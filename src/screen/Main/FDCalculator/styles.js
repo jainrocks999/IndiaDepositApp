@@ -1,0 +1,99 @@
+import { StyleSheet } from 'react-native';
+import colors from '../../../component/colors';
+
+export default StyleSheet.create({
+    container:{
+    flex: 1,
+    },
+    imageContainer:{
+        alignItems:'center',
+        marginTop:20
+    }, 
+    textView:{
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:30
+    },
+    text:{
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor,
+        fontSize:24
+    },
+    logo:{
+        width:'80%',
+        height:75,
+        resizeMode:'stretch'
+    },
+    main:{
+        paddingHorizontal:30,
+        marginTop:60
+    },
+    heading:{
+        fontSize:18,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    },
+    normal:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor,
+        marginTop:10,
+        lineHeight:20
+    },
+    same:{
+        fontFamily:'Montserrat-Medium',
+        fontSize:15,
+        color:colors.textColor
+    },
+    input:{
+        marginTop:6,
+        borderWidth:1,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        height:35,
+        paddingHorizontal:10,
+        justifyContent:'center'
+    },
+    interest:{
+        marginTop:6,
+        borderWidth:1,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        height:35,
+        paddingHorizontal:10,
+        justifyContent:'space-between',
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    buttonContainer:{
+        marginTop:25,
+        width:'100%',
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginBottom:20
+    },
+    button:{
+        width:'47%',
+        height:45,
+        borderRadius:30,
+        backgroundColor:colors.textColor,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    cal:{
+        color:colors.white,
+        fontSize:14,
+        fontFamily:'Montserrat-SemiBold'
+    },
+    drop:{
+        marginTop:13 ,
+        borderWidth:1,
+        height:35,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:10,
+    },
+    
+   
+    
+})

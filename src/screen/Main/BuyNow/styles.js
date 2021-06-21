@@ -1,0 +1,56 @@
+import { StyleSheet } from 'react-native';
+import colors from '../../../component/colors';
+
+export default StyleSheet.create({
+    same:{
+        fontSize:11,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    },
+    title:{
+        fontSize:14,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    },
+    cardView:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    card:{
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:5,
+        borderRadius:6,
+        backgroundColor:'white',
+        height:85,
+        padding:13,
+    },
+    title1:{
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    },
+    value1:{
+        fontFamily:'Montserrat-Normal',
+        fontSize:12,
+        color:colors.textColor
+    },
+    buttonContainer:{
+        width:'100%',
+        alignItems:'center',
+        justifyContent:'space-between',
+        flexDirection:'row',
+        paddingHorizontal:25,
+        paddingVertical:20
+    },
+    button:{
+        width:'48%',
+        height:45,
+        backgroundColor:colors.bc,
+        borderRadius:30,
+        justifyContent:'center',
+        alignItems:'center'
+    }
+})
