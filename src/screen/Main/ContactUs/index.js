@@ -8,6 +8,7 @@ import colors from '../../../component/colors';
 import Button from '../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
@@ -32,7 +33,7 @@ const Contact=()=>{
           onPress={()=>navigation.toggleDrawer()}
           />
           <ScrollView>
-            <View style={styles.header}>
+            {/* <View style={styles.header}>
               <Text style={styles.toll}>TOLL FREE NUMBER</Text>
               <View style={[styles.view,{ marginTop:21}]}>
                   <Text style={styles.num}>1800000000</Text>
@@ -55,50 +56,11 @@ const Contact=()=>{
                         <Text style={styles.call}>CALL</Text>
                     </TouchableOpacity>
               </View>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.main}>
-              <Text style={styles.toll}>FOLLW US ON</Text>
-               <View style={styles.bottom}>
-                 <View>
-                   <View style={styles.container1}>
-                       <View style={styles.fb}>
-                         <Image 
-                         source={require('../../../assets/Images/fb.png')}/>
-                       </View>
-                       <Text style={[styles.india,{marginLeft:8}]}>@indiadeposit</Text>
-                   </View>
-                   <View style={[styles.container1,{marginTop:7}]}>
-                       <View style={styles.fb}>
-                         <Image source={require('../../../assets/Images/in.png')}/>
-                       </View>
-                       <Text style={[styles.india,{marginLeft:8}]}>@indiadeposit</Text>
-                   </View>
-                   </View>
-                   <View>
-                   <View style={[styles.container1,{marginTop:7}]}>
-                       <View style={styles.fb}>
-                         <Image source={require('../../../assets/Images/twitter.png')}/>
-                       </View>
-                       <Text style={[styles.india,{marginLeft:8}]}>@indiadeposit</Text>
-                   </View>
-                   <View style={[styles.container1,{marginTop:7}]}>
-                       <View style={styles.fb}>
-                         <Image source={require('../../../assets/Images/insta.png')}/>
-                       </View>
-                       <Text style={[styles.india,{marginLeft:8}]}>@indiadeposit</Text>
-                   </View>
-                   </View>
-               </View>
-            </View>
-            <View style={styles.line}></View>
-            <View style={styles.main}>
-              <Text style={styles.toll}>WRITE US ON EMAIL</Text>
-               <View style={{marginTop:18}}>
-                 <Text style={styles.india}>customercare@indiadeposit</Text>
-               </View>
-            </View>
-            <View style={styles.line}></View>
+            </View> */}
+            {/* <View style={styles.line}></View> */}
+            
+           
+            {/* <View style={styles.line}></View> */}
             <View style={styles.main}>
               <Text style={styles.toll}>GET IN TOUCH</Text>
               <View style={{marginTop:20}}>
@@ -157,18 +119,47 @@ const Contact=()=>{
               </View>
               
               </View>
-              <View style={{marginBottom:30}}>
+              <View style={{marginBottom:0}}>
                 <Button
                 onPress={()=>handleSubmit()}
                 title='SUBMIT'
                 />
               </View>
+              
             </View>
+            <View style={styles.line}></View>
+            <View style={styles.main}>
+              <Text style={styles.toll}>WRITE US ON EMAIL</Text>
+               <View style={{marginTop:18}}>
+                 <Text style={styles.india}>customercare@indiadeposit</Text>
+               </View>
+            </View>
+            <View style={styles.line}></View>
+            <View style={styles.main}>
+              <Text style={styles.toll}>FOLLW US ON</Text>
+               <View style={styles.bottom}>
+               <View style={styles.fb}>
+               <Image source={require('../../../assets/Images/fb.png')}/>
+               </View>
+               <View style={styles.fb}>
+               <Image source={require('../../../assets/Images/in.png')}/>
+               </View>
+               <View style={styles.fb}>
+               <Image source={require('../../../assets/Images/twitter.png')}/>
+               </View>
+               <View style={styles.fb}>
+               <Image source={require('../../../assets/Images/insta.png')}/>
+               </View>
+               </View>
+            </View>
+            <View style={[styles.line,{marginBottom:20}]}></View>
          </ScrollView>
          <StatusBar/>
+         <BottomTab/>
        </View>
         )}
         </Formik>
     )
 }
 export default Contact;
+                         

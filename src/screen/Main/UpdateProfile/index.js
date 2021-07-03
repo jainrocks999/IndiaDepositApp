@@ -15,7 +15,7 @@ import colors from '../../../component/colors';
 import Header from '../../../component/compareHeader';
 //import * as ImagePicker from "react-native-image-picker"
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import ImagePicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 
@@ -55,28 +55,28 @@ useEffect(async()=>{
 //  setData(photo)
 },[])
 const openCamera = () => {
-      ImagePicker.openCamera({
-        width: 300,
-        height: 400,
-        cropping: true,
-      }).then(image => {
-      let source = { uri: image.path };
-      AsyncStorage.setItem(Storage.photo,JSON.stringify(source))
-      setphotos(source)
-      console.log(image)
-      });
-    setVisible(false)
+    //   ImagePicker.openCamera({
+    //     width: 300,
+    //     height: 400,
+    //     cropping: true,
+    //   }).then(image => {
+    //   let source = { uri: image.path };
+    //   AsyncStorage.setItem(Storage.photo,JSON.stringify(source))
+    //   setphotos(source)
+    //   console.log(image)
+    //   });
+    // setVisible(false)
   };
 
 const openGallery = () => {
-  ImagePicker.openPicker({
-    multiple: true
-  }).then(images => {
-    let source = { uri: images[0].path };
-   setphotos(source)
-   console.log(source)
-  });
-  setVisible(false)
+  // ImagePicker.openPicker({
+  //   multiple: true
+  // }).then(images => {
+  //   let source = { uri: images[0].path };
+  //  setphotos(source)
+  //  console.log(source)
+  // });
+  // setVisible(false)
 };
 const renderImage=()=>{
   // if(data==''){

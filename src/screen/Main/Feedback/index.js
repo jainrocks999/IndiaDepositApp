@@ -10,6 +10,7 @@ import { TextInput } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const data=[{ label: 'Item', value: 'Item'},
 { label: 'Item', value: 'Item' },
@@ -98,6 +99,7 @@ const Contact=()=>{
             </View>
           </ScrollView>
          <StatusBar/>
+         <BottomTab/>
        </View>
     )
 }

@@ -148,8 +148,8 @@ const validateUser=(email,password)=>{
                   </View> 
                 <View style={styles.button}>
                     <CustomButton
-                     //onPress={()=>navigation.navigate('DashBoardPage')}
-                   onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
+                     onPress={()=>navigation.navigate('DashBoardPage')}
+                  // onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
                 </View>

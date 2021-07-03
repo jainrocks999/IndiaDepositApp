@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const loginValidationSchema=yup.object().shape({
   oldPassword:yup.string().min(8,({min})=>`Old Password must be atleast ${min} charrecter`).
@@ -192,6 +193,7 @@ const validateUser=()=>{
            </View>
          </ScrollView>
          <StatusBar/>
+         <BottomTab/>
        </View>
          )}
          </Formik>

@@ -8,12 +8,12 @@ export default StyleSheet.create({
     },
     main:{
         paddingHorizontal:30,
-        marginTop:'40%'
+       // marginTop:'40%'
     },
    
    
     input:{
-        marginTop:15,
+        marginTop:5,
         borderWidth:1,
         borderColor:colors.textColor,
         borderRadius:6,

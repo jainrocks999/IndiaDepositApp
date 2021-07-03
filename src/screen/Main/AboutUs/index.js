@@ -6,6 +6,7 @@ import StatusBar from '../../../component/StatusBar';
 import color from '../../../component/colors';
 import CustomButton from '../../../component/button1';
 import Header from '../../../component/header';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const Contact=()=>{
     const navigation=useNavigation()
@@ -42,6 +43,7 @@ const Contact=()=>{
              </View>
           </ScrollView>
          <StatusBar/>
+         <BottomTab/>
        </View>
     )
 }

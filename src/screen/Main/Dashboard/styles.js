@@ -4,23 +4,23 @@ export default StyleSheet.create({
     container:{
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingHorizontal:40,
         marginTop:38
     },
     imageView:{
-        width:90,
-        height:90,
+        width:60,
+        height:60,
         backgroundColor:colors.bc,
-        borderRadius:45,
+        borderRadius:30,
         justifyContent:'center',
         alignItems:'center'
     },
     text:{
         fontFamily:'Montserrat-Normal',
-        fontSize:18,
+        fontSize:14,
         color:colors.textColor,
-        marginTop:8,
-        fontWeight:'600'
+        marginTop:6,
+        fontWeight:'600',
+        textAlign: 'center',
     },
     name:{
         color:colors.white,

@@ -19,6 +19,7 @@ import AccountDetail from '../screen/Main/AccountDetail';
 import CompareFD from '../screen/Main/CompareFD';
 import CompareSBAccount from '../screen/Main/CompareSBAccount';
 import BuyNow from '../screen/Main/BuyNow';
+import Introduction from '../screen/Auth/Introduction';
 const Stack = createStackNavigator();
 function Navigate() {
   return (
@@ -42,6 +43,7 @@ function Navigate() {
         <Stack.Screen name="CompareFD" component={CompareFD}/>
         <Stack.Screen name="CompareSBAccount" component={CompareSBAccount}/>
         <Stack.Screen name="BuyNow" component={BuyNow}/>
+        <Stack.Screen name="Introduction" component={Introduction}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

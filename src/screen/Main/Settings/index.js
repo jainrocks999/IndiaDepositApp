@@ -1,15 +1,12 @@
 import React,{useState} from 'react';
 import { View,Text,Image,ScrollView} from 'react-native';
-import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import StatusBar from '../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
-import Loader from '../../../component/loader';
-import OTPTextInput  from 'react-native-otp-textinput';
-import color from '../../../component/colors';
 import Header from '../../../component/header';
+import BottomTab from '../../../component/StoreButtomTab';
 const OtpVarification=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -77,6 +74,7 @@ const validateUser=()=>{
            </View>
          </ScrollView>
          <StatusBar/>
+         <BottomTab/>
        </View>
     )
 }
