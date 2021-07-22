@@ -3,32 +3,21 @@ import { View, Image, ScrollView, Alert,TouchableOpacity } from 'react-native';
 import {
     DrawerContentScrollView,
 } from '@react-navigation/drawer';
-import AsyncStorage from "@react-native-community/async-storage";
 import { useNavigation } from '@react-navigation/native';
-
 import {
-    Avatar,
-    Title,
-    Caption,
     Text,
 } from 'react-native-paper';
 import styles from './styles';
-import Storage from '../AsyncStorage';
 import { useSelector,useDispatch } from 'react-redux';
+import colors from '../colors';
 
-
-const DrawerContent=({props,name,email,mobile})=> {
+const DrawerContent=({props})=> {
     const navigation = useNavigation();
     const dispatch=useDispatch()
-    const getLogout=async()=>{
-        //const userid=await AsyncStorage.getItem(Storage.userid)
-        //   dispatch({
-        //       type: 'User_Logout_Request',
-        //       url: 'logout',
-        //      userid,
-        //      navigation: navigation,
-        //     });
-      }
+    const [expand,setExpand]=useState(false)
+    const [expandCal,setExpandCal]=useState(false)
+    const [expandBank,setExpandBank]=useState(false)
+    const getLogout=async()=>{}
 
     const Logout = () => {
         console.log('this is working');
@@ -48,121 +37,329 @@ const DrawerContent=({props,name,email,mobile})=> {
             { cancelable: false }
         );
     };
+    const expandProfile=()=>{
+        if(expand){
+            setExpand(false)
+        }
+        else{
+            setExpand(true)
+        }
+    }
+    const expandCalculater=()=>{
+        if(expandCal){
+            setExpandCal(false)
+        }
+        else{
+            setExpandCal(true)
+        }
+    }
+    const expandBanks=()=>{
+        if(expandBank){
+            setExpandBank(false)
+        }
+        else{
+            setExpandBank(true)
+        }
+    }
     return (
-        <DrawerContentScrollView {...props}>
-            <ScrollView showsVerticalScrollIndicator={false} style={styles.drawerContent}>
-                <View style={[styles.drawers]}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('UpdateProfile')}>
-                    <Image style={{width:50,height:50}} source={require('../../assets/Images/pfile.png')}/>
-                    </TouchableOpacity>
-                   {!email?
-                   <View style={styles.profile}>
-                    <Text style={styles.title}>{'Login To View Profile'}</Text>
-                    </View>:
-                    <View style={styles.profile}>
-                        <Title style={styles.title}>{name}</Title>
-                        <Caption style={styles.caption}>{mobile}</Caption>
-                    </View>}
-                </View>
-              
+        <DrawerContentScrollView
+        contentContainerStyle={{ paddingTop: 0 }}
+        {...props}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+              <View style={{
+                  width:'100%',
+                  height:130,
+                  backgroundColor:'#5A4392',
+                  flexDirection:'row',
+                  alignItems:'center',
+                  paddingHorizontal:20
+                  }}>
+                  <View>
+                      <Image source={require('../../assets/Image/team.png')}/>
+                  </View>
+                  <View style={{marginLeft:20}}>
+                      <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>Rohit</Text>
+                      <Text style={{color:colors.white,fontSize:12,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
+                      <Text style={{color:colors.white,fontSize:12,fontFamily:'Montserrat-Normal'}}>rohit@gmail.com</Text>
+                  </View>
+              </View>
                 <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('Dashboard')
-                    }}>
-                    <View style={[styles.drawer, {}]}>
-                        <View style={{ flexDirection: 'row' }}>
+                    onPress={() => expandProfile()}>
+                    <View style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
                             <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/dashboard.png')}/>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/profile1.png')}/>
                             </View>
-                            <Text style={styles.text}>{'Dashboard'}</Text>
+                            <Text style={styles.text}>{'Profile'}</Text>
+                            </View>
+                           {expand? <Image source={require('../../assets/Image/down.png')}/>:
+                                  <Image source={require('../../assets/Image/arrowF.png')}/>}
+                        </View>
+                    </View>
+                    
+                    </TouchableOpacity>
+                    {expand?
+                       <View>
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'Profile'}</Text>
+                            </View>
+
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'Personal Details'}</Text>
+                            </View>
+
+                            <View style={[styles.drawer1]}>
+                            <Image style={{marginLeft:40}}
+                            source={require('../../assets/Image/arrowB.png')}/>
+                            <Text style={[styles.text,{marginLeft:20}]}>{'Bank Details'}</Text>
+                        </View>
+                        <View style={[styles.drawer1]}>
+                            <Image style={{marginLeft:40}}
+                            source={require('../../assets/Image/arrowB.png')}/>
+                            <Text style={[styles.text,{marginLeft:20}]}>{'Nominee Details'}</Text>
+                        </View>
+                        <View style={[styles.drawer1]}>
+                            <Image style={{marginLeft:40}}
+                            source={require('../../assets/Image/arrowB.png')}/>
+                            <Text style={[styles.text,{marginLeft:20}]}>{'Others'}</Text>
+                        </View>
+                        </View>:
+                        <View></View>}
+                <TouchableOpacity
+                    onPress={() => expandCalculater()}
+                    >
+                    <View style={[styles.drawer]}>
+                    <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/cal.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Calculator'}</Text>
+                            </View>
+                            {expandCal? <Image source={require('../../assets/Image/down.png')}/>:
+                                  <Image source={require('../../assets/Image/arrowF.png')}/>}
+                        </View>
+                    </View>  
+                </TouchableOpacity>
+                {expandCal?
+                       <View>
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'SIP'}</Text>
+                            </View>
+
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'FD'}</Text>
+                            </View>
+                        </View>:
+                        <View></View>}
+                <TouchableOpacity
+                    onPress={()=>expandBanks()}
+                    >
+                    <View style={[styles.drawer]}>
+                    <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/bank-holiday.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Bank Holidays'}</Text>
+                            </View>
+                            {expandBank? <Image source={require('../../assets/Image/down.png')}/>:
+                                  <Image source={require('../../assets/Image/arrowF.png')}/>}
                         </View>
                     </View>
                 </TouchableOpacity>
+                {expandBank?
+                       <View>
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'Holiday'}</Text>
+                            </View>
+
+                            <View style={[styles.drawer1]}>
+                                <Image style={{marginLeft:40}}
+                                source={require('../../assets/Image/arrowB.png')}/>
+                                <Text style={[styles.text,{marginLeft:20}]}>{'Timing'}</Text>
+                            </View>
+                        </View>:
+                        <View></View>}
+
                
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('BankLocator')
+                    }}>
+                    <View style={[styles.drawer]}>
+                    <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/bank-locator.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Bank Locator'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+
                 <TouchableOpacity
                     onPress={() => {
                         navigation.navigate('AboutUs')
                     }}>
                     <View style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/about.png')}/>
+                    <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/about.png')}/>
                             </View>
-                            <Text style={styles.text}>{'About us'}</Text>
+                            <Text style={styles.text}>{'About'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('Feedback')
-                    }}>
-                    <View style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/feedback.png')}/>
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Notification')}
+                    style={[styles.drawer]}>
+                         <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/noti.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Notification'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('KnowledgeCenter')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/knowledege.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Knowledge Center'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Support')}
+                    style={[styles.drawer]}>
+                         <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/support.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Support'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Feedback')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/feedback.png')}/>
                             </View>
                             <Text style={styles.text}>{'Feedback'}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
-               
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('Settings')
-                    }}>
-                    <View style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/setting.png')}/>
                             </View>
-                            <Text style={styles.text}>{'Setting'}</Text>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
                         </View>
-                    </View>
                 </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('ContactUs')
-                    }}>
-                    <View style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/call1.png')}/>
-                            </View>
-                            <Text style={styles.text}>{'Contact us'}</Text>
-                        </View>
-                    </View>
-                </TouchableOpacity>
+
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Change')}
                     style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/lock.png')}/>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/ref.png')}/>
                             </View>
-                            <Text style={styles.text}>{'Change Password'}</Text>
+                            <Text style={styles.text}>{'Referral'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
+
                 <TouchableOpacity 
-                    //onPress={()=>navigation.navigate('Change')}
                     style={[styles.drawer]}>
-                        <View style={{ flexDirection: 'row' }}>
-                        <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/referal.png')}/>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/privacy.png')}/>
                             </View>
-                            <Text style={styles.text}>{'Refer App'}</Text>
+                            <Text style={styles.text}>{'Privacy'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
-               
+
                 <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Security')}
+                    style={[styles.drawer]}>
+                         <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/security.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Security'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('TermAndCondition')}
+                    style={[styles.drawer,{marginBottom:50}]}>
+                        <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/term.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Term Condition'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                {/* <TouchableOpacity 
                     onPress={()=>Logout()}
                     style={[styles.drawer]}>
                         <View style={{ flexDirection: 'row' }}>
                         <View style={styles.iconView}>
-                                <Image style={styles.imageicon} source={require('../../assets/Images/logout1.png')}/>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Images/logout1.png')}/>
                             </View>
                             <Text style={styles.text}>{'Log out'}</Text>
                         </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                
                
             </ScrollView>

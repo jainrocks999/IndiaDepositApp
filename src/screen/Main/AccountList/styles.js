@@ -25,7 +25,7 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:6,
         backgroundColor:'white',
-        height:85,
+       // height:85,
         padding:13,
     },
     cont:{
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     row:{
         flexDirection:'row',
         justifyContent:'space-between',
-        marginTop:15,
+        marginTop:7,
         paddingHorizontal:5,
         width:'90%'
     },

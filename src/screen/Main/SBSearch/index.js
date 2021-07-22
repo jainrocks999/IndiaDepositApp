@@ -9,36 +9,34 @@ import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
-import CheckBox from '@react-native-community/checkbox';
+import { ProgressBar, Colors } from 'react-native-paper';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const data=[
-{ label: 'Monday', value: 'Monday'},
-{ label: 'Tuesday', value: 'Tuesday' },
-{ label: 'Wednesday', value: 'Wednesday' },
-{ label: 'Thursday', value: 'Thursday' },
-{ label: 'Friday', value: 'Friday' },
-{ label: 'Saturday', value: 'Saturday' },
-{ label: 'Sunday', value: 'Sunday' },
+  { label: '10-20 Years', value: '10-20 Years'},
+  { label: '20-50 Years', value: '20-50 Years' },
+  { label: '50-80 Years', value: '50-80 Years' },
 ]
+
 const data1=[
-  { label: 'State Bank Of India', value: 'State Bank Of India'},
-  { label: 'Bank Of Baroda', value: 'Bank Of Baroda' },
-  { label: 'Union Bank', value: 'Union Bank' },
-  { label: 'Gramin Bank', value: 'Gramin Bank' },
-  { label: 'HDFC Bank', value: 'HDFC Bank' },
-  
-  ]
+  { label: 'Any', value: 'Any'},
+  { label: 'Any', value: 'Any' },
+  { label: 'Any', value: 'Any' },
+]
 
-const Contact=()=>{
+const data2=[
+  { label: 'Any', value: 'Any'},
+  { label: 'Any', value: 'Any' },
+  { label: 'Any', value: 'Any' },
+]
+    
+const SBAccount=()=>{
     const navigation=useNavigation()
-    const [value, setValue] = useState('')
-    const [toggleCheckBox,setToggleCheckBox]=useState(false)
-  
+    const [age, setAge] = useState('')
+    const [account, setAccount] = useState('')
+    const [acType, setAcType] = useState('')
+    const [checked, setChecked] = React.useState(false);
 
-
-const keepme = async (newValue) => {
-      setToggleCheckBox(newValue);
-    };
     return(
         <View style={styles.container}>
             <Header
@@ -46,54 +44,78 @@ const keepme = async (newValue) => {
             source={require('../../../assets/Images/arrow.png')}
             onPress={()=>navigation.goBack()}
             />
-          <ScrollView style={{flex:1}}>
+          <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:30}}>
             <View style={styles.main}>
-             <View style={styles.input}>
-               
-                <RNPickerSelect
-                    onValueChange={(val)=>setValue(val)}
-                    items={data1}
-                    style={{ 
-                    inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                    placeholder:{color:colors.textColor}
-                    }}
-                    value={value}
-                    useNativeAndroidPickerStyle={false}
-                    placeholder={{ label: "Bank Name", value: null }}
-                    Icon={()=><Image 
-                        style={{marginTop:16,marginRight:8}} 
-                        source={require('../../../assets/Images/down.png')}/>}
-                    />
+             
+            <View style={{marginTop:20}}>
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Minimum Balance Range</Text>
+                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:8}}>Rs 20,000</Text>
+                </View>
+                <View style={{marginTop:15}}>
+                <ProgressBar progress={0.5} color={'#5A4392'} />
+                </View>
+            </View>
+           
+            <View style={{marginTop:20}}>
+              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Age</Text>
+                <View style={styles.input}>
+                    <RNPickerSelect
+                        onValueChange={(val)=>setAge(val)}
+                        items={data}
+                        style={{ 
+                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                        placeholder:{color:'#333333',fontSize:12}
+                        }}
+                        value={age}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select", value: null }}
+                        Icon={()=><Image 
+                            style={styles.image} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                        />
                   </View>
-                  <View style={styles.input}>
-                    <TextInput 
-                    style={styles.input1}
-                    placeholder='Account Type'
-                    maxLength={40}
-                    />
+            </View>
+            <View style={{marginTop:20}}>
+              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Account Type</Text>
+                <View style={styles.input}>
+                    <RNPickerSelect
+                        onValueChange={(val)=>setAccount(val)}
+                        items={data1}
+                        style={{ 
+                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                        placeholder:{color:'#333333',fontSize:12,}
+                        }}
+                        value={account}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select", value: null }}
+                        Icon={()=><Image 
+                            style={styles.image} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                        />
                   </View>
-                  <View style={styles.input}>
-                    <TextInput 
-                    style={styles.input1}
-                    placeholder='Minimum Amount'
-                    keyboardType={'number-pad'}
-                    maxLength={40}
-                    />
+            </View>
+            <View style={{marginTop:20}}>
+              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Account Sub Type</Text>
+                <View style={styles.input}>
+                    <RNPickerSelect
+                        onValueChange={(val)=>setAcType(val)}
+                        items={data2}
+                        style={{ 
+                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                        placeholder:{color:'#333333',fontSize:12}
+                        }}
+                        value={acType}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select", value: null }}
+                        Icon={()=><Image 
+                            style={styles.image} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                        />
                   </View>
-                  <View style={styles.interest}>
-                    <TextInput 
-                    style={styles.input1} 
-                    placeholder='Interest Rate'
-                    keyboardType={'number-pad'}
-                    maxLength={20}
-                    />
-                    <Image 
-                    style={{marginRight:5}} 
-                    source={require('../../../assets/Images/percent.png')}/>
-                  </View>
-                  
-                 
-                    <View style={{marginTop:15}}>
+            </View>
+                    
+                    <View style={{marginTop:15,marginBottom:20}}>
                     <Button
                     onPress={()=>navigation.navigate('AccountList')}
                     title='SEARCH'
@@ -101,9 +123,10 @@ const keepme = async (newValue) => {
                     </View>
              </View>
           </ScrollView>
+          <BottomTab/>
          <StatusBar/>
        </View>
     )
 }
-export default Contact;
+export default SBAccount;
 

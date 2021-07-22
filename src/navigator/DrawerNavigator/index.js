@@ -12,15 +12,34 @@ import ChangePassword from '../../screen/Auth/ChangePassword';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 function MyDrawer() {
+  const horizontalAnimation = {
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateX: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.width, 0],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
   return (
-    <Drawer.Navigator drawerContent={() => <DrawerContent/>}>
+    <Drawer.Navigator
+  
+    drawerStyle={{width:'100%'}}
+    drawerContent={() => <DrawerContent/>}>
         <Drawer.Screen name="Dashboard" component={Dashboard} />
-        <Drawer.Screen name="AboutUs" component={AboutUs} />
-        <Drawer.Screen name="ContactUs" component={ContactUs} />
-        <Drawer.Screen name="Feedback" component={Feedback} />
-        <Drawer.Screen name="Change" component={ChangePassword}/>
-        <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="UpdateProfile" component={UpdateProfile} />
+        {/* <Drawer.Screen name="AboutUs" component={AboutUs} options={horizontalAnimation}/> */}
+        <Drawer.Screen name="ContactUs" component={ContactUs} options={horizontalAnimation}/>
+        {/* <Drawer.Screen name="Feedback" component={Feedback} options={horizontalAnimation}/> */}
+        <Drawer.Screen name="Change" component={ChangePassword} options={horizontalAnimation}/>
+        <Drawer.Screen name="Settings" component={Settings} options={horizontalAnimation}/>
+        <Drawer.Screen name="UpdateProfile" component={UpdateProfile} options={horizontalAnimation}/>
     </Drawer.Navigator>
   );
 

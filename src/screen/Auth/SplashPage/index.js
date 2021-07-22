@@ -8,7 +8,7 @@ const Splash=()=>{
         initial();
       }, []);
       const initial = async () => {
-        setTimeout(() => navigation.replace("Login"), 2000);
+         setTimeout(() => navigation.replace("Login"), 2000);
       }
     return(
         <View style={styles.container}>

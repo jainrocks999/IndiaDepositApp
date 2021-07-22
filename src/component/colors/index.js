@@ -1,5 +1,5 @@
 export default {
-  bc:'rgba(119, 119, 119, 0.7)',
-  textColor:'rgba(119, 119, 119, 0.7);',
+  bc:'#5A4392',
+  textColor:'#000',
   white:'#fff'
   };

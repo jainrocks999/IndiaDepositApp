@@ -13,12 +13,12 @@ const Contact=()=>{
     return(
         <View style={styles.container}>
            <Header
-            source={require('../../../assets/Images/drawer.png')}
+            source={require('../../../assets/Images/arrow.png')}
            title={'ABOUT US'}
-           onPress={()=>navigation.toggleDrawer()}
+           onPress={()=>navigation.goBack()}
            />
-          <ScrollView style={{flex:1}}>
-             <View style={styles.main}>
+             <View style={styles.card}>
+             <ScrollView style={{flex:1}}>
                 <Text style={styles.heading}>Lorem Ipsum is simply dummy text. </Text> 
                 <Text style={styles.normal}>
                 It is a long established fact that a reader will be
@@ -40,10 +40,11 @@ const Contact=()=>{
                 looking at its layout. The point of using Lorem 
                 Ipsum is that.
                 </Text>
+                </ScrollView>
              </View>
-          </ScrollView>
+         
          <StatusBar/>
-         <BottomTab/>
+         {/* <BottomTab/> */}
        </View>
     )
 }

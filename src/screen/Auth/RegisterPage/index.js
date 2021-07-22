@@ -53,119 +53,126 @@ const RegisterPage=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-          <ScrollView>
-            <View style={styles.imageContainer}>
-               <Image style={styles.image} 
-               source={require('../../../assets/Images/IndiaDeposit_Primary.png')}/>
-            </View>
-           <View style={styles.textView}>
-               <Text style={styles.text}>SIGN UP</Text>
-           </View>
-           <View style={styles.main}>
-            <View style={styles.mainCon}>
-            <View style={styles.view1}>
-              <TextInput 
-              style={styles.input1}
-              placeholder='Full Name'
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
-              value={values.name}
-              maxLength={40}
-              />
-              <Image source={require('../../../assets/Images/profile.png')}/>
-            </View>
-            <View style={styles.error}>
+         <ScrollView>
+          <View style={styles.imageContainer}>
+              <View style={styles.round}>
+                  <Image style={styles.image} 
+                  source={require('../../../assets/Image/logo-icon.png')}/>
+              </View>
+          </View>
+          <View style={styles.main}>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Full Name</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/profile.png')}/>
+                     <TextInput 
+                        style={styles.input1}
+                        placeholder='Full Name'
+                        onChangeText={handleChange('name')}
+                        onBlur={handleBlur('name')}
+                        value={values.name}
+                        maxLength={40}
+                        />
+                  </View>
+              </View>
+              <View style={styles.error}>
               {(errors.name && touched.name) &&
                 <Text style={styles.warn}>{errors.name}</Text>
                 }
               </View>
-            <View style={[styles.view1,{marginTop:10}]}>
-             
-              <TextInput 
-              style={styles.input1}
-              placeholder='Email'
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-              maxLength={40}
-              />
-              <Image source={require('../../../assets/Images/message.png')}/>
-            </View>
-            <View style={styles.error}>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Email</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <TextInput 
+                      style={styles.input1}
+                      placeholder='Email'
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                      maxLength={40}
+                      />
+                  </View>
+              </View>
+              <View style={styles.error}>
               {(errors.email && touched.email) &&
                 <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
-            <View style={[styles.view2,{marginTop:10}]}>
-              <View style={styles.mobile}>
-                <Text style={{color:colors.textColor}}>+91</Text>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Mobile</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/phone.png')}/>
+                     <TextInput 
+                      style={styles.input1}
+                      placeholder='Mobile'
+                      onChangeText={handleChange('mobile')}
+                      onBlur={handleBlur('mobile')}
+                      value={values.mobile}
+                      keyboardType={'number-pad'}
+                      maxLength={11}
+                      />
+                  </View>
               </View>
-              <View style={styles.view3}>
-              <TextInput 
-              style={styles.input2}
-              placeholder='Mobile'
-              onChangeText={handleChange('mobile')}
-              onBlur={handleBlur('mobile')}
-              value={values.mobile}
-              keyboardType={'number-pad'}
-              maxLength={11}
-              />
-              <Image style={{marginRight:10}} 
-              source={require('../../../assets/Images/mobile.png')}/>
-              </View>
-            </View>
-            <View style={styles.error}>
+              <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
                 <Text style={{fontSize:14,color:'red'}}>{errors.mobile}</Text>
                 }
               </View>
-            <View style={[styles.view1,{marginTop:10}]}>
-              <TextInput 
-              style={styles.input1}
-              placeholder='Password'
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-              />
-              <Image source={require('../../../assets/Images/lock.png')}/>
-            </View>
-            <View style={styles.error}>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Password</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/lock.png')}/>
+                     <TextInput 
+                      style={styles.input1}
+                      placeholder='Password'
+                      onChangeText={handleChange('password')}
+                      onBlur={handleBlur('password')}
+                      value={values.password}
+                      />
+                  </View>
+              </View>
+              <View style={styles.error}>
               {(errors.password && touched.password) &&
                 <Text style={styles.warn}>{errors.password}</Text>
                 }
               </View>
-            <View style={[styles.view1,{marginTop:10}]}>
-              <TextInput 
-              style={styles.input1}
-              placeholder='Confim Password'
-              onChangeText={handleChange('confirm')}
-              onBlur={handleBlur('confirm')}
-              value={values.confirm}
-              />
-
-              <Image source={require('../../../assets/Images/lock.png')}/>
-            </View>
-            <View style={styles.error}>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Confirm Password</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/lock.png')}/>
+                     <TextInput 
+                      style={styles.input1}
+                      placeholder='Confim Password'
+                      onChangeText={handleChange('confirm')}
+                      onBlur={handleBlur('confirm')}
+                      value={values.confirm}
+                      />
+                  </View>
+              </View>
+              
+              <View style={styles.error}>
               {(errors.confirm && touched.confirm) &&
                 <Text style={styles.warn}>{errors.confirm}</Text>
                 }
               </View>
-            </View>
-             <View style={styles.button}>
+              <View style={styles.button}>
                  <CustomButton
-                  onPress={()=>errors.password || errors.email ||
+                  onPress={()=>
+                    errors.password || errors.email ||
                     errors.name || errors.mobile || errors.confirm?
-                    Toast.show('All field required'):handleSubmit()}
-                 title='REGISTER NOW'
+                    Toast.show('All field required'):
+                    handleSubmit()}
+                 title='SIGN UP'
                  />
              </View>
              <View style={styles.bottom}>
                  <Text style={styles.account}>Already have an account?</Text>
                  <Text 
                  onPress={()=>navigation.navigate('Login')} 
-                 style={styles.account}> Login here</Text>
+                 style={styles.account1}> Login here</Text>
              </View>
-           </View>
+          </View>
          </ScrollView>
          <StatusBar/>
        </View>

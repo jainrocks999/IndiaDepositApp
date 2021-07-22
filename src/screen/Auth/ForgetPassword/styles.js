@@ -6,6 +6,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
    
     imageContainer:{
@@ -13,47 +14,48 @@ export default StyleSheet.create({
         marginTop:20
     },
     main:{
-        paddingHorizontal:10,
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:100
+        paddingHorizontal:20,
+        marginTop:50
     },
-    second:{
+    round:{
+        width:115,
+        height:115,
+        backgroundColor:'#5A4392',
+        borderRadius:57,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+
+    input1:{
         width:'90%',
-        height:40,
-        borderWidth:1,
-        justifyContent:'center',
-        flexDirection:'row',
-        borderRadius:6,
-        borderColor:colors.textColor
+        marginLeft:11
+
     },
-    imageView:{
-        justifyContent:'center',
-        alignItems:'center',
-        width:40,
-        height:'100%',
-        borderRightWidth:1,
-        borderRightColor:colors.textColor
+    card: { 
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        height:60,
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginTop:10
+    },
+    heading:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:'#777777'
     },
     input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
-    textView:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:30
-    },
-    text:{
-        fontFamily:'Montserrat-SemiBold',
-        color:colors.textColor,
-        fontSize:22
+        marginTop:-14,
+        flexDirection:'row',
+        alignItems:'center'
     },
     button:{
         width:'100%',
-        paddingHorizontal:20,
         marginTop:15,
         marginBottom:20
     },
@@ -64,10 +66,6 @@ export default StyleSheet.create({
         paddingHorizontal:0,
         marginTop:6
     },
-    image:{
-        width:'82%',
-        height:75,
-        resizeMode:'stretch'
-    }
+   
    
 })

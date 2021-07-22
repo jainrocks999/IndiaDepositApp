@@ -20,12 +20,41 @@ import CompareFD from '../screen/Main/CompareFD';
 import CompareSBAccount from '../screen/Main/CompareSBAccount';
 import BuyNow from '../screen/Main/BuyNow';
 import Introduction from '../screen/Auth/Introduction';
+import Main from './DrawerNavigator';
+import AboutUs from '../screen/Main/AboutUs';
+import Feedback from '../screen/Main/Feedback';
+import Notification from '../screen/Main/Notification';
+import TermAndCondition from '../screen/Main/TermAndCondition';
+import Security from '../screen/Main/Security';
+import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
+import BankLocator from '../screen/Main/BankLocator';
+import Support from '../screen/Main/Support';
+
 const Stack = createStackNavigator();
 function Navigate() {
+
+  const horizontalAnimation = {
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateX: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.width, 0],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
   return (
     //InitialPages
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" headerMode="none">
+      <Stack.Navigator initialRouteName="Splash" headerMode="none" mode="modal" >
+        <Stack.Screen name="Main" component={Main}/>
+        <Stack.Screen name="AboutUs" component={AboutUs} options={horizontalAnimation}/>
         <Stack.Screen name="Splash" component={SplashScreen}/>
         <Stack.Screen name="Login" component={LoginPage}/>
         <Stack.Screen name="Register" component={RegisterPage}/>
@@ -34,7 +63,7 @@ function Navigate() {
         <Stack.Screen name="DashBoardPage" component={DashBoardPage}/>
         <Stack.Screen name="Manage" component={ManageNaminee}/>
         <Stack.Screen name="FDCalculator" component={FDCalculator} />
-        <Stack.Screen name="FDSearch" component={FDSearch}/>
+        <Stack.Screen name="FDSearch" component={FDSearch} options={horizontalAnimation}/>
         <Stack.Screen name="FDList" component={FDList}/>
         <Stack.Screen name="FDDetail" component={FDDetail}/>
         <Stack.Screen name="SBSearch" component={SBSearch}/>
@@ -42,8 +71,15 @@ function Navigate() {
         <Stack.Screen name="AccountDetail" component={AccountDetail}/>
         <Stack.Screen name="CompareFD" component={CompareFD}/>
         <Stack.Screen name="CompareSBAccount" component={CompareSBAccount}/>
-        <Stack.Screen name="BuyNow" component={BuyNow}/>
+        <Stack.Screen name="BuyNow" component={BuyNow} />
         <Stack.Screen name="Introduction" component={Introduction}/>
+        <Stack.Screen name="Feedback" component={Feedback} options={horizontalAnimation}/>
+        <Stack.Screen name="Notification" component={Notification}  options={horizontalAnimation}/>
+        <Stack.Screen name="TermAndCondition" component={TermAndCondition} options={horizontalAnimation}/>
+        <Stack.Screen name="Security" component={Security} options={horizontalAnimation}/>
+        <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
+        <Stack.Screen name="BankLocator" component={BankLocator} options={horizontalAnimation}/>
+        <Stack.Screen name="Support" component={Support} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

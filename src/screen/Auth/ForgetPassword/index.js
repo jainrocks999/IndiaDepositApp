@@ -45,30 +45,27 @@ const validateUser=()=>{
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
           <ScrollView>
-            <View style={styles.imageContainer}>
-               <Image style={styles.image} 
-               source={require('../../../assets/Images/IndiaDeposit_Primary.png')}/>
-            </View>
-           <View style={styles.textView}>
-               <Text style={styles.text}>{'FORGET YOUR \n  PASSWORD?'}</Text>
-           </View>
+          <View style={styles.imageContainer}>
+              <View style={styles.round}>
+                  <Image
+                  source={require('../../../assets/Image/logo-icon.png')}/>
+              </View>
+          </View>
            <View style={styles.main}>
-              <View style={styles.second}>
-                <View style={styles.imageView}>
-                <Image style={{height:13,width:17}} 
-                source={require('../../../assets/Images/message.png')}/>
-                </View>
-                <View style={styles.input}>
-                 <TextInput
-                 placeholder='Type your email'
-                 style={{width:'100%',color:colors.textColor}}
-                 onChangeText={handleChange('email')}
-                 onBlur={handleBlur('email')}
-                 value={values.email}
-                 maxLength={40}
-                 />
-                </View>
-              </View> 
+               <View style={styles.card}>
+                    <Text style={styles.heading}>Email</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <TextInput
+                      placeholder='Type your email'
+                      style={styles.input1}
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                      maxLength={40}
+                      />
+                  </View>
+              </View>
               <View style={styles.error}>
                    {(errors.email && touched.email) &&
                 <Text style={{fontSize:14,color:'red'}}>{errors.email}</Text>
@@ -76,7 +73,7 @@ const validateUser=()=>{
               </View>
              <View style={styles.button}>
                  <CustomButton
-                 title='RESET MY PASSWORD'
+                   title='RESET MY PASSWORD'
                    onPress={()=>errors.email?Toast.show('All field required'):navigation.navigate('Login')}
                  />
              </View>

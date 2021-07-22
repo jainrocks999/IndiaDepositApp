@@ -25,8 +25,8 @@ const Contact=()=>{
         <View style={styles.container}>
           <Header
           title={'FEEDBACK'}
-          source={require('../../../assets/Images/drawer.png')}
-          onPress={()=>navigation.toggleDrawer()}
+          source={require('../../../assets/Images/arrow.png')}
+          onPress={()=>navigation.goBack()}
           />
           <ScrollView style={{flex:1}}>
             <View style={styles.main}>
@@ -60,7 +60,7 @@ const Contact=()=>{
             placeholder={{ label: "Select", value: null }}
             Icon={()=>
             <Image style={{margin:12}} 
-            source={require('../../../assets/Images/down.png')}/>}
+            source={require('../../../assets/Image/down.png')}/>}
             />
             </View>
             <Text style={styles.better}>What can we do better?</Text>
@@ -77,7 +77,7 @@ const Contact=()=>{
             placeholder={{ label: "Select", value: '' }}
             Icon={()=>
             <Image style={{margin:12}} 
-            source={require('../../../assets/Images/down.png')}/>}
+            source={require('../../../assets/Image/down.png')}/>}
             />
            
             </View>

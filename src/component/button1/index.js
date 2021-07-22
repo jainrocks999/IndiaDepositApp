@@ -14,8 +14,8 @@ const CustomButton1 = (props) => {
 const styles = StyleSheet.create({
   button: {
     width: "100%",
-    height:45,
-    backgroundColor: colors.bc,
+    height:50,
+    backgroundColor: '#5A4392',
     justifyContent: "center",
     alignItems: "center",
     borderRadius:30,

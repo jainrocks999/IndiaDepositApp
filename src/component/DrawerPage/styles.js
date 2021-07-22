@@ -2,8 +2,8 @@ import { StyleSheet } from 'react-native';
 import colors from '../../component/colors';
 export default StyleSheet.create({
     drawerContent: {
-        flex: 1,
-        paddingHorizontal:6
+       // flex: 1,
+       // paddingHorizontal:6
     },
     title: {
         fontFamily:'Montserrat-SemiBold',
@@ -16,24 +16,24 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    drawers: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#b6b8b6',
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-        paddingVertical:20,
-        height:120
-    },
+   
     drawer: {
         borderBottomWidth: 1,
         borderBottomColor: '#b6b8b6',
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 10,
-        paddingVertical: 14, 
+        paddingHorizontal: 15, 
+        justifyContent: 'space-between',
+        height:40
+    },
+    drawer1: {
+        borderBottomWidth: 1,
+        borderBottomColor: '#b6b8b6',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        alignItems: 'center',
+        paddingHorizontal: 15,
+        height:40,
+        backgroundColor:'#EDEDEB'
     },
     iconView: {
         width: 30,
@@ -72,8 +72,10 @@ export default StyleSheet.create({
         height: 30, 
         width: 30 
     },
-    imageicon:{
-      //  width:'100%',
-      //  height:'100%'
+    row:{ 
+        flexDirection: 'row',
+        alignItems:'center',
+        justifyContent:'space-between',
+        flex:1 
     }
 })

@@ -15,7 +15,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const loginValidationSchema=yup.object().shape({
-  email:yup.string().required('Email address or mobile number is required'),
+  email:yup.string().email('Please enter valid email').required('Email address is required'),
   password:yup.string().min(8,({min})=>`Password must be atleast ${min} charrecter`).
   required('Password is required').matches(
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -36,18 +36,12 @@ const showVisible=()=>{
   return(
     <TouchableOpacity 
       onPress={()=>visible?setVisible(false):setVisible(true)}>
-      {!visible?<Image 
-      style={{width:19,height:13}} 
-      source={require('../../../assets/Images/eye.png')}/>:
-      <Image style={{width:19,height:13}} 
-      source={require('../../../assets/Images/eye1.png')}/>
+      {!visible?  <Image source={require('../../../assets/Image/eye.png')}/>:
+        <Image source={require('../../../assets/Image/eye1.png')}/>
     }
     </TouchableOpacity>
   )
 }
-const keepme = async (newValue) => {
-    setToggleCheckBox(newValue);
-  };
 const validateUser=(email,password)=>{
   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   const mob = /^[0]?[789]\d{9}$/;
@@ -77,45 +71,42 @@ const validateUser=(email,password)=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-          <ScrollView>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} 
-                    source={require('../../../assets/Images/IndiaDeposit_Primary.png')}/>
-                </View>
-
-                <View style={styles.textView}>
-                  <Text style={styles.text}>LOG IN</Text>
-                </View>
-
-                <View style={styles.main}>
-                  <View style={styles.second}>
-                    <View style={styles.imageView}>
-                        <Image style={styles.image1} 
-                        source={require('../../../assets/Images/message.png')}/>
-                    </View>
-
+         <ScrollView>
+          <View style={styles.imageContainer}>
+              <View style={styles.round}>
+                  <Image style={styles.image} 
+                  source={require('../../../assets/Image/logo-icon.png')}/>
+              </View>
+          </View>
+          <View style={styles.main}>
+             
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
-                        <TextInput
-                        style={styles.input1}
-                        placeholder='Email Address /  Mobile Number'
-                        onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        value={values.email}
-                        maxLength={40}
-                        />
-                    </View>
-                  </View> 
-                    <View style={styles.error}>
-                      {(errors.email && touched.email) &&
-                        <Text style={styles.text1}>{errors.email}</Text>
-                        }
-                    </View>
-                   <View style={[styles.second,{marginTop:10}]}>
-                    <View style={styles.imageView}>
-                    {showVisible()}
-                    </View>
+                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <TextInput 
+                      style={styles.input1}
+                      placeholder='Email'
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                      maxLength={40}
+                      />
+                  </View>
+              </View>
+              <View style={styles.error}>
+              {(errors.email && touched.email) &&
+                <Text style={styles.warn}>{errors.email}</Text>
+                }
+              </View>
+             
+             
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Password</Text>
                     <View style={styles.input}>
-                    <TextInput
+                   
+                     {showVisible()}
+                     <TextInput
                     style={styles.input1}
                     placeholder='Password'
                     onChangeText={handleChange('password')}
@@ -124,31 +115,20 @@ const validateUser=(email,password)=>{
                     secureTextEntry={visible}
                     maxLength={20}
                     />
-                    </View>
                   </View>
-                  <View style={styles.error}>
-                  {(errors.password && touched.password) &&
-                    <Text style={styles.text1}>{errors.password}</Text>}
-                    </View>
-                  <View style={styles.main1}>
-                  <View style={styles.check}>
-                  <CheckBox
-                      disabled={false}
-                      value={toggleCheckBox}
-                      onValueChange={(newValue) => keepme(newValue)}
-                      boxType="square"
-                      onFillColor={colors.textColor}
-                      tintColors={{ true: colors.textColor, false: colors.textColor }}
-                    />
-                    <Text style={styles.keep}>Keep me logged in</Text>
-                    </View>
-                    <Text 
-                    onPress={()=>navigation.navigate('Forget')} 
-                    style={styles.forgot}>Forget Password ?</Text>
-                  </View> 
-                <View style={styles.button}>
+              </View>
+              <View style={styles.error}>
+              {(errors.password && touched.password) &&
+                <Text style={styles.warn}>{errors.password}</Text>
+                }
+              </View>
+              <TouchableOpacity onPress={()=>navigation.navigate('Forget')}
+               style={{justifyContent:'flex-end',alignItems:'flex-end',marginTop:10}}>
+                <Text>Forgot password?</Text>
+              </TouchableOpacity>
+              <View style={styles.button}>
                     <CustomButton
-                     onPress={()=>navigation.navigate('DashBoardPage')}
+                     onPress={()=>navigation.navigate('Main')}
                   // onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
@@ -157,9 +137,9 @@ const validateUser=(email,password)=>{
                     <Text style={styles.account}>Don't have an account?</Text>
                     <Text 
                     onPress={()=>navigation.navigate('Register')} 
-                    style={styles.account}> Register here</Text>
+                    style={styles.account1}> Register here</Text>
                 </View>
-              </View>
+          </View>
          </ScrollView>
          <StatusBar/>
        </View>

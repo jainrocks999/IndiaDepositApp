@@ -4,15 +4,43 @@ import Header from '../../../component/compareHeader';
 import colors from '../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-import BottomTab from '../../../component/FDBottomTab';
+import BottomTab from '../../../component/StoreButtomTab';
 import BottomSheet from 'react-native-simple-bottom-sheet';
 const data=[
-    {source:require('../../../assets/Images/sbi.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'},
-    {source:require('../../../assets/Images/union.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'},
-    {source:require('../../../assets/Images/axis.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'},
-    {source:require('../../../assets/Images/pnb.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'},
-    {source:require('../../../assets/Images/hdfc.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'},
-    {source:require('../../../assets/Images/bob.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%'}
+    {source:require('../../../assets/Images/sbi.png'),
+    title:'Regular Fixed Deposit',
+    value1:'5.5%',value2:'9%',
+    value3:'3 Lakh',value4:'12%',
+    img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')
+  },
+    {source:require('../../../assets/Images/union.png'),
+    title:'Regular Fixed Deposit',
+    value1:'5.5%',value2:'9%',
+    value3:'3 Lakh',value4:'12%',
+    img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')
+  },
+    {source:require('../../../assets/Images/axis.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')},
+    {source:require('../../../assets/Images/pnb.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')},
+    {source:require('../../../assets/Images/hdfc.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')},
+    {source:require('../../../assets/Images/bob.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img2:require('../../../assets/Image/maturity.png'),
+    img3:require('../../../assets/Image/loan.png'),
+    img4:require('../../../assets/Image/premature.png')}
 ]
 const FDList=()=>{
         const panelRef1 = useRef(null);
@@ -34,7 +62,12 @@ const renderItem=(item)=>{
                <Text style={styles.same}>{item.value2}</Text>
                <Text style={styles.same}>{item.value3}</Text>
                <Text style={styles.same}>{item.value4}</Text>
-            
+             </View>
+             <View style={styles.row}>
+                <Image source={item.img1}/>
+                <Image source={item.img2}/>
+                <Image source={item.img3}/>
+                <Image source={item.img4}/>
              </View>
           </TouchableOpacity>
           </View>
@@ -43,7 +76,7 @@ const renderItem=(item)=>{
     return(
         <View style={{flex:1}}>
           <Header
-            title={'     FD LIST'}
+            title={'FD LISTING'}
             source={require('../../../assets/Images/arrow.png')}
             titleTwo='Compare'
             onPress={()=>navigation.goBack()}
@@ -58,7 +91,7 @@ const renderItem=(item)=>{
                 />
 
             </View>
-            <BottomSheet 
+            {/* <BottomSheet 
             isOpen={false}
             sliderMinHeight={0}
             lineStyle={{width:0}}
@@ -71,9 +104,9 @@ const renderItem=(item)=>{
               <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>Alphabetical</Text>
               <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>Interest Rate</Text>
             </View>
-          </BottomSheet>
+          </BottomSheet> */}
 
-          <BottomSheet 
+          {/* <BottomSheet 
             isOpen={false}
             sliderMinHeight={0}
             lineStyle={{width:0}}
@@ -102,13 +135,8 @@ const renderItem=(item)=>{
               </TouchableOpacity>
               </View>
             </View>
-          </BottomSheet>
-            <BottomTab
-          // onPres={()=>}
-           onPress1={()=>panelRef1.current.togglePanel()}
-           onPress2={()=>panelRef2.current.togglePanel()}
-         //  onPress2
-            />
+          </BottomSheet> */}
+          <BottomTab/>
         </View>
     )
 }

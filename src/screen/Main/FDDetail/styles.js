@@ -28,33 +28,23 @@ export default StyleSheet.create({
         height:85,
         padding:13,
     },
-    title1:{
-        fontFamily:'Montserrat-Medium',
-        color:colors.textColor
-    },
-    value1:{
-        fontFamily:'Montserrat-Normal',
-        fontSize:12,
-        color:colors.textColor
-    },
+   
     cont:{
         paddingHorizontal:25,
-        paddingVertical:8
+        paddingVertical:8,
+       
     },
-    align:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-    },
-    border:{
-        width:'100%',
-        borderWidth:1,
-        marginTop:12,
-        borderColor:colors.textColor
-    },
+   
+   
     list:{
-        alignItems:'center',
-        justifyContent:'center',
-        flex:1,
-        marginTop:10
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        paddingVertical:10,
+        margin:15
     }
 })

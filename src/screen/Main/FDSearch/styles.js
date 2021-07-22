@@ -5,20 +5,26 @@ import colors from '../../../component/colors';
 export default StyleSheet.create({
     container:{
     flex: 1,
+    backgroundColor:'#E5E5E5'
     },
     main:{
         paddingHorizontal:30,
-       // marginTop:'40%'
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginBottom:40
     },
-   
-   
     input:{
-        marginTop:5,
-        borderWidth:1,
-        borderColor:colors.textColor,
-        borderRadius:6,
+        marginTop:-8,
+        borderBottomWidth:1.5,
+        borderColor:'#3D4785',
         height:40,
-        paddingHorizontal:10,
         justifyContent:'center'
     },
     interest:{

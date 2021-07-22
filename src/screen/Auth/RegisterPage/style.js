@@ -6,131 +6,71 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
    
     imageContainer:{
         alignItems:'center',
-        marginTop:20
+        marginTop:20,
     },
-    main:{
-        paddingHorizontal:10,
+    round:{
+        width:115,
+        height:115,
+        backgroundColor:'#5A4392',
+        borderRadius:57,
         justifyContent:'center',
-        alignItems:'center',
-        marginTop:40
+        alignItems:'center'
     },
-    second:{
+    input1:{
         width:'90%',
-        height:40,
-        borderWidth:1,
-        justifyContent:'center',
-        flexDirection:'row',
-        borderRadius:6,
-        borderColor:colors.textColor
+        marginLeft:11
+
     },
-    imageView:{
-        justifyContent:'center',
-        alignItems:'center',
-        width:40,
-        height:'100%',
-        borderRightWidth:1
+    card: { 
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        height:60,
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginTop:10
+    },
+    heading:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:'#777777'
     },
     input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
-    textView:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:30
-    },
-    text:{
-        fontFamily:'Montserrat-SemiBold',
-        color:colors.textColor,
-        fontSize:22
-    },
-    main1:{
-        height:40,
-        width:'100%',
-        flexDirection:'row',
-        paddingHorizontal:12,
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    check:{
+        marginTop:-14,
         flexDirection:'row',
         alignItems:'center'
     },
-    keep:{
-        color:colors.textColor,
-        fontSize:11
-    },
-    forgot:{
-        marginRight:5,
-        color:colors.textColor,
-        fontSize:11
+    main:{
+        paddingHorizontal:20,
+        marginTop:50
     },
     button:{
         width:'100%',
-        paddingHorizontal:20,
-        marginTop:10
+        marginTop:15
     },
     bottom:{
         flexDirection:'row',
         marginTop:8,
-        marginBottom:20
+        marginBottom:20,
+        alignItems:'center',
+        justifyContent:'center'
     },
     account:{
         color:colors.textColor,
         fontSize:13
     },
-    inputContainerStyle: {
-        height: 40,
-        borderRadius: 6,
-        backgroundColor: '#ffffff',
-        borderWidth:1,
-        width:'100%'
-    },
-    inputStyle:{
-        fontSize: 14, 
-        marginLeft: 10
-    },
-    view:{
-        width:'100%',
-        paddingHorizontal:20,
-        marginTop:15
-    },
-    view1:{
-        width:'100%',
-        height:40,
-        borderWidth:1,
-        borderRadius:6,
-        borderColor:colors.textColor,
-        paddingHorizontal:14,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    view2:{
-        width:'100%',
-        height:40,
-        borderWidth:1,
-        borderRadius:6,
-        borderColor:colors.textColor,
-       
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    view3:{
-        width:'88%',
-        height:40,
-        borderColor:colors.textColor,
-        paddingHorizontal:10,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between',
+    account1:{
+        color:'#3D4785',
+        fontSize:13
     },
     error:{
         width:'90%',
@@ -139,34 +79,8 @@ export default StyleSheet.create({
         paddingHorizontal:0,
         marginTop:6
     },
-    mobile:{
-        borderRightWidth:1,
-        height:40,
-        width:40,
-        justifyContent:'center',
-        alignItems:'center',
-        borderColor:colors.textColor
-    },
-    image:{
-        width:'82%',
-        height:75,
-        resizeMode:'stretch'
-    },
-    mainCon:{
-        paddingHorizontal:20,
-        width:'100%'
-    },
-    input1:{
-        width:'90%',
-        color:colors.textColor
-    },
     warn:{
         fontSize:14,
         color:'red'
     },
-    input2:{
-        width:'80%',
-        color:colors.textColor
-    }
-   
 })

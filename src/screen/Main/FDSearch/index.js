@@ -29,10 +29,18 @@ const data2=[
   { label: 'Any', value: 'Any' },
   { label: 'Any', value: 'Any' },
 ]
+const data3=[
+  { label: 'Any', value: 'Any'},
+  { label: 'Any', value: 'Any' },
+  { label: 'Any', value: 'Any' },
+]
     
 const Contact=()=>{
     const navigation=useNavigation()
-    const [value, setValue] = useState('')
+    const [gender, setGender] = useState('')
+    const [age, setAge] = useState('')
+    const [type, setType] = useState('')
+    const [interest, setInterest] = useState('')
     const [checked, setChecked] = React.useState(false);
 
     return(
@@ -42,42 +50,41 @@ const Contact=()=>{
             source={require('../../../assets/Images/arrow.png')}
             onPress={()=>navigation.goBack()}
             />
-          <ScrollView style={{flex:1}}>
+          <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:30}}>
             <View style={styles.main}>
               <View style={{marginTop:20}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <View style={{}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Tenure</Text>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>0 Days</Text>
+                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:11,fontWeight:'400',marginTop:5}}>7 Days</Text>
                 </View>
-                <View style={{marginTop:15}}>
-                <ProgressBar progress={0.5} color={Colors.grey700} />
+                <View style={{marginTop:5,borderWidth:0.8,borderColor:'#3D4785'}}>
                 </View>
             </View>
             <View style={{marginTop:20}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Amount</Text>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Rs 0.0</Text>
+                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:8}}>Rs 20,000</Text>
                 </View>
                 <View style={{marginTop:15}}>
-                <ProgressBar progress={0.5} color={Colors.grey700} />
+                <ProgressBar progress={0.5} color={'#5A4392'} />
                 </View>
             </View>
             <View style={{marginTop:20}}>
               <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Gender</Text>
                 <View style={styles.input}>
                     <RNPickerSelect
-                        onValueChange={(val)=>setValue(val)}
+                        onValueChange={(val)=>setGender(val)}
                         items={data}
                         style={{ 
                         inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:colors.textColor}
+                        placeholder:{color:'#333333',fontSize:12}
                         }}
-                        value={value}
+                        value={gender}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select", value: null }}
                         Icon={()=><Image 
                             style={styles.image} 
-                            source={require('../../../assets/Images/down.png')}/>}
+                            source={require('../../../assets/Image/down.png')}/>}
                         />
                   </View>
             </View>
@@ -85,18 +92,18 @@ const Contact=()=>{
               <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Age</Text>
                 <View style={styles.input}>
                     <RNPickerSelect
-                        onValueChange={(val)=>setValue(val)}
+                        onValueChange={(val)=>setAge(val)}
                         items={data1}
                         style={{ 
                         inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:colors.textColor}
+                        placeholder:{color:'#333333',fontSize:12}
                         }}
-                        value={value}
+                        value={age}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select", value: null }}
                         Icon={()=><Image 
                             style={styles.image} 
-                            source={require('../../../assets/Images/down.png')}/>}
+                            source={require('../../../assets/Image/down.png')}/>}
                         />
                   </View>
             </View>
@@ -104,29 +111,39 @@ const Contact=()=>{
               <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Type</Text>
                 <View style={styles.input}>
                     <RNPickerSelect
-                        onValueChange={(val)=>setValue(val)}
+                        onValueChange={(val)=>setType(val)}
                         items={data2}
                         style={{ 
                         inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:colors.textColor}
+                        placeholder:{color:'#333333',fontSize:12}
                         }}
-                        value={value}
+                        value={type}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select", value: null }}
                         Icon={()=><Image 
                             style={styles.image} 
-                            source={require('../../../assets/Images/down.png')}/>}
+                            source={require('../../../assets/Image/down.png')}/>}
                         />
                   </View>
             </View>
-            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',marginTop:20}}>Interest Payout</Text>
-            <View style={styles.input}>
-                      <TextInput 
-                      style={styles.input1}
-                      //placeholder='Amount'
-                      keyboardType='number-pad'
-                      maxLength={30}
-                      />
+            <View style={{marginTop:20}}>
+              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Interest Payout</Text>
+                <View style={styles.input}>
+                    <RNPickerSelect
+                        onValueChange={(val)=>setInterest(val)}
+                        items={data3}
+                        style={{ 
+                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                        placeholder:{color:'#333333',fontSize:12}
+                        }}
+                        value={interest}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select", value: null }}
+                        Icon={()=><Image 
+                            style={styles.image} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                        />
+                  </View>
             </View>
                     
                     <View style={{marginTop:15,marginBottom:20}}>

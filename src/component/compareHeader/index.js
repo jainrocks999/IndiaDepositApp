@@ -13,12 +13,13 @@ const Header=({title,onPress1,titleTwo,source,onPress})=>{
             <View style={styles.view}>
             <Text style={styles.text}>{title} </Text>
             </View>
-            {titleTwo?
+            <View style={{width:30}}></View>
+            {/* {titleTwo?
             <TouchableOpacity onPress={onPress1}
             style={styles.squareView}>
                 <Text style={{fontSize:11,color:'#ffffff',fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
             </TouchableOpacity>:<View></View>
-            }
+            } */}
             {/* </View> */}
            </View>
         </View>

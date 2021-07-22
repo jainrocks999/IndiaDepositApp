@@ -6,92 +6,71 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
    
     imageContainer:{
         alignItems:'center',
-        marginTop:20
+        marginTop:20,
     },
-    main:{
-        paddingHorizontal:10,
+    round:{
+        width:115,
+        height:115,
+        backgroundColor:'#5A4392',
+        borderRadius:57,
         justifyContent:'center',
-        alignItems:'center',
-        marginTop:40
+        alignItems:'center'
     },
-    second:{
+    input1:{
         width:'90%',
-        height:40,
-        borderWidth:1,
-        justifyContent:'center',
-        flexDirection:'row',
-        borderRadius:6,
-        borderColor:colors.textColor
+        marginLeft:11
+
     },
-    imageView:{
-        justifyContent:'center',
-        alignItems:'center',
-        width:40,
-        height:'100%',
-        borderRightWidth:1,
-        borderRightColor:colors.textColor
+    card: { 
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        height:60,
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginTop:10
+    },
+    heading:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:'#777777'
     },
     input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
-    textView:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:60
-    },
-    text:{
-        fontFamily:'Montserrat-SemiBold',
-        color:colors.textColor,
-        fontSize:22
-    },
-    main1:{
-        height:40,
-        width:'92%',
+        marginTop:-14,
         flexDirection:'row',
-       // paddingHorizontal:12,
-        alignItems:'center',
-        justifyContent:'space-between'
+        alignItems:'center'
     },
-    check:{
-        flexDirection:'row',
-        alignItems:'center',
-       // paddingHorizontal:13,
-       
-    },
-    keep:{
-        color:colors.textColor,
-        fontSize:11
-    },
-    forgot:{
-        marginRight:5,
-        color:colors.textColor,
-        fontSize:11
+    main:{
+        paddingHorizontal:20,
+        marginTop:50
     },
     button:{
         width:'100%',
-        paddingHorizontal:20,
-        marginTop:7
+        marginTop:15
     },
     bottom:{
         flexDirection:'row',
-        marginTop:10,
-        marginBottom:10
+        marginTop:8,
+        marginBottom:20,
+        alignItems:'center',
+        justifyContent:'center'
     },
     account:{
         color:colors.textColor,
         fontSize:13
     },
-    image:{
-        width:'82%',
-        height:75,
-        resizeMode:'stretch'
+    account1:{
+        color:'#5A4392',
+        fontSize:13
     },
     error:{
         width:'90%',
@@ -100,17 +79,8 @@ export default StyleSheet.create({
         paddingHorizontal:0,
         marginTop:6
     },
-    input1:{
-        width:'100%',
-        color:colors.textColor
-    },
-    image1:{
-        height:13,
-        width:19
-    },
-    text1:{
+    warn:{
         fontSize:14,
         color:'red'
-    }
-   
+    },
 })
