@@ -21,8 +21,30 @@ export default StyleSheet.create({
         borderTopRightRadius:10,
         backgroundColor:'white',
         marginHorizontal:15,
-        paddingHorizontal:18,
-        marginTop:20,
+        paddingVertical:18,
+        //paddingHorizontal:20,
+        marginTop:-32,
         height:'100%'
     },
+    pfile:{
+        width:'100%',
+        height:254,
+        backgroundColor:'#B2B2F9',
+        alignItems:'center',
+        justifyContent:'center',
+       
+    },
+    round:{
+        width:56,
+        borderWidth:2,
+        height:56,
+        borderRadius:28,
+        borderColor:'#5A4392',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    text:{
+        fontSize:20,
+        color:'#5A4392'
+    }
 })

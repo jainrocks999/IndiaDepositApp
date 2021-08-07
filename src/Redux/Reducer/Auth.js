@@ -3,11 +3,8 @@ initialstate = {
   UserDetails: [],
   RegisterDetails: [],
   Logout: [],
-  OTP: [],
-  CategoryList:[],
-  GetListById:[],
-  LeaderBoard:[],
-  Summery:[]
+  MLoginDetails:[],
+
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -18,6 +15,14 @@ export default (state = initialstate, action) => {
       return { ...state, isFetching: false, UserDetails: action.payload };
     case 'User_Login_Error':
       return { ...state, isFetching: false };
+
+    case 'User_MLogin_Request':
+      return { ...state, isFetching: true };
+    case 'User_MLogin_Success':
+      return { ...state, isFetching: false, MLoginDetails: action.payload };
+    case 'User_MLogin_Error':
+      return { ...state, isFetching: false };
+
     //Register
     case 'User_Register_Request':
       return { ...state, isFetching: true };

@@ -41,13 +41,13 @@ const Security=()=>{
                             }}
                             value={value}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: '' }}
+                            placeholder={{ label: "Select Bank", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
                             />
                     </View>
-                    <Text style={styles.better}>Bank</Text>
+                    <Text style={styles.better}>State</Text>
                       <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue1(val)}
@@ -58,13 +58,13 @@ const Security=()=>{
                             }}
                             value={value1}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: '' }}
+                            placeholder={{ label: "Select State", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
                             />
                     </View>
-                    <Text style={styles.better}>Bank</Text>
+                    <Text style={styles.better}>District</Text>
                       <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue2(val)}
@@ -75,13 +75,13 @@ const Security=()=>{
                             }}
                             value={value2}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: '' }}
+                            placeholder={{ label: "Select District", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
                             />
                     </View>
-                    <Text style={styles.better}>Bank</Text>
+                    <Text style={styles.better}>Branch</Text>
                       <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue3(val)}
@@ -92,7 +92,7 @@ const Security=()=>{
                             }}
                             value={value3}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: '' }}
+                            placeholder={{ label: "Select Branch", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}

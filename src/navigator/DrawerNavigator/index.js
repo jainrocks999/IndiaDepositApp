@@ -9,6 +9,8 @@ import Settings from '../../screen/Main/Settings';
 import UpdateProfile from '../../screen/Main/UpdateProfile';
 import Dashboard from '../../screen/Main/Dashboard';
 import ChangePassword from '../../screen/Auth/ChangePassword';
+import Dashboard1 from '../../screen/Main/Dashboard1';
+import Dashboard2 from '../../screen/Main/Dashboard2';
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 function MyDrawer() {
@@ -40,6 +42,9 @@ function MyDrawer() {
         <Drawer.Screen name="Change" component={ChangePassword} options={horizontalAnimation}/>
         <Drawer.Screen name="Settings" component={Settings} options={horizontalAnimation}/>
         <Drawer.Screen name="UpdateProfile" component={UpdateProfile} options={horizontalAnimation}/>
+        <Drawer.Screen name="Dashboard1" component={Dashboard1} options={horizontalAnimation}/>
+        <Drawer.Screen name="Dashboard2" component={Dashboard2} options={horizontalAnimation}/>
+
     </Drawer.Navigator>
   );
 

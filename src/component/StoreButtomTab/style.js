@@ -4,7 +4,7 @@ export default StyleSheet.create({
   header: {
     flexDirection: 'row',
     paddingHorizontal: 20,
-    backgroundColor: '#d7d9db',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',
     opacity: 10,

@@ -7,38 +7,48 @@ import BottomTab from '../../../component/StoreButtomTab';
 import styles from './styles';
 const data=[
   {source:require('../../../assets/Images/sbi.png'),
-  title:'Regular Fixed Deposit',
-  value1:'5.5%',value2:'9%',
-  value3:'Yes',value4:'No',
+  title:'Saving Account',
+  value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
   img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')
 },
   {source:require('../../../assets/Images/union.png'),
-  title:'Regular Fixed Deposit',
-  value1:'5.5%',value2:'9%',
-  value3:'Yes',value4:'No',
+  title:'Saving Account',
+  value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
   img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')
 },
-  {source:require('../../../assets/Images/axis.png'),title:'Regular Fixed Deposit',
+  {source:require('../../../assets/Images/axis.png'),title:'Saving Account',
   value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
   img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')},
-  {source:require('../../../assets/Images/pnb.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', img1:require('../../../assets/Image/interest.png'),
+  {source:require('../../../assets/Images/pnb.png'),title:'Saving Account',
+  value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+  img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')},
-  {source:require('../../../assets/Images/hdfc.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',img1:require('../../../assets/Image/interest.png'),
+  {source:require('../../../assets/Images/hdfc.png'),title:'Saving Account',
+  value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+  img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')},
-  {source:require('../../../assets/Images/bob.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', img1:require('../../../assets/Image/interest.png'),
+  {source:require('../../../assets/Images/bob.png'),title:'Saving Account',
+  value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
+  value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+  img1:require('../../../assets/Image/interest.png'),
   img2:require('../../../assets/Image/penalty.png'),
   img3:require('../../../assets/Image/debit.png'),
   img4:require('../../../assets/Image/offer.png')}
@@ -54,7 +64,7 @@ const renderItem=(item)=>{
              <View style={styles.cardView}>
                <Image source={item.source}/>
                <Text style={styles.title}>{item.title}</Text>
-               <View style={{width:'20%'}}></View>
+               <View style={{width:'25%'}}></View>
              </View>
              <View style={styles.row}>
                <Text style={styles.same}>{item.value1}</Text>
@@ -68,6 +78,14 @@ const renderItem=(item)=>{
                 <Image source={item.img2}/>
                 <Image source={item.img3}/>
                 <Image source={item.img4}/>
+             </View>
+
+             <View style={styles.row1}>
+               <Text style={styles.same}>{item.value5}</Text>
+               <Text style={styles.same}>{item.value6}</Text>
+               <Text style={styles.same}>{item.value7}</Text>
+               <Text style={styles.same}>{item.value8}</Text>
+             
              </View>
           </TouchableOpacity>
           </View>

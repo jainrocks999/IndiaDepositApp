@@ -41,6 +41,7 @@ const Contact=()=>{
     const [age, setAge] = useState('')
     const [type, setType] = useState('')
     const [interest, setInterest] = useState('')
+    const [day, setDay] = useState('')
     const [checked, setChecked] = React.useState(false);
 
     return(
@@ -55,18 +56,77 @@ const Contact=()=>{
               <View style={{marginTop:20}}>
                 <View style={{}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Tenure</Text>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:11,fontWeight:'400',marginTop:5}}>7 Days</Text>
                 </View>
-                <View style={{marginTop:5,borderWidth:0.8,borderColor:'#3D4785'}}>
-                </View>
+                <View style={{marginTop:20}}>
+                  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                    <View style={{width:'27%'}}>
+                      <View style={styles.input}>
+                        <RNPickerSelect
+                            onValueChange={(val)=>setDay(val)}
+                            items={days}
+                            style={{ 
+                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                            placeholder:{color:'#333333',fontSize:12}
+                            }}
+                            value={day}
+                            useNativeAndroidPickerStyle={false}
+                            placeholder={{ label: "Days", value: null }}
+                            Icon={()=><Image 
+                                style={styles.image} 
+                                source={require('../../../assets/Image/down.png')}/>}
+                            />
+                      </View>
+                    </View>
+
+                    <View style={{width:'27%'}}>
+                      <View style={styles.input}>
+                        <RNPickerSelect
+                            onValueChange={(val)=>setGender(val)}
+                            items={data}
+                            style={{ 
+                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                            placeholder:{color:'#333333',fontSize:12}
+                            }}
+                            value={gender}
+                            useNativeAndroidPickerStyle={false}
+                            placeholder={{ label: "Month", value: null }}
+                            Icon={()=><Image 
+                                style={styles.image} 
+                                source={require('../../../assets/Image/down.png')}/>}
+                            />
+                      </View>
+                    </View>
+
+                    <View style={{width:'27%'}}>
+                      <View style={styles.input}>
+                        <RNPickerSelect
+                            onValueChange={(val)=>setGender(val)}
+                            items={data}
+                            style={{ 
+                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                            placeholder:{color:'#333333',fontSize:12}
+                            }}
+                            value={gender}
+                            useNativeAndroidPickerStyle={false}
+                            placeholder={{ label: "Year", value: null }}
+                            Icon={()=><Image 
+                                style={styles.image} 
+                                source={require('../../../assets/Image/down.png')}/>}
+                            />
+                      </View>
+                    </View>
+                  </View>
+            </View>
+  
             </View>
             <View style={{marginTop:20}}>
                 <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Amount</Text>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:8}}>Rs 20,000</Text>
                 </View>
-                <View style={{marginTop:15}}>
-                <ProgressBar progress={0.5} color={'#5A4392'} />
+                <View style={{marginTop:-10}}>
+                <TextInput
+                style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                />
                 </View>
             </View>
             <View style={{marginTop:20}}>
@@ -161,3 +221,51 @@ const Contact=()=>{
 }
 export default Contact;
 
+const days=[
+  { label: '01', value: '01'},
+  { label: '02', value: '02' },
+  { label: '03', value: '03' },
+  { label: '04', value: '04' },
+  { label: '05', value: '05' },
+  { label: '06', value: '06' },
+  { label: '07', value: '07' },
+  { label: '08', value: '08' },
+  { label: '09', value: '09' },
+  { label: '10', value: '10' },
+  { label: '11', value: '11' },
+  { label: '12', value: '12' },
+  { label: '13', value: '13' },
+  { label: '14', value: '14' },
+  { label: '15', value: '15' },
+  { label: '16', value: '16' },
+  { label: '17', value: '17' },
+  { label: '18', value: '18' },
+  { label: '19', value: '19' },
+  { label: '20', value: '20' },
+  { label: '21', value: '21' },
+  { label: '22', value: '22' },
+  { label: '23', value: '23' },
+  { label: '24', value: '24' },
+  { label: '25', value: '25' },
+  { label: '26', value: '26' },
+  { label: '27', value: '27' },
+  { label: '28', value: '28' },
+  { label: '29', value: '29' },
+  { label: '30', value: '30' },
+
+]
+const Month=[
+  
+  { label: 'January', value: 'January' },
+  { label: 'February', value: 'February' },
+  { label: 'March', value: 'March' },
+  { label: 'April', value: 'April' },
+  { label: 'May', value: 'May' },
+  { label: 'June', value: 'June' },
+  { label: 'July', value: 'July' },
+  { label: 'August', value: 'August' },
+  { label: 'September', value: 'September' },
+  { label: 'October', value: 'October' },
+  { label: 'November', value: 'November' },
+  { label: 'December', value: 'December' },
+]

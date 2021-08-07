@@ -66,6 +66,23 @@ const validateUser=()=>{
                       />
                   </View>
               </View>
+              <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:20}}>
+                <Text style={{color:'#333333'}}>OR</Text>
+              </View>
+              <View style={styles.card}>
+                    <Text style={styles.heading}>Mobile</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/phone.png')}/>
+                     <TextInput
+                      placeholder='Mobile Number'
+                      style={styles.input1}
+                      onChangeText={handleChange('email')}
+                      onBlur={handleBlur('email')}
+                      value={values.email}
+                      maxLength={40}
+                      />
+                  </View>
+              </View>
               <View style={styles.error}>
                    {(errors.email && touched.email) &&
                 <Text style={{fontSize:14,color:'red'}}>{errors.email}</Text>

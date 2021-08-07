@@ -6,11 +6,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
-    main:{
-        paddingHorizontal:30,
-        marginTop:50,
-        marginBottom:20
-    }, 
     card:{
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -22,7 +17,24 @@ export default StyleSheet.create({
         backgroundColor:'white',
         marginHorizontal:15,
         paddingHorizontal:18,
+        paddingVertical:20,
         marginTop:20,
         height:'100%'
     },
+    
+    heading:{
+        fontSize:18,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    },
+    normal:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor,
+        marginTop:10
+    },
+    
+    
+   
+    
 })

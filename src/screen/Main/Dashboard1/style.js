@@ -2,17 +2,18 @@ import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
 export default StyleSheet.create({
     container:{
+        flex:1,
         flexDirection:'row',
         justifyContent:'space-between',
         //marginTop:38
     },
     imageView:{
-        width:60,
-        height:60,
-        backgroundColor:colors.bc,
-        borderRadius:30,
-        justifyContent:'center',
-        alignItems:'center'
+//width:60,
+  //      height:60,
+        //backgroundColor:'grey',
+       // borderRadius:30,
+         justifyContent:'center',
+         alignItems:'center'
     },
     text:{
         fontFamily:'Montserrat-Normal',
@@ -21,6 +22,7 @@ export default StyleSheet.create({
         marginTop:6,
         fontWeight:'600',
         textAlign: 'center',
+        marginBottom:15
     },
     name:{
         color:colors.white,
@@ -41,24 +43,37 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     main:{
-       // height:200,
+        height:165,
         width:'100%',
         backgroundColor:'#C4C4C4',
         justifyContent:'center',
         alignItems:'center'
     },
-    item:{
+    image:{
         width:'100%',
+        height:165,
+    },
+    item:{
+        flex:1,
+        width:'95%',
+        marginTop:-20,
+        marginBottom:35,
         justifyContent:'center',
         alignContent:'center',
+        marginLeft:10,
         backgroundColor:'#FFFFFF',
-        borderRadius:10,
-        marginBottom:20,
-        paddingVertical:25,
-        shadowColor:'black',
-        shadowOpacity:0.25,
-        shadowRadius:8,
-        shadowOffset:{height:2,width:0},
-        elevation:5,
-    }
+        borderColor:'black',
+        borderRadius:7
+       // paddingHorizontal:5
+    },
+    text1:{
+        fontFamily:'Montserrat-Medium',
+        fontSize:16,
+        color:colors.textColor,
+        marginTop:6,
+        fontWeight:'500',
+        //textAlign: 'center',
+        marginLeft:20,
+    },
+    imageicon:{height:35,width:35, tintColor:'#5A4392'},
 })

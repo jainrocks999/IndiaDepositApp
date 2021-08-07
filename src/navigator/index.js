@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "../screen/Auth/SplashPage";
 import LoginPage from '../screen/Auth/LoginPage';
@@ -29,7 +29,10 @@ import Security from '../screen/Main/Security';
 import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
 import BankLocator from '../screen/Main/BankLocator';
 import Support from '../screen/Main/Support';
-
+import Privacy from '../screen/Main/PrivacyPolicy'
+import LoginWithOtp from '../screen/Auth/LoginWithOtp';
+import Referal from '../screen/Main/Referal';
+import BankHoliday from '../screen/Main/BankHoliday';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -57,6 +60,7 @@ function Navigate() {
         <Stack.Screen name="AboutUs" component={AboutUs} options={horizontalAnimation}/>
         <Stack.Screen name="Splash" component={SplashScreen}/>
         <Stack.Screen name="Login" component={LoginPage}/>
+        <Stack.Screen name="LoginWithOtp" component={LoginWithOtp}/>
         <Stack.Screen name="Register" component={RegisterPage}/>
         <Stack.Screen name="Forget" component={ForgetPassword}/>
         <Stack.Screen name="Otp" component={OtpVarification}/>
@@ -80,6 +84,10 @@ function Navigate() {
         <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
         <Stack.Screen name="BankLocator" component={BankLocator} options={horizontalAnimation}/>
         <Stack.Screen name="Support" component={Support} options={horizontalAnimation}/>
+        <Stack.Screen name="Privacy" component={Privacy} options={horizontalAnimation}/>
+        <Stack.Screen name="Referal" component={Referal} options={horizontalAnimation}/>
+        <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

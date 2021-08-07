@@ -60,7 +60,6 @@ export default StyleSheet.create({
     bottom:{
         flexDirection:'row',
         marginTop:8,
-        marginBottom:20,
         alignItems:'center',
         justifyContent:'center'
     },

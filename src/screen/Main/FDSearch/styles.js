@@ -27,6 +27,14 @@ export default StyleSheet.create({
         height:40,
         justifyContent:'center'
     },
+    input1:{
+        marginTop:-8,
+        borderBottomWidth:1.5,
+        borderColor:'#3D4785',
+        height:40,
+        justifyContent:'center',
+        width:'27%'
+    },
     interest:{
         marginTop:15,
         borderWidth:1,

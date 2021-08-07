@@ -194,8 +194,8 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation project(':react-native-push-notification')
-implementation 'com.android.support:design:27.1.0'
- implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(path: ":@react-native-firebase_crashlytics")
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"

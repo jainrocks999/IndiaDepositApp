@@ -18,7 +18,7 @@ export default StyleSheet.create({
         backgroundColor:'white',
         paddingHorizontal:15,
         paddingVertical:10,
-        marginBottom:40
+        marginBottom:50
     },
     input:{
         marginTop:-8,

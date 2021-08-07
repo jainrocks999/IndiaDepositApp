@@ -10,6 +10,8 @@ import Loader from '../../../component/loader';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
+import CheckBox from "@react-native-community/checkbox";
+
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
@@ -34,19 +36,48 @@ const loginValidationSchema=yup.object().shape({
 })
 
 
+
 const RegisterPage=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
+    const [toggleCheckBox,setToggleCheckBox]=useState(false)
+
     
-    const validateUser=()=>{
-      Toast.show('Registration Successfull')
-      navigation.navigate('Otp')
-    }
+    const validateUser=(name,email,mobile,password)=>{
+      console.log('this is your registered data',name,email,mobile,password);
+      dispatch({
+       type: 'User_Register_Request',
+       url: 'adduserdetails',
+       name,
+       email,
+       mobile,
+       password,
+       mobile_country_code:0,
+       father_spouse_name:0,
+       mother_maiden_name:0,
+       gender:0,
+       dob:0,
+       pan:0,
+       address1:0,
+       address2:0,
+       city:0,
+       state:0,
+       country:0,
+       pincode:0,
+       residential_status:0,
+       profile_pic:0,
+       education:0,
+       occupation:0,
+       marital_status:0,
+       navigation: navigation,
+     })
+}
+
     return(
       <Formik
-      initialValues={{ email: '',password:'',name:'',password:'',confirm:''}}
-      onSubmit={values => validateUser()}
+      initialValues={{ email: '',password:'',name:'',mobile:'',confirm:''}}
+      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.password)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
@@ -156,6 +187,27 @@ const RegisterPage=()=>{
                 <Text style={styles.warn}>{errors.confirm}</Text>
                 }
               </View>
+              {/* <View
+               style={{marginTop:0,flexDirection:'row',alignItems:'center'}}>
+                 <CheckBox
+                    disabled={false}
+                    value={toggleCheckBox}
+                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                    tintColors={{ true: '#5A4392', false: '#5A4392' }}
+                  />
+                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}>Subscribe with newsletter</Text>
+              </View> */}
+              <View
+               style={{flexDirection:'row',alignItems:'center'}}>
+                 <CheckBox
+                    disabled={false}
+                    value={toggleCheckBox}
+                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                    tintColors={{ true: '#5A4392', false: '#5A4392' }}
+                  />
+                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}>{'I agree with Terms & Conditions and Privacy Policy'} </Text>
+              </View>
+
               <View style={styles.button}>
                  <CustomButton
                   onPress={()=>
@@ -163,7 +215,7 @@ const RegisterPage=()=>{
                     errors.name || errors.mobile || errors.confirm?
                     Toast.show('All field required'):
                     handleSubmit()}
-                 title='SIGN UP'
+                    title='SIGN UP'
                  />
              </View>
              <View style={styles.bottom}>
@@ -171,6 +223,35 @@ const RegisterPage=()=>{
                  <Text 
                  onPress={()=>navigation.navigate('Login')} 
                  style={styles.account1}> Login here</Text>
+             </View>
+             <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:30}}>
+               <Text style={{color:'#333333'}}>OR</Text>
+             </View>
+             <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:0}}>
+               <Text style={{fontSize:11,color:'#777777'}}>ENTER REFERRAL CODE</Text>
+               <View style={{width:'60%',
+               borderWidth:1,
+               borderRadius:10,
+               borderStyle:'dotted',
+               justifyContent:'center',
+               alignItems:'center',
+               height:40,
+               marginTop:10,marginBottom:20
+               }}>
+               <TextInput
+               
+               />
+               </View>
+             </View>
+             <View style={[styles.button,{marginBottom:20}]}>
+                 <CustomButton
+                  // onPress={()=>
+                  //   errors.password || errors.email ||
+                  //   errors.name || errors.mobile || errors.confirm?
+                  //   Toast.show('All field required'):
+                  //   handleSubmit()}
+                    title='SIGN UP'
+                 />
              </View>
           </View>
          </ScrollView>

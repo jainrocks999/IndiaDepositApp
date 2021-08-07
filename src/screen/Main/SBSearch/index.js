@@ -48,7 +48,13 @@ const SBAccount=()=>{
             <View style={styles.main}>
              
             <View style={{marginTop:20}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+              <Text style={{fontSize:13,fontFamily:'Montserrat-Normal'}}>
+                Lorem ipsum, or lipsum as it is sometimes known,
+                is dummy text used in laying out print, graphic or
+                web designs. The passage is attributed to an
+                unknown typesetter book.</Text>
+
+                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:20}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Minimum Balance Range</Text>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:8}}>Rs 20,000</Text>
                 </View>
@@ -108,6 +114,25 @@ const SBAccount=()=>{
                         value={acType}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select", value: null }}
+                        Icon={()=><Image 
+                            style={styles.image} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                        />
+                  </View>
+            </View>
+            <View style={{marginTop:20}}>
+              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Location</Text>
+                <View style={styles.input}>
+                    <RNPickerSelect
+                        onValueChange={(val)=>setAcType(val)}
+                        items={data2}
+                        style={{ 
+                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                        placeholder:{color:'#333333',fontSize:12}
+                        }}
+                        value={acType}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "", value: null }}
                         Icon={()=><Image 
                             style={styles.image} 
                             source={require('../../../assets/Image/down.png')}/>}

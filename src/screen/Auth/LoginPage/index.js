@@ -7,12 +7,9 @@ import Toast from 'react-native-simple-toast';
 import StatusBar from '../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
 import Loader from '../../../component/loader';
-import AsyncStorage from '@react-native-community/async-storage';
-import Storage from '../../../component/AsyncStorage';
-import colors from '../../../component/colors';
-import CheckBox from '@react-native-community/checkbox';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import CheckBox from "@react-native-community/checkbox";
 
 const loginValidationSchema=yup.object().shape({
   email:yup.string().email('Please enter valid email').required('Email address is required'),
@@ -29,9 +26,6 @@ const Login=()=>{
     const [visible,setVisible]=useState(true)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
 
-useEffect(async()=>{
- 
-},[])
 const showVisible=()=>{
   return(
     <TouchableOpacity 
@@ -43,22 +37,14 @@ const showVisible=()=>{
   )
 }
 const validateUser=(email,password)=>{
-  let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-  const mob = /^[0]?[789]\d{9}$/;
-      if(isNaN(email))
-      {
-          if(reg.test(email)==false){
-            Toast.show('Please Enter Valid Email Address')
-            return false;
-          }
-      }
-      else
-      {
-          if(mob.test(email)==false){
-            Toast.show('Please Enter Valid Mobile number')
-          }
-      }
-    navigation.replace('DashBoardPage')
+        console.log('this is user login detail',email,password);
+        dispatch({
+          type: 'User_Login_Request',
+          url: 'signin',
+          email,
+          password,
+          navigation: navigation,
+        })
 }
 
     return(
@@ -103,8 +89,7 @@ const validateUser=(email,password)=>{
              
               <View style={styles.card}>
                     <Text style={styles.heading}>Password</Text>
-                    <View style={styles.input}>
-                   
+                    <View style={styles.input}>      
                      {showVisible()}
                      <TextInput
                     style={styles.input1}
@@ -122,14 +107,26 @@ const validateUser=(email,password)=>{
                 <Text style={styles.warn}>{errors.password}</Text>
                 }
               </View>
-              <TouchableOpacity onPress={()=>navigation.navigate('Forget')}
-               style={{justifyContent:'flex-end',alignItems:'flex-end',marginTop:10}}>
-                <Text>Forgot password?</Text>
-              </TouchableOpacity>
+
+              <View
+               style={{marginTop:10,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                 <View  style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                 <CheckBox
+                    disabled={false}
+                    value={toggleCheckBox}
+                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                    tintColors={{ true: '#5A4392', false: '#5A4392' }}
+                  />
+                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}>keep me logged in</Text>
+                  </View>
+                <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}
+                 onPress={()=>navigation.navigate('Forget')}>Forgot password?</Text>
+              </View>
+
               <View style={styles.button}>
                     <CustomButton
-                     onPress={()=>navigation.navigate('Main')}
-                  // onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
+                    // onPress={()=>navigation.navigate('Main')}
+                   onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
                 </View>
@@ -139,6 +136,11 @@ const validateUser=(email,password)=>{
                     onPress={()=>navigation.navigate('Register')} 
                     style={styles.account1}> Register here</Text>
                 </View>
+                <TouchableOpacity 
+                onPress={()=>navigation.navigate('LoginWithOtp')}
+                style={styles.bottom}>
+                  <Text style={styles.account}>Login With OTP</Text>
+                </TouchableOpacity>
           </View>
          </ScrollView>
          <StatusBar/>

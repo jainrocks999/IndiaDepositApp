@@ -31,6 +31,7 @@ const Support=()=>{
            />
              <View style={styles.card}>
                 <ScrollView style={{flex:1}}>
+                  <Text style={{fontFamily:'Montserrat-SemiBold',color:'#000',fontSize:15}}>How can we help you?</Text>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
                         <TextInput
@@ -66,7 +67,6 @@ const Support=()=>{
                         multiline = {true}
                         style={{height:70}}
                         placeholder=''
-                        
                         />
                     </View>
                     <View style={{marginTop:20}}>

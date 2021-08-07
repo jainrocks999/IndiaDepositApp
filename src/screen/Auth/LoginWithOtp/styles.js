@@ -24,7 +24,6 @@ export default StyleSheet.create({
     input1:{
         width:'90%',
         marginLeft:11,
-        color:colors.textColor
 
     },
     card: { 
@@ -38,12 +37,12 @@ export default StyleSheet.create({
         height:60,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginTop:10
+        marginTop:18
     },
     heading:{
         fontSize:13,
         fontFamily:'Montserrat-Normal',
-        color:colors.heading
+        color:'#777777'
     },
     input:{
         marginTop:-14,
@@ -56,21 +55,21 @@ export default StyleSheet.create({
     },
     button:{
         width:'100%',
-        marginTop:5
+        marginTop:15
     },
     bottom:{
         flexDirection:'row',
         marginTop:8,
-       // marginBottom:20,
         alignItems:'center',
         justifyContent:'center'
     },
     account:{
         color:colors.textColor,
-        fontSize:13
+        fontSize:13,
+        fontFamily:'Montserrat-Normal'
     },
     account1:{
-        color:'#3D4785',
+        color:'#5A4392',
         fontSize:13
     },
     error:{

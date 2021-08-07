@@ -10,17 +10,23 @@ import Loader from '../../../component/loader';
 import OTPTextInput  from 'react-native-otp-textinput';
 import color from '../../../component/colors';
 
-const OtpVarification=()=>{
+const OtpVarification=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
+    const otpCode=route.params
+    console.log('this is parms value',otpCode);
+    console.log('this is parms value',otpCode.otp);
     const [otp,setOtp]=useState('')
 const validateUser=()=>{
     if(otp==''){
         Toast.show('Enter OTP Code')
     }
+    else if(otpCode.otp!=otp){
+        Toast.show('OTP Mismatch')
+      }
     else{
-        navigation.navigate('Login')
+        navigation.replace('Main')
       }
 }
     return(

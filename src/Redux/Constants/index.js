@@ -1,3 +1,3 @@
 export default BASEURLS = {
-  MainUrl: 'http://demo.webshowcase-india.com/abtyp/index.php/api/',
+  MainUrl: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/',
 };

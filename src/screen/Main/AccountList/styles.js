@@ -5,12 +5,13 @@ export default StyleSheet.create({
     same:{
         fontSize:11,
         fontFamily:'Montserrat-Normal',
-        color:colors.textColor
+        color:'#5A4392',
+        textAlign:'center'
     },
     title:{
         fontSize:14,
         fontFamily:'Montserrat-Medium',
-        color:colors.textColor
+        color:'#5A4392'
     },
     cardView:{
         flexDirection:'row',
@@ -32,12 +33,19 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         paddingVertical:8
     },
+    row1:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:7,
+        paddingHorizontal:0,
+        width:'100%'
+    },
     row:{
         flexDirection:'row',
         justifyContent:'space-between',
         marginTop:7,
-        paddingHorizontal:5,
-        width:'90%'
+        paddingHorizontal:10,
+        width:'100%'
     },
     list:{
         alignItems:'center',
