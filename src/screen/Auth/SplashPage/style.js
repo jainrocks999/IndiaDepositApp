@@ -1,11 +1,9 @@
 import {StyleSheet} from 'react-native';
-import color from '../../../component/colors';
+import colors from '../../../component/colors';
 export default StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#5A4392'
+        backgroundColor:colors.bc
     },
     image:{
         width:'87%',

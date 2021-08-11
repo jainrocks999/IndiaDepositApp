@@ -14,7 +14,7 @@ export default StyleSheet.create({
         marginTop:20
     },
     main:{
-        paddingHorizontal:20,
+        paddingHorizontal:30,
         marginTop:50
     },
     round:{
@@ -42,7 +42,8 @@ export default StyleSheet.create({
         height:60,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginTop:10
+        borderWidth:1,
+        borderColor:colors.bc
     },
     heading:{
         fontSize:13,

@@ -37,7 +37,9 @@ export default StyleSheet.create({
         height:60,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginTop:18
+        marginTop:18,
+        borderColor:colors.bc,
+        borderWidth:1
     },
     heading:{
         fontSize:13,
@@ -50,7 +52,7 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     main:{
-        paddingHorizontal:20,
+        paddingHorizontal:30,
         marginTop:50
     },
     button:{

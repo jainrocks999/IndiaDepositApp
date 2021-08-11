@@ -16,23 +16,33 @@ import CheckBox from "@react-native-community/checkbox";
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
   email:yup.string().email('Please enter valid email').required('Email address is required'),
-  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[789]\d{9}$/,"Please Enter valid Mobile Number"),
-  password:yup.string().min(8,({min})=>`Password must be atleast ${min} charrecter`).
-  required('Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
-  confirm:yup.string().when("password", {
+  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[6-9]\d{9}$/,"Please Enter valid Mobile Number"),
+  pin:yup.string().required('Pin required'),
+  confirmPin:yup.string().when("pin", {
     is: val => (val && val.length > 0 ? true : false),
     then: yup.string().oneOf(
-      [yup.ref("password")],
-      "Both password need to be the same"
+      [yup.ref("pin")],
+      "Both pin need to be the same"
     )
-  }).
-  required('Confirm Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
+  }).required('Confirm Pin required'),
+  referal:yup.string().required('Referal code required'),
+  // password:yup.string().min(8,({min})=>`Password must be atleast ${min} charrecter`).
+  // required('Password is required').matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // ),
+  
+  // confirm:yup.string().when("password", {
+  //   is: val => (val && val.length > 0 ? true : false),
+  //   then: yup.string().oneOf(
+  //     [yup.ref("password")],
+  //     "Both password need to be the same"
+  //   )
+  // }).
+  // required('Confirm Password is required').matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // ),
 })
 
 
@@ -76,7 +86,7 @@ const RegisterPage=()=>{
 
     return(
       <Formik
-      initialValues={{ email: '',password:'',name:'',mobile:'',confirm:''}}
+      initialValues={{ email: '',password:'',name:'',pin:'',confirmPin:'',referal:''}}
       onSubmit={values => validateUser(values.name,values.email,values.mobile,values.password)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -140,7 +150,7 @@ const RegisterPage=()=>{
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
-                      keyboardType={'number-pad'}
+                      keyboardType={'phone-pad'}
                       maxLength={11}
                       />
                   </View>
@@ -150,53 +160,66 @@ const RegisterPage=()=>{
                 <Text style={{fontSize:14,color:'red'}}>{errors.mobile}</Text>
                 }
               </View>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Password</Text>
+              <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                <View style={{width:'47%'}}>
+                  <View style={styles.card1}>
+                    <Text style={styles.heading}>Set Your Pin</Text>
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/lock.png')}/>
+                     <TextInput 
+                      style={styles.input2}
+                      placeholder='Enter Pin'
+                      onChangeText={handleChange('pin')}
+                      onBlur={handleBlur('pin')}
+                      value={values.pin}
+                      keyboardType={'number-pad'}
+                       />
+                    </View>
+                  </View>
+                  <View style={styles.error}>
+                {(errors.pin && touched.pin) &&
+                  <Text style={styles.warn}>{errors.pin}</Text>}
+                </View>
+                </View>
+                <View  style={{  width:'47%'}}>
+                  <View style={styles.card1}>
+                    <Text style={styles.heading}>Confirm Pin</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       style={styles.input1}
-                      placeholder='Password'
-                      onChangeText={handleChange('password')}
-                      onBlur={handleBlur('password')}
-                      value={values.password}
-                      />
+                      placeholder='Confirm Pin'
+                      onChangeText={handleChange('confirmPin')}
+                      onBlur={handleBlur('confirmPin')}
+                      value={values.confirmPin}
+                      keyboardType={'number-pad'}
+                       />
+                    </View>
                   </View>
+                  <View style={styles.error}>
+                {(errors.confirmPin && touched.confirmPin) &&
+                  <Text style={styles.warn}>{errors.confirmPin}</Text>}
+                </View>
+                </View>
               </View>
-              <View style={styles.error}>
-              {(errors.password && touched.password) &&
-                <Text style={styles.warn}>{errors.password}</Text>
-                }
-              </View>
+             
               <View style={styles.card}>
-                    <Text style={styles.heading}>Confirm Password</Text>
+                    <Text style={styles.heading}>Enter Referral Code</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
-                      style={styles.input1}
-                      placeholder='Confim Password'
-                      onChangeText={handleChange('confirm')}
-                      onBlur={handleBlur('confirm')}
-                      value={values.confirm}
+                      style={[styles.input1,{marginLeft:-3,}]}
+                      placeholder='BA52RT'
+                      onChangeText={handleChange('referal')}
+                      onBlur={handleBlur('referal')}
+                      value={values.referal}
                       />
                   </View>
               </View>
-              
               <View style={styles.error}>
-              {(errors.confirm && touched.confirm) &&
-                <Text style={styles.warn}>{errors.confirm}</Text>
+              {(errors.referal && touched.referal) &&
+                <Text style={styles.warn}>{errors.referal}</Text>
                 }
               </View>
-              {/* <View
-               style={{marginTop:0,flexDirection:'row',alignItems:'center'}}>
-                 <CheckBox
-                    disabled={false}
-                    value={toggleCheckBox}
-                    onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    tintColors={{ true: '#5A4392', false: '#5A4392' }}
-                  />
-                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}>Subscribe with newsletter</Text>
-              </View> */}
               <View
                style={{flexDirection:'row',alignItems:'center'}}>
                  <CheckBox
@@ -205,9 +228,8 @@ const RegisterPage=()=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}>{'I agree with Terms & Conditions and Privacy Policy'} </Text>
+                  <Text style={styles.agree}>{'I agree with Terms & Conditions and Privacy Policy'} </Text>
               </View>
-
               <View style={styles.button}>
                  <CustomButton
                   onPress={()=>
@@ -224,7 +246,7 @@ const RegisterPage=()=>{
                  onPress={()=>navigation.navigate('Login')} 
                  style={styles.account1}> Login here</Text>
              </View>
-             <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:30}}>
+             {/* <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:30}}>
                <Text style={{color:'#333333'}}>OR</Text>
              </View>
              <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:0}}>
@@ -242,17 +264,12 @@ const RegisterPage=()=>{
                
                />
                </View>
-             </View>
-             <View style={[styles.button,{marginBottom:20}]}>
+             </View> */}
+             {/* <View style={[styles.button,{marginBottom:20}]}>
                  <CustomButton
-                  // onPress={()=>
-                  //   errors.password || errors.email ||
-                  //   errors.name || errors.mobile || errors.confirm?
-                  //   Toast.show('All field required'):
-                  //   handleSubmit()}
                     title='SIGN UP'
                  />
-             </View>
+             </View> */}
           </View>
          </ScrollView>
          <StatusBar/>

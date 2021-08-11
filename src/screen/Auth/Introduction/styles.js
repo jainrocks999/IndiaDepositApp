@@ -6,69 +6,66 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
-   
     imageContainer:{
         alignItems:'center',
         marginTop:20
     },
     main:{
-        paddingHorizontal:10,
-        justifyContent:'center',
         alignItems:'center',
-        marginTop:100
+        paddingHorizontal:15,
+        width:'100%'
     },
-    second:{
-        width:'90%',
-        height:40,
-        borderWidth:1,
+    round:{
+        width:115,
+        height:115,
+        backgroundColor:'#5A4392',
+        borderRadius:57,
         justifyContent:'center',
-        flexDirection:'row',
-        borderRadius:6,
-        borderColor:colors.textColor
+        alignItems:'center'
     },
-    imageView:{
-        justifyContent:'center',
-        alignItems:'center',
-        width:40,
-        height:'100%',
-        borderRightWidth:1,
-        borderRightColor:colors.textColor
-    },
-    input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
-    textView:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:30
-    },
-    text:{
-        fontFamily:'Montserrat-SemiBold',
+    heading:{
+        fontSize:16,
+        fontFamily:'Montserrat-Normal',
         color:colors.textColor,
-        fontSize:22,
+        alignContent:'center',
         textAlign:'center'
     },
-    button:{
-        width:'100%',
-        paddingHorizontal:20,
-        marginTop:15,
-        marginBottom:20
+    india:{
+        fontFamily:'Montserrat-SemiBold', 
+        color:colors.bc,
+        fontSize:22,
+        marginTop:10
     },
-    error:{
-        width:'90%',
+    lorem:{
+        alignItems:'center',
         justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:0,
-        marginTop:6
+        paddingVertical:10
     },
-    image:{
-        width:'82%',
-        height:75,
-        resizeMode:'stretch'
+button:{
+        height:45,
+        width:'45%',
+        paddingHorizontal:10,
+        paddingVertical:10,
+        backgroundColor:colors.bc,
+        borderRadius:10,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    buttonContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginBottom:30,
+        alignItems:'center',
+        width:'100%',
+    },
+    text:{
+        color:colors.white,
+        fontSize:16,
+        fontFamily:'Montserrat-Normal'
     }
-   
+    
+    
+    
 })

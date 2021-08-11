@@ -9,6 +9,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import Loader from '../../../component/loader';
 import OTPTextInput  from 'react-native-otp-textinput';
 import color from '../../../component/colors';
+import colors from '../../../component/colors';
 
 const OtpVarification=({route})=>{
     const navigation=useNavigation()
@@ -43,16 +44,16 @@ const validateUser=()=>{
            <View style={styles.otpView}>
             <Text style={styles.enter}>Enter OTP</Text>
            <OTPTextInput
-             containerStyle={styles.input}
+              containerStyle={styles.input}
               handleTextChange={(code)=>setOtp(code)}
               inputCount={4}
               textInputStyle={styles.otp}
               offTintColor={'white'}
               tintColor={'white'}
               />
-              <View style={styles.textBottom}>
+              <View style={[styles.textBottom,{marginTop:15}]}>
                   <Text style={styles.your}>
-                      {`Enter the OTP sent to your mobile\nnumber. We are here to secure\nyour login details.`}
+                      {`Enter the OTP sent to your mobile number.`}
                   </Text>
               </View>
             </View>          
@@ -61,7 +62,16 @@ const validateUser=()=>{
                  title='CONFIRM OTP'
                  onPress={()=>validateUser()}
                  />
+                 <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center'}]}>
+                  <Text style={styles.your}>
+                      {`Didn’t Receive the OTP?`}
+                  </Text>
+                  <Text style={[styles.your,{color:colors.bc}]}>
+                      {` Resend again`}
+                  </Text>
+              </View>
              </View>
+             
            </View>
          </ScrollView>
          <StatusBar/>

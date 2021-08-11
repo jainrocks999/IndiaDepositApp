@@ -10,6 +10,8 @@ import Loader from '../../../component/loader';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import CheckBox from "@react-native-community/checkbox";
+import OTPTextInput  from 'react-native-otp-textinput';
+import colors from '../../../component/colors';
 
 const loginValidationSchema=yup.object().shape({
   email:yup.string().email('Please enter valid email').required('Email address is required'),
@@ -25,6 +27,7 @@ const Login=()=>{
     const isFetching=useSelector((state)=>state.isFetching)
     const [visible,setVisible]=useState(true)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
+    const [otp,setOtp]=useState('')
 
 const showVisible=()=>{
   return(
@@ -65,9 +68,8 @@ const validateUser=(email,password)=>{
               </View>
           </View>
           <View style={styles.main}>
-             
               <View style={styles.card}>
-                    <Text style={styles.heading}>Email</Text>
+                    <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
@@ -85,9 +87,18 @@ const validateUser=(email,password)=>{
                 <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
-             
-             
-              <View style={styles.card}>
+             <View style={{width:'100%',marginTop:20}}>
+               <Text style={{marginLeft:4,color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13}}>Enter Your Pin</Text>
+              <OTPTextInput
+              containerStyle={styles.OtpInput}
+              handleTextChange={(code)=>setOtp(code)}
+              inputCount={4}
+              textInputStyle={styles.otp}
+              offTintColor={'white'}
+              tintColor={'white'}
+              />
+              </View>
+              {/* <View style={styles.card}>
                     <Text style={styles.heading}>Password</Text>
                     <View style={styles.input}>      
                      {showVisible()}
@@ -101,12 +112,12 @@ const validateUser=(email,password)=>{
                     maxLength={20}
                     />
                   </View>
-              </View>
-              <View style={styles.error}>
+              </View> */}
+              {/* <View style={styles.error}>
               {(errors.password && touched.password) &&
                 <Text style={styles.warn}>{errors.password}</Text>
                 }
-              </View>
+              </View> */}
 
               <View
                style={{marginTop:10,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
@@ -117,16 +128,16 @@ const validateUser=(email,password)=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}>keep me logged in</Text>
+                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}>keep me logged in</Text>
                   </View>
-                <Text style={{fontSize:12,fontFamily:'Montserrat-Normal'}}
+                <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}
                  onPress={()=>navigation.navigate('Forget')}>Forgot password?</Text>
               </View>
 
               <View style={styles.button}>
                     <CustomButton
-                    // onPress={()=>navigation.navigate('Main')}
-                   onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
+                     onPress={()=>navigation.replace('Main')}
+                  // onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
                 </View>

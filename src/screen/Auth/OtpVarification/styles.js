@@ -35,12 +35,12 @@ export default StyleSheet.create({
         height:'100%',
         borderRightWidth:1
     },
-    input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
+    // input:{
+    //     width:'87%',
+    //     justifyContent:'center',
+    //     alignItems:'flex-start',
+    //     paddingHorizontal:10
+    // },
     textView:{
         justifyContent:'center',
         alignItems:'center',
@@ -98,7 +98,6 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     textBottom:{
-        marginTop:15,
         paddingHorizontal:7,
         alignItems:'center'
     }  ,

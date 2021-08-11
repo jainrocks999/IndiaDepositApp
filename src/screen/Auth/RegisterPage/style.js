@@ -27,6 +27,12 @@ export default StyleSheet.create({
         color:colors.textColor
 
     },
+    input2:{
+        width:'90%',
+        marginLeft:11,
+        color:colors.textColor
+
+    },
     card: { 
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -38,7 +44,25 @@ export default StyleSheet.create({
         height:60,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginTop:10
+        marginTop:10,
+        borderWidth:1,
+        borderColor:colors.bc
+    },
+    card1: { 
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        height:60,
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginTop:10,
+        borderWidth:1,
+        borderColor:colors.bc,
+      
     },
     heading:{
         fontSize:13,
@@ -51,17 +75,18 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     main:{
-        paddingHorizontal:20,
+        paddingHorizontal:30,
         marginTop:50
     },
     button:{
         width:'100%',
-        marginTop:5
+        marginTop:5,
+       // marginBottom:20
     },
     bottom:{
         flexDirection:'row',
         marginTop:8,
-       // marginBottom:20,
+        marginBottom:20,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -84,4 +109,9 @@ export default StyleSheet.create({
         fontSize:14,
         color:'red'
     },
+    agree:{
+        fontSize:12,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    }
 })

@@ -37,7 +37,9 @@ export default StyleSheet.create({
         height:60,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginTop:10
+        marginTop:10,
+        borderColor:colors.bc,
+        borderWidth:1
     },
     heading:{
         fontSize:13,
@@ -50,12 +52,12 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     main:{
-        paddingHorizontal:20,
+        paddingHorizontal:30,
         marginTop:50
     },
     button:{
         width:'100%',
-        marginTop:15
+        marginTop:5
     },
     bottom:{
         flexDirection:'row',
@@ -81,5 +83,23 @@ export default StyleSheet.create({
     warn:{
         fontSize:14,
         color:'red'
+    },
+    OtpInput:{
+        width:'100%',
+        alignItems:'flex-start',
+        marginTop:5
+    },
+    otp:{
+        width: 50,
+        height: 50,
+        borderWidth: 2,
+        color:'#000',
+        backgroundColor:'white',
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
     },
 })
