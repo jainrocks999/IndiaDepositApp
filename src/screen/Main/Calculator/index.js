@@ -14,21 +14,23 @@ import SP from '../../../component/TabComponents/SP';
     second: SP,
    
   });
-const Calculator=()=>{
-  const navigation=useNavigation()
-  const [index, setIndex] = useState(0);
-  const [routes] = React.useState([
-    { key: 'first', title: 'FD' },
-    { key: 'second', title: 'SP' },
+const Calculator=()=>
+{
+   const navigation=useNavigation()
+   const [index, setIndex] = useState(0);
+   const [routes] = React.useState
+   ([
+     { key: 'first', title: 'FD' },
+     { key: 'second', title: 'SP' },
    
-  ]);
+    ]);
     return(
-        <View style={styles.container}>
-           <Header
-            source={require('../../../assets/Images/arrow.png')}
-            title={'CALCULATOR'}
-           onPress={()=>navigation.goBack()}
-           />
+           <View style={styles.container}>
+              <Header
+                source={require('../../../assets/Images/arrow.png')}
+                title={'CALCULATOR'}
+                onPress={()=>navigation.goBack()}
+              />
              <View style={styles.card}>
                 <TabView
                     navigationState={{ index, routes }}
@@ -36,20 +38,21 @@ const Calculator=()=>{
                     onIndexChange={setIndex}
                     initialLayout={{ width: '100%' }}
                     renderTabBar={props => <TabBar
-                        indicatorStyle={{ 
-                            backgroundColor: colors.bc, 
-                            height:3
-                          }}
-                        renderLabel={({route, color,focused}) => (
-                            <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
-                              {route.title}
-                            </Text>
-                          )}
-                        {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
-                    />
+                    indicatorStyle=
+                     {{ 
+                        backgroundColor: colors.bc, 
+                        height:3
+                     }}
+                    renderLabel={({route, color,focused}) => (
+                     <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
+                           {route.title}
+                     </Text>
+                   )}
+                   {...props} style={styles.prop}/>}
+                />
              </View>
-         <StatusBar/>
-       </View>
+              <StatusBar/>
+           </View>
     )
 }
 export default Calculator;

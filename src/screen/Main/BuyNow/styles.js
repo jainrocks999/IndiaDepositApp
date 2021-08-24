@@ -52,5 +52,27 @@ export default StyleSheet.create({
         borderRadius:30,
         justifyContent:'center',
         alignItems:'center'
-    }
+    },
+    Textview:{
+        paddingHorizontal:25,
+        paddingVertical:8,
+        marginTop:0
+    },
+    Textview1:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    line:
+    {
+     width:'100%',
+    borderWidth:1,
+    marginTop:12,
+    borderColor:colors.textColor
+},
+flat:{
+    alignItems:'center',
+    justifyContent:'center',
+    flex:1
+},
 })

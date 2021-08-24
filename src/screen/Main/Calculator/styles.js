@@ -58,5 +58,10 @@ export default StyleSheet.create({
         fontSize:13,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' 
-    }
+    },
+    prop:{
+        backgroundColor: 'white',
+        borderTopRightRadius:10,
+        borderTopLeftRadius:10
+    },
 })

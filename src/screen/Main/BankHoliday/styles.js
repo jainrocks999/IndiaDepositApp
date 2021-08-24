@@ -1,6 +1,22 @@
 import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
 export default StyleSheet.create({
+    container1:
+    {
+        flex:1,
+        backgroundColor:'#E5E5E5'
+    },
+    Textview:
+    {
+         backgroundColor:'#fff',
+         marginTop:20,
+         borderRadius:6
+    },
+    Textview1:
+    {
+        paddingHorizontal:20,
+        marginTop:20
+    },
    jan:{
         flexDirection:'row',
         alignItems:'center',

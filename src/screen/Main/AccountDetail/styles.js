@@ -2,6 +2,11 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 
 export default StyleSheet.create({
+    container1:
+    {
+        flex:1,
+        backgroundColor:'#E5E5E5'
+    },
     list:{
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -17,6 +22,24 @@ export default StyleSheet.create({
         marginVertical:2,
         marginTop:13
     },
+    img:
+    {
+        width:86,
+        height:30
+    },
+    Text1:
+    {
+        marginTop:10,
+        fontSize:14,
+        color:colors.bc,
+        fontFamily:'Montserrat-Medium'
+     },
+     Text2:
+     {
+         marginTop:6,
+         fontSize:12,
+         fontFamily:'Montserrat-Medium'
+     },
     item:{
         fontSize:12,
         fontFamily:'Montserrat-Normal',
@@ -27,19 +50,102 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         color:'#777777'
     },
+    card:
+    {
+        backgroundColor:colors.white,
+    },
     container:{
         flexDirection:'row',
         justifyContent:'space-between',
         paddingVertical:13,
         paddingHorizontal:12
     },
-    tds:{color:'#000',fontFamily:'Montserrat-Normal',marginTop:10},
-    lorem:{color:colors.textColor,fontFamily:'Montserrat-Normal',marginTop:10,fontSize:13},
-    point:{width:6,height:6,borderRadius:3,backgroundColor:'#000',marginTop:7},
-    pointText:{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:10,marginTop:1},
-    bank:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:50,
-        flexDirection:'row',alignItems:'center',justifyContent:'space-between'
-       },
-    bankDetails:{color:colors.bc,fontSize:13,fontFamily:'Montserrat-Normal'},
-    top:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:20}
+    tds:
+    {
+        color:'#000',
+        fontFamily:'Montserrat-Normal',
+        marginTop:10
+    },
+    lorem:
+    {
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        marginTop:10,
+        fontSize:13
+    },
+    point:
+    {
+        width:6,
+        height:6,
+        borderRadius:3,
+        backgroundColor:'#000',
+        marginTop:7
+    },
+    pointText:
+    {
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        fontSize:13,
+        marginLeft:10,
+        marginTop:1
+    },
+    bank:
+    {
+        backgroundColor:colors.white,
+        marginTop:13,
+        paddingVertical:15,
+        paddingHorizontal:50,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
+    },
+    bankDetails:
+    {
+        color:colors.bc,
+        fontSize:13,
+        fontFamily:'Montserrat-Normal'
+    },
+    top:
+    {
+        backgroundColor:colors.white,
+        marginTop:13,
+        paddingVertical:15,
+        paddingHorizontal:20
+    },
+    line:
+    {
+        borderWidth:1,
+        borderColor:'#C7BEBE'
+    },
+    undercard:
+    {
+        alignItems:'center'
+    },
+    second:
+    {
+        backgroundColor:colors.white,
+        marginTop:13
+    },
+    Textview:
+    {
+        marginTop:6,
+        flexDirection:'row'
+    },
+    Text3:
+    {
+        color:'#000',
+        fontFamily:'Montserrat-Normal',
+        marginTop:10
+    },
+    rupay:
+    {
+        marginRight:2,
+        height:11,
+        width:8,
+        marginTop:2
+    },
+    rup:
+    {
+        flexDirection:'row'
+    },
 })

@@ -43,5 +43,10 @@ export default StyleSheet.create({
     row1:{width:28,height:28,borderRadius:14,backgroundColor:colors.bc,justifyContent:'center',alignItems:'center'},
     title1:{marginTop:17,fontFamily:'Montserrat-SemiBold',color:colors.textColor},
     button:{width:120,height:35,backgroundColor:colors.bc,borderRadius:30,justifyContent:'center',alignItems:'center'},
-    invest:{color:colors.white,fontSize:10,fontFamily:'Montserrat-SemiBold'}
+    invest:{color:colors.white,fontSize:10,fontFamily:'Montserrat-SemiBold'},
+    flatdata:{alignItems:'center',justifyContent:'center',flex:1},
+    data1:{paddingHorizontal:20,paddingVertical:20},
+    Textview:{paddingHorizontal:10,paddingVertical:20},
+    xtext:{color:colors.white,marginTop:-5,fontSize:20},
+    touch:{position:'absolute',bottom:15},
 })
