@@ -24,14 +24,14 @@ export default StyleSheet.create({
     input1:{
         width:'90%',
         marginLeft:11,
+        paddingVertical:-10,
         color:colors.textColor
-
     },
     input2:{
         width:'90%',
         marginLeft:11,
-        color:colors.textColor
-
+        color:colors.textColor,
+        paddingVertical:-10,
     },
     card: { 
         shadowColor:'black',
@@ -41,12 +41,10 @@ export default StyleSheet.create({
         elevation:2,
         borderRadius:10,
         backgroundColor:'white',
-        height:60,
         paddingHorizontal:15,
         paddingVertical:10,
         marginTop:10,
         borderWidth:1,
-        borderColor:colors.bc
     },
     card1: { 
         shadowColor:'black',
@@ -56,7 +54,7 @@ export default StyleSheet.create({
         elevation:2,
         borderRadius:10,
         backgroundColor:'white',
-        height:60,
+       
         paddingHorizontal:15,
         paddingVertical:10,
         marginTop:10,
@@ -70,9 +68,9 @@ export default StyleSheet.create({
         color:colors.heading
     },
     input:{
-        marginTop:-14,
+        alignItems:'center',
         flexDirection:'row',
-        alignItems:'center'
+        marginTop:-3
     },
     main:{
         paddingHorizontal:30,
@@ -102,11 +100,11 @@ export default StyleSheet.create({
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
-        paddingHorizontal:0,
+        paddingHorizontal:8,
         marginTop:6
     },
     warn:{
-        fontSize:14,
+        fontSize:12,
         color:'red'
     },
     agree:{

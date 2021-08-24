@@ -23,8 +23,9 @@ export default StyleSheet.create({
     },
     input1:{
         width:'90%',
-        marginLeft:11
-
+        marginLeft:11,
+        paddingVertical:-10,
+        color:colors.textColor
     },
     card: { 
         shadowColor:'black',
@@ -34,12 +35,10 @@ export default StyleSheet.create({
         elevation:2,
         borderRadius:10,
         backgroundColor:'white',
-        height:60,
         paddingHorizontal:15,
         paddingVertical:10,
         marginTop:10,
-        borderColor:colors.bc,
-        borderWidth:1
+        borderWidth:1,
     },
     heading:{
         fontSize:13,
@@ -47,9 +46,9 @@ export default StyleSheet.create({
         color:'#777777'
     },
     input:{
-        marginTop:-14,
+        alignItems:'center',
         flexDirection:'row',
-        alignItems:'center'
+        marginTop:-3
     },
     main:{
         paddingHorizontal:30,
@@ -77,11 +76,11 @@ export default StyleSheet.create({
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
-        paddingHorizontal:0,
+        paddingHorizontal:8,
         marginTop:6
     },
     warn:{
-        fontSize:14,
+        fontSize:12,
         color:'red'
     },
     OtpInput:{

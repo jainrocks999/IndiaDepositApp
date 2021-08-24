@@ -7,8 +7,15 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-between',
-    opacity: 10,
-    paddingVertical:10,
+     opacity: 50,
+     paddingVertical:10,
+     shadowColor:'black',
+    shadowOpacity:10,
+    shadowOffset:{height:4,width:2},
+    elevation:3,
+    borderTopWidth:3,
+    borderTopColor:'#afb3b0'
+    
   },
 
   itemSeperator: {
@@ -35,12 +42,11 @@ export default StyleSheet.create({
   text:{
     fontSize: 10,
     color:colors.textColor,
-    fontFamily:'Poppins-SemiBold',
+    fontFamily:'Montserrat-Medium',
     marginTop:5
   },
   container:{
     justifyContent: 'center', 
-    alignSelf: 'center', 
     alignItems: 'center'
   }
 });

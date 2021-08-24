@@ -40,7 +40,7 @@ const SBAccount=()=>{
     return(
         <View style={styles.container}>
             <Header
-            title={'SB ACCOUNT SEARCH'}
+            title={'SB A/C SEARCH'}
             source={require('../../../assets/Images/arrow.png')}
             onPress={()=>navigation.goBack()}
             />
@@ -48,97 +48,42 @@ const SBAccount=()=>{
             <View style={styles.main}>
              
             <View style={{marginTop:20}}>
-              <Text style={{fontSize:13,fontFamily:'Montserrat-Normal'}}>
+              <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.textColor}}>
                 Lorem ipsum, or lipsum as it is sometimes known,
                 is dummy text used in laying out print, graphic or
                 web designs. The passage is attributed to an
                 unknown typesetter book.</Text>
 
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:20}}>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Minimum Balance Range</Text>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:8}}>Rs 20,000</Text>
-                </View>
-                <View style={{marginTop:15}}>
-                <ProgressBar progress={0.5} color={'#5A4392'} />
-                </View>
+                <View style={{marginTop:20}}>
+                  <Text>Minimum Balance </Text>
+                          <TextInput
+                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',height:40,marginTop:-10}}
+                         // placeholder='Enter Pincode'
+                         keyboardType='number-pad'
+                          />
+                      </View>
+               
             </View>
+
            
             <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Age</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setAge(val)}
-                        items={data}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={age}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Account Type</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setAccount(val)}
-                        items={data1}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12,}
-                        }}
-                        value={account}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Account Sub Type</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setAcType(val)}
-                        items={data2}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={acType}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Location</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setAcType(val)}
-                        items={data2}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={acType}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
+                          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Location</Text>
+                          </View>
+                          <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
+                          <Image source={require('../../../assets/Image/search.png')}/>
+                          <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',marginLeft:30}}>Current Location</Text>
+                          </View>
+                      </View>
+                      <View style={{marginTop:20,alignItems:'center'}}>
+                        <Text>OR</Text>
+                      </View>
+                      <View style={{marginTop:5}}>
+                          <TextInput
+                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                          placeholder='Enter Pincode'
+                          />
+                      </View>
                     
                     <View style={{marginTop:15,marginBottom:20}}>
                     <Button

@@ -94,7 +94,7 @@ const renderItem=(item)=>{
     return(
         <View style={{flex:1}}>
           <Header
-            title={'SB ACCOUNT LISTING'}
+            title={'SB A/C LISTING'}
             source={require('../../../assets/Images/arrow.png')}
             titleTwo='Compare'
             onPress={()=>navigation.goBack()}

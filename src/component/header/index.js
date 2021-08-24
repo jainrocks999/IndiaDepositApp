@@ -2,16 +2,18 @@ import React from 'react';
 import { View,Text,TouchableOpacity ,StyleSheet,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../colors';
-const Header=({title,source,onPress})=>{
+const Header=({title,source,onPress,source1,onPress1})=>{
     const navigation=useNavigation()
     return(
         <View>
             <View style={styles.main}>
-            <TouchableOpacity onPress={onPress}>
-            <Image style={{height:35,width:35,tintColor:colors.white}}  source={source}/>
-            </TouchableOpacity>
-            <Text style={styles.text}>{title} </Text>
-            <View style={{width:20}}></View>
+                <TouchableOpacity onPress={onPress}>
+                  <Image style={{height:35,width:35,tintColor:colors.white}}  source={source}/>
+                </TouchableOpacity>
+                <Text style={styles.text}>{title} </Text>
+                <TouchableOpacity onPress={onPress1}>
+                <Image source={source1}/>
+                </TouchableOpacity>
            </View>
         </View>
     )

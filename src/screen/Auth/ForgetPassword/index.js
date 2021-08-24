@@ -10,71 +10,81 @@ import Loader from '../../../component/loader';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 const loginValidationSchema=yup.object().shape({
-  email:yup.string().email('Please enter valid email').required('Email address is required'),
+  email:yup.string().email('Please enter valid email'),
+  mobile:yup.string(),
 })
 const ForgetPassword=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
+    const [focus,setFocus]=useState(false)
+    const [focus1,setFocus1]=useState(false)
 
-const validateUser=()=>{
-  let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if(reg.test(email)==false){
-        Toast.show('Enter Valid Mobile Number')
+const validateUser=(email,mobile)=>{
+    if(email && mobile){
+       Toast.show('Please Enter Email or Mobile Number')
     }
-    else{
-        dispatch({
+    else if(email){
+         console.log('this is working');
+         dispatch({
           type: 'Forget_Password_Request',
-          url: '',
-          mobile,
-          navigation: navigation,
+          url: 'forgetpassword',
+          email,
         })
-      }
-}
+    }
+    else if(mobile){
+      console.log('this is working1');
+      dispatch({
+        type: 'Forget_Password_Request',
+        url: 'forgetpassword',
+        mobile,
+      })
+    }
+  }
+  const showBorder=()=>{
+    setFocus(true)
+    setFocus1(false)
+  }
+  const showBorder1=()=>{
+    setFocus1(true)
+    setFocus(false)
+   
+  }
+
+
     return(
       <Formik
-      initialValues={{ email: '',password:'' }}
-      onSubmit={values => console.log(values.email)}
+      initialValues={{ email: '',mobile:'' }}
+      onSubmit={values => validateUser(values.email,values.mobile)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-          <ScrollView>
+          <KeyboardAwareScrollView>
           <View style={styles.imageContainer}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <Image source={require('../../../assets/Image/arrowBack.png')}/>
+            </TouchableOpacity>
               <View style={styles.round}>
                   <Image
                   source={require('../../../assets/Image/logo-icon.png')}/>
               </View>
+              <View style={{width:'5%'}}></View>
           </View>
            <View style={styles.main}>
-               <View style={styles.card}>
-                    <Text style={styles.heading}>Email</Text>
+           <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
+                   {values.email? <Text style={styles.heading}>Email</Text> :null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput
-                      placeholder='Type your email'
-                      style={styles.input1}
-                      onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                      value={values.email}
-                      maxLength={40}
-                      />
-                  </View>
-              </View>
-              <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
-                <Text style={{color:colors.textColor}}>OR</Text>
-              </View>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Mobile</Text>
-                    <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/phone.png')}/>
-                     <TextInput
-                      placeholder='Mobile Number'
+                      onFocus={()=>showBorder()}
+                      placeholder='Email Address'
                       style={styles.input1}
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -85,18 +95,42 @@ const validateUser=()=>{
               </View>
               <View style={styles.error}>
                    {(errors.email && touched.email) &&
-                <Text style={{fontSize:14,color:'red'}}>{errors.email}</Text>
+                <Text style={{fontSize:12,color:'red'}}>{errors.email}</Text>
+                }
+              </View>
+              <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
+                <Text style={{color:colors.textColor}}>OR</Text>
+              </View>
+              <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
+                   {values.mobile? <Text style={styles.heading}>Mobile</Text> :null}
+                    <View style={styles.input}>
+                     <Image source={require('../../../assets/Image/phone.png')}/>
+                     <TextInput
+                      onFocus={()=>showBorder1()}
+                      placeholder='Mobile Number'
+                      style={styles.input1}
+                      onChangeText={handleChange('mobile')}
+                      onBlur={handleBlur('mobile')}
+                      value={values.mobile}
+                      maxLength={11}
+                      keyboardType={'phone-pad'}
+                      />
+                  </View>
+              </View>
+              <View style={styles.error}>
+                   {(errors.mobile && touched.mobile) &&
+                <Text style={{fontSize:14,color:'red'}}>{errors.mobile}</Text>
                 }
               </View>
              <View style={styles.button}>
                  <CustomButton
                    title='RESET MY PASSWORD'
-                   onPress={()=>errors.email?Toast.show('All field required'):navigation.navigate('Login')}
+                   onPress={()=>errors.email || errors.mobile ?Toast.show('All field required'):handleSubmit()}
                  />
              </View>
             
            </View>
-         </ScrollView>
+         </KeyboardAwareScrollView>
          <StatusBar/>
        </View>
          )}

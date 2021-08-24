@@ -1,103 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Image, View, TouchableOpacity, Text } from 'react-native';
 import styles from './style';
 import { useNavigation } from '@react-navigation/native';
-import Storage from '../AsyncStorage';
-import AsyncStorage from '@react-native-community/async-storage';
 
-const BottomTab = (mobile) => {
+const BottomTab = () => {
   const navigation = useNavigation();
-  const [Number, setNumber] = useState('');
-  useEffect(async () => {
-    let number = await AsyncStorage.getItem(Storage.mobile);
-    setNumber(number)
-  })
-  const renderImageOnline = () => {
+
+  const renderHome = () => {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/Images/home.png')}
-          //style={styles.bottomTab}
-        />
+        <View style={{width:30}}>
+          <Image
+            source={require('../../assets/Images/home.png')}/>
+        </View>
         <Text style={styles.text}>{'HOME'}</Text>
       </View>
     )
   };
 
-  const renderImageNotification = () => {
-
+  const renderBank = () => {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/Images/holy.png')}
-         // style={styles.bottomTab}
-        />
+        <View style={{width:30}}>
+          <Image
+            source={require('../../assets/Images/holy.png')}/>
+        </View>
         <Text style={styles.text}>{'BANK HOLIDAY'}</Text>
       </View>
     );
-
-  };
-  const renderImageReport = () => {
-
+  }
+  const renderKnowledge = () => {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/Images/knowledge.png')}
-         // style={styles.bottomTab}
-        />
+          <View style={{width:30}}>
+            <Image
+              source={require('../../assets/Image/knowledege_grey.png')}/>
+          </View>
         <Text style={styles.text}>{'KNOWLEDGE CENTER'}</Text>
       </View>
     );
-
   };
-  const renderImageSetting = () => {
-
+  const renderTrending = () => {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/Images/trend.png')}
-         // style={styles.bottomTab}
-        />
+          <View style={{width:30}}>
+            <Image
+              source={require('../../assets/Images/trend.png')}/>
+          </View>
         <Text style={styles.text}>{'TRENDING'}</Text>
       </View>
     );
-
   };
   return (
     <View style={styles.header}>
+
       <TouchableOpacity
         style={styles.bottomTabContainer}
         onPress={() => {
-          navigation.navigate('DashBoardPage');
-        }}>
-
-        {renderImageOnline()}
+          navigation.navigate('Dashboard')}}>
+        {renderHome()}
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.bottomTabContainer}
         onPress={() => {
-          // navigation.navigate('About');
-        }}>
-        {renderImageNotification()}
+           navigation.navigate('BankHoliday')}}>
+        {renderBank()}
       </TouchableOpacity>
-
-
 
       <TouchableOpacity
         style={styles.bottomTabContainer}
-       // onPress={() => call()}
-      //  onPress={()=>navigation.navigate('HowTo')}
-      >
-        {renderImageReport()}
+        onPress={()=>navigation.navigate('KnowledgeCenter')}>
+        {renderKnowledge()}
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.bottomTabContainer}
         onPress={() => {
-          // navigation.navigate('Leader');
-        }}>
-        {renderImageSetting()}
+         navigation.navigate('Trending')}}>
+        {renderTrending()}
       </TouchableOpacity>
     </View>
   );

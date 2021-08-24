@@ -6,25 +6,27 @@ import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 
 
-const Introduction=()=>{
+const Introduction=({route})=>{
     const navigation=useNavigation()
+    const data=route.params
+      console.log('this is data information',data);
     return(
         <View style={styles.container}>
-          <ScrollView>
-          <View style={styles.imageContainer}>
+          <ScrollView style={{flex:1}}>
+             <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image
                   source={require('../../../assets/Image/logo-icon.png')}/>
               </View>
               <Text style={styles.india}>IndiaDeposit</Text>
-          </View>
-              <View style={{alignItems:'center',justifyContent:'center',marginTop:50}}>
-             <Image style={{width:'95%'}}
-                  source={require('../../../assets/Image/intro.png')}/>
-                  </View>
+            </View>
+                <View style={{alignItems:'center',justifyContent:'center',marginTop:20,width:'100%',height:290,padding:10}}>
+                <Image style={{width:'95%',height:'90%'}}
+                      source={{uri:data.image_url}}/>
+                </View>
            <View style={styles.main}>
                 <View style={styles.lorem}>
-                  <Text style={styles.heading}>{'Lorem ipsum, or lipsum as it is sometimes\n known, is dummy text used in laying.'}</Text>
+                  <Text style={styles.heading}>{data.intro_speech}</Text>
                 </View>
              <View style={styles.buttonContainer}>
                 <TouchableOpacity

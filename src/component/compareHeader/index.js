@@ -13,14 +13,12 @@ const Header=({title,onPress1,titleTwo,source,onPress})=>{
             <View style={styles.view}>
             <Text style={styles.text}>{title} </Text>
             </View>
-            <View style={{width:30}}></View>
-            {/* {titleTwo?
+            {titleTwo?
             <TouchableOpacity onPress={onPress1}
             style={styles.squareView}>
-                <Text style={{fontSize:11,color:'#ffffff',fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
+                <Text style={{fontSize:11,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
             </TouchableOpacity>:<View></View>
-            } */}
-            {/* </View> */}
+            }
            </View>
         </View>
     )
@@ -48,7 +46,7 @@ const styles=StyleSheet.create({
         marginRight:10
     },
     view:{
-        marginLeft:15
+        marginLeft:15,
        // flexDirection:'row',
        // alignItems:'center',
         //width:'50%',
@@ -62,6 +60,7 @@ const styles=StyleSheet.create({
         borderRadius:6,
         justifyContent:'center',
         alignItems:'center',
-        paddingHorizontal:10
+        paddingHorizontal:10,
+        backgroundColor:'#fff'
     }
 })

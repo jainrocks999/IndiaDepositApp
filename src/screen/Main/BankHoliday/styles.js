@@ -1,76 +1,86 @@
 import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
 export default StyleSheet.create({
+   jan:{
+        flexDirection:'row',
+        alignItems:'center',
+        width:'100%',
+        paddingHorizontal:20,paddingVertical:10,
+        backgroundColor:colors.bc,
+        justifyContent:'space-between'
+    },
+    border:{
+        borderColor: colors.white,
+        borderWidth: 1,
+    },
+    month:{
+        fontSize:16,
+        fontFamily:'Montserrat-Normal',
+        color:colors.white
+    },
+    border1:{
+        borderColor: colors.textColor,
+        borderStyle: 'dashed',
+        borderWidth: .5,
+        borderRadius:0.000001
+    },
     container:{
         flexDirection:'row',
-        justifyContent:'space-between',
-       width:'98%',
-        marginTop:38
+        alignItems:'center',
+        width:'100%',
+        paddingHorizontal:20,
+        paddingVertical:10,
+        justifyContent:'space-between'
     },
-    imageView:{
-        width:56,
-        height:56,
-        backgroundColor:'#FFFFFF',
-        borderRadius:28,
-        borderWidth:2,
-        borderColor:'#5A4392',
-        justifyContent:'center',
-        alignItems:'center'
-    },
-    text:{
-        fontFamily:'Montserrat-Normal',
-        fontSize:17,
-        color:'#000000',
-        marginTop:15,
-        fontWeight:'600',
-        textAlign: 'center',
-        marginBottom:15,
-    },
-   
     main:{
-        alignItems:'center',
-        justifyContent:'center',
-        height: 21,
-        width: 161,
-        left: 127,
-        top: 115,
-//border-radius: nullpx;
-
-    },
-    item:{
-        flex:1,
-        width:'95%',
         marginTop:20,
-        marginBottom:20,
-        marginLeft:10,
-        backgroundColor:'#FFFFFF',
-        borderColor:'black',
-        borderRadius:10,
+        alignItems:'center',
+        justifyContent:'center'
     },
-    text1:{
-        fontFamily:'Montserrat-Normal',
-        fontStyle:'normal',
+    heading:{
         fontSize:16,
-        color:'#FFFFFF',
-        marginTop:0,
-        fontWeight:'700',
+        color:colors.bc,
+        marginBottom:15
     },
-    main1:{
+    item1:{
+        fontSize:14,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    },
+    item2:{
+        fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor
+    },
+    result:{
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        fontSize:14,
+        marginTop:20
+    },
+    search:{
+        color:colors.white,
+        fontFamily:'Montserrat-Normal',
+        fontSize:14
+    },
+    button:{
+        backgroundColor:colors.bc,
+        width:'100%',
         alignItems:'center',
         justifyContent:'center',
-         width: '100%',
-          height: 40,
-       backgroundColor:'#5A4392',
+        borderRadius:30,
+        height:50
     },
-    text2:{
+    input:{
+        borderWidth:1,
+        height:40,
+        borderRadius:10,
+        paddingHorizontal:10,
+        borderColor:'#000'
+    },
+    dummy:{
+        fontSize:13,
         fontFamily:'Montserrat-Normal',
-        fontSize:12,
-        color:'#000000',
-        marginTop:10,
-        fontWeight:'200',
-        textAlign: 'center',
-        marginBottom:10,
-    },
-    main3:{flexDirection:'row',justifyContent:'space-between',marginHorizontal:10},
-    cardspace:{height:0,width:"100%",borderWidth:0.5,backgroundColor:'#DDDDDD',marginTop:0},
+        color:colors.textColor
+    }
 })

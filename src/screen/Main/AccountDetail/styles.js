@@ -2,60 +2,44 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 
 export default StyleSheet.create({
-    same:{
-        fontSize:11,
-        fontFamily:'Montserrat-Normal',
-        color:colors.textColor
-    },
-    title:{
-        fontSize:14,
-        fontFamily:'Montserrat-Normal',
-        color:colors.textColor
-    },
-    cardView:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
-    },
-    card:{
+    list:{
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
-        elevation:5,
-        borderRadius:6,
+        elevation:2,
+        borderRadius:10,
         backgroundColor:'white',
-        height:85,
-        padding:13,
+        paddingVertical:15,
+        marginHorizontal:15,
+        justifyContent:'center',
+        alignItems:'center',
+        marginVertical:2,
+        marginTop:13
     },
-    title1:{
-        fontFamily:'Montserrat-Medium',
-        color:colors.textColor
-    },
-    value1:{
-        fontFamily:'Montserrat-Normal',
+    item:{
         fontSize:12,
+        fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    cont:{
-        paddingHorizontal:25,
-        paddingVertical:8
+    item1:{
+        fontSize:11,
+        fontFamily:'Montserrat-Normal',
+        color:'#777777'
     },
-    row:{
+    container:{
         flexDirection:'row',
         justifyContent:'space-between',
-        alignItems:'center'
+        paddingVertical:13,
+        paddingHorizontal:12
     },
-    border:{
-        width:'100%',
-        borderWidth:1,
-        marginTop:12,
-        borderColor:colors.textColor
-    },
-    list:{
-        alignItems:'center',
-        justifyContent:'center',
-        flex:1,
-        marginTop:10
-    }
+    tds:{color:'#000',fontFamily:'Montserrat-Normal',marginTop:10},
+    lorem:{color:colors.textColor,fontFamily:'Montserrat-Normal',marginTop:10,fontSize:13},
+    point:{width:6,height:6,borderRadius:3,backgroundColor:'#000',marginTop:7},
+    pointText:{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:10,marginTop:1},
+    bank:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:50,
+        flexDirection:'row',alignItems:'center',justifyContent:'space-between'
+       },
+    bankDetails:{color:colors.bc,fontSize:13,fontFamily:'Montserrat-Normal'},
+    top:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:20}
 })

@@ -24,6 +24,8 @@ export default StyleSheet.create({
     input1:{
         width:'90%',
         marginLeft:11,
+        paddingVertical:-10,
+        color:colors.textColor
 
     },
     card: { 
@@ -34,7 +36,6 @@ export default StyleSheet.create({
         elevation:2,
         borderRadius:10,
         backgroundColor:'white',
-        height:60,
         paddingHorizontal:15,
         paddingVertical:10,
         marginTop:18,
@@ -44,12 +45,12 @@ export default StyleSheet.create({
     heading:{
         fontSize:13,
         fontFamily:'Montserrat-Normal',
-        color:'#777777'
+        color:colors.textColor,
     },
     input:{
-        marginTop:-14,
+        alignItems:'center',
         flexDirection:'row',
-        alignItems:'center'
+        marginTop:-3
     },
     main:{
         paddingHorizontal:30,

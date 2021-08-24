@@ -7,16 +7,16 @@ export default StyleSheet.create({
         //marginTop:38
     },
     imageView:{
-        width:60,
-        height:60,
-        backgroundColor:colors.bc,
-        borderRadius:30,
-        justifyContent:'center',
-        alignItems:'center'
+        // width:60,
+        // height:60,
+        // backgroundColor:colors.bc,
+        // borderRadius:30,
+        // justifyContent:'center',
+        // alignItems:'center'
     },
     text:{
-        fontFamily:'Montserrat-Normal',
-        fontSize:14,
+        fontFamily:'Montserrat-SemiBold',
+        fontSize:12,
         color:colors.textColor,
         marginTop:6,
         fontWeight:'600',
@@ -54,11 +54,6 @@ export default StyleSheet.create({
         backgroundColor:'#FFFFFF',
         borderRadius:10,
         marginBottom:20,
-        paddingVertical:25,
-        shadowColor:'black',
-        shadowOpacity:0.25,
-        shadowRadius:8,
-        shadowOffset:{height:2,width:0},
-        elevation:5,
+        // paddingVertical:25,
     }
 })

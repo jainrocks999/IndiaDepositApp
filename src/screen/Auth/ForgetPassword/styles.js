@@ -10,8 +10,10 @@ export default StyleSheet.create({
     },
    
     imageContainer:{
-        alignItems:'center',
-        marginTop:20
+        justifyContent:'space-between',
+        marginTop:20,
+        flexDirection:'row',
+        paddingHorizontal:15
     },
     main:{
         paddingHorizontal:30,
@@ -28,8 +30,9 @@ export default StyleSheet.create({
 
     input1:{
         width:'90%',
-        marginLeft:11
-
+        marginLeft:11,
+        paddingVertical:-10,
+        color:colors.textColor
     },
     card: { 
         shadowColor:'black',
@@ -39,11 +42,10 @@ export default StyleSheet.create({
         elevation:2,
         borderRadius:10,
         backgroundColor:'white',
-        height:60,
         paddingHorizontal:15,
         paddingVertical:10,
+        marginTop:10,
         borderWidth:1,
-        borderColor:colors.bc
     },
     heading:{
         fontSize:13,
@@ -51,9 +53,9 @@ export default StyleSheet.create({
         color:'#777777'
     },
     input:{
-        marginTop:-14,
+        alignItems:'center',
         flexDirection:'row',
-        alignItems:'center'
+        marginTop:-3
     },
     button:{
         width:'100%',
@@ -64,7 +66,7 @@ export default StyleSheet.create({
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
-        paddingHorizontal:0,
+        paddingHorizontal:8,
         marginTop:6
     },
    

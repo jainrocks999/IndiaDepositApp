@@ -12,14 +12,10 @@ import * as yup from 'yup';
 import CheckBox from "@react-native-community/checkbox";
 import OTPTextInput  from 'react-native-otp-textinput';
 import colors from '../../../component/colors';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 const loginValidationSchema=yup.object().shape({
-  email:yup.string().email('Please enter valid email').required('Email address is required'),
-  password:yup.string().min(8,({min})=>`Password must be atleast ${min} charrecter`).
-  required('Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
+  value:yup.string().required('Email or Mobile is required'),
 })
 const Login=()=>{
     const navigation=useNavigation()
@@ -28,6 +24,7 @@ const Login=()=>{
     const [visible,setVisible]=useState(true)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [otp,setOtp]=useState('')
+    const [focus,setFocus]=useState(false)
 
 const showVisible=()=>{
   return(
@@ -39,28 +36,41 @@ const showVisible=()=>{
     </TouchableOpacity>
   )
 }
-const validateUser=(email,password)=>{
-        console.log('this is user login detail',email,password);
+const validateUser=(value)=>{
+        if(isNaN(value))
         dispatch({
           type: 'User_Login_Request',
           url: 'signin',
-          email,
-          password,
-          navigation: navigation,
+          email:value,
+          pin:otp,
+          navigation:navigation,
         })
+        else{
+          dispatch({
+            type: 'User_Login_Request',
+            url: 'signin',
+            mobile:value,
+            pin:otp,
+            navigation: navigation,
+          })
+        }
+        
 }
 
+const call=()=>{
+  setFocus(false)
+}
     return(
       <Formik
-      initialValues={{ email: '',password:'' }}
-      onSubmit={values => validateUser(values.email,values.password)}
+      initialValues={{ value: ''}}
+      onSubmit={values => validateUser(values.value)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <ScrollView>
+         <KeyboardAwareScrollView>
           <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image style={styles.image} 
@@ -68,23 +78,24 @@ const validateUser=(email,password)=>{
               </View>
           </View>
           <View style={styles.main}>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Email / Mobile</Text>
+              <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
+                {values.value? <Text style={styles.heading}>Email / Mobile</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
                       style={styles.input1}
-                      placeholder='Email'
-                      onChangeText={handleChange('email')}
-                      onBlur={handleBlur('email')}
-                      value={values.email}
+                     // onFocus={()=>setFocus(true)}
+                      placeholder='Email / Mobile'
+                      onChangeText={handleChange('value')}
+                      onBlur={handleBlur('value')}
+                      value={values.value}
                       maxLength={40}
                       />
                   </View>
               </View>
               <View style={styles.error}>
-              {(errors.email && touched.email) &&
-                <Text style={styles.warn}>{errors.email}</Text>
+              {(errors.value && touched.value) &&
+                <Text style={styles.warn}>{errors.value}</Text>
                 }
               </View>
              <View style={{width:'100%',marginTop:20}}>
@@ -98,27 +109,7 @@ const validateUser=(email,password)=>{
               tintColor={'white'}
               />
               </View>
-              {/* <View style={styles.card}>
-                    <Text style={styles.heading}>Password</Text>
-                    <View style={styles.input}>      
-                     {showVisible()}
-                     <TextInput
-                    style={styles.input1}
-                    placeholder='Password'
-                    onChangeText={handleChange('password')}
-                    onBlur={handleBlur('password')}
-                    value={values.password}
-                    secureTextEntry={visible}
-                    maxLength={20}
-                    />
-                  </View>
-              </View> */}
-              {/* <View style={styles.error}>
-              {(errors.password && touched.password) &&
-                <Text style={styles.warn}>{errors.password}</Text>
-                }
-              </View> */}
-
+             
               <View
                style={{marginTop:10,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                  <View  style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
@@ -131,13 +122,13 @@ const validateUser=(email,password)=>{
                   <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}>keep me logged in</Text>
                   </View>
                 <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}
-                 onPress={()=>navigation.navigate('Forget')}>Forgot password?</Text>
+                 onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>
               </View>
 
               <View style={styles.button}>
                     <CustomButton
-                     onPress={()=>navigation.replace('Main')}
-                  // onPress={()=>errors.password || errors.email?Toast.show('All field required'):handleSubmit()}
+                    // onPress={()=>navigation.replace('Main')}
+                     onPress={()=>errors.value || otp==''?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
                 </View>
@@ -153,7 +144,7 @@ const validateUser=(email,password)=>{
                   <Text style={styles.account}>Login With OTP</Text>
                 </TouchableOpacity>
           </View>
-         </ScrollView>
+         </KeyboardAwareScrollView>
          <StatusBar/>
        </View>
         )}

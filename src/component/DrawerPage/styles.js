@@ -24,7 +24,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 15, 
         justifyContent: 'space-between',
-        height:40
+        height:40,
+        
     },
     drawer1: {
         borderBottomWidth: 1,
@@ -36,12 +37,12 @@ export default StyleSheet.create({
         backgroundColor:'#EDEDEB'
     },
     iconView: {
-        width: 30,
-        height: 24,
+        // width: 30,
+        // height: 24,
        // backgroundColor: 'grey'
     },
     text: {
-        marginLeft: 10,
+        marginLeft: 15,
         fontFamily:'Montserrat-Normal',
         fontSize:16,
         color:colors.textColor
@@ -77,5 +78,47 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'space-between',
         flex:1 
-    }
+    },
+    modal: {
+        width: 320,
+        height:172,
+        borderRadius: 10,
+        flexDirection: 'column',
+        alignSelf: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+      },
+      ModelBtntext: {
+        color: '#fff',
+        fontSize: 15,
+        alignSelf: 'center',
+        fontFamily: 'Poppins-Bold',
+        fontWeight: 'bold',
+        textAlign: 'center',
+      },
+      ModelMsgText: {
+        width: '99%',
+        color: colors.textColor,
+        fontSize: 16,
+        textAlign: 'center',
+        margin:10
+      },
+      ModelmsgView: {
+        width: '99%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop:10
+      },
+      popup: {
+        height: 40,
+        width:100,
+        marginTop: 10,
+        backgroundColor:colors.bc,
+        justifyContent: 'center',
+        borderRadius: 4,
+        alignItems: 'center',
+        alignSelf: 'center',
+        paddingHorizontal:10
+      },
 })

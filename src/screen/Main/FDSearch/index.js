@@ -12,37 +12,10 @@ import RNPickerSelect from "react-native-picker-select";
 import { ProgressBar, Colors } from 'react-native-paper';
 import BottomTab from '../../../component/StoreButtomTab';
 
-const data=[
-  { label: 'Male', value: 'Male'},
-  { label: 'Female', value: 'Female' },
-  { label: 'Other', value: 'Other' },
-]
-
-const data1=[
-  { label: '10-20 Years', value: '10-20 Years'},
-  { label: '20-50 Years', value: '20-50 Years' },
-  { label: '50-80 Years', value: '50-80 Years' },
-]
-
-const data2=[
-  { label: 'Any', value: 'Any'},
-  { label: 'Any', value: 'Any' },
-  { label: 'Any', value: 'Any' },
-]
-const data3=[
-  { label: 'Any', value: 'Any'},
-  { label: 'Any', value: 'Any' },
-  { label: 'Any', value: 'Any' },
-]
-    
 const Contact=()=>{
     const navigation=useNavigation()
     const [gender, setGender] = useState('')
-    const [age, setAge] = useState('')
-    const [type, setType] = useState('')
-    const [interest, setInterest] = useState('')
     const [day, setDay] = useState('')
-    const [checked, setChecked] = React.useState(false);
 
     return(
         <View style={styles.container}>
@@ -53,8 +26,14 @@ const Contact=()=>{
             />
           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:30}}>
             <View style={styles.main}>
-              <View style={{marginTop:20}}>
-                <View style={{}}>
+              <View style={{marginTop:10}}>
+                <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13}}>
+                Lorem ipsum, or lipsum as it is sometimes known,
+                is dummy text used in laying out print, graphic or
+                web designs. The passage is attributed to an
+                unknown typesetter book.
+                </Text>
+                <View style={{marginTop:10}}>
                   <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Tenure</Text>
                 </View>
                 <View style={{marginTop:20}}>
@@ -82,7 +61,7 @@ const Contact=()=>{
                       <View style={styles.input}>
                         <RNPickerSelect
                             onValueChange={(val)=>setGender(val)}
-                            items={data}
+                            items={Month}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:40 },
                             placeholder:{color:'#333333',fontSize:12}
@@ -101,7 +80,7 @@ const Contact=()=>{
                       <View style={styles.input}>
                         <RNPickerSelect
                             onValueChange={(val)=>setGender(val)}
-                            items={data}
+                            items={Years}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:40 },
                             placeholder:{color:'#333333',fontSize:12}
@@ -116,96 +95,38 @@ const Contact=()=>{
                       </View>
                     </View>
                   </View>
-            </View>
-  
-            </View>
-            <View style={{marginTop:20}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Amount</Text>
-                </View>
-                <View style={{marginTop:-10}}>
-                <TextInput
-                style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
-                />
-                </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Gender</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setGender(val)}
-                        items={data}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={gender}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Age</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setAge(val)}
-                        items={data1}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={age}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Type</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setType(val)}
-                        items={data2}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={type}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-            <View style={{marginTop:20}}>
-              <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Interest Payout</Text>
-                <View style={styles.input}>
-                    <RNPickerSelect
-                        onValueChange={(val)=>setInterest(val)}
-                        items={data3}
-                        style={{ 
-                        inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                        placeholder:{color:'#333333',fontSize:12}
-                        }}
-                        value={interest}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select", value: null }}
-                        Icon={()=><Image 
-                            style={styles.image} 
-                            source={require('../../../assets/Image/down.png')}/>}
-                        />
-                  </View>
-            </View>
-                    
+                      </View>
+            
+                      </View>
+                      <View style={{marginTop:20}}>
+                          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Amount</Text>
+                          </View>
+                          <View style={{marginTop:-10}}>
+                          <TextInput
+                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                          keyboardType='number-pad'
+                          />
+                          </View>
+                      </View>
+                      <View style={{marginTop:20}}>
+                          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Location</Text>
+                          </View>
+                          <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
+                          <Image source={require('../../../assets/Image/search.png')}/>
+                          <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',marginLeft:30}}>Current Location</Text>
+                          </View>
+                      </View>
+                      <View style={{marginTop:20,alignItems:'center'}}>
+                        <Text>OR</Text>
+                      </View>
+                      <View style={{marginTop:5}}>
+                          <TextInput
+                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                          placeholder='Enter Pincode'
+                          />
+                      </View>
                     <View style={{marginTop:15,marginBottom:20}}>
                     <Button
                     onPress={()=>navigation.navigate('FDList')}
@@ -268,4 +189,12 @@ const Month=[
   { label: 'October', value: 'October' },
   { label: 'November', value: 'November' },
   { label: 'December', value: 'December' },
+]
+
+const Years=[
+  { label: '2000', value: '2000' },
+  { label: '2001', value: '2001' },
+  { label: '2002', value: '2002' },
+  { label: '2003', value: '2003' },
+  
 ]

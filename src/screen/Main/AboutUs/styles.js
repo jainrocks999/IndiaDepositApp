@@ -28,13 +28,10 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal'
     },
     normal:{
-        fontSize:13,
+        fontSize:14,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         marginTop:10
     },
-    
-    
-   
     
 })

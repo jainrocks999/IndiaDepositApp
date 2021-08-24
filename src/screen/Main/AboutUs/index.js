@@ -1,15 +1,34 @@
-import React,{useState}from 'react';
+import React,{useEffect, useState}from 'react';
 import { View,Text,Image,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import color from '../../../component/colors';
-import CustomButton from '../../../component/button1';
 import Header from '../../../component/header';
-import BottomTab from '../../../component/StoreButtomTab';
-
+import Loader from '../../../component/loader';
+import { useDispatch,useSelector } from "react-redux";
 const Contact=()=>{
     const navigation=useNavigation()
+    const dispatch=useDispatch()
+    const selector=useSelector(state=>state.AboutUs)
+    const isFetching=useSelector(state=>state.isFetching)
+  
+   
+useEffect(()=>{
+  dispatch({
+    type: 'About_Us_Request',
+    url: 'getpagecontent',
+    key:'about_us',
+  })
+},[])
+const showContent=()=>{
+      if (selector.length>0) {
+        return <Text style={styles.normal}>
+                {selector[0].value}
+        </Text>
+      } else {
+        return<View></View>
+      }
+}
     return(
         <View style={styles.container}>
            <Header
@@ -18,33 +37,12 @@ const Contact=()=>{
            onPress={()=>navigation.goBack()}
            />
              <View style={styles.card}>
+             {isFetching?<Loader/>:null}
              <ScrollView style={{flex:1}}>
-                <Text style={styles.heading}>Lorem Ipsum is simply dummy text. </Text> 
-                <Text style={styles.normal}>
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem 
-                Ipsum is that.
-                </Text>
-                <Text style={[styles.heading,{marginTop:37}]}>Lorem Ipsum is simply dummy text. </Text> 
-                <Text style={styles.normal}>
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem 
-                Ipsum is that.
-                </Text>
-                <Text style={[styles.heading,{marginTop:37}]}>Lorem Ipsum is simply dummy text. </Text> 
-                <Text style={styles.normal}>
-                It is a long established fact that a reader will be
-                distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem 
-                Ipsum is that.
-                </Text>
+              {showContent()}
                 </ScrollView>
              </View>
-         
          <StatusBar/>
-         {/* <BottomTab/> */}
        </View>
     )
 }

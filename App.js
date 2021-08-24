@@ -28,7 +28,7 @@ const test = {};
  // console.log(test.should.crash);
  useEffect(()=>{
    // setData('narendra')
- // crashlytics().crash();
+ //crashlytics().crash();
   crashlytics().log('Analytics page just mounted')
 getCrashlyticsDetail()
 return()=>{

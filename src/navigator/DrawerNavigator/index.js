@@ -1,18 +1,11 @@
 import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createStackNavigator } from "@react-navigation/stack";
 import DrawerContent from '../../component/DrawerPage';
-import AboutUs from '../../screen/Main/AboutUs';
-import ContactUs from '../../screen/Main/ContactUs';
-import Feedback from '../../screen/Main/Feedback';
-import Settings from '../../screen/Main/Settings';
-import UpdateProfile from '../../screen/Main/UpdateProfile';
 import Dashboard from '../../screen/Main/Dashboard';
-import ChangePassword from '../../screen/Auth/ChangePassword';
-import Dashboard1 from '../../screen/Main/Dashboard1';
-import Dashboard2 from '../../screen/Main/Dashboard2';
+import Trending from '../../screen/Main/Trending'
+import BankHoliday from '../../screen/Main/BankHoliday';
+import KnowledgeCenter from '../../screen/Main/KnowledgeCenter';
 const Drawer = createDrawerNavigator();
-const Stack = createStackNavigator();
 function MyDrawer() {
   const horizontalAnimation = {
     cardStyleInterpolator: ({ current, layouts }) => {
@@ -36,15 +29,9 @@ function MyDrawer() {
     drawerStyle={{width:'100%'}}
     drawerContent={() => <DrawerContent/>}>
         <Drawer.Screen name="Dashboard" component={Dashboard} />
-        {/* <Drawer.Screen name="AboutUs" component={AboutUs} options={horizontalAnimation}/> */}
-        <Drawer.Screen name="ContactUs" component={ContactUs} options={horizontalAnimation}/>
-        {/* <Drawer.Screen name="Feedback" component={Feedback} options={horizontalAnimation}/> */}
-        <Drawer.Screen name="Change" component={ChangePassword} options={horizontalAnimation}/>
-        <Drawer.Screen name="Settings" component={Settings} options={horizontalAnimation}/>
-        <Drawer.Screen name="UpdateProfile" component={UpdateProfile} options={horizontalAnimation}/>
-        <Drawer.Screen name="Dashboard1" component={Dashboard1} options={horizontalAnimation}/>
-        <Drawer.Screen name="Dashboard2" component={Dashboard2} options={horizontalAnimation}/>
-
+        <Drawer.Screen name="Trending" component={Trending} />
+        <Drawer.Screen name="BankHoliday" component={BankHoliday}/>
+        <Drawer.Screen name="KnowledgeCenter" component ={KnowledgeCenter}/>
     </Drawer.Navigator>
   );
 

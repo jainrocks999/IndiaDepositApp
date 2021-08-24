@@ -11,6 +11,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
 import CheckBox from "@react-native-community/checkbox";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 
 const loginValidationSchema=yup.object().shape({
@@ -25,44 +26,31 @@ const loginValidationSchema=yup.object().shape({
       "Both pin need to be the same"
     )
   }).required('Confirm Pin required'),
-  referal:yup.string().required('Referal code required'),
-  // password:yup.string().min(8,({min})=>`Password must be atleast ${min} charrecter`).
-  // required('Password is required').matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
-  
-  // confirm:yup.string().when("password", {
-  //   is: val => (val && val.length > 0 ? true : false),
-  //   then: yup.string().oneOf(
-  //     [yup.ref("password")],
-  //     "Both password need to be the same"
-  //   )
-  // }).
-  // required('Confirm Password is required').matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
+  referal:yup.string(),
 })
-
-
 
 const RegisterPage=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
-
-    
-    const validateUser=(name,email,mobile,password)=>{
-      console.log('this is your registered data',name,email,mobile,password);
+    const [fBorder,setFBorder]=useState(false)
+    const [eBorder,setEBorder]=useState(false)
+    const [mBorder,setMBorder]=useState(false)
+    const [pBorder,setPBorder]=useState(false)
+    const [cBorder,setCBorder]=useState(false)
+    const [bBorder,setBBorder]=useState(false)
+  
+    const validateUser=(name,email,mobile,pin)=>{
+      console.log('this is your registered data',name,email,mobile,pin);
       dispatch({
        type: 'User_Register_Request',
        url: 'adduserdetails',
        name,
        email,
        mobile,
-       password,
+       pin,
+       refferal_code:0,
        mobile_country_code:0,
        father_spouse_name:0,
        mother_maiden_name:0,
@@ -81,20 +69,22 @@ const RegisterPage=()=>{
        occupation:0,
        marital_status:0,
        navigation: navigation,
-     })
+    })
 }
 
     return(
       <Formik
-      initialValues={{ email: '',password:'',name:'',pin:'',confirmPin:'',referal:''}}
-      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.password)}
+      initialValues={{ email: '',mobile:'',name:'',pin:'',confirmPin:'',referal:''}}
+      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.pin)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <ScrollView>
+         <KeyboardAwareScrollView 
+        
+          >
           <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image style={styles.image} 
@@ -102,11 +92,12 @@ const RegisterPage=()=>{
               </View>
           </View>
           <View style={styles.main}>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Full Name</Text>
+              <View style={[styles.card,{borderColor:fBorder?colors.bc:'white'}]}>
+                   {values.name? <Text style={styles.heading}>Full Name</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/profile.png')}/>
                      <TextInput 
+                        onFocus={()=>setFBorder(true)}
                         style={styles.input1}
                         placeholder='Full Name'
                         onChangeText={handleChange('name')}
@@ -121,11 +112,12 @@ const RegisterPage=()=>{
                 <Text style={styles.warn}>{errors.name}</Text>
                 }
               </View>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Email</Text>
+              <View style={[styles.card,{borderColor:eBorder?colors.bc:'white'}]}>
+                   {values.email? <Text style={styles.heading}>Email</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
+                      onFocus={()=>setEBorder(true)}
                       style={styles.input1}
                       placeholder='Email'
                       onChangeText={handleChange('email')}
@@ -140,11 +132,12 @@ const RegisterPage=()=>{
                 <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Mobile</Text>
+              <View style={[styles.card,{borderColor:mBorder?colors.bc:'white'}]}>
+                   {values.mobile? <Text style={styles.heading}>Mobile</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput 
+                      onFocus={()=>setMBorder(true)}
                       style={styles.input1}
                       placeholder='Mobile'
                       onChangeText={handleChange('mobile')}
@@ -162,13 +155,14 @@ const RegisterPage=()=>{
               </View>
               <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                 <View style={{width:'47%'}}>
-                  <View style={styles.card1}>
-                    <Text style={styles.heading}>Set Your Pin</Text>
+                <View style={[styles.card1,{borderColor:pBorder?colors.bc:'white'}]}>
+                   {values.pin? <Text style={styles.heading}>Set Your Pin</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
+                      onFocus={()=>setPBorder(true)}
                       style={styles.input2}
-                      placeholder='Enter Pin'
+                      placeholder='Set Your Pin'
                       onChangeText={handleChange('pin')}
                       onBlur={handleBlur('pin')}
                       value={values.pin}
@@ -182,11 +176,12 @@ const RegisterPage=()=>{
                 </View>
                 </View>
                 <View  style={{  width:'47%'}}>
-                  <View style={styles.card1}>
-                    <Text style={styles.heading}>Confirm Pin</Text>
+                <View style={[styles.card1,{borderColor:cBorder?colors.bc:'white'}]}>
+                   {values.confirmPin? <Text style={styles.heading}>Confirm Pin</Text>:null}
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
+                      onFocus={()=>setCBorder(true)}
                       style={styles.input1}
                       placeholder='Confirm Pin'
                       onChangeText={handleChange('confirmPin')}
@@ -203,14 +198,15 @@ const RegisterPage=()=>{
                 </View>
               </View>
              
-              <View style={styles.card}>
-                    <Text style={styles.heading}>Enter Referral Code</Text>
+              <View style={[styles.card,{borderColor:bBorder?colors.bc:'white'}]}>
+                   {values.referal? <Text style={styles.heading}>Enter Referral Code</Text>:null}
                     <View style={styles.input}>
                      <TextInput 
+                       onFocus={()=>setBBorder(true)}
                       style={[styles.input1,{marginLeft:-3,}]}
                       placeholder='BA52RT'
                       onChangeText={handleChange('referal')}
-                      onBlur={handleBlur('referal')}
+                     // onBlur={handleBlur('referal')}
                       value={values.referal}
                       />
                   </View>
@@ -236,6 +232,7 @@ const RegisterPage=()=>{
                     errors.password || errors.email ||
                     errors.name || errors.mobile || errors.confirm?
                     Toast.show('All field required'):
+                    toggleCheckBox==false? Toast.show('Please Confirm Terms and Condition') :
                     handleSubmit()}
                     title='SIGN UP'
                  />
@@ -246,32 +243,8 @@ const RegisterPage=()=>{
                  onPress={()=>navigation.navigate('Login')} 
                  style={styles.account1}> Login here</Text>
              </View>
-             {/* <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:30}}>
-               <Text style={{color:'#333333'}}>OR</Text>
-             </View>
-             <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:0}}>
-               <Text style={{fontSize:11,color:'#777777'}}>ENTER REFERRAL CODE</Text>
-               <View style={{width:'60%',
-               borderWidth:1,
-               borderRadius:10,
-               borderStyle:'dotted',
-               justifyContent:'center',
-               alignItems:'center',
-               height:40,
-               marginTop:10,marginBottom:20
-               }}>
-               <TextInput
-               
-               />
-               </View>
-             </View> */}
-             {/* <View style={[styles.button,{marginBottom:20}]}>
-                 <CustomButton
-                    title='SIGN UP'
-                 />
-             </View> */}
           </View>
-         </ScrollView>
+         </KeyboardAwareScrollView>
          <StatusBar/>
        </View>
          )}

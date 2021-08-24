@@ -10,8 +10,7 @@ import { TextInput } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
-import BottomTab from '../../../component/StoreButtomTab';
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 const data=[{ label: 'Item', value: 'Item'},
 { label: 'Item', value: 'Item' },
 { label: 'Item', value: 'Item' },]
@@ -28,7 +27,8 @@ const Contact=()=>{
           source={require('../../../assets/Images/arrow.png')}
           onPress={()=>navigation.goBack()}
           />
-          <ScrollView style={{flex:1}}>
+          <KeyboardAwareScrollView>
+         <View style={{paddingHorizontal:15,paddingVertical:20}}>
             <View style={styles.main}>
             <Text style={styles.how}>How would you rate your experience with india deposit app?</Text>
             <View style={styles.star}>
@@ -97,10 +97,13 @@ const Contact=()=>{
              </View>
             </View>
             </View>
-          </ScrollView>
+          </View>
+          </KeyboardAwareScrollView>
          <StatusBar/>
-         <BottomTab/>
+        
        </View>
     )
 }
 export default Contact;
+
+

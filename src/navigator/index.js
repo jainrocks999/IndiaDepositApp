@@ -4,7 +4,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "../screen/Auth/SplashPage";
 import LoginPage from '../screen/Auth/LoginPage';
 import RegisterPage from '../screen/Auth/RegisterPage';
-import ChangePassword from '../screen/Auth/ChangePassword';
 import ForgetPassword from '../screen/Auth/ForgetPassword';
 import OtpVarification from '../screen/Auth/OtpVarification';
 import DashBoardPage from '../screen/DashBoardPage';
@@ -24,15 +23,13 @@ import Main from './DrawerNavigator';
 import AboutUs from '../screen/Main/AboutUs';
 import Feedback from '../screen/Main/Feedback';
 import Notification from '../screen/Main/Notification';
-import TermAndCondition from '../screen/Main/TermAndCondition';
-import Security from '../screen/Main/Security';
-import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
 import BankLocator from '../screen/Main/BankLocator';
 import Support from '../screen/Main/Support';
-import Privacy from '../screen/Main/PrivacyPolicy'
+import Policy from '../screen/Main/PrivacyPolicy'
 import LoginWithOtp from '../screen/Auth/LoginWithOtp';
 import Referal from '../screen/Main/Referal';
-import BankHoliday from '../screen/Main/BankHoliday';
+import Profile from '../screen/Main/Profile';
+import Calculator from '../screen/Main/Calculator';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -79,15 +76,12 @@ function Navigate() {
         <Stack.Screen name="Introduction" component={Introduction}/>
         <Stack.Screen name="Feedback" component={Feedback} options={horizontalAnimation}/>
         <Stack.Screen name="Notification" component={Notification}  options={horizontalAnimation}/>
-        <Stack.Screen name="TermAndCondition" component={TermAndCondition} options={horizontalAnimation}/>
-        <Stack.Screen name="Security" component={Security} options={horizontalAnimation}/>
-        <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
         <Stack.Screen name="BankLocator" component={BankLocator} options={horizontalAnimation}/>
         <Stack.Screen name="Support" component={Support} options={horizontalAnimation}/>
-        <Stack.Screen name="Privacy" component={Privacy} options={horizontalAnimation}/>
+        <Stack.Screen name="Policy" component={Policy} options={horizontalAnimation}/>
         <Stack.Screen name="Referal" component={Referal} options={horizontalAnimation}/>
-        <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
-
+        <Stack.Screen name="Profile" component={Profile} options={horizontalAnimation}/>
+        <Stack.Screen name="Calculator" component={Calculator} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -15,7 +15,8 @@ export default StyleSheet.create({
     main:{
         alignItems:'center',
         paddingHorizontal:15,
-        width:'100%'
+        width:'100%',
+        //paddingVertical:20
     },
     round:{
         width:115,
@@ -59,6 +60,7 @@ button:{
         marginBottom:30,
         alignItems:'center',
         width:'100%',
+        marginTop:10
     },
     text:{
         color:colors.white,

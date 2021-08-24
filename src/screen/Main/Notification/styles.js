@@ -23,6 +23,6 @@ export default StyleSheet.create({
         marginHorizontal:15,
         paddingHorizontal:18,
         marginTop:20,
-        height:'100%'
+        height:'89%'
     },
 })
