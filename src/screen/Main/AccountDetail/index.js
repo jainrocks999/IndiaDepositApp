@@ -70,6 +70,7 @@ import colors from '../../../component/colors';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
+import StatusBar from '../../../component/StatusBar';
 const data=[
       
 ]
@@ -271,6 +272,7 @@ const navigation=useNavigation()
             </View>
            
          </ScrollView>
+         <StatusBar/>
      </View>
        
     )

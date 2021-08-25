@@ -17,9 +17,9 @@ import BankDetail from '../../../component/TabComponents/BankDetail';
 import NomineeDetail from '../../../component/TabComponents/NomineeDetail';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
   const renderScene = SceneMap({
-    first: Profile,
-    second: BankDetail,
-    third:NomineeDetail
+      first: Profile,
+      second: BankDetail,
+      third:NomineeDetail
   });
 
 
@@ -35,58 +35,52 @@ const ProfileScreen=()=>{
 
     return(
         <View style={styles.container}>
-           <Header
-            source={require('../../../assets/Images/arrow.png')}
-            title={'PROFILE'}
-           onPress={()=>navigation.goBack()}
-           />
-            <ScrollView
-             contentContainerStyle={{flex:1}}
-             style={{backgroundColor:'#E5E5E5'}}>
-             <View style={styles.card}>
-            
-              
-                <View style={styles.main}>
-                   <View style={{width:'35%'}}>
-                   </View>
-                   <View style={{width:'60%',flexDirection:'row'}}>
-                     <View style={styles.imageContainer}>
-                      <Image style={{height:'100%',width:'100%'}} 
-                      source={require('../../../assets/Image/profile-pic.png')}/>
-                     </View>
-                     <View style={styles.camera}>
-                         <Image source={require('../../../assets/Image/camera.png')}/>
-                       </View>
-                   <Text style={styles.change}>Change Password</Text>
-                   </View>
-                </View>
-               {/* <Profile/> */}
-                <TabView
-                    navigationState={{ index, routes }}
-                    renderScene={renderScene}
-                    onIndexChange={setIndex}
-                    initialLayout={{ width: '100%' }}
-                    renderTabBar={props => <TabBar
-                        indicatorStyle={{ 
-                            backgroundColor: colors.bc, 
-                            height:3
-                          }}
-                        renderLabel={({route, color,focused}) => (
-                            <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
-                              {route.title}
-                            </Text>
-                          )}
-                        {...props} style={{backgroundColor: 'white'}}/>}
-                    />
- 
-                    
-                   
-                  
-             </View>
-             </ScrollView>
-         <StatusBar/>
-       </View>
-    )
+              <Header
+                  source={require('../../../assets/Images/arrow.png')}
+                  title={'PROFILE'}
+                  onPress={()=>navigation.goBack()}
+              />
+              <ScrollView
+                      contentContainerStyle={{flex:1}}
+                      style={{backgroundColor:'#E5E5E5'}}>
+                     <View style={styles.card}>
+                            <View style={styles.main}>
+                                <View style={styles.view1}>
+                                </View>
+                                <View style={styles.view2}>
+                                     <View style={styles.imageContainer}>
+                                         <Image style={styles.img} 
+                                         source={require('../../../assets/Image/profile-pic.png')}/>
+                                     </View>
+                                     <View style={styles.camera}>
+                                         <Image source={require('../../../assets/Image/camera.png')}/>
+                                     </View>
+                                     <Text style={styles.change}>Change Password</Text>
+                                </View>
+                             </View>
+                              {/* <Profile/> */}
+                              <TabView
+                                  navigationState={{ index, routes }}
+                                  renderScene={renderScene}
+                                  onIndexChange={setIndex}
+                                  initialLayout={{ width: '100%' }}
+                                  renderTabBar={props => <TabBar
+                                  indicatorStyle={{ 
+                                  backgroundColor: colors.bc, 
+                                  height:3
+                                  }}
+                                  renderLabel={({route, color,focused}) => (
+                                  <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
+                                       {route.title}
+                                  </Text>
+                                  )}
+                                 {...props} style={{backgroundColor: 'white'}}/>}
+                              />
+                      </View>
+               </ScrollView>
+               <StatusBar/>
+           </View>
+      )
 }
 export default ProfileScreen;
 

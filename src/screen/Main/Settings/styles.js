@@ -8,6 +8,7 @@ export default StyleSheet.create({
     alignContent: 'center',
     },
    
+    view:{marginTop:20},
     imageContainer:{
         alignItems:'center',
         marginTop:20

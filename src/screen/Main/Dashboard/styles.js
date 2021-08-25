@@ -80,7 +80,11 @@ export default StyleSheet.create({
         width:10,
         height:10,
         borderRadius:5,
-        borderWidth:1
+        borderWidth:1,
+        marginTop:6,
+        marginLeft:2,
+        alignItems:'center',
+        justifyContent:'center'
     },
     buttomview:{
         borderTopWidth:1,

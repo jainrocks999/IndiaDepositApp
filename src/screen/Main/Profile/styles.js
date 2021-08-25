@@ -23,6 +23,9 @@ export default StyleSheet.create({
         
          height:'100%'
     }, 
+    view1:{width:'35%'},
+    view2:{width:'60%',flexDirection:'row'},
+    img:{height:'100%',width:'100%'},
     main:{
         flexDirection:'row',
         paddingHorizontal:20,

@@ -6,6 +6,12 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
+    view1:{marginTop:15},
+    view2:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+    text1:{fontFamily:'Montserrat-Normal'},
+    text2:{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'},
+    text3:{color:'grey',fontSize:12,fontFamily:'Montserrat-Normal'},
+    line:{borderWidth:1,marginTop:15,borderColor:'#DDDDDD'},
     main:{
         paddingHorizontal:30,
         marginTop:50,

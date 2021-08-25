@@ -24,41 +24,41 @@ const Knowledge=()=>{
   ]);
     return(
         <View style={styles.container}>
-            <Header
-            title={'KNOWLEDGE CENTER'}
-            source ={require('../../../assets/Images/drawer.png')}
-            onPress={()=>navigation.toggleDrawer()}
-            source1={require('../../../assets/Image/notification.png')}
-            onPress1={()=>navigation.navigate('Notification')}
-            /> 
+              <Header
+                  title={'KNOWLEDGE CENTER'}
+                  source ={require('../../../assets/Images/drawer.png')}
+                  onPress={()=>navigation.toggleDrawer()}
+                 source1={require('../../../assets/Image/notification.png')}
+                 onPress1={()=>navigation.navigate('Notification')}
+              /> 
              <ScrollView
-              contentContainerStyle={{flex:1}}
-              style={{backgroundColor:'#E5E5E5'}}>
-             <View style={styles.card}>
-                <TabView
-                    navigationState={{ index, routes }}
-                    renderScene={renderScene}
-                    onIndexChange={setIndex}
-                    initialLayout={{ width: '100%' }}
-                    renderTabBar={props => <TabBar
-                        indicatorStyle={{ 
-                            backgroundColor: colors.bc, 
-                            height:3
-                          }}
-                        renderLabel={({route, color,focused}) => (
-                            <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
+                contentContainerStyle={{flex:1}}
+                style={{backgroundColor:'#E5E5E5'}}>
+                 <View style={styles.card}>
+                    <TabView
+                       navigationState={{ index, routes }}
+                       renderScene={renderScene}
+                       onIndexChange={setIndex}
+                       initialLayout={{ width: '100%' }}
+                       renderTabBar={props => <TabBar
+                       indicatorStyle={{ 
+                       backgroundColor: colors.bc, 
+                       height:3
+                       }}
+                       renderLabel={({route, color,focused}) => (
+                       <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
                               {route.title}
-                            </Text>
-                          )}
-                        {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
+                       </Text>
+                        )}
+                       {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
                     />
-             </View>
+                 </View>
              </ScrollView>
-         <StatusBar/>
-         <View style={{bottom:0,left:0,right:0,position:'absolute'}}>
-         <BottomTab/>
-         </View>
-       </View>
+              <StatusBar/>
+              <View style={styles.buttomview}>
+                 <BottomTab/>
+              </View>
+        </View>
     )
 }
 export default Knowledge;

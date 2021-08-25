@@ -6,6 +6,7 @@ import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import StatusBar from "../../../component/StatusBar";
 import BottomTab from '../../../component/StoreButtomTab';
 const dashboard=()=>{
     const navigation=useNavigation()
@@ -43,7 +44,10 @@ const dashboard=()=>{
                                                </View>
                                               <View style={styles.view2}>
                                                  <Text style={styles.text}>{'Regular'}</Text>
-                                                 <View style={styles.circle}></View>
+                                                 <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
                                               </View>
                                            </TouchableOpacity>
                                           <TouchableOpacity
@@ -52,7 +56,13 @@ const dashboard=()=>{
                                              <View style={styles.imageView}>
                                                 <Image source={require('../../../assets/Image/tax-fd.png')}/> 
                                              </View>
-                                             <Text style={styles.text}>{'Tax Saving'}</Text>
+                                             <View style={styles.view2} >
+                                                  <Text style={styles.text}>{'Tax Saving'}</Text>
+                                                  <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                             </View>
                                          </TouchableOpacity>
 
                                          <TouchableOpacity
@@ -61,7 +71,13 @@ const dashboard=()=>{
                                              <View style={styles.imageView}>
                                                <Image source={require('../../../assets/Image/nri-fd.png')}/>
                                               </View>
-                                             <Text style={styles.text}>{'NRI'}</Text>
+                                              <View style={styles.view2}>
+                                                <Text style={styles.text}>{'NRI'}</Text>
+                                                <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                             </View>
                                          </TouchableOpacity>
                                    </View>
                                    <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
@@ -71,7 +87,13 @@ const dashboard=()=>{
                                              <View style={styles.imageView}>
                                                  <Image source={require('../../../assets/Image/senior_citizen.png')}/> 
                                              </View>
-                                             <Text style={styles.text}>{'Senior\nCitizen'}</Text>
+                                             <View style={styles.view2}>
+                                                <Text style={styles.text}>{'Senior\nCitizen'}</Text>
+                                                <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                             </View>
                                       </TouchableOpacity>
                                   </View>
                                   <View style={styles.buttomview}>
@@ -94,7 +116,13 @@ const dashboard=()=>{
                                              <View style={styles.imageView}>
                                                    <Image source={require('../../../assets/Image/regular-fd.png')}/> 
                                              </View>
-                                            <Text style={styles.text}>{'Regular'}</Text>
+                                             <View style={styles.view2}>
+                                               <Text style={styles.text}>{'Regular'}</Text>
+                                               <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                            </View>
                                       </TouchableOpacity>
 
                                        <TouchableOpacity
@@ -103,7 +131,13 @@ const dashboard=()=>{
                                               <View style={styles.imageView}>
                                                   <Image source={require('../../../assets/Image/sb-female.png')}/> 
                                               </View>
-                                              <Text style={styles.text}>{'Female'}</Text>
+                                              <View style={styles.view2}>
+                                                  <Text style={styles.text}>{'Female'}</Text>
+                                                  <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                              </View>
                                        </TouchableOpacity>
 
                                       <TouchableOpacity
@@ -112,7 +146,13 @@ const dashboard=()=>{
                                             <View style={styles.imageView}>
                                                   <Image source={require('../../../assets/Image/nri-fd.png')}/>
                                           </View>
-                                          <Text style={styles.text}>{'Defense'}</Text>
+                                          <View style={styles.view2}>
+                                              <Text style={styles.text}>{'Defense'}</Text>
+                                              <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                           </View>   
                                      </TouchableOpacity>
                                  </View>
                                  <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
@@ -123,7 +163,13 @@ const dashboard=()=>{
                                            <View style={styles.imageView}>
                                               <Image source={require('../../../assets/Image/sb-zb.png')}/> 
                                           </View>
-                                          <Text style={styles.text}>{'Zero\nBalance'}</Text>
+                                          <View style={styles.view2}>
+                                              <Text style={styles.text}>{'Zero\nBalance'}</Text>
+                                              <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                           </View>   
                                     </TouchableOpacity>
 
                                     <TouchableOpacity 
@@ -132,8 +178,14 @@ const dashboard=()=>{
                                          <View style={styles.imageView}>
                                               <Image source={require('../../../assets/Image/senior_citizen.png')}/> 
                                          </View>
-                                        <Text style={styles.text}>{'Senior\nCitizen'}</Text>
-                                  </TouchableOpacity>
+                                         <View style={styles.view2}>
+                                              <Text style={styles.text}>{'Senior\nCitizen'}</Text>
+                                              <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                          </View>
+                                   </TouchableOpacity>
 
                                   <View style={styles.width}></View>
                              </View>
@@ -143,6 +195,7 @@ const dashboard=()=>{
                           </View>
                       </View>
                   </ScrollView>
+                  <StatusBar/>
                    <BottomTab/>
               </View>
      )

@@ -28,6 +28,7 @@ export default StyleSheet.create({
         paddingHorizontal:30,
         marginTop:60
     },
+    main1:{marginTop:18},
     heading:{
         fontSize:18,
         color:colors.textColor,
@@ -54,6 +55,7 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         justifyContent:'center'
     },
+    textinput:{height:35,width:'90%',fontSize:13,color:colors.textColor},
     interest:{
         marginTop:6,
         borderWidth:1,
@@ -94,6 +96,8 @@ export default StyleSheet.create({
         paddingHorizontal:10,
     },
     
-   
-    
+   icon1:{marginTop:12,marginRight:5},
+   view1:{flexDirection:'row',width:'100%'},
+   view2:{flexDirection:'row',alignItems:'center',marginLeft:-5}, 
+   text1:{color:colors.textColor,fontSize:12},
 })

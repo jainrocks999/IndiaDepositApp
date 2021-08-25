@@ -5,6 +5,7 @@ import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Button from '../../../component/button1';
+import StatusBar from "../../../component/StatusBar";
 import { Item } from "react-native-paper/lib/typescript/components/List/List";
 
 const FDList=()=>{
@@ -78,6 +79,7 @@ const renderItem=(item)=>
                 </View>
                  <View>
                  </View>
+            <StatusBar/>
         </View>
     )
 }

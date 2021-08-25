@@ -56,5 +56,6 @@ export default StyleSheet.create({
         fontSize:13,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' 
-    }
+    },
+    buttomview:{bottom:0,left:0,right:0,position:'absolute'},
 })
