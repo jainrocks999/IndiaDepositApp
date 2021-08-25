@@ -4,8 +4,7 @@ import colors from '../../../component/colors';
 export default StyleSheet.create({
     container:{
     flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
     imageContainer:{
         alignItems:'center',
@@ -46,9 +45,9 @@ export default StyleSheet.create({
         alignItems:'center',
     },
     toll:{
-        fontSize:18,
+        fontSize:16,
         color:colors.textColor,
-        fontFamily:'Montserrat-Medium'
+        fontFamily:'Montserrat-Normal'
     },
     call:{
         marginLeft:5,
@@ -59,11 +58,11 @@ export default StyleSheet.create({
     line:{
         borderTopWidth:1,
         marginTop:20,
-        borderTopColor:colors.textColor
+        borderTopColor:'#DDDDDD'
     },
     main:{
         marginTop:20,
-        paddingHorizontal:30
+        paddingHorizontal:20
     },
     container1:{
         flexDirection:'row',
@@ -73,7 +72,7 @@ export default StyleSheet.create({
         width:24,
         height:24,
         borderRadius:12,
-        backgroundColor:colors.textColor,
+        backgroundColor:colors.bc,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -108,17 +107,27 @@ export default StyleSheet.create({
         marginTop:6
     },
     header:{
-        marginTop:50,
-        paddingHorizontal:30
+        marginTop:30,
+        paddingHorizontal:20
     },
     image:{height:11,width:11},
     warn:{fontSize:14,color:'red'},
     bottom:{
         marginTop:15,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center',
-        width:'50%'
+        // flexDirection:'row',
+        // justifyContent:'space-between',
+        // alignItems:'center',
+        // width:'50%'
+    },
+    card:{ 
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        marginBottom:40
     }
    
     

@@ -7,17 +7,19 @@ import styles from './style';
 import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
-import { SvgUri } from 'react-native-svg';
 const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
+    
+   
      appVersion()
      //initial()
       }, []);
 
       const appVersion = async (url) => {
         const user_id=await AsyncStorage.getItem(Storage.user_id)
+        const name=await AsyncStorage.getItem(Storage.name)
         try {
           const data = new FormData();
           data.append('user_id', user_id)
@@ -38,9 +40,9 @@ const Splash=()=>{
                if (response.data.useractive==0) {
                 AsyncStorage.setItem(Storage.user_id, '')
                 AsyncStorage.setItem(Storage.name, '')
-                initial(response.data.img_url,response.data.intro_speech);
+                initial(response.data.img_url,response.data.intro_speech,name);
                } else {
-                initial(response.data.img_url,response.data.intro_speech);
+                initial(response.data.img_url,response.data.intro_speech,name);
                }
              }
           } else {
@@ -50,9 +52,9 @@ const Splash=()=>{
               if (response.data.useractive==0) {
                 AsyncStorage.setItem(Storage.user_id, '')
                 AsyncStorage.setItem(Storage.name, '')
-                initial(response.data.img_url,response.data.intro_speech);
+                initial(response.data.img_url,response.data.intro_speech,name);
                } else {
-                initial(response.data.img_url,response.data.intro_speech);
+                initial(response.data.img_url,response.data.intro_speech,name);
                }
              }
           }
@@ -62,8 +64,9 @@ const Splash=()=>{
           
         }
       };
-      const initial = async (image_url,intro_speech) => {
-        const name=await AsyncStorage.getItem(Storage.name)
+      const initial = async (image_url,intro_speech,name) => {
+       
+        console.log('this iis na',name);
         if (!name) {
          setTimeout(() => navigation.replace("Introduction",{
           image_url:image_url,

@@ -127,8 +127,8 @@ const call=()=>{
 
               <View style={styles.button}>
                     <CustomButton
-                    // onPress={()=>navigation.replace('Main')}
-                     onPress={()=>errors.value || otp==''?Toast.show('All field required'):handleSubmit()}
+                    //  onPress={()=>navigation.replace('Main')}
+                   onPress={()=>errors.value || otp==''?Toast.show('All field required'):handleSubmit()}
                     title='LOG IN'
                     />
                 </View>

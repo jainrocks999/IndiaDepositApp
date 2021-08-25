@@ -323,6 +323,89 @@ function* trending(action) {
           });
     }
 }
+
+function* notification(action) {
+  console.log('thisi si your action',action);
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Notification_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Notification_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Notification_Error',
+          });
+    }
+}
+// support values
+function* support(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('name',action.name)
+      data.append('email',action.email)
+      data.append('mobile',action.mobile)
+      data.append('subject',action.subject)
+      data.append('message',action.message)
+      
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Support_Success',
+              });       
+              Toast.show(response.messages);
+            } else {
+              yield put({
+                type: 'Support_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Support_Error',
+          });
+    }
+}
+
+function* contact(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('name',action.name)
+      data.append('email',action.email)
+      data.append('mobile',action.mobile)
+      data.append('message',action.message)
+      
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Contact_Us_Success',
+              });       
+              Toast.show(response.messages);
+            } else {
+              yield put({
+                type: 'Contact_Us_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Contact_Us_Error',
+          });
+    }
+}
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -334,4 +417,8 @@ export default function* authSaga() {
   yield takeEvery('Privacy_Request',privacy)
   yield takeEvery('Security_Request',security)
   yield takeEvery('Trending_Request',trending)
+  yield takeEvery('TermAndCondition_Request',TermAndCondition)
+  yield takeEvery('Notification_Request',notification)
+  yield takeEvery('Support_Request',support)
+  yield takeEvery('Contact_Us_Request',contact)
 }

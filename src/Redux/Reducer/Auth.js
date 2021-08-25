@@ -10,7 +10,7 @@ initialstate = {
   Security:[],
   TermCondition:[],
   Trending:[],
-
+  Notification:[],
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -90,7 +90,7 @@ export default (state = initialstate, action) => {
     case 'TermAndCondition_Success':
       return { ...state, isFetching: false, TermCondition: action.payload };
     case 'TermAndCondition_Error':
-    return { ...state, isFetching: false };
+      return { ...state, isFetching: false };
 
    //Trending
    case 'Trending_Request':
@@ -98,6 +98,30 @@ export default (state = initialstate, action) => {
   case 'Trending_Success':
     return { ...state, isFetching: false, Trending: action.payload };
   case 'Trending_Error':
+    return { ...state, isFetching: false };
+
+   //Notification 
+  case 'Notification_Request':
+    return { ...state, isFetching: true };
+  case 'Notification_Success':
+    return { ...state, isFetching: false, Notification: action.payload };
+  case 'Notification_Error':
+  return { ...state, isFetching: false };
+
+  ///Support
+  case 'Support_Request':
+    return { ...state, isFetching: true };
+  case 'Support_Success':
+    return { ...state, isFetching: false,};
+  case 'Support_Error':
+  return { ...state, isFetching: false };
+
+  //Contact us
+  case 'Contact_Us_Request':
+    return { ...state, isFetching: true };
+  case 'Contact_Us_Success':
+    return { ...state, isFetching: false,};
+  case 'Contact_Us_Error':
   return { ...state, isFetching: false };
     default:
       return state;
