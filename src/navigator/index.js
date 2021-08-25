@@ -30,6 +30,7 @@ import LoginWithOtp from '../screen/Auth/LoginWithOtp';
 import Referal from '../screen/Main/Referal';
 import Profile from '../screen/Main/Profile';
 import Calculator from '../screen/Main/Calculator';
+import Contact from '../screen/Main/ContactUs'
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -82,6 +83,7 @@ function Navigate() {
         <Stack.Screen name="Referal" component={Referal} options={horizontalAnimation}/>
         <Stack.Screen name="Profile" component={Profile} options={horizontalAnimation}/>
         <Stack.Screen name="Calculator" component={Calculator} options={horizontalAnimation}/>
+        <Stack.Screen name="Contact" component ={Contact} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

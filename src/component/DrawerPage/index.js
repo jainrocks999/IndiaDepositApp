@@ -148,6 +148,23 @@ const DrawerContent=({props})=> {
                         </View>
                     </View>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('Contact')
+                    }}>
+                    <View style={[styles.drawer]}>
+                    <View style={styles.row}>
+                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/about.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Contact Us'}</Text>
+                            </View>
+                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                    </View>
+                </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={()=>navigation.navigate('Notification')}
                     style={[styles.drawer]}>

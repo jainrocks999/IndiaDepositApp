@@ -1,4 +1,4 @@
-import React,{useState}from 'react';
+import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -6,52 +6,69 @@ import StatusBar from '../../../component/StatusBar';
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import { FlatList } from 'react-native';
-const dummy=
-[
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'10 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'5 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'7 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'9 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'2 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'12 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'21 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'20 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'30 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'50 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'31 min ago'},
-    {title:'Lorem Ipsum Dolor Sit Amet',desc:'Lorem ipsum, or lipsum as it is sometimes',time:'20 min ago'},
-]
+import Loader from '../../../component/loader';
+import { useDispatch,useSelector } from "react-redux";
+import AsyncStorage from "@react-native-community/async-storage";
+import Storage from '../../../component/AsyncStorage';
 const Contact=()=>{
     const navigation=useNavigation()
+    const dispatch=useDispatch()
+    const selector=useSelector(state=>state.Notification)
+    const isFetching=useSelector(state=>state.isFetching)
+    console.log('this is log valie',selector);
+useEffect(async()=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    console.log('this is log valie',user_id);
+    dispatch({
+        type: 'Notification_Request',
+        url: 'getnotification',
+        user_id:user_id,
+    })
+},[])
+
+const showContent=()=>{
+    if (selector) {
+        console.log('this is log valie',selector);
+        return(
+            <View>
+                 <FlatList
+              showsVerticalScrollIndicator={false}
+              data={selector}
+              renderItem={({item})=>
+              <View>
+               <View style={{marginTop:15}}>
+                   <View>
+                       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                       <Text style={{fontFamily:'Montserrat-Normal'}}>{item.title}</Text>
+                       {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.title}</Text> */}
+                       </View>
+                       <Text style={{color:'grey',fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.notification}</Text>
+                   </View>
+               </View>
+               <View style={{borderWidth:1,marginTop:15,borderColor:'#DDDDDD'}}></View>
+              </View>
+              }
+              /> 
+            </View>
+        )
+        
+    } else {
+        
+    }
+}
     return(
         <View style={styles.container}>
-               <Header
-                    source={require('../../../assets/Images/arrow.png')}
-                    title={'NOTIFICATIONS'}
-                    onPress={()=>navigation.goBack()}
-                />
-                <View style={styles.card}>   
-                       <FlatList
-                            showsVerticalScrollIndicator={false}
-                            data={dummy}
-                            renderItem={({item})=>
-                            <View>
-                               <View style={styles.view1}>
-                                   <View>
-                                        <View style={styles.view2}>
-                                           <Text style={styles.text1}>{item.title}</Text>
-                                           <Text style={styles.text2}>{item.time}</Text>
-                                        </View>
-                                        <Text style={styles.text3}>{item.desc}</Text>
-                                   </View>
-                                </View>
-                                <View style={styles.line}></View>
-                            </View>
-                            }
-                       /> 
-                    </View>
-                    <StatusBar/>
-                     {/* <BottomTab/> */}
+           <Header
+            source={require('../../../assets/Images/arrow.png')}
+           title={'NOTIFICATIONS'}
+           onPress={()=>navigation.goBack()}
+           />
+             {isFetching?<Loader/>:null}
+             <View style={styles.card}>   
+                {showContent()}
+             </View>
+         <StatusBar/>
+         {/* <BottomTab/> */}
        </View>
     )
 }

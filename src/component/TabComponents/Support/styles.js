@@ -24,7 +24,7 @@ export default StyleSheet.create({
     }, 
     better:{
         color:colors.textColor,
-        marginTop:13,
+        marginTop:1,
         fontSize:14,
         fontFamily:'Montserrat-Normal'
     },
@@ -35,6 +35,7 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         borderRadius:6,
         paddingHorizontal:5,
+        justifyContent:'center'
 
     },
     drop1:{
@@ -43,7 +44,17 @@ export default StyleSheet.create({
         height:70,
         borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5,
-        
+        paddingHorizontal:5, 
+    },
+    error:{
+        width:'90%',
+        justifyContent:'center',
+        alignItems:'flex-start',
+        paddingHorizontal:8,
+        marginTop:6
+    },
+    warn:{
+        fontSize:12,
+        color:'red'
     },
 })
