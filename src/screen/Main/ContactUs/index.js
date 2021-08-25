@@ -125,6 +125,7 @@ const Contact=()=>{
             </View>
             <View style={styles.line}></View>
             <View style={styles.main}>
+<<<<<<< HEAD
               <Text style={styles.toll}>GET IN TOUCH</Text>
               <View style={{marginTop:20}}>
               <View style={styles.input}>
@@ -184,8 +185,81 @@ const Contact=()=>{
                 multiline={true}
                 />
               </View>
+=======
+                   <Text style={styles.toll}>GET IN TOUCH</Text>
+                   <View style={{marginTop:20}}>
+                       <View style={styles.input}>
+                            <TextInput
+                              style={{color:colors.textColor}}
+                              placeholder='Name'
+                              onChangeText={handleChange('name')}
+                              onBlur={handleBlur('name')}
+                              value={values.name}
+                              maxLength={40}
+                            />
+                       </View>
+                         <View style={styles.error}>
+                           {
+                            (errors.name && touched.name) &&
+                            <Text style={styles.warn}>{errors.name}</Text>
+                           }
+                          </View>
+                          <View style={[styles.input,{marginTop:15}]}>
+                               <TextInput
+                                   style={{color:colors.textColor}}
+                                   placeholder='Email'
+                                   onChangeText={handleChange('email')}
+                                   onBlur={handleBlur('email')}
+                                   value={values.email}
+                                   maxLength={40}
+                                />
+                           </View>
+                          <View style={styles.error}>
+                             {(errors.email && touched.email) &&
+                             <Text style={{fontSize:14,color:'red'}}>{errors.email}</Text>
+                              }
+                          </View>
+                          <View style={[styles.input,{marginTop:15}]}>
+                                <TextInput
+                                     style={{color:colors.textColor}}
+                                     placeholder='Mobile'
+                                     onChangeText={handleChange('mobile')}
+                                     onBlur={handleBlur('mobile')}
+                                     value={values.mobile}
+                                     keyboardType={'number-pad'}
+                                     maxLength={11}
+                                />
+                          </View>
+                          <View style={styles.error}>
+                             {(errors.mobile && touched.mobile) &&
+                              <Text style={styles.warn}>{errors.mobile}</Text>
+                              }
+                          </View>
+                      <View style={[styles.input1,{marginTop:15,marginBottom:20}]}>
+                             <TextInput
+                                   style={{color:colors.textColor}}
+                                   placeholder='Message / Report for Crash'
+                              />
+                       </View>
               
+                    </View>
+                      <View style={{marginBottom:0}}>
+                            <Button
+                                onPress={()=>handleSubmit()}
+                                title='SUBMIT'
+                                 />
+                     </View>
+>>>>>>> 0d345ab5674d5c8a26b02d4ca4ff6a951018d1b1
+              
+             </View>
+              <View style={styles.line}></View>
+              <View style={styles.main}>
+                    <Text style={styles.toll}>WRITE US ON EMAIL</Text>
+                    <View style={{marginTop:18}}>
+                         <Text style={styles.india}>customercare@indiadeposit</Text>
+                     </View>
               </View>
+<<<<<<< HEAD
               <View style={{marginBottom:30}}>
                 <Button
                 onPress={()=>handleSubmit()}
@@ -200,6 +274,33 @@ const Contact=()=>{
        {/* </TouchableWithoutFeedback> */}
        </View>
         )}
+=======
+              <View style={styles.line}></View>
+              <View style={styles.main}>
+                      <Text style={styles.toll}>FOLLW US ON</Text>
+                      <View style={styles.bottom}>
+                             <View style={styles.fb}>
+                                 <Image source={require('../../../assets/Images/fb.png')}/>
+                              </View>
+                              <View style={styles.fb}>
+                                  <Image source={require('../../../assets/Images/in.png')}/>
+                              </View>
+                              <View style={styles.fb}>
+                                  <Image source={require('../../../assets/Images/twitter.png')}/>
+                              </View>
+                              <View style={styles.fb}>
+                                  <Image source={require('../../../assets/Images/insta.png')}/>
+                              </View>
+                      </View>
+              </View>
+              <View style={[styles.line,{marginBottom:20}]}></View>
+          </ScrollView>
+           <StatusBar/>
+            <BottomTab/>
+     </View>
+  )
+  }
+>>>>>>> 0d345ab5674d5c8a26b02d4ca4ff6a951018d1b1
         </Formik>
     )
 }

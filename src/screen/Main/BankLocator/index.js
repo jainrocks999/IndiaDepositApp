@@ -6,13 +6,13 @@ import StatusBar from '../../../component/StatusBar';
 import color from '../../../component/colors';
 import CustomButton from '../../../component/button1';
 import Header from '../../../component/header';
-import BottomTab from '../../../component/StoreButtomTab';
 import RNPickerSelect from "react-native-picker-select";
-import colors from '../../../component/colors';
-
-const data=[{ label: 'Item', value: 'Item'},
-{ label: 'Item', value: 'Item' },
-{ label: 'Item', value: 'Item' },]
+const data=
+[
+   { label: 'Item', value: 'Item'},
+   { label: 'Item', value: 'Item' },
+   { label: 'Item', value: 'Item' },
+]
 
 const Security=()=>{
     const navigation=useNavigation()
@@ -23,14 +23,14 @@ const Security=()=>{
 
     return(
         <View style={styles.container}>
-           <Header
-            source={require('../../../assets/Images/arrow.png')}
-            title={'BANK LOCATOR'}
-           onPress={()=>navigation.goBack()}
-           />
+             <Header
+                  source={require('../../../assets/Images/arrow.png')}
+                  title={'BANK LOCATOR'}
+                  onPress={()=>navigation.goBack()}
+             />
              <View style={styles.card}>
                 <ScrollView style={{flex:1}}>
-                    <Text style={styles.better}>Bank</Text>
+                      <Text style={styles.better}>Bank</Text>
                       <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue(val)}
@@ -45,10 +45,10 @@ const Security=()=>{
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
-                            />
-                    </View>
-                    <Text style={styles.better}>State</Text>
-                      <View style={styles.drop}>
+                           />
+                       </View>
+                       <Text style={styles.better}>State</Text>
+                       <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue1(val)}
                             items={data}
@@ -62,10 +62,10 @@ const Security=()=>{
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
-                            />
-                    </View>
-                    <Text style={styles.better}>District</Text>
-                      <View style={styles.drop}>
+                           />
+                       </View>
+                        <Text style={styles.better}>District</Text>
+                        <View style={styles.drop}>
                          <RNPickerSelect
                             onValueChange={(val)=>setValue2(val)}
                             items={data}
@@ -79,11 +79,11 @@ const Security=()=>{
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
-                            />
-                    </View>
-                    <Text style={styles.better}>Branch</Text>
-                      <View style={styles.drop}>
-                         <RNPickerSelect
+                           />
+                        </View>
+                        <Text style={styles.better}>Branch</Text>
+                        <View style={styles.drop}>
+                          <RNPickerSelect
                             onValueChange={(val)=>setValue3(val)}
                             items={data}
                             style={{ 
@@ -96,20 +96,20 @@ const Security=()=>{
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
-                            />
-                    </View>
-                    <View style={{marginTop:20}}>
-                      <CustomButton
-                      title='SEARCH'
-                      />
-                    </View>
-                </ScrollView>
-             </View>
+                           />
+                        </View>
+                        <View style={{marginTop:20}}>
+                            <CustomButton
+                                title='SEARCH'
+                           />
+                        </View>
+           </ScrollView>
+       </View>
          
          <StatusBar/>
          {/* <BottomTab/> */}
-       </View>
-    )
+    </View>
+   )
 }
 export default Security;
 

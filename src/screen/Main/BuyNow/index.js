@@ -5,7 +5,8 @@ import colors from '../../../component/colors';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import Button from "../../../component/button1";
-const data=[
+const data=
+[
     {title:'FD Name',value:'Regular Fixed Deposit',title1:'Bank Name',value1:'State Bank of India'},
     {title:'Rate',value:'10%',title1:'FD Type',value1:'Tax-Saving Fixed Deposits'},
     {title:'Duration',value:'10 years',title1:'Security',value1:'Fixed Deposits'},
@@ -21,34 +22,35 @@ const data=[
     {title:'Nomination',value:'-------',title1:'SB account Required',value1:'yes'}
 
 ]
-const FDList=()=>{
-const navigation=useNavigation()
-const renderItem=(item)=>{
-      return(
-          <View style={{paddingHorizontal:25,paddingVertical:8,marginTop:0}}>
-           <View style={{flexDirection:'row',justifyContent:'space-between',}}>
-            <View style={{width:'50%'}}>
-              <Text style={styles.title1}>{item.title}</Text>
-              <Text style={styles.value1}>{item.value}</Text>
-            </View>
-            <View style={{width:'50%'}}>
-            <Text style={styles.title1}>{item.title1}</Text>
-              <Text style={styles.value1}>{item.value1}</Text>
-            </View>
-            </View>
-            <View style={{width:'100%',borderWidth:1,marginTop:12,borderColor:colors.textColor}}></View>
-          </View>
-      )
-}
-    return(
+const FDList=()=>
+{
+ const navigation=useNavigation()
+ const renderItem=(item)=>
+ {
+   return(
+          <View style={styles.Textview}>
+                <View style={styles.Textview1}>
+                    <View style={{width:'50%'}}>
+                        <Text style={styles.title1}>{item.title}</Text>
+                        <Text style={styles.value1}>{item.value}</Text>
+                    </View>
+                   <View style={{width:'50%'}}>
+                       <Text style={styles.title1}>{item.title1}</Text>
+                       <Text style={styles.value1}>{item.value1}</Text>
+                   </View>
+                 </View>
+                 <View style={styles.line}></View>
+         </View>
+   )
+ }
+ return(
         <View style={{flex:1}}>
-          <Header
-            title={'BUY NOW'}
-            source={require('../../../assets/Images/arrow.png')}
-            onPress={()=>navigation.goBack()}
-           
+            <Header
+              title={'BUY NOW'}
+              source={require('../../../assets/Images/arrow.png')}
+              onPress={()=>navigation.goBack()}
             /> 
-            <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+            <View style={styles.flat}>
                 <FlatList
                  data={data}
                  renderItem={({item})=>renderItem(item)}
@@ -57,14 +59,14 @@ const renderItem=(item)=>{
                 />
             </View>
             <View style={styles.buttonContainer}>
-             <TouchableOpacity style={styles.button}>
-               <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>BUY NOW</Text>
-             </TouchableOpacity>
-             <TouchableOpacity style={styles.button}>
-               <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>CANCEL</Text>
-             </TouchableOpacity>
+                <TouchableOpacity style={styles.button}>
+                    <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>BUY NOW</Text>
+                </TouchableOpacity>
+               <TouchableOpacity style={styles.button}>
+                     <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>CANCEL</Text>
+               </TouchableOpacity>
             </View>
-        </View>
-    )
+       </View>
+     )
 }
 export default FDList;

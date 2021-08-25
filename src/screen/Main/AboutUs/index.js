@@ -30,20 +30,20 @@ const showContent=()=>{
       }
 }
     return(
-        <View style={styles.container}>
+     <View style={styles.container}>
            <Header
-            source={require('../../../assets/Images/arrow.png')}
-           title={'ABOUT US'}
-           onPress={()=>navigation.goBack()}
+             source={require('../../../assets/Images/arrow.png')}
+             title={'ABOUT US'}
+             onPress={()=>navigation.goBack()}
            />
-             <View style={styles.card}>
-             {isFetching?<Loader/>:null}
+           <View style={styles.card}>
+              {isFetching?<Loader/>:null}
              <ScrollView style={{flex:1}}>
-              {showContent()}
-                </ScrollView>
-             </View>
+                 {showContent()}
+             </ScrollView>
+           </View>
          <StatusBar/>
-       </View>
+    </View>
     )
 }
 export default Contact;
