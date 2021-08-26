@@ -40,6 +40,8 @@ const RegisterPage=()=>{
     const [pBorder,setPBorder]=useState(false)
     const [cBorder,setCBorder]=useState(false)
     const [bBorder,setBBorder]=useState(false)
+    const [visible,setVisible]=useState(true)
+    const [visible1,setVisible1]=useState(true)
   
     const validateUser=(name,email,mobile,pin)=>{
       console.log('this is your registered data',name,email,mobile,pin);
@@ -72,6 +74,33 @@ const RegisterPage=()=>{
     })
 }
 
+const showVisible=()=>{
+  return(
+    <TouchableOpacity 
+        onPress={()=>visible?setVisible(false):setVisible(true)}>
+        {!visible?<Image 
+        style={{width:19,height:13,marginLeft:-7}} 
+        source={require('../../../assets/Image/eye.png')}/>:
+        <Image style={{width:19,height:13,marginLeft:-7}} 
+        source={require('../../../assets/Image/eye1.png')}/>
+      }
+      </TouchableOpacity>
+    )
+  }    
+const showVisible1=()=>{
+    return(
+      <TouchableOpacity 
+          onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
+          {!visible1?<Image 
+          style={{width:19,height:13,marginLeft:-7}} 
+          source={require('../../../assets/Image/eye.png')}/>:
+          <Image style={{width:19,height:13,marginLeft:-7}} 
+          source={require('../../../assets/Image/eye1.png')}/>
+        }
+        </TouchableOpacity>
+      )
+}
+
     return(
       <Formik
       initialValues={{ email: '',mobile:'',name:'',pin:'',confirmPin:'',referal:''}}
@@ -82,9 +111,7 @@ const RegisterPage=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <KeyboardAwareScrollView 
-        
-          >
+         <KeyboardAwareScrollView >
           <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image style={styles.image} 
@@ -161,14 +188,16 @@ const RegisterPage=()=>{
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       onFocus={()=>setPBorder(true)}
-                      style={styles.input2}
+                      style={[styles.input2]}
                       placeholder='Set Your Pin'
                       onChangeText={handleChange('pin')}
                       onBlur={handleBlur('pin')}
                       value={values.pin}
                       keyboardType={'number-pad'}
+                      // secureTextEntry={visible}
                        />
                     
+                       {/* {values.pin?showVisible():null} */}
                     </View>
                   </View>
                   <View style={styles.error}>
@@ -189,7 +218,9 @@ const RegisterPage=()=>{
                       onBlur={handleBlur('confirmPin')}
                       value={values.confirmPin}
                       keyboardType={'number-pad'}
+                      // secureTextEntry={visible1}
                        />
+                        {/* {values.confirmPin?showVisible1():null} */}
                     </View>
                   </View>
                   <View style={styles.error}>

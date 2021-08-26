@@ -19,7 +19,6 @@ const Contact=()=>{
     console.log('this is log valie',selector);
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-    console.log('this is log valie',user_id);
     dispatch({
         type: 'Notification_Request',
         url: 'getnotification',

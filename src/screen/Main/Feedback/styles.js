@@ -38,12 +38,15 @@ export default StyleSheet.create({
         backgroundColor:'white',
         paddingHorizontal:15,
         paddingVertical:10,
-        marginBottom:40
+        marginBottom:40,
     },
     how:{
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+       // fontSize:13,
+        fontFamily:'Montserrat-Normal',
+        marginTop:20
     },
     star:{
         alignItems:'flex-start',

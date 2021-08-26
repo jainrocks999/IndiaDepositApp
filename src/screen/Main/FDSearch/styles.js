@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
@@ -93,6 +92,5 @@ export default StyleSheet.create({
     image:{
         marginTop:16,
         marginRight:8
-    }
-    
+    },
 })

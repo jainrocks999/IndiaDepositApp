@@ -209,7 +209,7 @@ const DrawerContent=({props})=> {
                         </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity 
+                {/* <TouchableOpacity 
                     onPress={()=>navigation.navigate('ChangePassword')}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
@@ -222,7 +222,7 @@ const DrawerContent=({props})=> {
                             </View>
                             <Image source={require('../../assets/Image/arrowF.png')}/>
                         </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <TouchableOpacity 
                     onPress={()=>navigation.navigate('Feedback')}

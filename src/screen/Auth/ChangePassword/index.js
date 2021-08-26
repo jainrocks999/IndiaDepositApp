@@ -117,7 +117,7 @@ const validateUser=async(values)=>{
           <ScrollView>
          
                  <View style={styles.main}>
-           <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
+                    <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
                    {values.oldPassword? <Text style={styles.heading}>Old Password</Text> :null}
                     <View style={styles.input}>
                     {showVisible()}

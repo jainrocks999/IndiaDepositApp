@@ -32,6 +32,7 @@ import Profile from '../screen/Main/Profile';
 import Calculator from '../screen/Main/Calculator';
 import Contact from '../screen/Main/ContactUs'
 import ChangePassword from '../screen/Auth/ChangePassword';
+
 const Stack = createStackNavigator();
 function Navigate() {
 

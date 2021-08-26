@@ -24,7 +24,7 @@ const Contact=()=>{
                   source={require('../../../assets/Images/arrow.png')}
                   onPress={()=>navigation.goBack()}
               />
-             <ScrollView style={styles.srcoll}>
+             <ScrollView style={styles.scroll}>
                 <View style={styles.main}>
                   < View style={styles.view}>
                       <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
