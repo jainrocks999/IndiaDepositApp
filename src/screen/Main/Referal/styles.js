@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -48,21 +48,37 @@ export default StyleSheet.create({
     marginTop:10,
     marginBottom:20
    },
-    text:{width:'90%',fontFamily:'Montserrat-Normal',fontSize:14},
-    text2:{fontSize:11,color:'#777777'},
-    line:{width:'100%',borderWidth:1,borderColor:'#DDDDDD',marginVertical:15},
-    line1:{width:60,height:1,backgroundColor:'#000',},
+    text:{
+        width:'90%',
+        fontFamily:'Montserrat-Normal',
+        fontSize:fontSize.fourteen
+    },
+    text2:{
+        fontSize:fontSize.eleven,
+        color:colors.heading
+    },
+    line:{
+        width:'100%',
+        borderWidth:1,
+        borderColor:'#DDDDDD',
+        marginVertical:15
+    },
+    line1:{
+        width:60,
+        height:1,
+        backgroundColor:'#000',
+    },
     round:{
         width:56,
         borderWidth:2,
         height:56,
         borderRadius:28,
-        borderColor:'#5A4392',
+        borderColor:colors.bc,
         alignItems:'center',
         justifyContent:'center'
     },
     text:{
-        fontSize:20,
-        color:'#5A4392'
+        fontSize:fontSize.twenty,
+        color:colors.bc
     }
 })

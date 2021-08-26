@@ -2,6 +2,7 @@ import React from 'react';
 import { View,Text,TouchableOpacity ,StyleSheet,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import colors from '../colors';
+import fontSize from '../fontSize';
 const Header=({title,onPress1,titleTwo,source,onPress})=>{
     const navigation=useNavigation()
     return(
@@ -16,7 +17,7 @@ const Header=({title,onPress1,titleTwo,source,onPress})=>{
             {titleTwo?
             <TouchableOpacity onPress={onPress1}
             style={styles.squareView}>
-                <Text style={{fontSize:11,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
+                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
             </TouchableOpacity>:<View></View>
             }
            </View>
@@ -40,8 +41,8 @@ const styles=StyleSheet.create({
         tintColor:'white'
     },
     text:{
-        color:'white',
-        fontSize:18,
+        color:colors.white,
+        fontSize:fontSize.eighteen,
         fontFamily:'Montserrat-SemiBold',
         marginRight:10
     },

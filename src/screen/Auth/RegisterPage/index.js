@@ -12,7 +12,7 @@ import * as yup from 'yup';
 import colors from '../../../component/colors';
 import CheckBox from "@react-native-community/checkbox";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import fontSize from '../../../component/fontSize';
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
@@ -150,7 +150,7 @@ const RegisterPage=()=>{
               </View>
               <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
-                <Text style={{fontSize:14,color:'red'}}>{errors.mobile}</Text>
+                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.mobile}</Text>
                 }
               </View>
               <View style={{flexDirection:'row',justifyContent:'space-between'}}>
@@ -168,6 +168,7 @@ const RegisterPage=()=>{
                       value={values.pin}
                       keyboardType={'number-pad'}
                        />
+                    
                     </View>
                   </View>
                   <View style={styles.error}>

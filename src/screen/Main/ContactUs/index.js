@@ -12,7 +12,7 @@ import BottomTab from '../../../component/StoreButtomTab';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
-
+import fontSize from '../../../component/fontSize';
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
   email:yup.string().email('Please enter valid email').required('Email address is required'),
@@ -150,7 +150,7 @@ const Contact=()=>{
               </View>
               <View style={styles.error}>
               {(errors.email && touched.email) &&
-                <Text style={{fontSize:14,color:'red'}}>{errors.email}</Text>
+                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.email}</Text>
                 }
               </View>
               <View style={[styles.input,{marginTop:15}]}>

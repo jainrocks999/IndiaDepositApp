@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -23,12 +23,12 @@ export default StyleSheet.create({
     },
     
     heading:{
-        fontSize:18,
+        fontSize:fontSize.eighteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
     normal:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         marginTop:10

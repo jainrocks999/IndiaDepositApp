@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:24
+        fontSize:fontSize.twenty
     },
     first:{
         flexDirection:'row',
@@ -37,7 +37,7 @@ export default StyleSheet.create({
     personal:{
         marginLeft:14,
         fontFamily:'Montserrat-Normal',
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:colors.textColor
     },
     border:{

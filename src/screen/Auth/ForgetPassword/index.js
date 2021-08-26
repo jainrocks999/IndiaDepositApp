@@ -8,6 +8,7 @@ import StatusBar from '../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
 import Loader from '../../../component/loader';
 import { Formik } from 'formik';
+import fontSize from '../../../component/fontSize';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -95,7 +96,7 @@ const validateUser=(email,mobile)=>{
               </View>
               <View style={styles.error}>
                    {(errors.email && touched.email) &&
-                <Text style={{fontSize:12,color:'red'}}>{errors.email}</Text>
+                <Text style={{fontSize:fontSize.twelve,color:'red'}}>{errors.email}</Text>
                 }
               </View>
               <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
@@ -119,7 +120,7 @@ const validateUser=(email,mobile)=>{
               </View>
               <View style={styles.error}>
                    {(errors.mobile && touched.mobile) &&
-                <Text style={{fontSize:14,color:'red'}}>{errors.mobile}</Text>
+                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.mobile}</Text>
                 }
               </View>
              <View style={styles.button}>

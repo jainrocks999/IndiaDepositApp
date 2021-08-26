@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import colors from "../colors";
+import fontSize from "../fontSize";
 const CustomButton1 = (props) => {
   return (
     <TouchableOpacity
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: colors.white,
     fontFamily:'Montserrat-SemiBold',
-    fontSize: 14,
+    fontSize:fontSize.fourteen,
   },
 });
 

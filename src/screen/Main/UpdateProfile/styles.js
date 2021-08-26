@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -60,7 +60,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:24
+        fontSize:fontSize.twenty
     },
     main1:{
         height:40,
@@ -76,12 +76,12 @@ export default StyleSheet.create({
     },
     keep:{
         color:colors.textColor,
-        fontSize:11
+        fontSize:fontSize.eleven
     },
     forgot:{
         marginRight:5,
         color:colors.textColor,
-        fontSize:11
+        fontSize:fontSize.eleven
     },
     button:{
         width:'100%',
@@ -96,7 +96,7 @@ export default StyleSheet.create({
     },
     account:{
         color:colors.textColor,
-        fontSize:13
+        fontSize:fontSize.thirteen
     },
     inputContainerStyle: {
         height: 40,
@@ -106,7 +106,7 @@ export default StyleSheet.create({
         width:'100%'
     },
     inputStyle:{
-        fontSize: 14, 
+        fontSize:fontSize.fourteen, 
         marginLeft: 10
     },
     view:{
@@ -165,7 +165,7 @@ export default StyleSheet.create({
     },
     per:{
         fontFamily:'Montserrat-SemiBold',
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         color:colors.textColor
     },
     con:{
@@ -178,7 +178,7 @@ export default StyleSheet.create({
         color:colors.textColor
     },
     warn:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:'red'
     },
     modalView:{
@@ -200,7 +200,7 @@ export default StyleSheet.create({
     came:{
         color:colors.white,
         fontFamily:'Montserrat-SemiBold',
-        fontSize:16
+        fontSize:fontSize.sixteen
     }
    
 })

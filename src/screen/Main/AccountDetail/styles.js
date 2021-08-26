@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container1:
     {
@@ -30,25 +30,25 @@ export default StyleSheet.create({
     Text1:
     {
         marginTop:10,
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:colors.bc,
         fontFamily:'Montserrat-Medium'
      },
      Text2:
      {
          marginTop:6,
-         fontSize:12,
+         fontSize:fontSize.twelve,
          fontFamily:'Montserrat-Medium'
      },
     item:{
-        fontSize:12,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
     item1:{
-        fontSize:11,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
-        color:'#777777'
+        color:colors.heading
     },
     card:
     {
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         fontFamily:'Montserrat-Normal',
         marginTop:10,
-        fontSize:13
+        fontSize:fontSize.thirteen
     },
     point:
     {
@@ -85,7 +85,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontFamily:'Montserrat-Normal',
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         marginLeft:10,
         marginTop:1
     },
@@ -102,7 +102,7 @@ export default StyleSheet.create({
     bankDetails:
     {
         color:colors.bc,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     top:

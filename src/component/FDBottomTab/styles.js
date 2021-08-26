@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet } from 'react-native';
 import colors from '../colors';
+import fontSize from '../fontSize';
 export default StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -26,14 +27,14 @@ export default StyleSheet.create({
     width: 40,
   },
   buttonText: {
-    fontSize: 10,
+    fontSize:fontSize.eleven,
     alignSelf: 'center',
     width: 90,
     padding: 4,
     textAlign: 'center',
   },
   text:{
-    fontSize: 10,
+    fontSize:fontSize.eleven,
     color:colors.textColor,
     fontFamily:'Poppins-SemiBold',
     marginTop:5

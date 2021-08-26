@@ -1,6 +1,7 @@
 import React from 'react';
 import { View,Text,TouchableOpacity ,StyleSheet,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import fontSize from '../fontSize';
 import colors from '../colors';
 const Header=({title,source,onPress,source1,onPress1})=>{
     const navigation=useNavigation()
@@ -35,8 +36,8 @@ const styles=StyleSheet.create({
         tintColor:'white'
     },
     text:{
-        color:'white',
-        fontSize:18,
+        color:colors.white,
+        fontSize:fontSize.eighteen,
         fontFamily:'Montserrat-SemiBold'
     },
 })

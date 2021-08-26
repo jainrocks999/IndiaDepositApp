@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:24
+        fontSize:fontSize.twenty
     },
     logo:{
         width:'80%',
@@ -30,12 +30,12 @@ export default StyleSheet.create({
     },
     main1:{marginTop:18},
     heading:{
-        fontSize:18,
+        fontSize:fontSize.eighteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
     normal:{
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         marginTop:10,
@@ -43,7 +43,7 @@ export default StyleSheet.create({
     },
     same:{
         fontFamily:'Montserrat-Medium',
-        fontSize:15,
+        fontSize:fontSize.fefteen,
         color:colors.textColor
     },
     input:{
@@ -55,7 +55,7 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         justifyContent:'center'
     },
-    textinput:{height:35,width:'90%',fontSize:13,color:colors.textColor},
+    textinput:{height:35,width:'90%',fontSize:fontSize.thirteen,color:colors.textColor},
     interest:{
         marginTop:6,
         borderWidth:1,
@@ -84,7 +84,7 @@ export default StyleSheet.create({
     },
     cal:{
         color:colors.white,
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-SemiBold'
     },
     drop:{
@@ -99,5 +99,5 @@ export default StyleSheet.create({
    icon1:{marginTop:12,marginRight:5},
    view1:{flexDirection:'row',width:'100%'},
    view2:{flexDirection:'row',alignItems:'center',marginLeft:-5}, 
-   text1:{color:colors.textColor,fontSize:12},
+   text1:{color:colors.textColor,fontSize:fontSize.twelve},
 })

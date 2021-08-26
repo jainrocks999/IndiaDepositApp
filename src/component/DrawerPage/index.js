@@ -13,7 +13,7 @@ import colors from '../colors';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../AsyncStorage';
 import Modal from "react-native-modal";
-
+import fontSize from '../fontSize';
 const DrawerContent=({props})=> {
     const navigation = useNavigation();
     const dispatch=useDispatch()
@@ -43,7 +43,7 @@ const DrawerContent=({props})=> {
                     <Text
                     style={{
                         color: colors.white,
-                        fontSize: 20,
+                        fontSize: fontSize.twenty,
                         fontWeight: 'bold',
                         textAlign: 'center',
                     }}>
@@ -86,8 +86,8 @@ const DrawerContent=({props})=> {
                       <Image source={require('../../assets/Image/profile-pic.png')}/>
                   <View style={{marginLeft:20}}>
                       <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>John</Text>
-                      <Text style={{color:colors.white,fontSize:12,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
-                      <Text style={{color:colors.white,fontSize:12,fontFamily:'Montserrat-Normal'}}>test@gmail.com</Text>
+                      <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
+                      <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>test@gmail.com</Text>
                   </View>
                   </View>
                   <TouchableOpacity 

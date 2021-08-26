@@ -11,7 +11,7 @@ import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
 import { ProgressBar, Colors } from 'react-native-paper';
 import BottomTab from '../../../component/StoreButtomTab';
-
+import fontSize from '../../../component/fontSize';
 const Contact=()=>{
     const navigation=useNavigation()
     const [gender, setGender] = useState('')
@@ -27,7 +27,7 @@ const Contact=()=>{
              <ScrollView style={styles.srcoll}>
                 <View style={styles.main}>
                   < View style={styles.view}>
-                      <Text style={[styles.text1,{fontSize:13}]}>
+                      <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
                         Lorem ipsum, or lipsum as it is sometimes known,
                         is dummy text used in laying out print, graphic or
                         web designs. The passage is attributed to an
@@ -45,7 +45,7 @@ const Contact=()=>{
                                       items={days}
                                       style={{ 
                                       inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                                      placeholder:{color:'#333333',fontSize:12}
+                                      placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                       }}
                                       value={day}
                                       useNativeAndroidPickerStyle={false}
@@ -63,7 +63,7 @@ const Contact=()=>{
                                           items={Month}
                                           style={{ 
                                           inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                                          placeholder:{color:'#333333',fontSize:12}
+                                          placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                           }}
                                           value={gender}
                                           useNativeAndroidPickerStyle={false}
@@ -81,7 +81,7 @@ const Contact=()=>{
                                            items={Years}
                                            style={{ 
                                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                                           placeholder:{color:'#333333',fontSize:12}
+                                           placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                            }}
                                            value={gender}
                                            useNativeAndroidPickerStyle={false}

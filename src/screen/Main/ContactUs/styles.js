@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -18,7 +18,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:24
+        fontSize:fontSize.twenty
     },
     logo:{
         width:'82%',
@@ -36,7 +36,7 @@ export default StyleSheet.create({
     },
     num:{
         color:colors.textColor,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     view:{
@@ -45,7 +45,7 @@ export default StyleSheet.create({
         alignItems:'center',
     },
     toll:{
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
@@ -53,7 +53,7 @@ export default StyleSheet.create({
         marginLeft:5,
         color:colors.textColor,
         fontFamily:'Montserrat-Medium',
-        fontSize:12
+        fontSize:fontSize.twelve
     },
     line:{
         borderTopWidth:1,
@@ -78,7 +78,7 @@ export default StyleSheet.create({
     },
     india:{
         color:colors.textColor,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     input:{  
@@ -111,7 +111,7 @@ export default StyleSheet.create({
         paddingHorizontal:20
     },
     image:{height:11,width:11},
-    warn:{fontSize:14,color:'red'},
+    warn:{fontSize:fontSize.fourteen,color:'red'},
     bottom:{
         marginTop:15,
     },

@@ -10,6 +10,7 @@ import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import CheckBox from '@react-native-community/checkbox';
 import { RadioButton } from 'react-native-paper';
+import fontSize from '../../../component/fontSize';
 const data=[
 { label: 'Jan', value: 'Jan'},
 { label: 'Feb', value: 'Feb' },
@@ -69,8 +70,8 @@ const FDCalculator=()=>{
                                        onValueChange={(val)=>setValue(val)}
                                        items={data}
                                        style={{ 
-                                       inputAndroid:{ color: color.textColor,width:'100%',height:35,fontSize:12 },
-                                       placeholder:{fontSize:12,color:colors.textColor} }}
+                                       inputAndroid:{ color: color.textColor,width:'100%',height:35,fontSize:fontSize.twelve },
+                                       placeholder:{fontSize:fontSize.twelve,color:colors.textColor} }}
                                        value={value}
                                        useNativeAndroidPickerStyle={false}
                                        placeholder={{ label: "Month / Years", value: null }}

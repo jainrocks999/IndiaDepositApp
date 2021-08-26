@@ -13,7 +13,7 @@ import CheckBox from "@react-native-community/checkbox";
 import OTPTextInput  from 'react-native-otp-textinput';
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import fontSize from '../../../component/fontSize';
 const loginValidationSchema=yup.object().shape({
   value:yup.string().required('Email or Mobile is required'),
 })
@@ -99,7 +99,7 @@ const call=()=>{
                 }
               </View>
              <View style={{width:'100%',marginTop:20}}>
-               <Text style={{marginLeft:4,color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13}}>Enter Your Pin</Text>
+               <Text style={{marginLeft:4,color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:fontSize.thirteen}}>Enter Your Pin</Text>
               <OTPTextInput
               containerStyle={styles.OtpInput}
               handleTextChange={(code)=>setOtp(code)}
@@ -119,9 +119,9 @@ const call=()=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}>keep me logged in</Text>
+                  <Text style={{fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal',color:colors.textColor}}>keep me logged in</Text>
                   </View>
-                <Text style={{fontSize:12,fontFamily:'Montserrat-Normal',color:colors.textColor}}
+                <Text style={{fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal',color:colors.textColor}}
                  onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>
               </View>
 

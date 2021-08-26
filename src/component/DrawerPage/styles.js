@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../component/colors';
+import fontSize from '../fontSize';
 export default StyleSheet.create({
     drawerContent: {
        // flex: 1,
@@ -7,12 +8,12 @@ export default StyleSheet.create({
     },
     title: {
         fontFamily:'Montserrat-SemiBold',
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         width:'95%',
         color:colors.textColor
     },
     caption: {
-        fontSize: 14,
+        fontSize: fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
@@ -44,7 +45,7 @@ export default StyleSheet.create({
     text: {
         marginLeft: 15,
         fontFamily:'Montserrat-Normal',
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         color:colors.textColor
     },
     icon: {
@@ -66,7 +67,7 @@ export default StyleSheet.create({
     },
     text1:{ 
         color: 'white', 
-        fontSize: 16 ,
+        fontSize: fontSize.sixteen ,
         fontFamily:'Krdev016'
     },
     image:{ 
@@ -90,7 +91,7 @@ export default StyleSheet.create({
       },
       ModelBtntext: {
         color: '#fff',
-        fontSize: 15,
+        fontSize: fontSize.fefteen,
         alignSelf: 'center',
         fontFamily: 'Poppins-Bold',
         fontWeight: 'bold',
@@ -99,7 +100,7 @@ export default StyleSheet.create({
       ModelMsgText: {
         width: '99%',
         color: colors.textColor,
-        fontSize: 16,
+        fontSize: fontSize.sixteen,
         textAlign: 'center',
         margin:10
       },

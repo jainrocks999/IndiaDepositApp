@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import fontSize from '../../../component/fontSize';
 import colors from '../../../component/colors';
 import {  widthPercentageToDP as wp,
     heightPercentageToDP as hp, } from "react-native-responsive-screen";
@@ -48,14 +49,14 @@ export default StyleSheet.create({
         alignItems:'center',justifyContent:'center'
     },
     change:{
-        fontSize: hp('1.9%'),
+        fontSize:fontSize.thirteen,
         marginHorizontal:15,
         marginTop:5,
         color:colors.bc
     },
     title:{ 
      
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' 
     },

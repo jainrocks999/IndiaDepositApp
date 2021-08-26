@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import colors from '../../../component/colors';
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
         flex:1,
@@ -25,8 +26,8 @@ export default StyleSheet.create({
         backgroundColor: 'white',
       },
       ModelBtntext: {
-        color: '#fff',
-        fontSize: 15,
+        color:colors.white,
+        fontSize:fontSize.fefteen,
         alignSelf: 'center',
         fontFamily: 'Poppins-Bold',
         fontWeight: 'bold',
@@ -35,7 +36,7 @@ export default StyleSheet.create({
       ModelMsgText: {
         width: '99%',
         color: colors.textColor,
-        fontSize: 14,
+        fontSize: fontSize.fourteen,
         textAlign: 'center',
         margin:10
       },

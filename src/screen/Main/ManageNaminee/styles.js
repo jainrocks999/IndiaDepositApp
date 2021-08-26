@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -48,7 +48,7 @@ export default StyleSheet.create({
     buttonText:{
         color:colors.white,
         fontFamily:'Montserrat-Normal',
-        fontSize:13
+        fontSize:fontSize.thirteen
     },
     con:{
         paddingHorizontal:20,
@@ -64,7 +64,7 @@ export default StyleSheet.create({
         color:colors.textColor
     },
     warn:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:'red'
     },
     modalView:{
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     came:{
         color:colors.white,
         fontFamily:'Montserrat-SemiBold',
-        fontSize:16
+        fontSize:fontSize.sixteen
     }
    
    

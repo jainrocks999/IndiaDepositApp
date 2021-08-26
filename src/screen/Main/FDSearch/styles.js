@@ -1,7 +1,7 @@
 
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -75,13 +75,13 @@ export default StyleSheet.create({
     input1:{
         height:40,
         width:'90%',
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         color:colors.textColor
     },
     ten:{
         height:40,
         width:'99%',
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         color:colors.textColor
     },
     row:{

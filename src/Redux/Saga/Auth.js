@@ -257,6 +257,7 @@ function* privacy(action) {
           });
     }
 }
+
 function* security(action) {
   try{
     const data = new FormData();

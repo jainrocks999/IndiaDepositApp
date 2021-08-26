@@ -7,6 +7,7 @@ import color from '../../../component/colors';
 import CustomButton from '../../../component/button1';
 import Header from '../../../component/header';
 import RNPickerSelect from "react-native-picker-select";
+import fontSize from '../../../component/fontSize';
 const data=
 [
    { label: 'Item', value: 'Item'},
@@ -37,7 +38,7 @@ const Security=()=>{
                             items={data}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:35 },
-                            placeholder:{color:'#555555',fontSize:13}
+                            placeholder:{color:'#555555',fontSize:fontSize.thirteen}
                             }}
                             value={value}
                             useNativeAndroidPickerStyle={false}
@@ -54,7 +55,7 @@ const Security=()=>{
                             items={data}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:35 },
-                            placeholder:{color:'#555555',fontSize:13}
+                            placeholder:{color:'#555555',fontSize:fontSize.thirteen}
                             }}
                             value={value1}
                             useNativeAndroidPickerStyle={false}
@@ -71,7 +72,7 @@ const Security=()=>{
                             items={data}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:35 },
-                            placeholder:{color:'#555555',fontSize:13}
+                            placeholder:{color:'#555555',fontSize:fontSize.thirteen}
                             }}
                             value={value2}
                             useNativeAndroidPickerStyle={false}
@@ -88,7 +89,7 @@ const Security=()=>{
                             items={data}
                             style={{ 
                             inputAndroid: { color: color.textColor,width:'100%',height:35 },
-                            placeholder:{color:'#555555',fontSize:13}
+                            placeholder:{color:'#555555',fontSize:fontSize.thirteen}
                             }}
                             value={value3}
                             useNativeAndroidPickerStyle={false}

@@ -36,7 +36,7 @@ export default StyleSheet.create({
     india:{
         fontFamily:'Montserrat-SemiBold', 
         color:colors.bc,
-        fontSize:22,
+        fontSize:fontSize.twenty,
         marginTop:10
     },
     lorem:{
@@ -64,7 +64,7 @@ button:{
     },
     text:{
         color:colors.white,
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-Normal'
     }
     

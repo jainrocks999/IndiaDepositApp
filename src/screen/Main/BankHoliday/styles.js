@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
+import fontSize from "../../../component/fontSize";
 export default StyleSheet.create({
     container1:
     {
@@ -30,7 +31,7 @@ export default StyleSheet.create({
         borderWidth: 1,
     },
     month:{
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-Normal',
         color:colors.white
     },
@@ -54,30 +55,30 @@ export default StyleSheet.create({
         justifyContent:'center'
     },
     heading:{
-        fontSize:16,
+        fontSize:fontSize.sixteen,
         color:colors.bc,
         marginBottom:15
     },
     item1:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
     item2:{
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
     result:{
         color:colors.textColor,
         fontFamily:'Montserrat-Normal',
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         marginTop:20
     },
     search:{
         color:colors.white,
         fontFamily:'Montserrat-Normal',
-        fontSize:14
+        fontSize:fontSize.fourteen
     },
     button:{
         backgroundColor:colors.bc,
@@ -95,7 +96,7 @@ export default StyleSheet.create({
         borderColor:'#000'
     },
     dummy:{
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     }

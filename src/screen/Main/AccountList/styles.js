@@ -1,17 +1,17 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     same:{
-        fontSize:11,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
-        color:'#5A4392',
+        color:colors.bc,
         textAlign:'center'
     },
     title:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Medium',
-        color:'#5A4392'
+        color:colors.bc
     },
     cardView:{
         flexDirection:'row',

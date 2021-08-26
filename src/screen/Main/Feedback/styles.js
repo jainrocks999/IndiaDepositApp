@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -20,7 +20,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:24
+        fontSize:fontSize.twenty
     },
     logo:{
         width:'80%',
@@ -42,7 +42,7 @@ export default StyleSheet.create({
     },
     how:{
         color:colors.textColor,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     star:{
@@ -53,7 +53,7 @@ export default StyleSheet.create({
     what:{
         color:colors.textColor,
         marginTop:13,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     drop:{
@@ -67,7 +67,7 @@ export default StyleSheet.create({
     better:{
         color:colors.textColor,
         marginTop:13,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     bottom:{

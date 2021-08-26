@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container1:{
         flex:1,
@@ -12,13 +12,13 @@ export default StyleSheet.create({
     },
     text:{
         marginTop:10,
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:colors.bc,
         fontFamily:'Montserrat-Medium'
     },
     text1:{
         marginTop:6,
-        fontSize:12,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Medium',
         color:colors.textColor,
     },
@@ -38,14 +38,14 @@ export default StyleSheet.create({
         marginTop:13
     },
     item:{
-        fontSize:12,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
     item1:{
-        fontSize:11,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
-        color:'#777777'
+        color:colors.heading
     },
     view1:{backgroundColor:colors.white},
     container:{
@@ -60,17 +60,65 @@ export default StyleSheet.create({
     },
     view3:{marginTop:6,flexDirection:'row'},
     view2:{alignItems:'center'},
-    tds:{color:'#000',fontFamily:'Montserrat-Normal',marginTop:10},
-    lorem:{color:colors.textColor,fontFamily:'Montserrat-Normal',marginTop:10,fontSize:13},
-    point:{width:6,height:6,borderRadius:3,backgroundColor:'#000',marginTop:7},
-    pointText:{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:10,marginTop:1},
-    bank:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:50,
-        flexDirection:'row',alignItems:'center',justifyContent:'space-between'
+    tds:{color:'#000',
+    fontFamily:'Montserrat-Normal',
+    marginTop:10
+},
+    lorem:{color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        marginTop:10,
+        fontSize:fontSize.thirteen
+    },
+    point:{width:6,height:6,
+        borderRadius:3,
+        backgroundColor:'#000',
+        marginTop:7
+    },
+    pointText:{color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        fontSize:fontSize.thirteen,
+        marginLeft:10,
+        marginTop:1
+    },
+    bank:{backgroundColor:colors.white,
+        marginTop:13,
+        paddingVertical:15,
+        paddingHorizontal:50,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
        },
-    text3:{color:'white',fontFamily:'Montserrat-Normal',},
-    text2:{color:'#000',fontFamily:'Montserrat-Normal',marginTop:10},
-    bankDetails:{color:colors.bc,fontSize:13,fontFamily:'Montserrat-Normal'},
-    top:{backgroundColor:colors.white,marginTop:13,paddingVertical:15,paddingHorizontal:20},
-    button:{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:20,paddingVertical:20,marginBottom:20},
-    btCont:{width:'47%',height:45,borderRadius:20,backgroundColor:colors.bc,alignItems:'center',justifyContent:'center'}
+    text3:{
+        color:'white',
+        fontFamily:'Montserrat-Normal',
+    },
+    text2:{
+        color:'#000',
+        fontFamily:'Montserrat-Normal',
+        marginTop:10
+    },
+    bankDetails:{color:colors.bc,
+        fontSize:fontSize.thirteen,
+        fontFamily:'Montserrat-Normal'
+    },
+    top:{
+        backgroundColor:colors.white,
+        marginTop:13,
+        paddingVertical:15,
+        paddingHorizontal:20
+    },
+    button:{
+        flexDirection:'row',
+    justifyContent:'space-between',
+    paddingHorizontal:20,
+    paddingVertical:20,
+    marginBottom:20
+},
+    btCont:{
+        width:'47%',height:45,
+        borderRadius:20,
+        backgroundColor:colors.bc,
+        alignItems:'center',
+        justifyContent:'center'
+    }
 })

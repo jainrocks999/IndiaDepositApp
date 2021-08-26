@@ -7,6 +7,7 @@ import styles from './style';
 import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import fontSize from '../../../component/fontSize';
 import { Alert } from 'react-native';
 const Splash=()=>{
     const navigation=useNavigation()
@@ -87,7 +88,7 @@ const Splash=()=>{
                     <Text
                     style={{
                         color: colors.white,
-                        fontSize: 20,
+                        fontSize:fontSize.twenty,
                         fontWeight: 'bold',
                         textAlign: 'center',
                     }}>
@@ -117,7 +118,7 @@ const Splash=()=>{
                   source={require('../../../assets/Image/IndiaDeposit.png')}/>
                 <View style={{bottom:30,position:'absolute',width:'100%'}}>
                   <View style={{alignItems:'center'}}>
-                <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:22,marginBottom:20}}>We secure your details</Text>
+                <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:fontSize.twenty,marginBottom:20}}>We secure your details</Text>
                 </View>
                  <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:80}}>
                    <Image style={{width:65,height:65}} source={require('../../../assets/Image/iso.png')}/>

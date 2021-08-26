@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:22
+        fontSize:fontSize.twenty
     },
     button:{
         width:'100%',
@@ -89,7 +89,7 @@ export default StyleSheet.create({
     enter:{
         fontFamily:'Montserrat-SemiBold',
         marginLeft:5,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         color:'#000'
     },
     input:{

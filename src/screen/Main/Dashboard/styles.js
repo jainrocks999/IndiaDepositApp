@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
+import fontSize from "../../../component/fontSize";
 export default StyleSheet.create({
     container:{
         flexDirection:'row',
@@ -16,7 +17,7 @@ export default StyleSheet.create({
     },
     text:{
         fontFamily:'Montserrat-SemiBold',
-        fontSize:12,
+        fontSize:fontSize.twelve,
         color:colors.textColor,
         marginTop:6,
         fontWeight:'600',
@@ -24,12 +25,12 @@ export default StyleSheet.create({
     },
     name:{
         color:colors.white,
-        fontSize:19,
+        fontSize:fontSize.nineteen,
         fontFamily:'Montserrat-Normal'
     },
     last:{
         color:colors.white,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     pfile:{
@@ -68,7 +69,7 @@ export default StyleSheet.create({
         borderColor:'#DDDDDD'
     },
     text2:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-SemiBold'
     },
     view2:{
@@ -93,7 +94,7 @@ export default StyleSheet.create({
         borderColor:'#DDDDDD'
     },
     Text1:{
-        fontSize:11,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal'
     },
     buttomview1:{

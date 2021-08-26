@@ -10,6 +10,7 @@ import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
+import fontSize from '../../../component/fontSize';
 const Contact=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -36,16 +37,16 @@ const showContent=()=>{
               data={selector}
               renderItem={({item})=>
               <View>
-               <View style={{marginTop:15}}>
+               <View style={styles.view1}>
                    <View>
-                       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                       <Text style={{fontFamily:'Montserrat-Normal'}}>{item.title}</Text>
+                       <View style={styles.view2}>
+                       <Text style={styles.text1}>{item.title}</Text>
                        {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.title}</Text> */}
                        </View>
-                       <Text style={{color:'grey',fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.notification}</Text>
+                       <Text style={styles.text3}>{item.notification}</Text>
                    </View>
                </View>
-               <View style={{borderWidth:1,marginTop:15,borderColor:'#DDDDDD'}}></View>
+               <View style={styles.line}></View>
               </View>
               }
               /> 

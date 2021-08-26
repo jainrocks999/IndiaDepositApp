@@ -105,7 +105,7 @@ const dashboard=()=>{
                  {/*  */}
                        <View style={styles.buttomview1}>
                              <View style={styles.item}>
-                                     <View style={styles.buttomview}>
+                                     <View style={styles.view1}>
                                          <Text style={styles.text2}>{'Savings Bank Account'}</Text>
                                       </View>
                                     <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>

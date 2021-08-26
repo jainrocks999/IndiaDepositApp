@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -43,9 +43,9 @@ export default StyleSheet.create({
         borderWidth:1
     },
     heading:{
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
-        color:colors.textColor,
+        color:colors.heading,
     },
     input:{
         alignItems:'center',
@@ -68,12 +68,12 @@ export default StyleSheet.create({
     },
     account:{
         color:colors.textColor,
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
     account1:{
-        color:'#5A4392',
-        fontSize:13
+        color:colors.bc,
+        fontSize:fontSize.thirteen
     },
     error:{
         width:'90%',
@@ -83,7 +83,7 @@ export default StyleSheet.create({
         marginTop:6
     },
     warn:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:'red'
     },
 })

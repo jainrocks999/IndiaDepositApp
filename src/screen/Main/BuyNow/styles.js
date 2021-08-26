@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     same:{
-        fontSize:11,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
     title:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
@@ -34,7 +34,7 @@ export default StyleSheet.create({
     },
     value1:{
         fontFamily:'Montserrat-Normal',
-        fontSize:12,
+        fontSize:fontSize.twelve,
         color:colors.textColor
     },
     buttonContainer:{

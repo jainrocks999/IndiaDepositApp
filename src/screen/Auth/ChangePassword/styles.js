@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     text:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        fontSize:22
+        fontSize:fontSize.twenty,
     },
     // button:{
     //     width:'100%',
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         color:colors.textColor
     },
     warn:{
-        fontSize:14,
+        fontSize:fontSize.fourteen,
         color:'red'
     },
     main:{
@@ -107,9 +107,9 @@ export default StyleSheet.create({
         borderWidth:1,
     },
     heading:{
-        fontSize:13,
+        fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
-        color:'#777777'
+        color:colors.heading
     },
     input:{
         alignItems:'center',

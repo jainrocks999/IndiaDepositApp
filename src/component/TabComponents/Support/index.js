@@ -9,7 +9,7 @@ import Storage from '../../AsyncStorage';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../colors';
-
+import fontSize from '../../fontSize';
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
   email:yup.string().email('Please enter valid email').required('Email address is required'),
@@ -47,7 +47,7 @@ const Support=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
-                  <Text style={{fontFamily:'Montserrat-SemiBold',color:'#000',fontSize:15}}>How can we help you?</Text>
+                  <Text style={{fontFamily:'Montserrat-SemiBold',color:'#000',fontSize:fontSize.fefteen}}>How can we help you?</Text>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
                         <TextInput
