@@ -28,8 +28,7 @@ export default StyleSheet.create({
         color:colors.textColor
     },
     input2:{
-        width:'90%',
-        marginLeft:11,
+        marginLeft:5,
         color:colors.textColor,
         paddingVertical:-10,
     },
@@ -70,7 +69,7 @@ export default StyleSheet.create({
     input:{
         alignItems:'center',
         flexDirection:'row',
-        marginTop:-3
+        marginTop:-3,
     },
     main:{
         paddingHorizontal:30,

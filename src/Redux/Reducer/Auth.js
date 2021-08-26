@@ -132,6 +132,14 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false,};
   case 'Change_Password_Error':
   return { ...state, isFetching: false };
+
+   //change password
+  case 'Feedback_Request':
+    return { ...state, isFetching: true };
+  case 'Feedback_Success':
+    return { ...state, isFetching: false,};
+  case 'Feedback_Error':
+  return { ...state, isFetching: false };
     default:
       return state;
   }

@@ -84,7 +84,7 @@ const call=()=>{
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
                       style={styles.input1}
-                     // onFocus={()=>setFocus(true)}
+                      onFocus={()=>setFocus(true)}
                       placeholder='Email / Mobile'
                       onChangeText={handleChange('value')}
                       onBlur={handleBlur('value')}

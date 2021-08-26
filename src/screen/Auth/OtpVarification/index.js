@@ -71,10 +71,14 @@ class OtpVarification extends React.Component{
              
               <KeyboardAwareScrollView>
               <View style={styles.imageContainer}>
+                  <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
+                  <Image source={require('../../../assets/Image/arrowBack.png')}/>
+                  </TouchableOpacity>
                   <View style={styles.round}>
                       <Image
                       source={require('../../../assets/Image/logo-icon.png')}/>
                   </View>
+                  <View style={{width:'5%'}}></View>
               </View>
                <View style={styles.main}>
                <View style={styles.otpView}>

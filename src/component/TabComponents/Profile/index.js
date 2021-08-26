@@ -40,15 +40,15 @@ const Profile=()=>{
                       <View style={styles.drop}>
                         <TextInput
                          style={styles.input}
-                         placeholder='Username@gmail.com'
+                         placeholder='Father/Spouse Name'
                         />
                     </View>
                     <Text style={styles.better}>Mother Maiden Name</Text>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='+91 000 0000 000'
-                        keyboardType='phone-pad'
+                        placeholder='Mother Maiden Name'
+                       
                         />
                     </View>
                     <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
@@ -96,15 +96,11 @@ const Profile=()=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='+91 000 0000 000'
-                        keyboardType='phone-pad'
+                        placeholder='E-mail'
                         />
                     </View>
-                    <View style={{paddingVertical:20,marginBottom:80}}>
-                      <CustomButton
-                      title='SUBMIT'
-                      />
-                      
+                    <View style={{paddingVertical:20,marginBottom:50}}>
+                     
                     </View>
                     </KeyboardAwareScrollView>
                     </View>

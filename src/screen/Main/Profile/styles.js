@@ -60,5 +60,20 @@ export default StyleSheet.create({
      
         fontSize: hp('1.3%'),
         fontFamily:'Montserrat-SemiBold' 
+    },
+    modalView:{
+        width:'100%',
+        paddingHorizontal:10,
+        justifyContent:'space-between',
+        flexDirection:'row',
+        marginTop:10,
+    },
+    buton:{
+         marginTop:35,
+    },
+    came:{
+        color:colors.bc,
+        fontFamily:'Montserrat-SemiBold',
+        fontSize:16
     }
 })

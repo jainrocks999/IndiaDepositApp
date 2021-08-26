@@ -8,11 +8,6 @@ export default StyleSheet.create({
     alignContent: 'center',
     backgroundColor:'#E5E5E5'
     },
-   
-    imageContainer:{
-        alignItems:'center',
-        marginTop:20
-    },
     main:{
         paddingHorizontal:10,
         justifyContent:'center',
@@ -114,8 +109,10 @@ export default StyleSheet.create({
         resizeMode:'stretch'
     },
     imageContainer:{
-        alignItems:'center',
-        marginTop:20
+        justifyContent:'space-between',
+        marginTop:20,
+        flexDirection:'row',
+        paddingHorizontal:15
     },
     main:{
         paddingHorizontal:20,

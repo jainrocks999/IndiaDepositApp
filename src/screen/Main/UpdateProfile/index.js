@@ -53,8 +53,8 @@ const RegisterPage=()=>
     const [data,setData]=useState('')
 
     useEffect(async()=>{
-    //  const photo= await AsyncStorage.getItem(Storage.photo)
-    //  setData(photo)
+   //   const photo= await AsyncStorage.getItem(Storage.photo)
+   //   setData(photo)
     },[])
    const openCamera = () =>
     {

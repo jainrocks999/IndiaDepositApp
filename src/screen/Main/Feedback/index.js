@@ -11,15 +11,44 @@ import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-const data=[{ label: 'Item', value: 'Item'},
-{ label: 'Item', value: 'Item' },
-{ label: 'Item', value: 'Item' },]
-const Contact=()=>{
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
+import Loader from '../../../component/loader';
+import { useDispatch,useSelector } from 'react-redux';
 
+const data=
+[{ label: 'Quality', value: 'Quality'},
+{ label: 'Service', value: 'Service' },
+{ label: 'Performance', value: 'Performance' },]
+
+const data1=
+[{ label: 'Quality', value: 'Quality'},
+{ label: 'Service', value: 'Service' },
+{ label: 'Performance', value: 'Performance' },]
+
+
+const Contact=()=>{
     const navigation=useNavigation()
     const [value, setValue] = useState('');
     const [value1, setValue1] = useState('');
-  
+    const [rating,setRatting]=useState('')
+    const [message,setMessage]=useState('')
+    const dispatch=useDispatch()
+    const isFetching=useSelector(state=>state.isFetching)
+const validateUser=async()=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    dispatch({
+        type: 'Feedback_Request',
+        url: 'feedback',
+        user_id,
+        rating:rating,
+        ans_key1:value,
+        ans_key2:value1,
+        message:message
+
+    })
+}
+
     return(
           <View style={styles.container}>
               <Header
@@ -28,14 +57,15 @@ const Contact=()=>{
                   onPress={()=>navigation.goBack()}
              />
               <KeyboardAwareScrollView>
-         <        View style={styles.view1}>
+                <View style={styles.view1}>
+                    {isFetching?<Loader/>:null}
                         <View style={styles.main}>
                           <Text style={styles.how}>How would you rate your experience with india deposit app?</Text>
                           <View style={styles.star}>
                               <Stars
-                                 half={true}
+                                half={true}
                                 default={0}
-                                update={(val)=>console.log(val)}
+                                update={(val)=>setRatting(val)}
                                 spacing={20}
                                 starSize={25}
                                 count={5}
@@ -65,7 +95,7 @@ const Contact=()=>{
                           <View style={styles.drop}>
                                  <RNPickerSelect
                                          onValueChange={(val)=>setValue1(val)}
-                                         items={data}
+                                         items={data1}
                                          style={{ 
                                          inputAndroid: { color: color.textColor,width:'100%',height:35 },
                                          placeholder:{color:colors.textColor}
@@ -82,12 +112,14 @@ const Contact=()=>{
                          <View style={styles.view2}>
                                <View style={styles.bottom}>
                                     <TextInput 
-                                         style={styles.input} 
+                                    onChangeText={(val)=>setMessage(val)}
+                                    multiline={true}
+                                    style={styles.input} 
                                     />
                                </View>
                               <View style={styles.bottomView}>
                                   <CustomButton
-                                      onPress={()=>navigation.navigate('FDeposit')}
+                                      onPress={()=>validateUser()}
                                       title='SUBMIT'
                                  />
                               </View>

@@ -83,7 +83,7 @@ const validateUser=(email,mobile)=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput
-                      onFocus={()=>showBorder()}
+                      onFocus={()=>setFocus(true)}
                       placeholder='Email Address'
                       style={styles.input1}
                       onChangeText={handleChange('email')}
@@ -106,7 +106,7 @@ const validateUser=(email,mobile)=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput
-                      onFocus={()=>showBorder1()}
+                      onFocus={()=>setFocus1()}
                       placeholder='Mobile Number'
                       style={styles.input1}
                       onChangeText={handleChange('mobile')}
@@ -125,7 +125,7 @@ const validateUser=(email,mobile)=>{
              <View style={styles.button}>
                  <CustomButton
                    title='RESET MY PASSWORD'
-                   onPress={()=>errors.email || errors.mobile ?Toast.show('All field required'):handleSubmit()}
+                   onPress={()=>values.email=='' || values.mobile=='' ?Toast.show('Please Enter Email or Mobile Number'):handleSubmit()}
                  />
              </View>
             

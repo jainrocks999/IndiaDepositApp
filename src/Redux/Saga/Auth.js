@@ -434,6 +434,35 @@ function* changepassword(action) {
           });
     }
 }
+
+function* feedback(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('rating',action.rating)
+      data.append('ans_key1',action.ans_key1)
+      data.append('ans_key2',action.ans_key2)
+      data.append('message',action.message)
+
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Feedback_Success',
+              });       
+              Toast.show(response.messages);
+            } else {
+              yield put({
+                type: 'Feedback_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Feedback_Request',
+          });
+    }
+}
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -450,4 +479,5 @@ export default function* authSaga() {
   yield takeEvery('Notification_Request',notification)
   yield takeEvery('Support_Request',support)
   yield takeEvery('Contact_Us_Request',contact)
+  yield takeEvery('Feedback_Request',feedback)
 }
