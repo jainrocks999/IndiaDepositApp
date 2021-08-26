@@ -67,8 +67,8 @@ const showContent=()=>{
              <View style={styles.card}>   
                 {showContent()}
              </View>
-         <StatusBar/>
-         {/* <BottomTab/> */}
+           <StatusBar/>
+           {/* <BottomTab/> */}
        </View>
     )
 }
