@@ -114,10 +114,6 @@ export default StyleSheet.create({
     warn:{fontSize:14,color:'red'},
     bottom:{
         marginTop:15,
-        // flexDirection:'row',
-        // justifyContent:'space-between',
-        // alignItems:'center',
-        // width:'50%'
     },
     card:{ 
         shadowColor:'black',

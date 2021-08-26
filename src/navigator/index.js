@@ -31,6 +31,7 @@ import Referal from '../screen/Main/Referal';
 import Profile from '../screen/Main/Profile';
 import Calculator from '../screen/Main/Calculator';
 import Contact from '../screen/Main/ContactUs'
+import ChangePassword from '../screen/Auth/ChangePassword';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -84,6 +85,7 @@ function Navigate() {
         <Stack.Screen name="Profile" component={Profile} options={horizontalAnimation}/>
         <Stack.Screen name="Calculator" component={Calculator} options={horizontalAnimation}/>
         <Stack.Screen name="Contact" component ={Contact} options={horizontalAnimation}/>
+        <Stack.Screen name="ChangePassword" component={ChangePassword} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

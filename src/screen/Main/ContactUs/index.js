@@ -46,10 +46,6 @@ const Contact=()=>{
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
-        {/* <TouchableWithoutFeedback
-        onPress={() => Keyboard.dismiss()}
-        > */}
-         
           <Header 
           title='CONTACT US'
           source={require('../../../assets/Images/arrow.png')}
@@ -186,13 +182,13 @@ const Contact=()=>{
               </View>
               
              </View>
-              <View style={styles.line}></View>
+              {/* <View style={styles.line}></View>
               <View style={styles.main}>
                     <Text style={styles.toll}>WRITE US ON EMAIL</Text>
                     <View style={{marginTop:18}}>
                          <Text style={styles.india}>customercare@indiadeposit</Text>
                      </View>
-              </View>
+              </View> */}
               <View style={{marginBottom:30}}>
                 <Button
                 onPress={()=>handleSubmit()}
@@ -203,8 +199,6 @@ const Contact=()=>{
             </View>
          </ScrollView>
          <StatusBar/>
-      
-       {/* </TouchableWithoutFeedback> */}
        </View>
         )}
         </Formik>
