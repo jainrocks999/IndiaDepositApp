@@ -406,11 +406,40 @@ function* contact(action) {
           });
     }
 }
+
+
+function* changepassword(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('password',action.password)
+      data.append('newpassword',action.newpassword)
+
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Change_Password_Success',
+              });       
+              Toast.show(response.messages);
+            } else {
+              yield put({
+                type: 'Change_Password_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Change_Password_Request',
+          });
+    }
+}
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
   yield takeEvery('User_Register_Request', doRegister);
   yield takeEvery('Forget_Password_Request', forgotpasword);
+  yield takeEvery('Change_Password_Request', changepassword);
   yield takeEvery('User_Logout_Request', logout);
   yield takeEvery('About_Us_Request',aboutus)
   yield takeEvery('Faq_Request',faq)

@@ -123,6 +123,15 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false,};
   case 'Contact_Us_Error':
   return { ...state, isFetching: false };
+
+
+  //change password
+  case 'Change_Password_Request':
+    return { ...state, isFetching: true };
+  case 'Change_Password_Success':
+    return { ...state, isFetching: false,};
+  case 'Change_Password_Error':
+  return { ...state, isFetching: false };
     default:
       return state;
   }

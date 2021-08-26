@@ -7,25 +7,25 @@ import styles from './style';
 import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import { Alert } from 'react-native';
 const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
-    
-   
      appVersion()
      //initial()
       }, []);
 
       const appVersion = async (url) => {
-        const user_id=await AsyncStorage.getItem(Storage.user_id)
+        const id=await AsyncStorage.getItem(Storage.user_id)
+        const user_id=id==null ? '':id
         const name=await AsyncStorage.getItem(Storage.name)
         try {
           const data = new FormData();
-          data.append('user_id', user_id)
+          data.append('user_id',user_id)
           const response = await axios({
-            method: 'GET',
-            data:data,
+            method: 'POST',
+            data,
             headers: {
               'content-type': 'multipart/form-data',
               Accept: 'multipart/form-data',
@@ -59,8 +59,8 @@ const Splash=()=>{
              }
           }
         } catch (error) {
-          
-          throw error;
+          // Alert.alert(error)
+         throw error;
           
         }
       };

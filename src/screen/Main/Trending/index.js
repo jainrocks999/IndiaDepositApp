@@ -24,9 +24,14 @@ const Trending=()=>{
 },[])
 const showContent=()=>{
     if (selector.length>0) {
-      return <Text style={styles.normal}>
+      return (
+        <View>
+      <Text style={styles.normal}>
               {selector[0].value}
       </Text>
+      </View>
+      )
+   
     } else {
       return<View></View>
     }
@@ -40,11 +45,13 @@ const showContent=()=>{
             source1={require('../../../assets/Image/notification.png')}
             onPress1={()=>navigation.navigate('Notification')}
             /> 
-             <ScrollView
+             {/* <ScrollView
               contentContainerStyle={{flex:1}}
               style={{backgroundColor:'#E5E5E5'}}>
                  {isFetching?<Loader/>:null}
-             <View style={styles.card}>
+             <View style={styles.card}> */}
+              <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
+            <View style={styles.card}>
                 {showContent()}
              </View>
              </ScrollView>

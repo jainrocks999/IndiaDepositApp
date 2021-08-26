@@ -12,18 +12,16 @@ import * as yup from 'yup';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import BottomTab from '../../../component/StoreButtomTab';
+import Storage from '../../../component/AsyncStorage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const loginValidationSchema=yup.object().shape({
-  oldPassword:yup.string().min(8,({min})=>`Old Password must be atleast ${min} charrecter`).
-  required('Old Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
-  newPassword:yup.string().min(8,({min})=>`New Password must be atleast ${min} charrecter`).
-  required('New Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
+  oldPassword:yup.string().required('Old Password is required'),
+  newPassword:yup.string().required('New Password is required'),
+  // .matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // ),
   confirmPassword:yup.string().when("newPassword", {
     is: val => (val && val.length > 0 ? true : false),
     then: yup.string().oneOf(
@@ -31,10 +29,11 @@ const loginValidationSchema=yup.object().shape({
       "Both password need to be the same"
     )
   }).
-  required('Confirm Password is required').matches(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  ),
+  required('Confirm Password is required'),
+  // .matches(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // ),
 })
 
 const ChangePassword=()=>{
@@ -44,6 +43,10 @@ const ChangePassword=()=>{
     const [visible,setVisible]=useState(true)
     const [visible1,setVisible1]=useState(true)
     const [visible2,setVisible2]=useState(true)
+    const [focus,setFocus]=useState(false)
+    const [focus1,setFocus1]=useState(false)
+    const [focus2,setFocus2]=useState(false)
+
 
 const showVisible=()=>{
     return(
@@ -51,9 +54,9 @@ const showVisible=()=>{
           onPress={()=>visible?setVisible(false):setVisible(true)}>
           {!visible?<Image 
           style={{width:19,height:13}} 
-          source={require('../../../assets/Images/eye.png')}/>:
+          source={require('../../../assets/Image/eye.png')}/>:
           <Image style={{width:19,height:13}} 
-          source={require('../../../assets/Images/eye1.png')}/>
+          source={require('../../../assets/Image/eye1.png')}/>
         }
         </TouchableOpacity>
       )
@@ -64,50 +67,41 @@ const showVisible1=()=>{
             onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
             {!visible1?<Image 
             style={{width:19,height:13}} 
-            source={require('../../../assets/Images/eye.png')}/>:
+            source={require('../../../assets/Image/eye.png')}/>:
             <Image style={{width:19,height:13}} 
-            source={require('../../../assets/Images/eye1.png')}/>
+            source={require('../../../assets/Image/eye1.png')}/>
           }
           </TouchableOpacity>
         )
-      }    
+}
+
+
 const showVisible2=()=>{
         return(
           <TouchableOpacity 
               onPress={()=>visible2?setVisible2(false):setVisible2(true)}>
               {!visible2?<Image 
               style={{width:19,height:13}} 
-              source={require('../../../assets/Images/eye.png')}/>:
+              source={require('../../../assets/Image/eye.png')}/>:
               <Image style={{width:19,height:13}} 
-              source={require('../../../assets/Images/eye1.png')}/>
+              source={require('../../../assets/Image/eye1.png')}/>
             }
             </TouchableOpacity>
           )
         }    
-const validateUser=()=>{
-    if(oldPassword==''){
-        Toast.show('Enter Old Password')
-    }
-    else if(newPassword==''){
-        Toast.show('Enter New Password')
-    }
-    else if(confirmPassword!=newPassword){
-        Toast.show('Enter Confirm Password')
-    }
-    else{
+const validateUser=async(values)=>{
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
         dispatch({
           type: 'Change_Password_Request',
-          url: '',
-          oldPassword,
-          newPassword,
-          confirmPassword,
-          navigation: navigation,
+          url: 'changepassword',
+          user_id,
+          password:values.oldPassword,
+          newpassword:values.newPassword,
         })
-      }
 }
     return(
       <Formik
-      initialValues={{ email: '',password:'' }}
+      initialValues={{ oldPassword: '',newPassword:'',confirmPassword:'' }}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -117,66 +111,67 @@ const validateUser=()=>{
          {isFetching?<Loader/>:null} 
          <Header
          title={'CHANGE PASSWORD'}
-         source={require('../../../assets/Images/drawer.png')}
-         onPress={()=>navigation.toggleDrawer()}
+         source={require('../../../assets/Images/arrow.png')}
+         onPress={()=>navigation.goBack()}
          />
           <ScrollView>
-           <View style={styles.main}>
-              <View style={styles.second}>
-                <View style={styles.imageView}>
-                {showVisible()}
-                </View>
-                <View style={styles.input}>
-                <TextInput
-                 style={styles.input1}
-                 placeholder='Old Password'
-                 onChangeText={handleChange('oldPassword')}
-                 onBlur={handleBlur('oldPassword')}
-                 value={values.oldPassword}
-                 secureTextEntry={visible}
-                 />
-                </View>
-              </View> 
+         
+                 <View style={styles.main}>
+           <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
+                   {values.oldPassword? <Text style={styles.heading}>Old Password</Text> :null}
+                    <View style={styles.input}>
+                    {showVisible()}
+                     <TextInput
+                      onFocus={()=>setFocus(true)}
+                      style={styles.input1}
+                      placeholder='Old Password'
+                      onChangeText={handleChange('oldPassword')}
+                      onBlur={handleBlur('oldPassword')}
+                      value={values.oldPassword}
+                      secureTextEntry={visible}
+                      />
+                  </View>
+              </View>
               <View style={styles.error}>
               {(errors.oldPassword && touched.oldPassword) &&
                 <Text style={styles.warn}>{errors.oldPassword}</Text>
                 }
               </View>
-              <View style={[styles.second,{marginTop:15}]}>
-                <View style={styles.imageView}>
-                {showVisible1()}
-                </View>
-                <View style={styles.input}>
-                <TextInput
-                 style={styles.input1}
-                 placeholder='New Password'
-                 onChangeText={handleChange('newPassword')}
-                 onBlur={handleBlur('newPassword')}
-                 value={values.newPassword}
-                 secureTextEntry={visible1}
-                 />
-                </View>
-              </View> 
+              <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
+                   {values.newPassword? <Text style={styles.heading}>New Password</Text> :null}
+                    <View style={styles.input}>
+                    {showVisible1()}
+                     <TextInput
+                     onFocus={()=>setFocus1(true)}
+                      style={styles.input1}
+                      placeholder='New Password'
+                      onChangeText={handleChange('newPassword')}
+                      onBlur={handleBlur('newPassword')}
+                      value={values.newPassword}
+                      secureTextEntry={visible1}
+                      />
+                  </View>
+              </View>
               <View style={styles.error}>
               {(errors.newPassword && touched.newPassword) &&
                 <Text style={styles.warn}>{errors.newPassword}</Text>
                 }
               </View>
-              <View style={[styles.second,{marginTop:15}]}>
-                <View style={styles.imageView}>
-                {showVisible2()}
-                </View>
-                <View style={styles.input}>
-                <TextInput
-                 style={styles.input1}
-                 placeholder='Confirm Password'
-                 onChangeText={handleChange('confirmPassword')}
-                 onBlur={handleBlur('confirmPassword')}
-                 value={values.confirmPassword}
-                 secureTextEntry={visible2}
-                 />
-                </View>
-              </View> 
+              <View style={[styles.card,{borderColor:focus2?colors.bc:'#fff'}]}>
+                   {values.confirmPassword? <Text style={styles.heading}>Confirm Password</Text> :null}
+                    <View style={styles.input}>
+                    {showVisible2()}
+                     <TextInput
+                     onFocus={()=>setFocus2(true)}
+                      style={styles.input1}
+                      placeholder='Confirm Password'
+                      onChangeText={handleChange('confirmPassword')}
+                      onBlur={handleBlur('confirmPassword')}
+                      value={values.confirmPassword}
+                      secureTextEntry={visible2}
+                      />
+                  </View>
+              </View>
               <View style={styles.error}>
               {(errors.confirmPassword && touched.confirmPassword) &&
                 <Text style={styles.warn}>{errors.confirmPassword}</Text>
@@ -184,12 +179,11 @@ const validateUser=()=>{
               </View>
              <View style={styles.button}>
                  <CustomButton
-                 title='UPDATE PASSWORD'
-                 onPress={()=>errors.oldPassword ||
-                   errors.newPassword ||
-                   errors.confirmPassword ?Toast.show('All field required'):navigation.navigate('Login')}
+                   title='RESET MY PASSWORD'
+                   onPress={()=>errors.email || errors.mobile ?Toast.show('All field required'):handleSubmit()}
                  />
              </View>
+            
            </View>
          </ScrollView>
          <StatusBar/>
