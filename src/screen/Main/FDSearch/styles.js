@@ -7,6 +7,17 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
+    scroll:{flex:1,paddingHorizontal:15,paddingVertical:30},
+    view:{marginTop:10},
+    view1:{marginTop:20},
+    view2:{flexDirection:'row',justifyContent:'space-between'},
+    view3:{width:'27%'},
+    view4:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+    view5:{marginTop:10,flexDirection:'row',alignItems:'center'},
+    view6:{marginTop:20,alignItems:'center'},
+    view7:{marginTop:5},
+    view8:{marginTop:15,marginBottom:20},
+    text1:{color:colors.textColor,fontFamily:'Montserrat-Normal'},
     main:{
         paddingHorizontal:30,
         shadowColor:'black',

@@ -19,125 +19,122 @@ const Contact=()=>{
 
     return(
         <View style={styles.container}>
-            <Header
-            title={'FD SEARCH'}
-            source={require('../../../assets/Images/arrow.png')}
-            onPress={()=>navigation.goBack()}
-            />
-          <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:30}}>
-            <View style={styles.main}>
-              <View style={{marginTop:10}}>
-                <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:13}}>
-                Lorem ipsum, or lipsum as it is sometimes known,
-                is dummy text used in laying out print, graphic or
-                web designs. The passage is attributed to an
-                unknown typesetter book.
-                </Text>
-                <View style={{marginTop:10}}>
-                  <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Tenure</Text>
-                </View>
-                <View style={{marginTop:20}}>
-                  <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                    <View style={{width:'27%'}}>
-                      <View style={styles.input}>
-                        <RNPickerSelect
-                            onValueChange={(val)=>setDay(val)}
-                            items={days}
-                            style={{ 
-                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                            placeholder:{color:'#333333',fontSize:12}
-                            }}
-                            value={day}
-                            useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Days", value: null }}
-                            Icon={()=><Image 
-                                style={styles.image} 
-                                source={require('../../../assets/Image/down.png')}/>}
+              <Header
+                  title={'FD SEARCH'}
+                  source={require('../../../assets/Images/arrow.png')}
+                  onPress={()=>navigation.goBack()}
+              />
+             <ScrollView style={styles.srcoll}>
+                <View style={styles.main}>
+                  < View style={styles.view}>
+                      <Text style={[styles.text1,{fontSize:13}]}>
+                        Lorem ipsum, or lipsum as it is sometimes known,
+                        is dummy text used in laying out print, graphic or
+                        web designs. The passage is attributed to an
+                        unknown typesetter book.
+                     </Text>
+                     <View  style={styles.view}>
+                        <Text style={styles.text1}>Tenure</Text>
+                     </View>
+                     <View style={styles.view1}>
+                        <View style={styles.view2}>
+                              <View style={styles.view3}>
+                                 <View style={styles.input}>
+                                    <RNPickerSelect
+                                      onValueChange={(val)=>setDay(val)}
+                                      items={days}
+                                      style={{ 
+                                      inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                      placeholder:{color:'#333333',fontSize:12}
+                                      }}
+                                      value={day}
+                                      useNativeAndroidPickerStyle={false}
+                                      placeholder={{ label: "Days", value: null }}
+                                      Icon={()=><Image 
+                                      style={styles.image} 
+                                      source={require('../../../assets/Image/down.png')}/>}
+                                    />
+                                  </View>
+                               </View>
+                               <View style={styles.view3}>
+                                    <View style={styles.input}>
+                                       <RNPickerSelect
+                                          onValueChange={(val)=>setGender(val)}
+                                          items={Month}
+                                          style={{ 
+                                          inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                          placeholder:{color:'#333333',fontSize:12}
+                                          }}
+                                          value={gender}
+                                          useNativeAndroidPickerStyle={false}
+                                          placeholder={{ label: "Month", value: null }}
+                                          Icon={()=><Image 
+                                          style={styles.image} 
+                                          source={require('../../../assets/Image/down.png')}/>}
+                                        />
+                                     </View>
+                               </View>
+                               <View style={styles.view3}>
+                                    <View style={styles.input}>
+                                       <RNPickerSelect
+                                           onValueChange={(val)=>setGender(val)}
+                                           items={Years}
+                                           style={{ 
+                                           inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                           placeholder:{color:'#333333',fontSize:12}
+                                           }}
+                                           value={gender}
+                                           useNativeAndroidPickerStyle={false}
+                                           placeholder={{ label: "Year", value: null }}
+                                           Icon={()=><Image 
+                                           style={styles.image} 
+                                           source={require('../../../assets/Image/down.png')}/>}
+                                       />
+                                     </View>
+                                 </View>
+                             </View>
+                        </View>
+                      </View>
+                      <View style={styles.view1}>
+                           <View style={styles.view4}>
+                               <Text style={styles.text1}>Amount</Text>
+                           </View>
+                           <View style={{marginTop:-10}}>
+                              <TextInput
+                                 style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                                 keyboardType='number-pad'
+                              />
+                           </View>
+                      </View>
+                      <View style={styles.view1}>
+                          <View style={styles.view4}>
+                              <Text style={styles.text1}>Location</Text>
+                          </View>
+                          <View style={styles.view5}>
+                                <Image source={require('../../../assets/Image/search.png')}/>
+                                <Text style={[styles.text1,{marginLeft:30}]}>Current Location</Text>
+                          </View>
+                       </View>
+                       <View style={styles.view6}>
+                             <Text>OR</Text>
+                       </View>
+                      <View style={styles.view7}>
+                           <TextInput
+                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              placeholder='Enter Pincode'
+                           />
+                       </View>
+                       <View style={styles.view8}>
+                            <Button
+                                onPress={()=>navigation.navigate('FDList')}
+                                title='SEARCH'
                             />
-                      </View>
-                    </View>
-
-                    <View style={{width:'27%'}}>
-                      <View style={styles.input}>
-                        <RNPickerSelect
-                            onValueChange={(val)=>setGender(val)}
-                            items={Month}
-                            style={{ 
-                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                            placeholder:{color:'#333333',fontSize:12}
-                            }}
-                            value={gender}
-                            useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Month", value: null }}
-                            Icon={()=><Image 
-                                style={styles.image} 
-                                source={require('../../../assets/Image/down.png')}/>}
-                            />
-                      </View>
-                    </View>
-
-                    <View style={{width:'27%'}}>
-                      <View style={styles.input}>
-                        <RNPickerSelect
-                            onValueChange={(val)=>setGender(val)}
-                            items={Years}
-                            style={{ 
-                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
-                            placeholder:{color:'#333333',fontSize:12}
-                            }}
-                            value={gender}
-                            useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Year", value: null }}
-                            Icon={()=><Image 
-                                style={styles.image} 
-                                source={require('../../../assets/Image/down.png')}/>}
-                            />
-                      </View>
-                    </View>
-                  </View>
-                      </View>
-            
-                      </View>
-                      <View style={{marginTop:20}}>
-                          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Amount</Text>
-                          </View>
-                          <View style={{marginTop:-10}}>
-                          <TextInput
-                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
-                          keyboardType='number-pad'
-                          />
-                          </View>
-                      </View>
-                      <View style={{marginTop:20}}>
-                          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Location</Text>
-                          </View>
-                          <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
-                          <Image source={require('../../../assets/Image/search.png')}/>
-                          <Text style={{color:colors.textColor,fontFamily:'Montserrat-Normal',marginLeft:30}}>Current Location</Text>
-                          </View>
-                      </View>
-                      <View style={{marginTop:20,alignItems:'center'}}>
-                        <Text>OR</Text>
-                      </View>
-                      <View style={{marginTop:5}}>
-                          <TextInput
-                          style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
-                          placeholder='Enter Pincode'
-                          />
-                      </View>
-                    <View style={{marginTop:15,marginBottom:20}}>
-                    <Button
-                    onPress={()=>navigation.navigate('FDList')}
-                    title='SEARCH'
-                    />
-                    </View>
-             </View>
-          </ScrollView>
-          <BottomTab/>
-         <StatusBar/>
-       </View>
+                       </View>
+                     </View>
+            </ScrollView>
+                  <BottomTab/>
+                 <StatusBar/>
+     </View>
     )
 }
 export default Contact;

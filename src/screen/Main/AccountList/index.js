@@ -4,6 +4,7 @@ import Header from '../../../component/compareHeader';
 import colors from '../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
 import BottomTab from '../../../component/StoreButtomTab';
+import StatusBar from "../../../component/StatusBar";
 import styles from './styles';
 const data=
 [
@@ -110,6 +111,7 @@ const renderItem=(item)=>{
                    style={{width:'100%'}}
                 />
             </View>
+            <StatusBar/>
             <BottomTab/>
         </View>
     )

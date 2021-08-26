@@ -3,7 +3,8 @@ import {View,Text,FlatList,TouchableOpacity} from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import styles from './styles';
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation} from '@react-navigation/native';
+import StatusBar from "../../../component/StatusBar";
 import Button from "../../../component/button1";
 const data=
 [
@@ -66,6 +67,7 @@ const FDList=()=>
                      <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>CANCEL</Text>
                </TouchableOpacity>
             </View>
+            <StatusBar/>
        </View>
      )
 }

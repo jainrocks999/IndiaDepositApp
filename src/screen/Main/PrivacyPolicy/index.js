@@ -24,34 +24,34 @@ const Calculator=()=>{
     { key: 'third', title: 'Term & Condition' },
   ]);
     return(
-        <View style={styles.container}>
-           <Header
-            source={require('../../../assets/Images/arrow.png')}
-            title={'POLICY'}
-           onPress={()=>navigation.goBack()}
-           />
-             <View style={styles.card}>
-                <TabView
-                    navigationState={{ index, routes }}
-                    renderScene={renderScene}
-                    onIndexChange={setIndex}
-                    initialLayout={{ width: '100%' }}
-                    renderTabBar={props => <TabBar
-                        indicatorStyle={{ 
-                            backgroundColor: colors.bc, 
-                            height:3
-                          }}
-                        renderLabel={({route, color,focused}) => (
-                            <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
+           <View style={styles.container}>
+               <Header
+                  source={require('../../../assets/Images/arrow.png')}
+                  title={'POLICY'}
+                  onPress={()=>navigation.goBack()}
+               />
+               <View style={styles.card}>
+                   <TabView
+                       navigationState={{ index, routes }}
+                       renderScene={renderScene}
+                       onIndexChange={setIndex}
+                       initialLayout={{ width: '100%' }}
+                       renderTabBar={props => <TabBar
+                       indicatorStyle={{ 
+                       backgroundColor: colors.bc, 
+                       height:3
+                       }}
+                       renderLabel={({route, color,focused}) => (
+                       <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>
                               {route.title}
-                            </Text>
-                          )}
+                       </Text>
+                       )}
                         {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
-                    />
-             </View>
-         <StatusBar/>
-       </View>
-    )
+                     />
+                </View>
+                <StatusBar/>
+            </View>
+         )
 }
 export default Calculator;
 

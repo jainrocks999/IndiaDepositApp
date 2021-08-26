@@ -45,7 +45,7 @@ export default StyleSheet.create({
         marginTop:10
     },
     
-    
+   buttomview:{bottom:0,position:'absolute',left:0,right:0}, 
    
     
 })

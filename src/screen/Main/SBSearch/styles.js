@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
+    scroll:{flex:1,paddingHorizontal:15,paddingVertical:30},
     main:{
         paddingHorizontal:30,
         shadowColor:'black',
@@ -20,6 +21,14 @@ export default StyleSheet.create({
         paddingVertical:10,
         marginBottom:50
     },
+    view:{marginTop:20},
+    view1:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
+    view2:{marginTop:15,marginBottom:20},
+    text1:{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.textColor},
+    text2:{color:colors.textColor,fontFamily:'Montserrat-Normal'},
+    text3:{color:colors.textColor,fontFamily:'Montserrat-Normal',marginLeft:30},
+    textinput:{borderBottomWidth:1.5,borderColor:'#3D4785',height:40,marginTop:-10},
+    textinput1:{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0},
     input:{
         marginTop:-8,
         borderBottomWidth:1.5,

@@ -8,14 +8,14 @@ import BottomTab from '../../../component/StoreButtomTab';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 
-const Trending=()=>{
-    const navigation=useNavigation()
-
-   
-    const dispatch=useDispatch()
-    const selector=useSelector(state=>state.Trending)
-    const isFetching=useSelector(state=>state.isFetching)
-    useEffect(()=>{
+const Trending=()=>
+{
+     const navigation=useNavigation()
+     const dispatch=useDispatch()
+     const selector=useSelector(state=>state.Trending)
+     const isFetching=useSelector(state=>state.isFetching)
+     useEffect(()=>
+     {
         dispatch({
           type: 'Trending_Request',
           url: 'getpagecontent',
@@ -55,12 +55,12 @@ const showContent=()=>{
                 {showContent()}
              </View>
              </ScrollView>
-         <StatusBar/>
-         <View style={{bottom:0,position:'absolute',left:0,right:0}}>
-           <BottomTab/>
-         </View>
-       </View>
-    )
+             <StatusBar/>
+             <View style={styles.buttomview}>
+               <BottomTab/>
+             </View>
+        </View>
+   )
 }
 export default Trending;
 

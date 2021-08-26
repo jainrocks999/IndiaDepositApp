@@ -6,6 +6,8 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
+    view1:{paddingHorizontal:15,paddingVertical:20},
+    view2:{ marginTop:13 },
     imageContainer:{
         alignItems:'center',
         marginTop:20
