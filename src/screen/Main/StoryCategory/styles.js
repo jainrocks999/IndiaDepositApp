@@ -1,13 +1,10 @@
 import { StyleSheet } from 'react-native';
 import fontSize from '../../../component/fontSize';
 import colors from '../../../component/colors';
-import {  widthPercentageToDP as wp,
-    heightPercentageToDP as hp, } from "react-native-responsive-screen";
-
 export default StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.white
     },
     card:{
         shadowColor:'black',
@@ -56,7 +53,8 @@ export default StyleSheet.create({
     },
     title:{ 
      
-        fontSize:fontSize.eleven,
+        fontSize:fontSize.thirteen,
+        //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' 
     },
     prop:{

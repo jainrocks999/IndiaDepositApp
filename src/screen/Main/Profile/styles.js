@@ -57,8 +57,8 @@ export default StyleSheet.create({
         color:colors.bc
     },
     title:{ 
-    // fontSize:fontSize.eleven,
-        fontSize: hp('1.3%'),
+    // fontSize:,
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-SemiBold' 
     },
     modalView:{

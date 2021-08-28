@@ -34,12 +34,12 @@ const Knowledge=()=>{
              <ScrollView
                 contentContainerStyle={{flex:1}}
                 style={{backgroundColor:'#E5E5E5'}}>
-                 <View style={styles.card}>
+                 <View style={{flex:1}}>
                     <TabView
                        navigationState={{ index, routes }}
                        renderScene={renderScene}
                        onIndexChange={setIndex}
-                       initialLayout={{ width: '100%' }}
+                       initialLayout={{ width: '100%', }}
                        renderTabBar={props => <TabBar
                        indicatorStyle={{ 
                        backgroundColor: colors.bc, 
@@ -50,7 +50,8 @@ const Knowledge=()=>{
                               {route.title}
                        </Text>
                         )}
-                       {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
+                       {...props} style={styles.card}/>}
+                      //  {backgroundColor: 'red',borderTopRightRadius:10,borderTopLeftRadius:10}
                     />
                  </View>
              </ScrollView>

@@ -7,11 +7,11 @@ import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import FD from '../../../component/TabComponents/FD';
-import SP from '../../../component/TabComponents/SP';
+import SIP from '../../../component/TabComponents/SP';
 
   const renderScene = SceneMap({
-    first: FD,
-    second: SP,
+    first: SIP,
+    second: FD,
    
   });
 const Calculator=()=>
@@ -20,8 +20,8 @@ const Calculator=()=>
    const [index, setIndex] = useState(0);
    const [routes] = React.useState
    ([
-     { key: 'first', title: 'FD' },
-     { key: 'second', title: 'SP' },
+     { key: 'first', title: 'SIP' },
+     { key: 'second', title: 'FD' },
    
     ]);
     return(

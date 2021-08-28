@@ -1,5 +1,5 @@
-import React from 'react';
-import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,TouchableWithoutFeedback,Keyboard} from 'react-native';
+import React,{useRef} from 'react';
+import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -24,9 +24,14 @@ const Contact=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
+    const next1 = useRef(null);
+    const next2 = useRef(null);
+    const next3 = useRef(null);
+    
 
   const validateUser=async(values)=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
+   Keyboard.dismiss()
     dispatch({
       type: 'Contact_Us_Request',
       url: 'contact',
@@ -125,12 +130,18 @@ const Contact=()=>{
               <View style={{marginTop:20}}>
               <View style={styles.input}>
                 <TextInput
+                
                 style={{color:colors.textColor}}
                 placeholder='Name'
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
                 value={values.name}
                 maxLength={40}
+                returnKeyType='next'
+                onSubmitEditing={() => {
+                  next1.current.focus()
+                }}
+                blurOnSubmit={false}
                 />
               </View>
               <View style={styles.error}>
@@ -140,12 +151,18 @@ const Contact=()=>{
               </View>
               <View style={[styles.input,{marginTop:15}]}>
               <TextInput
+                ref={next1}
                 style={{color:colors.textColor}}
                 placeholder='Email'
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
                 maxLength={40}
+                returnKeyType='next'
+                onSubmitEditing={() => {
+                  next2.current.focus()
+                }}
+                blurOnSubmit={false}
                 />
               </View>
               <View style={styles.error}>
@@ -155,6 +172,7 @@ const Contact=()=>{
               </View>
               <View style={[styles.input,{marginTop:15}]}>
               <TextInput
+                ref={next2}
                 style={{color:colors.textColor}}
                 placeholder='Mobile'
                 onChangeText={handleChange('mobile')}
@@ -162,6 +180,11 @@ const Contact=()=>{
                 value={values.mobile}
                 keyboardType={'number-pad'}
                 maxLength={11}
+                returnKeyType='next'
+                onSubmitEditing={() => {
+                  next3.current.focus()
+                }}
+                blurOnSubmit={false}
                 />
                
               </View>
@@ -172,23 +195,22 @@ const Contact=()=>{
               </View>
               <View style={[styles.input1,{marginTop:15,marginBottom:20}]}>
               <TextInput
+                ref={next3}
                 style={{color:colors.textColor}}
                 placeholder='Message / Report for Crash'
                 onChangeText={handleChange('message')}
                 onBlur={handleBlur('message')}
                 value={values.message}
-                multiline={true}
+                 multiline={true}
+              
+                // onSubmitEditing={() => {
+                //   handleSubmit()
+                // }}
+                // blurOnSubmit={false}
                 />
               </View>
               
              </View>
-              {/* <View style={styles.line}></View>
-              <View style={styles.main}>
-                    <Text style={styles.toll}>WRITE US ON EMAIL</Text>
-                    <View style={{marginTop:18}}>
-                         <Text style={styles.india}>customercare@indiadeposit</Text>
-                     </View>
-              </View> */}
               <View style={{marginBottom:30}}>
                 <Button
                 onPress={()=>handleSubmit()}

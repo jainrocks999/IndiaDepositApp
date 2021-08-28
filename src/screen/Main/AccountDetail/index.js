@@ -178,10 +178,9 @@ const navigation=useNavigation()
                          </View>
                      </View>
             </View>
-           
                {/*  ButtonView */}
             <View style={styles.bank}>
-                 <TouchableOpacity >
+                 <TouchableOpacity>
                       <Text style={styles.bankDetails}>BANK DETAILS</Text>
                   </TouchableOpacity>
                   <TouchableOpacity>

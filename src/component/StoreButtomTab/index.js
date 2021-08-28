@@ -11,9 +11,10 @@ const BottomTab = () => {
       <View style={styles.container}>
         <View style={{width:30}}>
           <Image
+           style={{height:15,width:19}}
             source={require('../../assets/Images/home.png')}/>
         </View>
-        <Text style={styles.text}>{'HOME'}</Text>
+        <Text style={[styles.text,{marginTop:7}]}>{'HOME'}</Text>
       </View>
     )
   };

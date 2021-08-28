@@ -18,8 +18,9 @@ export default StyleSheet.create({
         borderTopRightRadius:10,
         backgroundColor:'white',
         marginHorizontal:15,
-        marginVertical:20,
-        flex:1
+        marginVertical:4,
+        marginTop:20
+       
     }, 
     main:{
         flexDirection:'row',

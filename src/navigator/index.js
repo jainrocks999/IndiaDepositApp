@@ -32,6 +32,8 @@ import Profile from '../screen/Main/Profile';
 import Calculator from '../screen/Main/Calculator';
 import Contact from '../screen/Main/ContactUs'
 import ChangePassword from '../screen/Auth/ChangePassword';
+import BlogCategory from '../screen/Main/BlogCategory';
+import StoryCategory from '../screen/Main/StoryCategory';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -87,6 +89,8 @@ function Navigate() {
         <Stack.Screen name="Calculator" component={Calculator} options={horizontalAnimation}/>
         <Stack.Screen name="Contact" component ={Contact} options={horizontalAnimation}/>
         <Stack.Screen name="ChangePassword" component={ChangePassword} options={horizontalAnimation}/>
+        <Stack.Screen name="BlogCategory" component ={BlogCategory} options={horizontalAnimation}/>
+        <Stack.Screen name="StoryCategory" component={StoryCategory} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

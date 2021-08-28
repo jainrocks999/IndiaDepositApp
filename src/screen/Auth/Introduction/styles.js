@@ -60,7 +60,8 @@ button:{
         marginBottom:30,
         alignItems:'center',
         width:'100%',
-        marginTop:10
+        marginTop:10,
+        paddingHorizontal:16
     },
     text:{
         color:colors.white,
