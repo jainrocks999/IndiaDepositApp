@@ -2,42 +2,51 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     backgroundColor:'#E5E5E5'
     },
-    view1:{
+    view1:
+    {
         marginTop:15
     },
-    view2:{
+    view2:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center'
     },
-    text1:{
+    text1:
+    {
         fontFamily:'Montserrat-Normal'
     },
-    text2:{
+    text2:
+    {
         color:colors.bc,
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal'
     },
-    text3:{
+    text3:
+    {
         color:'grey',
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal'
     },
-    line:{
+    line:
+    {
         borderWidth:1,
         marginTop:15,
         borderColor:'#DDDDDD'
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         marginTop:50,
         marginBottom:20
     }, 
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:8,

@@ -4,11 +4,13 @@ import {  widthPercentageToDP as wp,
     heightPercentageToDP as hp, } from "react-native-responsive-screen";
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
         flex: 1,
         backgroundColor:'#E5E5E5'
     },
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:8,
@@ -23,21 +25,35 @@ export default StyleSheet.create({
         
          height:'100%'
     }, 
-    view1:{width:'35%'},
-    view2:{width:'60%',flexDirection:'row'},
-    img:{height:'100%',width:'100%'},
-    main:{
+    view1:
+    {
+        width:'35%'
+    },
+    view2:
+    {
+        width:'60%',
+        flexDirection:'row'
+    },
+    img:
+    {
+        height:'100%',
+        width:'100%'
+    },
+    main:
+    {
         flexDirection:'row',
         paddingHorizontal:20,
         marginBottom:10,
         marginTop:20
     },
-    imageContainer:{
+    imageContainer:
+    {
         height:84,
         width:84,
         borderRadius:42
     },
-    camera:{
+    camera:
+    {
         width:28,
         height:28, 
         shadowColor:'black',
@@ -50,28 +66,33 @@ export default StyleSheet.create({
         backgroundColor:'white',
         alignItems:'center',justifyContent:'center'
     },
-    change:{
+    change:
+    {
         fontSize:fontSize.twelve,
         marginHorizontal:15,
         marginTop:5,
         color:colors.bc
     },
-    title:{ 
+    title:
+    { 
     // fontSize:fontSize.eleven,
         fontSize: hp('1.3%'),
         fontFamily:'Montserrat-SemiBold' 
     },
-    modalView:{
+    modalView:
+    {
         width:'100%',
         paddingHorizontal:10,
         justifyContent:'space-between',
         flexDirection:'row',
         marginTop:10,
     },
-    buton:{
+    buton:
+    {
          marginTop:35,
     },
-    came:{
+    came:
+    {
         color:colors.bc,
         fontFamily:'Montserrat-SemiBold',
         fontSize:16

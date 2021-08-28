@@ -3,16 +3,19 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    backgroundColor:'#E5E5E5'
+    container:
+    {
+       flex: 1,
+       backgroundColor:'#E5E5E5'
     },
-    scroll:{
+    scroll:
+    {
         flex:1,
         paddingHorizontal:15,
         paddingVertical:30
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -25,44 +28,53 @@ export default StyleSheet.create({
         paddingVertical:10,
         marginBottom:50
     },
-    view:{
+    view:
+    {
         marginTop:20
     },
-    view1:{
+    view1:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center'
     },
-    view2:{
+    view2:
+    {
         marginTop:15,
         marginBottom:20
     },
-    text1:{
+    text1:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    text2:{
+    text2:
+    {
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
-    text3:{
+    text3:
+    {
         color:colors.textColor,
         fontFamily:'Montserrat-Normal',
         marginLeft:30
     },
-    textinput:{
+    textinput:
+    {
         borderBottomWidth:1.5,
         borderColor:'#3D4785',
         height:40,
         marginTop:-10
     },
-    textinput1:{
+    textinput1:
+    {
         borderBottomWidth:1.5,
         borderColor:'#3D4785',
         paddingBottom:0
     },
-    input:{
+    input:
+    {
         marginTop:-8,
         borderBottomWidth:1.5,
         borderColor:'#3D4785',
@@ -70,7 +82,8 @@ export default StyleSheet.create({
         height:40,
         justifyContent:'center'
     },
-    interest:{
+    interest:
+    {
         marginTop:15,
         borderWidth:1,
         borderColor:colors.textColor,
@@ -81,14 +94,16 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-    container1:{
+    container1:
+    {
         width:'100%',
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
         marginTop:15
     },
-    same:{
+    same:
+    {
         width:'47%',
         borderWidth:1,
         height:40,
@@ -96,25 +111,29 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         paddingHorizontal:8
     },
-    input1:{
+    input1:
+    {
         height:40,
         width:'90%',
         fontSize:fontSize.thirteen,
         color:colors.textColor
     },
-    ten:{
+    ten:
+    {
         height:40,
         width:'99%',
         fontSize:fontSize.thirteen,
         color:colors.textColor
     },
-    row:{
+    row:
+    {
         flexDirection:'row',
         alignItems:'center',
         marginLeft:-5,
         marginTop:10
     },
-    image:{
+    image:
+    {
         marginTop:16,
         marginRight:8
     }

@@ -10,13 +10,14 @@ import BottomTab from '../../../component/StoreButtomTab';
 import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import DatePicker from 'react-native-datepicker';
 
 
+const data=[
+  { label: 'Male', value: 'Male' },
+  { label: 'Female', value: 'Female' },
+  { label: 'Others', value: 'Others'}]
 
-
-const data=[{ label: 'Item', value: 'Item'},
-{ label: 'Item', value: 'Item' },
-{ label: 'Item', value: 'Item' },]
 
 const Profile=()=>{
     const navigation=useNavigation()
@@ -55,39 +56,57 @@ const Profile=()=>{
                         <View style={{width:'47%'}}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
-                                 {/* <RNPickerSelect
-                                    onValueChange={(val)=>setValue(val)}
-                                    items={data}
-                                    style={{ 
-                                    inputAndroid: { color: color.textColor,height:35 },
-                                    placeholder:{color:colors.textColor}
-                                    }}
-                                    value={value}
-                                    useNativeAndroidPickerStyle={false}
-                                    placeholder={{ label: "Select", value: null }}
-                                    Icon={()=>
+
+                               <RNPickerSelect
+                                     onValueChange={(val) => setValue(val)}
+                                     items={data}
+                                     style={{ inputAndroid: { color:colors.textColor,height:35 },
+                                     placeholder:{color:colors.textColor}
+                                     }}
+                                     value={value}
+                                     useNativeAndroidPickerStyle={false}
+                                     placeholder={{ label: "Select Gender", value: null }}
+                                     Icon={()=>
                                     <Image style={{margin:12}} 
-                                    source={require('../../../assets/Image/down.png')}/>}
-                                    /> */}
+                                       source={require('../../../assets/Image/down.png')}/>}
+                                     />
+                                 
                             </View>
                         </View>
-                        <View style={{width:'47%'}}>
+                        <View style={{width:'47%',}}>
                             <Text style={styles.better}>Date of Birth</Text>
                             <View style={styles.drop}>
-                            {/* <RNPickerSelect
-                                    onValueChange={(val)=>setValue(val)}
-                                    items={data}
-                                    style={{ 
-                                    inputAndroid: { color: color.textColor,height:35 },
-                                    placeholder:{color:colors.textColor}
-                                    }}
-                                    value={value}
-                                    useNativeAndroidPickerStyle={false}
-                                    placeholder={{ label: "Select", value: null }}
-                                    Icon={()=>
-                                    <Image style={{margin:12}} 
-                                    source={require('../../../assets/Image/down.png')}/>}
-                                    /> */}
+                               <DatePicker
+                                    style={{width: '100%'}}
+                                     date={value1}
+                                     mode="date"
+                                     placeholder="Date Of Birth"
+                                     format="DD-MM-YYYY"
+                                     maxDate={new Date()}
+                                     confirmBtnText="Confirm"
+                                     cancelBtnText="Cancel"
+                                     customStyles={{
+                                     placeholderText:{marginLeft:0,marginTop:0,color:colors.textColor},
+                                     dateIcon: {
+                                      width:0,
+                                      height:0,
+                                     // backgroundColor:colors.bc
+                                       },
+                                     dateInput: {
+                                      marginLeft:-40,
+                                      borderWidth:0, 
+                                      // width:300 
+                                       },
+                                      dateText:{
+                                        color:colors.textColor
+                                        }
+                                      }}
+                
+                                      onDateChange={(date)=> setValue1(date)}
+                                     
+                                  /> 
+                                  {/* <Image style={{marginTop:-15,marginLeft:115}} 
+                                    source={require('../../../assets/Image/down.png')}/> */}
                             </View>
                         </View>
                     </View>

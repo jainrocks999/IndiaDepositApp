@@ -98,8 +98,8 @@ const call=()=>{
                 <Text style={styles.warn}>{errors.value}</Text>
                 }
               </View>
-             <View style={{width:'100%',marginTop:20}}>
-               <Text style={{marginLeft:4,color:colors.textColor,fontFamily:'Montserrat-Normal',fontSize:fontSize.thirteen}}>Enter Your Pin</Text>
+             <View style={styles.view1}>
+               <Text style={styles.text1}>Enter Your Pin</Text>
               <OTPTextInput
               containerStyle={styles.OtpInput}
               handleTextChange={(code)=>setOtp(code)}
@@ -111,17 +111,17 @@ const call=()=>{
               </View>
              
               <View
-               style={{marginTop:10,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                 <View  style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+               style={styles.view2}>
+                 <View  style={styles.view3}>
                  <CheckBox
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={{fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal',color:colors.textColor}}>keep me logged in</Text>
+                  <Text style={styles.text2}>keep me logged in</Text>
                   </View>
-                <Text style={{fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal',color:colors.textColor}}
+                <Text style={styles.text2}
                  onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>
               </View>
 

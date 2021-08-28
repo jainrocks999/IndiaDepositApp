@@ -2,16 +2,19 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    backgroundColor:'#E5E5E5'
+    container:
+    {
+         flex: 1,
+         backgroundColor:'#E5E5E5'
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         marginTop:50,
         marginBottom:20
     }, 
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:8,
@@ -26,7 +29,8 @@ export default StyleSheet.create({
         marginTop:-32,
         height:'100%'
     },
-    pfile:{
+    pfile:
+    {
         width:'100%',
         height:254,
         backgroundColor:'#B2B2F9',
@@ -34,41 +38,69 @@ export default StyleSheet.create({
         justifyContent:'center',
        
     },
-    view1:{flexDirection:'row',justifyContent:'space-between',paddingHorizontal:10,alignItems:'center'},
-    view2:{paddingHorizontal:10,width:'100%'},
-    view3:{flexDirection:'row',alignItems:'center',justifyContent:'center'},
-    view4:{width:'100%',alignItems:'center',justifyContent:'center',marginTop:30},
-    view5:{width:'60%',
-    borderWidth:1,
-    borderRadius:2,
-    borderStyle:'dotted',
-    justifyContent:'center',
-    alignItems:'center',
-    height:40,
-    marginTop:10,
-    marginBottom:20
-   },
-    text:{
+    view1:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingHorizontal:10,
+        alignItems:'center'
+    },
+    view2:
+    {
+        paddingHorizontal:10,
+        width:'100%'
+    },
+    view3:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    view4:
+    {
+        width:'100%',
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop:30
+    },
+    view5:
+    {
+        width:'60%',
+        borderWidth:1,
+        borderRadius:2,
+        borderStyle:'dotted',
+        justifyContent:'center',
+        alignItems:'center',
+        height:40,
+        marginTop:10,
+       marginBottom:20
+    },
+    text:
+    {
         width:'90%',
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.fourteen
     },
-    text2:{
+    text2:
+    {
         fontSize:fontSize.eleven,
         color:colors.heading
     },
-    line:{
+    line:
+    {
         width:'100%',
         borderWidth:1,
         borderColor:'#DDDDDD',
         marginVertical:15
     },
-    line1:{
+    line1:
+    {
         width:60,
         height:1,
         backgroundColor:'#000',
     },
-    round:{
+    round:
+    {
         width:56,
         borderWidth:2,
         height:56,
@@ -77,7 +109,8 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    text:{
+    text:
+    {
         fontSize:fontSize.twenty,
         color:colors.bc
     }

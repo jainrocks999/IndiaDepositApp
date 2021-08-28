@@ -18,30 +18,36 @@ export default StyleSheet.create({
         paddingHorizontal:20,
         marginTop:20
     },
-   jan:{
+   jan:
+   {
         flexDirection:'row',
         alignItems:'center',
         width:'100%',
-        paddingHorizontal:20,paddingVertical:10,
+        paddingHorizontal:20,
+        paddingVertical:10,
         backgroundColor:colors.bc,
         justifyContent:'space-between'
     },
-    border:{
+    border:
+    {
         borderColor: colors.white,
         borderWidth: 1,
     },
-    month:{
+    month:
+    {
         fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-Normal',
         color:colors.white
     },
-    border1:{
+    border1:
+    {
         borderColor: colors.textColor,
         borderStyle: 'dashed',
         borderWidth: .5,
         borderRadius:0.000001
     },
-    container:{
+    container:
+    {
         flexDirection:'row',
         alignItems:'center',
         width:'100%',
@@ -49,38 +55,45 @@ export default StyleSheet.create({
         paddingVertical:10,
         justifyContent:'space-between'
     },
-    main:{
+    main:
+    {
         marginTop:20,
         alignItems:'center',
         justifyContent:'center'
     },
-    heading:{
+    heading:
+    {
         fontSize:fontSize.sixteen,
         color:colors.bc,
         marginBottom:15
     },
-    item1:{
+    item1:
+    {
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    item2:{
+    item2:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    result:{
+    result:
+    {
         color:colors.textColor,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.fourteen,
         marginTop:20
     },
-    search:{
+    search:
+    {
         color:colors.white,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.fourteen
     },
-    button:{
+    button:
+    {
         backgroundColor:colors.bc,
         width:'100%',
         alignItems:'center',
@@ -88,14 +101,16 @@ export default StyleSheet.create({
         borderRadius:30,
         height:50
     },
-    input:{
+    input:
+    {
         borderWidth:1,
         height:40,
         borderRadius:10,
         paddingHorizontal:10,
         borderColor:'#000'
     },
-    dummy:{
+    dummy:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor

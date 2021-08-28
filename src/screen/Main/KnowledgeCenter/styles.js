@@ -4,11 +4,13 @@ import {  widthPercentageToDP as wp,
     heightPercentageToDP as hp, } from "react-native-responsive-screen";
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
         flex: 1,
         backgroundColor:'#E5E5E5'
     },
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:8,
@@ -19,20 +21,24 @@ export default StyleSheet.create({
         backgroundColor:'white',
         marginHorizontal:15,
         marginVertical:20,
-        flex:1
+       flex:1,
+      
     }, 
-    main:{
+    main:
+    {
         flexDirection:'row',
         paddingHorizontal:20,
         marginBottom:10,
         marginTop:20
     },
-    imageContainer:{
+    imageContainer:
+    {
         height:84,
         width:84,
         borderRadius:42
     },
-    camera:{
+    camera:
+    {
         width:28,
         height:28, 
         shadowColor:'black',
@@ -45,18 +51,26 @@ export default StyleSheet.create({
         backgroundColor:'white',
         alignItems:'center',justifyContent:'center'
     },
-    change:{
+    change:
+    {
         fontSize:fontSize.fourteen,
         //fontSize: hp('1.9%'),
         marginHorizontal:15,
         marginTop:5,
         color:colors.bc
     },
-    title:{ 
+    title:
+    { 
      
         fontSize:fontSize.thirteen,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' 
     },
-    buttomview:{bottom:0,left:0,right:0,position:'absolute'},
+    buttomview:
+    {
+        bottom:0,
+        left:0,
+        right:0,
+        position:'absolute'
+    },
 })

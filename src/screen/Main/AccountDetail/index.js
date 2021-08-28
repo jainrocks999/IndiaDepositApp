@@ -85,7 +85,7 @@ const navigation=useNavigation()
           onPress={()=>navigation.goBack()}
           onPress1={()=>navigation.navigate('CompareFD')}
          /> 
-     <ScrollView>
+    <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
              <View>
                  <View style={styles.list}>
                      <Image style={styles.img} source={require('../../../assets/Image/sbi.png')}/>

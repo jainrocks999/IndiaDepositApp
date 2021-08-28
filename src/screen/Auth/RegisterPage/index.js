@@ -177,11 +177,11 @@ const showVisible1=()=>{
               </View>
               <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
-                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.mobile}</Text>
+                <Text style={styles.text1}>{errors.mobile}</Text>
                 }
               </View>
-              <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                <View style={{width:'47%'}}>
+              <View style={styles.view2}>
+                <View style={styles.view1}>
                 <View style={[styles.card1,{borderColor:pBorder?colors.bc:'white'}]}>
                    {values.pin? <Text style={styles.heading}>Set Your Pin</Text>:null}
                     <View style={styles.input}>
@@ -205,7 +205,7 @@ const showVisible1=()=>{
                   <Text style={styles.warn}>{errors.pin}</Text>}
                 </View>
                 </View>
-                <View  style={{  width:'47%'}}>
+                <View  style={styles.view1}>
                 <View style={[styles.card1,{borderColor:cBorder?colors.bc:'white'}]}>
                    {values.confirmPin? <Text style={styles.heading}>Confirm Pin</Text>:null}
                     <View style={styles.input}>

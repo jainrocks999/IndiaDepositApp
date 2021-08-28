@@ -2,19 +2,22 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
         width:'100%',
         height:45,
         backgroundColor:'#DDDDDD',
         justifyContent:'center',
         alignItems:'center'
     },
-    title:{
+    title:
+    {
         fontFamily:'Montserrat-Medium',
         fontSize:fontSize.fourteen,
-        color:colors.textColor
+        color:colors.bc
     },
-    row:{
+    row:
+    {
         width:'100%',
         height:45,
         flexDirection:'row',
@@ -22,12 +25,14 @@ export default StyleSheet.create({
         paddingHorizontal:60,
         justifyContent:'space-between'
     },
-    value:{
+    value:
+    {
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.twelve,
         color:colors.textColor
     },
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,shadowOffset:{height:2,width:0},
@@ -39,14 +44,68 @@ export default StyleSheet.create({
         width:160,
         paddingVertical:10
     },
-    xview:{alignItems:'flex-end',width:'100%',marginTop:-22,marginRight:-10},
-    row1:{width:28,height:28,borderRadius:14,backgroundColor:colors.bc,justifyContent:'center',alignItems:'center'},
-    title1:{marginTop:17,fontFamily:'Montserrat-SemiBold',color:colors.textColor},
-    button:{width:120,height:35,backgroundColor:colors.bc,borderRadius:30,justifyContent:'center',alignItems:'center'},
-    invest:{color:colors.white,fontSize:fontSize.eleven,fontFamily:'Montserrat-SemiBold'},
-    flatdata:{alignItems:'center',justifyContent:'center',flex:1},
-    data1:{paddingHorizontal:20,paddingVertical:20},
-    Textview:{paddingHorizontal:10,paddingVertical:20},
-    xtext:{color:colors.white,marginTop:-5,fontSize:fontSize.twenty},
-    touch:{position:'absolute',bottom:15},
+    xview:
+    {
+        alignItems:'flex-end',
+        width:'100%',
+        marginTop:-22,
+        marginRight:-10
+    },
+    row1:
+    {
+        width:28,
+        height:28,
+        borderRadius:14,
+        backgroundColor:colors.bc,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    title1:
+    {
+        marginTop:17,
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor
+    },
+    button:
+    {
+        width:120,
+        height:35,
+        backgroundColor:colors.bc,
+        borderRadius:30,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    invest:
+    {
+        color:colors.white,
+        fontSize:fontSize.eleven,
+        fontFamily:'Montserrat-SemiBold'
+    },
+    flatdata:
+    {
+        alignItems:'center',
+        justifyContent:'center',
+        flex:1
+    },
+    data1:
+    {
+        paddingHorizontal:20,
+        paddingVertical:20
+    },
+    Textview:
+    {
+        paddingHorizontal:10,
+        paddingVertical:20
+    },
+    xtext:
+    {
+        color:colors.white,
+        marginTop:-5,
+        fontSize:fontSize.twenty
+    },
+    touch:
+    {
+        position:'absolute',
+        bottom:15
+    },
 })

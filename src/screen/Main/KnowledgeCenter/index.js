@@ -31,6 +31,7 @@ const Knowledge=()=>{
                  source1={require('../../../assets/Image/notification.png')}
                  onPress1={()=>navigation.navigate('Notification')}
               /> 
+              
              <ScrollView
                 contentContainerStyle={{flex:1}}
                 style={{backgroundColor:'#E5E5E5'}}>

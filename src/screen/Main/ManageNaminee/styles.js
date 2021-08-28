@@ -2,24 +2,28 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
     },
-    main:{
+    main:
+    {
         paddingHorizontal:10,
         justifyContent:'center',
         alignItems:'center',
         marginTop:50
     },
-    button:{
+    button:
+    {
         width:'100%',
         paddingHorizontal:20,
         marginTop:12,
         marginBottom:20
     },
-    view1:{
+    view1:
+    {
         width:'100%',
         height:40,
         borderWidth:1,
@@ -30,14 +34,16 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'space-between'
     },
-    error:{
+    error:
+    {
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
         paddingHorizontal:0,
         marginTop:6
     },
-    button1:{
+    button1:
+    {
         width:'45%',
         height:45,
         backgroundColor:colors.bc,
@@ -45,36 +51,43 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    buttonText:{
+    buttonText:
+    {
         color:colors.white,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.thirteen
     },
-    con:{
+    con:
+    {
         paddingHorizontal:20,
         width:'100%'
     },
-    row:{
+    row:
+    {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-between'
     },
-    input:{
+    input:
+    {
         width:'90%',
         color:colors.textColor
     },
-    warn:{
+    warn:
+    {
         fontSize:fontSize.fourteen,
         color:'red'
     },
-    modalView:{
+    modalView:
+    {
         width:'100%',
         height:'100%',
        // paddingHorizontal:10,
         alignItems:'center',
        // justifyContent:'center'
     },
-    buton:{
+    buton:
+    {
         width:'100%',
         height:40,
         backgroundColor:colors.textColor,
@@ -83,7 +96,8 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    came:{
+    came:
+    {
         color:colors.white,
         fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.sixteen

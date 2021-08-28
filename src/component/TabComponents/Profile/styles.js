@@ -34,7 +34,7 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         borderRadius:6,
         paddingHorizontal:5,
-        justifyContent:'center'
+       justifyContent:'center'
        
     }, 
    

@@ -2,23 +2,27 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor:'#E5E5E5'
     },
-    imageContainer:{
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20
     },
-    main:{
+    main:
+    {
         alignItems:'center',
         paddingHorizontal:15,
         width:'100%',
         //paddingVertical:20
     },
-    round:{
+    round:
+    {
         width:115,
         height:115,
         backgroundColor:'#5A4392',
@@ -26,25 +30,29 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    heading:{
+    heading:
+    {
         fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         alignContent:'center',
         textAlign:'center'
     },
-    india:{
+    india:
+    {
         fontFamily:'Montserrat-SemiBold', 
         color:colors.bc,
         fontSize:fontSize.twenty,
         marginTop:10
     },
-    lorem:{
+    lorem:
+    {
         alignItems:'center',
         justifyContent:'center',
         paddingVertical:10
     },
-button:{
+button:
+{
         height:45,
         width:'45%',
         paddingHorizontal:10,
@@ -54,7 +62,8 @@ button:{
         alignItems:'center',
         justifyContent:'center'
     },
-    buttonContainer:{
+    buttonContainer:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         marginBottom:30,
@@ -62,11 +71,24 @@ button:{
         width:'100%',
         marginTop:10
     },
-    text:{
+    text:
+    {
         color:colors.white,
         fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-Normal'
-    }
+    },
+    view:
+    {
+        alignItems:'center',
+        justifyContent:'center',
+        marginTop:20,width:'100%',
+        height:290,padding:10
+    },
+    img:
+    {
+        width:'95%',
+        height:'90%'
+    },
     
     
     

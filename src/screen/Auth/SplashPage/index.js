@@ -84,14 +84,9 @@ const Splash=()=>{
                 isVisible={isModalVisible}
                 >
                 <View style={styles.modal}>
-                <View style={{width: '100%',borderWidth:1,backgroundColor:colors.bc,paddingVertical:5}}>
+                <View style={styles.view1}>
                     <Text
-                    style={{
-                        color: colors.white,
-                        fontSize:fontSize.twenty,
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                    }}>
+                    style={styles.text1}>
                     Update
                     </Text>
                 </View>
@@ -100,11 +95,7 @@ const Splash=()=>{
                 </TouchableOpacity>
 
                 <View
-                    style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                    width: '100%',
-                    }}>
+                    style={styles.view5}>
                     <TouchableOpacity style={styles.popup}
                      onPress={()=>openUrl()}
                      >
@@ -116,13 +107,13 @@ const Splash=()=>{
             <View style={styles.main}>
                   <Image style={styles.image} 
                   source={require('../../../assets/Image/IndiaDeposit.png')}/>
-                <View style={{bottom:30,position:'absolute',width:'100%'}}>
-                  <View style={{alignItems:'center'}}>
-                <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:fontSize.twenty,marginBottom:20}}>We secure your details</Text>
+                <View style={styles.view2}>
+                  <View style={styles.view3}>
+                <Text style={styles.text2}>We secure your details</Text>
                 </View>
-                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',paddingHorizontal:80}}>
-                   <Image style={{width:65,height:65}} source={require('../../../assets/Image/iso.png')}/>
-                   <Image style={{width:116,height:50}} source={require('../../../assets/Image/ssl.png')}/>
+                 <View style={styles.view4}>
+                   <Image style={styles.img} source={require('../../../assets/Image/iso.png')}/>
+                   <Image style={styles.img1} source={require('../../../assets/Image/ssl.png')}/>
                  </View>
                 </View>
             </View>

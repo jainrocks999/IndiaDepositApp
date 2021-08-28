@@ -2,22 +2,26 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    same:{
+    same:
+    {
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    title:{
+    title:
+    {
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    cardView:{
+    cardView:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center'
     },
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -28,16 +32,19 @@ export default StyleSheet.create({
         height:85,
         padding:13,
     },
-    title1:{
+    title1:
+    {
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    value1:{
+    value1:
+    {
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.twelve,
         color:colors.textColor
     },
-    buttonContainer:{
+    buttonContainer:
+    {
         width:'100%',
         alignItems:'center',
         justifyContent:'space-between',
@@ -45,7 +52,8 @@ export default StyleSheet.create({
         paddingHorizontal:25,
         paddingVertical:20
     },
-    button:{
+    button:
+    {
         width:'48%',
         height:45,
         backgroundColor:colors.bc,
@@ -53,7 +61,8 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    Textview:{
+    Textview:
+    {
         paddingHorizontal:25,
         paddingVertical:8,
         marginTop:0
@@ -70,7 +79,8 @@ export default StyleSheet.create({
     marginTop:12,
     borderColor:colors.textColor
 },
-flat:{
+flat:
+{
     alignItems:'center',
     justifyContent:'center',
     flex:1

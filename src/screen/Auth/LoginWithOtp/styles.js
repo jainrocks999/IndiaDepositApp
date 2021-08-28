@@ -2,18 +2,21 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
     backgroundColor:'#E5E5E5'
     },
    
-    imageContainer:{
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20,
     },
-    round:{
+    round:
+    {
         width:115,
         height:115,
         backgroundColor:'#5A4392',
@@ -21,14 +24,16 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    input1:{
+    input1:
+    {
         width:'90%',
         marginLeft:11,
         paddingVertical:-10,
         color:colors.textColor
 
     },
-    card: { 
+    card: 
+    { 
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -42,47 +47,56 @@ export default StyleSheet.create({
         borderColor:colors.bc,
         borderWidth:1
     },
-    heading:{
+    heading:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.heading,
     },
-    input:{
+    input:
+    {
         alignItems:'center',
         flexDirection:'row',
         marginTop:-3
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         marginTop:50
     },
-    button:{
+    button:
+    {
         width:'100%',
         marginTop:15
     },
-    bottom:{
+    bottom:
+    {
         flexDirection:'row',
         marginTop:8,
         alignItems:'center',
         justifyContent:'center'
     },
-    account:{
+    account:
+    {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
-    account1:{
+    account1:
+    {
         color:colors.bc,
         fontSize:fontSize.thirteen
     },
-    error:{
+    error:
+    {
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
         paddingHorizontal:0,
         marginTop:6
     },
-    warn:{
+    warn:
+    {
         fontSize:fontSize.fourteen,
         color:'red'
     },

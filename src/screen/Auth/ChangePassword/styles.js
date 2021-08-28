@@ -2,23 +2,27 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
     },
    
-    imageContainer:{
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20
     },
-    main:{
+    main:
+    {
         paddingHorizontal:10,
         justifyContent:'center',
         alignItems:'center',
         marginTop:50
     },
-    second:{
+    second:
+    {
         width:'90%',
         height:40,
         borderWidth:1,
@@ -27,7 +31,8 @@ export default StyleSheet.create({
         borderRadius:6,
         borderColor:colors.textColor
     },
-    imageView:{
+    imageView:
+    {
         justifyContent:'center',
         alignItems:'center',
         width:40,
@@ -35,18 +40,21 @@ export default StyleSheet.create({
         borderRightWidth:1,
         borderRightColor:colors.textColor
     },
-    input:{
+    input:
+    {
         width:'87%',
         justifyContent:'center',
         alignItems:'flex-start',
         paddingHorizontal:10
     },
-    textView:{
+    textView:
+    {
         justifyContent:'center',
         alignItems:'center',
         marginTop:30
     },
-    text:{
+    text:
+    {
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
         fontSize:fontSize.twenty,
@@ -64,21 +72,25 @@ export default StyleSheet.create({
     //     paddingHorizontal:0,
     //     marginTop:6
     // },
-    input1:{
+    input1:
+    {
         width:'90%',
         marginLeft:11,
         paddingVertical:-10,
         color:colors.textColor
     },
-    warn:{
+    warn:
+    {
         fontSize:fontSize.fourteen,
         color:'red'
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         marginTop:50
     },
-    round:{
+    round:
+    {
         width:115,
         height:115,
         backgroundColor:'#5A4392',
@@ -93,7 +105,8 @@ export default StyleSheet.create({
     //     paddingVertical:-10,
     //     color:colors.textColor
     // },
-    card: { 
+    card:
+    { 
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -106,22 +119,26 @@ export default StyleSheet.create({
         marginTop:10,
         borderWidth:1,
     },
-    heading:{
+    heading:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.heading
     },
-    input:{
+    input:
+    {
         alignItems:'center',
         flexDirection:'row',
         marginTop:-3
     },
-    button:{
+    button:
+    {
         width:'100%',
         marginTop:15,
         marginBottom:20
     },
-    error:{
+    error:
+    {
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',

@@ -20,8 +20,8 @@ const Calculator=()=>
    const [index, setIndex] = useState(0);
    const [routes] = React.useState
    ([
-     { key: 'first', title: 'FD' },
-     { key: 'second', title: 'SP' },
+     { key: 'first', title: 'SP' },
+     { key: 'second', title: 'FD' }, 
    
     ]);
     return(
