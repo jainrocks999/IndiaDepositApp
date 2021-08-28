@@ -1,41 +1,41 @@
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
-import fontSize from '../../fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    padding:16
-    // backgroundColor:'#E5E5E5'
+    container: {
+      flex: 1,
+      marginTop:10
     },
-    card:{
-        shadowColor:'black',
-        shadowOpacity:0.25,
-        shadowRadius:8,
-        shadowOffset:{height:2,width:0},
-        elevation:5,
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
-        backgroundColor:'white',
-        marginHorizontal:15,
-        paddingHorizontal:18,
-        paddingVertical:20,
-        marginTop:20,
-        height:'100%'
+    titleText: {
+      flex: 1,
+      fontSize: 22,
+      fontWeight: 'bold',
     },
-    
-    heading:{
-        fontSize:fontSize.eighteen,
-        color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+    header: {
+      backgroundColor: '#F5FCFF',
     },
-    normal:{
-        fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
-        color:colors.textColor,
-        marginTop:10
+    headerText: {
+      fontSize: 14,
+      fontWeight: '600',
+      color:colors.white,
+      fontFamily:'Montserrat-Normal'
     },
-    
-    
-   
-    
-})
+    separator: {
+      height: 0.5,
+      backgroundColor: '#808080',
+      width: '95%',
+      marginLeft: 16,
+      marginRight: 16,
+    },
+    text: {
+      fontSize: 13,
+      color: colors.textColor,
+      padding: 10,
+      fontFamily:'Montserrat-Normal',
+      fontWeight:'400'
+    },
+    content: {
+      paddingLeft: 10,
+      paddingRight: 10,
+      backgroundColor: '#fff',
+    },
+  });

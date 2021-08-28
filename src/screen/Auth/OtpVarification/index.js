@@ -1,18 +1,16 @@
 import React,{useState} from 'react';
 import { View,Text,Image,ScrollView} from 'react-native';
 import CustomButton from '../../../component/button1';
-import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
 import StatusBar from '../../../component/StatusBar';
-import { useDispatch,useSelector } from 'react-redux';
-import Loader from '../../../component/loader';
 import OTPTextInput  from 'react-native-otp-textinput';
-import color from '../../../component/colors';
 import colors from '../../../component/colors';
 import { TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 class OtpVarification extends React.Component{
     constructor(props) {
         super(props);
@@ -22,6 +20,8 @@ class OtpVarification extends React.Component{
           counter: 12,
           otpData:this.props.route.params.otp,
           mobile:this.props.route.params.mobile,
+          name:this.props.route.params.name,
+          user_id:this.props.route.params.user_id
         };
       }
     componentDidMount() {
@@ -55,14 +55,16 @@ class OtpVarification extends React.Component{
         })
     }
     validateUser=()=>{
-
+     console.log('tihs istesting details',this.state.user_id,this.state.name,this.state.otpData,this.state.mobile);
       if(this.state.otp==this.state.otpData){
+        AsyncStorage.setItem(Storage.name,this.state.name)
+        AsyncStorage.setItem(Storage.user_id,this.state.user_id)
         this.props.navigation.replace('Main')
       }
       else{
         Toast.show('Please Enter Correct Otp Code')
       }
-    }
+     }
   
     render(){
         console.log('this is construxskf',this.state.otpData,this.state.mobile);

@@ -23,7 +23,6 @@ import Storage from '../../component/AsyncStorage';
                   type: 'User_Login_Success',
                   payload: response.data,
                 });
-                AsyncStorage.setItem(Storage.status,JSON.stringify(response.status))
                 AsyncStorage.setItem(Storage.name,response.data.name)
                 AsyncStorage.setItem(Storage.user_id,response.data.user_id)
                   Toast.show(response.messages);
@@ -63,7 +62,11 @@ import Storage from '../../component/AsyncStorage';
                   action.navigation.replace('Otp',
                   {
                     otp:response.data.otp,
-                    mobile:action.mobile}
+                    mobile:action.mobile,
+                    user_id:response.data.data[0].user_id,
+                    name:response.data.data[0].name
+
+                  }
                     )
                   }
               } else {
@@ -146,7 +149,16 @@ import Storage from '../../component/AsyncStorage';
                   type: 'User_Register_Success',
                   payload: response.data,
                 });
-                action.navigation.replace('Login');
+                if(action && action.navigation){
+                  action.navigation.replace('Otp',
+                  {
+                    otp:response.otp,
+                    mobile:action.mobile,
+                    user_id:response.data[0].user_id,
+                    name:response.data[0].name
+                  }
+                    )
+                  }
               } else {
               Toast.show(response.messages);
                 yield put({

@@ -63,13 +63,13 @@ const validateUser=(mobile)=>{
                       {'We will send you a OTP on\nyour phone number'}</Text>
                 </TouchableOpacity>
               <View style={[styles.card,{borderColor:focus?colors.bc:'white'}]}>
-                   {values.mobile? <Text style={styles.heading}>Mobile</Text>:null}
+                   <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>      
                      {showVisible()}
                      <TextInput
                       onFocus={()=>setFocus(true)}
                       style={styles.input1}
-                      placeholder='Mobile Number'
+                      placeholder='+91 000 000 0000'
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}

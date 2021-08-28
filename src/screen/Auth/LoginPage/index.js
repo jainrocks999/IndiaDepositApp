@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Alert} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
@@ -25,6 +25,7 @@ const Login=()=>{
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [otp,setOtp]=useState('')
     const [focus,setFocus]=useState(false)
+    const next1 = useRef(null);
 
 const showVisible=()=>{
   return(
@@ -79,7 +80,7 @@ const call=()=>{
           </View>
           <View style={styles.main}>
               <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
-                {values.value? <Text style={styles.heading}>Email / Mobile</Text>:null}
+                <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
@@ -90,9 +91,11 @@ const call=()=>{
                       onBlur={handleBlur('value')}
                       value={values.value}
                       maxLength={40}
+                     
                       />
                   </View>
               </View>
+              
               <View style={styles.error}>
               {(errors.value && touched.value) &&
                 <Text style={styles.warn}>{errors.value}</Text>
@@ -101,6 +104,7 @@ const call=()=>{
              <View style={styles.view1}>
                <Text style={styles.text1}>Enter Your Pin</Text>
               <OTPTextInput
+              ref={next1 }
               containerStyle={styles.OtpInput}
               handleTextChange={(code)=>setOtp(code)}
               inputCount={4}

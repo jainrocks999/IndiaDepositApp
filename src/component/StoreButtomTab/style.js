@@ -41,7 +41,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   text:{
-    fontSize: fontSize.eleven,
+    fontSize: fontSize.ten,
     color:colors.textColor,
     fontFamily:'Montserrat-Medium',
     marginTop:5

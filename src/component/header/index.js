@@ -24,11 +24,11 @@ const styles=StyleSheet.create({
     main:{
         width:'100%',
         backgroundColor:colors.bc,
-        height:50,
         alignItems:'center',
         justifyContent:'space-between',
         paddingHorizontal:16,
-        flexDirection:'row'
+        flexDirection:'row',
+        paddingVertical:10
     },
     drawer:{
         width:30,
@@ -38,6 +38,6 @@ const styles=StyleSheet.create({
     text:{
         color:colors.white,
         fontSize:fontSize.eighteen,
-        fontFamily:'Montserrat-SemiBold'
+        fontFamily:'Montserrat-SemiBold',
     },
 })

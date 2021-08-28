@@ -27,7 +27,7 @@ const Refferal=()=>{
                      <View style={styles.view1}>
                            <Image source={require('../../../assets/Image/Vect.png')}/>
                            <View style={styles.view2}>
-                               <Text style={styles.text1}>Share your referral link and invite your friends via SMS / Email Whatsapp.</Text>
+                               <Text style={styles.text1}>{`Share your referral link and invite your\nfriends via SMS / Email Whatsapp.`}</Text>
                            </View>
                      </View>
                      <View style={styles.line}></View>

@@ -65,8 +65,7 @@ export default StyleSheet.create({
     title:
     { 
      
-        fontSize:fontSize.thirteen,
-        //  hp('1.9%'),
+        fontSize:fontSize.eleven,
         fontFamily:'Montserrat-SemiBold' 
     },
     prop:

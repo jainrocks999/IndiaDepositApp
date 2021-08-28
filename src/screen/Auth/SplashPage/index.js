@@ -13,7 +13,7 @@ const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
-     appVersion()
+    appVersion()
      //initial()
       }, []);
 
@@ -33,7 +33,6 @@ const Splash=()=>{
             },
             url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/version',
           });
-         
           if (Platform.OS=='android') {
             if (response.data.android_version > 1) {
               setModalVisible(true)

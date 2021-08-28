@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
@@ -42,6 +42,7 @@ const RegisterPage=()=>{
     const [bBorder,setBBorder]=useState(false)
     const [visible,setVisible]=useState(true)
     const [visible1,setVisible1]=useState(true)
+
   
     const validateUser=(name,email,mobile,pin)=>{
       console.log('this is your registered data',name,email,mobile,pin);
@@ -120,13 +121,13 @@ const showVisible1=()=>{
           </View>
           <View style={styles.main}>
               <View style={[styles.card,{borderColor:fBorder?colors.bc:'white'}]}>
-                   {values.name? <Text style={styles.heading}>Full Name</Text>:null}
+                  <Text style={styles.heading}>Full Name</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/profile.png')}/>
                      <TextInput 
                         onFocus={()=>setFBorder(true)}
                         style={styles.input1}
-                        placeholder='Full Name'
+                        placeholder='John Methew'
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
                         value={values.name}
@@ -140,13 +141,13 @@ const showVisible1=()=>{
                 }
               </View>
               <View style={[styles.card,{borderColor:eBorder?colors.bc:'white'}]}>
-                   {values.email? <Text style={styles.heading}>Email</Text>:null}
+                  <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
                       onFocus={()=>setEBorder(true)}
                       style={styles.input1}
-                      placeholder='Email'
+                      placeholder='abc@gmail.com'
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
@@ -160,13 +161,13 @@ const showVisible1=()=>{
                 }
               </View>
               <View style={[styles.card,{borderColor:mBorder?colors.bc:'white'}]}>
-                   {values.mobile? <Text style={styles.heading}>Mobile</Text>:null}
+                   <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput 
                       onFocus={()=>setMBorder(true)}
                       style={styles.input1}
-                      placeholder='Mobile'
+                      placeholder='+91 000 000 0000'
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
@@ -183,13 +184,13 @@ const showVisible1=()=>{
               <View style={styles.view2}>
                 <View style={styles.view1}>
                 <View style={[styles.card1,{borderColor:pBorder?colors.bc:'white'}]}>
-                   {values.pin? <Text style={styles.heading}>Set Your Pin</Text>:null}
+                  <Text style={styles.heading}>Set Your Pin</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       onFocus={()=>setPBorder(true)}
                       style={[styles.input2]}
-                      placeholder='Set Your Pin'
+                      placeholder='0000'
                       onChangeText={handleChange('pin')}
                       onBlur={handleBlur('pin')}
                       value={values.pin}
@@ -207,13 +208,13 @@ const showVisible1=()=>{
                 </View>
                 <View  style={styles.view1}>
                 <View style={[styles.card1,{borderColor:cBorder?colors.bc:'white'}]}>
-                   {values.confirmPin? <Text style={styles.heading}>Confirm Pin</Text>:null}
+                   <Text style={styles.heading}>Confirm Pin</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       onFocus={()=>setCBorder(true)}
                       style={styles.input1}
-                      placeholder='Confirm Pin'
+                      placeholder='0000'
                       onChangeText={handleChange('confirmPin')}
                       onBlur={handleBlur('confirmPin')}
                       value={values.confirmPin}
@@ -231,7 +232,7 @@ const showVisible1=()=>{
               </View>
              
               <View style={[styles.card,{borderColor:bBorder?colors.bc:'white'}]}>
-                   {values.referal? <Text style={styles.heading}>Enter Referral Code</Text>:null}
+                   <Text style={styles.heading}>Enter Referral Code</Text>
                     <View style={styles.input}>
                      <TextInput 
                        onFocus={()=>setBBorder(true)}

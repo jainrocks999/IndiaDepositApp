@@ -30,16 +30,17 @@ export default StyleSheet.create({
     drop:{
         marginTop:5 ,
         borderWidth:1,
-        height:35,
+        height:40,
         borderColor:colors.textColor,
         borderRadius:6,
         paddingHorizontal:5,
-       justifyContent:'center'
+        justifyContent:'center',
+        width:'100%',
+        paddingHorizontal:10,
        
     }, 
    
     input:{
-        height:35,
         color:colors.textColor
     },
     image:{

@@ -80,12 +80,12 @@ const validateUser=(email,mobile)=>{
           </View>
            <View style={styles.main}>
            <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
-                   {values.email? <Text style={styles.heading}>Email</Text> :null}
+                   <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput
                       onFocus={()=>setFocus(true)}
-                      placeholder='Email Address'
+                      placeholder='abc@gmail.com'
                       style={styles.input1}
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -103,12 +103,12 @@ const validateUser=(email,mobile)=>{
                 <Text style={{color:colors.textColor}}>OR</Text>
               </View>
               <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
-                   {values.mobile? <Text style={styles.heading}>Mobile</Text> :null}
+                   <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput
                       onFocus={()=>setFocus1()}
-                      placeholder='Mobile Number'
+                      placeholder='+91 000 000 0000'
                       style={styles.input1}
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
