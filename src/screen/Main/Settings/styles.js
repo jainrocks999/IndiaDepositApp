@@ -2,18 +2,24 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
+    container:
+    {
+      flex: 1,
+      justifyContent: 'center',
+      alignContent: 'center',
     },
    
-    view:{marginTop:20},
-    imageContainer:{
+    view:
+    {
+        marginTop:20
+    },
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20
     },
-    main:{
+    main:
+    {
         paddingHorizontal:20,
         justifyContent:'center',
         marginTop:50

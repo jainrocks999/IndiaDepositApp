@@ -2,23 +2,27 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    same:{
+    same:
+    {
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
         color:colors.bc,
         textAlign:'center'
     },
-    title:{
+    title:
+    {
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Medium',
         color:colors.bc
     },
-    cardView:{
+    cardView:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center'
     },
-    card:{
+    card:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -29,25 +33,29 @@ export default StyleSheet.create({
        // height:85,
         padding:13,
     },
-    cont:{
+    cont:
+    {
         paddingHorizontal:10,
         paddingVertical:8
     },
-    row1:{
+    row1:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         marginTop:7,
         paddingHorizontal:0,
         width:'100%'
     },
-    row:{
+    row:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         marginTop:7,
         paddingHorizontal:10,
         width:'100%'
     },
-    list:{
+    list:
+    {
         alignItems:'center',
         justifyContent:'center',
         flex:1

@@ -2,51 +2,64 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
+    container:
+    {
     flex: 1,
     },
-    imageContainer:{
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20
     }, 
-    textView:{
+    textView:
+    {
         justifyContent:'center',
         alignItems:'center',
         marginTop:30
     },
-    text:{
+    text:
+    {
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
         fontSize:fontSize.twenty
     },
-    logo:{
+    logo:
+    {
         width:'80%',
         height:75,
         resizeMode:'stretch'
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         marginTop:60
     },
-    main1:{marginTop:18},
-    heading:{
+    main1:
+    {
+        marginTop:18
+    },
+    heading:
+    {
         fontSize:fontSize.eighteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
-    normal:{
+    normal:
+    {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         marginTop:10,
         lineHeight:20
     },
-    same:{
+    same:
+    {
         fontFamily:'Montserrat-Medium',
         fontSize:fontSize.fefteen,
         color:colors.textColor
     },
-    input:{
+    input:
+    {
         marginTop:6,
         borderWidth:1,
         borderColor:colors.textColor,
@@ -55,8 +68,15 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         justifyContent:'center'
     },
-    textinput:{height:35,width:'90%',fontSize:fontSize.thirteen,color:colors.textColor},
-    interest:{
+    textinput:
+    {
+        height:35,
+        width:'90%',
+        fontSize:fontSize.thirteen,
+        color:colors.textColor
+    },
+    interest:
+    {
         marginTop:6,
         borderWidth:1,
         borderColor:colors.textColor,
@@ -67,14 +87,16 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-    buttonContainer:{
+    buttonContainer:
+    {
         marginTop:25,
         width:'100%',
         flexDirection:'row',
         justifyContent:'space-between',
         marginBottom:20
     },
-    button:{
+    button:
+    {
         width:'47%',
         height:45,
         borderRadius:30,
@@ -82,12 +104,14 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    cal:{
+    cal:
+    {
         color:colors.white,
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-SemiBold'
     },
-    drop:{
+    drop:
+    {
         marginTop:13 ,
         borderWidth:1,
         height:35,
@@ -96,8 +120,25 @@ export default StyleSheet.create({
         paddingHorizontal:10,
     },
     
-   icon1:{marginTop:12,marginRight:5},
-   view1:{flexDirection:'row',width:'100%'},
-   view2:{flexDirection:'row',alignItems:'center',marginLeft:-5}, 
-   text1:{color:colors.textColor,fontSize:fontSize.twelve},
+   icon1:
+   {
+       marginTop:12,
+       marginRight:5
+    },
+   view1:
+   {
+       flexDirection:'row',
+       width:'100%'
+    },
+   view2:
+   {
+       flexDirection:'row',
+       alignItems:'center',
+       marginLeft:-5
+    }, 
+   text1:
+   {
+       color:colors.textColor,
+       fontSize:fontSize.twelve
+    },
 })

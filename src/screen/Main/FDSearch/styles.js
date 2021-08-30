@@ -2,22 +2,67 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    backgroundColor:'#E5E5E5'
+    container:
+    {
+       flex: 1,
+        backgroundColor:'#E5E5E5'
     },
-    scroll:{flex:1,paddingHorizontal:15,paddingVertical:30},
-    view:{marginTop:10},
-    view1:{marginTop:20},
-    view2:{flexDirection:'row',justifyContent:'space-between'},
-    view3:{width:'27%'},
-    view4:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'},
-    view5:{marginTop:10,flexDirection:'row',alignItems:'center'},
-    view6:{marginTop:20,alignItems:'center'},
-    view7:{marginTop:5},
-    view8:{marginTop:15,marginBottom:20},
-    text1:{color:colors.textColor,fontFamily:'Montserrat-Normal'},
-    main:{
+    scroll:
+    {
+        flex:1,
+        paddingHorizontal:15,
+        paddingVertical:30
+    },
+    view:
+    {
+        marginTop:10
+    },
+    view1:
+    {
+        marginTop:20
+    },
+    view2:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    view3:
+    {
+        width:'27%'
+    },
+    view4:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    view5:
+    {
+        marginTop:10,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    view6:
+    {
+        marginTop:20,
+        alignItems:'center'
+    },
+    view7:
+    {
+        marginTop:5
+    },
+    view8:
+    {
+        marginTop:15,
+        marginBottom:20
+    },
+    text1:
+    {
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    },
+    main:
+    {
         paddingHorizontal:30,
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -30,14 +75,16 @@ export default StyleSheet.create({
         paddingVertical:10,
         marginBottom:40
     },
-    input:{
+    input:
+    {
         marginTop:-8,
         borderBottomWidth:1.5,
         borderColor:'#3D4785',
         height:40,
         justifyContent:'center'
     },
-    input1:{
+    input1:
+    {
         marginTop:-8,
         borderBottomWidth:1.5,
         borderColor:'#3D4785',
@@ -45,7 +92,8 @@ export default StyleSheet.create({
         justifyContent:'center',
         width:'27%'
     },
-    interest:{
+    interest:
+    {
         marginTop:15,
         borderWidth:1,
         borderColor:colors.textColor,
@@ -56,14 +104,16 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
-    container1:{
+    container1:
+    {
         width:'100%',
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
         marginTop:15
     },
-    same:{
+    same:
+    {
         width:'47%',
         borderWidth:1,
         height:40,
@@ -71,25 +121,29 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         paddingHorizontal:8
     },
-    input1:{
+    input1:
+    {
         height:40,
         width:'90%',
         fontSize:fontSize.thirteen,
         color:colors.textColor
     },
-    ten:{
+    ten:
+    {
         height:40,
         width:'99%',
         fontSize:fontSize.thirteen,
         color:colors.textColor
     },
-    row:{
+    row:
+    {
         flexDirection:'row',
         alignItems:'center',
         marginLeft:-5,
         marginTop:10
     },
-    image:{
+    image:
+    {
         marginTop:16,
         marginRight:8
     },

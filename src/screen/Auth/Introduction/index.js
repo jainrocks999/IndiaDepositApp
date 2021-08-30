@@ -20,8 +20,8 @@ const Introduction=({route})=>{
               </View>
               <Text style={styles.india}>IndiaDeposit</Text>
             </View>
-                <View style={{alignItems:'center',justifyContent:'center',marginTop:20,width:'100%',height:290,padding:10}}>
-                <Image style={{width:'95%',height:'90%'}}
+                <View style={styles.view}>
+                <Image style={styles.img}
                       source={{uri:data.image_url}}/>
                 </View>
            <View style={styles.main}>

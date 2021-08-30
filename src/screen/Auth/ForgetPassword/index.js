@@ -97,7 +97,7 @@ const validateUser=(email,mobile)=>{
               </View>
               <View style={styles.error}>
                    {(errors.email && touched.email) &&
-                <Text style={{fontSize:fontSize.twelve,color:'red'}}>{errors.email}</Text>
+                <Text style={styles.error1}>{errors.email}</Text>
                 }
               </View>
               <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
@@ -121,7 +121,7 @@ const validateUser=(email,mobile)=>{
               </View>
               <View style={styles.error}>
                    {(errors.mobile && touched.mobile) &&
-                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.mobile}</Text>
+                <Text style={styles.error2}>{errors.mobile}</Text>
                 }
               </View>
              <View style={styles.button}>

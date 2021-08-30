@@ -2,12 +2,14 @@ import { StyleSheet } from "react-native";
 import colors from '../../../component/colors';
 import fontSize from "../../../component/fontSize";
 export default StyleSheet.create({
-    container:{
+    container:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         //marginTop:38
     },
-    imageView:{
+    imageView:
+    {
         // width:60,
         // height:60,
         // backgroundColor:colors.bc,
@@ -15,7 +17,8 @@ export default StyleSheet.create({
         // justifyContent:'center',
         // alignItems:'center'
     },
-    text:{
+    text:
+    {
         fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.twelve,
         color:colors.textColor,
@@ -23,17 +26,20 @@ export default StyleSheet.create({
         fontWeight:'600',
         textAlign: 'center',
     },
-    name:{
+    name:
+    {
         color:colors.white,
         fontSize:fontSize.nineteen,
         fontFamily:'Montserrat-Normal'
     },
-    last:{
+    last:
+    {
         color:colors.white,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
-    pfile:{
+    pfile:
+    {
         width:76,
         height:76,
         borderRadius:37,
@@ -41,14 +47,16 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    main:{
+    main:
+    {
        // height:200,
         width:'100%',
         backgroundColor:'#C4C4C4',
         justifyContent:'center',
         alignItems:'center'
     },
-    item:{
+    item:
+    {
         width:'100%',
         justifyContent:'center',
         alignContent:'center',
@@ -57,27 +65,32 @@ export default StyleSheet.create({
         marginBottom:20,
         // paddingVertical:25,
     },
-    view:{
+    view:
+    {
         width:'100%',
         paddingHorizontal:15,
         marginTop:5
     },
-    view1:{
+    view1:
+    {
         borderBottomWidth:1,
         paddingVertical:8,
         paddingHorizontal:15,
         borderColor:'#DDDDDD'
     },
-    text2:{
+    text2:
+    {
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-SemiBold'
     },
-    view2:{
+    view2:
+    {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center'
     },
-    circle:{
+    circle:
+    {
         width:10,
         height:10,
         borderRadius:5,
@@ -87,21 +100,30 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
-    buttomview:{
+    buttomview:
+    {
         borderTopWidth:1,
         paddingVertical:8,
         paddingHorizontal:15,
         borderColor:'#DDDDDD'
     },
-    Text1:{
+    Text1:
+    {
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal'
     },
-    buttomview1:{
+    buttomview1:
+    {
         width:'100%',
         paddingHorizontal:15,
         marginTop:-10
     },
-    width:{width:'10%'},
-    touch1:{alignItems:'center'},
+    width:
+    {
+        width:'10%'
+    },
+    touch1:
+    {
+        alignItems:'center'
+    },
 })

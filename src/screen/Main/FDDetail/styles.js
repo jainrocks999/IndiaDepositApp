@@ -2,27 +2,32 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container1:{
+    container1:
+    {
         flex:1,
         backgroundColor:'#E5E5E5'
     },
-    img:{
+    img:
+    {
         width:86,
         height:30
     },
-    text:{
+    text:
+    {
         marginTop:10,
         fontSize:fontSize.fourteen,
         color:colors.bc,
         fontFamily:'Montserrat-Medium'
     },
-    text1:{
+    text1:
+    {
         marginTop:6,
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Medium',
         color:colors.textColor,
     },
-    list:{
+    list:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -37,50 +42,75 @@ export default StyleSheet.create({
         marginVertical:2,
         marginTop:13
     },
-    item:{
+    item:
+    {
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    item1:{
+    item1:
+    {
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
         color:colors.heading
     },
-    view1:{backgroundColor:colors.white},
-    container:{
+    view1:
+    {
+        backgroundColor:colors.white
+    },
+    container:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         paddingVertical:13,
         paddingHorizontal:12
     },
-    line:{
+    line:
+    {
         borderWidth:1,
         borderColor:'#C7BEBE'
     },
-    view3:{marginTop:6,flexDirection:'row'},
-    view2:{alignItems:'center'},
-    tds:{color:'#000',
+    view3:
+    {
+        marginTop:6,
+        flexDirection:'row'
+    },
+    view2:
+    {
+        alignItems:'center'
+    },
+    tds:
+    {
+        color:'#000',
     fontFamily:'Montserrat-Normal',
     marginTop:10
 },
-    lorem:{color:colors.textColor,
+    lorem:
+    {
+        color:colors.textColor,
         fontFamily:'Montserrat-Normal',
         marginTop:10,
         fontSize:fontSize.thirteen
     },
-    point:{width:6,height:6,
+    point:
+    {
+        width:6,
+        height:6,
         borderRadius:3,
         backgroundColor:'#000',
         marginTop:7
     },
-    pointText:{color:colors.textColor,
+    pointText:
+    {
+        color:colors.textColor,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.thirteen,
         marginLeft:10,
         marginTop:1
     },
-    bank:{backgroundColor:colors.white,
+    bank:
+    {
+        backgroundColor:colors.white,
         marginTop:13,
         paddingVertical:15,
         paddingHorizontal:50,
@@ -88,33 +118,40 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'space-between'
        },
-    text3:{
+    text3:
+    {
         color:'white',
         fontFamily:'Montserrat-Normal',
     },
-    text2:{
+    text2:
+    {
         color:'#000',
         fontFamily:'Montserrat-Normal',
         marginTop:10
     },
-    bankDetails:{color:colors.bc,
+    bankDetails:
+    {
+        color:colors.bc,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
-    top:{
+    top:
+    {
         backgroundColor:colors.white,
         marginTop:13,
         paddingVertical:15,
         paddingHorizontal:20
     },
-    button:{
+    button:
+    {
         flexDirection:'row',
-    justifyContent:'space-between',
-    paddingHorizontal:20,
-    paddingVertical:20,
-    marginBottom:20
-},
-    btCont:{
+        justifyContent:'space-between',
+        paddingHorizontal:20,
+        paddingVertical:20,
+        marginBottom:20
+    },
+    btCont:
+    {
         width:'47%',height:45,
         borderRadius:20,
         backgroundColor:colors.bc,

@@ -2,32 +2,44 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:{
-    flex: 1,
-    backgroundColor:'#E5E5E5'
+    container:
+    {
+       flex: 1,
+       backgroundColor:'#E5E5E5'
     },
-    view1:{paddingHorizontal:15,paddingVertical:20},
-    view2:{ marginTop:13 },
-    imageContainer:{
+    view1:
+    { 
+        paddingHorizontal:15,
+        paddingVertical:20},
+    view2:
+    {
+         marginTop:13
+         },
+    imageContainer:
+    {
         alignItems:'center',
         marginTop:20
     }, 
-    textView:{
+    textView:
+    {
         justifyContent:'center',
         alignItems:'center',
         marginTop:30
     },
-    text:{
+    text:
+    {
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
         fontSize:fontSize.twenty
     },
-    logo:{
+    logo:
+    {
         width:'80%',
         height:75,
         resizeMode:'stretch'
     },
-    main:{
+    main:
+    {
         paddingHorizontal:30,
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -40,7 +52,8 @@ export default StyleSheet.create({
         paddingVertical:10,
         marginBottom:40,
     },
-    how:{
+    how:
+    {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
@@ -48,18 +61,21 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         marginTop:20
     },
-    star:{
+    star:
+    {
         alignItems:'flex-start',
         marginLeft:-8,
         marginTop:13
     },
-    what:{
+    what:
+    {
         color:colors.textColor,
         marginTop:13,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
-    drop:{
+    drop:
+    {
         marginTop:13 ,
         borderWidth:1,
         height:35,
@@ -67,13 +83,15 @@ export default StyleSheet.create({
         borderRadius:6,
         paddingHorizontal:5,
     },
-    better:{
+    better:
+    {
         color:colors.textColor,
         marginTop:13,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal'
     },
-    bottom:{
+    bottom:
+    {
         height:60,
         borderWidth:1,
         borderRadius:6,
@@ -83,7 +101,8 @@ export default StyleSheet.create({
         justifyContent:'flex-start',
         flex:1
     },
-    input:{
+    input:
+    {
         width:'100%',
         color:colors.textColor,
     },

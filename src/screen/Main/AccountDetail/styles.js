@@ -7,7 +7,8 @@ export default StyleSheet.create({
         flex:1,
         backgroundColor:'#E5E5E5'
     },
-    list:{
+    list:
+    {
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -20,7 +21,7 @@ export default StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         marginVertical:2,
-        marginTop:13
+       // marginTop:13
     },
     img:
     {
@@ -40,12 +41,14 @@ export default StyleSheet.create({
          fontSize:fontSize.twelve,
          fontFamily:'Montserrat-Medium'
      },
-    item:{
+    item:
+    {
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
-    item1:{
+    item1:
+    {
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-Normal',
         color:colors.heading
@@ -54,7 +57,8 @@ export default StyleSheet.create({
     {
         backgroundColor:colors.white,
     },
-    container:{
+    container:
+    {
         flexDirection:'row',
         justifyContent:'space-between',
         paddingVertical:13,
