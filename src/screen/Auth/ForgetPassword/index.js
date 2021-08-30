@@ -26,6 +26,7 @@ const ForgetPassword=()=>{
     const [focus1,setFocus1]=useState(false)
 
 const validateUser=(email,mobile)=>{
+  console.log('hi',email,mobile);
     if(email && mobile){
        Toast.show('Please Enter Email or Mobile Number')
     }
@@ -126,7 +127,7 @@ const validateUser=(email,mobile)=>{
              <View style={styles.button}>
                  <CustomButton
                    title='RESET MY PASSWORD'
-                   onPress={()=>values.email=='' || values.mobile=='' ?Toast.show('Please Enter Email or Mobile Number'):handleSubmit()}
+                   onPress={()=>values.email=='' && values.mobile=='' ?Toast.show('Please Enter Email or Mobile Number'):handleSubmit()}
                  />
              </View>
             
