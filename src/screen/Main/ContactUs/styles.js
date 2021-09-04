@@ -122,7 +122,7 @@ export default StyleSheet.create({
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
-        paddingHorizontal:0,
+        paddingHorizontal:10,
         marginTop:6
     },
     header:
@@ -137,7 +137,7 @@ export default StyleSheet.create({
     },
     warn:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         color:'red'
     },
     bottom:

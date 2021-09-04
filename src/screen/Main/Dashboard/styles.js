@@ -87,7 +87,8 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        width:'100%'
     },
     circle:
     {
@@ -120,10 +121,14 @@ export default StyleSheet.create({
     },
     width:
     {
-        width:'10%'
+        width:'30%'
     },
     touch1:
     {
-        alignItems:'center'
+        alignItems:'center',
+       // backgroundColor:colors.bc,
+        width:'32%',
+        paddingVertical:15,
+        borderRadius:10
     },
 })

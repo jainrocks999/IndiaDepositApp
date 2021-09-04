@@ -54,7 +54,7 @@ export default StyleSheet.create({
 button:
 {
         height:45,
-        width:'45%',
+        width:'47%',
         paddingHorizontal:10,
         paddingVertical:10,
         backgroundColor:colors.bc,
@@ -87,8 +87,8 @@ button:
     },
     img:
     {
-        width:'95%',
-        height:'90%'
+        width:'86%',
+        height:230
     },
     
     

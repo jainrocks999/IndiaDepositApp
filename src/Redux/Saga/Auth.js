@@ -6,7 +6,6 @@ import Storage from '../../component/AsyncStorage';
 
 //Login
             function* doLogin(action) {
-              console.log('this is your mobile dtra',action);
               try{
               const data = new FormData();
               if(action.email){
@@ -16,8 +15,10 @@ import Storage from '../../component/AsyncStorage';
                 data.append('mobile',action.mobile)
               }
               data.append('pin',action.pin)
+              data.append('device_token',action.device_token)
+              data.append('device_type',action.device_type)
               const response = yield call(Api.fetchDataByPOST, action.url, data);
-              console.log('this is your res message',response);
+              console.log('this is run time response',response);
               if (response.status==200) {
                 yield put({
                   type: 'User_Login_Success',
@@ -25,6 +26,14 @@ import Storage from '../../component/AsyncStorage';
                 });
                 AsyncStorage.setItem(Storage.name,response.data.name)
                 AsyncStorage.setItem(Storage.user_id,response.data.user_id)
+                AsyncStorage.setItem(Storage.email,response.data.email)
+                AsyncStorage.setItem(Storage.fatherName,response.data.father_spouse_name)
+                AsyncStorage.setItem(Storage.motherName,response.data.mother_maiden_name)
+                AsyncStorage.setItem(Storage.dob,response.data.dob)
+                AsyncStorage.setItem(Storage.gender,response.data.gender),
+                AsyncStorage.setItem(Storage.mobile,response.data.mobile),
+                
+
                   Toast.show(response.messages);
                   action.navigation.replace('Main')
               } else {
@@ -48,28 +57,30 @@ import Storage from '../../component/AsyncStorage';
               try{
               const data = new FormData();
               data.append('mobile',action.mobile)
+              data.append('device_token',action.device_token)
+              data.append('device_type',action.device_type)
               const response = yield call(Api.fetchDataByPOST, action.url, data);
-              console.log('this is your response of data',response);
+             
               if (response.status==200) {
                 yield put({
                   type: 'User_MLogin_Success',
                   payload: response.data,
                 });
-                AsyncStorage.setItem(Storage.status,JSON.stringify(response.status))
+              
                   Toast.show(response.messages);
-
-                  if(action && action.navigation){
-                  action.navigation.replace('Otp',
-                  {
-                    otp:response.data.otp,
-                    mobile:action.mobile,
-                    user_id:response.data.data[0].user_id,
-                    name:response.data.data[0].name
-
-                  }
-                    )
-                  }
-              } else {
+                    action.navigation.replace('Otp',{
+                        otp:response.data.otp,
+                        mobile:action.mobile,
+                        name:response.data.data[0].name,
+                        email:response.data.data[0].email,
+                        father_spouse_name:response.data.data[0].father_spouse_name,
+                        mother_maiden_name:response.data.data[0].mother_maiden_name,
+                        dob:response.data.data[0].dob,
+                        gender:response.data.data[0].gender,
+                        user_id:response.data.data[0].user_id
+                        }
+                      ) 
+                } else {
                 Toast.show(response.messages);
                 yield put({
                   type: 'User_MLogin_Error',
@@ -78,6 +89,9 @@ import Storage from '../../component/AsyncStorage';
             }
             catch(error){
             Toast.show(error.messages)
+            yield put({
+              type: 'User_MLogin_Error',
+            });
             }
             }
 
@@ -91,14 +105,23 @@ import Storage from '../../component/AsyncStorage';
                 data.append('email',action.email)
               }
               const response = yield call(Api.fetchDataByPOST, action.url, data);
-              console.log('this is your response of data',response);
               if (response.status==200) {
                 yield put({
                   type: 'Forget_Password_Success',
                   payload: response.data,
                 });
-                  Toast.show(response.messages);
-              } else {
+                Toast.show(response.messages);
+                if(action && action.navigation){
+                  action.navigation.replace('ForgotOtp',
+                  {
+                    otp:'0852',
+                    mobile: response.mobile,
+                    email: response.email
+                  }
+                    )
+                  }
+              } 
+             else {
                 Toast.show(response.messages);
                 yield put({
                   type: 'Forget_Password_Error',
@@ -140,7 +163,9 @@ import Storage from '../../component/AsyncStorage';
               data.append('education',action.education)
               data.append('occupation',action.occupation)
               data.append('marital_status',action.marital_status)
-
+              data.append('device_token',action.device_token)
+              data.append('device_type',action.device_type)
+             
               const response = yield call(Api.fetchDataByPOST, action.url, data);
               console.log('this is  your response',response);
               if (response.status==200) {
@@ -155,12 +180,22 @@ import Storage from '../../component/AsyncStorage';
                     otp:response.otp,
                     mobile:action.mobile,
                     user_id:response.data[0].user_id,
-                    name:response.data[0].name
+                    name:response.data[0].name,
+                    email:response.data[0].email,
+                    father_spouse_name:response.data[0].father_spouse_name,
+                    mother_maiden_name:response.data[0].mother_maiden_name,
+                    dob:response.data[0].dob,
+                    gender:response.data[0].gender,
                   }
                     )
                   }
               } else {
-              Toast.show(response.messages);
+                if(response.messages.email){
+                  Toast.show(response.messages.email);
+                }
+                else{
+                Toast.show(response.messages);
+                }
                 yield put({
                   type: 'User_Register_Error',
                 });
@@ -187,7 +222,15 @@ function* logout(action) {
               });
                 Toast.show(response.messages);
                 action.navigation.replace('Login')
-                AsyncStorage.clear();
+
+                AsyncStorage.setItem(Storage.name,'')
+                AsyncStorage.setItem(Storage.user_id,'')
+                AsyncStorage.setItem(Storage.email,'')
+                AsyncStorage.setItem(Storage.fatherName,'')
+                AsyncStorage.setItem(Storage.motherName,'')
+                AsyncStorage.setItem(Storage.dob,'')
+                AsyncStorage.setItem(Storage.gender,'')
+                AsyncStorage.setItem(Storage.mobile,'')
                 
             } else {
               Toast.show(response.messages);
@@ -476,6 +519,83 @@ function* feedback(action) {
           });
     }
 }
+function* createPin(action) {
+  console.log('this is action', action);
+  try {
+    const data = new FormData();
+    if (action.mobile) {
+      data.append('mobile', action.mobile)
+    } else if (action.email) {
+      data.append('email', action.email)
+    }
+    data.append('pin', action.pin)
+    const response = yield call(Api.fetchDataByPOST, action.url, data);
+    console.log('thisis espo',response);
+    if (response.status == 200) {
+      yield put({
+        type: 'Create_Pin_Success',
+        payload: response.data,
+      });
+      Toast.show(response.messages);
+      if (action && action.navigation) {
+        action.navigation.replace('Login')
+      }
+    }
+    else {
+      Toast.show(response.messages);
+      yield put({
+        type: 'Create_Pin_Error',
+      });
+    }
+  }
+  catch (error) {
+    Toast.show(error.messages)
+    yield put({
+      type: 'Create_Pin_Error',
+    });
+  }
+}
+
+function* editProfile(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('name',action.name)
+      data.append('email',action.email)
+      data.append('dob',action.dob)
+      data.append('gender',action.gender)
+      data.append('father_spouse_name',action.father_spouse_name)
+      data.append('mother_maiden_name',action.mother_maiden_name)
+     
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+        console.log(response,'resfggdfghgf')
+            if (response.status==200) {
+              yield put({
+                type: 'Edit_Profile_Success',
+              });  
+                
+               AsyncStorage.setItem(Storage.name,response.data[0].name)
+                AsyncStorage.setItem(Storage.email,response.data[0].email)
+                AsyncStorage.setItem(Storage.fatherName,response.data[0].father_spouse_name)
+                AsyncStorage.setItem(Storage.motherName,response.data[0].mother_maiden_name)
+                AsyncStorage.setItem(Storage.dob,response.data[0].dob)
+                AsyncStorage.setItem(Storage.gender,response.data[0].gender)
+                AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
+                Toast.show(response.messages);  
+            } else {
+              yield put({
+                type: 'Edit_Profile_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Edit_Profile_Error',
+          });
+    }
+}
+
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -493,4 +613,6 @@ export default function* authSaga() {
   yield takeEvery('Support_Request',support)
   yield takeEvery('Contact_Us_Request',contact)
   yield takeEvery('Feedback_Request',feedback)
+  yield takeEvery('Create_Pin_Request',createPin)
+  yield takeEvery('Edit_Profile_Request',editProfile)
 }

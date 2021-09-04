@@ -9,6 +9,7 @@ import Header from '../../../component/header';
 import BottomTab from '../../../component/StoreButtomTab';
 import { FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native';
+import colors from '../../../component/colors';
 
 const Refferal=()=>{
     const navigation=useNavigation()
@@ -60,7 +61,21 @@ const Refferal=()=>{
                                    />
                          </View>
                             <Text style={styles.text2}>TAP TO COPY</Text>
+                            <TouchableOpacity style={{
+                                width:'50%',backgroundColor:colors.bc
+                                ,height:40,borderRadius:30,
+                                flexDirection:'row',
+                                justifyContent:'space-between',
+                                paddingHorizontal:30,
+                                paddingVertical:4,
+                                alignItems:'center',
+                                marginTop:10
+                                }}>
+                                  <Image source={require('../../../assets/Image/share.png')}/>
+                                  <Text style={{color:colors.white,fontFamily:'Montserrat-Normal',fontSize:14}}>REFER NOW</Text>
+                             </TouchableOpacity>
                      </View>
+                     
              </View>
              <StatusBar/>
         </View>

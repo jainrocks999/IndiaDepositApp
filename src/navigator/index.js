@@ -34,6 +34,10 @@ import Contact from '../screen/Main/ContactUs'
 import ChangePassword from '../screen/Auth/ChangePassword';
 import BlogCategory from '../screen/Main/BlogCategory';
 import StoryCategory from '../screen/Main/StoryCategory';
+import ForgotOtp from '../screen/Auth/ForgotOtp';
+import CreatePin from '../screen/Auth/CreatePin';
+import UpdateProfile from '../screen/Main/UpdateProfile';
+import {navigationRef } from './rootNavigation';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -56,7 +60,7 @@ function Navigate() {
   };
   return (
     //InitialPages
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName="Splash" headerMode="none" mode="modal" >
         <Stack.Screen name="Main" component={Main}/>
         <Stack.Screen name="AboutUs" component={AboutUs} options={horizontalAnimation}/>
@@ -91,6 +95,9 @@ function Navigate() {
         <Stack.Screen name="ChangePassword" component={ChangePassword} options={horizontalAnimation}/>
         <Stack.Screen name="BlogCategory" component ={BlogCategory} options={horizontalAnimation}/>
         <Stack.Screen name="StoryCategory" component={StoryCategory} options={horizontalAnimation}/>
+        <Stack.Screen name="ForgotOtp" component={ForgotOtp}/>
+        <Stack.Screen name="CreatePin" component={CreatePin}/>
+        <Stack.Screen name="UpdateProfile"component={UpdateProfile}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -13,7 +13,7 @@ const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
-    appVersion()
+     appVersion()
      //initial()
       }, []);
 

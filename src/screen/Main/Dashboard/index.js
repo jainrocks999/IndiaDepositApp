@@ -201,3 +201,17 @@ const dashboard=()=>{
      )
 }
 export default dashboard;
+const data=[
+    {name:'Regular',image:require('../../../assets/Image/regular-fd.png')},
+    {name:'Tax Saving',image:require('../../../assets/Image/tax-fd.png')},
+    {name:'NRI',image:require('../../../assets/Image/nri-fd.png')},
+    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png')},
+]
+
+const data1=[
+    {name:'Regular',image:require('../../../assets/Image/saving-ac.png')},
+    {name:'Female',image:require('../../../assets/Image/sb-female.png')},
+    {name:'Defense',image:require('../../../assets/Image/sb-defence.png')},
+    {name:'Zero\nBalance',image:require('../../../assets/Image/sb-zb.png')},
+    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png')},
+]

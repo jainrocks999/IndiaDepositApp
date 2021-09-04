@@ -9,8 +9,8 @@ export default StyleSheet.create({
     },
     image:
     {
-        width:'92%',
-        height:85
+        width:'86%',
+        height:80,marginBottom:30
     },
     main:
     {
@@ -75,7 +75,8 @@ export default StyleSheet.create({
       {
         bottom:30,
         position:'absolute',
-        width:'100%'
+        width:'100%',
+        marginTop:50
       },
       view3:
       {

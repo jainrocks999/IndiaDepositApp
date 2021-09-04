@@ -65,15 +65,15 @@ export default StyleSheet.create({
     },
     view5:
     {
-        width:'60%',
+        width:'50%',
         borderWidth:1,
         borderRadius:2,
         borderStyle:'dotted',
         justifyContent:'center',
         alignItems:'center',
         height:40,
-        marginTop:10,
-       marginBottom:20
+        marginVertical:10,
+       
     },
     text:
     {

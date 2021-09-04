@@ -31,8 +31,10 @@ export default StyleSheet.create({
     },
     view2:
     {
-        width:'60%',
-        flexDirection:'row'
+        width:'100%',
+        flexDirection:'row',
+        
+        justifyContent:'space-between'
     },
     img:
     {
@@ -62,14 +64,14 @@ export default StyleSheet.create({
         shadowOffset:{height:5,width:0},
         elevation:2,
         borderRadius:14,
-        marginLeft:-28,marginTop:63,
+        marginLeft:-68,marginTop:63,
         backgroundColor:'white',
         alignItems:'center',justifyContent:'center'
     },
     change:
     {
         fontSize:fontSize.twelve,
-        marginHorizontal:15,
+       // marginHorizontal:20,
         marginTop:5,
         color:colors.bc
     },

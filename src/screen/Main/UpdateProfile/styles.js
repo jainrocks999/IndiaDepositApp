@@ -3,204 +3,82 @@ import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
+        flex: 1,
+        backgroundColor:'#E5E5E5'
     },
-   
-    imageContainer:{
-        alignItems:'center',
-        marginTop:20
-    },
-    main:{
-        paddingHorizontal:10,
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:30
-    },
-    second:{
-        width:'90%',
-        height:40,
-        borderWidth:1,
-        justifyContent:'center',
-        flexDirection:'row',
-        borderRadius:6,
-        borderColor:colors.textColor
-    },
-    imageView:{
-        justifyContent:'center',
-        alignItems:'center',
-        width:40,
-        height:'100%',
-        borderRightWidth:1
-    },
-    input:{
-        width:'87%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:10
-    },
-    textView:{
-        justifyContent:'center',
-        alignItems:'center',
-        marginTop:20,
-        backgroundColor:'white',
-        width:114,height:114,
-        borderRadius:57,
+    card:{
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:8,
-        shadowOffset:{height:100,width:10},
-        elevation:10,
-        //marginBottom:10
-       
-       
-        
-    },
-    text:{
-        fontFamily:'Montserrat-SemiBold',
+        shadowOffset:{height:2,width:0},
+        elevation:5,
+        borderTopLeftRadius:10,
+        borderTopRightRadius:10,
+        backgroundColor:'white',
+        marginHorizontal:15,
+        paddingHorizontal:18,
+        paddingVertical:20,
+        marginTop:20,
+        height:'100%'
+    }, 
+    better:{
         color:colors.textColor,
-        fontSize:fontSize.twenty
-    },
-    main1:{
-        height:40,
-        width:'100%',
-        flexDirection:'row',
-        paddingHorizontal:12,
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    check:{
-        flexDirection:'row',
-        alignItems:'center'
-    },
-    keep:{
-        color:colors.textColor,
-        fontSize:fontSize.eleven
-    },
-    forgot:{
-        marginRight:5,
-        color:colors.textColor,
-        fontSize:fontSize.eleven
-    },
-    button:{
-        width:'100%',
-        paddingHorizontal:20,
-        marginTop:12,
-        marginBottom:20
-    },
-    bottom:{
-        flexDirection:'row',
-        marginTop:8,
-        marginBottom:20
-    },
-    account:{
-        color:colors.textColor,
-        fontSize:fontSize.thirteen
-    },
-    inputContainerStyle: {
-        height: 40,
-        borderRadius: 6,
-        backgroundColor: '#ffffff',
-        borderWidth:1,
-        width:'100%'
-    },
-    inputStyle:{
-        fontSize:fontSize.fourteen, 
-        marginLeft: 10
-    },
-    view:{
-        width:'100%',
-        paddingHorizontal:20,
-        marginTop:15
-    },
-    view1:{
-        width:'100%',
-        height:40,
-        borderWidth:1,
-        borderRadius:6,
-        borderColor:colors.textColor,
-        paddingHorizontal:14,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between'
-    },
-    error:{
-        width:'90%',
-        justifyContent:'center',
-        alignItems:'flex-start',
-        paddingHorizontal:0,
-        marginTop:6
+        marginTop:13,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
     },
     drop:{
-        width:'100%',
-        height:40,
+        marginTop:5 ,
         borderWidth:1,
-        justifyContent:'space-between',
-        paddingHorizontal:12,
-        borderRadius:6,
-        borderColor:colors.textColor,
-        flexDirection:'row',
-        alignItems:'center'
-    },
-    icon:{
-        width:26,
-        height:26,
-        backgroundColor:colors.textColor,
-        borderRadius:13,
-        justifyContent:'center',
-        alignItems:'center',
-        marginLeft:70,
-    },
-    row:{
-        justifyContent:'center',
-        alignItems:'center',
-        flex:1
-    },
-    profile:{
-        justifyContent:'center',
-        flex:1,
-        alignItems:'center',
-        marginTop:-20
-    },
-    per:{
-        fontFamily:'Montserrat-SemiBold',
-        fontSize:fontSize.sixteen,
-        color:colors.textColor
-    },
-    con:{
-        paddingHorizontal:20,
-        width:'100%',
-        marginTop:20
-    },
-    input1:{
-        width:'90%',
-        color:colors.textColor
-    },
-    warn:{
-        fontSize:fontSize.fourteen,
-        color:'red'
-    },
-    modalView:{
-        width:'100%',
-        height:'100%',
-        paddingHorizontal:10,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    buton:{
-        width:'100%',
         height:40,
-        backgroundColor:colors.textColor,
-        marginTop:25,
+        borderColor:colors.textColor,
         borderRadius:6,
+        paddingHorizontal:5,
+        justifyContent:'center',
+        width:'100%',
+        paddingHorizontal:10,
+       
+    }, 
+    dropCal:{
+        marginTop:5 ,
+        borderWidth:1,
+        height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'space-between',
+        width:'100%',
+        paddingHorizontal:10,
+        flexDirection:'row'
+    }, 
+   
+    input:{
+        color:colors.textColor
     },
-    came:{
-        color:colors.white,
-        fontFamily:'Montserrat-SemiBold',
-        fontSize:fontSize.sixteen
-    }
+    image:{
+        marginTop:16,
+        marginRight:8
+    },
+    scroll:
+    {
+        flex:1,
+        paddingHorizontal:15,
+        paddingVertical:30
+    },
+    main:
+    {
+        paddingHorizontal:30,
+        shadowColor:'black',
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:'white',
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginBottom:50
+    },
    
 })

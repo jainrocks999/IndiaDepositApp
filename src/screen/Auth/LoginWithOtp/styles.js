@@ -92,12 +92,12 @@ export default StyleSheet.create({
         width:'90%',
         justifyContent:'center',
         alignItems:'flex-start',
-        paddingHorizontal:0,
+        paddingHorizontal:15,
         marginTop:6
     },
     warn:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         color:'red'
     },
 })

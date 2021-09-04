@@ -12,10 +12,21 @@ import RNPickerSelect from "react-native-picker-select";
 import { ProgressBar, Colors } from 'react-native-paper';
 import BottomTab from '../../../component/StoreButtomTab';
 import fontSize from '../../../component/fontSize';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
 const Contact=()=>{
     const navigation=useNavigation()
     const [gender, setGender] = useState('')
     const [day, setDay] = useState('')
+
+
+    Geocoder.from("Colosseum")
+    .then(json => {
+       var location = json.results[0].geometry.location;
+       console.log('narendra hereh dklfjdskfldsjk',location);
+    })
+    .catch(error => console.warn(error));
+
 
     return(
         <View style={styles.container}>

@@ -1,31 +1,32 @@
-import React,{useState}from 'react';
+import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView,TextInput} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import color from '../../../component/colors';
-import CustomButton from '../../../component/button1';
-import Header from '../../../component/header';
-import BottomTab from '../../../component/StoreButtomTab';
-import RNPickerSelect from "react-native-picker-select";
-import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import DatePicker from 'react-native-datepicker';
-
-
-const data=[
-  { label: 'Male', value: 'Male' },
-  { label: 'Female', value: 'Female' },
-  { label: 'Others', value: 'Others'}]
-
-
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 const Profile=()=>{
-    const navigation=useNavigation()
-  
-    const [value, setValue] = useState('');
-    const [value1, setValue1] = useState('');
-   
-
+    const [name,setName]=useState()
+    const [mother,setMName]=useState()
+    const [father,setFName]=useState()
+    const [email,setEmail]=useState()
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+  useEffect(async()=>{
+    const name=await AsyncStorage.getItem(Storage.name)
+    const email=await AsyncStorage.getItem(Storage.email)
+    const father=await AsyncStorage.getItem(Storage.fatherName)
+    const mother=await AsyncStorage.getItem(Storage.motherName)
+    const dob=await AsyncStorage.getItem(Storage.dob)
+    const gender=await AsyncStorage.getItem(Storage.gender)
+    setName(name)
+    setEmail(email)
+    setFName(father)
+    setMName(mother)
+    setDob(dob)
+    setGender(gender)
+  })
+    
     return(
         <View style={styles.container}>
               <View style={{padding:10}}>
@@ -34,79 +35,51 @@ const Profile=()=>{
                       <View style={styles.drop}>
                         <TextInput
                          style={styles.input}
-                         placeholder='Jhon Mathew'
+                        //  placeholder='Jhon Mathew'
+                         value={name==0?'':name}
+                         editable={false}
                         />
                     </View>
                     <Text style={styles.better}>Father/Spouse Name</Text>
                       <View style={styles.drop}>
                         <TextInput
                          style={styles.input}
-                         placeholder='Father/Spouse Name'
+                        //  placeholder='Father/Spouse Name'
+                         value={father==0?'':father}
+                         editable={false}
                         />
                     </View>
                     <Text style={styles.better}>Mother Maiden Name</Text>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Mother Maiden Name'
-                       
+                        // placeholder='Mother Maiden Name'
+                        value={mother==0?'':mother}
+                        editable={false}
                         />
                     </View>
                     <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
                         <View style={{width:'47%'}}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
-
-                               <RNPickerSelect
-                                     onValueChange={(val) => setValue(val)}
-                                     items={data}
-                                     style={{ inputAndroid: { color:colors.textColor,height:35 },
-                                     placeholder:{color:colors.textColor}
-                                     }}
-                                     value={value}
-                                     useNativeAndroidPickerStyle={false}
-                                     placeholder={{ label: "Select Gender", value: null }}
-                                     Icon={()=>
-                                    <Image style={{margin:12}} 
-                                       source={require('../../../assets/Image/down.png')}/>}
-                                     />
-                                 
+                         
+                              <TextInput
+                              style={styles.input}
+                              // placeholder='Gender'
+                              value={gender==0?'':gender}
+                              editable={false}
+                              />
                             </View>
                         </View>
                         <View style={{width:'47%',}}>
                             <Text style={styles.better}>Date of Birth</Text>
-                            <View style={styles.drop}>
-                               <DatePicker
-                                    style={{width: '100%'}}
-                                     date={value1}
-                                     mode="date"
-                                     placeholder="Date Of Birth"
-                                     format="DD-MM-YYYY"
-                                     maxDate={new Date()}
-                                     confirmBtnText="Confirm"
-                                     cancelBtnText="Cancel"
-                                     customStyles={{
-                                     placeholderText:{marginLeft:0,marginTop:0,color:colors.textColor},
-                                     dateIcon: {
-                                      width:0,
-                                      height:0,
-                                     // backgroundColor:colors.bc
-                                       },
-                                     dateInput: {
-                                      marginLeft:-40,
-                                      borderWidth:0, 
-                                      // width:300 
-                                       },
-                                      dateText:{
-                                        color:colors.textColor
-                                        }
-                                      }}
-                
-                                      onDateChange={(date)=> setValue1(date)}
-                                     
-                                  /> 
-                                  {/* <Image style={{marginTop:-15,marginLeft:115}} 
-                                    source={require('../../../assets/Image/down.png')}/> */}
+                            <View style={styles.dropCal}>
+                            <TextInput
+                              style={styles.input}
+                              // placeholder='Date of Birth'
+                              value={dob==0?'':dob}
+                              editable={false}
+                              />
                             </View>
                         </View>
                     </View>
@@ -115,7 +88,9 @@ const Profile=()=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='E-mail'
+                        // placeholder='example@domain.com'
+                        value={email==0?'':email}
+                        editable={false}
                         />
                     </View>
                     <View style={{paddingVertical:20,marginBottom:50}}>
