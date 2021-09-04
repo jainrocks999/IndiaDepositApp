@@ -2,43 +2,38 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:
-    {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    backgroundColor:'#E5E5E5'
+    container:{
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
     },
-   
-    imageContainer:{
-        justifyContent:'space-between',
-        marginTop:20,
-        flexDirection:'row',
-        paddingHorizontal:15
+
+    main:
+    {
+        paddingHorizontal:10,
+        justifyContent:'center',
+        alignItems:'center',
+        marginTop:50
+    },
+    input1:
+    {
+        width:'100%',
+        marginLeft:5,
+        paddingVertical:-10,
+        color:colors.textColor
+    },
+    warn:
+    {
+        fontSize:fontSize.twelve,
+        color:'red'
     },
     main:
     {
         paddingHorizontal:30,
         marginTop:50
     },
-    round:{
-        width:115,
-        height:115,
-        backgroundColor:'#5A4392',
-        borderRadius:57,
-        justifyContent:'center',
-        alignItems:'center'
-    },
-
-    input1:
-    {
-        width:'90%',
-        marginLeft:11,
-        paddingVertical:-10,
-        color:colors.textColor
-    },
     card:
-     { 
+    { 
         shadowColor:'black',
         shadowOpacity:0.25,
         shadowRadius:4,
@@ -66,7 +61,7 @@ export default StyleSheet.create({
     button:
     {
         width:'100%',
-        marginTop:15,
+        marginTop:25,
         marginBottom:20
     },
     error:
@@ -77,16 +72,20 @@ export default StyleSheet.create({
         paddingHorizontal:8,
         marginTop:6
     },
-    error1:
-    {
-        fontSize:fontSize.twelve,
-        color:'red'
+    round:{
+        width:115,
+        height:115,
+        backgroundColor:'#5A4392',
+        borderRadius:57,
+        justifyContent:'center',
+        alignItems:'center'
     },
-    error2:
-    {
-        fontSize:fontSize.fourteen,
-        color:'red'
+    imageContainer:{
+        justifyContent:'space-between',
+        marginTop:20,
+        flexDirection:'row',
+        paddingHorizontal:15
     },
-   
+
    
 })

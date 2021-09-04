@@ -11,11 +11,13 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 
 const loginValidationSchema=yup.object().shape({
-    mobile:yup.string().min(10).
-    required('Mobile number is required').
-    matches(/^[0]?[789]\d{9}$/,"Please Enter valid Mobile Number"),
+  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
+
 })
 const Login=()=>{
     const navigation=useNavigation()
@@ -28,12 +30,16 @@ const showVisible=()=>{
    <Image source={require('../../../assets/Image/phone.png')}/>
   )
 }
-const validateUser=(mobile)=>{
+const validateUser=async(mobile)=>{
+          const device_type= DeviceInfo.getSystemName()
+          let token=await AsyncStorage.getItem(Storage.token);
         dispatch({
           type: 'User_MLogin_Request',
           url: 'mlogin',
           mobile,
-          navigation: navigation,
+          device_token:token,
+          device_type:device_type,
+          navigation,
         })
 }
 
@@ -69,12 +75,14 @@ const validateUser=(mobile)=>{
                      <TextInput
                       onFocus={()=>setFocus(true)}
                       style={styles.input1}
-                      placeholder='+91 000 000 0000'
+                      placeholder='9123456789'
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
                       maxLength={13}
                       keyboardType={'phone-pad'}
+                      returnKeyType='go'
+                      onSubmitEditing={()=>handleSubmit()}
                       />
                   </View>
               </View>
@@ -86,7 +94,7 @@ const validateUser=(mobile)=>{
               <View style={styles.button}>
                     <CustomButton
                     // onPress={()=>navigation.navigate('Main')}
-                   onPress={()=>errors.mobile ?Toast.show('Field required'):handleSubmit()}
+                   onPress={()=>handleSubmit()}
                     title='GET OTP'
                     />
                 </View>

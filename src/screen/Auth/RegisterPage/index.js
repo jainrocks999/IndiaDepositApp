@@ -12,20 +12,22 @@ import * as yup from 'yup';
 import colors from '../../../component/colors';
 import CheckBox from "@react-native-community/checkbox";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import fontSize from '../../../component/fontSize';
+import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
-  email:yup.string().email('Please enter valid email').required('Email address is required'),
-  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[6-9]\d{9}$/,"Please Enter valid Mobile Number"),
-  pin:yup.string().required('Pin required'),
+  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Full Name '),
+  email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
+  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
+  pin:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter Pin'),
   confirmPin:yup.string().when("pin", {
     is: val => (val && val.length > 0 ? true : false),
     then: yup.string().oneOf(
       [yup.ref("pin")],
       "Both pin need to be the same"
     )
-  }).required('Confirm Pin required'),
+  }).required('Please confirm Pin'),
   referal:yup.string(),
 })
 
@@ -43,9 +45,21 @@ const RegisterPage=()=>{
     const [visible,setVisible]=useState(true)
     const [visible1,setVisible1]=useState(true)
 
+    const ref=useRef(null)
+    const ref1=useRef(null)
+    const ref2=useRef(null)
+    const ref3=useRef(null)
+    const ref4=useRef(null)
+
   
-    const validateUser=(name,email,mobile,pin)=>{
-      console.log('this is your registered data',name,email,mobile,pin);
+    const validateUser=async(name,email,mobile,pin)=>{
+      const device_type= DeviceInfo.getSystemName()
+      let token=await AsyncStorage.getItem(Storage.token);
+      console.log('testing',device_type,token);
+      if( toggleCheckBox==false ){
+        Toast.show('Please Confirm Terms and Condition')
+      }
+      else{
       dispatch({
        type: 'User_Register_Request',
        url: 'adduserdetails',
@@ -72,17 +86,21 @@ const RegisterPage=()=>{
        occupation:0,
        marital_status:0,
        navigation: navigation,
+       device_token:token,
+       device_type:device_type
     })
+  }
 }
 
 const showVisible=()=>{
   return(
     <TouchableOpacity 
+     
         onPress={()=>visible?setVisible(false):setVisible(true)}>
         {!visible?<Image 
-        style={{width:19,height:13,marginLeft:-7}} 
+        style={{width:19,height:13,marginLeft:'38%'}} 
         source={require('../../../assets/Image/eye.png')}/>:
-        <Image style={{width:19,height:13,marginLeft:-7}} 
+        <Image style={{width:19,height:13,marginLeft:'38%'}} 
         source={require('../../../assets/Image/eye1.png')}/>
       }
       </TouchableOpacity>
@@ -93,9 +111,9 @@ const showVisible1=()=>{
       <TouchableOpacity 
           onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
           {!visible1?<Image 
-          style={{width:19,height:13,marginLeft:-7}} 
+          style={{width:19,height:13,marginLeft:'38%'}} 
           source={require('../../../assets/Image/eye.png')}/>:
-          <Image style={{width:19,height:13,marginLeft:-7}} 
+          <Image style={{width:19,height:13,marginLeft:'38%'}} 
           source={require('../../../assets/Image/eye1.png')}/>
         }
         </TouchableOpacity>
@@ -112,7 +130,13 @@ const showVisible1=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <KeyboardAwareScrollView >
+         <ScrollView>
+         <KeyboardAwareScrollView
+        extraScrollHeight={100}
+         enableOnAndroid={true} 
+        keyboardShouldPersistTaps='handled'
+         contentContainerStyle={{flex:1}}>
+           <View style={{flex:1}}>
           <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image style={styles.image} 
@@ -132,6 +156,11 @@ const showVisible1=()=>{
                         onBlur={handleBlur('name')}
                         value={values.name}
                         maxLength={40}
+                        returnKeyType='next'
+                        onSubmitEditing={() => {
+                          ref.current.focus()
+                        }}
+                        //blurOnSubmit={false}
                         />
                   </View>
               </View>
@@ -145,13 +174,18 @@ const showVisible1=()=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
+                      ref={ref}
                       onFocus={()=>setEBorder(true)}
                       style={styles.input1}
-                      placeholder='abc@gmail.com'
+                      placeholder='example@domain.com'
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
                       maxLength={40}
+                      returnKeyType='next'
+                      onSubmitEditing={() => {
+                        ref1.current.focus()
+                      }}
                       />
                   </View>
               </View>
@@ -165,20 +199,25 @@ const showVisible1=()=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput 
+                      ref={ref1}
                       onFocus={()=>setMBorder(true)}
                       style={styles.input1}
-                      placeholder='+91 000 000 0000'
+                      placeholder='9123456789'
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
-                      keyboardType={'phone-pad'}
+                      keyboardType={'number-pad'}
                       maxLength={11}
+                      returnKeyType='next'
+                      onSubmitEditing={() => {
+                        ref2.current.focus()
+                      }}
                       />
                   </View>
               </View>
               <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
-                <Text style={styles.text1}>{errors.mobile}</Text>
+                <Text style={styles.warn}>{errors.mobile}</Text>
                 }
               </View>
               <View style={styles.view2}>
@@ -188,6 +227,7 @@ const showVisible1=()=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
+                      ref={ref2}
                       onFocus={()=>setPBorder(true)}
                       style={[styles.input2]}
                       placeholder='0000'
@@ -195,10 +235,16 @@ const showVisible1=()=>{
                       onBlur={handleBlur('pin')}
                       value={values.pin}
                       keyboardType={'number-pad'}
-                      // secureTextEntry={visible}
+                      returnKeyType='next'
+                      maxLength={4}
+                      onSubmitEditing={() => {
+                        ref3.current.focus()
+                      }}
+                      secureTextEntry={visible}
                        />
-                    
-                       {/* {values.pin?showVisible():null} */}
+                     
+                       {showVisible()}
+                     
                     </View>
                   </View>
                   <View style={styles.error}>
@@ -212,16 +258,22 @@ const showVisible1=()=>{
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
+                      ref={ref3}
                       onFocus={()=>setCBorder(true)}
-                      style={styles.input1}
+                      style={[styles.input2]}
                       placeholder='0000'
                       onChangeText={handleChange('confirmPin')}
                       onBlur={handleBlur('confirmPin')}
+                      maxLength={4}
                       value={values.confirmPin}
                       keyboardType={'number-pad'}
-                      // secureTextEntry={visible1}
+                      returnKeyType='next'
+                      onSubmitEditing={() => {
+                        ref4.current.focus()
+                      }}
+                       secureTextEntry={visible1}
                        />
-                        {/* {values.confirmPin?showVisible1():null} */}
+                        {showVisible1()}
                     </View>
                   </View>
                   <View style={styles.error}>
@@ -232,15 +284,17 @@ const showVisible1=()=>{
               </View>
              
               <View style={[styles.card,{borderColor:bBorder?colors.bc:'white'}]}>
-                   <Text style={styles.heading}>Enter Referral Code</Text>
+                   <Text style={styles.heading}>Enter Referral Code (Optional)</Text>
                     <View style={styles.input}>
                      <TextInput 
-                       onFocus={()=>setBBorder(true)}
+                     ref={ref4}
+                      onFocus={()=>setBBorder(true)}
                       style={[styles.input1,{marginLeft:-3,}]}
                       placeholder='BA52RT'
                       onChangeText={handleChange('referal')}
-                     // onBlur={handleBlur('referal')}
                       value={values.referal}
+                      returnKeyType='done'
+                      
                       />
                   </View>
               </View>
@@ -262,22 +316,20 @@ const showVisible1=()=>{
               <View style={styles.button}>
                  <CustomButton
                   onPress={()=>
-                    errors.password || errors.email ||
-                    errors.name || errors.mobile || errors.confirm?
-                    Toast.show('All field required'):
-                    toggleCheckBox==false? Toast.show('Please Confirm Terms and Condition') :
                     handleSubmit()}
                     title='SIGN UP'
                  />
              </View>
-             <View style={styles.bottom}>
+             <View style={[styles.bottom]}>
                  <Text style={styles.account}>Already have an account?</Text>
                  <Text 
                  onPress={()=>navigation.navigate('Login')} 
                  style={styles.account1}> Login here</Text>
              </View>
           </View>
+          </View>
          </KeyboardAwareScrollView>
+         </ScrollView>
          <StatusBar/>
        </View>
          )}

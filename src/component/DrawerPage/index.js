@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import { View, Image,TouchableOpacity } from 'react-native';
 import {
     DrawerContentScrollView,
@@ -18,7 +18,34 @@ const DrawerContent=({props})=> {
     const navigation = useNavigation();
     const dispatch=useDispatch()
     const [isModalVisible, setModalVisible] = useState(false);
+    const [name,setName]=useState()
+    const [mother,setMName]=useState()
+    const [father,setFName]=useState()
+    const [email,setEmail]=useState()
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+    const [mobile,setMobile]=useState('')
+    const [image,setImage]=useState('')
 
+    useEffect(async()=>{
+        let name=await AsyncStorage.getItem(Storage.name)
+        let motherName=await AsyncStorage.getItem(Storage.motherName)
+        let fatherName=await AsyncStorage.getItem(Storage.fatherName)
+        let gender=await AsyncStorage.getItem(Storage.gender)
+        let dob=await AsyncStorage.getItem(Storage.dob)
+        let email=await AsyncStorage.getItem(Storage.email)
+        let mobile=await AsyncStorage.getItem(Storage.mobile)
+        let image=await AsyncStorage.getItem(Storage.image)
+        setImage(image)
+
+         setMobile(mobile)
+         setName(name)
+         setMName(motherName)
+         setFName(fatherName)
+         setGender(gender)
+         setDob(dob)
+         setEmail(email)
+    })
    
     const getLogout=async()=>{
      const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -29,6 +56,13 @@ const DrawerContent=({props})=> {
         user_id,
         navigation:navigation,
       })
+    }
+
+    const validateUser=()=>{
+        navigation.navigate('Profile',{
+            name,email,dob,gender,mother,father
+        })
+        navigation.dispatch(DrawerActions.closeDrawer())
     }
   
     return (
@@ -76,28 +110,42 @@ const DrawerContent=({props})=> {
             </Modal>
 
               <View style={{
-                   height:'27%',
+                   height:'22%',
                    backgroundColor:'#5A4392',
                    flexDirection:'row',
                    paddingHorizontal:20,
                    justifyContent:'space-between'
                   }}>
                  <View style={{flexDirection:'row', alignItems:'center',}}>
-                      <Image source={require('../../assets/Image/profile-pic.png')}/>
-                  <View style={{marginLeft:20}}>
-                      <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>John</Text>
-                      <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
-                      <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>test@gmail.com</Text>
-                  </View>
+                 {image?<Image style={{height:84,
+                    width:84,
+                    borderRadius:42}} 
+                    source={{uri: image}}
+                 />
+                        :<Image 
+                            source={require('../../assets/Image/profile-pic.png')}/>}
+                { !name?
+                    <View style={{marginLeft:20}}>
+                        <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>John</Text>
+                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
+                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>test@gmail.com</Text>
+                    </View>:
+                    <View style={{marginLeft:20}}>
+                        <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>{name}</Text>
+                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>{mobile}</Text>
+                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>{email}</Text>
+                    </View>
+                    }
+                 
                   </View>
                   <TouchableOpacity 
                   onPress={()=>navigation.dispatch(DrawerActions.closeDrawer())}
                   style={{paddingVertical:20,}}>
-                    <Image source={require('../../assets/Images/arrow2.png')}/>
+                    <Image source={require('../../assets/Image/arrow2.png')}/>
                   </TouchableOpacity>
               </View>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Profile')}
+                    onPress={() => validateUser()}
                     >
                     <View style={[styles.drawer]}>
                         <View style={styles.row}>
@@ -209,20 +257,7 @@ const DrawerContent=({props})=> {
                         </View>
                 </TouchableOpacity>
 
-                {/* <TouchableOpacity 
-                    onPress={()=>navigation.navigate('ChangePassword')}
-                    style={[styles.drawer]}>
-                         <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
-                            <View style={styles.iconView}>
-                                <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/support.png')}/>
-                            </View>
-                            <Text style={styles.text}>{'Change Password'}</Text>
-                            </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
-                        </View>
-                </TouchableOpacity> */}
+               
 
                 <TouchableOpacity 
                     onPress={()=>navigation.navigate('Feedback')}

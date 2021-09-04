@@ -14,9 +14,9 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import fontSize from '../../../component/fontSize';
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Name is required'),
-  email:yup.string().email('Please enter valid email').required('Email address is required'),
-  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[789]\d{9}$/,"Please Enter valid Mobile Number"),
+  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name '),
+  email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
+  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
   message:yup.string()
 })
 
@@ -44,7 +44,7 @@ const Contact=()=>{
   }
     return(
       <Formik
-      initialValues={{ email: '',password:'',name:'',message:''}}
+      initialValues={{ email: '',mobile:'',name:'',message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -153,7 +153,7 @@ const Contact=()=>{
               <TextInput
                 ref={next1}
                 style={{color:colors.textColor}}
-                placeholder='Email'
+                placeholder='example@domain.com'
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
@@ -167,14 +167,14 @@ const Contact=()=>{
               </View>
               <View style={styles.error}>
               {(errors.email && touched.email) &&
-                <Text style={{fontSize:fontSize.fourteen,color:'red'}}>{errors.email}</Text>
+                <Text style={{fontSize:fontSize.twelve,color:'red'}}>{errors.email}</Text>
                 }
               </View>
               <View style={[styles.input,{marginTop:15}]}>
               <TextInput
                 ref={next2}
                 style={{color:colors.textColor}}
-                placeholder='Mobile'
+                placeholder='9123456789'
                 onChangeText={handleChange('mobile')}
                 onBlur={handleBlur('mobile')}
                 value={values.mobile}

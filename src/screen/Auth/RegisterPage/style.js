@@ -7,7 +7,8 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor:'#E5E5E5'
+        backgroundColor:'#E5E5E5',
+        height:'100%'
     },
    
     imageContainer:
@@ -36,6 +37,7 @@ export default StyleSheet.create({
         marginLeft:5,
         color:colors.textColor,
         paddingVertical:-10,
+        width:50
     },
     card: 
     { 

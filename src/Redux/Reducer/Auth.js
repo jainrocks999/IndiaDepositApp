@@ -140,6 +140,22 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false,};
   case 'Feedback_Error':
   return { ...state, isFetching: false };
+
+  case 'Create_Pin_Request':
+    return { ...state, isFetching: true };
+  case 'Create_Pin_Success':
+    return { ...state, isFetching: false,};
+  case 'Create_Pin_Error':
+  return { ...state, isFetching: false };
+
+  case 'Edit_Profile_Request':
+    return { ...state, isFetching: true };
+  case 'Edit_Profile_Success':
+    return { ...state, isFetching: false,};
+  case 'Edit_Profile_Error':
+  return { ...state, isFetching: false };
+
+  
     default:
       return state;
   }

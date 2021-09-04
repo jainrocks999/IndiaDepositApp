@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,Text,Image,ScrollView,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -14,6 +14,8 @@ import { TouchableOpacity } from 'react-native';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
+import * as RootNavigation from '../../../navigator/rootNavigation';
+import axios from 'axios';
   const renderScene = SceneMap({
       first: Profile,
       second: BankDetail,
@@ -26,14 +28,65 @@ const ProfileScreen=()=>{
   const [index, setIndex] = useState(0);
   const [photos, setphotos] = useState('');
   const [visible,setVisible]=useState(false)
+  const [name,setName]=useState()
+  const [mother,setMName]=useState()
+  const [father,setFName]=useState()
+  const [email,setEmail]=useState()
+  const [gender, setGender] = useState('');
+  const [dob, setDob] = useState('');
+  const [image,setImage]=useState('')
+  const [key,setKey]=useState(1)
 
+  useEffect(async()=>{
+   
+    const name=await AsyncStorage.getItem(Storage.name)
+    const email=await AsyncStorage.getItem(Storage.email)
+    const father=await AsyncStorage.getItem(Storage.fatherName)
+    const mother=await AsyncStorage.getItem(Storage.motherName)
+    const dob=await AsyncStorage.getItem(Storage.dob)
+    const gender=await AsyncStorage.getItem(Storage.gender)
+    let image=await AsyncStorage.getItem(Storage.image)
+    setImage(image)
+    setName(name)
+    setEmail(email)
+    setFName(father)
+    setMName(mother)
+    setDob(dob)
+    setGender(gender)
+  })
+   
   const [routes] = React.useState([
     { key: 'first', title: 'PERSONAL DETAILS' },
     { key: 'second', title: 'BANK DETAILS' },
     { key: 'third', title: 'NOMINEE DETAILS' },
   ]);
-  const openCamera = () =>
-  {
+
+  const save1=async(image)=>{
+    setKey(key+1)
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    try{
+      const data = new FormData();
+      data.append('user_id',user_id)
+      data.append('profile_pic', {
+      uri:image.path,
+      name:image.path.substring(image.path.lastIndexOf('/') + 1), 
+      type:`image/jpg`, 
+    });
+    const response =await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/uploadfile',
+    });  
+    AsyncStorage.setItem(Storage.image,response.data.profile_pic)
+  } catch (error) {
+    console.log(error);
+  }
+  }
+  const openCamera =async() =>{
     ImagePicker.openCamera({
       width: 300,
       height: 400,
@@ -42,66 +95,71 @@ const ProfileScreen=()=>{
     let source = { uri: image.path };
     AsyncStorage.setItem(Storage.photo,JSON.stringify(source))
      setphotos(source)
-    console.log('thisi s source value',source.uri);
+     save1(image)
     });
   setVisible(false)
   };
-
- const openGallery = () =>
-  {
+const save=async(images)=>{
+  setKey(key+1)
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  try{
+    const data = new FormData();
+    data.append('user_id',user_id)
+    data.append('profile_pic', {
+    uri:images[0].path,
+    name:images[0].path.substring(images[0].path.lastIndexOf('/') + 1), 
+    type:`image/jpg`, 
+  });
+  const response =await axios({
+    method: 'POST',
+    data,
+    headers: {
+      'content-type': 'multipart/form-data',
+      Accept: 'multipart/form-data',
+    },
+    url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/uploadfile',
+  });
+  console.log('tih is rsspose value',response.data);
+  AsyncStorage.setItem(Storage.image,response.data.profile_pic)  
+} catch (error) {
+  console.log(error);
+}
+}
+ const openGallery = async() =>{
    ImagePicker.openPicker({
      multiple: true
    }).then(images => {
      let source = { uri: images[0].path };
+    
+     console.log('this is images kresponse calie', );
     setphotos(source)
-    console.log(source)
+   save(images)
    });
    setVisible(false)
   };
-
-  const renderImage=async()=>{
-    if(photos){
-    return(
-      <View>
-      <View style={styles.imageContainer}>
-      {photos?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={photos}/>
-          :<Image style={styles.img} 
-          source={require('../../../assets/Image/profile-pic.png')}/>}
-      </View>
-      </View>
-    )
-    }
- }
-
     return(
         <View style={styles.container}>
               <Header
                   source={require('../../../assets/Images/arrow.png')}
                   title={'PROFILE'}
-                  onPress={()=>navigation.goBack()}
-              />
-              <ScrollView
+                  onPress={()=>navigation.goBack()}/>
+                    <ScrollView
                       contentContainerStyle={{flex:1}}
                       style={{backgroundColor:'#E5E5E5'}}>
-                     <View style={styles.card}>
-                            <View style={styles.main}>
-                                <View style={styles.view1}>
+                                        <View style={styles.view1}>
                                 <Dialog
                           dialogStyle={{width:300,height:170,paddingHorizontal:10}}
                           visible={visible}
-                          // onTouchOutside={() => {
-                          //  setVisible(false)
-                          //  }}
                          >
                        <DialogContent >
                          <View>
                         <View style={styles.modalView}>
                            <TouchableOpacity onPress={()=>openCamera()} style={styles.buton}>
-                               <Image style={{width:60,height:40}} source={require('../../../assets/Image/camera.png')}/>
+                               <Image style={{width:60,height:40}} source={require('../../../assets/Image/camera1.png')}/>
                                <Text style={styles.came}>Camera</Text>
                            </TouchableOpacity>
                            <TouchableOpacity onPress={()=>openGallery()} style={styles.buton}>
-                           <Image style={{width:60,height:40}} source={require('../../../assets/Image/camera.png')}/>
+                           <Image style={{width:60,height:40}} source={require('../../../assets/Image/gallery.png')}/>
                                <Text style={styles.came}>Gallery</Text>
                            </TouchableOpacity>
                         </View>
@@ -113,9 +171,18 @@ const ProfileScreen=()=>{
                        
                       </Dialog>
                                 </View>
+                     <View style={styles.card}>
+                            <View style={styles.main}>
+                
                                 <View style={styles.view2}>
-                                <View style={styles.imageContainer}>
-                                      {photos?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={photos}/>
+                                     <Text  
+                                     onPress={()=>RootNavigation.replace('UpdateProfile',{
+                                       name,email,gender,dob,father,mother
+                                     })} 
+                                     style={styles.change}>Edit Profile</Text>
+                                      <View style={styles.imageContainer}>
+                                        {photos?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={photos}/>
+                                          :image?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={{uri: image}}/>
                                           :<Image style={styles.img} 
                                           source={require('../../../assets/Image/profile-pic.png')}/>}
                                       </View>
@@ -124,7 +191,9 @@ const ProfileScreen=()=>{
                                       style={styles.camera}>
                                          <Image source={require('../../../assets/Image/camera.png')}/>
                                      </TouchableOpacity>
-                                     <Text  onPress={()=>navigation.navigate('ChangePassword')} style={styles.change}>Change Password</Text>
+                                     <Text  
+                                     onPress={()=>navigation.navigate('ChangePassword')} 
+                                     style={styles.change}>Change Pin</Text>
                                 </View>
                              </View>
                               <TabView

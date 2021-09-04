@@ -32,7 +32,7 @@ const showContent=()=>{
     return(
      <View style={styles.container}>
            <Header
-             source={require('../../../assets/Images/arrow.png')}
+             source={require('../../../assets/Image/arrow.png')}
              title={'ABOUT US'}
              onPress={()=>navigation.goBack()}
            />

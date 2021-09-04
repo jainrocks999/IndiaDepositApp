@@ -18,18 +18,13 @@ class OtpVarification extends React.Component{
           otp:'',
           timer: null,
           counter: 12,
-          user_id:this.props.route.params.user_id,
           otpData:this.props.route.params.otp,
           mobile:this.props.route.params.mobile,
-          name:this.props.route.params.name,
           email:this.props.route.params.email,
-          father_spouse_name:this.props.route.params.father_spouse_name,
-          mother_maiden_name:this.props.route.params.mother_maiden_name,
-          dob:this.props.route.params.dob,
-          gender:this.props.route.params.gender,
         };
       }
     componentDidMount() {
+        console.log('just cheking',this.state.email,this.state.mobile);
         const { counter } = this.state;
         let timer = setInterval(this.tick, 1000);
         this.setState({ timer });
@@ -52,25 +47,39 @@ class OtpVarification extends React.Component{
 
     
     otpResend=()=>{
-        this.props.dispatch({
-            type: 'User_MLogin_Request',
-            url: 'mlogin',
-            mobile:this.state.mobile,
-            navigation:this.props.navigation
-        })
+        if(!this.state.email){
+            dispatch({
+                type: 'Forget_Password_Request',
+                url: 'verfiyopt',
+                mobile,
+                navigation
+              })
+        }
+        else{
+            dispatch({
+                type: 'Forget_Password_Request',
+                url: 'verfiyopt',
+                email,
+                navigation
+              })
+        }
+       
+
     }
     validateUser=()=>{
-     console.log('tihs istesting details',this.state.user_id,this.state.name,this.state.otpData,this.state.mobile);
       if(this.state.otp==this.state.otpData){
-        AsyncStorage.setItem(Storage.name,this.state.name)
-        AsyncStorage.setItem(Storage.user_id,this.state.user_id)
-        AsyncStorage.setItem(Storage.mobile,this.state.mobile)
-        AsyncStorage.setItem(Storage.email,this.state.email)
-        AsyncStorage.setItem(Storage.fatherName,this.state.father_spouse_name)
-        AsyncStorage.setItem(Storage.motherName,this.state.mother_maiden_name)
-        AsyncStorage.setItem(Storage.dob,this.state.dob)
-        AsyncStorage.setItem(Storage.gender,this.state.gender)
-        this.props.navigation.replace('Main')
+          if(!this.state.email){
+              console.log('this is mobile value');
+             this.props.navigation.replace('CreatePin',{
+            mobile:this.state.mobile
+            })
+         }
+        else{
+            console.log('this is email value');
+            this.props.navigation.replace('CreatePin',{
+                email:this.state.email
+                })
+        }
       }
       else{
         Toast.show('Please Enter Correct Otp Code')
@@ -82,7 +91,7 @@ class OtpVarification extends React.Component{
         return(
             <View style={styles.container}>
              
-              <KeyboardAwareScrollView contentContainerStyle={{height:1000}}>
+              <KeyboardAwareScrollView>
               <View style={styles.imageContainer}>
                   <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
                   <Image source={require('../../../assets/Image/arrowBack.png')}/>
@@ -107,7 +116,7 @@ class OtpVarification extends React.Component{
                   />
                   <View style={[styles.textBottom,{marginTop:15}]}>
                       <Text style={styles.your}>
-                          {`Enter the OTP sent to your mobile number.`}
+                          {`Enter the OTP sent to your ${this.state.mobile==null?'email address':'mobile number'}.`}
                       </Text>
                   </View>
                 </View>          
@@ -125,7 +134,7 @@ class OtpVarification extends React.Component{
                       onPress={() => this.otpResend()}
                       >
                       <Text style={[styles.your,{color:this.state.counter>0?'grey':colors.bc}]}>
-                          {` Resend again`}
+                          {`Resend again`}
                       </Text>
                       </TouchableOpacity>
                      </View>

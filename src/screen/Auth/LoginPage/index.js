@@ -13,9 +13,14 @@ import CheckBox from "@react-native-community/checkbox";
 import OTPTextInput  from 'react-native-otp-textinput';
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import fontSize from '../../../component/fontSize';
+import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
+import OtpInputs from 'react-native-otp-inputs';
+
 const loginValidationSchema=yup.object().shape({
-  value:yup.string().required('Email or Mobile is required'),
+  value:yup.string().required('Please enter your Email or Mobile number'),
+  pin:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter your Pin'),
 })
 const Login=()=>{
     const navigation=useNavigation()
@@ -25,11 +30,12 @@ const Login=()=>{
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [otp,setOtp]=useState('')
     const [focus,setFocus]=useState(false)
-    const next1 = useRef(null);
+    const next = useRef(null);
 
 const showVisible=()=>{
   return(
     <TouchableOpacity 
+      style={{alignItems:'center',justifyContent:'center'}}
       onPress={()=>visible?setVisible(false):setVisible(true)}>
       {!visible?  <Image source={require('../../../assets/Image/eye.png')}/>:
         <Image source={require('../../../assets/Image/eye1.png')}/>
@@ -37,41 +43,50 @@ const showVisible=()=>{
     </TouchableOpacity>
   )
 }
-const validateUser=(value)=>{
-        if(isNaN(value))
+const validateUser=async(values)=>{
+        const device_type= DeviceInfo.getSystemName()
+        let token=await AsyncStorage.getItem(Storage.token);
+        if(isNaN(values.value)){  
         dispatch({
           type: 'User_Login_Request',
           url: 'signin',
-          email:value,
-          pin:otp,
+          email:values.value,
+          pin:values.pin,
+          device_token:token,
+          device_type:device_type,
           navigation:navigation,
         })
+      }
         else{
           dispatch({
             type: 'User_Login_Request',
             url: 'signin',
-            mobile:value,
-            pin:otp,
+            mobile:values.value,
+            pin:values.pin,
+            device_token:token,
+            device_type:device_type,
             navigation: navigation,
           })
-        }
         
-}
-
-const call=()=>{
-  setFocus(false)
+      }
+        
 }
     return(
       <Formik
-      initialValues={{ value: ''}}
-      onSubmit={values => validateUser(values.value)}
+      initialValues={{ value: '',pin:''}}
+      onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <KeyboardAwareScrollView>
+         <KeyboardAwareScrollView
+        extraScrollHeight={100}
+         enableOnAndroid={true} 
+        keyboardShouldPersistTaps='handled'
+         contentContainerStyle={{flex:1}}>
+           <View style={{flex:1}}>
           <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image style={styles.image} 
@@ -82,7 +97,7 @@ const call=()=>{
               <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
                 <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <Image source={require('../../../assets/Image/email-mobile.png')}/>
                      <TextInput 
                       style={styles.input1}
                       onFocus={()=>setFocus(true)}
@@ -91,7 +106,10 @@ const call=()=>{
                       onBlur={handleBlur('value')}
                       value={values.value}
                       maxLength={40}
-                     
+                      returnKeyType='next'
+                        onSubmitEditing={() => {
+                          next.current.focus()
+                        }}
                       />
                   </View>
               </View>
@@ -103,7 +121,7 @@ const call=()=>{
               </View>
              <View style={styles.view1}>
                <Text style={styles.text1}>Enter Your Pin</Text>
-              <OTPTextInput
+              {/* <OTPTextInput
               ref={next1 }
               containerStyle={styles.OtpInput}
               handleTextChange={(code)=>setOtp(code)}
@@ -111,9 +129,27 @@ const call=()=>{
               textInputStyle={styles.otp}
               offTintColor={'white'}
               tintColor={'white'}
+              /> */}
+                <View style={{width:'100%'}}>
+               <OtpInputs
+                ref={next}
+                 handleChange={handleChange('pin')}
+                 onBlur={handleBlur('pin')}
+                 numberOfInputs={4}
+                 keyboardType={"numeric"} secureTextEntry ={visible}
+                 style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
+                 inputContainerStyles={styles.otp}
+                 inputStyles={{fontSize:16,color:colors.textColor}}
+                 returnKeyType='go'
+                 onSubmitEditing={()=>handleSubmit()}
               />
+                    <View style={styles.error}>
+                    {(errors.pin && touched.pin) &&
+                      <Text style={styles.warn}>{errors.pin}</Text>
+                      }
+                    </View>
               </View>
-             
+              </View>
               <View
                style={styles.view2}>
                  <View  style={styles.view3}>
@@ -123,7 +159,7 @@ const call=()=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={styles.text2}>keep me logged in</Text>
+                  <Text style={styles.text2}>Keep me logged in</Text>
                   </View>
                 <Text style={styles.text2}
                  onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>
@@ -132,7 +168,7 @@ const call=()=>{
               <View style={styles.button}>
                     <CustomButton
                     //  onPress={()=>navigation.replace('Main')}
-                   onPress={()=>errors.value || otp==''?Toast.show('All field required'):handleSubmit()}
+                   onPress={()=>handleSubmit()}
                     title='LOG IN'
                     />
                 </View>
@@ -147,6 +183,7 @@ const call=()=>{
                 style={styles.bottom}>
                   <Text style={styles.account}>Login With OTP</Text>
                 </TouchableOpacity>
+          </View>
           </View>
          </KeyboardAwareScrollView>
          <StatusBar/>

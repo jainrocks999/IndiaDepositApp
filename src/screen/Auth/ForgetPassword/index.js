@@ -15,8 +15,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 
 const loginValidationSchema=yup.object().shape({
-  email:yup.string().email('Please enter valid email'),
-  mobile:yup.string(),
+  email:yup.string().email('Please enter valid Email '),
+  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number")
 })
 const ForgetPassword=()=>{
     const navigation=useNavigation()
@@ -34,16 +34,18 @@ const validateUser=(email,mobile)=>{
          console.log('this is working');
          dispatch({
           type: 'Forget_Password_Request',
-          url: 'forgetpassword',
+          url: 'verfiyopt',
           email,
+          navigation
         })
     }
     else if(mobile){
       console.log('this is working1');
       dispatch({
         type: 'Forget_Password_Request',
-        url: 'forgetpassword',
+        url: 'verfiyopt',
         mobile,
+        navigation
       })
     }
   }
@@ -86,7 +88,7 @@ const validateUser=(email,mobile)=>{
                      <Image source={require('../../../assets/Image/msg.png')}/>
                      <TextInput
                       onFocus={()=>setFocus(true)}
-                      placeholder='abc@gmail.com'
+                      placeholder='example@domain.com'
                       style={styles.input1}
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -109,7 +111,7 @@ const validateUser=(email,mobile)=>{
                      <Image source={require('../../../assets/Image/phone.png')}/>
                      <TextInput
                       onFocus={()=>setFocus1()}
-                      placeholder='+91 000 000 0000'
+                      placeholder='9123456789'
                       style={styles.input1}
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
@@ -126,7 +128,7 @@ const validateUser=(email,mobile)=>{
               </View>
              <View style={styles.button}>
                  <CustomButton
-                   title='RESET MY PASSWORD'
+                   title='RESET MY PIN'
                    onPress={()=>values.email=='' && values.mobile=='' ?Toast.show('Please Enter Email or Mobile Number'):handleSubmit()}
                  />
              </View>

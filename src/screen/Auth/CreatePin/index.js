@@ -16,12 +16,7 @@ import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const loginValidationSchema=yup.object().shape({
-  oldPassword:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter old Pin'),
   newPassword:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter new Pin'),
-  // .matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
   confirmPassword:yup.string().when("newPassword", {
     is: val => (val && val.length > 0 ? true : false),
     then: yup.string().oneOf(
@@ -30,20 +25,16 @@ const loginValidationSchema=yup.object().shape({
     )
   }).
   required('Please confirm new Pin'),
-  // .matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
 })
 
-const ChangePassword=()=>{
+const ChangePassword=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
+    const data=route.params
+    console.log('this is data value',data);
     const isFetching=useSelector((state)=>state.isFetching)
     const [visible,setVisible]=useState(true)
     const [visible1,setVisible1]=useState(true)
-    const [visible2,setVisible2]=useState(true)
-    const [focus,setFocus]=useState(false)
     const [focus1,setFocus1]=useState(false)
     const [focus2,setFocus2]=useState(false)
     const ref1=useRef(null)
@@ -75,34 +66,33 @@ const showVisible1=()=>{
           </TouchableOpacity>
         )
 }
-
-
-const showVisible2=()=>{
-        return(
-          <TouchableOpacity 
-              onPress={()=>visible2?setVisible2(false):setVisible2(true)}>
-              {!visible2?<Image 
-              style={{width:19,height:13}} 
-              source={require('../../../assets/Image/eye.png')}/>:
-              <Image style={{width:19,height:13}} 
-              source={require('../../../assets/Image/eye1.png')}/>
-            }
-            </TouchableOpacity>
-          )
-        }    
 const validateUser=async(values)=>{
         const user_id=await AsyncStorage.getItem(Storage.user_id)
-        dispatch({
-          type: 'Change_Password_Request',
-          url: 'changepassword',
-          user_id,
-          password:values.oldPassword,
-          newpassword:values.newPassword,
-        })
+                if(data.mobile){
+                dispatch({
+                type: 'Create_Pin_Request',
+                url: 'forgetpassword',
+                user_id,
+                pin:values.newPassword,
+                mobile:data.mobile,
+                navigation,
+               
+                })
+            }
+            else{
+                dispatch({
+                    type: 'Create_Pin_Request',
+                    url: 'forgetpassword',
+                    user_id,
+                    pin:values.newPassword,
+                    email:data.email,
+                    navigation
+                    })
+            }
 }
     return(
       <Formik
-      initialValues={{ oldPassword: '',newPassword:'',confirmPassword:'' }}
+      initialValues={{newPassword:'',confirmPassword:'' }}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -110,40 +100,20 @@ const validateUser=async(values)=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
-         <Header
-         title={'CHANGE PIN'}
-         source={require('../../../assets/Image/arrow.png')}
-         onPress={()=>navigation.goBack()}
-         />
+        
           <ScrollView>
-         
+          <View style={styles.imageContainer}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <Image source={require('../../../assets/Image/arrowBack.png')}/>
+            </TouchableOpacity>
+              <View style={styles.round}>
+                  <Image
+                  source={require('../../../assets/Image/logo-icon.png')}/>
+              </View>
+              <View style={{width:'5%'}}></View>
+          </View>
                  <View style={styles.main}>
-                    <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
-                  <Text style={styles.heading}>Old Pin</Text>
-                    <View style={styles.input}>
-                    {showVisible()}
-                     <TextInput
-                      onFocus={()=>setFocus(true)}
-                      style={styles.input1}
-                      placeholder='Old Pin'
-                      onChangeText={handleChange('oldPassword')}
-                      onBlur={handleBlur('oldPassword')}
-                      value={values.oldPassword}
-                      secureTextEntry={visible}
-                      returnKeyType='next'
-                      keyboardType='number-pad'
-                      maxLength={4}
-                      onSubmitEditing={() => {
-                        ref1.current.focus()
-                      }}
-                      />
-                  </View>
-              </View>
-              <View style={styles.error}>
-              {(errors.oldPassword && touched.oldPassword) &&
-                <Text style={styles.warn}>{errors.oldPassword}</Text>
-                }
-              </View>
+                      
               <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
                    <Text style={styles.heading}>New Pin</Text>
                     <View style={styles.input}>
@@ -158,8 +128,8 @@ const validateUser=async(values)=>{
                       value={values.newPassword}
                       secureTextEntry={visible1}
                       returnKeyType='next'
-                      maxLength={4}
                       keyboardType='number-pad'
+                      maxLength={4}
                       onSubmitEditing={() => {
                         ref2.current.focus()
                       }}
@@ -172,20 +142,21 @@ const validateUser=async(values)=>{
                 }
               </View>
               <View style={[styles.card,{borderColor:focus2?colors.bc:'#fff'}]}>
-                   <Text style={styles.heading}>Confirm Pin</Text>
+                   <Text style={styles.heading}>Confirm New Pin</Text>
                     <View style={styles.input}>
-                    {showVisible2()}
+                    {showVisible()}
                      <TextInput
                      ref={ref2}
                      onFocus={()=>setFocus2(true)}
                       style={styles.input1}
-                      placeholder='Confirm Pin'
+                      placeholder='Confirm New Pin'
                       onChangeText={handleChange('confirmPassword')}
                       onBlur={handleBlur('confirmPassword')}
                       value={values.confirmPassword}
-                      secureTextEntry={visible2}
+                      secureTextEntry={visible}
                       keyboardType='number-pad'
                       returnKeyType='go'
+                      maxLength={4}
                      onSubmitEditing={() => {
                       handleSubmit()
                      }}
@@ -199,15 +170,14 @@ const validateUser=async(values)=>{
               </View>
              <View style={styles.button}>
                  <CustomButton
-                   title='CHANGE PIN'
-                   onPress={()=>errors.email || errors.mobile ?Toast.show('All field required'):handleSubmit()}
+                   title='CREATE PIN'
+                   onPress={()=>handleSubmit()}
                  />
              </View>
             
            </View>
          </ScrollView>
          <StatusBar/>
-         {/* <BottomTab/> */}
        </View>
          )}
          </Formik>

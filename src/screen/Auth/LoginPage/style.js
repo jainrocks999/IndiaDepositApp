@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
-    container:
-    {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    backgroundColor:'#E5E5E5'
+    container:{
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        backgroundColor:'#E5E5E5',
+        height:'100%'
     },
    
     imageContainer:
@@ -107,8 +107,6 @@ export default StyleSheet.create({
     {
         width: 50,
         height: 50,
-        borderWidth: 2,
-        color:'#000',
         backgroundColor:'white',
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -116,6 +114,10 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
+        // alignItems:'center',
+        // justifyContent:'center',
+        marginTop:5,
+        paddingHorizontal:16
     },
     view1:
     {
@@ -138,7 +140,7 @@ export default StyleSheet.create({
     text1:
     {
         marginLeft:4,
-        color:colors.textColor,
+        color:colors.heading,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.thirteen
     },

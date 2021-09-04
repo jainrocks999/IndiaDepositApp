@@ -39,6 +39,21 @@ export default StyleSheet.create({
         paddingHorizontal:10,
        
     }, 
+    dropCal:{
+        marginTop:5 ,
+        borderWidth:1,
+        height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
+        alignItems:'center',
+        justifyContent:'space-between',
+        width:'100%',
+        paddingHorizontal:10,
+        flexDirection:'row'
+
+       
+    }, 
    
     input:{
         color:colors.textColor

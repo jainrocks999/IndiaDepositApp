@@ -29,9 +29,9 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal'
     },
     drop:{
-        marginTop:13 ,
+        marginTop:7 ,
         borderWidth:1,
-        height:35,
+        height:40,
         borderColor:colors.textColor,
         borderRadius:6,
         paddingHorizontal:5,
