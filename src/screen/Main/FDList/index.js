@@ -11,38 +11,69 @@ const data=
 [
     {source:require('../../../assets/Images/sbi.png'),
     title:'Regular Fixed Deposit',
-    value1:'5.5%',value2:'9%',
-    value3:'3 Lakh',value4:'12%',
+    value1:'5%',value2:'1.05 Lakh',
+    value3:'Yes',value4:'10%',
     img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
     },
     {source:require('../../../assets/Images/union.png'),
     title:'Regular Fixed Deposit',
-    value1:'5.5%',value2:'9%',
-    value3:'3 Lakh',value4:'12%',
+    value1:'6%',value2:'1.06 Lakh',
+    value3:'Yes',value4:'9%',
     img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
     },
-    {source:require('../../../assets/Images/axis.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    {source:require('../../../assets/Images/axis.png'),
+    title:'Regular Fixed Deposit',
+    value1:'7%',value2:'1.07 Lakh',
+    value3:'Yes',value4:'8%',
+     img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')},
-    {source:require('../../../assets/Images/pnb.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
+  },
+    {source:require('../../../assets/Images/pnb.png'),
+    title:'Regular Fixed Deposit',
+    value1:'8%',value2:'1.08 Lakh',
+    value3:'Yes',value4:'7%', 
+    img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')},
-    {source:require('../../../assets/Images/hdfc.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
+  },
+    {source:require('../../../assets/Images/hdfc.png'),
+    title:'Regular Fixed Deposit',
+    value1:'9%',value2:'1.09 Lakh',
+    value3:'Yes',value4:'6%',
+     img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')},
-    {source:require('../../../assets/Images/bob.png'),title:'Regular Fixed Deposit',value1:'5.5%',value2:'9%',value3:'3 Lakh',value4:'12%', img1:require('../../../assets/Image/interest.png'),
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
+  },
+    {source:require('../../../assets/Images/bob.png'),
+    title:'Regular Fixed Deposit',
+    value1:'10%',value2:'1.10 Lakh',
+    value3:'Yes',value4:'5%',
+    img1:require('../../../assets/Image/interest.png'),
     img2:require('../../../assets/Image/maturity.png'),
     img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png')
+    img4:require('../../../assets/Image/premature.png'),
+    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
+    tx3:'Premature\nPenalty'
     }
  ]
 const FDList=()=>{
@@ -72,6 +103,12 @@ const renderItem=(item)=>{
                        <Image source={item.img3}/>
                        <Image source={item.img4}/>
                    </View>
+                   <View style={styles.row1}>
+                     <Text  style={styles.same}>{item.tx}</Text>
+                     <Text  style={styles.same}>{item.tx1}</Text>
+                     <Text  style={styles.same}>{item.tx2}</Text>
+                     <Text  style={[styles.same]}>{item.tx3}</Text>
+                   </View>
                  </TouchableOpacity>
           </View>
       )
@@ -81,9 +118,9 @@ const renderItem=(item)=>{
               <Header
                     title={'FD LISTING'}
                     source={require('../../../assets/Images/arrow.png')}
-                    titleTwo='Compare'
+                   // titleTwo='Compare'
                     onPress={()=>navigation.goBack()}
-                    onPress1={()=>navigation.navigate('CompareFD')}
+                   // onPress1={()=>navigation.navigate('CompareFD')}
                /> 
               <View style={styles.list}>
                 <FlatList

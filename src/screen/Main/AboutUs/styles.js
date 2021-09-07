@@ -5,11 +5,11 @@ export default StyleSheet.create({
     container:
     {
     flex: 1,
-    backgroundColor:'#E5E5E5'
+    backgroundColor:colors.card
     },
     card:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
@@ -17,7 +17,7 @@ export default StyleSheet.create({
         borderRadius:10,
         //borderTopLeftRadius:10,
         //borderTopRightRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
        // marginHorizontal:15,
        // paddingHorizontal:18,
        // paddingVertical:20,

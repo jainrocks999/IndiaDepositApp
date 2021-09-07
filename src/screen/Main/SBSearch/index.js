@@ -56,7 +56,7 @@ const SBAccount=()=>{
                               web designs. The passage is attributed to an
                               unknown typesetter book.</Text>
                               <View style={styles.view}>
-                                  <Text>Minimum Balance </Text>
+                                  <Text style={[styles.text2,{fontWeight:'700'}]}>Minimum Balance </Text>
                                   <TextInput
                                       style={styles.textinput}
                                        // placeholder='Enter Pincode'
@@ -66,7 +66,7 @@ const SBAccount=()=>{
                            </View>
                            <View style={styles.view}>
                                  <View style={styles.view1}>
-                                     <Text style={styles.text2}>Location</Text>
+                                     <Text style={[styles.text2,{fontWeight:'700'}]}>Location</Text>
                                   </View>
                                   <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
                                           <Image source={require('../../../assets/Image/search.png')}/>
@@ -74,7 +74,7 @@ const SBAccount=()=>{
                                   </View>
                               </View>
                               <View style={[styles.view,{alignItems:'center'}]}>
-                                      <Text>OR</Text>
+                                      <Text style={{fontWeight:'700'}}>OR</Text>
                               </View>
                               <View style={{marginTop:5}}>
                                    <TextInput

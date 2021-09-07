@@ -17,7 +17,7 @@ const dashboard=()=>{
         console.log(photo)
     },[])
     return(
-        <View style={{flex:1,backgroundColor:'#E5E5E5'}}>
+        <View style={styles.container1}>
               <Header
                   title={'DASHBOARD'}
                   source ={require('../../../assets/Images/drawer.png')}

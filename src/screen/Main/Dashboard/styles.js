@@ -8,6 +8,10 @@ export default StyleSheet.create({
         justifyContent:'space-between',
         //marginTop:38
     },
+    container1:{
+        flex:1,
+        backgroundColor:colors.card
+    },
     imageView:
     {
         // width:60,
@@ -43,7 +47,7 @@ export default StyleSheet.create({
         width:76,
         height:76,
         borderRadius:37,
-        backgroundColor:'#fff',
+        backgroundColor:colors.white,
         justifyContent:'center',
         alignItems:'center'
     },
@@ -111,7 +115,8 @@ export default StyleSheet.create({
     Text1:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+        fontWeight:'500'
     },
     buttomview1:
     {

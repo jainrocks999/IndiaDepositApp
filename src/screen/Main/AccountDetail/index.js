@@ -6,6 +6,7 @@ import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
 import StatusBar from '../../../component/StatusBar';
+import BottomTab from '../../../component/StoreButtomTab';
 const data=[
       
 ]
@@ -16,15 +17,15 @@ const navigation=useNavigation()
          <Header
           title={'SB A/C DETAILS'}
           source={require('../../../assets/Image/arrow.png')}
-          titleTwo='Compare'
+         // titleTwo='Compare'
           onPress={()=>navigation.goBack()}
-          onPress1={()=>navigation.navigate('CompareFD')}
+         // onPress1={()=>navigation.navigate('CompareFD')}
          /> 
-    <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
+    <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20, marginBottom:10}}>
              <View>
                  <View style={styles.list}>
                      <Image style={styles.img} source={require('../../../assets/Image/sbi.png')}/>
-                     <Text style={styles.Text1}>Saving Account</Text>
+                     <Text  onPress={()=>navigation.navigate('CompareFD')} style={styles.Text1}>Saving Account</Text>
                      <Text style={styles.Text2}>Account</Text>
                  </View>
               </View>
@@ -206,6 +207,7 @@ const navigation=useNavigation()
             </View>
            
          </ScrollView>
+         <BottomTab/>
          <StatusBar/>
      </View>
        

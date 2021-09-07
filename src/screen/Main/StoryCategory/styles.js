@@ -7,14 +7,14 @@ export default StyleSheet.create({
         backgroundColor:colors.white
     },
     card:{
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginHorizontal:15,
         // paddingVertical:20,
         marginTop:20,
@@ -22,10 +22,12 @@ export default StyleSheet.create({
          height:'100%'
     }, 
     main:{
+        flex:1,
+        padding:20
+    },
+    main1:{
         flexDirection:'row',
-        paddingHorizontal:20,
-        marginBottom:10,
-        marginTop:20
+        alignItems:'center'
     },
     imageContainer:{
         height:84,
@@ -35,15 +37,16 @@ export default StyleSheet.create({
     camera:{
         width:28,
         height:28, 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:5,width:0},
         elevation:2,
         borderRadius:14,
         marginLeft:-28,marginTop:63,
-        backgroundColor:'white',
-        alignItems:'center',justifyContent:'center'
+        backgroundColor:colors.white,
+        alignItems:'center',
+        justifyContent:'center'
     },
     change:{
         fontSize:fontSize.thirteen,
@@ -51,14 +54,55 @@ export default StyleSheet.create({
         marginTop:5,
         color:colors.bc
     },
-    title:{ 
-     
-        fontSize:fontSize.thirteen,
-        //  hp('1.9%'),
-        fontFamily:'Montserrat-SemiBold' 
+    view:{
+        backgroundColor:colors.bc,
+        paddingHorizontal:12,
+        paddingVertical:2,
+        marginLeft:12
     },
+    view1:{
+        width:'100%',
+        height:120,
+        backgroundColor:'#EDEDEB',
+        marginTop:20,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    view2:{
+        marginTop:15
+    },
+    title:{
+        color:colors.bc,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
+    },
+    Text3:{color:colors.textColor,
+        fontSize:fontSize.thirteen,
+        fontFamily:'Montserrat-Normal'},
+    Text2:{
+        fontSize:16
+    },
+    Text1:{
+        color:colors.white,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
+},
+
+    title1:{
+        color:colors.heading,
+    },
+    title2:{
+        color:colors.black,
+        fontSize:fontSize.sixteen,
+        fontFamily:'Montserrat-Normal'
+    },
+    title3:{
+            color:colors.heading,
+            fontSize:fontSize.twelve,
+             fontFamily:'Montserrat-Normal'
+},
     prop:{
-        backgroundColor: 'white',
+        backgroundColor:colors.white,
         borderTopRightRadius:10,
         borderTopLeftRadius:10
     },

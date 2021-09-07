@@ -33,12 +33,12 @@ export default StyleSheet.create({
     },
     card:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:6,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         height:150,
         alignItems:'center',
         width:160,

@@ -26,7 +26,7 @@ const Knowledge=()=>{
         <View style={styles.container}>
               <Header
                   title={'KNOWLEDGE CENTER'}
-                  source ={require('../../../assets/Images/drawer.png')}
+                  source ={require('../../../assets/Images/arrow.png')}
                   onPress={()=>navigation.toggleDrawer()}
                  source1={require('../../../assets/Image/notification.png')}
                  onPress1={()=>navigation.navigate('Notification')}
@@ -34,7 +34,7 @@ const Knowledge=()=>{
               
              <ScrollView
                 contentContainerStyle={{flex:1}}
-                style={{backgroundColor:'#E5E5E5'}}>
+                style={{backgroundColor:colors.card}}>
                  <View style={{flex:1}}>
                     <TabView
                        navigationState={{ index, routes }}
@@ -44,7 +44,8 @@ const Knowledge=()=>{
                        renderTabBar={props => <TabBar
                        indicatorStyle={{ 
                        backgroundColor: colors.bc, 
-                       height:3
+                       height:3,
+                       width:'22%'
                        }}
                        renderLabel={({route, color,focused}) => (
                        <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>

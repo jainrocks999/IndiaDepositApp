@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container1:
     {
         flex:1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card
     },
     img:
     {
@@ -17,7 +17,8 @@ export default StyleSheet.create({
         marginTop:10,
         fontSize:fontSize.fourteen,
         color:colors.bc,
-        fontFamily:'Montserrat-Medium'
+        fontFamily:'Montserrat-Medium',
+        fontWeight:'600'
     },
     text1:
     {
@@ -25,16 +26,17 @@ export default StyleSheet.create({
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Medium',
         color:colors.textColor,
+        fontWeight:'500'
     },
     list:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingVertical:15,
         marginHorizontal:15,
         justifyContent:'center',
@@ -81,9 +83,11 @@ export default StyleSheet.create({
     },
     tds:
     {
-        color:'#000',
+        color:colors.black,
     fontFamily:'Montserrat-Normal',
-    marginTop:10
+    marginTop:10,
+    fontWeight:'700',
+    fontSize:fontSize.fourteen
 },
     lorem:
     {
@@ -97,7 +101,7 @@ export default StyleSheet.create({
         width:6,
         height:6,
         borderRadius:3,
-        backgroundColor:'#000',
+        backgroundColor:colors.black,
         marginTop:7
     },
     pointText:
@@ -120,12 +124,12 @@ export default StyleSheet.create({
        },
     text3:
     {
-        color:'white',
+        color:colors.white,
         fontFamily:'Montserrat-Normal',
     },
     text2:
     {
-        color:'#000',
+        color:colors.black,
         fontFamily:'Montserrat-Normal',
         marginTop:10
     },
@@ -133,7 +137,8 @@ export default StyleSheet.create({
     {
         color:colors.bc,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+        fontWeight:'700'
     },
     top:
     {
@@ -157,5 +162,16 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         alignItems:'center',
         justifyContent:'center'
-    }
+    },
+      rupay:
+    {
+        marginRight:2,
+        height:11,
+        width:8,
+        marginTop:2
+    },
+    view4:{
+        backgroundColor:colors.white,
+        marginTop:13
+    },
 })

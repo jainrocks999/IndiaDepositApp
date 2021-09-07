@@ -36,6 +36,9 @@ export default StyleSheet.create({
         justifyContent:'center'
        
     },
+    view1:{
+        marginTop:10
+    },
     heading:{
         fontSize:fontSize.eighteen,
         color:colors.textColor,
@@ -47,8 +50,34 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:10
     },
+    line:{
+        borderWidth:1,
+        borderColor:'#DDDDDD',
+        marginVertical:10
+    },
     
-    
-   
+    text:{
+        fontSize:fontSize.twelve,
+        color:colors.white
+    },
+    text1:{
+        fontSize:fontSize.fourteen,
+        color:colors.black,
+        fontFamily:'Montserrat-Normal'
+    },
+    text2:{
+        fontSize:fontSize.eleven,
+        color:colors.heading,
+        fontFamily:'Montserrat-Normal'
+    },
+   text3:{
+       fontSize:fontSize.thirteen,
+       color:colors.black,
+       fontFamily:'Montserrat-Normal'
+    },
+    text4:{
+        fontSize:fontSize.twelve,
+        color:colors.bc,
+        fontFamily:'Montserrat-Normal'},
     
 })

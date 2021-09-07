@@ -5,17 +5,18 @@ export default StyleSheet.create({
     container1:
     {
         flex:1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card,
+       
     },
     list:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingVertical:15,
         marginHorizontal:15,
         justifyContent:'center',
@@ -66,7 +67,7 @@ export default StyleSheet.create({
     },
     tds:
     {
-        color:'#000',
+        color:colors.black,
         fontFamily:'Montserrat-Normal',
         marginTop:10
     },
@@ -82,7 +83,7 @@ export default StyleSheet.create({
         width:6,
         height:6,
         borderRadius:3,
-        backgroundColor:'#000',
+        backgroundColor:colors.black,
         marginTop:7
     },
     pointText:
@@ -107,7 +108,8 @@ export default StyleSheet.create({
     {
         color:colors.bc,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+        fontWeight:'700'
     },
     top:
     {
@@ -137,7 +139,7 @@ export default StyleSheet.create({
     },
     Text3:
     {
-        color:'#000',
+        color:colors.black,
         fontFamily:'Montserrat-Normal',
         marginTop:10
     },

@@ -73,14 +73,9 @@ const DrawerContent=({props})=> {
            {/* Bottom Code For Popup */}
            <Modal isVisible={isModalVisible}>
                 <View style={styles.modal}>
-                <View style={{width: '100%',borderWidth:1,backgroundColor:colors.bc,paddingVertical:5}}>
+                <View style={styles.modal1}>
                     <Text
-                    style={{
-                        color: colors.white,
-                        fontSize: fontSize.twenty,
-                        fontWeight: 'bold',
-                        textAlign: 'center',
-                    }}>
+                    style={styles.modaltext}>
                     CONFIRM
                     </Text>
                 </View>
@@ -88,13 +83,7 @@ const DrawerContent=({props})=> {
                     <Text style={styles.ModelMsgText}>{'Are you sure want to logout?'}</Text>
                 </TouchableOpacity>
                 <View
-                    style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
-                    width: '100%',
-                    bottom:20,
-                    position:'absolute'
-                    }}>
+                    style={styles.modal2}>
                     <TouchableOpacity style={styles.popup}
                      onPress={()=>getLogout()}
                      >
@@ -109,31 +98,23 @@ const DrawerContent=({props})=> {
                 </View>
             </Modal>
 
-              <View style={{
-                   height:'22%',
-                   backgroundColor:'#5A4392',
-                   flexDirection:'row',
-                   paddingHorizontal:20,
-                   justifyContent:'space-between'
-                  }}>
-                 <View style={{flexDirection:'row', alignItems:'center',}}>
-                 {image?<Image style={{height:84,
-                    width:84,
-                    borderRadius:42}} 
+              <View style={styles.main}>
+                 <View style={styles.main1}>
+                 {image?<Image style={styles.img} 
                     source={{uri: image}}
                  />
                         :<Image 
                             source={require('../../assets/Image/profile-pic.png')}/>}
                 { !name?
-                    <View style={{marginLeft:20}}>
-                        <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>John</Text>
-                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>9633984668</Text>
-                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>test@gmail.com</Text>
+                    <View style={styles.view}>
+                        <Text style={styles.text2}>John</Text>
+                        <Text style={styles.text3}>9633984668</Text>
+                        <Text style={styles.text3}>test@gmail.com</Text>
                     </View>:
-                    <View style={{marginLeft:20}}>
-                        <Text style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>{name}</Text>
-                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>{mobile}</Text>
-                        <Text style={{color:colors.white,fontSize:fontSize.twelve,fontFamily:'Montserrat-Normal'}}>{email}</Text>
+                    <View style={styles.view}>
+                        <Text style={styles.text2}>{name}</Text>
+                        <Text style={styles.text3}>{mobile}</Text>
+                        <Text style={styles.text3}>{email}</Text>
                     </View>
                     }
                  
@@ -149,7 +130,7 @@ const DrawerContent=({props})=> {
                     >
                     <View style={[styles.drawer]}>
                         <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/profile1.png')}/>
@@ -167,7 +148,7 @@ const DrawerContent=({props})=> {
                     >
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/cal.png')}/>
@@ -185,7 +166,7 @@ const DrawerContent=({props})=> {
                     }}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/about.png')}/>
@@ -202,7 +183,7 @@ const DrawerContent=({props})=> {
                     }}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/about.png')}/>
@@ -217,7 +198,7 @@ const DrawerContent=({props})=> {
                     onPress={()=>navigation.navigate('Notification')}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/noti.png')}/>
@@ -231,7 +212,7 @@ const DrawerContent=({props})=> {
                     onPress={()=>navigation.navigate('KnowledgeCenter')}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/knowledege.png')}/>
@@ -246,7 +227,7 @@ const DrawerContent=({props})=> {
                     onPress={()=>navigation.navigate('Support')}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/support.png')}/>
@@ -263,7 +244,7 @@ const DrawerContent=({props})=> {
                     onPress={()=>navigation.navigate('Feedback')}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/feedback.png')}/>
@@ -278,7 +259,7 @@ const DrawerContent=({props})=> {
                 onPress={()=>navigation.navigate('Referal')}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/ref.png')}/>
@@ -293,7 +274,7 @@ const DrawerContent=({props})=> {
                     >
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/privacy.png')}/>
@@ -309,7 +290,7 @@ const DrawerContent=({props})=> {
                     onPress={() => setModalVisible(true)}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
-                            <View style={{ flexDirection: 'row',alignItems:'center',justifyContent:'center' }}>
+                            <View style={styles.view2}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/logout.png')}/>

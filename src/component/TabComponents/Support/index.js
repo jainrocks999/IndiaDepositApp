@@ -47,7 +47,7 @@ const Support=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
-                  <Text style={{fontFamily:'Montserrat-SemiBold',color:'#000',fontSize:fontSize.fefteen}}>How can we help you?</Text>
+                  <Text style={styles.better1}>How can we help you?</Text>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
                         <TextInput

@@ -9,6 +9,13 @@ export default StyleSheet.create({
         color:colors.bc,
         textAlign:'center'
     },
+    same1:
+    {
+        fontSize:fontSize.eleven,
+        fontFamily:'Montserrat-Normal',
+        color:colors.textColor,
+        textAlign:'center'
+    },
     title:
     {
         fontSize:fontSize.fourteen,
@@ -23,13 +30,13 @@ export default StyleSheet.create({
     },
     card:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:6,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
        // height:85,
         padding:13,
     },

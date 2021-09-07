@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container:
     {
        flex: 1,
-       backgroundColor:'#E5E5E5'
+       backgroundColor:colors.card
     },
     view1:
     { 
@@ -41,13 +41,13 @@ export default StyleSheet.create({
     main:
     {
         paddingHorizontal:30,
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingHorizontal:15,
         paddingVertical:10,
         marginBottom:40,

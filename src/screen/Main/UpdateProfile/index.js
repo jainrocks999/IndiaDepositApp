@@ -107,8 +107,8 @@ const RegisterPage=({route})=>{
                         onChangeText={(val)=>setMName(val)}
                         />
                     </View>
-                    <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
-                        <View style={{width:'47%'}}>
+                    <View style={styles.view2}>
+                        <View style={styles.view3}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
                                <RNPickerSelect
@@ -128,7 +128,7 @@ const RegisterPage=({route})=>{
 
                             </View>
                         </View>
-                        <View style={{width:'47%',}}>
+                        <View style={styles.view3}>
                             <Text style={styles.better}>Date of Birth</Text>
                             <View style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
@@ -173,7 +173,7 @@ const RegisterPage=({route})=>{
                         onChangeText={(val)=>setEmail(val)}
                         />
                     </View>
-                    <View style={{paddingVertical:30,marginBottom:10}}>
+                    <View style={styles.view1}>
                      <CustomButton
                      title='UPDATE'
                      onPress={()=>validateUser()}

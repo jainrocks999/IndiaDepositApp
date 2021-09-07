@@ -5,6 +5,7 @@ import colors from '../../../component/colors';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
+import BottomTab from '../../../component/StoreButtomTab';
 const data=[
       
 ]
@@ -16,88 +17,85 @@ const navigation=useNavigation()
                        <Header
                          title={'FD DETAILS'}
                          source={require('../../../assets/Images/arrow.png')}
-                         titleTwo='Compare'
+                         //titleTwo='Compare'
                          onPress={()=>navigation.goBack()}
-                         onPress1={()=>navigation.navigate('CompareFD')}
+                         //onPress1={()=>navigation.navigate('CompareFD')}
                        /> 
              <ScrollView>
                  <View>
                      <View style={styles.list}>
                          <Image style={styles.img} 
                          source={require('../../../assets/Image/sbi.png')}/>
-                         <Text style={styles.text}>Regular Fixed Deposit</Text>
+                         <Text onPress={()=>navigation.navigate('CompareFD')}style={styles.text}>Regular Fixed Deposit</Text>
                          <Text style={styles.text1}>Fixed Deposit</Text>
                      </View>
                  </View>
                  <View style={styles.view1}>
                         <View style={styles.container}>
                               <View style={styles.view2}>
-                                  <Text style={styles.item}>{`6%`}</Text>
-                                  <Text style={styles.item1}>{`Interest Rate`}</Text>
+                                 <View style={{flexDirection:'row'}}>
+                                    <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
+                                  <Text style={styles.item}>{`1 Lakh`}</Text>
+                                  </View>
+                                  <Text style={styles.item1}>{`Principal Amount`}</Text>
                               </View>
                               <View style={styles.view2}>
-                                   <Text style={styles.item}>{`300`}</Text>
-                                   <Text style={styles.item1}>{`Non-Maintenance Penalty`}</Text>
+                                   <Text style={styles.item}>{`6%`}</Text>
+                                   <Text style={styles.item1}>{`Interest Rate`}</Text>
                              </View>
                               <View style={styles.view2}>
-                                    <Text style={styles.item}>{`Yes`}</Text>
-                                    <Text style={styles.item1}>{`Locker Facility`}</Text>
+                                   <View style={{flexDirection:'row'}}>
+                                    <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
+                                  <Text style={styles.item}>{`106 Lakh`}</Text>
+                                  </View>
+                                    <Text style={styles.item1}>{`Maturity Amount`}</Text>
                              </View>
                         </View>
                         <View style={styles.line}></View>
                         <View style={styles.container}>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Yes`}</Text>
-                                     <Text style={styles.item1}>{`Joining Kit`}</Text>
+                                     <Text style={styles.item}>{`14-july-22`}</Text>
+                                     <Text style={styles.item1}>{`Date of Maturity`}</Text>
                                 </View>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Yes`}</Text>
-                                     <Text style={styles.item1}>{`Net banking`}</Text>
+                                     <Text style={styles.item}>{`Monthly`}</Text>
+                                     <Text style={styles.item1}>{`Interest Payout`}</Text>
                                 </View>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Yes`}</Text>
-                                     <Text style={[styles.item1,{textAlign:'center'}]}>{`Phone Banking`}</Text>
+                                     <Text style={styles.item}>{`Bank Deposit`}</Text>
+                                     <Text style={[styles.item1,{textAlign:'center'}]}>{`FD Type`}</Text>
                                 </View>
                         </View>
                  </View>
                   {/* first row */}
-                   <View style={{backgroundColor:colors.white,marginTop:13}}>
+                   <View style={styles.view4}>
                           <View style={styles.container}>
                                   <View style={styles.view2}>
-                                       <Text style={styles.item}>{`1 Lakh`}</Text>
-                                       <Text style={[styles.item1,{textAlign:'center'}]}>{`Cash Withdrawal\nLimit`}</Text>
+                                       <Text style={styles.item}>{`10%`}</Text>
+                                       <Text style={[styles.item1,{textAlign:'center'}]}>{`Premature Penalty`}</Text>
                                  </View>
                                  <View style={styles.view2}>
-                                     <Text style={styles.item}>{`1 Lakh`}</Text>
-                                     <Text style={styles.item1}>{`Cash Deposit limit`}</Text>
+                                     <Text style={styles.item}>{`Yes`}</Text>
+                                     <Text style={styles.item1}>{`Pan Requirement`}</Text>
                                  </View>
-                                 <View style={styles.view2}>
-                                      <Text style={styles.item}>{`3`}</Text>
-                                     <Text style={[styles.item1,{textAlign:'center'}]}>{`Atm Free no of\nTransaction`}</Text>
-                                 </View>
-                          </View>
-                          <View style={styles.line}></View>
-                          <View style={styles.container}>
                                  <View style={styles.view2}>
                                       <Text style={styles.item}>{`Yes`}</Text>
-                                     <Text style={styles.item1}>{`Pan requirement`}</Text>
-                                  </View>
-                                  <View style={styles.view2}>
-                                       <Text style={styles.item}>{`15`}</Text>
-                                       <Text style={styles.item1}>{`Bank Atm points`}</Text>
-                                  </View>
-                                  <View style={styles.view2}>
-                                       <Text style={styles.item}>{`100`}</Text>
-                                      <Text style={styles.item1}>{`ATM transaction\ncharges`}</Text>
+                                     <Text style={[styles.item1,{textAlign:'center'}]}>{`Savings A/c Required`}</Text>
                                  </View>
                           </View>
                           <View style={styles.line}></View>
                           <View style={styles.container}>
                                  <View style={styles.view2}>
-                                      <Text style={styles.item}>{`150`}</Text>
-                                      <Text style={styles.item1}>{`ATM Free transaction\nfrom other bank`}</Text>
-                                 </View>
+                                      <Text style={styles.item}>{`8%`}</Text>
+                                     <Text style={styles.item1}>{`Loan on  FD Rate`}</Text>
+                                  </View>
+                                  <View style={[styles.view2,{marginRight:165}]}>
+                                       <Text style={styles.item}>{`N/A`}</Text>
+                                       <Text style={styles.item1}>{`TDS`}</Text>
+                                  </View>
+                                 
                           </View>
+                         
                      </View>
            
                        {/*  ButtonView */}
@@ -165,7 +163,7 @@ const navigation=useNavigation()
                      </View>
 
                       <View style={styles.top}>
-                          <Text style={styles.text2}>Eligibility :</Text>
+                          <Text style={styles.tds}>Eligibility :</Text>
                          <Text style={styles.lorem}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore
@@ -186,6 +184,7 @@ const navigation=useNavigation()
                          </TouchableOpacity>
                      </View>
          </ScrollView>
+         <BottomTab/>
      </View>
        
     )

@@ -11,14 +11,14 @@ export default StyleSheet.create({
     },
     card:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginHorizontal:15,
         marginVertical:4,
         marginTop:20
@@ -41,15 +41,16 @@ export default StyleSheet.create({
     {
         width:28,
         height:28, 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:5,width:0},
         elevation:2,
         borderRadius:14,
         marginLeft:-28,marginTop:63,
-        backgroundColor:'white',
-        alignItems:'center',justifyContent:'center'
+        backgroundColor:colors.white,
+        alignItems:'center',
+        justifyContent:'center'
     },
     change:
     {
@@ -64,7 +65,8 @@ export default StyleSheet.create({
      
         fontSize:fontSize.thirteen,
         //  hp('1.9%'),
-        fontFamily:'Montserrat-SemiBold' 
+        fontFamily:'Montserrat-SemiBold' ,
+        marginRight:103
     },
     buttomview:
     {

@@ -87,10 +87,29 @@ export default StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor:colors.white,
       },
+      modal1:{
+          width: '100%',
+          borderWidth:1,
+          backgroundColor:colors.bc,
+          paddingVertical:5
+        },
+        modal2:{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            width: '100%',
+            bottom:20,
+            position:'absolute'
+            },
+        modaltext:{
+            color: colors.white,
+            fontSize: fontSize.twenty,
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
       ModelBtntext: {
-        color: '#fff',
+        color:colors.white,
         fontSize: fontSize.fefteen,
         alignSelf: 'center',
         fontFamily: 'Poppins-Bold',
@@ -122,4 +141,40 @@ export default StyleSheet.create({
         alignSelf: 'center',
         paddingHorizontal:10
       },
+      main:{
+        height:'22%',
+        backgroundColor:colors.bc,
+        flexDirection:'row',
+        paddingHorizontal:20,
+        justifyContent:'space-between'
+       },
+       main1:{
+           flexDirection:'row',
+           alignItems:'center',
+        },
+        img:{
+            height:84,
+            width:84,
+            borderRadius:42
+        },
+        view:{
+            marginLeft:20
+        }, 
+        text2:{
+            color:colors.white,
+            fontFamily:'Montserrat-SemiBold'
+        },
+        text3:{
+            color:colors.white,
+            fontSize:fontSize.twelve,
+            fontFamily:'Montserrat-Normal'
+        }, 
+        view1:{ 
+            flexDirection: 'row'
+         },
+        view2:{ 
+            flexDirection: 'row',
+            alignItems:'center',
+            justifyContent:'center'
+         },  
 })

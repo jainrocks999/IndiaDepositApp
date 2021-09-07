@@ -18,7 +18,7 @@ const Contact=()=>{
     const navigation=useNavigation()
     const [gender, setGender] = useState('')
     const [day, setDay] = useState('')
-
+    const [year,setYear] = useState('')
 
     Geocoder.from("Colosseum")
     .then(json => {
@@ -45,7 +45,7 @@ const Contact=()=>{
                         unknown typesetter book.
                      </Text>
                      <View  style={styles.view}>
-                        <Text style={styles.text1}>Tenure</Text>
+                        <Text style={[styles.text1,{fontWeight:'700'}]}>Tenure</Text>
                      </View>
                      <View style={styles.view1}>
                         <View style={styles.view2}>
@@ -60,7 +60,7 @@ const Contact=()=>{
                                       }}
                                       value={day}
                                       useNativeAndroidPickerStyle={false}
-                                      placeholder={{ label: "Days", value: null }}
+                                      placeholder={{ label: "yy", value: null }}
                                       Icon={()=><Image 
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
@@ -78,7 +78,7 @@ const Contact=()=>{
                                           }}
                                           value={gender}
                                           useNativeAndroidPickerStyle={false}
-                                          placeholder={{ label: "Month", value: null }}
+                                          placeholder={{ label: "MM", value: null }}
                                           Icon={()=><Image 
                                           style={styles.image} 
                                           source={require('../../../assets/Image/down.png')}/>}
@@ -96,7 +96,7 @@ const Contact=()=>{
                                            }}
                                            value={gender}
                                            useNativeAndroidPickerStyle={false}
-                                           placeholder={{ label: "Year", value: null }}
+                                           placeholder={{ label: "Days", value: null }}
                                            Icon={()=><Image 
                                            style={styles.image} 
                                            source={require('../../../assets/Image/down.png')}/>}
@@ -108,7 +108,7 @@ const Contact=()=>{
                       </View>
                       <View style={styles.view1}>
                            <View style={styles.view4}>
-                               <Text style={styles.text1}>Amount</Text>
+                               <Text style={[styles.text1,{fontWeight:'700'}]}>Amount</Text>
                            </View>
                            <View style={{marginTop:-10}}>
                               <TextInput
@@ -119,15 +119,15 @@ const Contact=()=>{
                       </View>
                       <View style={styles.view1}>
                           <View style={styles.view4}>
-                              <Text style={styles.text1}>Location</Text>
+                              <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
                           <View style={styles.view5}>
                                 <Image source={require('../../../assets/Image/search.png')}/>
-                                <Text style={[styles.text1,{marginLeft:30}]}>Current Location</Text>
+                                <Text style={[styles.text1,{marginLeft:20}]}>Current Location</Text>
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text>OR</Text>
+                             <Text style={{fontWeight:'700'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput

@@ -5,11 +5,11 @@ export default StyleSheet.create({
     container1:
     {
         flex:1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card
     },
     Textview:
     {
-         backgroundColor:'#fff',
+         backgroundColor:colors.white,
          marginTop:20,
          borderRadius:6
     },
@@ -107,7 +107,7 @@ export default StyleSheet.create({
         height:40,
         borderRadius:10,
         paddingHorizontal:10,
-        borderColor:'#000'
+        borderColor:colors.black
     },
     dummy:
     {

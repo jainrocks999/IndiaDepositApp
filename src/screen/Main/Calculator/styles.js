@@ -12,14 +12,14 @@ export default StyleSheet.create({
     },
     card:
     {
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginHorizontal:15,
         // paddingVertical:20,
         marginTop:20,
@@ -43,7 +43,7 @@ export default StyleSheet.create({
     {
         width:28,
         height:28, 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:5,width:0},
@@ -51,7 +51,7 @@ export default StyleSheet.create({
         borderRadius:14,
         marginLeft:-28,
         marginTop:63,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         alignItems:'center',
         justifyContent:'center'
     },
@@ -66,11 +66,12 @@ export default StyleSheet.create({
     { 
      
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-SemiBold' 
+        fontFamily:'Montserrat-SemiBold' ,
+        marginRight:128
     },
     prop:
     {
-        backgroundColor: 'white',
+        backgroundColor:colors.white,
         borderTopRightRadius:10,
         borderTopLeftRadius:10
     },

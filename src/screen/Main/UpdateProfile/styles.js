@@ -4,23 +4,35 @@ import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card
     },
     card:{
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginHorizontal:15,
         paddingHorizontal:18,
         paddingVertical:20,
         marginTop:20,
         height:'100%'
+    },
+    view1:{
+        paddingVertical:30,
+        marginBottom:10
+    },
+    view2: {
+        flexDirection:'row' ,
+        justifyContent:'space-between',
+        width:'100%'
     }, 
+    view3:{
+        width:'47%'
+    },
     better:{
         color:colors.textColor,
         marginTop:13,
@@ -69,13 +81,13 @@ export default StyleSheet.create({
     main:
     {
         paddingHorizontal:30,
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingHorizontal:15,
         paddingVertical:10,
         marginBottom:50

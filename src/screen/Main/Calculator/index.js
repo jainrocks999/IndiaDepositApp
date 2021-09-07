@@ -41,7 +41,8 @@ const Calculator=()=>
                     indicatorStyle=
                      {{ 
                         backgroundColor: colors.bc, 
-                        height:3
+                        height:3,
+                        width:'15%'
                      }}
                     renderLabel={({route, color,focused}) => (
                      <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>

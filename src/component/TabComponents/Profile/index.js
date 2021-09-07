@@ -58,8 +58,8 @@ const Profile=()=>{
                         editable={false}
                         />
                     </View>
-                    <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
-                        <View style={{width:'47%'}}>
+                    <View style={styles.view}>
+                        <View style={styles.view1}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
                          
@@ -71,7 +71,7 @@ const Profile=()=>{
                               />
                             </View>
                         </View>
-                        <View style={{width:'47%',}}>
+                        <View style={styles.view1}>
                             <Text style={styles.better}>Date of Birth</Text>
                             <View style={styles.dropCal}>
                             <TextInput
@@ -93,7 +93,7 @@ const Profile=()=>{
                         editable={false}
                         />
                     </View>
-                    <View style={{paddingVertical:20,marginBottom:50}}>
+                    <View style={styles.view3}>
                      
                     </View>
                     </KeyboardAwareScrollView>

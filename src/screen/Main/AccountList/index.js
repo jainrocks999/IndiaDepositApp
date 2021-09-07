@@ -11,7 +11,8 @@ const data=
    {source:require('../../../assets/Images/sbi.png'),
           title:'Saving Account',
          value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-         value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+         value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+         value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
          img1:require('../../../assets/Image/interest.png'),
          img2:require('../../../assets/Image/penalty.png'),
          img3:require('../../../assets/Image/debit.png'),
@@ -20,7 +21,8 @@ const data=
     {source:require('../../../assets/Images/union.png'),
             title:'Saving Account',
             value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-            value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+            value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+            value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
             img1:require('../../../assets/Image/interest.png'),
             img2:require('../../../assets/Image/penalty.png'),
             img3:require('../../../assets/Image/debit.png'),
@@ -28,7 +30,8 @@ const data=
     },
     {source:require('../../../assets/Images/axis.png'),title:'Saving Account',
              value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
-             value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+             value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+             value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
              img1:require('../../../assets/Image/interest.png'),
              img2:require('../../../assets/Image/penalty.png'),
              img3:require('../../../assets/Image/debit.png'),
@@ -36,7 +39,8 @@ const data=
      },
      {source:require('../../../assets/Images/pnb.png'),title:'Saving Account',
                value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
-               value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+               value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+               value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
                img1:require('../../../assets/Image/interest.png'),
                img2:require('../../../assets/Image/penalty.png'),
                img3:require('../../../assets/Image/debit.png'),
@@ -44,7 +48,8 @@ const data=
       },
      {source:require('../../../assets/Images/hdfc.png'),title:'Saving Account',
               value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+              value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
               img1:require('../../../assets/Image/interest.png'),
               img2:require('../../../assets/Image/penalty.png'),
               img3:require('../../../assets/Image/debit.png'),
@@ -52,7 +57,8 @@ const data=
      },
      {source:require('../../../assets/Images/bob.png'),title:'Saving Account',
               value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
+              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
+              value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
               img1:require('../../../assets/Image/interest.png'),
               img2:require('../../../assets/Image/penalty.png'),
               img3:require('../../../assets/Image/debit.png'),
@@ -73,10 +79,10 @@ const renderItem=(item)=>{
                           <View style={{width:'25%'}}></View>
                      </View>
                       <View style={styles.row}>
-                           <Text style={styles.same}>{item.value1}</Text>
-                           <Text style={styles.same}>{item.value2}</Text>
-                           <Text style={styles.same}>{item.value3}</Text>
-                           <Text style={styles.same}>{item.value4}</Text>
+                           <Text style={styles.same1}>{item.value1}</Text>
+                           <Text style={styles.same1}>{item.value2}</Text>
+                           <Text style={styles.same1}>{item.value3}</Text>
+                           <Text style={styles.same1}>{item.value4}</Text>
                       </View>
                        <View style={styles.row}>
                            <Image source={item.img1}/>
@@ -99,9 +105,9 @@ const renderItem=(item)=>{
               <Header
                    title={'SB A/C LISTING'}
                    source={require('../../../assets/Image/arrow.png')}
-                   titleTwo='Compare'
+                   //titleTwo='Compare'
                    onPress={()=>navigation.goBack()}
-                   onPress1={()=>navigation.navigate('CompareSBAccount')}
+                //    onPress1={()=>navigation.navigate('CompareSBAccount')}
               /> 
              <View style={styles.list}>
                 <FlatList

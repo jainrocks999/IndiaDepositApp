@@ -46,20 +46,20 @@ const Blog=()=>{
                 renderItem={({item})=>(
                     <View style={styles.card}>
                         <View style={styles.titleView}>
-                            <Text style={{fontSize:12,color:'#fff'}}>{item.catergory_name}</Text>
+                            <Text style={styles.text}>{item.catergory_name}</Text>
                         </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:14,color:'#000',fontFamily:'Montserrat-Normal'}}>{item.title}</Text>
+                        <View style={styles.view1}>
+                            <Text style={styles.text1}>{item.title}</Text>
                         </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:11,color:'#777777',fontFamily:'Montserrat-Normal'}}>{`published on july 14th, 2021`}</Text>
+                        <View style={styles.view1}>
+                            <Text style={styles.text2}>{`published on july 14th, 2021`}</Text>
                         </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:13,color:'#000',fontFamily:'Montserrat-Normal'}}>{item.short_content}</Text>
+                        <View style={styles.view1}>
+                            <Text style={styles.text3}>{item.short_content}</Text>
                         </View>
-                        <View style={{borderWidth:1,borderColor:'#DDDDDD',marginVertical:10}}/>
+                        <View style={styles.line}/>
                         <TouchableOpacity onPress={()=>navigation.navigate('StoryCategory',{item})}>
-                            <Text style={{fontSize:12,color:'#5A4392',fontFamily:'Montserrat-Normal'}}>Read More</Text>
+                            <Text style={styles.text4}>Read More</Text>
                         </TouchableOpacity>
                  </View>
                 )}

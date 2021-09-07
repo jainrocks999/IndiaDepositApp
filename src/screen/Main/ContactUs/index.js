@@ -87,32 +87,32 @@ const Contact=()=>{
             <View style={styles.main}>
               <Text style={styles.toll}>FOLLW US ON</Text>
                <View style={styles.bottom}>
-                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                  <View style={{flexDirection:'row',width:'50%'}}>
+                <View style={styles.view1}>
+                  <View style={styles.view2}>
                       <View style={styles.fb}>
                       <Image source={require('../../../assets/Images/fb.png')}/>
                       </View>
-                      <Text style={{marginLeft:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>@indiadeposit</Text>
+                      <Text style={styles.text1}>@indiadeposit</Text>
                   </View>
-                  <View style={{flexDirection:'row',width:'50%'}}>
+                  <View style={styles.view3}>
                       <View style={styles.fb}>
                       <Image source={require('../../../assets/Images/in.png')}/>
                       </View>
-                      <Text style={{marginLeft:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>@indiadeposit</Text>
+                      <Text style={styles.text1}>@indiadeposit</Text>
                   </View>
                </View>
-               <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20}}>
-               <View style={{flexDirection:'row',width:'50%'}}>
+               <View style={[styles.view1,{marginTop:20}]}>
+               <View style={styles.view3}>
                       <View style={styles.fb}>
                       <Image source={require('../../../assets/Images/twitter.png')}/>
                       </View>
-                      <Text style={{marginLeft:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>@indiadeposit</Text>
+                      <Text style={styles.text1}>@indiadeposit</Text>
                </View>
-               <View style={{flexDirection:'row',width:'50%'}}>
+               <View style={styles.view3}>
                     <View style={styles.fb}>
                     <Image source={require('../../../assets/Images/insta.png')}/>
                     </View>
-                    <Text style={{marginLeft:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>@indiadeposit</Text>
+                    <Text style={styles.text1}>@indiadeposit</Text>
                </View>
                </View>
                </View>
@@ -167,7 +167,7 @@ const Contact=()=>{
               </View>
               <View style={styles.error}>
               {(errors.email && touched.email) &&
-                <Text style={{fontSize:fontSize.twelve,color:'red'}}>{errors.email}</Text>
+                <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
               <View style={[styles.input,{marginTop:15}]}>

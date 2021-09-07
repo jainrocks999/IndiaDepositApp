@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container:
     {
     flex: 1,
-    backgroundColor:'#E5E5E5'
+    backgroundColor:colors.card
     },
     imageContainer:
     {
@@ -53,6 +53,24 @@ export default StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
     },
+    view1:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    view2:{
+        flexDirection:'row',
+        width:'50%'
+    },
+    view3:{
+        flexDirection:'row',
+        width:'50%'
+    },
+    text1:{
+        marginLeft:10,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    },
+
     toll:
     {
         fontSize:fontSize.sixteen,
@@ -140,19 +158,20 @@ export default StyleSheet.create({
         fontSize:fontSize.twelve,
         color:'red'
     },
+    
     bottom:
     {
         marginTop:15,
     },
     card:
     { 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginBottom:40
     }
    

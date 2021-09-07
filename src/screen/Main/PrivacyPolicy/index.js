@@ -44,7 +44,8 @@ const Calculator=()=>{
                        renderTabBar={props => <TabBar
                        indicatorStyle={{ 
                        backgroundColor: colors.bc, 
-                       height:3
+                       height:3,
+                      
                        }}
                        renderLabel={({route, color,focused}) => (
                        <Text style={[styles.title,{ color:focused?colors.bc: colors.textColor}]}>

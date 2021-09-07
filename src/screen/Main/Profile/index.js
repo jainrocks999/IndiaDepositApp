@@ -155,11 +155,11 @@ const save=async(images)=>{
                          <View>
                         <View style={styles.modalView}>
                            <TouchableOpacity onPress={()=>openCamera()} style={styles.buton}>
-                               <Image style={{width:60,height:40}} source={require('../../../assets/Image/camera1.png')}/>
+                               <Image style={styles.img1} source={require('../../../assets/Image/camera1.png')}/>
                                <Text style={styles.came}>Camera</Text>
                            </TouchableOpacity>
                            <TouchableOpacity onPress={()=>openGallery()} style={styles.buton}>
-                           <Image style={{width:60,height:40}} source={require('../../../assets/Image/gallery.png')}/>
+                           <Image style={styles.img1} source={require('../../../assets/Image/gallery.png')}/>
                                <Text style={styles.came}>Gallery</Text>
                            </TouchableOpacity>
                         </View>

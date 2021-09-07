@@ -61,18 +61,9 @@ const Refferal=()=>{
                                    />
                          </View>
                             <Text style={styles.text2}>TAP TO COPY</Text>
-                            <TouchableOpacity style={{
-                                width:'50%',backgroundColor:colors.bc
-                                ,height:40,borderRadius:30,
-                                flexDirection:'row',
-                                justifyContent:'space-between',
-                                paddingHorizontal:30,
-                                paddingVertical:4,
-                                alignItems:'center',
-                                marginTop:10
-                                }}>
+                            <TouchableOpacity style={styles.touch}>
                                   <Image source={require('../../../assets/Image/share.png')}/>
-                                  <Text style={{color:colors.white,fontFamily:'Montserrat-Normal',fontSize:14}}>REFER NOW</Text>
+                                  <Text style={styles.text3}>REFER NOW</Text>
                              </TouchableOpacity>
                      </View>
                      
