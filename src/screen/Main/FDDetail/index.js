@@ -1,16 +1,25 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {View,Text,FlatList,Image,ScrollView} from 'react-native';
 import Header from '../../../component/compareHeader';
 import colors from '../../../component/colors';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
-const data=[
-      
-]
+import { useDispatch } from 'react-redux';
+import Storage from '../../../component/AsyncStorage';
+import AsyncStorage from '@react-native-community/async-storage';
 const FDList=()=>{
 const navigation=useNavigation()
+const dispatch=useDispatch()
 
+useEffect(async()=>{
+     const user_id=await AsyncStorage.getItem(Storage.user_id)
+     dispatch({
+          type: 'Bank_List_Request',
+          url: 'userbanklist',
+          user_id
+        })     
+})
     return(
         <View style={styles.container1}>
                        <Header
@@ -102,7 +111,7 @@ const navigation=useNavigation()
            
                        {/*  ButtonView */}
                       <View style={styles.bank}>
-                           <TouchableOpacity >
+                           <TouchableOpacity onPress={()=>navigation.navigate('BankDetail')}>
                                <Text style={styles.bankDetails}>BANK DETAILS</Text>
                           </TouchableOpacity>
                           <TouchableOpacity>

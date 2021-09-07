@@ -17,7 +17,8 @@ export default StyleSheet.create({
         backgroundColor:'white',
         paddingHorizontal:18,
         paddingVertical:15,
-        marginVertical:4
+        marginVertical:4,
+        alignItems:'flex-start',
        
     },
     titleView:{
@@ -31,7 +32,7 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         paddingHorizontal:18,
         paddingVertical:10,
-        width:130,
+        // width:130,
         alignItems:'center',
         justifyContent:'center'
        

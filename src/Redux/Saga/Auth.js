@@ -3,6 +3,7 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
+import { useDispatch } from 'react-redux';
 
 //Login
             function* doLogin(action) {
@@ -596,6 +597,125 @@ function* editProfile(action) {
     }
 }
 
+function* getFaq(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'Get_Faq_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Get_Faq_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Get_Faq_Error',
+          });
+    }
+}
+function* getBlog(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'Get_Blog_Success',
+                payload: response.data.blogpost,
+              });       
+            } else {
+              yield put({
+                type: 'Get_Blog_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Get_Blog_Error',
+          });
+    }
+}
+
+function* bankDetail(action) {
+  try{
+    const data = new FormData();
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Bank_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Bank_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Bank_List_Error',
+          });
+    }
+}
+function* addBank(action) {
+ 
+  try{
+    const data = new FormData();
+    data.append('user_id',action.user_id)
+    data.append('bank_id',1)
+    data.append('name',action.name)
+    data.append('account_number',action.account_number)
+    data.append('account_type',action.account_type)
+    data.append('ifsc_code',action.ifsc_code)
+    data.append('other1',action.other1)
+    data.append('other2',action.other2)
+
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Add_Bank_Success',
+                payload: response.data,
+              });    
+            
+            
+              Toast.show('Bank add Successfull')   
+            } else {
+              Toast.show('Bank add Error')   
+              yield put({
+                type: 'Add_Bank_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Add_Bank_Error',
+          });
+    }
+}
+
+function* getBankName(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'Bank_Name_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Bank_Name_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Bank_Name_Error',
+          });
+    }
+}
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -615,4 +735,10 @@ export default function* authSaga() {
   yield takeEvery('Feedback_Request',feedback)
   yield takeEvery('Create_Pin_Request',createPin)
   yield takeEvery('Edit_Profile_Request',editProfile)
+  yield takeEvery('Get_Faq_Request',getFaq)
+  yield takeEvery('Get_Blog_Request',getBlog)
+  yield takeEvery('Bank_List_Request',bankDetail)
+  yield takeEvery('Add_Bank_Request',addBank)
+  yield takeEvery('Bank_Name_Request',getBankName)
+  
 }

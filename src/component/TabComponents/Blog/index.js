@@ -2,6 +2,8 @@ import React,{useState}from 'react';
 import { View,Text,Image,ScrollView,FlatList,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import { useSelector } from "react-redux";
+
 const blogpost= [
     {
         "title": "state level championship!",
@@ -37,17 +39,21 @@ const blogpost= [
 
 const Blog=()=>{
     const navigation=useNavigation()
+    const Blogs=useSelector(state=>state.Blog)
+    console.log('this is blog array',Blogs);
     return(
         <View style={styles.container}>
              <View style={{marginBottom:60}}>
                 <FlatList
-                data={blogpost}
+                data={Blogs}
                 showsVerticalScrollIndicator={false}
                 renderItem={({item})=>(
                     <View style={styles.card}>
-                        <View style={styles.titleView}>
+                        {/* <View style={styles.titleView}> */}
+                        <TouchableOpacity style={styles.titleView}>
                             <Text style={{fontSize:12,color:'#fff'}}>{item.catergory_name}</Text>
-                        </View>
+                        </TouchableOpacity>
+                        {/* </View> */}
                         <View style={{marginTop:10}}>
                             <Text style={{fontSize:14,color:'#000',fontFamily:'Montserrat-Normal'}}>{item.title}</Text>
                         </View>
