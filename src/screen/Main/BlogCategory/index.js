@@ -1,5 +1,5 @@
 import React,{useState}from 'react';
-import { View,Text} from 'react-native';
+import { View,Text,Image} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -36,7 +36,11 @@ const BlogCategory=({route})=>{
                       </View>
                     </View>
                     <View style={{width:'100%',height:120,backgroundColor:'#EDEDEB',marginTop:20,alignItems:'center',justifyContent:'center'}}>
-                           <Text style={{fontSize:16}}>Dummy Image</Text>
+                     { !data.image?  <Text style={{fontSize:16}}>Dummy Image</Text>:
+                     <Image style={{width: '100%', height: '100%'}}
+                     source={{uri:data.image}}/>
+                     }
+                           
                     </View>
                     <View style={{marginTop:15}}>
                       <Text style={{color:colors.textColor,fontSize:13,fontFamily:'Montserrat-Normal'}}>{`${data.content}`}</Text>

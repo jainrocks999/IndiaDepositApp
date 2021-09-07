@@ -132,7 +132,7 @@ const showVisible1=()=>{
          {isFetching?<Loader/>:null} 
          <ScrollView>
          <KeyboardAwareScrollView
-        extraScrollHeight={100}
+        extraScrollHeight={10}
          enableOnAndroid={true} 
         keyboardShouldPersistTaps='handled'
          contentContainerStyle={{flex:1}}>

@@ -1,13 +1,10 @@
 import React,{useState,useEffect}from 'react';
-import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import Loader from '../../../component/loader';
-import { useDispatch,useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import colors from '../../../component/colors';;
 import {
   SafeAreaView,
   LayoutAnimation,
-  StyleSheet,
   View,
   Text,
   ScrollView,
@@ -64,8 +61,12 @@ const ExpandableComponent = ({item, onClickFunction}) => {
 };
 
 const Faq = () => {
-  const [listDataSource, setListDataSource] = useState(data);
+  const selector=useSelector(state=>state.FaqArray)
+  console.log('this is selector value',selector);
+  const [listDataSource, setListDataSource] = useState(selector);
   const [multiSelect, setMultiSelect] = useState(false);
+
+ 
   if (Platform.OS === 'android') {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }

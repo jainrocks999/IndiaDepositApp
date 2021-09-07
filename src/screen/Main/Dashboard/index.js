@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import StatusBar from "../../../component/StatusBar";
 import BottomTab from '../../../component/StoreButtomTab';
+import { FlatList } from "react-native-gesture-handler";
 const dashboard=()=>{
     const navigation=useNavigation()
     const [photo,setPhoto]=useState('')
@@ -35,7 +36,33 @@ const dashboard=()=>{
                                   <View style={styles.view1}>
                                      <Text style={styles.text2}>{'Fixed Deposit'}</Text>
                                  </View>
-                                  <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
+                                 <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
+                                     <FlatList
+                                    style={{ width: '99%' }}
+                                    data={data}
+                                    numColumns={3}
+                                    keyExtractor={(item, index) => item.id}
+                                     renderItem={({item})=>(
+                                         <View >
+                                             <TouchableOpacity 
+                                              onPress={()=>navigation.navigate('FDSearch')}
+                                              style={styles.touch1}>
+                                               <View style={styles.imageView}>
+                                                 <Image source={item.image}/> 
+                                               </View>
+                                              <View style={styles.view2}>
+                                                 <Text style={styles.text}>{item.name}</Text>
+                                                 <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                              </View>
+                                           </TouchableOpacity>
+                                         </View>
+                                     )}
+                                     />
+                                     </View>
+                                  {/* <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
                                            <TouchableOpacity 
                                               onPress={()=>navigation.navigate('FDSearch')}
                                               style={styles.touch1}>
@@ -79,8 +106,8 @@ const dashboard=()=>{
                                                  </View>
                                              </View>
                                          </TouchableOpacity>
-                                   </View>
-                                   <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
+                                   </View> */}
+                                   {/* <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
                                         <TouchableOpacity 
                                              onPress={()=>navigation.navigate('FDSearch')}
                                              style={styles.touch1}>
@@ -95,7 +122,7 @@ const dashboard=()=>{
                                                  </View>
                                              </View>
                                       </TouchableOpacity>
-                                  </View>
+                                  </View> */}
                                   <View style={styles.buttomview}>
                                        <Text style={styles.Text1}>{'*Tap & Hold to make multiple selection'}</Text>
                                   </View>
@@ -108,7 +135,33 @@ const dashboard=()=>{
                                      <View style={styles.view1}>
                                          <Text style={styles.text2}>{'Savings Bank Account'}</Text>
                                       </View>
-                                    <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
+                                      <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
+                                      <FlatList
+                                    style={{ width: '99%' }}
+                                    data={data1}
+                                    numColumns={3}
+                                    keyExtractor={(item, index) => item.id}
+                                     renderItem={({item})=>(
+                                         <View >
+                                             <TouchableOpacity 
+                                              onPress={()=>navigation.navigate('FDSearch')}
+                                              style={styles.touch1}>
+                                               <View style={styles.imageView}>
+                                                 <Image source={item.image}/> 
+                                               </View>
+                                              <View style={styles.view2}>
+                                                 <Text style={styles.text}>{item.name}</Text>
+                                                 <View style={styles.circle}>
+                                                     <Image 
+                                                     source={require('../../../assets/Image/ic.png')}/>  
+                                                 </View>
+                                              </View>
+                                           </TouchableOpacity>
+                                         </View>
+                                     )}
+                                     />
+                                     </View>
+                                    {/* <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10,marginTop:10}]}>
                        
                                         <TouchableOpacity 
                                              onPress={()=>navigation.navigate('FDSearch')}
@@ -154,8 +207,8 @@ const dashboard=()=>{
                                                  </View>
                                            </View>   
                                      </TouchableOpacity>
-                                 </View>
-                                 <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
+                                 </View> */}
+                                 {/* <View style={[styles.container,{paddingHorizontal:20,paddingVertical:10}]}>
                         
                                     <TouchableOpacity 
                                            onPress={()=>navigation.navigate('FDSearch')}
@@ -188,7 +241,7 @@ const dashboard=()=>{
                                    </TouchableOpacity>
 
                                   <View style={styles.width}></View>
-                             </View>
+                             </View> */}
                              <View style={styles.buttomview}>
                                    <Text style={styles.Text1}>{'*Tap & Hold to make multiple selection'}</Text>
                               </View>
@@ -202,10 +255,10 @@ const dashboard=()=>{
 }
 export default dashboard;
 const data=[
-    {name:'Regular',image:require('../../../assets/Image/regular-fd.png')},
-    {name:'Tax Saving',image:require('../../../assets/Image/tax-fd.png')},
-    {name:'NRI',image:require('../../../assets/Image/nri-fd.png')},
-    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png')},
+    {name:'Regular',image:require('../../../assets/Image/regular-fd.png'),id:1},
+    {name:'Tax Saving',image:require('../../../assets/Image/tax-fd.png'),id:2},
+    {name:'NRI',image:require('../../../assets/Image/nri-fd.png'),id:3},
+    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png'),id:4},
 ]
 
 const data1=[

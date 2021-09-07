@@ -38,7 +38,8 @@ import ForgotOtp from '../screen/Auth/ForgotOtp';
 import CreatePin from '../screen/Auth/CreatePin';
 import UpdateProfile from '../screen/Main/UpdateProfile';
 import {navigationRef } from './rootNavigation';
-
+import BankDetail from '../screen/Main/BankSection/BankDetail';
+import AddBank from '../screen/Main/BankSection/AddBank';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -98,6 +99,8 @@ function Navigate() {
         <Stack.Screen name="ForgotOtp" component={ForgotOtp}/>
         <Stack.Screen name="CreatePin" component={CreatePin}/>
         <Stack.Screen name="UpdateProfile"component={UpdateProfile}/>
+        <Stack.Screen name="BankDetail" component={BankDetail}/>
+        <Stack.Screen name="AddBank" component={AddBank}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

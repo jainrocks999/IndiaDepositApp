@@ -28,6 +28,15 @@ const DrawerContent=({props})=> {
     const [image,setImage]=useState('')
 
     useEffect(async()=>{
+        dispatch({
+            type: 'Get_Faq_Request',
+            url: 'getfaq',
+        })
+        dispatch({
+            type: 'Get_Blog_Request',
+            url: 'getpost',
+        })
+        
         let name=await AsyncStorage.getItem(Storage.name)
         let motherName=await AsyncStorage.getItem(Storage.motherName)
         let fatherName=await AsyncStorage.getItem(Storage.fatherName)

@@ -132,7 +132,7 @@ export default StyleSheet.create({
     {
         alignItems:'center',
        // backgroundColor:colors.bc,
-        width:'32%',
+        width:'57%',
         paddingVertical:15,
         borderRadius:10
     },

@@ -11,6 +11,10 @@ initialstate = {
   TermCondition:[],
   Trending:[],
   Notification:[],
+  FaqArray:[],
+  Blog:[],
+  BankList:[],
+  BankNameList:[]
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -155,7 +159,33 @@ export default (state = initialstate, action) => {
   case 'Edit_Profile_Error':
   return { ...state, isFetching: false };
 
+  case 'Get_Faq_Request':
+    return { ...state, isFetching: true };
+  case 'Get_Faq_Success':
+    return { ...state, isFetching: false, FaqArray: action.payload };
+  case 'Get_Faq_Error':
+  return { ...state, isFetching: false };
+
+  case 'Get_Blog_Request':
+    return { ...state, isFetching: true };
+  case 'Get_Blog_Success':
+    return { ...state, isFetching: false, Blog: action.payload };
+  case 'Get_Blog_Error':
+  return { ...state, isFetching: false };
   
+  case 'Bank_List_Request':
+    return { ...state, isFetching: true };
+  case 'Bank_List_Success':
+    return { ...state, isFetching: false, BankList: action.payload };
+  case 'Bank_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'Bank_Name_Request':
+    return { ...state, isFetching: true };
+  case 'Bank_Name_Success':
+    return { ...state, isFetching: false, BankNameList: action.payload };
+  case 'Bank_Name_Error':
+  return { ...state, isFetching: false };
     default:
       return state;
   }
