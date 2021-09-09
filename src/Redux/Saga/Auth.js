@@ -638,7 +638,7 @@ function* getBlog(action) {
     }
 }
 
-function* bankDetail(action) {
+function* bankList(action) {
   try{
     const data = new FormData();
     data.append('user_id',action.user_id)
@@ -660,8 +660,31 @@ function* bankDetail(action) {
           });
     }
 }
+
+function* nomineeList(action) {
+  try{
+    const data = new FormData();
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Nominee_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Nominee_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Nominee_List_Error',
+          });
+    }
+}
+
 function* addBank(action) {
- 
   try{
     const data = new FormData();
     data.append('user_id',action.user_id)
@@ -695,6 +718,70 @@ function* addBank(action) {
           });
     }
 }
+function* updateBank(action) {
+ 
+  try{
+    const data = new FormData();
+    data.append('user_bank_id',action.user_bank_id)
+    data.append('user_id',action.user_id)
+    data.append('bank_id',1)
+    data.append('name',action.name)
+    data.append('account_number',action.account_number)
+    data.append('account_type',action.account_type)
+    data.append('ifsc_code',action.ifsc_code)
+    data.append('other1',action.other1)
+    data.append('other2',action.other2)
+
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Update_Bank_Success',
+                payload: response.data,
+              });    
+            
+            
+              Toast.show('Bank Update Successfull')   
+            } else {
+              Toast.show('Bank Update Error')   
+              yield put({
+                type: 'Update_Bank_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Update_Bank_Error',
+          });
+    }
+}
+
+function* deleteBank(action) {
+ 
+  try{
+    const data = new FormData();
+    data.append('user_bank_id',action.user_bank_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Delete_Bank_Success',
+                payload: response.data,
+              });    
+
+              Toast.show('Bank Delete Successfull') 
+            } else {
+              Toast.show('Bank Delete Error')   
+              yield put({
+                type: 'Delete_Bank_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Delete_Bank_Error',
+          });
+    }
+}
+
 
 function* getBankName(action) {
   try{
@@ -716,6 +803,129 @@ function* getBankName(action) {
           });
     }
 }
+
+function* addNominee(action) {
+  try{
+    const data = new FormData();
+          data.append('user_id',action.user_id)
+          data.append('name',action.name)
+          data.append('address1',action.address1)
+          data.append('address2',action.address2)
+          data.append('country',action.country)
+          data.append('state',action.state)
+          data.append('city',action.city)
+          data.append('dob',action.dob)
+          data.append('guardian',action.guardian)
+          data.append('relationship',action.relationship)
+          data.append('guardian_relationship',action.guardian_relationship)
+          data.append('pincode',action.pincode)
+
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Add_Nominee_Success',
+                payload: response,
+              });    
+              Toast.show('Nominee add Successfull')   
+            } else {
+              console.log('thsi is working');
+              Toast.show('Nominee add Error')   
+              yield put({
+                type: 'Add_Nominee_Error',
+              });
+            }
+          }
+  catch(error){
+    console.log('hi tisi  s narendra');
+      yield put({
+            type: 'Add_Nominee_Error',
+          });
+    }
+}
+
+function* editNominee(action) {
+  try{
+    const data = new FormData();
+
+          data.append('user_id',action.user_id)
+          data.append('user_nominee_id',action.user_nominee_id)
+          data.append('name',action.name)
+          data.append('address1',action.address1)
+          data.append('address2',action.address2)
+          data.append('country',action.country)
+          data.append('state',action.state)
+          data.append('city',action.city)
+          data.append('dob',action.dob)
+          data.append('guardian',action.guardian)
+          data.append('relationship',action.relationship)
+          data.append('guardian_relationship',action.guardian_relationship)
+          data.append('pincode',action.pincode)
+
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Edit_Nominee_Success',
+                payload: response,
+              });    
+              Toast.show('Nominee Update Successfull')   
+            } else {
+              console.log('thsi is working');
+              Toast.show('Nominee add Error')   
+              yield put({
+                type: 'Edit_Nominee_Error',
+              });
+            }
+          }
+  catch(error){
+    console.log('hi tisi  s narendra');
+      yield put({
+            type: 'Edit_Nominee_Error',
+          });
+    }
+}
+
+function* countryList(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'Country_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Country_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Country_List_Error',
+          });
+    }
+}
+
+function* stateList(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'State_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'State_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'State_List_Error',
+          });
+    }
+}
+
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -737,8 +947,14 @@ export default function* authSaga() {
   yield takeEvery('Edit_Profile_Request',editProfile)
   yield takeEvery('Get_Faq_Request',getFaq)
   yield takeEvery('Get_Blog_Request',getBlog)
-  yield takeEvery('Bank_List_Request',bankDetail)
+  yield takeEvery('Bank_List_Request',bankList)
   yield takeEvery('Add_Bank_Request',addBank)
   yield takeEvery('Bank_Name_Request',getBankName)
-  
+  yield takeEvery('Update_Bank_Request',updateBank)
+  yield takeEvery('Delete_Bank_Request',deleteBank)
+  yield takeEvery('Nominee_List_Request',nomineeList)
+  yield takeEvery('Add_Nominee_Request',addNominee)
+  yield takeEvery('Edit_Nominee_Request',editNominee)
+  yield takeEvery('Country_List_Request',countryList)
+  yield takeEvery('State_List_Request',stateList)
 }

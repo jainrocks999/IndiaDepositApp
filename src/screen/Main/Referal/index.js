@@ -1,18 +1,42 @@
-import React,{useState}from 'react';
+import React,{useEffect,useState}from 'react';
 import { View,Text,Image,ScrollView,TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import color from '../../../component/colors';
-import CustomButton from '../../../component/button1';
 import Header from '../../../component/header';
-import BottomTab from '../../../component/StoreButtomTab';
-import { FlatList } from 'react-native';
 import { TouchableOpacity } from 'react-native';
-import colors from '../../../component/colors';
+import axios from "axios";
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from "../../../component/AsyncStorage";
 
 const Refferal=()=>{
     const navigation=useNavigation()
+    const [code,setCode]=useState('')
+
+
+useEffect(async()=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    try {
+        const data = new FormData();
+        data.append('user_id',user_id)
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getrefferalcode',
+        });
+       
+        if(response.data.status==200){
+            setCode(response.data.refferal_code)
+        }
+      } catch (error) {
+       throw error;
+        
+      }
+},[])
     return(
         <View style={styles.container}>
               <Header
@@ -58,6 +82,7 @@ const Refferal=()=>{
                           <Text style={styles.text2}>ENTER REFERRAL CODE</Text>
                            <View style={styles.view5}>
                                    <TextInput
+                                   value={code}
                                    />
                          </View>
                             <Text style={styles.text2}>TAP TO COPY</Text>

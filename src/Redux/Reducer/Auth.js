@@ -14,7 +14,10 @@ initialstate = {
   FaqArray:[],
   Blog:[],
   BankList:[],
-  BankNameList:[]
+  BankNameList:[],
+  NomineeList:[],
+  CountryList:[],
+  StateList:[]
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -186,6 +189,28 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false, BankNameList: action.payload };
   case 'Bank_Name_Error':
   return { ...state, isFetching: false };
+
+  case 'Nominee_List_Request':
+    return { ...state, isFetching: true };
+  case 'Nominee_List_Success':
+    return { ...state, isFetching: false, NomineeList: action.payload };
+  case 'Nominee_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'Country_List_Request':
+    return { ...state, isFetching: true };
+  case 'Country_List_Success':
+    return { ...state, isFetching: false, CountryList: action.payload };
+  case 'Country_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'State_List_Request':
+    return { ...state, isFetching: true };
+  case 'State_List_Success':
+    return { ...state, isFetching: false, StateList: action.payload };
+  case 'State_List_Error':
+  return { ...state, isFetching: false };
+
     default:
       return state;
   }
