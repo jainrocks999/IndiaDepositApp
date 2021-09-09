@@ -1,16 +1,14 @@
-import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import React,{useEffect}from 'react';
+import { View,Text} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import { FlatList } from 'react-native';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
-import fontSize from '../../../component/fontSize';
 const Contact=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()

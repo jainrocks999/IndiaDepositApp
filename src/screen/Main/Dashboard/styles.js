@@ -12,20 +12,10 @@ export default StyleSheet.create({
         flex:1,
         backgroundColor:colors.card
     },
-    imageView:
-    {
-        // width:60,
-        // height:60,
-        // backgroundColor:colors.bc,
-        // borderRadius:30,
-        // justifyContent:'center',
-        // alignItems:'center'
-    },
     text:
     {
         fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.twelve,
-        color:colors.textColor,
         marginTop:6,
         fontWeight:'500',
         textAlign: 'center',
@@ -80,7 +70,9 @@ export default StyleSheet.create({
         borderBottomWidth:1,
         paddingVertical:8,
         paddingHorizontal:15,
-        borderColor:'#DDDDDD'
+        borderColor:'#DDDDDD',
+        flexDirection:'row',
+        justifyContent:'space-between'
     },
     text2:
     {
@@ -131,9 +123,38 @@ export default StyleSheet.create({
     touch1:
     {
         alignItems:'center',
-       // backgroundColor:colors.bc,
-        width:'57%',
+        width:'100%',
         paddingVertical:15,
         borderRadius:10
     },
+    touch2:
+    {
+        alignItems:'center',
+        width:'90%',
+        paddingVertical:15,
+        borderRadius:10
+    },
+    button:{
+        backgroundColor:colors.bc,
+        paddingHorizontal:15,
+        alignItems:'center',
+        justifyContent:'center',
+        paddingVertical:5,
+        borderRadius:10
+    },
+    search:{
+        color:colors.white,
+        fontSize:12,
+        fontFamily:'Montserrat-Normal'
+    },
+    enable:{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width:'100%',
+        height:90,
+        backgroundColor:colors.bc,
+        borderRadius:10 
+   }
 })
+

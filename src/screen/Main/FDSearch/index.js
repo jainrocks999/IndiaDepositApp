@@ -16,8 +16,8 @@ import Geocoder from 'react-native-geocoding';
 Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
 const Contact=()=>{
     const navigation=useNavigation()
-    const [gender, setGender] = useState('')
-    const [day, setDay] = useState('')
+    const [tenure, setTenure] = useState('')
+    const [month, setMonth] = useState('')
     const [year,setYear] = useState('')
 
     Geocoder.from("Colosseum")
@@ -52,15 +52,15 @@ const Contact=()=>{
                               <View style={styles.view3}>
                                  <View style={styles.input}>
                                     <RNPickerSelect
-                                      onValueChange={(val)=>setDay(val)}
+                                      onValueChange={(val)=>setTenure(val)}
                                       items={days}
                                       style={{ 
                                       inputAndroid: { color: color.textColor,width:'100%',height:40 },
                                       placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                       }}
-                                      value={day}
+                                      value={tenure}
                                       useNativeAndroidPickerStyle={false}
-                                      placeholder={{ label: "yy", value: null }}
+                                      placeholder={{ label: "Select", value: null }}
                                       Icon={()=><Image 
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
@@ -70,13 +70,13 @@ const Contact=()=>{
                                <View style={styles.view3}>
                                     <View style={styles.input}>
                                        <RNPickerSelect
-                                          onValueChange={(val)=>setGender(val)}
+                                          onValueChange={(val)=>setMonth(val)}
                                           items={Month}
                                           style={{ 
                                           inputAndroid: { color: color.textColor,width:'100%',height:40 },
                                           placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                           }}
-                                          value={gender}
+                                          value={month}
                                           useNativeAndroidPickerStyle={false}
                                           placeholder={{ label: "MM", value: null }}
                                           Icon={()=><Image 
@@ -88,13 +88,13 @@ const Contact=()=>{
                                <View style={styles.view3}>
                                     <View style={styles.input}>
                                        <RNPickerSelect
-                                           onValueChange={(val)=>setGender(val)}
+                                           onValueChange={(val)=>setYear(val)}
                                            items={Years}
                                            style={{ 
                                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
                                            placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                            }}
-                                           value={gender}
+                                           value={year}
                                            useNativeAndroidPickerStyle={false}
                                            placeholder={{ label: "Days", value: null }}
                                            Icon={()=><Image 
@@ -127,7 +127,7 @@ const Contact=()=>{
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text style={{fontWeight:'700'}}>OR</Text>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput
