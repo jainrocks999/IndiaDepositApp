@@ -16,39 +16,35 @@ import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
 
 const loginValidationSchema=yup.object().shape({
-    // bank_name:yup.string().max(40,({max})=>`Bank Name must be only ${max} character`).required('Please enter your Bank Name '),
     account_number:yup.string().min(14,({min})=>`IFSC Code must be 14 digits`).required('Please enter your Account Number '),
-    // account_type:yup.string().required('Please select account type'),
     ifsc_code:yup.string().min(11,({min})=>`IFSC Code must be 11 digits`).required('Please enter IFSC Code'),
     name:yup.string().required('Please Enter your Name')
   })
-const data=[
+const data2=[
     { label: 'Saving Account', value: 'Saving Account'},
     { label: 'Current Account', value: 'Current Account'},
     { label: 'Others', value: 'Others'},
 ]
 
-const data1=[
-    { label: 'HDFC', value: '1'},
-    { label: 'SBI', value: '2' },
-    { label: 'Bank of Baroda', value: '3' },
-]
     
-const BankDetail=()=>{
+const BankDetail=({route})=>{
         const navigation=useNavigation()
+        const data=route.params
         const dispatch=useDispatch()
+        const [bank_name,set_bank_name]=useState(data.item.bank_id)
+        const [account_type,set_account_type]=useState(data.item.account_type)
         const selector=useSelector(state=>state.BankNameList)
-        const [bank_name,set_bank_name]=useState('')
-        const [account_type,set_account_type]=useState('')
+        console.log('this is route value',data);
        
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     console.log('narendra here pal kumar',values);
    
         dispatch({
-            type: 'Add_Bank_Request',
-            url: 'adduserbank',
+            type: 'Update_Bank_Request',
+            url: 'updateuserbank',
             user_id,
+            user_bank_id:data.item.user_bank_id,
             bank_id:bank_name,
             name:values.name,
             account_number:values.account_number,
@@ -61,7 +57,12 @@ const addUser=async(values)=>{
 
     return(
         <Formik
-        initialValues={{account_number:'',ifsc_code:'',name:''}}
+        enableReinitialize
+        initialValues={{ 
+            account_number:data.item.account_number,
+            ifsc_code:data.item.ifsc_code,
+            name:data.item.name
+        }}
         onSubmit={values => addUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -69,7 +70,7 @@ const addUser=async(values)=>{
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={{flex:1,backgroundColor:'#E5E5E5'}}>
             <Header
-                    title={'Add Bank'}
+                    title={'Edit Bank'}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('BankDetail')}
                    /> 
@@ -92,8 +93,8 @@ const addUser=async(values)=>{
                       <Text style={styles.better}>Bank Name</Text>
                       <View style={styles.drop}>
                        <RNPickerSelect
-                             onValueChange={(val)=>set_bank_name(val)}
-                            // onValueChange={handleChange('bank_name')}
+                            onValueChange={(val)=>set_bank_name(val)}
+                             //onValueChange={handleChange('bank_name')}
                             items={selector}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
@@ -128,7 +129,8 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>set_account_type(val)}
-                            items={data}
+                           // onValueChange={handleChange('account_type')}
+                            items={data2}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
                             placeholder:{color:colors.heading}

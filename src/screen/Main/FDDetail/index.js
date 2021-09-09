@@ -108,7 +108,11 @@ useEffect(async()=>{
            
                        {/*  ButtonView */}
                       <View style={styles.bank}>
-                           <TouchableOpacity onPress={()=>navigation.navigate('BankDetail')}>
+                           <TouchableOpacity 
+                           onPress={()=>navigation.navigate('BankDetail')}
+                         //   onPress={()=>navigation.navigate('NomineeList')}
+                           >
+
                                <Text style={styles.bankDetails}>BANK DETAILS</Text>
                           </TouchableOpacity>
                           <TouchableOpacity>
@@ -192,7 +196,7 @@ useEffect(async()=>{
                          </TouchableOpacity>
                      </View>
          </ScrollView>
-         <BottomTab/>
+        
      </View>
        
     )

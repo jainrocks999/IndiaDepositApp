@@ -96,7 +96,7 @@ const DrawerContent=({props})=> {
                     <TouchableOpacity style={styles.popup}
                      onPress={()=>getLogout()}
                      >
-                    <Text style={styles.ModelBtntext}>OK</Text>
+                    <Text style={styles.ModelBtntext}>YES</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.popup}
                      onPress={()=>setModalVisible(false)}

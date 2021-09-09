@@ -10,44 +10,37 @@ import { useSelector,useDispatch } from 'react-redux';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../../../component/loader';
-import OptionsMenu from "react-native-option-menu";
-import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import axios from "axios";
 import Toast from 'react-native-simple-toast';
-
 
 const BankDetail=()=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
-        const selector=useSelector(state=>state.BankList)
+        const selector=useSelector(state=>state.NomineeList)
         const isFetching=useSelector(state=>state.isFetching)
-        const [visible, setVisible] = useState(false);
 
-        const hideMenu = () => setVisible(false);
-      
-        const showMenu = () => setVisible(true);
 useEffect(async()=>{
-    const user_id=await AsyncStorage.getItem(Storage.user_id)
-   
+    const user_id=await AsyncStorage.getItem(Storage.user_id)   
     dispatch({
-        type: 'Bank_List_Request',
-        url: 'userbanklist',
+        type: 'Nominee_List_Request',
+        url: 'nomineelist',
         user_id
       })
 
     dispatch({
-        type: 'Bank_Name_Request',
-        url: 'bankdetaillist',
+        type: 'Country_List_Request',
+        url: 'countrylist',
       })
+
     dispatch({
-        type: 'Bank_Detail_Request',
-        url: 'bankdetaillist',
-    })
+        type: 'State_List_Request',
+        url: 'statelist',
+      })
 },[])
 
 const editPost=(item)=>{
-     navigation.navigate('EditUserBank',{
-       item
+     navigation.navigate('EditNominee',{
+      item 
      }
      )
 }
@@ -55,7 +48,7 @@ const deletePost=async(item)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
       try {
         const data = new FormData();
-        data.append('user_bank_id',item.user_bank_id)
+        data.append('user_nominee_id',item.user_nominee_id)
         const response = await axios({
           method: 'POST',
           data,
@@ -63,13 +56,13 @@ const deletePost=async(item)=>{
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deleteuserbank',
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/delete',
         });
         console.log('this is response value',response);
         if (response.data.status==200) {
             dispatch({
-                type: 'Bank_List_Request',
-                url: 'userbanklist',
+                type: 'Nominee_List_Request',
+                url: 'nomineelist',
                 user_id
               })
         
@@ -94,13 +87,13 @@ const renderItem=(item)=>{
                    </View>
                   
                    <View style={styles.row}>
-                       <Text style={styles.same}>{`Account No : ${item.account_number}`}</Text>
+                       <Text style={styles.same}>{`Account No : ${item.address1}`}</Text>
                    </View>
                    <View style={styles.row}>
-                       <Text style={styles.same}>{` IFSC Code : ${item.ifsc_code}`}</Text>
+                       <Text style={styles.same}>{` IFSC Code : ${item.address2}`}</Text>
                    </View>
                    <View style={styles.row}>
-                       <Text style={styles.same}>{`Account Type : ${item.account_type}`}</Text>
+                       <Text style={styles.same}>{`Account Type : ${item.guardian}`}</Text>
                    </View>
                    <View style={[styles.row,{marginTop:10,width:'50%'}]}>
                    <TouchableOpacity
@@ -125,11 +118,11 @@ const renderItem=(item)=>{
     return(
         <View style={{flex:1}}>
               <Header
-                    title={'Bank List'}
+                    title={'Nominee List'}
                     source={require('../../../../assets/Images/arrow.png')}
-                    titleTwo='Add Bank'
+                    titleTwo='Add Nominee'
                     onPress={()=>navigation.navigate('FDDetail')}
-                    onPress1={()=>navigation.navigate('AddBank')}
+                    onPress1={()=>navigation.navigate('AddNominee')}
                /> 
               {isFetching?<Loader/>:null}
               <View style={styles.list}>

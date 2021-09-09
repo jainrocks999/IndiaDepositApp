@@ -143,7 +143,7 @@ const Contact=()=>{
                        </View>
                      </View>
             </ScrollView>
-                  <BottomTab/>
+                  {/* <BottomTab/> */}
                  <StatusBar/>
      </View>
     )

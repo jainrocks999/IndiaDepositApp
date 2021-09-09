@@ -177,7 +177,7 @@ const renderItem=(item)=>{
             </View>
           </BottomSheet> */}
           <StatusBar/>
-          <BottomTab/>
+          {/* <BottomTab/> */}
        </View>
     )
 }
