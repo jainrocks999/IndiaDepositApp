@@ -66,7 +66,7 @@ export default StyleSheet.create({
         fontSize:fontSize.thirteen,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' ,
-        marginRight:103
+       
     },
     buttomview:
     {

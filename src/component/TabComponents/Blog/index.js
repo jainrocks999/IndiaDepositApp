@@ -43,7 +43,7 @@ const Blog=()=>{
     console.log('this is blog array',Blogs);
     return(
         <View style={styles.container}>
-             <View style={{marginBottom:60}}>
+             <View style={styles.main}>
                 <FlatList
                 data={Blogs}
                 showsVerticalScrollIndicator={false}
@@ -51,21 +51,21 @@ const Blog=()=>{
                     <View style={styles.card}>
                         {/* <View style={styles.titleView}> */}
                         <TouchableOpacity style={styles.titleView}>
-                            <Text style={{fontSize:12,color:'#fff'}}>{item.catergory_name}</Text>
+                            <Text style={styles.Text1}>{item.catergory_name}</Text>
                         </TouchableOpacity>
                         {/* </View> */}
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:14,color:'#000',fontFamily:'Montserrat-Normal'}}>{item.title}</Text>
+                        <View style={styles.view}>
+                            <Text style={styles.Textt}>{item.title}</Text>
                         </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:11,color:'#777777',fontFamily:'Montserrat-Normal'}}>{`published on july 14th, 2021`}</Text>
+                        <View style={styles.view}>
+                            <Text style={styles.Textp}>{`published on july 14th, 2021`}</Text>
                         </View>
-                        <View style={{marginTop:10}}>
-                            <Text style={{fontSize:13,color:'#000',fontFamily:'Montserrat-Normal'}}>{item.short_content}</Text>
+                        <View style={styles.view}>
+                            <Text style={styles.Textc}>{item.short_content}</Text>
                         </View>
-                        <View style={{borderWidth:1,borderColor:'#DDDDDD',marginVertical:10}}/>
+                        <View style={styles.line}/>
                         <TouchableOpacity onPress={()=>navigation.navigate('BlogCategory',{item})}>
-                            <Text style={{fontSize:12,color:'#5A4392',fontFamily:'Montserrat-Normal'}}>Read More</Text>
+                            <Text style={styles.Textr}>Read More</Text>
                         </TouchableOpacity>
                  </View>
                 )}

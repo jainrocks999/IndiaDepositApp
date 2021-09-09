@@ -27,7 +27,7 @@ export default StyleSheet.create({
         fontSize:fontSize.twelve,
         color:colors.textColor,
         marginTop:6,
-        fontWeight:'600',
+        fontWeight:'500',
         textAlign: 'center',
     },
     name:

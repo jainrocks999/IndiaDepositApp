@@ -106,14 +106,18 @@ const DrawerContent=({props})=> {
                 </View>
                 </View>
             </Modal>
-
-              <View style={styles.main}>
+            <View style={styles.main}>
                  <View style={styles.main1}>
                  {image?<Image style={styles.img} 
                     source={{uri: image}}
                  />
                         :<Image 
                             source={require('../../assets/Image/profile-pic.png')}/>}
+                            <TouchableOpacity
+                                    // onPress={()=>setVisible(true)} 
+                                      style={styles.camera}>
+                                         <Image source={require('../../assets/Image/camera.png')}/>
+                                     </TouchableOpacity>
                 { !name?
                     <View style={styles.view}>
                         <Text style={styles.text2}>John</Text>

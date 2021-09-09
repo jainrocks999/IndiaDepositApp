@@ -176,5 +176,21 @@ export default StyleSheet.create({
             flexDirection: 'row',
             alignItems:'center',
             justifyContent:'center'
+         },
+         camera:
+         {
+             width:28,
+             height:28, 
+             shadowColor:colors.black,
+             shadowOpacity:0.25,
+             shadowRadius:8,
+             shadowOffset:{height:5,width:0},
+             elevation:2,
+             borderRadius:14,
+             marginLeft:-25,
+             marginTop:70,
+             backgroundColor:colors.white,
+             alignItems:'center',
+             justifyContent:'center'
          },  
 })

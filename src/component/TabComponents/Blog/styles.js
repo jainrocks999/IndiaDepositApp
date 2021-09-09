@@ -7,6 +7,9 @@ export default StyleSheet.create({
     paddingHorizontal:16
     // backgroundColor:'#E5E5E5'
     },
+    main:{
+        marginBottom:60
+    },
     card:{
         shadowColor:'black',
         shadowOpacity:0.25,
@@ -36,6 +39,38 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
        
+    },
+    Text1:{
+        fontSize:fontSize.twelve,
+        color:colors.white
+    },
+    Textt:{
+        fontSize:fontSize.fourteen,
+        color:colors.black,
+        fontFamily:'Montserrat-Normal'
+    },
+    Textp:{fontSize:fontSize.eleven,
+        color:colors.heading,
+        fontFamily:'Montserrat-Normal'
+    },
+    Textc:{
+        fontSize:fontSize.thirteen,
+        color:colors.black,
+        fontFamily:'Montserrat-Normal'
+    },
+    Textr:{
+        fontSize:fontSize.twelve,
+        color:colors.bc,
+        fontFamily:'Montserrat-Normal'
+    },
+    line:{
+        borderWidth:1,
+        width:'100%',
+        borderColor:'#DDDDDD',
+        marginVertical:10
+    },
+    view:{
+        marginTop:10
     },
     heading:{
         fontSize:fontSize.eighteen,

@@ -67,7 +67,7 @@ export default StyleSheet.create({
      
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-SemiBold' ,
-        marginRight:128
+       
     },
     prop:
     {

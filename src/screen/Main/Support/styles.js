@@ -20,7 +20,7 @@ export default StyleSheet.create({
         height:'100%'
     }, 
     title:{
-        marginRight:85
+      
     }
     
 })

@@ -48,7 +48,7 @@ const dashboard=()=>{
                                               onPress={()=>navigation.navigate('FDSearch')}
                                               style={styles.touch1}>
                                                <View style={styles.imageView}>
-                                                 <Image source={item.image}/> 
+                                                 <Image style={{height:item.height,width:item.width}} source={item.image}/> 
                                                </View>
                                               <View style={styles.view2}>
                                                  <Text style={styles.text}>{item.name}</Text>
@@ -147,7 +147,7 @@ const dashboard=()=>{
                                               onPress={()=>navigation.navigate('FDSearch')}
                                               style={styles.touch1}>
                                                <View style={styles.imageView}>
-                                                 <Image source={item.image}/> 
+                                                 <Image style={{height:item.height,width:item.width}} source={item.image}/> 
                                                </View>
                                               <View style={styles.view2}>
                                                  <Text style={styles.text}>{item.name}</Text>
@@ -255,16 +255,16 @@ const dashboard=()=>{
 }
 export default dashboard;
 const data=[
-    {name:'Regular',image:require('../../../assets/Image/regular-fd.png'),id:1},
-    {name:'Tax Saving',image:require('../../../assets/Image/tax-fd.png'),id:2},
-    {name:'NRI',image:require('../../../assets/Image/nri-fd.png'),id:3},
-    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png'),id:4},
+    {name:'Regular',image:require('../../../assets/Image/regular-fd-b.png'),id:1,height:35,width:35},
+    {name:'Tax Saving',image:require('../../../assets/Image/tax-fd-b.png'),id:2,height:35,width:35},
+    {name:'NRI',image:require('../../../assets/Image/nri-fd-b.png'),id:3,height:35,width:32.31},
+    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen-b.png'),id:4,height:26,width:39.7},
 ]
 
 const data1=[
-    {name:'Regular',image:require('../../../assets/Image/saving-ac.png')},
-    {name:'Female',image:require('../../../assets/Image/sb-female.png')},
-    {name:'Defense',image:require('../../../assets/Image/sb-defence.png')},
-    {name:'Zero\nBalance',image:require('../../../assets/Image/sb-zb.png')},
-    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen.png')},
+    {name:'Regular',image:require('../../../assets/Image/saving-ac-b.png'),height:35,width:32.42},
+    {name:'Female',image:require('../../../assets/Image/sb-female-b.png'),height:35,width:27.02},
+    {name:'Defense',image:require('../../../assets/Image/sb-defence-b.png'),height:35,width:35},
+    {name:'Zero\nBalance',image:require('../../../assets/Image/sb-zb-b.png'),height:30,width:33.85},
+    {name:'Senior\nCitizen',image:require('../../../assets/Image/senior_citizen-b.png'),height:26,width:39.7},
 ]
