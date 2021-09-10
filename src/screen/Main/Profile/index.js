@@ -181,16 +181,22 @@ const save=async(images)=>{
                                      })} 
                                      style={styles.change}>Edit Profile</Text>
                                       <View style={styles.imageContainer}>
-                                        {photos?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={photos}/>
-                                          :image?<Image style={{width:'100%',height:'100%',borderRadius:57}} source={{uri: image}}/>
+                                        {photos?<Image 
+                                        style={{width:'100%',height:'100%',borderRadius:57}} 
+                                        source={photos}/>
+                                          :image?<Image 
+                                          style={{width:'100%',height:'100%',borderRadius:57}} 
+                                          source={{uri: image}}/>
                                           :<Image style={styles.img} 
                                           source={require('../../../assets/Image/profile-pic.png')}/>}
-                                      </View>
+                                    
                                      <TouchableOpacity
                                      onPress={()=>setVisible(true)} 
                                       style={styles.camera}>
-                                         <Image source={require('../../../assets/Image/camera.png')}/>
+                                         <Image 
+                                         source={require('../../../assets/Image/camera.png')}/>
                                      </TouchableOpacity>
+                                     </View>
                                      <Text  
                                      onPress={()=>navigation.navigate('ChangePassword')} 
                                      style={styles.change}>Change Pin</Text>

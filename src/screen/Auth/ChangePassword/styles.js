@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+    backgroundColor:'#E5E5E5'
     },
    
     imageContainer:

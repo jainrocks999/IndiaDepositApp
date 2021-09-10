@@ -33,7 +33,6 @@ export default StyleSheet.create({
     {
         width:'100%',
         flexDirection:'row',
-        
         justifyContent:'space-between'
     },
     img:
@@ -56,19 +55,32 @@ export default StyleSheet.create({
     },
     camera:
     {
-        width:28,
-        height:28, 
-        shadowColor:colors.black,
-        shadowOpacity:0.25,
-        shadowRadius:8,
-        shadowOffset:{height:5,width:0},
-        elevation:2,
-        borderRadius:14,
-        marginLeft:-68,
-        marginTop:63,
-        backgroundColor:colors.white,
-        alignItems:'center',
-        justifyContent:'center'
+        // width:28,
+        // height:28, 
+        // shadowColor:colors.black,
+        // shadowOpacity:0.25,
+        // shadowRadius:8,
+        // shadowOffset:{height:5,width:0},
+        // elevation:2,
+        // borderRadius:14,
+        // marginLeft:'-23%',
+        // marginTop:63,
+        // backgroundColor:colors.white,
+        // alignItems:'center',
+        // justifyContent:'center'
+             width:28,
+             height:28, 
+             shadowColor:colors.black,
+             shadowOpacity:0.25,
+             shadowRadius:8,
+             shadowOffset:{height:5,width:0},
+             elevation:2,
+             borderRadius:14,
+             marginLeft:55,
+             marginTop:-20,
+             backgroundColor:colors.white,
+             alignItems:'center',
+             justifyContent:'center'
     },
     change:
     {

@@ -104,8 +104,11 @@ const Splash=()=>{
                 </View>
             </Modal>
             <View style={styles.main}>
-                  <Image style={styles.image} 
-                  source={require('../../../assets/Image/IndiaDeposit.png')}/>
+                 <View style={{width:'100%',alignItems:'center',padding:20,justifyContent:'center'}}> 
+                  <Image 
+                  //style={styles.image} 
+                  source={require('../../../assets/Image/indiaDepositLogo.png')}/>
+                  </View>
                 <View style={styles.view2}>
                   <View style={styles.view3}>
                 <Text style={styles.text2}>We secure your details</Text>

@@ -113,11 +113,11 @@ const DrawerContent=({props})=> {
                  />
                         :<Image 
                             source={require('../../assets/Image/profile-pic.png')}/>}
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                     // onPress={()=>setVisible(true)} 
                                       style={styles.camera}>
                                          <Image source={require('../../assets/Image/camera.png')}/>
-                                     </TouchableOpacity>
+                                     </TouchableOpacity> */}
                 { !name?
                     <View style={styles.view}>
                         <Text style={styles.text2}>John</Text>
