@@ -19,8 +19,8 @@ import * as yup from 'yup';
 
 const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your  Name '),
-   father:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Father/Spouse Name required '),
-   mother:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Mother/Maiden Name required '),
+   father:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Father/Spouse Name '),
+   mother:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Mother/Maiden Name'),
    email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
    gender:yup.string(),
    dob:yup.string(),
