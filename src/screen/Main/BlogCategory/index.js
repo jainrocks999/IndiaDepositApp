@@ -18,32 +18,32 @@ const BlogCategory=({route})=>{
                 title={data.title}
                 onPress={()=>navigation.goBack()}
               />
-               <View style={{flex:1,padding:20}}>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{'Blog'}</Text>
-                        <Text style={{color:'#777777'}}>{'  >>  '}</Text>
-                        <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{data.catergory_name}</Text>
-                        <Text style={{color:'#777777'}}>{'  >>  '}</Text>
-                        <Text style={{color:'#777777',fontSize:12,fontFamily:'Montserrat-Normal'}}>{data.title}</Text>
+               <View style={styles.view}>
+                    <View style={styles.view1}>
+                        <Text style={styles.text}>{'Blog'}</Text>
+                        <Text style={styles.text2}>{'  >>  '}</Text>
+                        <Text style={styles.text}>{data.catergory_name}</Text>
+                        <Text style={styles.text2}>{'  >>  '}</Text>
+                        <Text style={styles.text1}>{data.title}</Text>
                     </View>
-                    <View style={{marginTop:15}}>
-                      <Text style={{color:'#000',fontSize:16,fontFamily:'Montserrat-Normal'}}>{`${data.title}`}</Text>
+                    <View style={styles.view5}>
+                      <Text style={styles.text3}>{`${data.title}`}</Text>
                     </View>
-                    <View style={{marginTop:15,flexDirection:'row',alignItems:'center'}}>
-                      <Text style={{color:'#777777',fontSize:12,fontFamily:'Montserrat-Normal'}}>{`Posted on july 14th, 2021`}</Text>
-                      <View style={{backgroundColor:colors.bc,paddingHorizontal:12,paddingVertical:2,marginLeft:12}}>
-                          <Text style={{color:colors.white,fontSize:12,fontFamily:'Montserrat-Normal'}}>{data.catergory_name}</Text>
+                    <View style={styles.view2}>
+                      <Text style={styles.text1}>{`Posted on july 14th, 2021`}</Text>
+                      <View style={styles.view3}>
+                          <Text style={styles.text4}>{data.catergory_name}</Text>
                       </View>
                     </View>
-                    <View style={{width:'100%',height:120,backgroundColor:'#EDEDEB',marginTop:20,alignItems:'center',justifyContent:'center'}}>
-                     { !data.image?  <Text style={{fontSize:16}}>Dummy Image</Text>:
-                     <Image style={{width: '100%', height: '100%'}}
+                    <View style={styles.view4}>
+                     { !data.image?  <Text style={styles.text5}>Dummy Image</Text>:
+                     <Image style={styles.img}
                      source={{uri:data.image}}/>
                      }
                            
                     </View>
-                    <View style={{marginTop:15}}>
-                      <Text style={{color:colors.textColor,fontSize:13,fontFamily:'Montserrat-Normal'}}>{`${data.content}`}</Text>
+                    <View style={styles.view5}>
+                      <Text style={styles.text6}>{`${data.content}`}</Text>
                     </View>
                </View>
               <StatusBar/>

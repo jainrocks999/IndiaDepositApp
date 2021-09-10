@@ -15,7 +15,7 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginBottom:40
     },
     

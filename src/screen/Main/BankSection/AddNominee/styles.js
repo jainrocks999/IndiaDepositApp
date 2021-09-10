@@ -2,6 +2,15 @@ import { StyleSheet } from 'react-native';
 import colors from '../../../../component/colors';
 import fontSize from '../../../../component/fontSize';
 export default StyleSheet.create({
+    container:{
+        flex:1,
+        backgroundColor:colors.card
+    },
+    main:{
+        flex:1,
+        paddingHorizontal:15,
+        paddingVertical:20
+    },
     better:{
         color:colors.textColor,
         marginTop:10,
@@ -25,13 +34,13 @@ export default StyleSheet.create({
     },
     card:
     { 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         marginBottom:40,
         paddingHorizontal:15,
         paddingBottom:20,

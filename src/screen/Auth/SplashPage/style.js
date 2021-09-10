@@ -29,7 +29,7 @@ export default StyleSheet.create({
         flexDirection: 'column',
         alignSelf: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor:colors.white,
       },
       ModelBtntext:
       {

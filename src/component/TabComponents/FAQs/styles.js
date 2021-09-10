@@ -36,6 +36,6 @@ export default StyleSheet.create({
     content: {
       paddingLeft: 10,
       paddingRight: 10,
-      backgroundColor: '#fff',
+      backgroundColor:colors.white,
     },
   });

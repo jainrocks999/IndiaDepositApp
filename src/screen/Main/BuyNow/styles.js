@@ -14,6 +14,10 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
+    text:{
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.white
+    },
     cardView:
     {
         flexDirection:'row',

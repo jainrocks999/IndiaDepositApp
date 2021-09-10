@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from 'react-native-elements';
+import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
         flex: 1,
@@ -20,7 +21,8 @@ export default StyleSheet.create({
         height:'100%'
     }, 
     title:{
-      
+      fontSize:fontSize.eleven,
+      fontFamily:'Montserrat-SemiBold' ,
     }
     
 })

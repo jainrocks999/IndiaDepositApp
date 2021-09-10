@@ -66,7 +66,7 @@ export default StyleSheet.create({
         paddingVertical: 20
     },
     text1:{ 
-        color: 'white', 
+        color: colors.white, 
         fontSize: fontSize.sixteen ,
         fontFamily:'Krdev016'
     },

@@ -11,13 +11,13 @@ export default StyleSheet.create({
         marginBottom:60
     },
     card:{
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingHorizontal:18,
         paddingVertical:15,
         marginVertical:4,
@@ -25,7 +25,7 @@ export default StyleSheet.create({
        
     },
     titleView:{
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},

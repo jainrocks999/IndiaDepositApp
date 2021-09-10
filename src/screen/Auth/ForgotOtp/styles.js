@@ -72,9 +72,9 @@ export default StyleSheet.create({
         width: 50,
         height: 50,
         borderWidth: 2,
-        color:'#000',
-        backgroundColor:'white',
-        shadowColor:'black',
+        color:colors.black,
+        backgroundColor:colors.white,
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
@@ -97,7 +97,7 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-SemiBold',
         marginLeft:5,
         fontSize:fontSize.thirteen,
-        color:'#000'
+        color:colors.black
     },
     input:
     {
@@ -112,7 +112,7 @@ export default StyleSheet.create({
     }  ,
     your:
     {
-        color:'#000',
+        color:colors.black,
         alignSelf:'center',
         alignContent:'center',
         textAlign:'center',
@@ -140,7 +140,7 @@ export default StyleSheet.create({
     {
         width:115,
         height:115,
-        backgroundColor:'#5A4392',
+        backgroundColor:colors.bc,
         borderRadius:57,
         justifyContent:'center',
         alignItems:'center'

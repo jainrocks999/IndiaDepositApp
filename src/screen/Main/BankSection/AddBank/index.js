@@ -67,13 +67,13 @@ const addUser=async(values)=>{
         validationSchema={loginValidationSchema}
       >
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
-        <View style={{flex:1,backgroundColor:'#E5E5E5'}}>
+        <View style={styles.container}>
             <Header
                     title={'Add Bank'}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('BankDetail')}
                    /> 
-             <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
+             <ScrollView style={styles.main}>
                 <View style={styles.card}>
                 <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
