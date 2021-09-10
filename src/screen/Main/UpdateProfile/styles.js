@@ -92,5 +92,18 @@ export default StyleSheet.create({
         paddingVertical:10,
         marginBottom:50
     },
+    error:
+    {
+        width:'90%',
+        justifyContent:'center',
+        alignItems:'flex-start',
+        paddingHorizontal:8,
+        marginTop:6
+    },
+    warn:
+    {
+        fontSize:fontSize.twelve,
+        color:'red'
+    },
    
 })

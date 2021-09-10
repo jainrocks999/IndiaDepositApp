@@ -61,10 +61,10 @@ const FDList=()=>
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button}>
-                    <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>BUY NOW</Text>
+                    <Text style={styles.text}>BUY NOW</Text>
                 </TouchableOpacity>
                <TouchableOpacity style={styles.button}>
-                     <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.white}}>CANCEL</Text>
+                     <Text style={styles.text}>CANCEL</Text>
                </TouchableOpacity>
             </View>
             <StatusBar/>

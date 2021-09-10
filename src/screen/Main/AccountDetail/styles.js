@@ -40,7 +40,8 @@ export default StyleSheet.create({
      {
          marginTop:6,
          fontSize:fontSize.twelve,
-         fontFamily:'Montserrat-Medium'
+         fontFamily:'Montserrat-Medium',
+         color:colors.textColor
      },
     item:
     {

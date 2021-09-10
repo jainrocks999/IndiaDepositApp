@@ -108,7 +108,7 @@ export default StyleSheet.create({
     },
     account1:
     {
-        color:'#3D4785',
+        color:colors.bc,
         fontSize:fontSize.thirteen
     },
     error:

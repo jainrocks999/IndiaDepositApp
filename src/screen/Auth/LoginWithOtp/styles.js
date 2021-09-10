@@ -7,7 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor:'#E5E5E5'
+    backgroundColor:colors.card
     },
    
     imageContainer:
@@ -19,7 +19,7 @@ export default StyleSheet.create({
     {
         width:115,
         height:115,
-        backgroundColor:'#5A4392',
+        backgroundColor:colors.bc,
         borderRadius:57,
         justifyContent:'center',
         alignItems:'center'
@@ -34,13 +34,13 @@ export default StyleSheet.create({
     },
     card: 
     { 
-        shadowColor:'black',
+        shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        backgroundColor:'white',
+        backgroundColor:colors.white,
         paddingHorizontal:15,
         paddingVertical:10,
         marginTop:18,

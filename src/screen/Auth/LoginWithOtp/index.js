@@ -68,7 +68,7 @@ const validateUser=async(mobile)=>{
                   style={[styles.account,{textAlign:'center'}]}>
                       {'We will send you a OTP on\nyour phone number'}</Text>
                 </TouchableOpacity>
-              <View style={[styles.card,{borderColor:focus?colors.bc:'white'}]}>
+              <View style={[styles.card,{borderColor:focus?colors.bc:colors.white}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>      
                      {showVisible()}

@@ -17,6 +17,7 @@ import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import OtpInputs from 'react-native-otp-inputs';
+import fontSize from '../../../component/fontSize';
 
 const loginValidationSchema=yup.object().shape({
   value:yup.string().required('Please enter your Email or Mobile number'),
@@ -94,7 +95,7 @@ const validateUser=async(values)=>{
               </View>
           </View>
           <View style={styles.main}>
-              <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
+              <View style={[styles.card,{borderColor:focus?colors.bc:colors.white}]}>
                 <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
                      <Image source={require('../../../assets/Image/email-mobile.png')}/>
@@ -139,7 +140,7 @@ const validateUser=async(values)=>{
                  keyboardType={"numeric"} secureTextEntry ={visible}
                  style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
                  inputContainerStyles={styles.otp}
-                 inputStyles={{fontSize:16,color:colors.textColor}}
+                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor}}
                  returnKeyType='go'
                  onSubmitEditing={()=>handleSubmit()}
               />
@@ -157,7 +158,7 @@ const validateUser=async(values)=>{
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
-                    tintColors={{ true: '#5A4392', false: '#5A4392' }}
+                    tintColors={{ true:colors.bc, false:colors.bc }}
                   />
                   <Text style={styles.text2}>Keep me logged in</Text>
                   </View>

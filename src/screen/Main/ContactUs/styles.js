@@ -61,10 +61,7 @@ export default StyleSheet.create({
         flexDirection:'row',
         width:'50%'
     },
-    view3:{
-        flexDirection:'row',
-        width:'50%'
-    },
+   
     text1:{
         marginLeft:10,
         color:colors.textColor,

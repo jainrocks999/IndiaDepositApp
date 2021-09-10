@@ -144,7 +144,7 @@ const dashboard=()=>{
                                      renderItem={({item})=>(
                                          <View >
                                              <TouchableOpacity 
-                                              onPress={()=>navigation.navigate('FDSearch')}
+                                              onPress={()=>navigation.navigate('SBSearch')}
                                               style={styles.touch1}>
                                                <View style={styles.imageView}>
                                                  <Image style={{height:item.height,width:item.width}} source={item.image}/> 

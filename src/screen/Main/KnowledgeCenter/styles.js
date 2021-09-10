@@ -7,7 +7,7 @@ export default StyleSheet.create({
     container:
     {
         flex: 1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card
     },
     card:
     {
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     title:
     { 
      
-        fontSize:fontSize.thirteen,
+        fontSize:fontSize.eleven,
         //  hp('1.9%'),
         fontFamily:'Montserrat-SemiBold' ,
        

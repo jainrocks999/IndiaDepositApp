@@ -94,7 +94,7 @@ const Contact=()=>{
                       </View>
                       <Text style={styles.text1}>@indiadeposit</Text>
                   </View>
-                  <View style={styles.view3}>
+                  <View style={styles.view2}>
                       <View style={styles.fb}>
                       <Image source={require('../../../assets/Images/in.png')}/>
                       </View>
@@ -102,13 +102,13 @@ const Contact=()=>{
                   </View>
                </View>
                <View style={[styles.view1,{marginTop:20}]}>
-               <View style={styles.view3}>
+               <View style={styles.view2}>
                       <View style={styles.fb}>
                       <Image source={require('../../../assets/Images/twitter.png')}/>
                       </View>
                       <Text style={styles.text1}>@indiadeposit</Text>
                </View>
-               <View style={styles.view3}>
+               <View style={styles.view2}>
                     <View style={styles.fb}>
                     <Image source={require('../../../assets/Images/insta.png')}/>
                     </View>

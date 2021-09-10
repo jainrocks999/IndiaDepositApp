@@ -8,7 +8,7 @@ export default StyleSheet.create({
     container:
     {
         flex: 1,
-        backgroundColor:'#E5E5E5'
+        backgroundColor:colors.card
     },
     card:
     {
