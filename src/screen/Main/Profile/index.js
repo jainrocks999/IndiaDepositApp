@@ -144,7 +144,7 @@ const save=async(images)=>{
               <Header
                   source={require('../../../assets/Images/arrow.png')}
                   title={'PROFILE'}
-                  onPress={()=>navigation.goBack()}/>
+                  onPress={()=>navigation.navigate('Main')}/>
                     <ScrollView
                       contentContainerStyle={{flex:1}}
                       style={{backgroundColor:'#E5E5E5'}}>
