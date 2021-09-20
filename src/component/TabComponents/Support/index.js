@@ -53,6 +53,7 @@ const Support=()=>{
                         <TextInput
                           style={{color:colors.textColor}}
                          placeholder='Jhon Mathew'
+                         placeholderTextColor={colors.heading1}
                          onChangeText={handleChange('name')}
                          onBlur={handleBlur('name')}
                          value={values.name}
@@ -68,6 +69,7 @@ const Support=()=>{
                         <TextInput
                          style={{color:colors.textColor}}
                          placeholder='example@domain.com'
+                         placeholderTextColor={colors.heading1}
                          onChangeText={handleChange('email')}
                          onBlur={handleBlur('email')}
                          value={values.email}
@@ -83,6 +85,7 @@ const Support=()=>{
                         <TextInput
                        style={{color:colors.textColor}}
                         placeholder='9123456789'
+                        placeholderTextColor={colors.heading1}
                         keyboardType='phone-pad'
                         onChangeText={handleChange('mobile')}
                         onBlur={handleBlur('mobile')}
@@ -99,6 +102,7 @@ const Support=()=>{
                       <TextInput
                          style={{color:colors.textColor}}
                         placeholder=''
+                        placeholderTextColor={colors.heading1}
                         onChangeText={handleChange('subject')}
                         onBlur={handleBlur('subject')}
                         value={values.subject}
@@ -110,6 +114,7 @@ const Support=()=>{
                         multiline = {true}
                         style={{height:70,color:colors.textColor}}
                         placeholder=''
+                        placeholderTextColor={colors.heading1}
                         />
                     </View>
                     <View style={{marginTop:20}}>

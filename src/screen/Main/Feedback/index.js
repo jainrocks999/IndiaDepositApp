@@ -115,6 +115,7 @@ const validateUser=async()=>{
                                     onChangeText={(val)=>setMessage(val)}
                                     multiline={true}
                                     style={styles.input} 
+                                    placeholderTextColor={colors.heading1}
                                     />
                                </View>
                               <View style={styles.bottomView}>

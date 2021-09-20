@@ -47,6 +47,7 @@ const FDCalculator=()=>{
                                 <TextInput 
                                     style={styles.textinput}
                                     placeholder='Amount'
+                                    placeholderTextColor={colors.heading1}
                                     keyboardType='number-pad'
                                 />
                             </View>
@@ -57,6 +58,7 @@ const FDCalculator=()=>{
                                <TextInput 
                                  style={styles.textinput} 
                                   placeholder='Interest'
+                                  placeholderTextColor={colors.heading1}
                                   keyboardType={'number-pad'}
                                 />
                                 <Image style={{marginRight:5}} 

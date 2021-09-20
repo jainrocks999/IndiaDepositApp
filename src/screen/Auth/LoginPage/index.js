@@ -19,6 +19,7 @@ import Storage from '../../../component/AsyncStorage';
 import OtpInputs from 'react-native-otp-inputs';
 import fontSize from '../../../component/fontSize';
 
+
 const loginValidationSchema=yup.object().shape({
   value:yup.string().required('Please enter your Email or Mobile number'),
   pin:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter your Pin'),
@@ -103,6 +104,7 @@ const validateUser=async(values)=>{
                       style={styles.input1}
                       onFocus={()=>setFocus(true)}
                       placeholder='Email / Mobile'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('value')}
                       onBlur={handleBlur('value')}
                       value={values.value}
@@ -168,8 +170,8 @@ const validateUser=async(values)=>{
 
               <View style={styles.button}>
                     <CustomButton
-                    //  onPress={()=>navigation.replace('Main')}
-                   onPress={()=>handleSubmit()}
+                      onPress={()=>navigation.replace('Main')}
+                  // onPress={()=>handleSubmit()}
                     title='LOG IN'
                     />
                 </View>
@@ -182,7 +184,7 @@ const validateUser=async(values)=>{
                 <TouchableOpacity 
                 onPress={()=>navigation.navigate('LoginWithOtp')}
                 style={styles.bottom}>
-                  <Text style={styles.account}>Login With OTP</Text>
+                  <Text style={styles.account1}>Login With OTP</Text>
                 </TouchableOpacity>
           </View>
           </View>

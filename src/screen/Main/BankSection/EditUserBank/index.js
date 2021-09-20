@@ -81,6 +81,7 @@ const addUser=async(values)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='John Methew'
+                        placeholderTextColor={colors.heading1}
                         value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
@@ -114,6 +115,7 @@ const addUser=async(values)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='21000001234567'
+                        placeholderTextColor={colors.heading1}
                         value={values.account_number}
                         onChangeText={handleChange('account_number')}
                         onBlur={handleBlur('account_number')}
@@ -149,6 +151,7 @@ const addUser=async(values)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='SBIN00084'
+                            placeholderTextColor={colors.heading1}
                             value={values.ifsc_code}
                             onChangeText={handleChange('ifsc_code')}
                             onBlur={handleBlur('ifsc_code')}

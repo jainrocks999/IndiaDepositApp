@@ -60,6 +60,7 @@ const SBAccount=()=>{
                                   <TextInput
                                       style={styles.textinput}
                                        // placeholder='Enter Pincode'
+                                       placeholderTextColor={colors.heading1}
                                        keyboardType='number-pad'
                                   />
                                 </View>
@@ -80,6 +81,7 @@ const SBAccount=()=>{
                                    <TextInput
                                        style={styles.textinput1}
                                        placeholder='Enter Pincode'
+                                       placeholderTextColor={colors.heading1}
                                     />
                                </View>
                                <View style={styles.view2}>

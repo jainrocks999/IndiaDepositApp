@@ -116,6 +116,7 @@ const addUser=async(values)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='John Methew'
+                        placeholderTextColor={colors.heading1}
                         value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
@@ -130,6 +131,7 @@ const addUser=async(values)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='Address1'
+                        placeholderTextColor={colors.heading1}
                         value={values.address1}
                         onChangeText={handleChange('address1')}
                         onBlur={handleBlur('address1')}
@@ -144,6 +146,7 @@ const addUser=async(values)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='Address2'
+                        placeholderTextColor={colors.heading1}
                         value={values.address2}
                         onChangeText={handleChange('address2')}
                         onBlur={handleBlur('address2')}
@@ -249,6 +252,7 @@ const addUser=async(values)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='SBIN00084'
+                            placeholderTextColor={colors.heading1}
                             value={values.relationship}
                             onChangeText={handleChange('relationship')}
                             onBlur={handleBlur('relationship')}
@@ -265,6 +269,7 @@ const addUser=async(values)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='SBIN00084'
+                            placeholderTextColor={colors.heading1}
                             value={values.guardian}
                             onChangeText={handleChange('guardian')}
                             onBlur={handleBlur('guardian')}
@@ -281,6 +286,7 @@ const addUser=async(values)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='SBIN00084'
+                            placeholderTextColor={colors.heading1}
                             value={values.guardian_relationship}
                             onChangeText={handleChange('guardian_relationship')}
                             onBlur={handleBlur('guardian_relationship')}
@@ -297,6 +303,7 @@ const addUser=async(values)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='SBIN00084'
+                            placeholderTextColor={colors.heading1}
                             value={values.pincode}
                             onChangeText={handleChange('pincode')}
                             onBlur={handleBlur('pincode')}

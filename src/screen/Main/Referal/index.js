@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native';
 import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
-
+import colors from '../../../component/colors';
 const Refferal=()=>{
     const navigation=useNavigation()
     const [code,setCode]=useState('')
@@ -83,6 +83,7 @@ useEffect(async()=>{
                            <View style={styles.view5}>
                                    <TextInput
                                    value={code}
+                                   placeholderTextColor={colors.heading1}
                                    />
                          </View>
                             <Text style={styles.text2}>TAP TO COPY</Text>

@@ -126,6 +126,7 @@ const manageState=async(val)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='John Methew'
+                        placeholderTextColor={colors.heading1}
                         defaultValue={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
@@ -140,6 +141,7 @@ const manageState=async(val)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='Address1'
+                        placeholderTextColor={colors.heading1}
                         defaultValue={values.address1}
                         onChangeText={handleChange('address1')}
                         onBlur={handleBlur('address1')}
@@ -154,6 +156,7 @@ const manageState=async(val)=>{
                         <TextInput
                         style={styles.input}
                         placeholder='Address2'
+                        placeholderTextColor={colors.heading1}
                         defaultValue={values.address2}
                         onChangeText={handleChange('address2')}
                         onBlur={handleBlur('address2')}
@@ -259,6 +262,7 @@ const manageState=async(val)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='Relationship'
+                            placeholderTextColor={colors.heading1}
                             defaultValue={values.relationship}
                             onChangeText={handleChange('relationship')}
                             onBlur={handleBlur('relationship')}
@@ -275,6 +279,7 @@ const manageState=async(val)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='Guardian'
+                            placeholderTextColor={colors.heading1}
                             defaultValue={values.guardian}
                             onChangeText={handleChange('guardian')}
                             onBlur={handleBlur('guardian')}
@@ -291,6 +296,7 @@ const manageState=async(val)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='Guardian Relationship'
+                            placeholderTextColor={colors.heading1}
                             defaultValue={values.guardian_relationship}
                             onChangeText={handleChange('guardian_relationship')}
                             onBlur={handleBlur('guardian_relationship')}
@@ -307,6 +313,7 @@ const manageState=async(val)=>{
                         <TextInput
                             style={styles.input}
                             placeholder='Pincode'
+                            placeholderTextColor={colors.heading1}
                             defaultValue={values.pincode}
                             onChangeText={handleChange('pincode')}
                             onBlur={handleBlur('pincode')}

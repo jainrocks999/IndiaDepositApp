@@ -113,6 +113,7 @@ const Contact=()=>{
                            <View style={{marginTop:-10}}>
                               <TextInput
                                  style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                                 placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                               />
                            </View>
@@ -133,6 +134,7 @@ const Contact=()=>{
                            <TextInput
                               style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
                               placeholder='Enter Pincode'
+                              placeholderTextColor={colors.heading1}
                            />
                        </View>
                        <View style={styles.view8}>

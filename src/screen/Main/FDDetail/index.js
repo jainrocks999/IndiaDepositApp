@@ -149,7 +149,7 @@ useEffect(async()=>{
                                             <Text style={styles.pointText}>
                                                 {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
                                              </Text> 
-                                   </View>
+                                     </View>
                      </View>
 
                      <View style={styles.top}>

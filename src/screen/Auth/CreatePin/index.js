@@ -123,6 +123,7 @@ const validateUser=async(values)=>{
                       onFocus={()=>setFocus1(true)}
                       style={styles.input1}
                       placeholder='New Pin'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('newPassword')}
                       onBlur={handleBlur('newPassword')}
                       value={values.newPassword}
@@ -150,6 +151,7 @@ const validateUser=async(values)=>{
                      onFocus={()=>setFocus2(true)}
                       style={styles.input1}
                       placeholder='Confirm New Pin'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('confirmPassword')}
                       onBlur={handleBlur('confirmPassword')}
                       value={values.confirmPassword}

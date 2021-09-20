@@ -76,6 +76,7 @@ const validateUser=async(mobile)=>{
                       onFocus={()=>setFocus(true)}
                       style={styles.input1}
                       placeholder='9123456789'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}

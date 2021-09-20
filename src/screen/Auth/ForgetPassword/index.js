@@ -89,6 +89,7 @@ const validateUser=(email,mobile)=>{
                      <TextInput
                       onFocus={()=>setFocus(true)}
                       placeholder='example@domain.com'
+                      placeholderTextColor={colors.heading1}
                       style={styles.input1}
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
@@ -112,6 +113,7 @@ const validateUser=(email,mobile)=>{
                      <TextInput
                       onFocus={()=>setFocus1()}
                       placeholder='9123456789'
+                      placeholderTextColor={colors.heading1}
                       style={styles.input1}
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}

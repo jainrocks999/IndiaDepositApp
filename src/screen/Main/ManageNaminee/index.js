@@ -90,6 +90,7 @@ const RegisterPage=()=>{
                                        <TextInput 
                                          style={styles.input}
                                          placeholder='Nominee Name'
+                                         placeholderTextColor={colors.heading1}
                                          onChangeText={handleChange('name')}
                                          onBlur={handleBlur('name')}
                                          value={values.name}
@@ -105,6 +106,7 @@ const RegisterPage=()=>{
                                        <TextInput 
                                              style={styles.input}
                                              placeholder='Mobile Number'
+                                             placeholderTextColor={colors.heading1}
                                              onChangeText={handleChange('mobile')}
                                              onBlur={handleBlur('mobile')}
                                              value={values.mobile}
@@ -152,6 +154,7 @@ const RegisterPage=()=>{
                                         <TextInput 
                                              style={styles.input}
                                              placeholder='Address'
+                                             placeholderTextColor={colors.heading1}
                                              onChangeText={handleChange('address')}
                                              onBlur={handleBlur('address')}
                                              value={values.address}
@@ -166,6 +169,7 @@ const RegisterPage=()=>{
                                     <TextInput 
                                          style={styles.input}
                                          placeholder='Relationship with Depositor'
+                                         placeholderTextColor={colors.heading1}
                                          onChangeText={handleChange('relation')}
                                          onBlur={handleBlur('relation')}
                                          value={values.relation}

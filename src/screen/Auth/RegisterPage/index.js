@@ -152,6 +152,7 @@ const showVisible1=()=>{
                         onFocus={()=>setFBorder(true)}
                         style={styles.input1}
                         placeholder='John Methew'
+                        placeholderTextColor={colors.heading1}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
                         value={values.name}
@@ -178,6 +179,7 @@ const showVisible1=()=>{
                       onFocus={()=>setEBorder(true)}
                       style={styles.input1}
                       placeholder='example@domain.com'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
@@ -203,6 +205,7 @@ const showVisible1=()=>{
                       onFocus={()=>setMBorder(true)}
                       style={styles.input1}
                       placeholder='9123456789'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
@@ -231,6 +234,7 @@ const showVisible1=()=>{
                       onFocus={()=>setPBorder(true)}
                       style={[styles.input2]}
                       placeholder='0000'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('pin')}
                       onBlur={handleBlur('pin')}
                       value={values.pin}
@@ -262,6 +266,7 @@ const showVisible1=()=>{
                       onFocus={()=>setCBorder(true)}
                       style={[styles.input2]}
                       placeholder='0000'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('confirmPin')}
                       onBlur={handleBlur('confirmPin')}
                       maxLength={4}
@@ -291,6 +296,7 @@ const showVisible1=()=>{
                       onFocus={()=>setBBorder(true)}
                       style={[styles.input1,{marginLeft:-3,}]}
                       placeholder='BA52RT'
+                      placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('referal')}
                       value={values.referal}
                       returnKeyType='done'

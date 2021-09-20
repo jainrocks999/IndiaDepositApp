@@ -1,6 +1,7 @@
 import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView,TextInput} from 'react-native';
 import styles from './styles';
+import colors from '../../../component/colors';
 import StatusBar from '../../../component/StatusBar';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-community/async-storage';
@@ -36,6 +37,7 @@ const Profile=()=>{
                         <TextInput
                          style={styles.input}
                         //  placeholder='Jhon Mathew'
+                        placeholderTextColor={colors.heading1}
                          value={name==0?'':name}
                          editable={false}
                         />
@@ -45,6 +47,7 @@ const Profile=()=>{
                         <TextInput
                          style={styles.input}
                         //  placeholder='Father/Spouse Name'
+                        placeholderTextColor={colors.heading1}
                          value={father==0?'':father}
                          editable={false}
                         />
@@ -54,6 +57,7 @@ const Profile=()=>{
                         <TextInput
                         style={styles.input}
                         // placeholder='Mother Maiden Name'
+                        placeholderTextColor={colors.heading1}
                         value={mother==0?'':mother}
                         editable={false}
                         />
@@ -66,6 +70,7 @@ const Profile=()=>{
                               <TextInput
                               style={styles.input}
                               // placeholder='Gender'
+                              placeholderTextColor={colors.heading1}
                               value={gender==0?'':gender}
                               editable={false}
                               />
@@ -77,6 +82,7 @@ const Profile=()=>{
                             <TextInput
                               style={styles.input}
                               // placeholder='Date of Birth'
+                              placeholderTextColor={colors.heading1}
                               value={dob==0?'':dob}
                               editable={false}
                               />
@@ -89,6 +95,7 @@ const Profile=()=>{
                         <TextInput
                         style={styles.input}
                         // placeholder='example@domain.com'
+                        placeholderTextColor={colors.heading1}
                         value={email==0?'':email}
                         editable={false}
                         />

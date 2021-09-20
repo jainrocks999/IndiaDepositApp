@@ -104,6 +104,7 @@ const RegisterPage=({route})=>{
                         <TextInput
                          style={styles.input}
                          placeholder='Jhon Mathew'
+                         placeholderTextColor={colors.heading1}
                          onChangeText={handleChange('name')}
                          onBlur={handleBlur('name')}
                          value={values.name}
@@ -122,6 +123,7 @@ const RegisterPage=({route})=>{
                         <TextInput
                          style={styles.input}
                          placeholder='Father/Spouse Name'
+                         placeholderTextColor={colors.heading1}
                         //  defaultValue={father==0?'':father}
                          onChangeText={handleChange('father')}
                          onBlur={handleBlur('father')}
@@ -140,6 +142,7 @@ const RegisterPage=({route})=>{
                         <TextInput
                         style={styles.input}
                         placeholder='Mother Maiden Name'
+                        placeholderTextColor={colors.heading1}
                         //defaultValue={mother==0?'':mother}
                         onChangeText={handleChange('mother')}
                         onBlur={handleBlur('mother')}
@@ -223,6 +226,7 @@ const RegisterPage=({route})=>{
                         <TextInput
                         style={styles.input}
                         placeholder='example@gmail.com'
+                        placeholderTextColor={colors.heading1}
                         defaultValue={email}
                         onBlur={handleBlur('email')}
                         onChangeText={handleChange('email')}

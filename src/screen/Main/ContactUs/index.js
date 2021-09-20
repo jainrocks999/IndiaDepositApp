@@ -133,6 +133,7 @@ const Contact=()=>{
                 
                 style={{color:colors.textColor}}
                 placeholder='Name'
+                placeholderTextColor={colors.heading1}
                 onChangeText={handleChange('name')}
                 onBlur={handleBlur('name')}
                 value={values.name}
@@ -154,6 +155,7 @@ const Contact=()=>{
                 ref={next1}
                 style={{color:colors.textColor}}
                 placeholder='example@domain.com'
+                placeholderTextColor={colors.heading1}
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
@@ -175,6 +177,7 @@ const Contact=()=>{
                 ref={next2}
                 style={{color:colors.textColor}}
                 placeholder='9123456789'
+                placeholderTextColor={colors.heading1}
                 onChangeText={handleChange('mobile')}
                 onBlur={handleBlur('mobile')}
                 value={values.mobile}
@@ -198,6 +201,7 @@ const Contact=()=>{
                 ref={next3}
                 style={{color:colors.textColor}}
                 placeholder='Message / Report for Crash'
+                placeholderTextColor={colors.heading1}
                 onChangeText={handleChange('message')}
                 onBlur={handleBlur('message')}
                 value={values.message}

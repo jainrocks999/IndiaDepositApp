@@ -4,7 +4,7 @@ import { View,Text } from 'react-native';
 const Profile=()=>{
     return(
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-            <Text>Working</Text>
+            <Text   onPress={()=>navigation.navigate('BankDeatail')}>Working</Text>
         </View>
     )
 }

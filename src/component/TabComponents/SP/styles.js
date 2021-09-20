@@ -34,7 +34,25 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:10
     },
-    
+    view:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    view1:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:20,
+        paddingHorizontal:10
+    },
+    view2:{
+        alignItems:'center'
+    },
+    text:{
+        fontSize:fontSize.seventeen,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    },
     
    
     
