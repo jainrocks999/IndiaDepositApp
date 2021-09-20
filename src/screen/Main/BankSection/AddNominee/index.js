@@ -107,7 +107,7 @@ const addUser=async(values)=>{
             <Header
                     title={'Add Nominee'}
                     source={require('../../../../assets/Images/arrow.png')}
-                    onPress={()=>Root.push('NomineeList')}
+                    onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
                 <View style={styles.card}>

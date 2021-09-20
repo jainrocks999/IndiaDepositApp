@@ -32,10 +32,16 @@ const DrawerContent=({props})=> {
             type: 'Get_Faq_Request',
             url: 'getfaq',
         })
-        dispatch({
-            type: 'Get_Blog_Request',
-            url: 'getpost',
-        })
+        // dispatch({
+        //     type: 'Get_Blog_Request',
+        //     url: 'getpost',
+        //     post_category_id:1
+        // })
+        // dispatch({
+        //     type: 'Get_Story_Request',
+        //     url: 'getpost',
+        //     post_category_id:2
+        // })
         
         let name=await AsyncStorage.getItem(Storage.name)
         let motherName=await AsyncStorage.getItem(Storage.motherName)
@@ -111,8 +117,10 @@ const DrawerContent=({props})=> {
                  {image?<Image style={styles.img} 
                     source={{uri: image}}
                  />
-                        :<Image 
-                            source={require('../../assets/Image/profile-pic.png')}/>}
+                        :<Image style={{ height:84,
+                            width:84,
+                            borderRadius:42}}
+                            source={require('../../assets/Image/user-couple.png')}/>}
                             {/* <TouchableOpacity
                                     // onPress={()=>setVisible(true)} 
                                       style={styles.camera}>
@@ -135,7 +143,7 @@ const DrawerContent=({props})=> {
                   <TouchableOpacity 
                   onPress={()=>navigation.dispatch(DrawerActions.closeDrawer())}
                   style={{paddingVertical:20,}}>
-                    <Image source={require('../../assets/Image/arrow2.png')}/>
+                    <Image style={{width:32,height:32}} source={require('../../assets/Image/arrow2.png')}/>
                   </TouchableOpacity>
               </View>
                 <TouchableOpacity
@@ -146,11 +154,13 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/profile1.png')}/>
+                                source={require('../../assets/newImage/user.png')}/>
                             </View>
                             <Text style={styles.text}>{'Profile'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image
+                            style={styles.arrow}
+                            source={require('../../assets/Image/arrowF.png')}/>
                          </View>
                     </View>
                     
@@ -164,11 +174,13 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/cal.png')}/>
+                                source={require('../../assets/newImage/cal.png')}/>
                             </View>
                             <Text style={styles.text}>{'Calculator'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image
+                            style={styles.arrow}
+                            source={require('../../assets/Image/arrowF.png')}/>
                            
                         </View>
                     </View>  
@@ -182,11 +194,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/about.png')}/>
+                                source={require('../../assets/newImage/about.png')}/>
                             </View>
                             <Text style={styles.text}>{'About'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -199,11 +211,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/about.png')}/>
+                                source={require('../../assets/newImage/about.png')}/>
                             </View>
                             <Text style={styles.text}>{'Contact Us'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -214,11 +226,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/noti.png')}/>
+                                source={require('../../assets/newImage/noti.png')}/>
                             </View>
                             <Text style={styles.text}>{'Notification'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -228,11 +240,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/knowledege.png')}/>
+                                source={require('../../assets/newImage/knowledege.png')}/>
                             </View>
                             <Text style={styles.text}>{'Knowledge Center'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
 
@@ -243,11 +255,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/support.png')}/>
+                                source={require('../../assets/newImage/support.png')}/>
                             </View>
                             <Text style={styles.text}>{'Support'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
 
@@ -260,11 +272,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/feedback.png')}/>
+                                source={require('../../assets/newImage/feedback.png')}/>
                             </View>
                             <Text style={styles.text}>{'Feedback'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
 
@@ -279,7 +291,7 @@ const DrawerContent=({props})=> {
                             </View>
                             <Text style={styles.text}>{'Referral'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -290,11 +302,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/privacy.png')}/>
+                                source={require('../../assets/newImage/privacy.png')}/>
                             </View>
                             <Text style={styles.text}>{'Policy'}</Text>
                             </View>
-                            <Image source={require('../../assets/Image/arrowF.png')}/>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
                     </View>  
                 </TouchableOpacity>
@@ -306,11 +318,11 @@ const DrawerContent=({props})=> {
                             <View style={styles.view2}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/logout.png')}/>
+                                source={require('../../assets/newImage/logout.png')}/>
                             </View>
                             <Text style={styles.text}>{'Logout'}</Text>
                             </View>
-                                <Image source={require('../../assets/Image/arrowF.png')}/>
+                                <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                     </View>
                     </View>  
                 </TouchableOpacity>

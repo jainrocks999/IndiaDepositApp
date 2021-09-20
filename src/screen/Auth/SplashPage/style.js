@@ -9,9 +9,9 @@ export default StyleSheet.create({
     },
     image:
     {
-        width:'100%',
-        height:83,
-        alignSelf:'center'
+       marginBottom:30,
+       height:85,
+       width:'100%'
       
     },
     main:

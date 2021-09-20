@@ -98,11 +98,12 @@ const validateUser=async(values)=>{
               <View style={[styles.card,{borderColor:focus?colors.bc:colors.white}]}>
                 <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/email-mobile.png')}/>
+                     <Image style={{width:24,height:36}}
+                      source={require('../../../assets/Image/email-mobile.png')}/>
                      <TextInput 
                       style={styles.input1}
                       onFocus={()=>setFocus(true)}
-                      placeholder='Email / Mobile'
+                      placeholder='example@domain.com'
                       onChangeText={handleChange('value')}
                       onBlur={handleBlur('value')}
                       value={values.value}

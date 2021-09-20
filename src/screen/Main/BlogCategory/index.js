@@ -1,5 +1,5 @@
 import React,{useState}from 'react';
-import { View,Text,Image} from 'react-native';
+import { View,Text,Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -13,21 +13,23 @@ const BlogCategory=({route})=>{
    const data=route.params.item
     return(
            <View style={styles.container}>
-              <Header
-                source={require('../../../assets/Images/arrow.png')}
-                title={data.title}
-                onPress={()=>navigation.goBack()}
-              />
+             
+              <View style={styles.main5}>
+                <TouchableOpacity onPress={()=>navigation.goBack()}>
+                  <Image style={{height:32,width:32,tintColor:colors.white}}   
+                  source={require('../../../assets/Images/arrow.png')}/>
+                </TouchableOpacity>
+                <Text style={styles.textTitle}>{data.title} </Text>
+           </View>
                <View style={styles.view}>
                     <View style={styles.view1}>
-                        <Text style={styles.text}>{'Blog'}</Text>
-                        <Text style={styles.text2}>{'  >>  '}</Text>
+                        
                         <Text style={styles.text}>{data.catergory_name}</Text>
                         <Text style={styles.text2}>{'  >>  '}</Text>
                         <Text style={styles.text1}>{data.title}</Text>
                     </View>
                     <View style={styles.view5}>
-                      <Text style={styles.text3}>{`${data.title}`}</Text>
+                      <Text style={styles.text3}>{`${data.description}`}</Text>
                     </View>
                     <View style={styles.view2}>
                       <Text style={styles.text1}>{`Posted on july 14th, 2021`}</Text>
@@ -37,7 +39,9 @@ const BlogCategory=({route})=>{
                     </View>
                     <View style={styles.view4}>
                      { !data.image?  <Text style={styles.text5}>Dummy Image</Text>:
-                     <Image style={styles.img}
+                     <Image 
+                     resizeMode='contain'
+                     style={styles.img}
                      source={{uri:data.image}}/>
                      }
                            

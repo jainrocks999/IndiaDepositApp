@@ -53,6 +53,8 @@ const ProfileScreen=()=>{
     setMName(mother)
     setDob(dob)
     setGender(gender)
+
+    console.log('this is user dtails0',name,email,father,mother,dob,gender);
   })
    
   const [routes] = React.useState([
@@ -181,19 +183,22 @@ const save=async(images)=>{
                                      })} 
                                      style={styles.change}>Edit Profile</Text>
                                       <View style={styles.imageContainer}>
-                                        {photos?<Image 
+                                        {/* {photos?<Image 
                                         style={{width:'100%',height:'100%',borderRadius:57}} 
                                         source={photos}/>
                                           :image?<Image 
                                           style={{width:'100%',height:'100%',borderRadius:57}} 
                                           source={{uri: image}}/>
-                                          :<Image style={styles.img} 
-                                          source={require('../../../assets/Image/profile-pic.png')}/>}
+                                          : */}
+                                          <Image style={styles.img} 
+                                          source={require('../../../assets/Image/user-couple.png')}/>
+                                          {/* } */}
                                     
                                      <TouchableOpacity
                                      onPress={()=>setVisible(true)} 
                                       style={styles.camera}>
                                          <Image 
+                                         style={{width:20,height:20}}
                                          source={require('../../../assets/Image/camera.png')}/>
                                      </TouchableOpacity>
                                      </View>

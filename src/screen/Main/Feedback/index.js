@@ -87,7 +87,7 @@ const validateUser=async()=>{
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select", value: null }}
                                          Icon={()=>
-                                         <Image style={{margin:12}} 
+                                         <Image style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                          source={require('../../../assets/Image/down.png')}/>}
                                    />
                           </View>
@@ -104,7 +104,7 @@ const validateUser=async()=>{
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select", value: '' }}
                                          Icon={()=>
-                                         <Image style={{margin:12}} 
+                                         <Image style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                          source={require('../../../assets/Image/down.png')}/>}
                                   />
                           </View>

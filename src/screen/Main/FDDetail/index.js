@@ -5,13 +5,14 @@ import colors from '../../../component/colors';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 const FDList=()=>{
 const navigation=useNavigation()
 const dispatch=useDispatch()
-
+const selector=useSelector(state=>state.FDDetail)
+const details=selector[0]
 useEffect(async()=>{
      const user_id=await AsyncStorage.getItem(Storage.user_id)
      dispatch({
@@ -32,9 +33,10 @@ useEffect(async()=>{
              <ScrollView>
                  <View>
                      <View style={styles.list}>
-                         <Image style={styles.img} 
-                         source={require('../../../assets/Image/sbi.png')}/>
-                         <Text onPress={()=>navigation.navigate('CompareFD')}style={styles.text}>Regular Fixed Deposit</Text>
+                         <Image  resizeMode='contain'
+                       style={{height:20,width:80}}
+                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${details.bank_logo}`}}/>
+                         <Text onPress={()=>navigation.navigate('CompareFD')}style={styles.text}>{details.name}</Text>
                          <Text style={styles.text1}>Fixed Deposit</Text>
                      </View>
                  </View>

@@ -1,6 +1,8 @@
 import { StyleSheet } from 'react-native';
 import fontSize from '../../../component/fontSize';
 import colors from '../../../component/colors';
+
+
 export default StyleSheet.create({
     container:{
         flex: 1,
@@ -22,12 +24,10 @@ export default StyleSheet.create({
          height:'100%'
     }, 
     main:{
-        flex:1,
-        padding:20
-    },
-    main1:{
         flexDirection:'row',
-        alignItems:'center'
+        paddingHorizontal:20,
+        marginBottom:10,
+        marginTop:20
     },
     imageContainer:{
         height:84,
@@ -54,56 +54,103 @@ export default StyleSheet.create({
         marginTop:5,
         color:colors.bc
     },
-    view:{
-        backgroundColor:colors.bc,
-        paddingHorizontal:12,
-        paddingVertical:2,
-        marginLeft:12
-    },
-    view1:{
-        width:'100%',
-        height:120,
-        backgroundColor:'#EDEDEB',
-        marginTop:20,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    view2:{
-        marginTop:15
-    },
-    title:{
-        color:colors.bc,
-        fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
-    },
-    Text3:{color:colors.textColor,
+    title:{ 
+     
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'},
-    Text2:{
-        fontSize:16
+        //  hp('1.9%'),
+        fontFamily:'Montserrat-SemiBold' 
     },
-    Text1:{
-        color:colors.white,
-        fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
-},
-
-    title1:{
-        color:colors.heading,
-    },
-    title2:{
-        color:colors.black,
-        fontSize:fontSize.sixteen,
-        fontFamily:'Montserrat-Normal'
-    },
-    title3:{
-            color:colors.heading,
-            fontSize:fontSize.twelve,
-             fontFamily:'Montserrat-Normal'
-},
     prop:{
         backgroundColor:colors.white,
         borderTopRightRadius:10,
         borderTopLeftRadius:10
     },
+    view:{
+        flex:1,
+        padding:20
+    },
+    view1:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    view2:{
+        marginTop:15,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    view3:{
+        backgroundColor:colors.bc,
+        paddingHorizontal:12,
+        paddingVertical:2,
+        marginLeft:12
+    },
+    view4:{
+        width:'100%',
+        backgroundColor:'#EDEDEB',
+        marginTop:20,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    view5:{
+        marginTop:15
+    },
+    text:{
+        color:colors.bc,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
+    },
+    text1:{
+        color:colors.heading,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
+    },
+    text2:{
+        color:colors.heading
+    },
+    text3:{
+        color:colors.black,
+        fontSize:fontSize.sixteen,
+        fontFamily:'Montserrat-Normal'
+    },
+    text4:{
+        color:colors.white,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal'
+    },
+    text5:{
+        fontSize:fontSize.sixteen,
+       
+    },
+    text6:{
+        color:colors.textColor,
+        fontSize:fontSize.thirteen,
+        fontFamily:'Montserrat-Normal'
+    },
+    img:{
+        width: '100%',
+        height: '50%'
+    },
+    main5:{
+        width:'100%',
+        backgroundColor:colors.bc,
+        alignItems:'center',
+        justifyContent:'space-between',
+        paddingHorizontal:16,
+        flexDirection:'row',
+        paddingVertical:10
+    },
+    drawer:{
+        width:30,
+        height:30,
+        tintColor:'white'
+    },
+    textTitle:{
+        color:colors.white,
+        fontSize:fontSize.eighteen,
+        fontFamily:'Montserrat-SemiBold',
+        marginLeft:15,
+        width:'90%'
+    },
+
+    
 })

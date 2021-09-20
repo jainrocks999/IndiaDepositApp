@@ -72,13 +72,13 @@ import { useDispatch } from 'react-redux';
                     action.navigation.replace('Otp',{
                         otp:response.data.otp,
                         mobile:action.mobile,
-                        name:response.data.data[0].name,
-                        email:response.data.data[0].email,
-                        father_spouse_name:response.data.data[0].father_spouse_name,
-                        mother_maiden_name:response.data.data[0].mother_maiden_name,
-                        dob:response.data.data[0].dob,
-                        gender:response.data.data[0].gender,
-                        user_id:response.data.data[0].user_id
+                        name:response.data.data.name,
+                        email:response.data.data.email,
+                        father_spouse_name:response.data.data.father_spouse_name,
+                        mother_maiden_name:response.data.data.mother_maiden_name,
+                        dob:response.data.data.dob,
+                        gender:response.data.data.gender,
+                        user_id:response.data.data.user_id
                         }
                       ) 
                 } else {
@@ -619,7 +619,9 @@ function* getFaq(action) {
 }
 function* getBlog(action) {
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+    const data = new FormData();
+    data.append('post_category_id',action.post_category_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'Get_Blog_Success',
@@ -634,6 +636,29 @@ function* getBlog(action) {
   catch(error){
       yield put({
             type: 'Get_Blog_Error',
+          });
+    }
+}
+
+function* getStory(action) {
+  try{
+    const data = new FormData();
+    data.append('post_category_id',action.post_category_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Get_Story_Success',
+                payload: response.data.blogpost,
+              });       
+            } else {
+              yield put({
+                type: 'Get_Story_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Get_Story_Error',
           });
     }
 }
@@ -926,6 +951,52 @@ function* stateList(action) {
     }
 }
 
+function* FDList(action) {
+  try{
+        const response =yield call(Api.fetchDataByPOST, action.url);
+            if (response.status==200) {
+              yield put({
+                type: 'FD_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'FD_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'FD_List_Error',
+          });
+    }
+}
+
+function* FDDetail(action) {
+  try{
+    const data=new FormData()
+    data.append('fixed_deposit_id',action.fixed_deposit_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'FD_Detail_Success',
+                payload: response.data,
+              });  
+              action.navigation.navigate('FDDetail')
+            } else {
+              yield put({
+                type: 'FD_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'FD_Detail_Error',
+          });
+    }
+}
+
+
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -957,4 +1028,8 @@ export default function* authSaga() {
   yield takeEvery('Edit_Nominee_Request',editNominee)
   yield takeEvery('Country_List_Request',countryList)
   yield takeEvery('State_List_Request',stateList)
+  yield takeEvery('FD_List_Request',FDList)
+  yield takeEvery('FD_Detail_Request',FDDetail)
+  yield takeEvery('Get_Story_Request',getStory)
+
 }

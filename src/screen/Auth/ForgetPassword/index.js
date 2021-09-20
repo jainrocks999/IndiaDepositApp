@@ -73,7 +73,7 @@ const validateUser=(email,mobile)=>{
           <KeyboardAwareScrollView>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-            <Image source={require('../../../assets/Image/arrowBack.png')}/>
+            <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
             </TouchableOpacity>
               <View style={styles.round}>
                   <Image
@@ -85,7 +85,9 @@ const validateUser=(email,mobile)=>{
            <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
                    <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <Image resizeMode='contain'
+                      style={{width:24,height:24}} 
+                      source={require('../../../assets/Image/msg.png')}/>
                      <TextInput
                       onFocus={()=>setFocus(true)}
                       placeholder='example@domain.com'
@@ -108,7 +110,10 @@ const validateUser=(email,mobile)=>{
               <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/phone.png')}/>
+                     <Image
+                      resizeMode='contain'
+                      style={{width:24,height:24}} 
+                     source={require('../../../assets/Image/phone.png')}/>
                      <TextInput
                       onFocus={()=>setFocus1()}
                       placeholder='9123456789'

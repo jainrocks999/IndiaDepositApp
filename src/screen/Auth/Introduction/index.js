@@ -22,6 +22,7 @@ const Introduction=({route})=>{
             </View>
                 <View style={styles.view}>
                 <Image style={styles.img}
+                resizeMode='contain'
                       source={{uri:data.image_url}}/>
                 </View>
            <View style={styles.main}>

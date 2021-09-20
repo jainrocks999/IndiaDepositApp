@@ -44,7 +44,7 @@ export default StyleSheet.create({
     fontSize: fontSize.ten,
     color:colors.textColor,
     fontFamily:'Montserrat-Medium',
-    marginTop:5
+   // marginTop:5
   },
   container:{
     justifyContent: 'center', 

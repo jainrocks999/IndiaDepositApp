@@ -86,7 +86,6 @@ export default StyleSheet.create({
     },
     view4:{
         width:'100%',
-        height:120,
         backgroundColor:'#EDEDEB',
         marginTop:20,
         alignItems:'center',
@@ -129,6 +128,29 @@ export default StyleSheet.create({
     },
     img:{
         width: '100%',
-         height: '100%'
-        },
+        height: '50%'
+    },
+    main5:{
+        width:'100%',
+        backgroundColor:colors.bc,
+        alignItems:'center',
+        justifyContent:'space-between',
+        paddingHorizontal:16,
+        flexDirection:'row',
+        paddingVertical:10
+    },
+    drawer:{
+        width:30,
+        height:30,
+        tintColor:'white'
+    },
+    textTitle:{
+        color:colors.white,
+        fontSize:fontSize.eighteen,
+        fontFamily:'Montserrat-SemiBold',
+        marginLeft:15,
+        width:'90%'
+    },
+
+    
 })

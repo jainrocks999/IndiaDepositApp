@@ -89,7 +89,7 @@ button:
         justifyContent:'center',
         marginTop:20,
         width:'100%',
-        height:290,
+        height:275,
         padding:10,
         
     },

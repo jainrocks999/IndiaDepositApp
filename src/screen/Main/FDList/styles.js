@@ -8,7 +8,8 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         marginRight:0,
-        alignItems:'center'
+        alignItems:'center',
+        textAlign:'center'
     },
     title:
     {
@@ -51,11 +52,24 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         justifyContent:'space-between',
-        marginTop:7,
-        paddingHorizontal:0,
+        // marginTop:7,
+        paddingHorizontal:5,
         marginHorizontal:-8,
-        width:'100%'
+        width:'100%',
+        marginLeft:2,
+      
     },
+    row2:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        marginTop:7,
+        paddingHorizontal:5,
+        marginHorizontal:-8,
+        width:'95%',
+        marginLeft:2
+    },
+
     list:
     {
         alignItems:'center',

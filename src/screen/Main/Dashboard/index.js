@@ -27,7 +27,7 @@ const dashboard=()=>{
       };
 
     const handleOnPress1 = contact => {
-        if (selectedItems.length) {
+        if (selectedItems1.length) {
           return selectItems1(contact);
         }
       };
@@ -45,8 +45,7 @@ const dashboard=()=>{
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
                     <View style={styles.circle}>
-                        <Image 
-                        source={require('../../../assets/Image/ic.png')}/>  
+                    <Text style={{fontSize:6,color:colors.bc}}>{`i`}</Text>
                     </View>
                     </View>
                     {selected && <View style={styles.enable}>
@@ -60,9 +59,10 @@ const dashboard=()=>{
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
                     <View style={[styles.circle,{borderColor:colors.white}]}>
-                        <Image 
+                      <Text style={{color:colors.white,fontSize:6}}>i</Text>
+                        {/* <Image 
                         style={{tintColor:colors.white}}
-                        source={require('../../../assets/Image/ic.png')}/>  
+                        source={require('../../../assets/Image/ic.png')}/>   */}
                     </View>
                     </View>
                    
@@ -99,7 +99,7 @@ const dashboard=()=>{
           );
           return setSelectedItems1([...newListItems]);
         }
-        setSelectedItems1([...selectedItems, item.id]);
+        setSelectedItems1([...selectedItems1, item.id]);
       };
 
     return(
@@ -197,32 +197,33 @@ const data=[
     {name:'NRI',
     image:require('../../../assets/Image/nri-fd-b.png'),
     image1:require('../../../assets/Image/nri-fd-w.png'),
-    id:3,height:35,width:32.31},
+    id:3,height:35,width:35},
     {name:'Senior\nCitizen',
     image:require('../../../assets/Image/senior_citizen-b.png'),
     image1:require('../../../assets/Image/senior_citizen-w.png')
-    ,id:4,height:26,width:39.7},
+    ,id:4,height:35,width:35},
 ]
 
 const data1=[
     {name:'Regular',
     image:require('../../../assets/Image/saving-ac-b.png'),
     image1:require('../../../assets/Image/saving-ac-w.png'),
-    id:5,height:35,width:32.42},
+    id:5,height:35,width:35},
     {name:'Female',
     image:require('../../../assets/Image/sb-female-b.png'),
     image1:require('../../../assets/Image/sb-female-w.png'),
-    id:6,height:35,width:27.02},
+    id:6,height:35,width:35},
     {name:'Defense',
     image:require('../../../assets/Image/sb-defence-b.png'),
     image1:require('../../../assets/Image/sb-defence-w.png'),
-    id:7,height:35,width:35},
+    id:7,height:35,width:35
+  },
     {name:'Zero\nBalance',
     image:require('../../../assets/Image/sb-zb-b.png'),
     image1:require('../../../assets/Image/sb-zb-w.png'),
-    id:8,height:30,width:33.85},
+    id:8,height:35,width:35},
     {name:'Senior\nCitizen',
     image:require('../../../assets/Image/senior_citizen-b.png'),
     image1:require('../../../assets/Image/senior_citizen-w.png'),
-    id:9,height:26,width:39.7},
+    id:9,height:35,width:35},
 ]

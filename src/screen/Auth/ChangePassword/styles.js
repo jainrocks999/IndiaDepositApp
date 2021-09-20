@@ -76,7 +76,7 @@ export default StyleSheet.create({
     input1:
     {
         width:'90%',
-        marginLeft:11,
+        marginLeft:5,
         paddingVertical:-10,
         color:colors.textColor
     },

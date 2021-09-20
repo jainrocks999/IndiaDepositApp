@@ -1,12 +1,11 @@
-import React,{useRef} from "react";
+import React,{useRef,useEffect} from "react";
 import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
 import Header from '../../../component/compareHeader';
-import colors from '../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-import BottomTab from '../../../component/StoreButtomTab';
 import StatusBar from "../../../component/StatusBar";
-import BottomSheet from 'react-native-simple-bottom-sheet';
+import { useDispatch,useSelector } from 'react-redux';
+
 const data=
 [
     {source:require('../../../assets/Images/sbi.png'),
@@ -77,37 +76,51 @@ const data=
     }
  ]
 const FDList=()=>{
-        const panelRef1 = useRef(null);
-        const panelRef2 = useRef(null);
         const navigation=useNavigation()
+        const dispatch=useDispatch()
+        const selector=useSelector(state=>state.FDList)
+console.log('this is selector value',selector);
+
+const manageList=(item)=>{
+  dispatch({
+    type: 'FD_Detail_Request',
+    url: 'fddetail',
+    fixed_deposit_id:item,
+    navigation:navigation
+  })
+  
+}
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('FDDetail')}
+                    onPress={()=>manageList(item.fixed_deposit_id)}
                     style={styles.card}>
                    <View style={styles.cardView}>
-                      <Image source={item.source}/>
-                      <Text style={styles.title}>{item.title}</Text>
+                      <Image
+                       resizeMode='contain'
+                       style={{height:20,width:70}}
+                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
+                      <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
-                   <View style={styles.row}>
-                       <Text style={styles.same}>{item.value1}</Text>
-                       <Text style={styles.same}>{item.value2}</Text>
-                       <Text style={styles.same}>{item.value3}</Text>
-                       <Text style={styles.same}>{item.value4}</Text>
+                   <View style={[styles.row2,{paddingRight:10}]}>
+                       <Text style={styles.same}>{item.rate}</Text>
+                       <Text style={styles.same}>{item.min_amount}</Text>
+                       <Text style={styles.same}>{item.loan}</Text>
+                       <Text style={styles.same}>{item.premature_penality}</Text>
                    </View>
-                   <View style={styles.row}>
-                       <Image source={item.img1}/>
-                       <Image source={item.img2}/>
-                       <Image source={item.img3}/>
-                       <Image source={item.img4}/>
+                   <View style={[styles.row2,{marginTop:0}]}>
+                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
+                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
+                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
+                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
                    </View>
                    <View style={styles.row1}>
-                     <Text  style={styles.same}>{item.tx}</Text>
-                     <Text  style={styles.same}>{item.tx1}</Text>
-                     <Text  style={styles.same}>{item.tx2}</Text>
-                     <Text  style={[styles.same]}>{item.tx3}</Text>
+                     <Text  style={styles.same}>{'Interest\n Rate'}</Text>
+                     <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
+                     <Text  style={styles.same}>{'Loan'}</Text>
+                     <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
                    </View>
                  </TouchableOpacity>
           </View>
@@ -124,60 +137,16 @@ const renderItem=(item)=>{
                /> 
               <View style={styles.list}>
                 <FlatList
-                   data={data}
+                   data={selector}
                    renderItem={({item})=>renderItem(item)}
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
                  />
 
               </View>
-            {/* <BottomSheet 
-            isOpen={false}
-            sliderMinHeight={0}
-            lineStyle={{width:0}}
-            lineContainerStyle={{width:0,height:0,borderRedius:0}}
-            ref={ref => panelRef1.current = ref}>
-            <View style={{width:'100%',height:120,padding:10}}>
-              <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>SORT BY</Text>
-              <View style={{width:"100%",borderWidth:1/2,borderColor:colors.textColor,marginTop:10,marginBottom:10}}></View>
-              <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>Popular</Text>
-              <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>Alphabetical</Text>
-              <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>Interest Rate</Text>
-             </View>
-              </BottomSheet> */}
-
-               {/* <BottomSheet 
-                 isOpen={false}
-                  sliderMinHeight={0}
-                  lineStyle={{width:0}}
-                  lineContainerStyle={{width:0,height:0,borderRedius:0}}
-                   ref={ref => panelRef2.current = ref}>
-                  <View style={{width:'100%',height:200,padding:10}}>
-                  <Text style={{fontFamily:'Montserrat-Normal',fontSize:12,color:colors.textColor}}>COMPARISON</Text>
-                  <View style={{width:"100%",borderWidth:1/2,borderColor:colors.textColor,marginTop:10,marginBottom:15}}></View>
-                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-
-                <View style={{alignItems:'center',justifyContent:'center'}}>
-                  <Image source={require('../../../assets/Images/sbi.png')}/>
-                  <Text style={{textAlign:'center',marginTop:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>{`Regular Fixed\nDeposit`}</Text>
-                </View>
-
-                <View style={{width:0,height:60,borderWidth:1/2,borderColor:colors.textColor}}></View>
-
-               <View style={{alignItems:'center',justifyContent:'center'}}>
-                  <Image source={require('../../../assets/Images/union.png')}/>
-                  <Text style={{textAlign:'center',marginTop:10,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>{`Regular Fixed\nDeposit`}</Text>
-                </View>
-              </View>
-              <View style={{width:'100%',alignItems:'center',marginTop:20}}>
-              <TouchableOpacity style={{height:45,width:'50%',backgroundColor:colors.textColor,borderRadius:30,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{color:colors.white}}>COMPARE</Text>
-              </TouchableOpacity>
-              </View>
-            </View>
-          </BottomSheet> */}
+         
           <StatusBar/>
-          {/* <BottomTab/> */}
+         
        </View>
     )
 }

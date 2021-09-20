@@ -17,7 +17,10 @@ initialstate = {
   BankNameList:[],
   NomineeList:[],
   CountryList:[],
-  StateList:[]
+  StateList:[],
+  FDList:[],
+  FDDetail:[],
+  Story:[]
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -175,6 +178,13 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false, Blog: action.payload };
   case 'Get_Blog_Error':
   return { ...state, isFetching: false };
+
+  case 'Get_Story_Request':
+    return { ...state, isFetching: true };
+  case 'Get_Story_Success':
+    return { ...state, isFetching: false, Story: action.payload };
+  case 'Get_Story_Error':
+  return { ...state, isFetching: false };
   
   case 'Bank_List_Request':
     return { ...state, isFetching: true };
@@ -209,6 +219,20 @@ export default (state = initialstate, action) => {
   case 'State_List_Success':
     return { ...state, isFetching: false, StateList: action.payload };
   case 'State_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'FD_List_Request':
+    return { ...state, isFetching: true };
+  case 'FD_List_Success':
+    return { ...state, isFetching: false, FDList: action.payload };
+  case 'FD_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'FD_Detail_Request':
+    return { ...state, isFetching: true };
+  case 'FD_Detail_Success':
+    return { ...state, isFetching: false, FDDetail: action.payload };
+  case 'FD_Detail_Error':
   return { ...state, isFetching: false };
 
     default:

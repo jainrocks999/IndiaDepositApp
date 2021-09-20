@@ -13,7 +13,7 @@ const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
-     appVersion()
+    appVersion()
      //initial()
       }, []);
 
@@ -106,8 +106,9 @@ const Splash=()=>{
             <View style={styles.main}>
                  <View style={{width:'100%',alignItems:'center',padding:20,justifyContent:'center'}}> 
                   <Image 
-                  //style={styles.image} 
-                  source={require('../../../assets/Image/indiaDepositLogo.png')}/>
+                  style={styles.image} 
+                  resizeMode='contain'
+                  source={require('../../../assets/Image/IndiaDeposit.png')}/>
                   </View>
                 <View style={styles.view2}>
                   <View style={styles.view3}>
