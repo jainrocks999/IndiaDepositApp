@@ -98,9 +98,9 @@ const showVisible=()=>{
      
         onPress={()=>visible?setVisible(false):setVisible(true)}>
         {!visible?<Image 
-        style={{width:19,height:13,marginLeft:'38%'}} 
+        style={{width:24,height:24,marginLeft:'25%'}} 
         source={require('../../../assets/Image/eye.png')}/>:
-        <Image style={{width:19,height:13,marginLeft:'38%'}} 
+        <Image style={{width:24,height:24,marginLeft:'25%'}} 
         source={require('../../../assets/Image/eye1.png')}/>
       }
       </TouchableOpacity>
@@ -111,9 +111,10 @@ const showVisible1=()=>{
       <TouchableOpacity 
           onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
           {!visible1?<Image 
-          style={{width:19,height:13,marginLeft:'38%'}} 
+          style={{width:24,height:24,marginLeft:'25%'}} 
           source={require('../../../assets/Image/eye.png')}/>:
-          <Image style={{width:19,height:13,marginLeft:'38%'}} 
+          <Image style={{width:24,height:24,marginLeft:'25%'}} 
+          resizeMode='contain'
           source={require('../../../assets/Image/eye1.png')}/>
         }
         </TouchableOpacity>
@@ -139,7 +140,7 @@ const showVisible1=()=>{
            <View style={{flex:1}}>
           <View style={styles.imageContainer}>
               <View style={styles.round}>
-                  <Image style={styles.image} 
+                  <Image 
                   source={require('../../../assets/Image/logo-icon.png')}/>
               </View>
           </View>
@@ -147,10 +148,10 @@ const showVisible1=()=>{
               <View style={[styles.card,{borderColor:fBorder?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Full Name</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/profile.png')}/>
+                     <Image style={styles.image} source={require('../../../assets/Image/profile.png')}/>
                      <TextInput 
                         onFocus={()=>setFBorder(true)}
-                        style={styles.input1}
+                        style={[styles.input1,{marginLeft:10}]}
                         placeholder='John Methew'
                         placeholderTextColor={colors.heading1}
                         onChangeText={handleChange('name')}
@@ -173,7 +174,9 @@ const showVisible1=()=>{
               <View style={[styles.card,{borderColor:eBorder?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/msg.png')}/>
+                     <Image
+                     style={styles.image}
+                      source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
                       ref={ref}
                       onFocus={()=>setEBorder(true)}
@@ -199,7 +202,9 @@ const showVisible1=()=>{
               <View style={[styles.card,{borderColor:mBorder?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/phone.png')}/>
+                     <Image 
+                     style={styles.image}
+                     source={require('../../../assets/Image/phone.png')}/>
                      <TextInput 
                       ref={ref1}
                       onFocus={()=>setMBorder(true)}
@@ -228,7 +233,9 @@ const showVisible1=()=>{
                 <View style={[styles.card1,{borderColor:pBorder?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Set Your Pin</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/lock.png')}/>
+                     <Image 
+                     style={styles.image}
+                     source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       ref={ref2}
                       onFocus={()=>setPBorder(true)}
@@ -260,7 +267,9 @@ const showVisible1=()=>{
                 <View style={[styles.card1,{borderColor:cBorder?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Confirm Pin</Text>
                     <View style={styles.input}>
-                     <Image source={require('../../../assets/Image/lock.png')}/>
+                     <Image
+                     style={styles.image}
+                     source={require('../../../assets/Image/lock.png')}/>
                      <TextInput 
                       ref={ref3}
                       onFocus={()=>setCBorder(true)}
@@ -322,7 +331,9 @@ const showVisible1=()=>{
               <View style={styles.button}>
                  <CustomButton
                   onPress={()=>
-                    handleSubmit()}
+                  // navigation.navigate('Main')
+                 handleSubmit()
+                  }
                     title='SIGN UP'
                  />
              </View>

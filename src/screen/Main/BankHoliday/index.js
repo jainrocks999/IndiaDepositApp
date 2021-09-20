@@ -171,8 +171,8 @@ const Holiday=()=>{
                           <TouchableOpacity style={styles.jan}
                                    onPress={()=>checkJan()}>
                                    <Text style={styles.month}>January</Text>
-                                    {jan ==false? <Image source={require('../../../assets/Image/wFarword.png')}/>:
-                                    <Image source={require('../../../assets/Image/wDown.png')}/>}
+                                    {jan ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
+                                    <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>}
                            </TouchableOpacity> 
                  </View>
                       {jan ==true?<View>
@@ -197,8 +197,8 @@ const Holiday=()=>{
                                 onPress={()=>checkFeb()}>
                                 <Text style={styles.month}>February</Text>
                                 {
-                                 feb ==false? <Image source={require('../../../assets/Image/wFarword.png')}/>:
-                                 <Image source={require('../../../assets/Image/wDown.png')}/>
+                                 feb ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
+                                 <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
                                 }
                          </TouchableOpacity> 
                     </View>
@@ -224,8 +224,8 @@ const Holiday=()=>{
                                    onPress={()=>checkMarch()}>
                                    <Text style={styles.month}>March</Text>
                                     {
-                                       march ==false? <Image source={require('../../../assets/Image/wFarword.png')}/>:
-                                       <Image source={require('../../../assets/Image/wDown.png')}/>
+                                       march ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
+                                       <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
                                     }
                               </TouchableOpacity> 
                        </View>
@@ -253,8 +253,10 @@ const Holiday=()=>{
                                           onPress={()=>checkApril()}>
                                          <Text style={styles.month}>April</Text>
                                           { 
-                                            april ==false? <Image source={require('../../../assets/Image/wFarword.png')}/>:
-                                             <Image source={require('../../../assets/Image/wDown.png')}/>
+                                            april ==false? <Image
+                                            style={{width:24,height:16}}
+                                             source={require('../../../assets/Image/wFarword.png')}/>:
+                                             <Image  style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
                                           }
                                      </TouchableOpacity> 
                         </View>
@@ -281,8 +283,8 @@ const Holiday=()=>{
                                       onPress={()=>checkMay()}>
                                      <Text style={styles.month}>May</Text>
                                      {
-                                          may ==false? <Image source={require('../../../assets/Image/wFarword.png')}/>:
-                                          <Image source={require('../../../assets/Image/wDown.png')}/>
+                                          may ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
+                                          <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
                                       }
                             </TouchableOpacity> 
                         </View>

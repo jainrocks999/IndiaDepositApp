@@ -43,8 +43,8 @@ const ExpandableComponent = ({item, onClickFunction}) => {
         <Text style={styles.headerText}>
           {item.question}
         </Text>
-       {item.isExpanded?<Image source={require('../../../assets/Image/wDown.png')}/>:
-       <Image source={require('../../../assets/Image/wFarword.png')}/>}
+       {item.isExpanded?<Image style={{width:26,height:18}} source={require('../../../assets/Image/wDown.png')}/>:
+       <Image style={{width:26,height:18}} source={require('../../../assets/Image/wFarword.png')}/>}
       </TouchableOpacity>
      
       <View

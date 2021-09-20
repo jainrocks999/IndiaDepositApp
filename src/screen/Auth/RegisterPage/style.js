@@ -28,13 +28,13 @@ export default StyleSheet.create({
     input1:
     {
         width:'90%',
-        marginLeft:11,
+        marginLeft:1,
         paddingVertical:-10,
         color:colors.textColor
     },
     input2:
     {
-        marginLeft:5,
+        marginLeft:1,
         color:colors.textColor,
         paddingVertical:-10,
         width:50
@@ -144,4 +144,8 @@ export default StyleSheet.create({
     { 
          width:'47%'
     },
+    image:{
+        width:24,
+        height:24
+    }
 })

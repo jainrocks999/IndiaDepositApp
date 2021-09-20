@@ -9,11 +9,11 @@ const Header=({title,source,onPress,source1,onPress1})=>{
         <View>
             <View style={styles.main}>
                 <TouchableOpacity onPress={onPress}>
-                  <Image style={{height:35,width:35,tintColor:colors.white}}  source={source}/>
+                  <Image style={{height:32,width:32,tintColor:colors.white}}  source={source}/>
                 </TouchableOpacity>
                 <Text style={styles.text}>{title} </Text>
                 <TouchableOpacity onPress={onPress1}>
-                <Image source={source1}/>
+                <Image style={{width:25,height:30}} source={source1}/>
                 </TouchableOpacity>
            </View>
         </View>
@@ -39,5 +39,6 @@ const styles=StyleSheet.create({
         color:colors.white,
         fontSize:fontSize.eighteen,
         fontFamily:'Montserrat-SemiBold',
+        marginLeft:10
     },
 })

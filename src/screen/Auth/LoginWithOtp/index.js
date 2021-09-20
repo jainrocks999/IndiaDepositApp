@@ -27,7 +27,8 @@ const Login=()=>{
 
 const showVisible=()=>{
   return(
-   <Image source={require('../../../assets/Image/phone.png')}/>
+   <Image resizeMode='contain'
+   style={{width:24,height:24}}  source={require('../../../assets/Image/phone.png')}/>
   )
 }
 const validateUser=async(mobile)=>{

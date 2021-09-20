@@ -43,7 +43,7 @@ export default StyleSheet.create({
        // backgroundColor: 'grey'
     },
     text: {
-        marginLeft: 15,
+        marginLeft: 10,
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.sixteen,
         color:colors.textColor
@@ -170,7 +170,8 @@ export default StyleSheet.create({
             fontFamily:'Montserrat-Normal'
         }, 
         view1:{ 
-            flexDirection: 'row'
+            flexDirection: 'row',
+            alignItems:'center'
          },
         view2:{ 
             flexDirection: 'row',
@@ -192,5 +193,12 @@ export default StyleSheet.create({
              backgroundColor:colors.white,
              alignItems:'center',
              justifyContent:'center'
-         },  
+         }, 
+         imageicon:{
+             width:32,
+             height:32
+         } ,
+         arrow:{
+             width:28,height:28
+         }
 })

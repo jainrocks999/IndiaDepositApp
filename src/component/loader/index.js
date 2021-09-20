@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 
-//Main loader component
+//Main loader component0
 export default class Loading extends React.Component {
   render() {
     return (

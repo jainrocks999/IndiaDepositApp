@@ -72,7 +72,7 @@ const addUser=async(values)=>{
             <Header
                     title={'Edit Bank'}
                     source={require('../../../../assets/Images/arrow.png')}
-                    onPress={()=>Root.push('BankDetail')}
+                    onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
                 <View style={styles.card}>

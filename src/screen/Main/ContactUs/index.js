@@ -67,6 +67,7 @@ const Contact=()=>{
                     onPress={()=>Linking.openURL(`tel:1800000000`)}
                     style={styles.button}>
                         <Image 
+                        style={{width:16,height:20}}
                         source={require('../../../assets/Image/call.png')}/>
                         <Text style={styles.call}>CALL</Text>
                     </TouchableOpacity>
@@ -77,6 +78,7 @@ const Contact=()=>{
                     onPress={()=>Linking.openURL(`tel:18110000000`)}
                     style={styles.button}>
                         <Image
+                         style={{width:16,height:20}}
                         source={require('../../../assets/Image/call.png')}/>
                         <Text style={styles.call}>CALL</Text>
                     </TouchableOpacity>

@@ -77,7 +77,6 @@ const deletePost=async(item)=>{
         } 
       } catch (error) {
        throw error;
-        
       }
 }
 

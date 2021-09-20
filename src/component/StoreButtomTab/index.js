@@ -11,10 +11,10 @@ const BottomTab = () => {
       <View style={styles.container}>
         <View style={{width:30}}>
           <Image
-           style={{height:15,width:19}}
-            source={require('../../assets/Images/home.png')}/>
+           style={{height:32,width:32}}
+            source={require('../../assets/Image/home.png')}/>
         </View>
-        <Text style={[styles.text,{marginTop:7}]}>{'HOME'}</Text>
+        <Text style={[styles.text,{marginTop:0}]}>{'HOME'}</Text>
       </View>
     )
   };
@@ -24,7 +24,8 @@ const BottomTab = () => {
       <View style={styles.container}>
         <View style={{width:30}}>
           <Image
-            source={require('../../assets/Images/holy.png')}/>
+          style={{height:32,width:32}}
+            source={require('../../assets/Image/holy.png')}/>
         </View>
         <Text style={styles.text}>{'BANK HOLIDAY'}</Text>
       </View>
@@ -35,9 +36,10 @@ const BottomTab = () => {
       <View style={styles.container}>
           <View style={{width:30}}>
             <Image
+             style={{height:32,width:32}}
               source={require('../../assets/Image/knowledege_grey.png')}/>
           </View>
-        <Text style={styles.text}>{'KNOWLEDGE CENTER'}</Text>
+        <Text style={styles.text}>{'KNOWLEDGE CE...'}</Text>
       </View>
     );
   };
@@ -46,7 +48,8 @@ const BottomTab = () => {
       <View style={styles.container}>
           <View style={{width:30}}>
             <Image
-              source={require('../../assets/Images/trend.png')}/>
+             style={{height:32,width:32}}
+              source={require('../../assets/Image/trend.png')}/>
           </View>
         <Text style={styles.text}>{'TRENDING'}</Text>
       </View>

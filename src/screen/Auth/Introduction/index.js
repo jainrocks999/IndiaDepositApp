@@ -12,7 +12,7 @@ const Introduction=({route})=>{
       console.log('this is data information',data);
     return(
         <View style={styles.container}>
-          <ScrollView style={{flex:1}}>
+          {/* <ScrollView style={{flex:1}}> */}
              <View style={styles.imageContainer}>
               <View style={styles.round}>
                   <Image
@@ -22,6 +22,7 @@ const Introduction=({route})=>{
             </View>
                 <View style={styles.view}>
                 <Image style={styles.img}
+                resizeMode='contain'
                       source={{uri:data.image_url}}/>
                 </View>
            <View style={styles.main}>
@@ -42,7 +43,7 @@ const Introduction=({route})=>{
                 </TouchableOpacity>
             </View>
            </View>
-         </ScrollView>
+         {/* </ScrollView> */}
          <StatusBar/>
        </View>
     )

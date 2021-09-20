@@ -54,9 +54,9 @@ const showVisible=()=>{
       <TouchableOpacity 
           onPress={()=>visible?setVisible(false):setVisible(true)}>
           {!visible?<Image 
-          style={{width:19,height:13}} 
+           style={{width:24,height:24}} 
           source={require('../../../assets/Image/eye.png')}/>:
-          <Image style={{width:19,height:13}} 
+          <Image   style={{width:24,height:24}} 
           source={require('../../../assets/Image/eye1.png')}/>
         }
         </TouchableOpacity>
@@ -67,9 +67,9 @@ const showVisible1=()=>{
         <TouchableOpacity 
             onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
             {!visible1?<Image 
-            style={{width:19,height:13}} 
+            style={{width:24,height:24}} 
             source={require('../../../assets/Image/eye.png')}/>:
-            <Image style={{width:19,height:13}} 
+            <Image style={{width:24,height:24}} 
             source={require('../../../assets/Image/eye1.png')}/>
           }
           </TouchableOpacity>
@@ -82,9 +82,9 @@ const showVisible2=()=>{
           <TouchableOpacity 
               onPress={()=>visible2?setVisible2(false):setVisible2(true)}>
               {!visible2?<Image 
-              style={{width:19,height:13}} 
+                style={{width:24,height:24}} 
               source={require('../../../assets/Image/eye.png')}/>:
-              <Image style={{width:19,height:13}} 
+              <Image   style={{width:24,height:24}}  
               source={require('../../../assets/Image/eye1.png')}/>
             }
             </TouchableOpacity>
@@ -112,7 +112,7 @@ const validateUser=async(values)=>{
          {isFetching?<Loader/>:null} 
          <Header
          title={'CHANGE PIN'}
-         source={require('../../../assets/Image/arrow.png')}
+         source={require('../../../assets/Image/arrow2.png')}
          onPress={()=>navigation.goBack()}
          />
           <ScrollView>

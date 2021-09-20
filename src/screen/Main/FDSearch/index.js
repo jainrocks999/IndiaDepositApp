@@ -1,4 +1,4 @@
-import React,{useState}from 'react';
+import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -13,12 +13,23 @@ import { ProgressBar, Colors } from 'react-native-paper';
 import BottomTab from '../../../component/StoreButtomTab';
 import fontSize from '../../../component/fontSize';
 import Geocoder from 'react-native-geocoding';
+import { useDispatch,useSelector } from 'react-redux';
+
 Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
 const Contact=()=>{
     const navigation=useNavigation()
     const [tenure, setTenure] = useState('')
     const [month, setMonth] = useState('')
     const [year,setYear] = useState('')
+    const dispatch=useDispatch()
+
+
+    useEffect(()=>{
+      dispatch({
+        type: 'FD_List_Request',
+        url: 'fdlist',
+      })
+    },[])
 
     Geocoder.from("Colosseum")
     .then(json => {
@@ -123,7 +134,7 @@ const Contact=()=>{
                               <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
                           <View style={styles.view5}>
-                                <Image source={require('../../../assets/Image/search.png')}/>
+                                <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                                 <Text style={[styles.text1,{marginLeft:20}]}>Current Location</Text>
                           </View>
                        </View>

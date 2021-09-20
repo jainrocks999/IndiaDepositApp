@@ -84,7 +84,7 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        width:'100%'
+        width:'100%',
     },
     circle:
     {

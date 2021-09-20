@@ -146,6 +146,8 @@ export default StyleSheet.create({
     image:
     {
         marginTop:16,
-        marginRight:8
+        marginRight:0,
+        height:7,
+        width:20,
     },
 })
