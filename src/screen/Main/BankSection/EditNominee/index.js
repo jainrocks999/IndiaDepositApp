@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
 import DatePicker from 'react-native-datepicker'
 import axios from "axios";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const loginValidationSchema=yup.object().shape({
     name:yup.string().required('Please Enter your Name'),
@@ -120,6 +121,11 @@ const manageState=async(val)=>{
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
+             <KeyboardAwareScrollView
+                extraScrollHeight={10}
+                enableOnAndroid={true} 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
                 <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
@@ -333,6 +339,7 @@ const manageState=async(val)=>{
                   </View>
                    
                 </View>
+                </KeyboardAwareScrollView>
            </ScrollView>
           <StatusBar/>
          

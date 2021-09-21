@@ -5,7 +5,8 @@ import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
-
+import HTMLView from 'react-native-htmlview';
+import { ScrollView } from 'react-native-gesture-handler';
 
   
 const BlogCategory=({route})=>{
@@ -13,7 +14,7 @@ const BlogCategory=({route})=>{
    const data=route.params.item
     return(
            <View style={styles.container}>
-             
+            
               <View style={styles.main5}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
                   <Image style={{height:32,width:32,tintColor:colors.white}}   
@@ -21,6 +22,7 @@ const BlogCategory=({route})=>{
                 </TouchableOpacity>
                 <Text style={styles.textTitle}>{data.title} </Text>
            </View>
+           <ScrollView style={{flex:1}}>
                <View style={styles.view}>
                     <View style={styles.view1}>
                         
@@ -47,9 +49,15 @@ const BlogCategory=({route})=>{
                            
                     </View>
                     <View style={styles.view5}>
-                      <Text style={styles.text6}>{`${data.content}`}</Text>
+                    <HTMLView
+                      value={data.content}
+                    />
+                    
+                    
+                      {/* <Text style={styles.text6}>{`${}`}</Text> */}
                     </View>
                </View>
+               </ScrollView>
               <StatusBar/>
            </View>
     )

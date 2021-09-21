@@ -81,6 +81,7 @@ export default StyleSheet.create({
         alignItems:'center',
         flexDirection:'row',
         marginTop:-3,
+        
     },
     main:
     {
@@ -129,6 +130,12 @@ export default StyleSheet.create({
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
+    },
+    agree1:
+    {
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Normal',
+        color:colors.bc
     },
     text1:
     {

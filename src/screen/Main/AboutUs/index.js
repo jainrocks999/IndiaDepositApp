@@ -6,6 +6,7 @@ import StatusBar from '../../../component/StatusBar';
 import Header from '../../../component/header';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
+import HTMLView from 'react-native-htmlview';
 const Contact=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -22,9 +23,12 @@ useEffect(()=>{
 },[])
 const showContent=()=>{
       if (selector.length>0) {
-        return <Text style={styles.normal}>
-                {selector[0].value}
-        </Text>
+        return(
+          <HTMLView
+          value={selector[0].value}
+        />
+        )
+       
       } else {
         return<View></View>
       }

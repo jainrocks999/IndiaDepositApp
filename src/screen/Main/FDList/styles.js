@@ -4,12 +4,12 @@ import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     same:
     {
-        fontSize:fontSize.eleven,
+        fontSize:fontSize.ten,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
-        marginRight:0,
-        alignItems:'center',
-        textAlign:'center'
+       
+       
+       
     },
     title:
     {
@@ -32,8 +32,8 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:6,
         backgroundColor:colors.white,
-      //  height:85,
         padding:13,
+        width:'100%'
     },
     cont:
     {
@@ -75,5 +75,13 @@ export default StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         flex:1
-    }
+    },
+    width:{
+        width:'20%',
+        alignSelf:'center',
+        justifyContent:'center',
+        alignItems:'center'
+       // flex:1
+    },
+    image:{width:25,height:25}
 })

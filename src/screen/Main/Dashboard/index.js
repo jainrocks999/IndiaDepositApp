@@ -33,8 +33,8 @@ const dashboard=()=>{
       };
 
     const ListItem = ({item, selected, onPress, onLongPress}) => (
-        <>
-           <View style={{width:'33%',alignItems:'center',justifyContent:'center',height:100}}>
+       
+           <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:100}}>
                <TouchableOpacity 
                     onPress={onPress}
                     onLongPress={onLongPress}
@@ -45,7 +45,7 @@ const dashboard=()=>{
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
                     <View style={styles.circle}>
-                    <Text style={{fontSize:6,color:colors.bc}}>{`i`}</Text>
+                    <Text style={{fontSize:8,color:colors.bc,fontWeight:'700'}}>{`i`}</Text>
                     </View>
                     </View>
                     {selected && <View style={styles.enable}>
@@ -59,10 +59,7 @@ const dashboard=()=>{
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
                     <View style={[styles.circle,{borderColor:colors.white}]}>
-                      <Text style={{color:colors.white,fontSize:6}}>i</Text>
-                        {/* <Image 
-                        style={{tintColor:colors.white}}
-                        source={require('../../../assets/Image/ic.png')}/>   */}
+                      <Text style={{color:colors.white,fontSize:8,fontWeight:'700'}}>i</Text>
                     </View>
                     </View>
                    
@@ -73,13 +70,14 @@ const dashboard=()=>{
                 </TouchableOpacity>
                
             </View>                                           
-        </>
+      
       );
 
       const getSelected = contact => selectedItems.includes(contact.id);
 
       const deSelectItems = () => setSelectedItems([]);
       const selectItems = item => {
+        setSelectedItems1([])
         if (selectedItems.includes(item.id)) {
           const newListItems = selectedItems.filter(
             listItem => listItem !== item.id,
@@ -93,6 +91,7 @@ const dashboard=()=>{
 
       const deSelectItems1 = () => setSelectedItems1([]);
       const selectItems1 = item => {
+        setSelectedItems([])
         if (selectedItems1.includes(item.id)) {
           const newListItems = selectedItems1.filter(
             listItem => listItem !== item.id,

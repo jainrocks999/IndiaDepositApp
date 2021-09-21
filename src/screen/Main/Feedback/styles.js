@@ -92,7 +92,7 @@ export default StyleSheet.create({
     },
     bottom:
     {
-        height:60,
+        // height:60,
         borderWidth:1,
         borderRadius:6,
         borderColor:colors.textColor,

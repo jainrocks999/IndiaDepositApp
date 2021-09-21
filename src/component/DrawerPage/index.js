@@ -14,6 +14,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../AsyncStorage';
 import Modal from "react-native-modal";
 import fontSize from '../fontSize';
+import Root from '../../navigator/rootNavigation';
 const DrawerContent=({props})=> {
     const navigation = useNavigation();
     const dispatch=useDispatch()
@@ -77,7 +78,7 @@ const DrawerContent=({props})=> {
         navigation.navigate('Profile',{
             name,email,dob,gender,mother,father
         })
-        navigation.dispatch(DrawerActions.closeDrawer())
+        // navigation.dispatch(DrawerActions.closeDrawer())
     }
   
     return (

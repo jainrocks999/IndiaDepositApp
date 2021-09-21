@@ -88,9 +88,9 @@ export default StyleSheet.create({
     },
     circle:
     {
-        width:10,
-        height:10,
-        borderRadius:5,
+        width:12,
+        height:12,
+        borderRadius:6,
         borderWidth:1,
         marginTop:6,
         marginLeft:2,
@@ -123,9 +123,10 @@ export default StyleSheet.create({
     touch1:
     {
         alignItems:'center',
-        width:'100%',
+        width:'98%',
         paddingVertical:15,
-        borderRadius:10
+        borderRadius:10,
+    
     },
     touch2:
     {
@@ -154,7 +155,8 @@ export default StyleSheet.create({
         width:'100%',
         height:90,
         backgroundColor:colors.bc,
-        borderRadius:10 
+        borderRadius:10 ,
+        alignItems:'center',justifyContent:'center'
    }
 })
 

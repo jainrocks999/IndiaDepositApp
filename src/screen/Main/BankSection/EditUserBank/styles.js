@@ -27,10 +27,13 @@ export default StyleSheet.create({
         justifyContent:'center',
         width:'100%',
         paddingHorizontal:10,
+        alignItems:'flex-start'
        
     },
     input:{
-        color:colors.textColor
+        color:colors.textColor,
+        height:40,
+        width:'100%'
     },
     card:
     { 

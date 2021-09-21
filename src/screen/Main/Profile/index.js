@@ -16,6 +16,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import * as RootNavigation from '../../../navigator/rootNavigation';
 import axios from 'axios';
+
   const renderScene = SceneMap({
       first: Profile,
       second: BankDetail,
@@ -28,9 +29,9 @@ const ProfileScreen=()=>{
   const [index, setIndex] = useState(0);
   const [photos, setphotos] = useState('');
   const [visible,setVisible]=useState(false)
-  const [name,setName]=useState()
-  const [mother,setMName]=useState()
-  const [father,setFName]=useState()
+  const [name,setName]=useState('')
+  const [mother,setMName]=useState('')
+  const [father,setFName]=useState('')
   const [email,setEmail]=useState()
   const [gender, setGender] = useState('');
   const [dob, setDob] = useState('');
@@ -148,8 +149,9 @@ const save=async(images)=>{
                     <ScrollView
                       contentContainerStyle={{flex:1}}
                       style={{backgroundColor:'#E5E5E5'}}>
-                                        <View style={styles.view1}>
-                                <Dialog
+                      
+                      <View style={styles.view1}>
+                          <Dialog
                           dialogStyle={{width:300,height:170,paddingHorizontal:10}}
                           visible={visible}
                          >
@@ -178,21 +180,21 @@ const save=async(images)=>{
                 
                                 <View style={styles.view2}>
                                      <Text  
-                                     onPress={()=>RootNavigation.replace('UpdateProfile',{
+                                     onPress={()=>RootNavigation.push('UpdateProfile',{
                                        name,email,gender,dob,father,mother
                                      })} 
                                      style={styles.change}>Edit Profile</Text>
                                       <View style={styles.imageContainer}>
-                                        {/* {photos?<Image 
+                                        {photos?<Image 
                                         style={{width:'100%',height:'100%',borderRadius:57}} 
                                         source={photos}/>
                                           :image?<Image 
                                           style={{width:'100%',height:'100%',borderRadius:57}} 
                                           source={{uri: image}}/>
-                                          : */}
+                                          :
                                           <Image style={styles.img} 
                                           source={require('../../../assets/Image/user-couple.png')}/>
-                                          {/* } */}
+                                        }
                                     
                                      <TouchableOpacity
                                      onPress={()=>setVisible(true)} 

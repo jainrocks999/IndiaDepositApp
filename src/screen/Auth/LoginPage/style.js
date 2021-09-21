@@ -148,7 +148,7 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
-        color:colors.textColor
+        color:colors.bc
     },
    
 })

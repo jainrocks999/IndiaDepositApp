@@ -14,7 +14,7 @@ import CustomButton from '../../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const loginValidationSchema=yup.object().shape({
     account_number:yup.string().min(14,({min})=>`IFSC Code must be 14 digits`).required('Please enter your Account Number '),
     ifsc_code:yup.string().min(11,({min})=>`IFSC Code must be 11 digits`).required('Please enter IFSC Code'),
@@ -75,6 +75,11 @@ const addUser=async(values)=>{
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
+             <KeyboardAwareScrollView
+                extraScrollHeight={0}
+                enableOnAndroid={true} 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
                 <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
@@ -171,6 +176,7 @@ const addUser=async(values)=>{
                   </View>
                    
                 </View>
+                </KeyboardAwareScrollView>
            </ScrollView>
           <StatusBar/>
          

@@ -1,16 +1,17 @@
 import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView,TextInput} from 'react-native';
 import styles from './styles';
-import colors from '../../../component/colors';
-import StatusBar from '../../../component/StatusBar';
+import colors from '../../colors';
+import StatusBar from '../../StatusBar';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-community/async-storage';
-import Storage from '../../../component/AsyncStorage';
+import Storage from '../../AsyncStorage';
+import Loader from '../../loader';
 const Profile=()=>{
-    const [name,setName]=useState()
-    const [mother,setMName]=useState()
-    const [father,setFName]=useState()
-    const [email,setEmail]=useState()
+    const [name,setName]=useState('')
+    const [mother,setMName]=useState('')
+    const [father,setFName]=useState('')
+    const [email,setEmail]=useState('')
     const [gender, setGender] = useState('');
     const [dob, setDob] = useState('');
   useEffect(async()=>{
@@ -31,6 +32,7 @@ const Profile=()=>{
     return(
         <View style={styles.container}>
               <View style={{padding:10}}>
+              {name==''&&father==''&&mother==''?<Loader/>:null}
                  <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>

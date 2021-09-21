@@ -30,7 +30,8 @@ export default StyleSheet.create({
        
     },
     input:{
-        color:colors.textColor
+        color:colors.textColor,
+        height:40
     },
     card:
     { 

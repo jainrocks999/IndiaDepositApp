@@ -32,7 +32,7 @@ const Calculator=()=>{
                />
               <ScrollView
                 contentContainerStyle={{flex:1}}
-                style={{backgroundColor:'#E5E5E5',marginBottom:15}}>
+                style={{backgroundColor:'#E5E5E5'}}>
 
               
                <View style={styles.card}>

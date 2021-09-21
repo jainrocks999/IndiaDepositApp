@@ -16,6 +16,8 @@ import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 const loginValidationSchema=yup.object().shape({
     name:yup.string().required('Please Enter your Name'),
     address1:yup.string().required('Please Enter your Address1'),
@@ -110,6 +112,11 @@ const addUser=async(values)=>{
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
+             <KeyboardAwareScrollView
+                extraScrollHeight={10}
+                enableOnAndroid={true} 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
                 <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
@@ -226,8 +233,8 @@ const addUser=async(values)=>{
                             cancelBtnText="Cancel"
                             maxDate={new Date()}
                             customStyles={{
-                                placeholderText:{marginLeft:0},
-                                
+                                placeholderText:{marginLeft:0,color:colors.heading1},
+                               
                             dateIcon: {
                                 width:0,
                                 height:0,
@@ -323,6 +330,7 @@ const addUser=async(values)=>{
                   </View>
                    
                 </View>
+                </KeyboardAwareScrollView>
            </ScrollView>
           <StatusBar/>
          

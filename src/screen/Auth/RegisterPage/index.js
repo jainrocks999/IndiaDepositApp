@@ -326,7 +326,13 @@ const showVisible1=()=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  <Text style={styles.agree}>{'I agree with Terms & Conditions and Privacy Policy'} </Text>
+                  <Text style={styles.agree}>
+                    {'I agree with '}
+                    <Text style={styles.agree1}>{`Terms & Conditions`}</Text>
+                    <Text> and </Text>
+                    <Text style={styles.agree1}>{`Privacy Policy`}</Text>
+                    
+                     </Text>
               </View>
               <View style={styles.button}>
                  <CustomButton

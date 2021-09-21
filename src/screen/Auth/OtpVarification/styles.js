@@ -112,12 +112,13 @@ export default StyleSheet.create({
     }  ,
     your:
     {
-        color:colors.black,
+        color:colors.textColor,
         alignSelf:'center',
         alignContent:'center',
         textAlign:'center',
         fontFamily:'Montserrat-Normal'
     },
+   
     image:
     {
         width:'82%',

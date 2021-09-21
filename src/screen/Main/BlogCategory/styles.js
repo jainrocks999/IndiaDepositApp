@@ -128,7 +128,7 @@ export default StyleSheet.create({
     },
     img:{
         width: '100%',
-        height: '50%'
+        height: 200
     },
     main5:{
         width:'100%',

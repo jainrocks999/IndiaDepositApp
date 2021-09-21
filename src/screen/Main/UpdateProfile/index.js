@@ -74,7 +74,7 @@ const RegisterPage=({route})=>{
                   <Header
                      source={require('../../../assets/Images/arrow.png')}
                      title='EDIT PROFILE'
-                     onPress={()=>navigation.push('Main')}
+                     onPress={()=>navigation.push('Profile')}
                   />
                { isFetching?<Loader/>:null}
                   <ScrollView style={styles.scroll}>

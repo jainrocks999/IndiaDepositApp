@@ -7,7 +7,7 @@ import Header from '../../../component/header';
 import BottomTab from '../../../component/StoreButtomTab';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
-
+import HTMLView from 'react-native-htmlview';
 const Trending=()=>
 {
      const navigation=useNavigation()
@@ -26,9 +26,12 @@ const showContent=()=>{
     if (selector.length>0) {
       return (
         <View>
-      <Text style={styles.normal}>
+      {/* <Text style={styles.normal}>
               {selector[0].value}
-      </Text>
+      </Text> */}
+       <HTMLView
+        value={selector[0].value}
+      />
       </View>
       )
    

@@ -20,6 +20,7 @@ const Splash=()=>{
       const appVersion = async (url) => {
         const id=await AsyncStorage.getItem(Storage.user_id)
         const user_id=id==null ? '':id
+        console.log('this isi user id',user_id);
         const name=await AsyncStorage.getItem(Storage.name)
         try {
           const data = new FormData();

@@ -16,7 +16,9 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:10,
         backgroundColor:colors.white,
-        marginBottom:40
+        marginBottom:40,
+        paddingHorizontal:15,
+        paddingVertical:20
     },
     
     heading:

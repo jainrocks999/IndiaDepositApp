@@ -20,10 +20,8 @@ export default StyleSheet.create({
         borderTopRightRadius:10,
         backgroundColor:colors.white,
         marginHorizontal:15,
-        // paddingVertical:20,
         marginTop:20,
-        
-         height:'100%'
+        height:'100%'
     }, 
     main:
     {

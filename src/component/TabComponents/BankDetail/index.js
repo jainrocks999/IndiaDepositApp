@@ -70,6 +70,7 @@ const BankDetails=()=>{
           }
     }
     const renderItem=(item)=>{
+      console.log('thisis i dffkkdfk',item.bank_logo);
         return(
             <View style={styles.cont}>
 
@@ -77,14 +78,17 @@ const BankDetails=()=>{
                       style={styles.card}>
                      <View style={styles.cardView}>
                        
-                        <Image source={require('../../../assets/Images/sbi.png')}/>
+                        <Image
+                         resizeMode='contain'
+                         style={{height:20,width:70}} 
+                        source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
                         <Text style={styles.title}>{item.name}</Text>
                        <View style={{width:'20%',alignItems:'flex-end'}}>
                        </View>
                      </View>
                     
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Account No : ${item.account_number}`}</Text>
+                         <Text style={styles.same}>{`Account No : XXXXXXXXXX${item.account_number.substr(-4)}`}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.same}>{` IFSC Code : ${item.ifsc_code}`}</Text>

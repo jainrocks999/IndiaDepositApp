@@ -124,7 +124,7 @@ class OtpVarification extends React.Component{
                       disabled={this.state.counter > 0 ? true : false}
                       onPress={() => this.otpResend()}
                       >
-                      <Text style={[styles.your,{color:this.state.counter>0?'grey':colors.bc}]}>
+                      <Text style={[styles.your,{color:this.state.counter>0?'grey':colors.bc,fontWeight:'700'}]}>
                           {` Resend again`}
                       </Text>
                       </TouchableOpacity>

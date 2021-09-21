@@ -1,86 +1,18 @@
-import React,{useRef,useEffect} from "react";
+import React,{useRef,useEffect,useState} from "react";
 import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from "../../../component/StatusBar";
 import { useDispatch,useSelector } from 'react-redux';
+import colors from '../../../component/colors';
 
-const data=
-[
-    {source:require('../../../assets/Images/sbi.png'),
-    title:'Regular Fixed Deposit',
-    value1:'5%',value2:'1.05 Lakh',
-    value3:'Yes',value4:'10%',
-    img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-    },
-    {source:require('../../../assets/Images/union.png'),
-    title:'Regular Fixed Deposit',
-    value1:'6%',value2:'1.06 Lakh',
-    value3:'Yes',value4:'9%',
-    img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-    },
-    {source:require('../../../assets/Images/axis.png'),
-    title:'Regular Fixed Deposit',
-    value1:'7%',value2:'1.07 Lakh',
-    value3:'Yes',value4:'8%',
-     img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-  },
-    {source:require('../../../assets/Images/pnb.png'),
-    title:'Regular Fixed Deposit',
-    value1:'8%',value2:'1.08 Lakh',
-    value3:'Yes',value4:'7%', 
-    img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-  },
-    {source:require('../../../assets/Images/hdfc.png'),
-    title:'Regular Fixed Deposit',
-    value1:'9%',value2:'1.09 Lakh',
-    value3:'Yes',value4:'6%',
-     img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-  },
-    {source:require('../../../assets/Images/bob.png'),
-    title:'Regular Fixed Deposit',
-    value1:'10%',value2:'1.10 Lakh',
-    value3:'Yes',value4:'5%',
-    img1:require('../../../assets/Image/interest.png'),
-    img2:require('../../../assets/Image/maturity.png'),
-    img3:require('../../../assets/Image/loan.png'),
-    img4:require('../../../assets/Image/premature.png'),
-    tx:'Interest\n Rate',tx1:'Maturity\nAmount',tx2:'Loan',
-    tx3:'Premature\nPenalty'
-    }
- ]
 const FDList=()=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.FDList)
-console.log('this is selector value',selector);
-
+        const [selectedData,setSelectedData]=useState([])
+console.log('this is selcted data id',selectedData);
 const manageList=(item)=>{
   dispatch({
     type: 'FD_Detail_Request',
@@ -90,12 +22,30 @@ const manageList=(item)=>{
   })
   
 }
+const handleonPress=(id)=>{
+  if(selectedData.length){
+    handleSelectionMultiple(id)
+  }else{
+    manageList(id)
+  }
+}
+
+const handleSelectionMultiple = (id) => {
+  var selectedIds = [...selectedData] // clone state
+
+  if(selectedIds.includes(id))
+    selectedIds = selectedIds.filter(_id => _id !== id)
+  else 
+    selectedIds.push(id)
+    setSelectedData(selectedIds)
+}
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
-                    onPress={()=>manageList(item.fixed_deposit_id)}
-                    style={styles.card}>
+                    onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
+                    onPress={()=>handleonPress(item.fixed_deposit_id)}
+                    style={[styles.card,{backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null}]}>
                    <View style={styles.cardView}>
                       <Image
                        resizeMode='contain'
@@ -105,22 +55,54 @@ const renderItem=(item)=>{
                      <View style={{width:'20%'}}></View>
                    </View>
                    <View style={[styles.row2,{paddingRight:10}]}>
+                     <View style={styles.width}>
                        <Text style={styles.same}>{item.rate}</Text>
+                       </View>
+                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.min_amount}</Text>
+                       </View>
+                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.loan}</Text>
+                       </View>
+                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.premature_penality}</Text>
+                       </View>
                    </View>
                    <View style={[styles.row2,{marginTop:0}]}>
-                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
-                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
-                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
-                       <Image style={{width:30,height:30}} resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
+                   <View  style={styles.width}>
+                       <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
+                        </View>
+                        <View  style={styles.width}>
+                       <Image
+                         style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
+                      </View>
+                      <View  style={styles.width}>
+                       <Image 
+                        style={styles.image} 
+                       resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
+                      </View>
+                      <View  style={styles.width}>
+                       <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
+                        </View>
                    </View>
                    <View style={styles.row1}>
+                   <View  style={styles.width}>
                      <Text  style={styles.same}>{'Interest\n Rate'}</Text>
+                     </View>
+                     <View  style={styles.width}>
                      <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
+                     </View>
+                     <View  style={styles.width}>
                      <Text  style={styles.same}>{'Loan'}</Text>
+                     </View>
+                     <View  style={styles.width}>
                      <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
+                     </View>
                    </View>
                  </TouchableOpacity>
           </View>
@@ -131,11 +113,12 @@ const renderItem=(item)=>{
               <Header
                     title={'FD LISTING'}
                     source={require('../../../assets/Images/arrow.png')}
-                   // titleTwo='Compare'
+                    titleTwo={selectedData.length==2?'Campare':null}
                     onPress={()=>navigation.goBack()}
-                   // onPress1={()=>navigation.navigate('CompareFD')}
+                    onPress1={()=>navigation.navigate('CompareFD')}
                /> 
               <View style={styles.list}>
+                
                 <FlatList
                    data={selector}
                    renderItem={({item})=>renderItem(item)}

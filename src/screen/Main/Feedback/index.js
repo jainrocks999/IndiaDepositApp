@@ -19,7 +19,7 @@ import { useDispatch,useSelector } from 'react-redux';
 const data=
 [{ label: 'Quality', value: 'Quality'},
 { label: 'Service', value: 'Service' },
-{ label: 'Performance', value: 'Performance' },]
+{ label: 'Performance', value: 'Performance' }]
 
 const data1=
 [{ label: 'Quality', value: 'Quality'},
@@ -56,7 +56,13 @@ const validateUser=async()=>{
                   source={require('../../../assets/Images/arrow.png')}
                   onPress={()=>navigation.goBack()}
              />
-              <KeyboardAwareScrollView>
+             <ScrollView>
+              <KeyboardAwareScrollView
+                extraScrollHeight={0}
+                enableOnAndroid={true} 
+                keyboardShouldPersistTaps='handled'
+                contentContainerStyle={{flex:1}}
+                >
                 <View style={styles.view1}>
                     {isFetching?<Loader/>:null}
                         <View style={styles.main}>
@@ -85,7 +91,7 @@ const validateUser=async()=>{
                                          }}
                                          value={value}
                                          useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select", value: null }}
+                                         placeholder={{ label: "Select", value: '' }}
                                          Icon={()=>
                                          <Image style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                          source={require('../../../assets/Image/down.png')}/>}
@@ -114,7 +120,7 @@ const validateUser=async()=>{
                                     <TextInput 
                                     onChangeText={(val)=>setMessage(val)}
                                     multiline={true}
-                                    style={styles.input} 
+                                    style={{color:colors.textColor,height:'100%',width:'100%'}} 
                                     placeholderTextColor={colors.heading1}
                                     />
                                </View>
@@ -128,6 +134,7 @@ const validateUser=async()=>{
                         </View>
                   </View>
             </KeyboardAwareScrollView>
+            </ScrollView>
              <StatusBar/>
         
         </View>

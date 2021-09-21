@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import colors from '../../colors';
 import fontSize from '../../fontSize';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name '),
   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
@@ -47,6 +48,11 @@ const Support=()=>{
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
+                <KeyboardAwareScrollView
+                  extraScrollHeight={10}
+                  enableOnAndroid={true} 
+                  keyboardShouldPersistTaps='handled'
+                  contentContainerStyle={{flex:1}}>
                   <Text style={styles.better1}>How can we help you?</Text>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
@@ -127,6 +133,7 @@ const Support=()=>{
                       />
                     </View>
                     <View style={{marginTop:80}}></View>
+                    </KeyboardAwareScrollView>
                 </ScrollView>
        </View>
         )}

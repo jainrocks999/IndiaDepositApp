@@ -89,7 +89,6 @@ import { useDispatch } from 'react-redux';
               }
             }
             catch(error){
-            Toast.show(error.messages)
             yield put({
               type: 'User_MLogin_Error',
             });
@@ -713,7 +712,7 @@ function* addBank(action) {
   try{
     const data = new FormData();
     data.append('user_id',action.user_id)
-    data.append('bank_id',1)
+    data.append('bank_id',action.bank_id)
     data.append('name',action.name)
     data.append('account_number',action.account_number)
     data.append('account_type',action.account_type)
@@ -749,7 +748,7 @@ function* updateBank(action) {
     const data = new FormData();
     data.append('user_bank_id',action.user_bank_id)
     data.append('user_id',action.user_id)
-    data.append('bank_id',1)
+    data.append('bank_id',action.bank_id)
     data.append('name',action.name)
     data.append('account_number',action.account_number)
     data.append('account_type',action.account_type)

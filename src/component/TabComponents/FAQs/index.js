@@ -2,6 +2,8 @@ import React,{useState,useEffect}from 'react';
 import styles from './styles';
 import {useSelector } from "react-redux";
 import colors from '../../../component/colors';;
+import HTMLView from 'react-native-htmlview';
+
 import {
   SafeAreaView,
   LayoutAnimation,
@@ -51,10 +53,14 @@ const ExpandableComponent = ({item, onClickFunction}) => {
         style={{
           height: layoutHeight,
           overflow: 'hidden',
+          paddingHorizontal:10
         }}>
-            <Text style={styles.text}>
+            {/* <Text style={styles.text}>
              {item.answer.answer}
-            </Text>
+            </Text> */}
+             <HTMLView
+        value={item.answer.answer}
+      />
       </View>
     </View>
   );
@@ -62,7 +68,6 @@ const ExpandableComponent = ({item, onClickFunction}) => {
 
 const Faq = () => {
   const selector=useSelector(state=>state.FaqArray)
-  console.log('this is selector value',selector);
   const [listDataSource, setListDataSource] = useState(selector);
   const [multiSelect, setMultiSelect] = useState(false);
 

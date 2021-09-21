@@ -1,13 +1,12 @@
 import React,{useState}from 'react';
-import { View,Text,TouchableOpacity,Image} from 'react-native';
+import { View,Text,TouchableOpacity,Image,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
+import HTMLView from 'react-native-htmlview';
 
-
-  
 const BlogCategory=({route})=>{
    const navigation=useNavigation()
    const data=route.params.item
@@ -21,6 +20,7 @@ const BlogCategory=({route})=>{
         </TouchableOpacity>
         <Text style={styles.textTitle}>{data.title} </Text>
    </View>
+   <ScrollView style={{flex:1}}>
        <View style={styles.view}>
             <View style={styles.view1}>
                 
@@ -47,9 +47,13 @@ const BlogCategory=({route})=>{
                    
             </View>
             <View style={styles.view5}>
-              <Text style={styles.text6}>{`${data.content}`}</Text>
+            <HTMLView
+                      value={data.content}
+                    />
+              {/* <Text style={styles.text6}>{`${data.content}`}</Text> */}
             </View>
        </View>
+       </ScrollView>
       <StatusBar/>
    </View>
     )
