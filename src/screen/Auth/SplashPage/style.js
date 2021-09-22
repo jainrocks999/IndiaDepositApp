@@ -118,7 +118,7 @@ export default StyleSheet.create({
     {
       color:colors.white,
       fontFamily:'Montserrat-SemiBold',
-      fontSize:fontSize.twenty,
+      fontSize:fontSize.seventeen,
       marginBottom:20
     },
 });

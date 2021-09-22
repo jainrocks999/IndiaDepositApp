@@ -32,7 +32,6 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:6,
         backgroundColor:colors.white,
-        padding:13,
         width:'100%'
     },
     cont:
@@ -83,5 +82,72 @@ export default StyleSheet.create({
         alignItems:'center'
        // flex:1
     },
-    image:{width:25,height:25}
+    image:{width:25,height:25},
+    main:{
+        paddingHorizontal:30,
+        shadowColor:colors.black,
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        borderRadius:10,
+        backgroundColor:colors.white,
+        paddingHorizontal:15,
+        paddingVertical:10,
+        marginBottom:40
+    },
+    view5:
+    {
+        marginTop:10
+    },
+    text5:
+    {
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal',
+        
+    },
+    view52:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    view53:
+    {
+        width:'27%'
+    },
+    input5:
+    {
+        marginTop:-8,
+        borderBottomWidth:1.5,
+        borderColor:'#3D4785',
+        height:40,
+        justifyContent:'center'
+    },
+    image4:
+    {
+        marginTop:16,
+        marginRight:0,
+        height:7,
+        width:20,
+    },
+    view4:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    view6:
+    {
+        marginTop:20,
+        alignItems:'center'
+    },
+    view7:
+    {
+        marginTop:5
+    },
+    view8:
+    {
+        marginTop:15,
+        marginBottom:20
+    },
 })

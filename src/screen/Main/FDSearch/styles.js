@@ -19,7 +19,7 @@ export default StyleSheet.create({
     },
     view1:
     {
-        marginTop:20
+        marginTop:10
     },
     view2:
     {

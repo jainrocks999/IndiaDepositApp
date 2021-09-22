@@ -14,6 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import CustomButton from '../../../component/button1';
 import Loader from '../../../component/loader';
+import fontSize from '../../../component/fontSize';
 const data=[
    { label: 'Male', value: 'Male' },
    { label: 'Female', value: 'Female' },
@@ -30,8 +31,7 @@ const RegisterPage=({route})=>{
     const [email,setEmail]=useState(route.params.email)
     const [gender, setGender] = useState(route.params.gender);
     const [dob, setDob] = useState(route.params.dob);
-
-
+    
    const validateUser=async()=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -85,7 +85,7 @@ const RegisterPage=({route})=>{
                         <TextInput
                          style={styles.input}
                          placeholder='Jhon Mathew'
-                         defaultValue={name}
+                         defaultValue={name==0?'':name}
                          onChangeText={(val)=>setName(val)}
                         />
                     </View>
@@ -108,15 +108,15 @@ const RegisterPage=({route})=>{
                         />
                     </View>
                     <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
-                        <View style={{width:'47%'}}>
+                        {/* <View style={{width:'47%'}}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
                                <RNPickerSelect
                                          onValueChange={(val)=>setGender(val)}
                                          items={data}
                                          style={{ 
-                                         inputAndroid: { color: colors.textColor,width:'100%',height:35 },
-                                         placeholder:{color:colors.textColor}
+                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                                         placeholder:{color:colors.heading1,width:'100%'}
                                          }}
                                          value={gender}
                                          useNativeAndroidPickerStyle={false}
@@ -125,19 +125,39 @@ const RegisterPage=({route})=>{
                                           <Image 
                                          style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                         source={require('../../../assets/Image/down.png')}/>}
-                                        //  <Image style={{margin:12}} 
-                                        //  source={require('../../../assets/Image/down.png')}/>}
+                                        
                                    />
+                                   
 
                             </View>
+                        </View> */}
+                        <View style={{borderWidth:1,}}>
+
+                        <RNPickerSelect
+                                         onValueChange={(val)=>setGender(val)}
+                                         items={data}
+                                         style={{ 
+                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                                         placeholder:{color:colors.heading1,width:'100%'}
+                                         }}
+                                         value={gender}
+                                         useNativeAndroidPickerStyle={false}
+                                         placeholder={{ label: "Select", value: null }}
+                                         Icon={()=>
+                                          <Image 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                                        source={require('../../../assets/Image/down.png')}/>}
+                                        
+                                   />
                         </View>
+                      
                         <View style={{width:'47%',}}>
                             <Text style={styles.better}>Date of Birth</Text>
                             <View style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
                                <DatePicker
                                   //  style={{width: '100%',}}
-                                     date={dob}
+                                     date={dob=='0000-00-00'?'':dob}
                                      mode="date"
                                      placeholder="Date Of Birth"
                                      format="YYYY-MM-DD"

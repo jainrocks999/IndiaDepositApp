@@ -1,18 +1,29 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from "../../../component/StatusBar";
 import { useDispatch,useSelector } from 'react-redux';
 import colors from '../../../component/colors';
-
-const FDList=()=>{
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
+import fontSize from '../../../component/fontSize';
+import RNPickerSelect from "react-native-picker-select";
+import Button from '../../../component/button1';
+const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.FDList)
         const [selectedData,setSelectedData]=useState([])
-console.log('this is selcted data id',selectedData);
+        const [visible,setVisible]=useState(false)
+      
+        const [day, setDay] = useState('')
+        const [month, setMonth] = useState('')
+        const [year,setYear] = useState('')
+        const [amount,setAmount] = useState('')
+        const [pincode,setPincode]=useState('')
+        const [type, setType] = useState('')
+      
 const manageList=(item)=>{
   dispatch({
     type: 'FD_Detail_Request',
@@ -45,7 +56,10 @@ const renderItem=(item)=>{
                 <TouchableOpacity 
                     onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
                     onPress={()=>handleonPress(item.fixed_deposit_id)}
-                    style={[styles.card,{backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null}]}>
+                    style={[styles.card,{
+                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null,
+                      padding:13
+                      }]}>
                    <View style={styles.cardView}>
                       <Image
                        resizeMode='contain'
@@ -117,8 +131,154 @@ const renderItem=(item)=>{
                     onPress={()=>navigation.goBack()}
                     onPress1={()=>navigation.navigate('CompareFD')}
                /> 
+                       <Dialog
+                          dialogStyle={{width:'94%',paddingHorizontal:10}}
+                          visible={visible}
+                          onTouchOutside={()=>setVisible(false)}
+                         >
+                       <DialogContent >
+                       <View >
+                  < View style={styles.view5}>
+                     
+                     <View  style={{marginTop:29}}>
+                        <Text style={[styles.text5,{fontWeight:'700'}]}>Tenure</Text>
+                     </View>
+                     <View style={styles.view5}>
+                        <View style={styles.view52}>
+                              <View style={styles.view53}>
+                                 <View style={styles.input5}>
+                                    <RNPickerSelect
+                                      onValueChange={(val)=>setYear(val)}
+                                      items={Years}
+                                      style={{ 
+                                      inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                      placeholder:{color:'#333333',fontSize:fontSize.twelve}
+                                      }}
+                                      value={year}
+                                      useNativeAndroidPickerStyle={false}
+                                      placeholder={{ label: "YY", value: null }}
+                                      Icon={()=><Image 
+                                      style={styles.image4} 
+                                      source={require('../../../assets/Image/down.png')}/>}
+                                    />
+                                  </View>
+                               </View>
+                               <View style={styles.view53}>
+                                    <View style={styles.input5}>
+                                       <RNPickerSelect
+                                          onValueChange={(val)=>setMonth(val)}
+                                          items={Month}
+                                          style={{ 
+                                          inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                          placeholder:{color:'#333333',fontSize:fontSize.twelve}
+                                          }}
+                                          value={month}
+                                          useNativeAndroidPickerStyle={false}
+                                          placeholder={{ label: "MM", value: null }}
+                                          Icon={()=><Image 
+                                          style={styles.image4} 
+                                          source={require('../../../assets/Image/down.png')}/>}
+                                        />
+                                     </View>
+                               </View>
+                               <View style={styles.view53}>
+                                    <View style={styles.input5}>
+                                       <RNPickerSelect
+                                           onValueChange={(val)=>setDay(val)}
+                                           items={days}
+                                           style={{ 
+                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                           placeholder:{color:'#333333',fontSize:fontSize.twelve}
+                                           }}
+                                           value={day}
+                                           useNativeAndroidPickerStyle={false}
+                                           placeholder={{ label: "Days", value: null }}
+                                           Icon={()=><Image 
+                                           style={styles.image4} 
+                                           source={require('../../../assets/Image/down.png')}/>}
+                                       />
+                                     </View>
+                                 </View>
+                             </View>
+                        </View>
+                      </View>
+                      <View style={styles.view5}>
+                           <View style={styles.view4}>
+                               <Text style={[styles.text5,{fontWeight:'700'}]}>Amount</Text>
+                           </View>
+                           <View style={{marginTop:-10}}>
+                              <TextInput
+                                 style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                                 placeholderTextColor={colors.heading1}
+                                 keyboardType='number-pad'
+                                 value={amount}
+                                 onChangeText={(val)=>setAmount(val)}
+                              />
+                           </View>
+                      </View>
+                      <View style={styles.view5}>
+                          <View style={styles.view4}>
+                              <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
+                          </View>
+                          <View style={styles.view5}>
+                                <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
+                                <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>
+                          </View>
+                       </View>
+                       <View style={styles.view6}>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                       </View>
+                      <View style={styles.view7}>
+                           <TextInput
+                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              placeholder='Enter Pincode'
+                              placeholderTextColor={colors.heading1}
+                              value={pincode}
+                              onChangeText={(val)=>setPincode(val)}
+                              keyboardType='number-pad'
+                           />
+                       </View>
+                       <View style={{marginTop:26}}>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
+                           <RNPickerSelect
+                                           onValueChange={(val)=>setType(val)}
+                                           items={SBType}
+                                           style={{ 
+                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                           placeholder:{color:colors.heading1,fontSize:fontSize.twelve}
+                                           }}
+                                           value={type}
+                                           useNativeAndroidPickerStyle={false}
+                                           placeholder={{ label: "Select SB A/C", value: null }}
+                                           Icon={()=><Image 
+                                           style={{width:24,height:24,marginTop:5}} 
+                                           source={require('../../../assets/Image/down.png')}/>}
+                                       />
+                           <View style={{borderWidth:1,marginTop:-10,borderColor:'#3D4785',}}></View>
+                       </View>
+                       <View style={styles.view8}>
+                            <Button
+                                onPress={()=>manageSearch()}
+                                title='MODIFY'
+                            />
+                       </View>
+                     </View>
+                      
+                        </DialogContent>
+                       
+                      </Dialog>
               <View style={styles.list}>
-                
+                <TouchableOpacity
+                onPress={()=>setVisible(true)}
+                style={{width:'100%',paddingHorizontal:15,paddingVertical:6}}>
+                  <View style={[styles.card,{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:10,paddingVertical:8}]}>
+                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Amount : ${route.params.amount}`}</Text>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:15}}>{`Tenure ${route.params.year} y ${route.params.month} m ${route.params.days}d`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
                 <FlatList
                    data={selector}
                    renderItem={({item})=>renderItem(item)}
@@ -134,3 +294,67 @@ const renderItem=(item)=>{
     )
 }
 export default FDList;
+const SBType=[
+  { label: 'Regular', value: 'Regular' },
+  { label: 'Female', value: 'Female' },
+  { label: 'Defense', value: 'Defense' },
+  { label: 'Zero Balance', value: 'Zero Balance' },
+  { label: 'Senior Citizen', value: 'Senior Citizen' },
+]
+
+const days=[
+  { label: '1', value: '1'},
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' },
+  { label: '5', value: '5' },
+  { label: '6', value: '6' },
+  { label: '7', value: '7' },
+  { label: '8', value: '8' },
+  { label: '9', value: '9' },
+  { label: '10', value: '10' },
+  { label: '11', value: '11' },
+  { label: '12', value: '12' },
+  { label: '13', value: '13' },
+  { label: '14', value: '14' },
+  { label: '15', value: '15' },
+  { label: '16', value: '16' },
+  { label: '17', value: '17' },
+  { label: '18', value: '18' },
+  { label: '19', value: '19' },
+  { label: '20', value: '20' },
+  { label: '21', value: '21' },
+  { label: '22', value: '22' },
+  { label: '23', value: '23' },
+  { label: '24', value: '24' },
+  { label: '25', value: '25' },
+  { label: '26', value: '26' },
+  { label: '27', value: '27' },
+  { label: '28', value: '28' },
+  { label: '29', value: '29' },
+  { label: '30', value: '30' },
+
+]
+const Month=[
+  
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' },
+  { label: '5', value: '5' },
+  { label: '6', value: '6' },
+  { label: '7', value: '7' },
+  { label: '8', value: '8' },
+  { label: '9', value: '9' },
+  { label: '10', value: '10' },
+  { label: '11', value: '11' },
+ 
+]
+
+const Years=[
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '5', value: '5' },
+  
+]

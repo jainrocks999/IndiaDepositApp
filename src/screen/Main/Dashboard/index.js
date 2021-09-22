@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from "react";
-import {View,Text,Image,TouchableOpacity,ScrollView,Pressable} from 'react-native';
+import {View,Text,Image,TouchableOpacity,ScrollView,Pressable,BackHandler} from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors'
 import styles from './styles';
@@ -9,27 +9,42 @@ import Storage from '../../../component/AsyncStorage';
 import StatusBar from "../../../component/StatusBar";
 import BottomTab from '../../../component/StoreButtomTab';
 import { FlatList } from "react-native-gesture-handler";
+import Toast from "react-native-simple-toast";
 const dashboard=()=>{
     const navigation=useNavigation()
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedItems1, setSelectedItems1] = useState([]);
+    const [count, setCount] = useState(0);
     useEffect(async()=>{
         const photo=await AsyncStorage.getItem(Storage.photo)
         console.log(photo)
+        const backHandler = BackHandler.addEventListener(
+          'hardwareBackPress',
+          handleBackButtonClick,
+        );
+        return () => backHandler.remove();
     },[])
-
-
+    const handleBackButtonClick=() =>{
+      BackHandler.exitApp();
+       return true;
+    }
+    
     const handleOnPress = contact => {
         if (selectedItems.length) {
           return selectItems(contact);
         }
-        navigation.navigate('FDSearch')
+       navigation.navigate('FDSearch',{
+         type:contact.name
+       })
       };
 
     const handleOnPress1 = contact => {
         if (selectedItems1.length) {
           return selectItems1(contact);
         }
+        navigation.navigate('SBSearch',{
+          type:contact.name
+        })
       };
 
     const ListItem = ({item, selected, onPress, onLongPress}) => (

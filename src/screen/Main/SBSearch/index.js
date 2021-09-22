@@ -3,43 +3,41 @@ import { View,Text,Image,ScrollView,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import color from '../../../component/colors';
 import { TextInput } from 'react-native';
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import Button from '../../../component/button1'
-import RNPickerSelect from "react-native-picker-select";
-import { ProgressBar, Colors } from 'react-native-paper';
 import BottomTab from '../../../component/StoreButtomTab';
-
-const data=
-[
-  { label: '10-20 Years', value: '10-20 Years'},
-  { label: '20-50 Years', value: '20-50 Years' },
-  { label: '50-80 Years', value: '50-80 Years' },
-]
-
-const data1=
-[
-  { label: 'Any', value: 'Any'},
-  { label: 'Any', value: 'Any' },
-  { label: 'Any', value: 'Any' },
-]
-
-const data2=
-[
-  { label: 'Any', value: 'Any'},
-  { label: 'Any', value: 'Any' },
-  { label: 'Any', value: 'Any' },
-]
-    
-const SBAccount=()=>{
+import Toast from 'react-native-simple-toast'
+import { useDispatch,useSelector } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Loader from '../../../component/loader';
+const SBAccount=({route})=>{
+   
     const navigation=useNavigation()
-    const [age, setAge] = useState('')
-    const [account, setAccount] = useState('')
-    const [acType, setAcType] = useState('')
-    const [checked, setChecked] = React.useState(false);
-
+    const [balance,setBalance]=useState('')
+    const [location,setLocation]=useState('')
+    const dispatch=useDispatch()
+    const isFetching=useSelector((state)=>state.isFetching)
+    const type=route.params.type
+  
+    const manageSearch=async()=>{ 
+      if(balance==''){
+         Toast.show('Please enter minimum balance')
+      }
+      else if(location==''){
+         Toast.show('Please enter location')
+      }else{
+      dispatch({
+         type: 'SB_Search_Request',
+         url: 'sblist',
+         min_bal:balance,
+         location:location,
+         type1:'Fixed',
+         navigation:navigation
+       })
+    }
+   }
     return(
         <View style={styles.container}>
                  <Header
@@ -48,6 +46,12 @@ const SBAccount=()=>{
                     onPress={()=>navigation.goBack()}
                   />
                   <ScrollView style={styles.scroll}>
+                     {isFetching?<Loader/>:null}
+                  <KeyboardAwareScrollView
+                     extraScrollHeight={10}
+                     enableOnAndroid={true} 
+                     keyboardShouldPersistTaps='handled'
+                     contentContainerStyle={{flex:1}}>
                      <View style={styles.main}>
                            <View style={styles.view}>
                               <Text style={styles.text1}>
@@ -57,12 +61,18 @@ const SBAccount=()=>{
                               unknown typesetter book.</Text>
                               <View style={styles.view}>
                                   <Text style={[styles.text2,{fontWeight:'700'}]}>Minimum Balance </Text>
+                                  <View style={{flexDirection:'row',width:'100%'}}>
+                                     <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                                   <TextInput
-                                      style={styles.textinput}
-                                       // placeholder='Enter Pincode'
+                                       style={styles.textinput}
                                        placeholderTextColor={colors.heading1}
                                        keyboardType='number-pad'
+                                       value={balance}
+                                       onChangeText={(val)=>setBalance(val)}
                                   />
+                                 
+                                  </View>
+                                  <View style={{borderBottomWidth:1,width:'100%',marginTop:-5}}/>
                                 </View>
                            </View>
                            <View style={styles.view}>
@@ -70,27 +80,31 @@ const SBAccount=()=>{
                                      <Text style={[styles.text2,{fontWeight:'700'}]}>Location</Text>
                                   </View>
                                   <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
-                                          <Image source={require('../../../assets/Image/search.png')}/>
+                                          <Image style={{width:24,height:24}}  source={require('../../../assets/Image/search.png')}/>
                                            <Text style={styles.text3}>Current Location</Text>
                                   </View>
                               </View>
                               <View style={[styles.view,{alignItems:'center'}]}>
-                                      <Text style={{fontWeight:'700'}}>OR</Text>
+                                      <Text style={{fontWeight:'700'}}>OR </Text>
                               </View>
                               <View style={{marginTop:5}}>
                                    <TextInput
                                        style={styles.textinput1}
                                        placeholder='Enter Pincode'
                                        placeholderTextColor={colors.heading1}
+                                       keyboardType='number-pad'
+                                       value={location}
+                                       onChangeText={(val)=>setLocation(val)}
                                     />
                                </View>
                                <View style={styles.view2}>
                                          <Button
-                                             onPress={()=>navigation.navigate('AccountList')}
+                                             onPress={()=>manageSearch()}
                                               title='SEARCH'
                                          />
                                 </View>
                           </View>
+                          </KeyboardAwareScrollView>
                   </ScrollView>
                        <BottomTab/>
                         <StatusBar/>

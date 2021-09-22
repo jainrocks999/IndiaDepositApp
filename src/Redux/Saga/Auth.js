@@ -950,27 +950,48 @@ function* stateList(action) {
     }
 }
 
-function* FDList(action) {
+function* Search(action) {
+  console.log('this is working',action);
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+    const data = new FormData();
+      data.append('year',action.year)
+      data.append('month',action.month)
+      data.append('days',action.days)
+      data.append('amount',action.amount)
+      data.append('location',action.location)
+      data.append('type1',action.type1)
+      data.append('type2',action.type2)
+      data.append('type3',action.type3)
+      data.append('type4',action.type4)
+      data.append('type5',action.type5)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this is response value',response);
             if (response.status==200) {
               yield put({
-                type: 'FD_List_Success',
+                type: 'FD_Search_Success',
                 payload: response.data,
-              });       
+              });  
+               action.navigation.navigate('FDList',{
+                 amount:action.amount,
+                 days:action.days,
+                 year:action.year,
+                 month:action.month
+               })     
             } else {
+              Toast.show('hiu')
               yield put({
-                type: 'FD_List_Error',
+                type: 'FD_Search_Error',
               });
             }
           }
   catch(error){
+   Toast.show('hi')
       yield put({
-            type: 'FD_List_Error',
+            type: 'FD_Search_Error',
           });
     }
 }
-
 function* FDDetail(action) {
   try{
     const data=new FormData()
@@ -994,7 +1015,44 @@ function* FDDetail(action) {
           });
     }
 }
+function* SBSearch(action) {
+  console.log('this is working',action);
+  try{
+    const data = new FormData();
+      data.append('min_bal',action.min_bal)
+      data.append('location',action.location)
+      data.append('type',action.type1)
+      // data.append('type2',action.type2)
+      // data.append('type3',action.type3)
+      // data.append('type4',action.type4)
+      // data.append('type5',action.type5)
 
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this is response value',response);
+            if (response.status==200) {
+              yield put({
+                type: 'SB_Search_Success',
+                payload: response.data,
+              });  
+               action.navigation.navigate('AccountList',{
+                 balance:action.min_bal,
+                 location:action.location,
+                 type1:action.type1
+               })     
+            } else {
+              Toast.show('hiu')
+              yield put({
+                type: 'SB_Search_Error',
+              });
+            }
+          }
+  catch(error){
+   Toast.show('hi')
+      yield put({
+            type: 'SB_Search_Error',
+          });
+    }
+}
 
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
@@ -1027,8 +1085,9 @@ export default function* authSaga() {
   yield takeEvery('Edit_Nominee_Request',editNominee)
   yield takeEvery('Country_List_Request',countryList)
   yield takeEvery('State_List_Request',stateList)
-  yield takeEvery('FD_List_Request',FDList)
   yield takeEvery('FD_Detail_Request',FDDetail)
   yield takeEvery('Get_Story_Request',getStory)
+  yield takeEvery('FD_Search_Request',Search)
+  yield takeEvery('SB_Search_Request',SBSearch)
 
 }

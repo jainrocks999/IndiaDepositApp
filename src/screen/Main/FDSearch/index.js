@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView,TouchableOpacity} from 'react-native';
+import { View,Text,Image,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -9,34 +9,64 @@ import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
-import { ProgressBar, Colors } from 'react-native-paper';
-import BottomTab from '../../../component/StoreButtomTab';
 import fontSize from '../../../component/fontSize';
 import Geocoder from 'react-native-geocoding';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector, } from 'react-redux';
+import Toast from 'react-native-simple-toast';
+import Loader from '../../../component/loader';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
-const Contact=()=>{
+const Contact=({route})=>{
     const navigation=useNavigation()
-    const [tenure, setTenure] = useState('')
+    const [day, setDay] = useState('')
     const [month, setMonth] = useState('')
     const [year,setYear] = useState('')
+    const [amount,setAmount] = useState('')
+    const [pincode,setPincode]=useState('')
     const dispatch=useDispatch()
-
-
-    useEffect(()=>{
+    const isFetching=useSelector((state)=>state.isFetching)
+    const type=route.params.type
+   
+   const manageSearch=async()=>{
+      if(year==''){
+       Toast.show('Please select year')
+      }
+      else if(month==''){
+         Toast.show('Please select month')
+      }
+      else if(day==''){
+         Toast.show('Please select days')
+      }
+      else if(amount==''){
+         Toast.show('Please enter amount')
+      }
+      else if(pincode==''){
+         Toast.show('Please enter location')
+      }else{
       dispatch({
-        type: 'FD_List_Request',
-        url: 'fdlist',
-      })
-    },[])
-
-    Geocoder.from("Colosseum")
-    .then(json => {
-       var location = json.results[0].geometry.location;
-       console.log('narendra hereh dklfjdskfldsjk',location);
-    })
-    .catch(error => console.warn(error));
+         type: 'FD_Search_Request',
+         url: 'fdlist',
+         year:year,
+         month:month,
+         days:day,
+         amount:amount,
+         location:pincode,
+         type1:type,
+         type2:'',
+         type3:'',
+         type4:'',
+         type5:'',
+         navigation:navigation
+       })
+    }
+   }
+   //  Geocoder.from("Colosseum")
+   //  .then(json => {
+   //     var location = json.results[0].geometry.location;
+   //     console.log('narendra hereh dklfjdskfldsjk',location);
+   //  })
+   //  .catch(error => console.warn(error));
 
 
     return(
@@ -47,6 +77,12 @@ const Contact=()=>{
                   onPress={()=>navigation.goBack()}
               />
              <ScrollView style={styles.scroll}>
+             <KeyboardAwareScrollView
+               extraScrollHeight={10}
+               enableOnAndroid={true} 
+               keyboardShouldPersistTaps='handled'
+               contentContainerStyle={{flex:1}}>
+                {isFetching?<Loader/>:null}
                 <View style={styles.main}>
                   < View style={styles.view}>
                       <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
@@ -55,7 +91,7 @@ const Contact=()=>{
                         web designs. The passage is attributed to an
                         unknown typesetter book.
                      </Text>
-                     <View  style={styles.view}>
+                     <View  style={{marginTop:29}}>
                         <Text style={[styles.text1,{fontWeight:'700'}]}>Tenure</Text>
                      </View>
                      <View style={styles.view1}>
@@ -63,15 +99,15 @@ const Contact=()=>{
                               <View style={styles.view3}>
                                  <View style={styles.input}>
                                     <RNPickerSelect
-                                      onValueChange={(val)=>setTenure(val)}
-                                      items={days}
+                                      onValueChange={(val)=>setYear(val)}
+                                      items={Years}
                                       style={{ 
                                       inputAndroid: { color: color.textColor,width:'100%',height:40 },
                                       placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                       }}
-                                      value={tenure}
+                                      value={year}
                                       useNativeAndroidPickerStyle={false}
-                                      placeholder={{ label: "Select", value: null }}
+                                      placeholder={{ label: "YY", value: null }}
                                       Icon={()=><Image 
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
@@ -99,13 +135,13 @@ const Contact=()=>{
                                <View style={styles.view3}>
                                     <View style={styles.input}>
                                        <RNPickerSelect
-                                           onValueChange={(val)=>setYear(val)}
-                                           items={Years}
+                                           onValueChange={(val)=>setDay(val)}
+                                           items={days}
                                            style={{ 
                                            inputAndroid: { color: color.textColor,width:'100%',height:40 },
                                            placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                            }}
-                                           value={year}
+                                           value={day}
                                            useNativeAndroidPickerStyle={false}
                                            placeholder={{ label: "Days", value: null }}
                                            Icon={()=><Image 
@@ -117,17 +153,21 @@ const Contact=()=>{
                              </View>
                         </View>
                       </View>
-                      <View style={styles.view1}>
+                      <View style={{marginTop:23}}>
                            <View style={styles.view4}>
                                <Text style={[styles.text1,{fontWeight:'700'}]}>Amount</Text>
                            </View>
-                           <View style={{marginTop:-10}}>
+                           <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
+                              <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                                 style={{marginTop:0}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
+                                 value={amount}
+                                 onChangeText={(val)=>setAmount(val)}
                               />
                            </View>
+                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:-10}}/>
                       </View>
                       <View style={styles.view1}>
                           <View style={styles.view4}>
@@ -146,15 +186,19 @@ const Contact=()=>{
                               style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
+                              value={pincode}
+                              onChangeText={(val)=>setPincode(val)}
+                              keyboardType='number-pad'
                            />
                        </View>
                        <View style={styles.view8}>
                             <Button
-                                onPress={()=>navigation.navigate('FDList')}
+                                onPress={()=>manageSearch()}
                                 title='SEARCH'
                             />
                        </View>
                      </View>
+                     </KeyboardAwareScrollView>
             </ScrollView>
                   {/* <BottomTab/> */}
                  <StatusBar/>
@@ -164,15 +208,15 @@ const Contact=()=>{
 export default Contact;
 
 const days=[
-  { label: '01', value: '01'},
-  { label: '02', value: '02' },
-  { label: '03', value: '03' },
-  { label: '04', value: '04' },
-  { label: '05', value: '05' },
-  { label: '06', value: '06' },
-  { label: '07', value: '07' },
-  { label: '08', value: '08' },
-  { label: '09', value: '09' },
+  { label: '1', value: '1'},
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' },
+  { label: '5', value: '5' },
+  { label: '6', value: '6' },
+  { label: '7', value: '7' },
+  { label: '8', value: '8' },
+  { label: '9', value: '9' },
   { label: '10', value: '10' },
   { label: '11', value: '11' },
   { label: '12', value: '12' },
@@ -198,24 +242,24 @@ const days=[
 ]
 const Month=[
   
-  { label: 'January', value: 'January' },
-  { label: 'February', value: 'February' },
-  { label: 'March', value: 'March' },
-  { label: 'April', value: 'April' },
-  { label: 'May', value: 'May' },
-  { label: 'June', value: 'June' },
-  { label: 'July', value: 'July' },
-  { label: 'August', value: 'August' },
-  { label: 'September', value: 'September' },
-  { label: 'October', value: 'October' },
-  { label: 'November', value: 'November' },
-  { label: 'December', value: 'December' },
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '4', value: '4' },
+  { label: '5', value: '5' },
+  { label: '6', value: '6' },
+  { label: '7', value: '7' },
+  { label: '8', value: '8' },
+  { label: '9', value: '9' },
+  { label: '10', value: '10' },
+  { label: '11', value: '11' },
+ 
 ]
 
 const Years=[
-  { label: '2000', value: '2000' },
-  { label: '2001', value: '2001' },
-  { label: '2002', value: '2002' },
-  { label: '2003', value: '2003' },
+  { label: '1', value: '1' },
+  { label: '2', value: '2' },
+  { label: '3', value: '3' },
+  { label: '5', value: '5' },
   
 ]

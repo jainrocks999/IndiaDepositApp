@@ -170,8 +170,8 @@ const validateUser=async(values)=>{
 
               <View style={styles.button}>
                     <CustomButton
-                      onPress={()=>navigation.replace('Main')}
-                  // onPress={()=>handleSubmit()}
+                      // onPress={()=>navigation.replace('Main')}
+                    onPress={()=>handleSubmit()}
                     title='LOG IN'
                     />
                 </View>

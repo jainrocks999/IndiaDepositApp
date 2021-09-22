@@ -1,125 +1,272 @@
-import React from "react";
-import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
+import React,{useRef,useEffect,useState} from "react";
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput} from 'react-native';
 import Header from '../../../component/compareHeader';
-import colors from '../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
-import BottomTab from '../../../component/StoreButtomTab';
-import StatusBar from "../../../component/StatusBar";
 import styles from './styles';
-const data=
-[
-   {source:require('../../../assets/Images/sbi.png'),
-          title:'Saving Account',
-         value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-         value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-         value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-         img1:require('../../../assets/Image/interest.png'),
-         img2:require('../../../assets/Image/penalty.png'),
-         img3:require('../../../assets/Image/debit.png'),
-         img4:require('../../../assets/Image/offer.png')
-    },
-    {source:require('../../../assets/Images/union.png'),
-            title:'Saving Account',
-            value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-            value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-            value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-            img1:require('../../../assets/Image/interest.png'),
-            img2:require('../../../assets/Image/penalty.png'),
-            img3:require('../../../assets/Image/debit.png'),
-            img4:require('../../../assets/Image/offer.png')
-    },
-    {source:require('../../../assets/Images/axis.png'),title:'Saving Account',
-             value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
-             value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-             value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-             img1:require('../../../assets/Image/interest.png'),
-             img2:require('../../../assets/Image/penalty.png'),
-             img3:require('../../../assets/Image/debit.png'),
-             img4:require('../../../assets/Image/offer.png')
-     },
-     {source:require('../../../assets/Images/pnb.png'),title:'Saving Account',
-               value1:'5.5%',value2:'9%',value3:'Yes',value4:'No', 
-               value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-               value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-               img1:require('../../../assets/Image/interest.png'),
-               img2:require('../../../assets/Image/penalty.png'),
-               img3:require('../../../assets/Image/debit.png'),
-              img4:require('../../../assets/Image/offer.png')
-      },
-     {source:require('../../../assets/Images/hdfc.png'),title:'Saving Account',
-              value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-              value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-              img1:require('../../../assets/Image/interest.png'),
-              img2:require('../../../assets/Image/penalty.png'),
-              img3:require('../../../assets/Image/debit.png'),
-              img4:require('../../../assets/Image/offer.png')
-     },
-     {source:require('../../../assets/Images/bob.png'),title:'Saving Account',
-              value1:'5.5%',value2:'9%',value3:'Yes',value4:'No',
-              value5:'Interest\nRate',value6:'Non Maintenance\nPenalty',
-              value7:'Debit Card\nAMC',value8:'Life Style\nOffer',
-              img1:require('../../../assets/Image/interest.png'),
-              img2:require('../../../assets/Image/penalty.png'),
-              img3:require('../../../assets/Image/debit.png'),
-              img4:require('../../../assets/Image/offer.png')
-      }
-]
-const FDList=()=>{
-const navigation=useNavigation()
+import StatusBar from "../../../component/StatusBar";
+import { useDispatch,useSelector } from 'react-redux';
+import colors from '../../../component/colors';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
+import fontSize from '../../../component/fontSize';
+import RNPickerSelect from "react-native-picker-select";
+import Button from '../../../component/button1';
+import Toast from 'react-native-simple-toast';
+import Loader from '../../../component/loader';
+const SBAccountList=({route})=>{
+        const navigation=useNavigation()
+        const dispatch=useDispatch()
+        const selector=useSelector(state=>state.SBList)
+        const [selectedData,setSelectedData]=useState([])
+        const [visible,setVisible]=useState(false)
+        const [type, setType] = useState('')
+        const [balance,setBalance] = useState(route.params.balance)
+        const [location,setLocation]=useState(route.params.location)
+        const isFetching=useSelector((state)=>state.isFetching)
+
+      
+const manageList=(item)=>{
+  dispatch({
+    type: 'FD_Detail_Request',
+    url: 'fddetail',
+    fixed_deposit_id:item,
+    navigation:navigation
+  })
+}
+
+const manageSearch=async()=>{ 
+    if(balance==''){
+        Toast.show('Please enter minimum balance')
+    }
+    else if(location==''){
+       Toast.show('Please enter location')
+    }else{
+    dispatch({
+       type: 'SB_Search_Request',
+       url: 'sblist',
+       min_bal:balance,
+       location:location,
+       type1:'Fixed',
+       navigation:navigation
+     })
+     setVisible(false)
+  }
+ }
+const handleonPress=(id)=>{
+  if(selectedData.length){
+    handleSelectionMultiple(id)
+  }else{
+    mana
+    geList(id)
+  }
+}
+
+const handleSelectionMultiple = (id) => {
+  var selectedIds = [...selectedData] // clone state
+
+  if(selectedIds.includes(id))
+    selectedIds = selectedIds.filter(_id => _id !== id)
+  else 
+    selectedIds.push(id)
+    setSelectedData(selectedIds)
+}
 const renderItem=(item)=>{
- return(
-         <View style={styles.cont}>
-            <TouchableOpacity 
-                     onPress={()=>navigation.navigate('AccountDetail')}
-                     style={styles.card}>
-                     <View style={styles.cardView}>
-                          <Image source={item.source}/>
-                          <Text style={styles.title}>{item.title}</Text>
-                          <View style={{width:'25%'}}></View>
-                     </View>
-                      <View style={styles.row}>
-                           <Text style={styles.same1}>{item.value1}</Text>
-                           <Text style={styles.same1}>{item.value2}</Text>
-                           <Text style={styles.same1}>{item.value3}</Text>
-                           <Text style={styles.same1}>{item.value4}</Text>
-                      </View>
-                       <View style={styles.row}>
-                           <Image source={item.img1}/>
-                           <Image source={item.img2}/>
-                           <Image source={item.img3}/>
-                           <Image source={item.img4}/>
+      return(
+          <View style={styles.cont}>
+                <TouchableOpacity 
+                    onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
+                    onPress={()=>handleonPress(item.fixed_deposit_id)}
+                    style={[styles.card,{
+                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null,
+                      padding:13
+                      }]}>
+                   <View style={styles.cardView}>
+                      <Image
+                       resizeMode='contain'
+                       style={{height:20,width:70}}
+                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
+                      <Text style={styles.title}>{item.name}</Text>
+                     <View style={{width:'20%'}}></View>
+                   </View>
+                   <View style={[styles.row2,{paddingRight:10}]}>
+                     <View style={[styles.width,{  alignItems:'flex-start'}]}>
+                       <Text style={styles.same}>{item.rate}</Text>
                        </View>
-                      <View style={styles.row1}>
-                          <Text style={styles.same}>{item.value5}</Text>
-                          <Text style={styles.same}>{item.value6}</Text>
-                          <Text style={styles.same}>{item.value7}</Text>
-                         <Text style={styles.same}>{item.value8}</Text>
+                       <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text>
+                       </View>
+                       <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Text style={styles.same}>{item.debit_card_amc_charges1}</Text>
+                       </View>
+                       <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
+                       </View>
+                   </View>
+                   <View style={[styles.row2,{marginTop:0}]}>
+                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
+                       <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
+                        </View>
+                        <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Image
+                         style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/penalty.png')}/>
                       </View>
-            </TouchableOpacity>
+                      <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Image 
+                        style={styles.image} 
+                       resizeMode='contain' source={require('../../../assets/Image/debit.png')}/>
+                      </View>
+                      <View style={[styles.width,{  alignItems:'center'}]}>
+                       <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/offer.png')}/>
+                        </View>
+                   </View>
+                   <View style={styles.row1}>
+                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
+                     <Text  style={styles.same}>{'Interest\n Rate'}</Text>
+                     </View>
+                     <View style={[styles.width,{  alignItems:'center'}]}>
+                     <Text  style={styles.same}>{'Non Maintenance\nPenalty'}</Text>
+                     </View>
+                     <View style={[styles.width,{  alignItems:'center'}]}>
+                     <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
+                     </View>
+                     <View style={[styles.width,{  alignItems:'center'}]}>
+                     <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
+                     </View>
+                   </View>
+                 </TouchableOpacity>
           </View>
       )
 }
     return(
         <View style={{flex:1}}>
               <Header
-                   title={'SB A/C LISTING'}
-                   source={require('../../../assets/Image/arrow.png')}
-                   //titleTwo='Compare'
-                   onPress={()=>navigation.goBack()}
-                //    onPress1={()=>navigation.navigate('CompareSBAccount')}
-              /> 
-             <View style={styles.list}>
+                     title={'SB A/C LISTING'}
+                    source={require('../../../assets/Images/arrow.png')}
+                    titleTwo={selectedData.length==2?'Campare':null}
+                    onPress={()=>navigation.goBack()}
+                    onPress1={()=>navigation.navigate('CompareFD')}
+               /> 
+               {isFetching?<Loader/>:null}
+                       <Dialog
+                          dialogStyle={{width:'94%',paddingHorizontal:10}}
+                          visible={visible}
+                          onTouchOutside={()=>setVisible(false)}
+                         >
+                       <DialogContent >
+                       <View >
+                  < View style={styles.view5}>
+                     
+                     <View  style={{marginTop:2}}>
+                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:16}}>Modify your search</Text>
+                     </View>
+                     <View style={styles.view5}>
+                        <View style={styles.view52}>  
+                             </View>
+                        </View>
+                      </View>
+                      <View >
+                           <View style={styles.view4}>
+                               <Text style={[styles.text5,{fontSize:14}]}>Minimum Balance</Text>
+                           </View>
+                           <View style={{flexDirection:'row',alignItems:'center'}}>
+                               <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
+                              <TextInput
+                                 style={{paddingBottom:-10,width:'100%',marginTop:-10}}
+                                 placeholderTextColor={colors.heading1}
+                                 keyboardType='number-pad'
+                                 defaultValue={balance}
+                                 onChangeText={(val)=>setBalance(val)}
+                              />
+                           </View>
+                           <View style={{borderWidth:1,marginTop:-1,borderColor:'#3D4785',}}></View>
+                      </View>
+                      <View style={{marginTop:25}}>
+                          <View style={styles.view4}>
+                              <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
+                          </View>
+                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28}}>
+                                <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
+                                <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>
+                          </View>
+                       </View>
+                       <View style={styles.view6}>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                       </View>
+                      <View style={styles.view7}>
+                           <TextInput
+                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              placeholder='Enter Pincode'
+                              placeholderTextColor={colors.heading1}
+                              value={location}
+                              onChangeText={(val)=>setLocation(val)}
+                              keyboardType='number-pad'
+                           />
+                       </View>
+
+                       <View style={{marginTop:26}}>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
+                           <RNPickerSelect
+                                           onValueChange={(val)=>setType(val)}
+                                           items={SBType}
+                                           style={{ 
+                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                           placeholder:{color:colors.heading1,fontSize:fontSize.twelve}
+                                           }}
+                                           value={type}
+                                           useNativeAndroidPickerStyle={false}
+                                           placeholder={{ label: "Select SB A/C", value: null }}
+                                           Icon={()=><Image 
+                                           style={{width:24,height:24,marginTop:5}} 
+                                           source={require('../../../assets/Image/down.png')}/>}
+                                       />
+                           <View style={{borderWidth:1,marginTop:-10,borderColor:'#3D4785',}}></View>
+                       </View>
+                       <View style={styles.view8}>
+                            <Button
+                                onPress={()=>manageSearch()}
+                                title='MODIFY'
+                            />
+                       </View>
+                     </View>
+                      
+                        </DialogContent>
+                       
+                      </Dialog>
+              <View style={styles.list}>
+                <TouchableOpacity
+                onPress={()=>setVisible(true)}
+                style={{width:'100%',paddingHorizontal:15,paddingVertical:6}}>
+                  <View style={[styles.card,{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:10,paddingVertical:8}]}>
+                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Minimum balance : ${route.params.balance}`}</Text>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:15}}>{`Location : ${route.params.location}`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
                 <FlatList
-                   data={data}
+                   data={selector}
                    renderItem={({item})=>renderItem(item)}
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
-                />
-            </View>
-            <StatusBar/>
-            <BottomTab/>
-        </View>
+                 />
+
+              </View>
+         
+          <StatusBar/>
+         
+       </View>
     )
 }
-export default FDList;
+export default SBAccountList;
+const SBType=[
+  { label: 'Regular', value: 'Regular' },
+  { label: 'Female', value: 'Female' },
+  { label: 'Defense', value: 'Defense' },
+  { label: 'Zero Balance', value: 'Zero Balance' },
+  { label: 'Senior Citizen', value: 'Senior Citizen' },
+]

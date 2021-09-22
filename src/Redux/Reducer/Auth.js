@@ -19,6 +19,7 @@ initialstate = {
   CountryList:[],
   StateList:[],
   FDList:[],
+  SBList:[],
   FDDetail:[],
   Story:[]
 };
@@ -221,11 +222,18 @@ export default (state = initialstate, action) => {
   case 'State_List_Error':
   return { ...state, isFetching: false };
 
-  case 'FD_List_Request':
+  case 'FD_Search_Request':
     return { ...state, isFetching: true };
-  case 'FD_List_Success':
+  case 'FD_Search_Success':
     return { ...state, isFetching: false, FDList: action.payload };
-  case 'FD_List_Error':
+  case 'FD_Search_Error':
+  return { ...state, isFetching: false };
+
+  case 'SB_Search_Request':
+    return { ...state, isFetching: true };
+  case 'SB_Search_Success':
+    return { ...state, isFetching: false, SBList: action.payload };
+  case 'SB_Search_Error':
   return { ...state, isFetching: false };
 
   case 'FD_Detail_Request':

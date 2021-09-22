@@ -62,16 +62,17 @@ export default StyleSheet.create({
     },
     textinput:
     {
-        borderBottomWidth:1.5,
+        // borderBottomWidth:1.5,
         borderColor:'#3D4785',
         height:40,
-        marginTop:-10
+        marginTop:-10,
+        width:'100%'
     },
     textinput1:
     {
-        borderBottomWidth:1.5,
+        borderBottomWidth:1,
         borderColor:'#3D4785',
-        paddingBottom:0
+        paddingBottom:5
     },
     input:
     {
