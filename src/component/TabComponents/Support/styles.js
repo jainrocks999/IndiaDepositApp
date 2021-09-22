@@ -25,13 +25,13 @@ export default StyleSheet.create({
     better:{
         color:colors.textColor,
         marginTop:10,
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.fefteen,
         fontFamily:'Montserrat-Normal'
     },
     better1:{
         fontFamily:'Montserrat-SemiBold',
         color:colors.black,
-        fontSize:fontSize.fefteen
+        fontSize:fontSize.seventeen
     },
     drop:{
         marginTop:7 ,

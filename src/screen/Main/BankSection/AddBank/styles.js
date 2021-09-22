@@ -14,7 +14,7 @@ export default StyleSheet.create({
     better:{
         color:colors.textColor,
         marginTop:10,
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal'
     },
     drop:{

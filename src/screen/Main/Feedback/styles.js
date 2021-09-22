@@ -57,8 +57,6 @@ export default StyleSheet.create({
         color:colors.textColor,
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
-       // fontSize:13,
-        fontFamily:'Montserrat-Normal',
         marginTop:20
     },
     star:

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: colors.white,
     fontFamily:'Montserrat-SemiBold',
-    fontSize:fontSize.fourteen,
+    fontSize:fontSize.sixteen,
   },
 });
 

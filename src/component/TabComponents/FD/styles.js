@@ -34,8 +34,30 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:10
     },
+    img:{
+        width:20,
+        height:22
+    },
     
-    
-   
+   main:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       alignItems:'center'
+    },
+   main1:{
+       flexDirection:'row',
+       justifyContent:'space-between',
+       marginTop:20,
+       paddingHorizontal:20
+    },
+    total:{
+        fontSize:fontSize.seventeen,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Normal'
+    }, 
+   input:{
+       flexDirection:'row',
+       alignItems:'center'
+    },
     
 })

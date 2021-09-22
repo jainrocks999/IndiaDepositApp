@@ -106,7 +106,7 @@ const validateUser=(email,mobile)=>{
                 }
               </View>
               <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
-                <Text style={{color:colors.textColor}}>OR</Text>
+                <Text style={{color:colors.textColor,fontSize:fontSize.fefteen,fontWeight:'600'}}>OR</Text>
               </View>
               <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
                    <Text style={styles.heading}>Mobile</Text>

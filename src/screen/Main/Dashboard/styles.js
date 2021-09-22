@@ -76,7 +76,7 @@ export default StyleSheet.create({
     },
     text2:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.sixteen,
         fontFamily:'Montserrat-SemiBold'
     },
     view2:
@@ -145,7 +145,7 @@ export default StyleSheet.create({
     },
     search:{
         color:colors.white,
-        fontSize:12,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal'
     },
     enable:{

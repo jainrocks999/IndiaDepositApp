@@ -19,7 +19,8 @@ export default StyleSheet.create({
     },
     text1:
     {
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+        fontSize:fontSize.twelve
     },
     text2:
     {

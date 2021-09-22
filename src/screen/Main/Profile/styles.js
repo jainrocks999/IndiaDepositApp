@@ -85,7 +85,7 @@ export default StyleSheet.create({
     },
     change:
     {
-        fontSize:fontSize.twelve,
+        fontSize:fontSize.eleven,
        // marginHorizontal:20,
         marginTop:5,
         color:colors.bc

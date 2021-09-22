@@ -35,12 +35,12 @@ const SIP=()=>{
     return(
         <View style={styles.container}>
              <ScrollView style={{flex:1}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                <View style={styles.view}>
                     <Text 
-                    style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>
+                    style={styles.text}>
                         Monthly Investment</Text>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Image style={{width:20,height:22}} source={require('../../../assets/Image/rupay.png')}/>
+                    <View style={styles.view}>
+                        <Image style={styles.img} source={require('../../../assets/Image/rupay.png')}/>
                         <TextInput 
                         defaultValue={totalInvestment}
                         style={{borderBottomWidth:0,}}
@@ -61,11 +61,11 @@ const SIP=()=>{
                          onValueChange={(value) =>setTotalInvestment(JSON.stringify(value))} 
                             />
                         </View>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                <View style={styles.view}>
                     <Text 
-                    style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>
+                    style={styles.text}>
                         Expected Return Rate</Text>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <View style={styles.view3}>
                     <TextInput 
                     onChangeText={(val)=>setInterest(val)}
                     defaultValue={interest}
@@ -85,11 +85,11 @@ const SIP=()=>{
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                <View style={styles.view}>
                     <Text 
-                    style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>
+                    style={styles.text}>
                         Time Period</Text>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                    <View style={styles.view}>
                        
                         <TextInput 
                         onChangeText={(val)=>setTime(val)}
@@ -110,12 +110,9 @@ const SIP=()=>{
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
-                <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,paddingHorizontal:20}}>
-                    <View style={{alignItems:'center'}}> 
-                        <Text style={{fontSize:fontsize.seventeen,
-                            color:colors.textColor,
-                            fontFamily:'Montserrat-Normal'
-                            }}>Total Investment</Text>
+                <View style={styles.view1}>
+                    <View style={styles.view2}> 
+                        <Text style={styles.text}>Total Investment</Text>
                         <Text>{time==0?'0':totalInvestment*time*12}</Text>
                     </View>
                     <View style={{alignItems:'center'}}>
@@ -132,15 +129,7 @@ const SIP=()=>{
                 <View style={{alignItems:'center',marginTop:20}}>
                       
                        {time && interest=='0'?<Text
-                       style={{
-                        fontSize:fontsize.seventeen,
-                        color:colors.textColor,
-                        fontFamily:'Montserrat-Normal'
-                        }}>{`Maturity Value  ₹ 0`}</Text>: <Text style={{
-                            fontSize:fontsize.seventeen,
-                            color:colors.textColor,
-                            fontFamily:'Montserrat-Normal'
-                            }}> 
+                       style={styles.text}>{`Maturity Value  ₹ 0`}</Text>: <Text style={styles.text}> 
                    
                      {`Maturity Value  ₹ ${(totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0)}`}
                      </Text> } 

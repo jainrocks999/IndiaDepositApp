@@ -104,7 +104,7 @@ const validateUser=async(mobile)=>{
                 <TouchableOpacity 
                 onPress={()=>navigation.navigate('Login')}
                 style={styles.bottom}>
-                  <Text style={styles.account}>Login With Pin</Text>
+                  <Text style={styles.account1}>Login With Pin</Text>
                 </TouchableOpacity>
           </View>
          </KeyboardAwareScrollView>

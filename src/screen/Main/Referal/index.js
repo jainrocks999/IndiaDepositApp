@@ -86,7 +86,7 @@ useEffect(async()=>{
                                    placeholderTextColor={colors.heading1}
                                    />
                          </View>
-                            <Text style={styles.text2}>TAP TO COPY</Text>
+                            <Text style={styles.text4}>TAP TO COPY</Text>
                             <TouchableOpacity style={styles.touch}>
                                   <Image source={require('../../../assets/Image/share.png')}/>
                                   <Text style={styles.text3}>REFER NOW</Text>

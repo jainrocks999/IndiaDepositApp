@@ -43,15 +43,23 @@ export default StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         marginTop:20,
-        paddingHorizontal:10
+        paddingHorizontal:20
     },
     view2:{
+        alignItems:'center'
+    },
+    view3:{
+        flexDirection:'row',
         alignItems:'center'
     },
     text:{
         fontSize:fontSize.seventeen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
+    },
+    img:{
+        width:20,
+        height:22
     },
     
    

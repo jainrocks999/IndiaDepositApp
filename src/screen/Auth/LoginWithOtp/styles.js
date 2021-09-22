@@ -79,13 +79,13 @@ export default StyleSheet.create({
     account:
     {
         color:colors.textColor,
-        fontSize:fontSize.thirteen,
+        fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-Normal'
     },
     account1:
     {
-        color:colors.bc,
-        fontSize:fontSize.thirteen
+        color:colors.textColor,
+        fontSize:fontSize.twelve
     },
     error:
     {

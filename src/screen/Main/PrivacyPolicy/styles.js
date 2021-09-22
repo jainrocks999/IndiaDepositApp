@@ -64,6 +64,7 @@ export default StyleSheet.create({
      
         fontSize:fontSize.eleven,
         //  hp('1.9%'),
-        fontFamily:'Montserrat-SemiBold' 
+        fontFamily:'Montserrat-SemiBold' ,
+        fontWeight:'600'
     }
 })

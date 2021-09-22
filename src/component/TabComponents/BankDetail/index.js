@@ -130,7 +130,7 @@ const BankDetails=()=>{
               <View style={{justifyContent:'center',alignItems:'center',flex:1,marginBottom:40,marginTop:20}}>
                   <TouchableOpacity style={{backgroundColor:colors.bc,paddingHorizontal:15,paddingVertical:6,borderRadius:10}}>
               <Text onPress={()=>Root.replace('AddBank')} 
-              style={{fontSize:14,color:colors.white}}>Add Bank</Text>
+              style={{fontSize:fontSize.fourteen,color:colors.white}}>Add Bank</Text>
               </TouchableOpacity>
               </View>
               </View>
