@@ -162,7 +162,7 @@ const validateUser=async(values)=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true:colors.bc, false:colors.bc }}
                   />
-                  <Text style={styles.text2}>Keep me logged in</Text>
+                  <Text style={styles.text3}>Keep me logged in</Text>
                   </View>
                 <Text style={styles.text2}
                  onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>

@@ -34,7 +34,7 @@ flex: 1,
     },
     heading:
     {
-        fontSize:fontSize.sixteen,
+        fontSize:fontSize.seventeen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
         alignContent:'center',
@@ -44,7 +44,7 @@ flex: 1,
     {
         fontFamily:'Montserrat-SemiBold', 
         color:colors.bc,
-        fontSize:fontSize.twenty,
+        fontSize:fontSize.twentytwo,
         marginTop:10
     },
     lorem:

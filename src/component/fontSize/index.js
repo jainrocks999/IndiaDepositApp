@@ -9,6 +9,16 @@ export default {
     seventeen:17,
     eighteen:18,
     nineteen:19,
-    twenty:20
+    twenty:20,
+    twentyone:21,
+    twentytwo:22,
+    twentythree:23,
+    twentyfour:24,
+    twentyfive:25,
+    twentysix:26,
+    twentyseven:27,
+    twentyeight:28,
+    twentynine:29,
+    thirty:30
     };
   

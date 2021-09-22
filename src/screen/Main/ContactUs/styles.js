@@ -65,19 +65,20 @@ export default StyleSheet.create({
     text1:{
         marginLeft:10,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Normal',
+        fontSize:fontSize.thirteen
     },
 
     toll:
     {
-        fontSize:fontSize.sixteen,
+        fontSize:fontSize.seventeen,
         color:colors.textColor,
         fontFamily:'Montserrat-Normal'
     },
     call:
     {
         marginLeft:5,
-        color:colors.textColor,
+        color:colors.bc,
         fontFamily:'Montserrat-Medium',
         fontSize:fontSize.twelve
     },

@@ -88,7 +88,7 @@ export default StyleSheet.create({
         marginVertical:10,
        
     },
-    text:
+    text1:
     {
         width:'90%',
         fontFamily:'Montserrat-Normal',
@@ -98,6 +98,11 @@ export default StyleSheet.create({
     text2:
     {
         fontSize:fontSize.eleven,
+        color:colors.heading
+    },
+    text4:
+    {
+        fontSize:fontSize.ten,
         color:colors.heading
     },
     line:
@@ -125,7 +130,7 @@ export default StyleSheet.create({
     },
     text:
     {
-        fontSize:fontSize.twenty,
+        fontSize:fontSize.thirty,
         color:colors.bc
     },
     text3:{

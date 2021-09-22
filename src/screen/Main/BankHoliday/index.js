@@ -7,6 +7,7 @@ import BottomTab from '../../../component/StoreButtomTab';
 import { TextInput } from "react-native-gesture-handler";
 import colors from "../../../component/colors";
 import { TouchableOpacity } from "react-native";
+import fontSize from "../../../component/fontSize";
 const data =
 [
           {title:'Bank ',value:'STATE BANK OF INDIA'},
@@ -181,9 +182,9 @@ const Holiday=()=>{
                                 renderItem={({item})=>(
                               <View>
                                    <View style={styles.container}>
-                                        <Text style={{color:colors.textColor}}>{item.date}</Text>
-                                        <Text style={{color:colors.textColor}}>{item.day}</Text>
-                                        <Text style={{color:colors.textColor}}>{item.leave}</Text>
+                                        <Text style={styles.fdata}>{item.date}</Text>
+                                        <Text style={styles.fdata}>{item.day}</Text>
+                                        <Text style={styles.fdata}>{item.leave}</Text>
                                    </View>
                                    <View style={styles.border1}></View>
                                </View>
@@ -209,9 +210,9 @@ const Holiday=()=>{
                                   <View>
                                     <View style={styles.border1}></View>
                                         <View style={styles.container}>
-                                              <Text style={{color:colors.textColor}}>{item.date}</Text>
-                                              <Text style={{color:colors.textColor}}>{item.day}</Text>
-                                              <Text style={{color:colors.textColor}}>{item.leave}</Text>
+                                              <Text style={styles.fdata}>{item.date}</Text>
+                                              <Text style={styles.fdata}>{item.day}</Text>
+                                              <Text style={styles.fdata}>{item.leave}</Text>
                                          </View>
                                    </View>
                                  )}
@@ -236,9 +237,9 @@ const Holiday=()=>{
                                  <View>
                                      <View style={styles.border1}></View>
                                      <View style={styles.container}>
-                                          <Text style={{color:colors.textColor}}>{item.date}</Text>
-                                          <Text style={{color:colors.textColor}}>{item.day}</Text>
-                                          <Text style={{color:colors.textColor}}>{item.leave}</Text>
+                                          <Text style={styles.fdata}>{item.date}</Text>
+                                          <Text style={styles.fdata}>{item.day}</Text>
+                                          <Text style={styles.fdata}>{item.leave}</Text>
                                      </View>
                                    </View>
                                 )}
@@ -267,9 +268,9 @@ const Holiday=()=>{
                                     <View>
                                        <View style={styles.border1}></View>
                                              <View style={styles.container}>
-                                                   <Text style={{color:colors.textColor}}>{item.date}</Text>
-                                                   <Text style={{color:colors.textColor}}>{item.day}</Text>
-                                                   <Text style={{color:colors.textColor}}>{item.leave}</Text>
+                                                   <Text style={styles.fdata}>{item.date}</Text>
+                                                   <Text style={styles.fdata}>{item.day}</Text>
+                                                   <Text style={styles.fdata}>{item.leave}</Text>
                                               </View>
                                     </View>
                                   )}
@@ -295,9 +296,9 @@ const Holiday=()=>{
                                    <View>
                                        <View style={styles.border1}></View>
                                        <View style={styles.container}>
-                                             <Text style={{color:colors.textColor}}>{item.date}</Text>
-                                             <Text style={{color:colors.textColor}}>{item.day}</Text>
-                                            <Text style={{color:colors.textColor}}>{item.leave}</Text>
+                                             <Text style={styles.fdata}>{item.date}</Text>
+                                             <Text style={styles.fdata}>{item.day}</Text>
+                                            <Text style={styles.fdata}>{item.leave}</Text>
                                         </View>
                                    </View>
                                   )}

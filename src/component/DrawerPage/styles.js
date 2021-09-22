@@ -45,7 +45,7 @@ export default StyleSheet.create({
     text: {
         marginLeft: 10,
         fontFamily:'Montserrat-Normal',
-        fontSize:fontSize.sixteen,
+        fontSize:fontSize.fourteen,
         color:colors.textColor
     },
     icon: {
@@ -162,11 +162,12 @@ export default StyleSheet.create({
         }, 
         text2:{
             color:colors.white,
-            fontFamily:'Montserrat-SemiBold'
+            fontFamily:'Montserrat-SemiBold',
+            fontSize:fontSize.seventeen,
         },
         text3:{
             color:colors.white,
-            fontSize:fontSize.twelve,
+            fontSize:fontSize.fourteen,
             fontFamily:'Montserrat-Normal'
         }, 
         view1:{ 

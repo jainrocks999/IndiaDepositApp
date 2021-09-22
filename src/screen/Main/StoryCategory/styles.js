@@ -109,7 +109,7 @@ export default StyleSheet.create({
     },
     text3:{
         color:colors.black,
-        fontSize:fontSize.sixteen,
+        fontSize:fontSize.seventeen,
         fontFamily:'Montserrat-Normal'
     },
     text4:{
@@ -146,7 +146,7 @@ export default StyleSheet.create({
     },
     textTitle:{
         color:colors.white,
-        fontSize:fontSize.eighteen,
+        fontSize:fontSize.twentytwo,
         fontFamily:'Montserrat-SemiBold',
         marginLeft:15,
         width:'90%'

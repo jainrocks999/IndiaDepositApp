@@ -63,13 +63,14 @@ export default StyleSheet.create({
     },
     heading:
     {
-        fontSize:fontSize.sixteen,
+        fontSize:fontSize.seventeen,
         color:colors.bc,
-        marginBottom:15
+        marginBottom:15,
+        fontWeight:'700'
     },
     item1:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.fefteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
     },
@@ -114,5 +115,9 @@ export default StyleSheet.create({
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor
-    }
+    },
+    fdata:{
+        color:colors.textColor,
+        fontSize:fontSize.thirteen
+    },
 })

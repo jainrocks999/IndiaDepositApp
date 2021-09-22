@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     title:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Medium',
         color:colors.bc
     },
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     text:{
         color:colors.white,
         fontFamily:'Montserrat-Normal',
-        fontSize:12
+        fontSize:fontSize.twelve
     },
     modal: {
         width: 320,

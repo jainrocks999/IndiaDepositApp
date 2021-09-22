@@ -55,7 +55,8 @@ export default StyleSheet.create({
     {
         color:colors.white,
         fontFamily:'Montserrat-Normal',
-        fontSize:fontSize.thirteen
+        fontSize:fontSize.twelve
+
     },
     con:
     {
@@ -75,7 +76,7 @@ export default StyleSheet.create({
     },
     warn:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         color:'red'
     },
     modalView:

@@ -21,10 +21,10 @@ const FD=()=>{
     return(
         <View style={styles.container}>
              <ScrollView style={{flex:1}}>
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                    <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Total Investment</Text>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Image style={{width:20,height:22}} source={require('../../../assets/Image/rupay.png')}/>
+                <View style={styles.main}>
+                    <Text style={styles.total}>Total Investment</Text>
+                    <View style={styles.main}>
+                        <Image style={styles.img} source={require('../../../assets/Image/rupay.png')}/>
                         <TextInput 
                         defaultValue={totalInvestment}
                         style={{borderBottomWidth:0,}}
@@ -45,9 +45,9 @@ const FD=()=>{
                          onValueChange={(value) =>setTotalInvestment(JSON.stringify(value))} 
                             />
 
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                    <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Rate of Interest (P.A)</Text>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                <View style={styles.main}>
+                    <Text style={styles.total}>Rate of Interest (P.A)</Text>
+                    <View style={styles.input}>
                     <TextInput 
                     onChangeText={(val)=>setInterest(val)}
                     defaultValue={interest}
@@ -67,9 +67,9 @@ const FD=()=>{
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
-                <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                    <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Time Period</Text>
-                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                <View style={styles.main}>
+                    <Text style={styles.total}>Time Period</Text>
+                    <View style={styles.main}>
                        
                         <TextInput 
                         onChangeText={(val)=>setTime(val)}
@@ -90,13 +90,13 @@ const FD=()=>{
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
-                <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:20,paddingHorizontal:20}}>
+                <View style={styles.main1}>
                     <View style={{alignItems:'center'}}> 
-                        <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Total Investment</Text>
+                        <Text style={styles.total}>Total Investment</Text>
                         <Text>{totalInvestment}</Text>
                     </View>
                     <View style={{alignItems:'center'}}>
-                        <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'}}>Total Interest</Text>
+                        <Text style={styles.total}>Total Interest</Text>
                         <Text>{(totalInvestment* Math.pow((1 + (interest / (1 * 100))), (1 * time))-totalInvestment).toFixed(0)}</Text>
                     </View>
                 </View>

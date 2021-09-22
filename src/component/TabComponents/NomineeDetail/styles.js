@@ -63,7 +63,7 @@ export default StyleSheet.create({
     text:{
         color:colors.white,
         fontFamily:'Montserrat-Normal',
-        fontSize:12
+        fontSize:fontSize.twelve
     },
     modal: {
         width: 320,

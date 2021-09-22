@@ -84,7 +84,7 @@ export default StyleSheet.create({
     },
     error2:
     {
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         color:'red'
     },
    

@@ -27,7 +27,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         marginTop:13,
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal'
     },
     drop:

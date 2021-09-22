@@ -16,7 +16,8 @@ export default StyleSheet.create({
     },
     text:{
         fontFamily:'Montserrat-SemiBold',
-        color:colors.white
+        color:colors.white,
+        fontSize:fontSize.twelve
     },
     cardView:
     {
@@ -39,7 +40,8 @@ export default StyleSheet.create({
     title1:
     {
         fontFamily:'Montserrat-Normal',
-        color:colors.textColor
+        color:colors.textColor,
+        fontSize:fontSize.fefteen
     },
     value1:
     {
