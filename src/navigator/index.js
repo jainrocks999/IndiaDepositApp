@@ -102,7 +102,7 @@ function Navigate() {
         <Stack.Screen name="StoryCategory" component={StoryCategory} options={horizontalAnimation}/>
         <Stack.Screen name="ForgotOtp" component={ForgotOtp}/>
         <Stack.Screen name="CreatePin" component={CreatePin}/>
-        <Stack.Screen name="UpdateProfile"component={UpdateProfile}/>
+        <Stack.Screen name="UpdateProfile"component={UpdateProfile}  options={horizontalAnimation}/>
         <Stack.Screen name="BankDetail" component={BankDetail}/>
         <Stack.Screen name="AddBank" component={AddBank}/>
         <Stack.Screen name="EditUserBank" component={EditUserBank}/>

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {View,Text,FlatList,ScrollView,Image} from 'react-native';
+import React, { useState,useEffect } from "react";
+import {View,Text,FlatList,ScrollView,Image,BackHandler} from 'react-native';
 import Header from '../../../component/header';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
@@ -28,6 +28,7 @@ const data1 =
           {title:'Bank Timings For\nall Sundays',value:'Closed'},
   
 ]
+
 const Holiday=()=>{
     const navigation=useNavigation()
     const [jan,setJan]=useState(false)
@@ -35,7 +36,6 @@ const Holiday=()=>{
     const [march,setMarch]=useState(false)
     const [april,setAp]=useState(false)
     const [may,setMay]=useState(false)
-
   const checkJan=()=>
   {
      if(jan==true)

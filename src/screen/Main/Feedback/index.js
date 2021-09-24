@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from 'react-redux';
-
+import Toast from "react-native-simple-toast";
 const data=
 [{ label: 'Quality', value: 'Quality'},
 { label: 'Service', value: 'Service' },
@@ -37,6 +37,15 @@ const Contact=()=>{
     const isFetching=useSelector(state=>state.isFetching)
 const validateUser=async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
+    if(value==''){
+     Toast.show('Please select type')
+    }else if(value1==''){
+    Toast.show('Please select type')
+    }
+    else if(message==''){
+        Toast.show('Please enter message')
+    }
+    else{
     dispatch({
         type: 'Feedback_Request',
         url: 'feedback',
@@ -45,8 +54,8 @@ const validateUser=async()=>{
         ans_key1:value,
         ans_key2:value1,
         message:message
-
     })
+}
 }
 
     return(
@@ -66,7 +75,7 @@ const validateUser=async()=>{
                 <View style={styles.view1}>
                     {isFetching?<Loader/>:null}
                         <View style={styles.main}>
-                          <Text style={styles.how}>How would you rate your experience with india deposit app?</Text>
+                          <Text style={styles.how}>How would you rate your experience with India Deposit app?</Text>
                           <View style={styles.star}>
                               <Stars
                                 half={true}

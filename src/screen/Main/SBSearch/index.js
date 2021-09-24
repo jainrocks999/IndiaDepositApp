@@ -19,8 +19,7 @@ const SBAccount=({route})=>{
     const [location,setLocation]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-    const type=route.params.type
-  
+    console.log('this is narendra here',route.params);
     const manageSearch=async()=>{ 
       if(balance==''){
          Toast.show('Please enter minimum balance')
@@ -33,7 +32,11 @@ const SBAccount=({route})=>{
          url: 'sblist',
          min_bal:balance,
          location:location,
-         type1:'Fixed',
+         type1:route.params.type1,
+         type2:route.params.type2,
+         type3:route.params.type3,
+         type4:route.params.type4,
+         type5:route.params.type5,
          navigation:navigation
        })
     }
@@ -95,6 +98,7 @@ const SBAccount=({route})=>{
                                        keyboardType='number-pad'
                                        value={location}
                                        onChangeText={(val)=>setLocation(val)}
+                                       maxLength={6}
                                     />
                                </View>
                                <View style={styles.view2}>

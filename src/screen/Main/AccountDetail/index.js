@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {View,Text,FlatList,Image,ScrollView} from 'react-native';
 import Header from '../../../component/compareHeader';
 import colors from '../../../component/colors';
@@ -7,26 +7,26 @@ import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
 import StatusBar from '../../../component/StatusBar';
 import BottomTab from '../../../component/StoreButtomTab';
-const data=[
-      
-]
+import { useSelector } from 'react-redux';
 const FDList=()=>{
 const navigation=useNavigation()
+const selector=useSelector((state)=>state.SBDetail)
+const details=selector[0]
  return(
        <View style={styles.container1}>
          <Header
           title={'SB A/C DETAILS'}
           source={require('../../../assets/Image/arrow.png')}
-         // titleTwo='Compare'
           onPress={()=>navigation.goBack()}
-         // onPress1={()=>navigation.navigate('CompareFD')}
          /> 
-    <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20, marginBottom:10}}>
+           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20, marginBottom:10}}>
              <View>
                  <View style={styles.list}>
-                     <Image style={styles.img} source={require('../../../assets/Image/sbi.png')}/>
-                     <Text  onPress={()=>navigation.navigate('CompareFD')} style={styles.Text1}>Saving Account</Text>
-                     <Text style={styles.Text2}>Account</Text>
+                 <Image  resizeMode='contain'
+                       style={{height:20,width:80}}
+                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${details.bank_logo}`}}/>
+                     <Text  onPress={()=>navigation.navigate('CompareFD')} style={styles.Text1}>{details.bankname}</Text>
+                     <Text style={styles.Text2}>{details.name}</Text>
                  </View>
               </View>
              <View style={styles.card}>

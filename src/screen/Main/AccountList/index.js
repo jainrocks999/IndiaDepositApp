@@ -18,7 +18,7 @@ const SBAccountList=({route})=>{
         const selector=useSelector(state=>state.SBList)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
-        const [type, setType] = useState('')
+        const [type, setType] = useState(route.params.type1)
         const [balance,setBalance] = useState(route.params.balance)
         const [location,setLocation]=useState(route.params.location)
         const isFetching=useSelector((state)=>state.isFetching)
@@ -26,9 +26,9 @@ const SBAccountList=({route})=>{
       
 const manageList=(item)=>{
   dispatch({
-    type: 'FD_Detail_Request',
-    url: 'fddetail',
-    fixed_deposit_id:item,
+    type: 'SB_Detail_Request',
+    url: 'sblist',
+    saving_account_id:item,
     navigation:navigation
   })
 }
@@ -45,7 +45,11 @@ const manageSearch=async()=>{
        url: 'sblist',
        min_bal:balance,
        location:location,
-       type1:'Fixed',
+       type1:type,
+       type2:'',
+       type3:'',
+       type4:'',
+       type5:'',
        navigation:navigation
      })
      setVisible(false)
@@ -55,8 +59,7 @@ const handleonPress=(id)=>{
   if(selectedData.length){
     handleSelectionMultiple(id)
   }else{
-    mana
-    geList(id)
+    manageList(id)
   }
 }
 
@@ -73,11 +76,12 @@ const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
-                    onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
-                    onPress={()=>handleonPress(item.fixed_deposit_id)}
+                    onLongPress={(val)=>handleSelectionMultiple(item.saving_account_id)}
+                    onPress={()=>handleonPress(item.saving_account_id)}
                     style={[styles.card,{
-                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null,
-                      padding:13
+                      backgroundColor:selectedData.includes(item.saving_account_id) ? colors.bc : null,
+                      padding:13,
+                      backgroundColor:'white'
                       }]}>
                    <View style={styles.cardView}>
                       <Image
@@ -204,6 +208,7 @@ const renderItem=(item)=>{
                               value={location}
                               onChangeText={(val)=>setLocation(val)}
                               keyboardType='number-pad'
+                              maxLength={6}
                            />
                        </View>
 
@@ -239,7 +244,7 @@ const renderItem=(item)=>{
               <View style={styles.list}>
                 <TouchableOpacity
                 onPress={()=>setVisible(true)}
-                style={{width:'100%',paddingHorizontal:15,paddingVertical:6}}>
+                style={{width:'100%',paddingHorizontal:5,paddingVertical:6}}>
                   <View style={[styles.card,{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:10,paddingVertical:8}]}>
                     <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Minimum balance : ${route.params.balance}`}</Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>

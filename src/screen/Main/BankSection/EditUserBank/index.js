@@ -16,9 +16,14 @@ import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const loginValidationSchema=yup.object().shape({
-    account_number:yup.string().min(14,({min})=>`IFSC Code must be 14 digits`).required('Please enter your Account Number '),
-    ifsc_code:yup.string().min(11,({min})=>`IFSC Code must be 11 digits`).required('Please enter IFSC Code'),
-    name:yup.string().required('Please Enter your Name')
+    account_number:yup.string().
+    max(16,({min})=>`Account number must be maximum 16 digits`).
+    min(11,({min})=>`Account number must be atleast 11 digits`)
+    .required('Please enter your account number ').matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid account number"),
+    ifsc_code:yup.string().min(11,({min})=>`IFSC code must be 11 digits`)
+    .required('Please enter IFSC Code')
+    .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid IFSC code"),
+    name:yup.string().required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   })
 const data2=[
     { label: 'Saving Account', value: 'Saving Account'},
@@ -51,7 +56,8 @@ const addUser=async(values)=>{
             account_type:account_type,
             ifsc_code:values.ifsc_code,
             other1:'test',
-            other2:'test'
+            other2:'test',
+            navigation:navigation
           })
       }
 
@@ -85,7 +91,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='John Methew'
+                        placeholder='Please enter your name'
                         placeholderTextColor={colors.heading1}
                         value={values.name}
                         onChangeText={handleChange('name')}
@@ -170,7 +176,7 @@ const addUser=async(values)=>{
                   
                     <View style={{marginTop:20}}>
                     <CustomButton
-                    title='Add'
+                    title='Update'
                     onPress={()=> handleSubmit()}
                     />
                   </View>

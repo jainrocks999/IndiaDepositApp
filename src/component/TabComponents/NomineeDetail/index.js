@@ -1,10 +1,9 @@
 import React,{useEffect,useState} from 'react';
-import { View,Text,TouchableOpacity,FlatList, ScrollView,Image } from 'react-native';
+import { View,Text,TouchableOpacity,FlatList, ScrollView,Image,Alert } from 'react-native';
 import { useSelector,useDispatch } from "react-redux";
 import Loader from '../../../component/loader';
 import styles from "./styles";
 import { useNavigation } from '@react-navigation/native';
-import fontSize from '../../fontSize';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../AsyncStorage';
 import axios from "axios";
@@ -15,7 +14,6 @@ const Nominee=()=>{
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.NomineeList)
         const isFetching=useSelector(state=>state.isFetching)
-
     useEffect(async()=>{
         const user_id=await AsyncStorage.getItem(Storage.user_id)   
         dispatch({
@@ -62,13 +60,26 @@ const Nominee=()=>{
                     url: 'nomineelist',
                     user_id
                   })
-            
-                Toast.show('Delete Successful')
             } 
           } catch (error) {
            throw error;
             
           }
+    }
+
+    const renderModal=(item)=>{
+        Alert.alert(
+          "CONFIRM",
+          "Are you sure you want to delete Nominee Details?",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel"
+            },
+            { text: "YES", onPress: () => deletePost(item) }
+          ]
+        );
     }
     
     const renderItem=(item)=>{
@@ -84,17 +95,17 @@ const Nominee=()=>{
                      </View>
                     
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Address  : ${item.address1}`}</Text>
+                         <Text style={styles.same}>{`Address1 : ${item.address1}`}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Address 2 : ${item.address2}`}</Text>
+                         <Text style={styles.same}>{`Address2 : ${item.address2}`}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Gourdian : ${item.guardian}`}</Text>
+                         <Text style={styles.same}>{`Guardian : ${item.guardian}`}</Text>
                      </View>
                      <View style={[styles.row,{marginTop:10,width:'50%'}]}>
                      <TouchableOpacity
-                     onPress={()=>deletePost(item)}
+                     onPress={()=>renderModal(item)}
                      style={styles.button}>
                           <Text style={styles.text}>
                               Delete

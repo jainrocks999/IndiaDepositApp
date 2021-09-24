@@ -78,7 +78,7 @@ const DrawerContent=({props})=> {
         navigation.navigate('Profile',{
             name,email,dob,gender,mother,father
         })
-        // navigation.dispatch(DrawerActions.closeDrawer())
+         navigation.dispatch(DrawerActions.closeDrawer())
     }
   
     return (
@@ -143,8 +143,8 @@ const DrawerContent=({props})=> {
                   </View>
                   <TouchableOpacity 
                   onPress={()=>navigation.dispatch(DrawerActions.closeDrawer())}
-                  style={{paddingVertical:20,}}>
-                    <Image style={{width:32,height:32}} source={require('../../assets/Image/arrow2.png')}/>
+                  style={{marginTop:10,}}>
+                    <Image style={{width:20,height:32}} source={require('../../assets/Image/arrow2.png')}/>
                   </TouchableOpacity>
               </View>
                 <TouchableOpacity
@@ -205,7 +205,11 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('Contact')
+                        navigation.navigate('Contact',{
+                             name:name,
+                             email:email,
+                             mobile:mobile
+                        })
                     }}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
@@ -250,7 +254,9 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Support')}
+                    onPress={()=>navigation.navigate('Support',{
+                        name,email,mobile
+                    })}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
                             <View style={styles.view1}>

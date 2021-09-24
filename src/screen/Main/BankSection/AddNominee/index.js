@@ -19,13 +19,14 @@ import axios from 'axios';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const loginValidationSchema=yup.object().shape({
-    name:yup.string().required('Please Enter your Name'),
-    address1:yup.string().required('Please Enter your Address1'),
-    address2:yup.string().required('Please Enter your Address2'),
-    pincode:yup.string().required('Please Enter your Pincode'),
-    relationship:yup.string().required('Please Enter your Relationship'),
-    guardian:yup.string().required('Please Enter your Guardian Name'),
-    guardian_relationship:yup.string().required('Please Enter your Guardian Relationship'),
+    name:yup.string().max(40).required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
+    address1:yup.string().required('Please enter your address1').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address1"),
+    address2:yup.string().required('Please enter your address2').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
+    pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`).required('Please enter your pincode')
+    .matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid pincode"),
+    relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
+    guardian:yup.string().required('Please Enter your guardian name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian name"),
+    guardian_relationship:yup.string().required('Please enter your guardian relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian relationship"),
   })
   
 const BankDetail=({route})=>{
@@ -68,6 +69,7 @@ const addUser=async(values)=>{
             guardian:values.guardian,
             guardian_relationship:values.guardian_relationship,
             pincode:values.pincode,
+            navigation:navigation
           })
         }
       }
@@ -107,7 +109,7 @@ const addUser=async(values)=>{
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
             <Header
-                    title={'Add Nominee'}
+                    title={'Add Nominee   '}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
@@ -122,7 +124,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='John Methew'
+                        placeholder='Please enter your name'
                         placeholderTextColor={colors.heading1}
                         value={values.name}
                         onChangeText={handleChange('name')}
@@ -137,7 +139,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Address1'
+                        placeholder='Please enter your address1'
                         placeholderTextColor={colors.heading1}
                         value={values.address1}
                         onChangeText={handleChange('address1')}
@@ -152,7 +154,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Address2'
+                        placeholder='Please enter your address2'
                         placeholderTextColor={colors.heading1}
                         value={values.address2}
                         onChangeText={handleChange('address2')}
@@ -228,7 +230,7 @@ const addUser=async(values)=>{
                             date={dob}
                             mode="date"
                             placeholder="Date Of Birth"
-                            format="DD-MM-YYYY"
+                            format="YYYY-MM-DD"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             maxDate={new Date()}
@@ -258,7 +260,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='SBIN00084'
+                            placeholder='Please enter your relationship'
                             placeholderTextColor={colors.heading1}
                             value={values.relationship}
                             onChangeText={handleChange('relationship')}
@@ -275,7 +277,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='SBIN00084'
+                            placeholder='Please enter your guardian name'
                             placeholderTextColor={colors.heading1}
                             value={values.guardian}
                             onChangeText={handleChange('guardian')}
@@ -292,7 +294,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='SBIN00084'
+                            placeholder='Please enter your guardian relationship'
                             placeholderTextColor={colors.heading1}
                             value={values.guardian_relationship}
                             onChangeText={handleChange('guardian_relationship')}
@@ -309,7 +311,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='SBIN00084'
+                            placeholder='Please enter your pincode'
                             placeholderTextColor={colors.heading1}
                             value={values.pincode}
                             onChangeText={handleChange('pincode')}

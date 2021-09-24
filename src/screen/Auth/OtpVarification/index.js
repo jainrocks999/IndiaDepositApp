@@ -131,7 +131,7 @@ class OtpVarification extends React.Component{
                      </View>
                      {this.state.counter!=0?
                      <Text style={[styles.your,{textAlign:'center'}]}>
-                         {`You can request OTP Resend\nafter ${Math.floor(this.state.counter / 60)}:${this.state.counter % 60}  minutes!`}</Text>
+                         {`You can request OTP Resend\nafter 0${Math.floor(this.state.counter / 60)}:${(this.state.counter < 10 ? `0${this.state.counter%60}`:this.state.counter%60)} sec`}</Text>
                     :null
                     }
                  </View>
