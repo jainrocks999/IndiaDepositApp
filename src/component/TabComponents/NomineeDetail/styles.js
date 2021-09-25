@@ -97,7 +97,7 @@ export default StyleSheet.create({
         color:colors.white,
         fontSize: fontSize.fefteen,
         alignSelf: 'center',
-        fontFamily: 'Poppins-Bold',
+        fontFamily: 'Montserrat-Bold',
         fontWeight: 'bold',
         textAlign: 'center',
       },
@@ -114,5 +114,16 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop:10
+      },
+      popup: {
+        height: 40,
+        width:100,
+        marginTop: 10,
+        backgroundColor:colors.bc,
+        justifyContent: 'center',
+        borderRadius: 4,
+        alignItems: 'center',
+        alignSelf: 'center',
+        paddingHorizontal:10
       },
 })

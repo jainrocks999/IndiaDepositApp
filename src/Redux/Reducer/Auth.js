@@ -21,6 +21,7 @@ initialstate = {
   FDList:[],
   SBList:[],
   FDDetail:[],
+  SBDetail:[],
   Story:[]
 };
 export default (state = initialstate, action) => {
@@ -241,6 +242,13 @@ export default (state = initialstate, action) => {
   case 'FD_Detail_Success':
     return { ...state, isFetching: false, FDDetail: action.payload };
   case 'FD_Detail_Error':
+  return { ...state, isFetching: false };
+
+  case 'SB_Detail_Request':
+    return { ...state, isFetching: true };
+  case 'SB_Detail_Success':
+    return { ...state, isFetching: false, SBDetail: action.payload };
+  case 'SB_Detail_Error':
   return { ...state, isFetching: false };
 
     default:

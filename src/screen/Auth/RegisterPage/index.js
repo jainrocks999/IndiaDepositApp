@@ -17,9 +17,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Full Name '),
+  name:yup.string().max(40,({max})=>`Name must be only ${max} character`)
+  .required('Please enter your Full Name ').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
-  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
+  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number')
+  .required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
   pin:yup.string().min(4,({min})=>`Pin must be 4 digits`).required('Please enter Pin'),
   confirmPin:yup.string().when("pin", {
     is: val => (val && val.length > 0 ? true : false),

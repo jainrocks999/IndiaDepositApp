@@ -36,6 +36,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-htmlview": "^0.16.0",
     "react-native-image-crop-picker": "^0.36.2",
+    "react-native-image-header-scroll-view": "^1.0.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-material-menu": "^2.0.0",
     "react-native-modal": "^12.0.3",

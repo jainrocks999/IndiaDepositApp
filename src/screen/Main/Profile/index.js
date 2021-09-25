@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView,Platform} from 'react-native';
+import { View,Text,Image,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -39,7 +39,6 @@ const ProfileScreen=()=>{
   const [key,setKey]=useState(1)
 
   useEffect(async()=>{
-   
     const name=await AsyncStorage.getItem(Storage.name)
     const email=await AsyncStorage.getItem(Storage.email)
     const father=await AsyncStorage.getItem(Storage.fatherName)
@@ -57,7 +56,7 @@ const ProfileScreen=()=>{
 
     console.log('this is user dtails0',name,email,father,mother,dob,gender);
   })
-   
+  
   const [routes] = React.useState([
     { key: 'first', title: 'PERSONAL DETAILS' },
     { key: 'second', title: 'BANK DETAILS' },
@@ -179,11 +178,11 @@ const save=async(images)=>{
                             <View style={styles.main}>
                 
                                 <View style={styles.view2}>
-                                     <Text  
-                                     onPress={()=>RootNavigation.push('UpdateProfile',{
+                                   <Text  
+                                     onPress={()=>RootNavigation.replace('UpdateProfile',{
                                        name,email,gender,dob,father,mother
                                      })} 
-                                     style={styles.change}>Edit Profile</Text>
+                                     style={styles.change}>{name&&email?'Edit Profile':'           '}</Text>
                                       <View style={styles.imageContainer}>
                                         {photos?<Image 
                                         style={{width:'100%',height:'100%',borderRadius:57}} 

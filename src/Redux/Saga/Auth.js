@@ -3,6 +3,7 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
+import Root from '../../navigator/rootNavigation';
 import { useDispatch } from 'react-redux';
 
 //Login
@@ -582,6 +583,7 @@ function* editProfile(action) {
                 AsyncStorage.setItem(Storage.gender,response.data[0].gender)
                 AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
                 Toast.show(response.messages);  
+                action.navigation.replace('Profile')
             } else {
               yield put({
                 type: 'Edit_Profile_Error',
@@ -726,11 +728,10 @@ function* addBank(action) {
                 type: 'Add_Bank_Success',
                 payload: response.data,
               });    
-            
-            
-              Toast.show('Bank add Successfull')   
+              Toast.show(response.messages)   
+             action.navigation.navigate('Profile')   
             } else {
-              Toast.show('Bank add Error')   
+              Toast.show(response.messages)   
               yield put({
                 type: 'Add_Bank_Error',
               });
@@ -762,11 +763,10 @@ function* updateBank(action) {
                 type: 'Update_Bank_Success',
                 payload: response.data,
               });    
-            
-            
-              Toast.show('Bank Update Successfull')   
+              Toast.show(response.messages)  
+              action.navigation.navigate('Profile')    
             } else {
-              Toast.show('Bank Update Error')   
+              Toast.show(response.messages)  
               yield put({
                 type: 'Update_Bank_Error',
               });
@@ -791,9 +791,9 @@ function* deleteBank(action) {
                 payload: response.data,
               });    
 
-              Toast.show('Bank Delete Successfull') 
+              Toast.show(response.messages)  
             } else {
-              Toast.show('Bank Delete Error')   
+              Toast.show(response.messages)    
               yield put({
                 type: 'Delete_Bank_Error',
               });
@@ -850,10 +850,11 @@ function* addNominee(action) {
                 type: 'Add_Nominee_Success',
                 payload: response,
               });    
-              Toast.show('Nominee add Successfull')   
+              Toast.show(response.messages)  
+              action.navigation.navigate('Profile')   
             } else {
               console.log('thsi is working');
-              Toast.show('Nominee add Error')   
+              Toast.show(response.messages)    
               yield put({
                 type: 'Add_Nominee_Error',
               });
@@ -891,7 +892,8 @@ function* editNominee(action) {
                 type: 'Edit_Nominee_Success',
                 payload: response,
               });    
-              Toast.show('Nominee Update Successfull')   
+              Toast.show(response.messages)  
+              action.navigation.navigate('Profile')     
             } else {
               console.log('thsi is working');
               Toast.show('Nominee add Error')   
@@ -1015,17 +1017,42 @@ function* FDDetail(action) {
           });
     }
 }
+
+function* SBDetail(action) {
+  try{
+    const data=new FormData()
+    data.append('saving_account_id',action.saving_account_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'SB_Detail_Success',
+                payload: response.data,
+              });  
+              action.navigation.navigate('AccountDetail')
+            } else {
+              yield put({
+                type: 'SB_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'SB_Detail_Error',
+          });
+    }
+}
+
 function* SBSearch(action) {
   console.log('this is working',action);
   try{
     const data = new FormData();
       data.append('min_bal',action.min_bal)
       data.append('location',action.location)
-      data.append('type',action.type1)
-      // data.append('type2',action.type2)
-      // data.append('type3',action.type3)
-      // data.append('type4',action.type4)
-      // data.append('type5',action.type5)
+      data.append('type1',action.type1)
+      data.append('type2',action.type2)
+      data.append('type3',action.type3)
+      data.append('type4',action.type4)
+      data.append('type5',action.type5)
 
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
@@ -1086,6 +1113,7 @@ export default function* authSaga() {
   yield takeEvery('Country_List_Request',countryList)
   yield takeEvery('State_List_Request',stateList)
   yield takeEvery('FD_Detail_Request',FDDetail)
+  yield takeEvery('SB_Detail_Request',SBDetail)
   yield takeEvery('Get_Story_Request',getStory)
   yield takeEvery('FD_Search_Request',Search)
   yield takeEvery('SB_Search_Request',SBSearch)

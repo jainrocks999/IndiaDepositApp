@@ -19,13 +19,14 @@ import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const loginValidationSchema=yup.object().shape({
-    name:yup.string().required('Please Enter your Name'),
-    address1:yup.string().required('Please Enter your Address1'),
-    address2:yup.string().required('Please Enter your Address2'),
-    pincode:yup.string().required('Please Enter your Pincode'),
-    relationship:yup.string().required('Please Enter your Relationship'),
-    guardian:yup.string().required('Please Enter your Guardian Name'),
-    guardian_relationship:yup.string().required('Please Enter your Guardian Relationship'),
+  name:yup.string().max(40).required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
+  address1:yup.string().required('Please enter your address1').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address1"),
+  address2:yup.string().required('Please enter your address2').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
+  pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`).required('Please enter your pincode')
+  .matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid pincode"),
+  relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
+  guardian:yup.string().required('Please Enter your guardian name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian name"),
+  guardian_relationship:yup.string().required('Please enter your guardian relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian relationship"),
   })
   
 const BankDetail=({route})=>{
@@ -37,7 +38,7 @@ const BankDetail=({route})=>{
         const [state,setState]=useState(data.item.state)
         const [country,setCountry]=useState(data.item.country)
         const [dob,setDob]=useState(data.item.dob)
-       
+       console.log('hi narendra here pal',data.item);
         const selector=useSelector(state=>state.CountryList)
         const selector1=useSelector(state=>state.StateList)
         const [manageStateValue,setManageStateValue]=useState([])
@@ -72,6 +73,7 @@ const addUser=async(values)=>{
             guardian:values.guardian,
             guardian_relationship:values.guardian_relationship,
             pincode:values.pincode,
+            navigation:navigation
           })
         }
       }
@@ -116,7 +118,7 @@ const manageState=async(val)=>{
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
             <Header
-                    title={'Edit Nominee'}
+                    title={'Edit Nominee  '}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
@@ -131,7 +133,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='John Methew'
+                        placeholder='Please enter your name'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.name}
                         onChangeText={handleChange('name')}
@@ -146,7 +148,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Address1'
+                        placeholder='Please enter your address1'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.address1}
                         onChangeText={handleChange('address1')}
@@ -161,7 +163,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Address2'
+                        placeholder='Please enter your address2'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.address2}
                         onChangeText={handleChange('address2')}
@@ -234,16 +236,15 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                       <DatePicker
                         style={{width: '99%'}}
-                            date={dob}
+                            date={dob=='0000-00-00'?'':dob}
                             mode="date"
                             placeholder="Date Of Birth"
-                            format="DD-MM-YYYY"
+                            format="YYYY-MM-DD"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             maxDate={new Date()}
                             customStyles={{
-                                placeholderText:{marginLeft:0},
-                                
+                                placeholderText:{marginLeft:0,color:colors.heading1},
                             dateIcon: {
                                 width:0,
                                 height:0,
@@ -267,7 +268,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='Relationship'
+                            placeholder='Please enter your relationship'
                             placeholderTextColor={colors.heading1}
                             defaultValue={values.relationship}
                             onChangeText={handleChange('relationship')}
@@ -284,7 +285,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='Guardian'
+                            placeholder='Please enter your guardian name'
                             placeholderTextColor={colors.heading1}
                             defaultValue={values.guardian}
                             onChangeText={handleChange('guardian')}
@@ -301,7 +302,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='Guardian Relationship'
+                            placeholder='Please enter your guardian relationship'
                             placeholderTextColor={colors.heading1}
                             defaultValue={values.guardian_relationship}
                             onChangeText={handleChange('guardian_relationship')}
@@ -318,7 +319,7 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
-                            placeholder='Pincode'
+                            placeholder='Pleae enter your pincode'
                             placeholderTextColor={colors.heading1}
                             defaultValue={values.pincode}
                             onChangeText={handleChange('pincode')}
@@ -333,7 +334,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{marginTop:20}}>
                     <CustomButton
-                    title='Add'
+                    title='Update'
                     onPress={()=> handleSubmit()}
                     />
                   </View>

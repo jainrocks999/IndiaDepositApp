@@ -12,15 +12,17 @@ import BottomTab from '../../../component/StoreButtomTab';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
-import fontSize from '../../../component/fontSize';
+import Loader from '../../../component/loader';
+
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name '),
+  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name ')
+  .matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
   mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
-  message:yup.string()
+  message:yup.string().required('Please enter Message / Report for Crash')
 })
 
-const Contact=()=>{
+const Contact=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
@@ -44,7 +46,7 @@ const Contact=()=>{
   }
     return(
       <Formik
-      initialValues={{ email: '',mobile:'',name:'',message:''}}
+      initialValues={{ email:route.params.email,mobile:route.params.mobile,name:route.params.name,message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -58,7 +60,7 @@ const Contact=()=>{
           />
           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
             <View style={styles.card}>
-            
+            {isFetching?<Loader/>:null}
             <View style={styles.header}>
               <Text style={styles.toll}>TOLL FREE NUMBER</Text>
               <View style={[styles.view,{ marginTop:21}]}>
@@ -87,7 +89,7 @@ const Contact=()=>{
            
             <View style={styles.line}></View>
             <View style={styles.main}>
-              <Text style={styles.toll}>FOLLW US ON</Text>
+              <Text style={styles.toll}>FOLLOW US ON</Text>
                <View style={styles.bottom}>
                 <View style={styles.view1}>
                   <View style={styles.view2}>
@@ -141,6 +143,7 @@ const Contact=()=>{
                 value={values.name}
                 maxLength={40}
                 returnKeyType='next'
+                editable={false}
                 onSubmitEditing={() => {
                   next1.current.focus()
                 }}
@@ -163,6 +166,7 @@ const Contact=()=>{
                 value={values.email}
                 maxLength={40}
                 returnKeyType='next'
+                editable={false}
                 onSubmitEditing={() => {
                   next2.current.focus()
                 }}
@@ -185,6 +189,7 @@ const Contact=()=>{
                 value={values.mobile}
                 keyboardType={'number-pad'}
                 maxLength={11}
+                editable={false}
                 returnKeyType='next'
                 onSubmitEditing={() => {
                   next3.current.focus()
@@ -198,10 +203,10 @@ const Contact=()=>{
                 <Text style={styles.warn}>{errors.mobile}</Text>
                 }
               </View>
-              <View style={[styles.input1,{marginTop:15,marginBottom:20}]}>
+              <View style={[styles.input1,{marginTop:15}]}>
               <TextInput
                 ref={next3}
-                style={{color:colors.textColor}}
+                style={{color:colors.textColor,width:'94%'}}
                 placeholder='Message / Report for Crash'
                 placeholderTextColor={colors.heading1}
                 onChangeText={handleChange('message')}
@@ -214,10 +219,16 @@ const Contact=()=>{
                 // }}
                 // blurOnSubmit={false}
                 />
+                
+              </View>
+              <View style={styles.error}>
+              {(errors.message && touched.message) &&
+                <Text style={styles.warn}>{errors.message}</Text>
+                }
               </View>
               
              </View>
-              <View style={{marginBottom:30}}>
+              <View style={{marginBottom:30,marginTop:20}}>
                 <Button
                 onPress={()=>handleSubmit()}
                 title='SUBMIT'

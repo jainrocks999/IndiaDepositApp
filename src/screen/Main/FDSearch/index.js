@@ -26,8 +26,7 @@ const Contact=({route})=>{
     const [pincode,setPincode]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-    const type=route.params.type
-   
+   console.log('this is narendra here',route.params);
    const manageSearch=async()=>{
       if(year==''){
        Toast.show('Please select year')
@@ -52,10 +51,10 @@ const Contact=({route})=>{
          days:day,
          amount:amount,
          location:pincode,
-         type1:type,
-         type2:'',
-         type3:'',
-         type4:'',
+         type1:route.params.type1,
+         type2:route.params.type2,
+         type3:route.params.type3,
+         type4:route.params.type4,
          type5:'',
          navigation:navigation
        })
@@ -112,6 +111,7 @@ const Contact=({route})=>{
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
                                     />
+                                    <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
                                   </View>
                                </View>
                                <View style={styles.view3}>
@@ -130,6 +130,7 @@ const Contact=({route})=>{
                                           style={styles.image} 
                                           source={require('../../../assets/Image/down.png')}/>}
                                         />
+                                           <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
                                      </View>
                                </View>
                                <View style={styles.view3}>
@@ -148,6 +149,7 @@ const Contact=({route})=>{
                                            style={styles.image} 
                                            source={require('../../../assets/Image/down.png')}/>}
                                        />
+                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
                                      </View>
                                  </View>
                              </View>
@@ -160,7 +162,7 @@ const Contact=({route})=>{
                            <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
                               <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{marginTop:0}}
+                                 style={{width:'90%'}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
@@ -169,13 +171,13 @@ const Contact=({route})=>{
                            </View>
                            <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:-10}}/>
                       </View>
-                      <View style={styles.view1}>
+                      <View style={{marginTop:24}}>
                           <View style={styles.view4}>
                               <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
                           <View style={styles.view5}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
-                                <Text style={[styles.text1,{marginLeft:20}]}>Current Location</Text>
+                                <Text style={[styles.text1,{marginLeft:10}]}>Current Location</Text>
                           </View>
                        </View>
                        <View style={styles.view6}>
@@ -183,13 +185,15 @@ const Contact=({route})=>{
                        </View>
                       <View style={styles.view7}>
                            <TextInput
-                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              style={{width:'90%'}}
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={pincode}
                               onChangeText={(val)=>setPincode(val)}
                               keyboardType='number-pad'
+                              maxLength={6}
                            />
+                              <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
                        </View>
                        <View style={styles.view8}>
                             <Button

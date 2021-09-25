@@ -146,7 +146,7 @@ export default StyleSheet.create({
     },
     textTitle:{
         color:colors.white,
-        fontSize:fontSize.twentytwo,
+        fontSize:fontSize.twenty,
         fontFamily:'Montserrat-SemiBold',
         marginLeft:15,
         width:'90%'

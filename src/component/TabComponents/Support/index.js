@@ -2,7 +2,6 @@ import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView,TextInput} from 'react-native';
 import styles from './styles';
 import CustomButton from '../../button1';
-import Loader from '../../header';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../AsyncStorage';
@@ -11,8 +10,10 @@ import * as yup from 'yup';
 import colors from '../../colors';
 import fontSize from '../../fontSize';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Loader from '../../../component/loader';
+
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name '),
+  name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`).required('Please enter your Name ').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
   mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
   subject:yup.string(),
@@ -22,6 +23,20 @@ const loginValidationSchema=yup.object().shape({
 const Support=()=>{
   const dispatch=useDispatch()
   const isFetching=useSelector(state=>state.isFetching)
+  const [name1,setName1]=useState('')
+  const [email1,setEmail1]=useState('')
+  const [mobile1,setMobile1]=useState('')
+console.log('name email,mobile',name1,email1,mobile1);
+  useEffect(async()=>{
+    const name=await AsyncStorage.getItem(Storage.name)
+    const email=await AsyncStorage.getItem(Storage.email)
+    const mobile=await AsyncStorage.getItem(Storage.mobile)
+    setName1(name)
+    setEmail1(email)
+    setMobile1(mobile)
+  })
+
+
 
   const validateUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -40,7 +55,7 @@ const Support=()=>{
 
     return(
       <Formik
-      initialValues={{ name: '',email:'',mobile:'',subject:'',message:''}}
+      initialValues={{ name: name1,email:email1,mobile:mobile1,subject:'',message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -53,16 +68,17 @@ const Support=()=>{
                   enableOnAndroid={true} 
                   keyboardShouldPersistTaps='handled'
                   contentContainerStyle={{flex:1}}>
+                    {isFetching?<Loader/>:null}
                   <Text style={styles.better1}>How can we help you?</Text>
                     <Text style={styles.better}>Name</Text>
                       <View style={styles.drop}>
                         <TextInput
                           style={{color:colors.textColor}}
-                         placeholder='Jhon Mathew'
-                         placeholderTextColor={colors.heading1}
-                         onChangeText={handleChange('name')}
-                         onBlur={handleBlur('name')}
-                         value={values.name}
+                          placeholder='Jhon Mathew'
+                          placeholderTextColor={colors.heading1}
+                          onChangeText={handleChange('name')}
+                          onBlur={handleBlur('name')}
+                          value={values.name}
                         />
                     </View>
                     <View style={styles.error}>

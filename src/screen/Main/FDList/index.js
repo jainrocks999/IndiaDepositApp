@@ -10,17 +10,19 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import fontSize from '../../../component/fontSize';
 import RNPickerSelect from "react-native-picker-select";
 import Button from '../../../component/button1';
+import Toast from 'react-native-simple-toast';
+import Loader from '../../../component/loader';
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.FDList)
+        const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
-      
-        const [day, setDay] = useState('')
-        const [month, setMonth] = useState('')
-        const [year,setYear] = useState('')
-        const [amount,setAmount] = useState('')
+        const [day, setDay] = useState(route.params.days)
+        const [month, setMonth] = useState(route.params.month)
+        const [year,setYear] = useState(route.params.year)
+        const [amount,setAmount] = useState(route.params.amount)
         const [pincode,setPincode]=useState('')
         const [type, setType] = useState('')
       
@@ -32,6 +34,40 @@ const manageList=(item)=>{
     navigation:navigation
   })
   
+}
+const manageSearch=async()=>{
+  if(year==''){
+   Toast.show('Please select year')
+  }
+  else if(month==''){
+     Toast.show('Please select month')
+  }
+  else if(day==''){
+     Toast.show('Please select days')
+  }
+  else if(amount==''){
+     Toast.show('Please enter amount')
+  }
+  else if(pincode==''){
+     Toast.show('Please enter location')
+  }else{
+  dispatch({
+     type: 'FD_Search_Request',
+     url: 'fdlist',
+     year:year,
+     month:month,
+     days:day,
+     amount:amount,
+     location:pincode,
+     type1:type,
+     type2:'',
+     type3:'',
+     type4:'',
+     type5:'',
+     navigation:navigation
+   })
+   setVisible(false)
+}
 }
 const handleonPress=(id)=>{
   if(selectedData.length){
@@ -56,10 +92,12 @@ const renderItem=(item)=>{
                 <TouchableOpacity 
                     onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
                     onPress={()=>handleonPress(item.fixed_deposit_id)}
-                    style={[styles.card,{
+                    style={[styles.card,
+                      {
                       backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null,
-                      padding:13
-                      }]}>
+                      padding:13,backgroundColor:'white'
+                      }
+                      ]}>
                    <View style={styles.cardView}>
                       <Image
                        resizeMode='contain'
@@ -123,7 +161,7 @@ const renderItem=(item)=>{
       )
 }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,backgroundColor:colors.card}}>
               <Header
                     title={'FD LISTING'}
                     source={require('../../../assets/Images/arrow.png')}
@@ -131,10 +169,12 @@ const renderItem=(item)=>{
                     onPress={()=>navigation.goBack()}
                     onPress1={()=>navigation.navigate('CompareFD')}
                /> 
+                  {isFetching?<Loader/>:null}
                        <Dialog
-                          dialogStyle={{width:'94%',paddingHorizontal:10}}
+                          dialogStyle={{width:'94%'}}
                           visible={visible}
                           onTouchOutside={()=>setVisible(false)}
+                          onHardwareBackPress={()=>setVisible(false)}
                          >
                        <DialogContent >
                        <View >
@@ -161,6 +201,7 @@ const renderItem=(item)=>{
                                       style={styles.image4} 
                                       source={require('../../../assets/Image/down.png')}/>}
                                     />
+                                      <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
                                   </View>
                                </View>
                                <View style={styles.view53}>
@@ -179,6 +220,7 @@ const renderItem=(item)=>{
                                           style={styles.image4} 
                                           source={require('../../../assets/Image/down.png')}/>}
                                         />
+                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
                                      </View>
                                </View>
                                <View style={styles.view53}>
@@ -197,12 +239,13 @@ const renderItem=(item)=>{
                                            style={styles.image4} 
                                            source={require('../../../assets/Image/down.png')}/>}
                                        />
+                                         <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
                                      </View>
                                  </View>
                              </View>
                         </View>
                       </View>
-                      <View style={styles.view5}>
+                      <View style={{marginTop:23}}>
                            <View style={styles.view4}>
                                <Text style={[styles.text5,{fontWeight:'700'}]}>Amount</Text>
                            </View>
@@ -216,11 +259,11 @@ const renderItem=(item)=>{
                               />
                            </View>
                       </View>
-                      <View style={styles.view5}>
+                      <View style={{marginTop:24}}>
                           <View style={styles.view4}>
                               <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
                           </View>
-                          <View style={styles.view5}>
+                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28}}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                                 <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>
                           </View>
@@ -236,6 +279,7 @@ const renderItem=(item)=>{
                               value={pincode}
                               onChangeText={(val)=>setPincode(val)}
                               keyboardType='number-pad'
+                              maxLength={6}
                            />
                        </View>
                        <View style={{marginTop:26}}>
@@ -270,8 +314,15 @@ const renderItem=(item)=>{
               <View style={styles.list}>
                 <TouchableOpacity
                 onPress={()=>setVisible(true)}
-                style={{width:'100%',paddingHorizontal:15,paddingVertical:6}}>
-                  <View style={[styles.card,{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:10,paddingVertical:8}]}>
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
+                  <View style={[styles.card,{
+                    flexDirection:'row',
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    paddingHorizontal:10,
+                    paddingVertical:8,
+                    backgroundColor:'white'
+                    }]}>
                     <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Amount : ${route.params.amount}`}</Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:15}}>{`Tenure ${route.params.year} y ${route.params.month} m ${route.params.days}d`}</Text>

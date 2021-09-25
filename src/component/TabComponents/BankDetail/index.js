@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { View,Text,TouchableOpacity,FlatList, ScrollView,Image } from 'react-native';
+import { View,Text,TouchableOpacity,FlatList, ScrollView,Image,Alert } from 'react-native';
 import { useSelector,useDispatch } from "react-redux";
 import Loader from '../../../component/loader';
 import styles from "./styles";
@@ -10,12 +10,14 @@ import Storage from '../../AsyncStorage';
 import axios from "axios";
 import * as Root from '../../../navigator/rootNavigation';
 import colors from '../../colors';
+import Modal from "react-native-modal";
 const BankDetails=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.BankList)
     const isFetching=useSelector(state=>state.isFetching)
     const [visible, setVisible] = useState(false);
+    const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async()=>{
         const user_id=await AsyncStorage.getItem(Storage.user_id)
        
@@ -42,10 +44,12 @@ const BankDetails=()=>{
         )
    }
     const deletePost=async(item)=>{
+      console.log('this is user bank detail---------------------------------------',item.user_bank_id);
         const user_id=await AsyncStorage.getItem(Storage.user_id)
           try {
             const data = new FormData();
             data.append('user_bank_id',item.user_bank_id)
+           
             const response = await axios({
               method: 'POST',
               data,
@@ -62,15 +66,26 @@ const BankDetails=()=>{
                     url: 'userbanklist',
                     user_id
                   })
-            
-                Toast.show('Delete Successful')
             } 
           } catch (error) {
            throw error;
           }
     }
+    const renderModal=(item)=>{
+      Alert.alert(
+        "CONFIRM",
+        "Are you sure you want to delete Bank Details?",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => deletePost(item) }
+        ]
+      )
+    }
     const renderItem=(item)=>{
-      console.log('thisis i dffkkdfk',item.bank_logo);
         return(
             <View style={styles.cont}>
 
@@ -98,7 +113,8 @@ const BankDetails=()=>{
                      </View>
                      <View style={[styles.row,{marginTop:10,width:'50%'}]}>
                      <TouchableOpacity
-                     onPress={()=>deletePost(item)}
+                     onPress={()=>renderModal(item)
+                         }
                      style={styles.button}>
                           <Text style={styles.text}>
                               Delete
@@ -113,6 +129,7 @@ const BankDetails=()=>{
                           </TouchableOpacity>
                      </View>
                    </View>
+                  
             </View>
         )
   }

@@ -79,10 +79,9 @@ export default StyleSheet.create({
     input:
     {
         marginTop:-8,
-        borderBottomWidth:1.5,
-        borderColor:'#3D4785',
         height:40,
-        justifyContent:'center'
+        justifyContent:'center',
+      
     },
     input1:
     {

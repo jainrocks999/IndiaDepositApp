@@ -99,13 +99,13 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:5,
         borderRadius:6,
-        backgroundColor:colors.white,
+        // backgroundColor:colors.white,
         width:'100%'
     },
     cont:
     {
         paddingHorizontal:10,
-        paddingVertical:8
+        paddingVertical:5
     },
     row:
     {
