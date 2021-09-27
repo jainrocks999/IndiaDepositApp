@@ -37,7 +37,7 @@ const data2=selector.datavalue2[0]
                          <View style={{position:'absolute',bottom:15}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
-                                 <Text style={styles.invest}>{'INVEST NOW'}</Text>
+                                 <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
                                </TouchableOpacity>
                          </View>
                      </View> 
@@ -55,7 +55,7 @@ const data2=selector.datavalue2[0]
                          <View style={{position:'absolute',bottom:15}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
-                                 <Text style={styles.invest}>{'INVEST NOW'}</Text>
+                                 <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
                                </TouchableOpacity>
                          </View>
                      </View> 

@@ -1,5 +1,5 @@
 import React,{useEffect,useState}from 'react';
-import { View,Text,Image,ScrollView,TextInput,Share} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,Share, ToastAndroid} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
 import colors from '../../../component/colors';
 import Clipboard from '@react-native-clipboard/clipboard';
+import Toast from 'react-native-simple-toast';
 
 const Refferal=()=>{
     const navigation=useNavigation()
@@ -48,6 +49,7 @@ const share=async()=>{
 
    const copyToClipboard = () => {
     Clipboard.setString(code);
+    Toast.show('code copied')
   };
     return(
         <View style={styles.container}>
@@ -56,6 +58,7 @@ const share=async()=>{
                   title={'REFERRAL'}
                   onPress={()=>navigation.goBack()}
                />
+               <ScrollView>
                <View style={styles.pfile}> 
                    <Image 
                       source={require('../../../assets/Image/Invite-fd.png')}/>
@@ -80,20 +83,26 @@ const share=async()=>{
                              <View style={styles.round}>
                                <Text style={styles.text}>2</Text>
                              </View>
-                              {/* <Text>narend</Text> */}
+                             {/* <Text>{'Invites your\nfriends to\nsign up'}</Text> */}
                          </View>
                           <View style={styles.line1}></View>
                          <View>
                              <View style={styles.round}>
                                  <Text style={styles.text}>3</Text>
                              </View>
-                               {/* <Text>narend</Text> */}
+                             {/* <Text>{'Invites your\nfriends to\nsign up'}</Text> */}
                          </View>
+                     </View>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:0,paddingHorizontal:20}}>
+                     <Text style={styles.row}>{'Invites your\nfriends to\nsign up'}</Text>
+                     <Text style={styles.row}>{'Your friends\nget a product\nfrom us'}</Text>
+                     <Text style={styles.row}>{'You and your\nfriends get\nrewarded'}</Text>
                      </View>
                      <View style={styles.view4}>
                           <Text style={styles.text2}>ENTER REFERRAL CODE</Text>
                            <View style={styles.view5}>
                                    <TextInput
+                                   style={{color:'#000'}}
                                    value={code}
                                    placeholderTextColor={colors.heading1}
                                    editable={false}
@@ -109,6 +118,7 @@ const share=async()=>{
                      </View>
                      
              </View>
+             </ScrollView>
              <StatusBar/>
         </View>
     )

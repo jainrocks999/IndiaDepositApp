@@ -196,7 +196,7 @@ const renderItem=(item)=>{
             <TouchableOpacity 
              onPress={()=>compareFD()}
             style={styles.squareView}>
-                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Campare'}</Text>
+                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Compare'}</Text>
             </TouchableOpacity>:<View></View>
             }
            </View>
@@ -368,7 +368,9 @@ const renderItem=(item)=>{
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
                  />
-
+<Text>
+  naren
+</Text>
               </View>
          
           <StatusBar/>

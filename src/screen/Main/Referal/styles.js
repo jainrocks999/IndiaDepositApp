@@ -67,7 +67,8 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        width:'100%',paddingHorizontal:10
     },
     view4:
     {
@@ -86,6 +87,7 @@ export default StyleSheet.create({
         alignItems:'center',
         height:40,
         marginVertical:10,
+        backgroundColor:'#EDEDEB'
        
     },
     text1:
@@ -138,4 +140,7 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Normal',
         fontSize:fontSize.fourteen
     },
+    row:
+        {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Normal'}
+    
 })

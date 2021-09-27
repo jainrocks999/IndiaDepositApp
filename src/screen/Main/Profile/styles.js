@@ -92,7 +92,7 @@ export default StyleSheet.create({
     },
     title:{ 
     // fontSize:,
-        fontSize:fontSize.eleven,
+        fontSize:fontSize.ten,
         fontFamily:'Montserrat-SemiBold' 
     },
     modalView:
