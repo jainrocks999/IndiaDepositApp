@@ -53,7 +53,8 @@ const validateUser=async()=>{
         rating:rating,
         ans_key1:value,
         ans_key2:value1,
-        message:message
+        message:message,
+        navigation:navigation
     })
 }
 }

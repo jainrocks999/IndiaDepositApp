@@ -74,7 +74,7 @@ const Contact=({route})=>{
                         <Text style={styles.call}>CALL</Text>
                     </TouchableOpacity>
               </View>
-              <View style={[styles.view,{ marginTop:16}]}>
+              <View style={[styles.view,{ marginTop:12}]}>
                   <Text style={styles.num}>18110000000</Text>
                     <TouchableOpacity
                     onPress={()=>Linking.openURL(`tel:18110000000`)}
@@ -131,7 +131,7 @@ const Contact=({route})=>{
             <View style={styles.line}></View>
             <View style={styles.main}>
               <Text style={styles.toll}>GET IN TOUCH</Text>
-              <View style={{marginTop:20}}>
+              <View style={{marginTop:27}}>
               <View style={styles.input}>
                 <TextInput
                 
@@ -155,7 +155,7 @@ const Contact=({route})=>{
                 <Text style={styles.warn}>{errors.name}</Text>
                 }
               </View>
-              <View style={[styles.input,{marginTop:15}]}>
+              <View style={[styles.input,{marginTop:17}]}>
               <TextInput
                 ref={next1}
                 style={{color:colors.textColor}}
@@ -178,7 +178,7 @@ const Contact=({route})=>{
                 <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
-              <View style={[styles.input,{marginTop:15}]}>
+              <View style={[styles.input,{marginTop:17}]}>
               <TextInput
                 ref={next2}
                 style={{color:colors.textColor}}
@@ -203,7 +203,7 @@ const Contact=({route})=>{
                 <Text style={styles.warn}>{errors.mobile}</Text>
                 }
               </View>
-              <View style={[styles.input1,{marginTop:15}]}>
+              <View style={[styles.input1,{marginTop:17}]}>
               <TextInput
                 ref={next3}
                 style={{color:colors.textColor,width:'94%'}}
@@ -228,7 +228,7 @@ const Contact=({route})=>{
               </View>
               
              </View>
-              <View style={{marginBottom:30,marginTop:20}}>
+              <View style={{marginBottom:30,marginTop:18}}>
                 <Button
                 onPress={()=>handleSubmit()}
                 title='SUBMIT'

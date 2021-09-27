@@ -12,6 +12,8 @@ import RNPickerSelect from "react-native-picker-select";
 import Button from '../../../component/button1';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
+import Storage from "../../../component/AsyncStorage";
+import AsyncStorage from '@react-native-community/async-storage';
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -69,6 +71,25 @@ const manageSearch=async()=>{
    setVisible(false)
 }
 }
+const compareFD=async()=>{
+const user_id=await AsyncStorage.getItem(Storage.user_id)
+if(selectedData.length==2){
+  dispatch({
+    type: 'FD_Compare_Request',
+    url: 'fdcompare',
+    user_id,
+    value_id1:selectedData[0],
+    value_id2:selectedData[1],
+    navigation
+  })
+  setSelectedData([])
+}
+else{
+   
+}
+}
+
+
 const handleonPress=(id)=>{
   if(selectedData.length){
     handleSelectionMultiple(id)
@@ -86,6 +107,7 @@ const handleSelectionMultiple = (id) => {
     selectedIds.push(id)
     setSelectedData(selectedIds)
 }
+
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -94,11 +116,11 @@ const renderItem=(item)=>{
                     onPress={()=>handleonPress(item.fixed_deposit_id)}
                     style={[styles.card,
                       {
-                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc : null,
-                      padding:13,backgroundColor:'white'
+                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc :'#fff',
+                      padding:13,
                       }
                       ]}>
-                   <View style={styles.cardView}>
+                    <View style={styles.cardView}>  
                       <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
@@ -162,13 +184,23 @@ const renderItem=(item)=>{
 }
     return(
         <View style={{flex:1,backgroundColor:colors.card}}>
-              <Header
-                    title={'FD LISTING'}
-                    source={require('../../../assets/Images/arrow.png')}
-                    titleTwo={selectedData.length==2?'Campare':null}
-                    onPress={()=>navigation.goBack()}
-                    onPress1={()=>navigation.navigate('CompareFD')}
-               /> 
+           <View>
+            <View style={styles.mains}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Images/arrow.png')}/>
+            </TouchableOpacity>
+            <View style={styles.views}>
+            <Text style={styles.texts}>{'FD LISTING'} </Text>
+            </View>
+            {selectedData.length==2?
+            <TouchableOpacity 
+             onPress={()=>compareFD()}
+            style={styles.squareView}>
+                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Campare'}</Text>
+            </TouchableOpacity>:<View></View>
+            }
+           </View>
+        </View>   
                   {isFetching?<Loader/>:null}
                        <Dialog
                           dialogStyle={{width:'94%'}}

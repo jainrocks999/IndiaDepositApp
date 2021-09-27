@@ -46,7 +46,7 @@ export default StyleSheet.create({
     }, 
     better:{
         color:colors.textColor,
-        marginTop:10,
+        marginTop:15,
         fontSize:fontSize.fefteen,
         fontFamily:'Montserrat-Normal'
     },
@@ -66,13 +66,20 @@ export default StyleSheet.create({
 
     },
     drop1:{
-        marginTop:13 ,
+         marginTop:13 ,
+        // borderWidth:1,
+        // height:70,
+        // borderColor:colors.textColor,
+        // borderRadius:6,
+        // paddingHorizontal:5, 
+        // justifyContent:'flex-start'
         borderWidth:1,
-        height:70,
-        borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5, 
-        justifyContent:'flex-start'
+        borderColor:colors.textColor,
+        paddingHorizontal:10,
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+        flex:1
     },
     error:{
         width:'90%',

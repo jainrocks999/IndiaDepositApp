@@ -22,7 +22,9 @@ initialstate = {
   SBList:[],
   FDDetail:[],
   SBDetail:[],
-  Story:[]
+  Story:[],
+  FDCompareDetail:[],
+  SBCompareDetail:[]
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
@@ -250,7 +252,20 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false, SBDetail: action.payload };
   case 'SB_Detail_Error':
   return { ...state, isFetching: false };
+  
+  case 'FD_Compare_Request':
+    return { ...state, isFetching: true };
+  case 'FD_Compare_Success':
+    return { ...state, isFetching: false, FDCompareDetail: action.payload };
+  case 'FD_Compare_Error':
+  return { ...state, isFetching: false };
 
+  case 'SB_Compare_Request':
+    return { ...state, isFetching: true };
+  case 'SB_Compare_Success':
+    return { ...state, isFetching: false, SBCompareDetail: action.payload };
+  case 'SB_Compare_Error':
+  return { ...state, isFetching: false };
     default:
       return state;
   }

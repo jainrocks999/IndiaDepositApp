@@ -42,7 +42,8 @@ const Supports=({route})=>{
         email:values.email,
         mobile:values.mobile,
         subject:values.subject,
-        message:values.message
+        message:values.message,
+        navigation:navigation
     })
     }
   
@@ -137,7 +138,7 @@ const Supports=({route})=>{
                         <View style={styles.drop1}>
                         <TextInput
                           multiline = {true}
-                          style={{height:70,color:colors.textColor}}
+                          style={{color:colors.textColor}}
                           placeholder=''
                           placeholderTextColor={colors.heading1}
                           onChangeText={handleChange('message')}

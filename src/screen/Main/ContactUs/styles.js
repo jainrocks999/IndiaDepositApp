@@ -125,12 +125,19 @@ export default StyleSheet.create({
     },
     input1:
     {  
-        width:'100%',
-        height:100,
+        // width:'100%',
+        // height:100,
+        // borderWidth:1,
+        // borderRadius:6,
+        // borderColor:colors.textColor,
+        // paddingHorizontal:14,
         borderWidth:1,
         borderRadius:6,
         borderColor:colors.textColor,
         paddingHorizontal:14,
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+        flex:1
         
     },
     error:

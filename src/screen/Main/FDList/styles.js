@@ -149,4 +149,37 @@ export default StyleSheet.create({
         marginTop:15,
         marginBottom:20
     },
+    mains:{
+        width:'100%',
+        backgroundColor:colors.bc,
+        height:50,
+        alignItems:'center',
+        justifyContent:'space-between',
+        paddingHorizontal:16,
+        flexDirection:'row'
+    },
+    drawers:{
+        width:30,
+        height:30,
+        tintColor:'white'
+    },
+    texts:{
+        color:colors.white,
+        fontSize:fontSize.eighteen,
+        fontFamily:'Montserrat-SemiBold',
+        marginRight:10
+    },
+    views:{
+        marginLeft:15,
+    },
+    squareView:{
+        height:30,
+        borderWidth:1,
+        borderColor:'#ffffff',
+        borderRadius:6,
+        justifyContent:'center',
+        alignItems:'center',
+        paddingHorizontal:10,
+        backgroundColor:colors.white
+    }
 })

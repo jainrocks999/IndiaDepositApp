@@ -81,21 +81,12 @@ export default StyleSheet.create({
         fontSize:fontSize.eleven,
         fontFamily:'Montserrat-SemiBold'
     },
-    flatdata:
-    {
-        alignItems:'center',
-        justifyContent:'center',
-        flex:1
-    },
-    data1:
-    {
-        paddingHorizontal:20,
-        paddingVertical:20
-    },
-    Textview:
+    View:
     {
         paddingHorizontal:10,
-        paddingVertical:20
+        paddingVertical:20,
+        flexDirection:'row',justifyContent:'space-between',
+        backgroundColor:'#DDDDDD',
     },
     xtext:
     {
@@ -103,9 +94,15 @@ export default StyleSheet.create({
         marginTop:-5,
         fontSize:fontSize.twenty
     },
-    touch:
+    view2:
     {
-        position:'absolute',
-        bottom:15
+        // alignItems:'center',
+        // justifyContent:'center',
+        // flex:1
+    },
+    df:
+    {
+        paddingHorizontal:20,
+        paddingVertical:20
     },
 })

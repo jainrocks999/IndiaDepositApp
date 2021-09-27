@@ -41,8 +41,9 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         height:150,
         alignItems:'center',
-        width:160,
-        paddingVertical:10
+        width:'48%',
+        paddingVertical:10,
+        borderWidth:1
     },
     xview:
     {
@@ -64,7 +65,9 @@ export default StyleSheet.create({
     {
         marginTop:17,
         fontFamily:'Montserrat-SemiBold',
-        color:colors.textColor
+        color:colors.textColor,
+        width:'70%',
+        textAlign:'center'
     },
     button:
     {
@@ -84,7 +87,9 @@ export default StyleSheet.create({
     View:
     {
         paddingHorizontal:10,
-        paddingVertical:20
+        paddingVertical:20,
+        flexDirection:'row',justifyContent:'space-between',
+        backgroundColor:'#DDDDDD',
     },
     xtext:
     {
@@ -94,9 +99,9 @@ export default StyleSheet.create({
     },
     view2:
     {
-        alignItems:'center',
-        justifyContent:'center',
-        flex:1
+        // alignItems:'center',
+        // justifyContent:'center',
+        // flex:1
     },
     df:
     {

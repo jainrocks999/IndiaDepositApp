@@ -49,11 +49,6 @@ const styles=StyleSheet.create({
     },
     view:{
         marginLeft:15,
-       // flexDirection:'row',
-       // alignItems:'center',
-        //width:'50%',
-       // justifyContent:'space-between',
-        //paddingHorizontal:5
     },
     squareView:{
         height:30,

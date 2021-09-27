@@ -421,6 +421,9 @@ function* support(action) {
                 type: 'Support_Success',
               });       
               Toast.show(response.messages);
+              setTimeout(()=>
+              action.navigation.navigate('Main')
+              ,2000)
             } else {
               yield put({
                 type: 'Support_Error',
@@ -507,6 +510,9 @@ function* feedback(action) {
                 type: 'Feedback_Success',
               });       
               Toast.show(response.messages);
+              setTimeout(()=>
+                 action.navigation.navigate('Main')
+              ,2000)
             } else {
               yield put({
                 type: 'Feedback_Error',
@@ -1060,6 +1066,7 @@ function* SBSearch(action) {
               yield put({
                 type: 'SB_Search_Success',
                 payload: response.data,
+
               });  
                action.navigation.navigate('AccountList',{
                  balance:action.min_bal,
@@ -1081,6 +1088,66 @@ function* SBSearch(action) {
     }
 }
 
+
+function* FDCompare(action) {
+  console.log('this is working',action);
+  try{
+    const data = new FormData();
+      data.append('value_id1',action.value_id1)
+      data.append('value_id2',action.value_id2)
+      // data.append('user_id',action.user_id)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this is response value',response);
+            if (response.status==200) {
+              yield put({
+                type: 'FD_Compare_Success',
+                payload: response,
+
+              });  
+               action.navigation.navigate('CompareFD')
+            } else {
+              yield put({
+                type: 'FD_Compare_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'FD_Compare_Error',
+          });
+    }
+}
+
+function* SBCompare(action) {
+ 
+  try{
+    const data = new FormData();
+      data.append('value_id1',action.value_id1)
+      data.append('value_id2',action.value_id2)
+      // data.append('user_id',action.user_id)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this is response value',response);
+            if (response.status==200) {
+              yield put({
+                type: 'SB_Compare_Success',
+                payload: response,
+
+              });  
+               action.navigation.navigate('CompareSBAccount')
+            } else {
+              yield put({
+                type: 'SB_Compare_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'SB_Compare_Error',
+          });
+    }
+}
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_MLogin_Request', mLogin);
@@ -1117,5 +1184,7 @@ export default function* authSaga() {
   yield takeEvery('Get_Story_Request',getStory)
   yield takeEvery('FD_Search_Request',Search)
   yield takeEvery('SB_Search_Request',SBSearch)
+  yield takeEvery('FD_Compare_Request',FDCompare)
+  yield takeEvery('SB_Compare_Request',SBCompare)
 
 }

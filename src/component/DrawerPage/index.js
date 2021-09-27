@@ -80,6 +80,18 @@ const DrawerContent=({props})=> {
         })
          navigation.dispatch(DrawerActions.closeDrawer())
     }
+
+    const validateUser1=()=>{
+        navigation.navigate('Support',{
+            name,email,mobile
+        })
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+
+    const validateUser2=()=>{
+        navigation.navigate('Feedback')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
   
     return (
         <DrawerContentScrollView
@@ -254,9 +266,7 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Support',{
-                        name,email,mobile
-                    })}
+                    onPress={()=>validateUser1()}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
                             <View style={styles.view1}>
@@ -273,7 +283,7 @@ const DrawerContent=({props})=> {
                
 
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Feedback')}
+                    onPress={()=>validateUser2()}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
                             <View style={styles.view1}>

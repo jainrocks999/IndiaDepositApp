@@ -12,6 +12,8 @@ import RNPickerSelect from "react-native-picker-select";
 import Button from '../../../component/button1';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
+import AsyncStorage from "@react-native-community/async-storage";
+import Storage from '../../../component/AsyncStorage';
 const SBAccountList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -72,6 +74,26 @@ const handleSelectionMultiple = (id) => {
     selectedIds.push(id)
     setSelectedData(selectedIds)
 }
+
+const compareFD=async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  console.log('this is selected data',selectedData);
+  if(selectedData.length==2){
+    dispatch({
+      type: 'SB_Compare_Request',
+      url: 'sbcompare',
+      user_id,
+      value_id1:selectedData[0],
+      value_id2:selectedData[1],
+      navigation
+    })
+    setSelectedData([])
+  }
+  else{
+     
+  }
+  }
+  
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -79,9 +101,8 @@ const renderItem=(item)=>{
                     onLongPress={(val)=>handleSelectionMultiple(item.saving_account_id)}
                     onPress={()=>handleonPress(item.saving_account_id)}
                     style={[styles.card,{
-                      backgroundColor:selectedData.includes(item.saving_account_id) ? colors.bc : null,
+                      backgroundColor:selectedData.includes(item.saving_account_id) ? colors.bc :'#fff',
                       padding:13,
-                      backgroundColor:'white'
                       }]}>
                    <View style={styles.cardView}>
                       <Image
@@ -147,13 +168,23 @@ const renderItem=(item)=>{
 }
     return(
         <View style={{flex:1}}>
-              <Header
-                     title={'SB A/C LISTING'}
-                    source={require('../../../assets/Images/arrow.png')}
-                    titleTwo={selectedData.length==2?'Campare':null}
-                    onPress={()=>navigation.goBack()}
-                    onPress1={()=>navigation.navigate('CompareFD')}
-               /> 
+               <View>
+            <View style={styles.mains}>
+            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Images/arrow.png')}/>
+            </TouchableOpacity>
+            <View style={styles.views}>
+            <Text style={styles.texts}>{'SB A/C LISTING'} </Text>
+            </View>
+            {selectedData.length==2?
+            <TouchableOpacity 
+             onPress={()=>compareFD()}
+            style={styles.squareView}>
+                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Campare'}</Text>
+            </TouchableOpacity>:<View></View>
+            }
+           </View>
+        </View>   
                {isFetching?<Loader/>:null}
                        <Dialog
                           dialogStyle={{width:'94%',paddingHorizontal:10}}
