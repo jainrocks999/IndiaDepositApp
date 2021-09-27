@@ -1,5 +1,5 @@
 import React,{useEffect,useState}from 'react';
-import { View,Text,Image,ScrollView,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,Share} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -9,10 +9,12 @@ import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
 import colors from '../../../component/colors';
+import Clipboard from '@react-native-clipboard/clipboard';
+
 const Refferal=()=>{
     const navigation=useNavigation()
     const [code,setCode]=useState('')
-
+    const [copiedText, setCopiedText] = useState('');
 
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -37,6 +39,16 @@ useEffect(async()=>{
         
       }
 },[])
+const share=async()=>{
+    await Share.share({
+      message:
+       `Referal Code ${code} `
+    });
+  }
+
+   const copyToClipboard = () => {
+    Clipboard.setString(code);
+  };
     return(
         <View style={styles.container}>
               <Header
@@ -84,10 +96,13 @@ useEffect(async()=>{
                                    <TextInput
                                    value={code}
                                    placeholderTextColor={colors.heading1}
+                                   editable={false}
                                    />
-                         </View>
-                            <Text style={styles.text4}>TAP TO COPY</Text>
-                            <TouchableOpacity style={styles.touch}>
+                         </View>   
+                            <Text style={styles.text4}  onPress={()=>copyToClipboard()}>TAP TO COPY</Text>
+                            <TouchableOpacity style={styles.touch}
+                             onPress={()=>share()}
+                            >
                                   <Image source={require('../../../assets/Image/share.png')}/>
                                   <Text style={styles.text3}>REFER NOW</Text>
                              </TouchableOpacity>
