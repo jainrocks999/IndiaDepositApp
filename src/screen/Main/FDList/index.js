@@ -149,7 +149,40 @@ const renderItem=(item)=>{
                       <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
-                   <View style={[styles.row2,{width:'93%'}]}>
+                   <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,}}>
+
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.rate}</Text>
+                     <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
+                          <Text  style={styles.same}>{'Interest\n Rate'}</Text>
+                     </View>
+
+                     <View style={{alignItems:'center'}}>
+                       <Text style={styles.same}>{item.min_amount}</Text>
+                       <Image
+                         style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
+                     <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
+                     </View>
+
+                     <View style={{alignItems:'center'}}>
+                       <Text style={styles.same}>{item.loan}</Text>
+                       <Image 
+                        style={styles.image} 
+                       resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
+                     <Text  style={styles.same}>{'Loan'}</Text>
+                         </View>  
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.premature_penality}</Text>
+                     <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
+                     <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
+                     </View>
+                   </View>
+                   {/* <View style={[styles.row2,{width:'93%'}]}>
                        <Text style={styles.same}>{item.rate}</Text>
                        <Text style={styles.same}>{item.min_amount}</Text>
                        <Text style={styles.same}>{item.loan}</Text>
@@ -174,7 +207,7 @@ const renderItem=(item)=>{
                      <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
                      <Text  style={styles.same}>{'  Loan'}</Text>
                      <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
-                   </View>
+                   </View> */}
                  </TouchableOpacity>
           </View>
       )

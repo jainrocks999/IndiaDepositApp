@@ -66,7 +66,7 @@ export default StyleSheet.create({
         fontSize:fontSize.seventeen,
         color:colors.bc,
         marginBottom:15,
-        fontWeight:'700'
+        fontFamily:'Montserrat-SemiBold'
     },
     item1:
     {

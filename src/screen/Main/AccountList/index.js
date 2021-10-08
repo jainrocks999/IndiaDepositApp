@@ -132,7 +132,40 @@ const renderItem=(item)=>{
                       <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
-                   <View style={[styles.row2,{paddingRight:10}]}>
+                   <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7}}>
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.rate}</Text>
+                     <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
+                         <Text  style={styles.same}>{'Interest\n Rate'}</Text>
+                     </View>
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text>
+                     <Image
+                         style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/penalty.png')}/>
+                        <Text  style={styles.same}>{'Non Maintenance\nPenalty'}</Text>
+
+                     </View>
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.debit_card_amc_charges1}</Text>
+                     <Image 
+                        style={styles.image} 
+                       resizeMode='contain' source={require('../../../assets/Image/debit.png')}/>
+                      <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
+
+                     </View>
+                     <View style={{alignItems:'center'}}>
+                     <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
+                     <Image 
+                        style={styles.image}
+                        resizeMode='contain' source={require('../../../assets/Image/offer.png')}/>
+                       <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
+
+                     </View>
+                   </View>
+                   {/* <View style={[styles.row2,{paddingRight:10}]}>
                      <View style={[styles.width,{  alignItems:'flex-start'}]}>
                        <Text style={styles.same}>{item.rate}</Text>
                        </View>
@@ -181,7 +214,7 @@ const renderItem=(item)=>{
                      <View style={[styles.width,{ justifyContent:'flex-end'}]}>
                      <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
                      </View>
-                   </View>
+                   </View> */}
                  </TouchableOpacity>
           </View>
       )
