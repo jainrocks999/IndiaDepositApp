@@ -11,6 +11,7 @@ const navigation=useNavigation()
 const dispatch=useDispatch()
 const selector=useSelector(state=>state.FDDetail)
 const details=selector[0]
+console.log('this is userdetails',details);
 
     return(
         <View style={styles.container1}>
@@ -19,16 +20,17 @@ const details=selector[0]
                          source={require('../../../assets/Images/arrow.png')}
                          onPress={()=>navigation.goBack()}
                        /> 
-             <ScrollView>
-                 <View>
+                       <View>
                      <View style={styles.list}>
                          <Image  resizeMode='contain'
                        style={{height:20,width:80}}
-                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${details.bank_logo}`}}/>
-                         <Text onPress={()=>navigation.navigate('CompareFD')}style={styles.text}>{details.name}</Text>
-                         <Text style={styles.text1}>Fixed Deposit</Text>
+                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`}}/>
+                         <Text style={styles.text}>{details.type}</Text>
+                         {/* <Text style={styles.text1}>Fixed Deposit</Text> */}
                      </View>
                  </View>
+             <ScrollView>
+                 
                  <View style={styles.view1}>
                         <View style={styles.container}>
                               <View style={styles.view2}>
@@ -39,7 +41,7 @@ const details=selector[0]
                                   <Text style={styles.item1}>{`Principal Amount`}</Text>
                               </View>
                               <View style={styles.view2}>
-                                   <Text style={styles.item}>{`6%`}</Text>
+                                   <Text style={styles.item}>{details.rate}%</Text>
                                    <Text style={styles.item1}>{`Interest Rate`}</Text>
                              </View>
                               <View style={styles.view2}>
@@ -57,11 +59,11 @@ const details=selector[0]
                                      <Text style={styles.item1}>{`Date of Maturity`}</Text>
                                 </View>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Monthly`}</Text>
+                                     <Text style={styles.item}>{details.interest_payout}</Text>
                                      <Text style={styles.item1}>{`Interest Payout`}</Text>
                                 </View>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Bank Deposit`}</Text>
+                                     <Text style={styles.item}>{details.type}</Text>
                                      <Text style={[styles.item1,{textAlign:'center'}]}>{`FD Type`}</Text>
                                 </View>
                         </View>
@@ -70,26 +72,26 @@ const details=selector[0]
                    <View style={styles.view4}>
                           <View style={styles.container}>
                                   <View style={styles.view2}>
-                                       <Text style={styles.item}>{`10%`}</Text>
+                                       <Text style={styles.item}>{details.premature_penality}</Text>
                                        <Text style={[styles.item1,{textAlign:'center'}]}>{`Premature Penalty`}</Text>
                                  </View>
                                  <View style={styles.view2}>
-                                     <Text style={styles.item}>{`Yes`}</Text>
+                                     <Text style={styles.item}>{details.pan_required}</Text>
                                      <Text style={styles.item1}>{`Pan Requirement`}</Text>
                                  </View>
                                  <View style={styles.view2}>
-                                      <Text style={styles.item}>{`Yes`}</Text>
+                                      <Text style={styles.item}>{details.sb_ac_require}</Text>
                                      <Text style={[styles.item1,{textAlign:'center'}]}>{`Savings A/c Required`}</Text>
                                  </View>
                           </View>
                           <View style={styles.line}></View>
                           <View style={styles.container}>
                                  <View style={styles.view2}>
-                                      <Text style={styles.item}>{`8%`}</Text>
+                                      <Text style={styles.item}>{details.loan}</Text>
                                      <Text style={styles.item1}>{`Loan on  FD Rate`}</Text>
                                   </View>
                                   <View style={[styles.view2,{marginRight:165}]}>
-                                       <Text style={styles.item}>{`N/A`}</Text>
+                                       <Text style={styles.item}>{details.tds_limit}</Text>
                                        <Text style={styles.item1}>{`TDS`}</Text>
                                   </View>
                                  

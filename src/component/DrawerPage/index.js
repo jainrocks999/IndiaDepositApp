@@ -29,20 +29,26 @@ const DrawerContent=({props})=> {
     const [image,setImage]=useState('')
 
     useEffect(async()=>{
+        let user_id=await AsyncStorage.getItem(Storage.user_id)
+
+        dispatch({
+            type: 'User_Detail_Request',
+            url: 'profile',
+            user_id,
+             })
+        dispatch({
+            type: 'Contact_Detail_Request',
+            url: 'getpagecontent',
+            key:'contact',
+        })
         dispatch({
             type: 'Get_Faq_Request',
             url: 'getfaq',
         })
-        // dispatch({
-        //     type: 'Get_Blog_Request',
-        //     url: 'getpost',
-        //     post_category_id:1
-        // })
-        // dispatch({
-        //     type: 'Get_Story_Request',
-        //     url: 'getpost',
-        //     post_category_id:2
-        // })
+        dispatch({
+            type: 'State_List_Request',
+            url: 'statelist',
+          })
         
         let name=await AsyncStorage.getItem(Storage.name)
         let motherName=await AsyncStorage.getItem(Storage.motherName)
@@ -209,7 +215,7 @@ const DrawerContent=({props})=> {
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/newImage/about.png')}/>
                             </View>
-                            <Text style={styles.text}>{'About'}</Text>
+                            <Text style={styles.text}>{'About Us'}</Text>
                             </View>
                             <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>

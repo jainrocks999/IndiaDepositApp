@@ -31,11 +31,17 @@ export default StyleSheet.create({
     },
     view3:{
         paddingVertical:20,
-        marginBottom:50
+        marginBottom:20
     },
     better:{
         color:colors.textColor,
         marginTop:13,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-SemiBold',
+    },
+    better1:{
+        color:colors.textColor,
+        // marginTop:13,
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Normal',
     },
@@ -45,10 +51,11 @@ export default StyleSheet.create({
         height:40,
         borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5,
         justifyContent:'center',
         width:'100%',
         paddingHorizontal:10,
+        alignContent:'center'
+        // alignItems:'flex-start'
        
     }, 
     dropCal:{
@@ -68,7 +75,9 @@ export default StyleSheet.create({
     }, 
    
     input:{
-        color:colors.textColor
+        color:colors.textColor,
+        height:40
+    
     },
     image:{
         marginTop:16,

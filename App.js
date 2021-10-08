@@ -7,7 +7,8 @@ import Store from './src/Redux/Store';
 import RootApp from './src/navigator';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from './src/component/AsyncStorage';
-
+import * as RootNavigation from './src/navigator/rootNavigation';
+import PushNotificationIOS from "@react-native-community/push-notification-ios";
 
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
@@ -28,7 +29,6 @@ const App = () => {
       crashlytics().log('Analytics page just unmounted')
     }
   }, [])
-  PushNotification.requestPermissions() 
   PushNotification.configure({
     
     onRegister: function (token) {
@@ -43,6 +43,16 @@ const App = () => {
         title: notification.message,
         message: notification.title,
       });
+      if(notification.userInteraction===true && notification.foreground==false) {
+        RootNavigation.navigate('Splash')
+        AsyncStorage.setItem('value','1')
+      }
+      else{
+        if (notification.userInteraction==true && notification.foreground==true) {
+          RootNavigation.navigate('Main')
+        }
+      }
+      notification.finish(PushNotificationIOS.FetchResult.NoData);
     },
     onAction: function (notification) {
       console.log('ACTION:', notification.action);

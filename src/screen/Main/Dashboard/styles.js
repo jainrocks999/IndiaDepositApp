@@ -43,7 +43,7 @@ export default StyleSheet.create({
     },
     main:
     {
-       // height:200,
+       // height:250,
         width:'100%',
         backgroundColor:'#C4C4C4',
         justifyContent:'center',
@@ -93,7 +93,7 @@ export default StyleSheet.create({
         borderRadius:6,
         borderWidth:1,
         marginTop:6,
-        marginLeft:2,
+        marginLeft:5,
         alignItems:'center',
         justifyContent:'center'
     },

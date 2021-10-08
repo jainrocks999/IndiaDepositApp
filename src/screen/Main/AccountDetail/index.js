@@ -19,46 +19,47 @@ const details=selector[0]
           source={require('../../../assets/Image/arrow.png')}
           onPress={()=>navigation.goBack()}
          /> 
-           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20, marginBottom:10}}>
-             <View>
+         <View style={{marginTop:12}}>
                  <View style={styles.list}>
                  <Image  resizeMode='contain'
                        style={{height:20,width:80}}
-                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${details.bank_logo}`}}/>
-                     <Text  onPress={()=>navigation.navigate('CompareFD')} style={styles.Text1}>{details.bankname}</Text>
-                     <Text style={styles.Text2}>{details.name}</Text>
+            source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`}}/>
+                     <Text  onPress={()=>navigation.navigate('CompareFD')} style={styles.Text1}>{details.type}</Text>
+                     {/* <Text style={styles.Text2}>{details.type}</Text> */}
                  </View>
               </View>
+           <ScrollView style={{flex:1,paddingVertical:0,}}>
+             
              <View style={styles.card}>
                  <View style={styles.container}>
                       <View style={styles.undercard}>
-                          <Text style={styles.item}>{`6%`}</Text>
+                          <Text style={styles.item}>{`${details.rate}%`}</Text>
                           <Text style={styles.item1}>{`Interest Rate`}</Text>
                       </View>
                      <View style={styles.undercard}>
                            <View style={styles.rup}>
                                <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                <Text style={styles.item}>{`300`}</Text>
+                                <Text style={styles.item}>{details.non_maitenance_penalty_charges}</Text>
                           </View>
                           <Text style={styles.item1}>{`Non-Maintenance Penalty`}</Text>
                        </View>
                        <View style={styles.undercard}>
-                            <Text style={styles.item}>{`Yes`}</Text>
+                            <Text style={styles.item}>{details.locker_facility}</Text>
                             <Text style={styles.item1}>{`Locker Facility`}</Text>
                         </View>
                   </View>
                   <View style={styles.line}></View>
                    <View style={styles.container}>
                          <View style={styles.undercard}>
-                              <Text style={styles.item}>{`Yes`}</Text>
+                              <Text style={styles.item}>{details.joining_kit}</Text>
                               <Text style={styles.item1}>{`Joining Kit`}</Text>
                          </View>
                          <View style={styles.undercard}>
-                               <Text style={styles.item}>{`Yes`}</Text>
+                               <Text style={styles.item}>{details.net_banking_operation}</Text>
                                <Text style={styles.item1}>{`Net banking`}</Text>
                          </View>
                          <View style={styles.undercard}>
-                                <Text style={styles.item}>{`Yes`}</Text>
+                                <Text style={styles.item}>{details.phone_banking}</Text>
                                 <Text style={[styles.item1,{textAlign:'center'}]}>{`Phone Banking`}</Text>
                          </View>
                      </View>
@@ -69,7 +70,7 @@ const details=selector[0]
                           <View style={styles.undercard}>
                                 <View style={styles.rup}> 
                                   <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                   <Text style={styles.item}>{`1 Lakh`}</Text>
+                                   <Text style={styles.item}>{details.cash_withdrawal_limit}</Text>
                               </View> 
                              <Text style={[styles.item1,{textAlign:'center'}]}>{`Cash Withdrawal\nLimit`}</Text>
                            </View>
@@ -81,26 +82,26 @@ const details=selector[0]
                                   <Text style={styles.item1}>{`Cash Deposit limit`}</Text>
                             </View>
                             <View style={styles.undercard}>
-                                  <Text style={styles.item}>{`3`}</Text>
+                                  <Text style={styles.item}>{details.free_atm_transaction_homebank}</Text>
                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`Atm Free no of\nTransaction`}</Text>
                             </View>
                   </View>
                   <View style={styles.line}></View>
                     <View style={styles.container}>
                             <View style={styles.undercard}>
-                                  <Text style={styles.item}>{`Yes`}</Text>
+                                  <Text style={styles.item}>{details.pan_required}</Text>
                                   <Text style={styles.item1}>{`Pan requirement`}</Text>
                             </View>
                             <View style={styles.undercard}>
-                                 <Text style={styles.item}>{`15`}</Text>
+                                 <Text style={styles.item}>{details.atm_points}</Text>
                                  <Text style={styles.item1}>{`Bank Atm points`}</Text>
                            </View>
                             <View style={styles.undercard}>
                                    <View style={styles.rup}>
                                         <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                        <Text style={styles.item}>{`100`}</Text>
+                                        <Text style={styles.item}>{details.free_atm_transaction_homebank_charges}</Text>
                                     </View>
-                                   <Text style={styles.item1}>{`ATM transaction\ncharges`}</Text>
+                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`ATM transaction\ncharges`}</Text>
                              </View>
                     </View>
                     <View style={styles.line}></View>
@@ -108,9 +109,9 @@ const details=selector[0]
                            <View style={styles.undercard}>
                                  <View style={styles.rup}>
                                       <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> 
-                                       <Text style={styles.item}>{`150`}</Text>
+                                       <Text style={styles.item}>{details.free_atm_transaction_otherbank}</Text>
                                  </View>
-                               <Text style={styles.item1}>{`ATM Free transaction\nfrom other bank`}</Text>
+                               <Text style={[styles.item1,{textAlign:'center'}]}>{`ATM Free transaction\nfrom other bank`}</Text>
                          </View>
                      </View>
             </View>
@@ -192,9 +193,9 @@ const details=selector[0]
                  </Text>
          </View>
 
-            <View style={[styles.top,{marginBottom:20}]}>
+            <View style={[styles.top,{marginBottom:10}]}>
                  <Text style={styles.Text3}>Bank contact information :</Text>
-                  <Text style={styles.lorem}>
+                  <Text style={[styles.lorem,{marginBottom:20}]}>
                          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
                         magna aliqua. Ut enim ad minim veniam, quis nostrud
@@ -207,7 +208,7 @@ const details=selector[0]
             </View>
            
          </ScrollView>
-         <BottomTab/>
+         {/* <BottomTab/> */}
          <StatusBar/>
      </View>
        

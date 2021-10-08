@@ -27,10 +27,7 @@ const BankDetails=()=>{
             user_id
           })
     
-        dispatch({
-            type: 'Bank_Name_Request',
-            url: 'bankdetaillist',
-          })
+       
         dispatch({
             type: 'Bank_Detail_Request',
             url: 'bankdetaillist',
@@ -44,7 +41,6 @@ const BankDetails=()=>{
         )
    }
     const deletePost=async(item)=>{
-      console.log('this is user bank detail---------------------------------------',item.user_bank_id);
         const user_id=await AsyncStorage.getItem(Storage.user_id)
           try {
             const data = new FormData();
@@ -111,20 +107,20 @@ const BankDetails=()=>{
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Account Type : ${item.account_type}`}</Text>
                      </View>
-                     <View style={[styles.row,{marginTop:10,width:'50%'}]}>
+                     <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
                      <TouchableOpacity
                      onPress={()=>renderModal(item)
                          }
                      style={styles.button}>
                           <Text style={styles.text}>
-                              Delete
+                              DELETE
                           </Text>
                           </TouchableOpacity>
                           <TouchableOpacity
                           onPress={()=>editPost(item)}
-                           style={styles.button}>
+                           style={[styles.button,{marginLeft:10}]}>
                           <Text style={styles.text}>
-                              Edit
+                              EDIT
                           </Text>
                           </TouchableOpacity>
                      </View>
@@ -145,9 +141,11 @@ const BankDetails=()=>{
                    style={{width:'100%',marginBottom:10,marginTop:5}}
                  />
               <View style={{justifyContent:'center',alignItems:'center',flex:1,marginBottom:40,marginTop:20}}>
-                  <TouchableOpacity style={{backgroundColor:colors.bc,paddingHorizontal:15,paddingVertical:6,borderRadius:10}}>
-              <Text onPress={()=>Root.replace('AddBank')} 
-              style={{fontSize:fontSize.fourteen,color:colors.white}}>Add Bank</Text>
+                  <TouchableOpacity
+                  onPress={()=>Root.replace('AddBank')}
+                  style={{backgroundColor:colors.bc,paddingHorizontal:15,paddingVertical:6,borderRadius:10}}>
+              <Text  
+              style={{fontSize:fontSize.fourteen,color:colors.white}}>ADD BANK</Text>
               </TouchableOpacity>
               </View>
               </View>

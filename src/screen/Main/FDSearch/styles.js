@@ -28,7 +28,7 @@ export default StyleSheet.create({
     },
     view3:
     {
-        width:'27%'
+        width:'29%'
     },
     view4:
     {
@@ -145,7 +145,7 @@ export default StyleSheet.create({
     image:
     {
         marginTop:16,
-        marginRight:0,
+        marginRight:-5,
         height:7,
         width:20,
     },

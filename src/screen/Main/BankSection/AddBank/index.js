@@ -72,8 +72,8 @@ const addUser=async(values)=>{
       >
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
-            <Header
-                    title={'Add Bank    '}
+                 <Header
+                    title={'ADD BANK    '}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
@@ -172,7 +172,7 @@ const addUser=async(values)=>{
                   
                     <View style={{marginTop:20}}>
                     <CustomButton
-                    title='Add'
+                    title='ADD'
                     onPress={()=> handleSubmit()}
                     />
                   </View>

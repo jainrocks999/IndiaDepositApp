@@ -34,6 +34,19 @@ import { useDispatch } from 'react-redux';
                 AsyncStorage.setItem(Storage.dob,response.data.dob)
                 AsyncStorage.setItem(Storage.gender,response.data.gender),
                 AsyncStorage.setItem(Storage.mobile,response.data.mobile),
+                AsyncStorage.setItem(Storage.pan,response.data.pan),
+                AsyncStorage.setItem(Storage.address1,response.data.address1),
+                AsyncStorage.setItem(Storage.address2,response.data.address2),
+                AsyncStorage.setItem(Storage.occupation,response.data.occupation),
+                AsyncStorage.setItem(Storage.pincode,response.data.pincode),
+                AsyncStorage.setItem(Storage.country,response.data.country),
+                AsyncStorage.setItem(Storage.state,response.data.state),
+                AsyncStorage.setItem(Storage.city,response.data.city),
+                AsyncStorage.setItem(Storage.income_group,response.data.income_group),
+                AsyncStorage.setItem(Storage.education,response.data.education),
+                AsyncStorage.setItem(Storage.marital,response.data.marital_status),
+                AsyncStorage.setItem(Storage.residential,response.data.residential_status),
+
                 
 
                   Toast.show(response.messages);
@@ -79,7 +92,20 @@ import { useDispatch } from 'react-redux';
                         mother_maiden_name:response.data.data.mother_maiden_name,
                         dob:response.data.data.dob,
                         gender:response.data.data.gender,
-                        user_id:response.data.data.user_id
+                        user_id:response.data.data.user_id,
+
+                        pan:response.data.data.pan,
+                        address1:response.data.data.address1,
+                        address2:response.data.data.address2,
+                        occupation:response.data.data.occupation,
+                        pincode:response.data.data.pincode,
+                        country:response.data.data.country,
+                        state:response.data.data.state,
+                        city:response.data.data.city,
+                        income_group:response.data.data.income_group,
+                        marital_status:response.data.data.marital_status,
+                        residential_status:response.data.data.residential_status,
+                        education:response.data.data.education,
                         }
                       ) 
                 } else {
@@ -187,6 +213,18 @@ import { useDispatch } from 'react-redux';
                     mother_maiden_name:response.data[0].mother_maiden_name,
                     dob:response.data[0].dob,
                     gender:response.data[0].gender,
+                        pan:response.data[0].pan,
+                        address1:response.data[0].address1,
+                        address2:response.data[0].address2,
+                        occupation:response.data[0].occupation,
+                        pincode:response.data[0].pincode,
+                        country:response.data[0].country,
+                        state:response.data[0].state,
+                        city:response.data[0].city,
+                        income_group:response.data[0].income_group,
+                        marital_status:response.data[0].marital_status,
+                        residential_status:response.data[0].residential_status,
+                        education:response.data[0].education,
                   }
                     )
                   }
@@ -232,7 +270,20 @@ function* logout(action) {
                 AsyncStorage.setItem(Storage.dob,'')
                 AsyncStorage.setItem(Storage.gender,'')
                 AsyncStorage.setItem(Storage.mobile,'')
-                
+                AsyncStorage.setItem(Storage.pan,''),
+                AsyncStorage.setItem(Storage.address1,''),
+                AsyncStorage.setItem(Storage.address2,''),
+                AsyncStorage.setItem(Storage.occupation,''),
+                AsyncStorage.setItem(Storage.pincode,''),
+                AsyncStorage.setItem(Storage.country,''),
+                AsyncStorage.setItem(Storage.state,''),
+                AsyncStorage.setItem(Storage.city,''),
+                AsyncStorage.setItem(Storage.income_group,''),
+                AsyncStorage.setItem(Storage.education,''),
+                AsyncStorage.setItem(Storage.marital,''),
+                AsyncStorage.setItem(Storage.residential,'')
+                AsyncStorage.setItem(Storage.stateId,''),
+                AsyncStorage.setItem(Storage.cityId,'')
             } else {
               Toast.show(response.messages);
               yield put({
@@ -268,6 +319,29 @@ function* aboutus(action) {
               type: 'About_Us_Error',
             });
       }
+}
+
+function* contacts(action) {
+  try{
+    const data = new FormData();
+      data.append('key',action.key)
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Contact_Detail_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Contact_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Contact_Detail_Error',
+          });
+    }
 }
 function* faq(action) {
   try{
@@ -572,10 +646,25 @@ function* editProfile(action) {
       data.append('dob',action.dob)
       data.append('gender',action.gender)
       data.append('father_spouse_name',action.father_spouse_name)
+
       data.append('mother_maiden_name',action.mother_maiden_name)
-     
+      data.append('pan',action.pan)
+      data.append('mobile',action.mobile)
+      data.append('address1',action.address1)
+      data.append('address2',action.address2)
+      data.append('occupation',action.occupation)
+      data.append('pincode',action.pincode)
+      data.append('country',action.country)
+      data.append('state',action.state)
+      data.append('city',action.city)
+      data.append('income_group',action.income_group)
+      data.append('education',action.education)
+      data.append('marital_status',action.marital_status)
+      data.append('residential_status',action.residential_status)
+
+      
         const response =yield call(Api.fetchDataByPOST, action.url, data);
-        console.log(response,'resfggdfghgf')
+        console.log('this is responce value -dssfdf-------sdf------------------------------------=============================================================================================================================================================',response);
             if (response.status==200) {
               yield put({
                 type: 'Edit_Profile_Success',
@@ -588,9 +677,27 @@ function* editProfile(action) {
                 AsyncStorage.setItem(Storage.dob,response.data[0].dob)
                 AsyncStorage.setItem(Storage.gender,response.data[0].gender)
                 AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
+
+                AsyncStorage.setItem(Storage.pan,response.data[0].pan),
+                AsyncStorage.setItem(Storage.address1,response.data[0].address1),
+                AsyncStorage.setItem(Storage.address2,response.data[0].address2),
+                AsyncStorage.setItem(Storage.occupation,response.data[0].occupation),
+                AsyncStorage.setItem(Storage.pincode,response.data[0].pincode),
+                AsyncStorage.setItem(Storage.country,response.data[0].country_name),
+                AsyncStorage.setItem(Storage.state,response.data[0].state_name),
+                AsyncStorage.setItem(Storage.city,response.data[0].city_name),
+                AsyncStorage.setItem(Storage.stateId,response.data[0].state),
+                AsyncStorage.setItem(Storage.cityId,response.data[0].city),
+
+                AsyncStorage.setItem(Storage.income_group,response.data[0].income_group),
+                AsyncStorage.setItem(Storage.education,response.data[0].education),
+                AsyncStorage.setItem(Storage.marital,response.data[0].marital_status),
+                AsyncStorage.setItem(Storage.residential,response.data[0].residential_status),
                 Toast.show(response.messages);  
                 action.navigation.replace('Profile')
             } else {
+              console.log('this is working narendra herer======');
+
               yield put({
                 type: 'Edit_Profile_Error',
               });
@@ -598,6 +705,7 @@ function* editProfile(action) {
             }
           }
   catch(error){
+    console.log('this is working narendra herer');
       yield put({
             type: 'Edit_Profile_Error',
           });
@@ -643,6 +751,29 @@ function* getBlog(action) {
   catch(error){
       yield put({
             type: 'Get_Blog_Error',
+          });
+    }
+}
+
+function* userDetails(action) {
+  try{
+    const data = new FormData();
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'User_Detail_Success',
+                payload: response.data,
+              });      
+            } else {
+              yield put({
+                type: 'User_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'User_Detail_Error',
           });
     }
 }
@@ -958,23 +1089,56 @@ function* stateList(action) {
     }
 }
 
-function* Search(action) {
-  console.log('this is working',action);
+function* cityList(action) {
   try{
     const data = new FormData();
-      data.append('year',action.year)
-      data.append('month',action.month)
-      data.append('days',action.days)
-      data.append('amount',action.amount)
-      data.append('location',action.location)
-      data.append('type1',action.type1)
-      data.append('type2',action.type2)
-      data.append('type3',action.type3)
-      data.append('type4',action.type4)
-      data.append('type5',action.type5)
+          data.append('state_id',action.state_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+        console.log('this isi fdkljadfklsdjflkadjflskdaadjkfhjhdfkjasdhfdjknkjyfnnjlkdsdyuweyihdskjfhaiuryeuiwfhjkdahsfdklyweiualfhcuidayrseufhalsfadsuriyeiluwafhdosauryoefhiadyeyruidhsdiuyeiafhdsuaifyriewuafhdsauyfeiouwafhidfha-=========================================================================',response);
+            if (response.status==200) {
+              yield put({
+                type: 'City_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              Toast.show(response.messages)
+              yield put({
+                type: 'City_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'City_List_Error',
+          });
+    }
+}
 
+function* Search(action) {
+  try{
+          const data = new FormData();
+            data.append('year',action.year)
+            data.append('month',action.month)
+            data.append('days',action.days)
+            data.append('amount',action.amount)
+            data.append('location',action.location)
+            data.append('type1',JSON.stringify(action.type1))
+
+            data.append('bank_id',JSON.stringify(action.bank_id))
+            data.append('interest_rate',action.interest_rate)
+            data.append('nationalized',action.nationalized)
+            data.append('sb_account_required',action.sb_account_required)
+            data.append('offer',action.offer)
+            data.append('gender',action.gender)
+            data.append('interest_payout',action.interest_payout)
+            data.append('premature_penalty',action.premature_penalty)
+            data.append('loan',action.loan)
+            // data.append('type2',action.type2)
+            // data.append('type3',action.type3)
+            // data.append('type4',action.type4)
+            // data.append('type5',action.type5)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
-            console.log('this is response value',response);
+            console.log('this is user response',response);
             if (response.status==200) {
               yield put({
                 type: 'FD_Search_Success',
@@ -984,17 +1148,19 @@ function* Search(action) {
                  amount:action.amount,
                  days:action.days,
                  year:action.year,
-                 month:action.month
+                 month:action.month,
+                 location:action.location,
+                 type1:action.type1,
                })     
             } else {
-              Toast.show('hiu')
+              Toast.show(response.messages)
               yield put({
                 type: 'FD_Search_Error',
               });
             }
           }
   catch(error){
-   Toast.show('hi')
+  Toast.show('hi')
       yield put({
             type: 'FD_Search_Error',
           });
@@ -1054,11 +1220,17 @@ function* SBSearch(action) {
     const data = new FormData();
       data.append('min_bal',action.min_bal)
       data.append('location',action.location)
-      data.append('type1',action.type1)
-      data.append('type2',action.type2)
-      data.append('type3',action.type3)
-      data.append('type4',action.type4)
-      data.append('type5',action.type5)
+      data.append('type1',JSON.stringify(action.type1))
+      data.append('bank_id',JSON.stringify(action.bank_id))
+      data.append('interest_rate',action.interest_rate)
+      data.append('nationalized',action.nationalized)
+      data.append('offer',action.offer)
+      data.append('private/public',action.private)
+      data.append('insurance',action.insurance)
+      data.append('account_type',action.account_type)
+      data.append('account_sub_type',action.account_sub_type)
+      data.append('non_maintenance_penalty',action.non_maintenance_penalty)
+      data.append('debit_card_amc',action.debit_card_amc)
 
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
@@ -1071,17 +1243,17 @@ function* SBSearch(action) {
                action.navigation.navigate('AccountList',{
                  balance:action.min_bal,
                  location:action.location,
-                 type1:action.type1
+                 type1:action.type1,
                })     
             } else {
-              Toast.show('hiu')
+              Toast.show(response.messages)
               yield put({
                 type: 'SB_Search_Error',
               });
             }
           }
   catch(error){
-   Toast.show('hi')
+  //  Toast.show('hi')
       yield put({
             type: 'SB_Search_Error',
           });
@@ -1104,8 +1276,8 @@ function* FDCompare(action) {
                 type: 'FD_Compare_Success',
                 payload: response,
 
-              });  
-               action.navigation.navigate('CompareFD')
+              });  Toast.show(response.messages)
+             action.navigation.navigate('CompareFD')
             } else {
               yield put({
                 type: 'FD_Compare_Error',
@@ -1150,12 +1322,14 @@ function* SBCompare(action) {
 }
 export default function* authSaga() {
   yield takeEvery('User_Login_Request', doLogin);
+  yield takeEvery('User_Detail_Request',userDetails)
   yield takeEvery('User_MLogin_Request', mLogin);
   yield takeEvery('User_Register_Request', doRegister);
   yield takeEvery('Forget_Password_Request', forgotpasword);
   yield takeEvery('Change_Password_Request', changepassword);
   yield takeEvery('User_Logout_Request', logout);
   yield takeEvery('About_Us_Request',aboutus)
+  yield takeEvery('Contact_Detail_Request',contacts)
   yield takeEvery('Faq_Request',faq)
   yield takeEvery('Privacy_Request',privacy)
   yield takeEvery('Security_Request',security)
@@ -1179,6 +1353,7 @@ export default function* authSaga() {
   yield takeEvery('Edit_Nominee_Request',editNominee)
   yield takeEvery('Country_List_Request',countryList)
   yield takeEvery('State_List_Request',stateList)
+  yield takeEvery('City_List_Request',cityList)
   yield takeEvery('FD_Detail_Request',FDDetail)
   yield takeEvery('SB_Detail_Request',SBDetail)
   yield takeEvery('Get_Story_Request',getStory)

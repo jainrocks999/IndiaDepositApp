@@ -1,5 +1,5 @@
 import React,{useState}from 'react';
-import { View,Text,Image,ScrollView,TouchableOpacity} from 'react-native';
+import { View,Text,Image,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -19,7 +19,7 @@ const SBAccount=({route})=>{
     const [location,setLocation]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-    console.log('this is narendra here',route.params);
+    console.log('this is user value',route.params);
     const manageSearch=async()=>{ 
       if(balance==''){
          Toast.show('Please enter minimum balance')
@@ -29,14 +29,20 @@ const SBAccount=({route})=>{
       }else{
       dispatch({
          type: 'SB_Search_Request',
-         url: 'sblist',
+         url: 'sblist1',
          min_bal:balance,
          location:location,
          type1:route.params.type1,
-         type2:route.params.type2,
-         type3:route.params.type3,
-         type4:route.params.type4,
-         type5:route.params.type5,
+         bank_id:'',
+         interest_rate:'',
+         nationalized:'',
+         offer:'',
+         insurance:'',
+         account_type:'',
+         account_sub_type:'',
+         non_maintenance_penalty:'',
+         debit_card_amc:'',
+         private:'',
          navigation:navigation
        })
     }

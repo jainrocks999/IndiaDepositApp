@@ -14,6 +14,8 @@ import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
+import MultiSelect from 'react-native-multiple-select';
+
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -25,9 +27,12 @@ const FDList=({route})=>{
         const [month, setMonth] = useState(route.params.month)
         const [year,setYear] = useState(route.params.year)
         const [amount,setAmount] = useState(route.params.amount)
-        const [pincode,setPincode]=useState('')
-        const [type, setType] = useState('')
-      
+        const [pincode,setPincode]=useState(route.params.location)
+        const [selected,setSelected]=useState(route.params.type1)
+        const [sort,setSort]=useState('Alphabetical')
+console.log('thisi sis selected',selected);
+     console.log('fdasfjkladsjfakldjfskldafjkldjs',route.params);
+
 const manageList=(item)=>{
   dispatch({
     type: 'FD_Detail_Request',
@@ -38,42 +43,56 @@ const manageList=(item)=>{
   
 }
 const manageSearch=async()=>{
-  if(year==''){
-   Toast.show('Please select year')
-  }
-  else if(month==''){
-     Toast.show('Please select month')
-  }
-  else if(day==''){
-     Toast.show('Please select days')
-  }
+if(year==0 && month==0 && day==0){
+    Toast.show('Tenure should be more than 7 days')
+ }
+ else if(year==0 && month==0 && day<7){
+    Toast.show('Tenure should be more than 7 days')
+ }
   else if(amount==''){
      Toast.show('Please enter amount')
   }
   else if(pincode==''){
      Toast.show('Please enter location')
-  }else{
+  }
+   
+  else{
   dispatch({
      type: 'FD_Search_Request',
-     url: 'fdlist',
+     url: 'fdlist1',
      year:year,
      month:month,
      days:day,
      amount:amount,
      location:pincode,
-     type1:type,
-     type2:'',
-     type3:'',
-     type4:'',
-     type5:'',
+     type1:selected,
+     bank_id:'',
+     interest_rate:'',
+     nationalized:'',
+     sb_account_required:'',
+     offer:'',
+     gender:'',
+     interest_payout:'',
+     premature_penalty:'',
+     oan:'',
      navigation:navigation
    })
    setVisible(false)
+  //  setSelected([])
 }
 }
 const compareFD=async()=>{
 const user_id=await AsyncStorage.getItem(Storage.user_id)
-if(selectedData.length==2){
+if(selectedData.length==0){
+Toast.show('Please select FD for Compare')
+}
+else if(selectedData.length==1){
+  Toast.show('Please select one more FD')
+}
+else if(selectedData.length>2)(
+  Toast.show('Please select only two FD')
+)
+else{
   dispatch({
     type: 'FD_Compare_Request',
     url: 'fdcompare',
@@ -82,10 +101,7 @@ if(selectedData.length==2){
     value_id2:selectedData[1],
     navigation
   })
-  setSelectedData([])
-}
-else{
-   
+  // setSelectedData([])
 }
 }
 
@@ -108,6 +124,11 @@ const handleSelectionMultiple = (id) => {
     setSelectedData(selectedIds)
 }
 
+
+const openDialog=()=>{
+  setVisible(true)
+  // setSelected([])
+}
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -116,7 +137,7 @@ const renderItem=(item)=>{
                     onPress={()=>handleonPress(item.fixed_deposit_id)}
                     style={[styles.card,
                       {
-                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? colors.bc :'#fff',
+                      backgroundColor:selectedData.includes(item.fixed_deposit_id) ? '#c9c9f0' :'#fff',
                       padding:13,
                       }
                       ]}>
@@ -128,55 +149,31 @@ const renderItem=(item)=>{
                       <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
-                   <View style={[styles.row2,{paddingRight:10}]}>
-                     <View style={styles.width}>
+                   <View style={[styles.row2,{width:'93%'}]}>
                        <Text style={styles.same}>{item.rate}</Text>
-                       </View>
-                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.min_amount}</Text>
-                       </View>
-                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.loan}</Text>
-                       </View>
-                       <View  style={styles.width}>
                        <Text style={styles.same}>{item.premature_penality}</Text>
-                       </View>
                    </View>
-                   <View style={[styles.row2,{marginTop:0}]}>
-                   <View  style={styles.width}>
+                   <View style={[styles.row2,{width:'96%'}]}>
                        <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
-                        </View>
-                        <View  style={styles.width}>
                        <Image
                          style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
-                      </View>
-                      <View  style={styles.width}>
                        <Image 
                         style={styles.image} 
                        resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
-                      </View>
-                      <View  style={styles.width}>
                        <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
-                        </View>
                    </View>
                    <View style={styles.row1}>
-                   <View  style={styles.width}>
                      <Text  style={styles.same}>{'Interest\n Rate'}</Text>
-                     </View>
-                     <View  style={styles.width}>
                      <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
-                     </View>
-                     <View  style={styles.width}>
-                     <Text  style={styles.same}>{'Loan'}</Text>
-                     </View>
-                     <View  style={styles.width}>
+                     <Text  style={styles.same}>{'  Loan'}</Text>
                      <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
-                     </View>
                    </View>
                  </TouchableOpacity>
           </View>
@@ -192,13 +189,7 @@ const renderItem=(item)=>{
             <View style={styles.views}>
             <Text style={styles.texts}>{'FD LISTING'} </Text>
             </View>
-            {selectedData.length==2?
-            <TouchableOpacity 
-             onPress={()=>compareFD()}
-            style={styles.squareView}>
-                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Compare'}</Text>
-            </TouchableOpacity>:<View></View>
-            }
+            <View></View>
            </View>
         </View>   
                   {isFetching?<Loader/>:null}
@@ -211,8 +202,8 @@ const renderItem=(item)=>{
                        <DialogContent >
                        <View >
                   < View style={styles.view5}>
-                     
-                     <View  style={{marginTop:29}}>
+                     <Text style={{marginTop:10,color:colors.bc}}>Modify your search</Text>
+                     <View  style={{marginTop:10,}}>
                         <Text style={[styles.text5,{fontWeight:'700'}]}>Tenure</Text>
                      </View>
                      <View style={styles.view5}>
@@ -281,15 +272,17 @@ const renderItem=(item)=>{
                            <View style={styles.view4}>
                                <Text style={[styles.text5,{fontWeight:'700'}]}>Amount</Text>
                            </View>
-                           <View style={{marginTop:-10}}>
+                           <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
+                             <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:-10}}
+                                 style={{width:'90%'}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
                                  onChangeText={(val)=>setAmount(val)}
                               />
                            </View>
+                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:-10}}/>
                       </View>
                       <View style={{marginTop:24}}>
                           <View style={styles.view4}>
@@ -314,23 +307,45 @@ const renderItem=(item)=>{
                               maxLength={6}
                            />
                        </View>
-                       <View style={{marginTop:26}}>
-                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
-                           <RNPickerSelect
-                                           onValueChange={(val)=>setType(val)}
-                                           items={SBType}
-                                           style={{ 
-                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
-                                           placeholder:{color:colors.heading1,fontSize:fontSize.twelve}
-                                           }}
-                                           value={type}
-                                           useNativeAndroidPickerStyle={false}
-                                           placeholder={{ label: "Select SB A/C", value: null }}
-                                           Icon={()=><Image 
-                                           style={{width:24,height:24,marginTop:5}} 
-                                           source={require('../../../assets/Image/down.png')}/>}
-                                       />
-                           <View style={{borderWidth:1,marginTop:-10,borderColor:'#3D4785',}}></View>
+                       <View style={{marginTop:16}}>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of FD</Text>
+                           <MultiSelect     
+                                items={item}
+                                uniqueKey="name"
+                                onSelectedItemsChange={(val)=>setSelected(val)}
+                                selectedItems={selected}
+                                searchIcon={false}
+                                tagBorderColor={colors.bc}
+                                tagRemoveIconColor={'#fff'}
+                                tagTextColor={'#fff'}
+                                selectText={selected.length>0?'':"Select FD"}
+                                // selectedItems
+                                // styleSelectorContainer={{marginTop:100}}
+                                // searchInputPlaceholderText="Select FD"
+                                onChangeInput={ (text)=> console.log(text)}
+                                selectedItemTextColor={colors.bc}
+                                selectedItemIconColor={colors.bc}
+                                itemTextColor={colors.textColor}
+                                displayKey="name"
+                                submitButtonColor={colors.bc}
+                                submitButtonText="Submit"
+                                textInputProps={{ editable: false,autoFocus:false, }}
+                                searchInputPlaceholderText=""
+                                searchIcon={false}
+                                
+                                styleDropdownMenu={{
+                                  width:'100%',
+                                  borderBottomWidth:1.5,
+                                  borderColor:colors.bc,
+                                  height:55,
+                                  alignSelf:'center',
+                                  // paddingBottom:-10,
+                                  flexDirection:'row',
+                                 // marginTop:-10
+                               
+                                }}
+                                tagContainerStyle={{backgroundColor:colors.bc}}
+                              />
                        </View>
                        <View style={styles.view8}>
                             <Button
@@ -345,7 +360,7 @@ const renderItem=(item)=>{
                       </Dialog>
               <View style={styles.list}>
                 <TouchableOpacity
-                onPress={()=>setVisible(true)}
+                onPress={()=>openDialog()}
                 style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
                   <View style={[styles.card,{
                     flexDirection:'row',
@@ -355,9 +370,17 @@ const renderItem=(item)=>{
                     paddingVertical:8,
                     backgroundColor:'white'
                     }]}>
-                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Amount : ${route.params.amount}`}</Text>
+                    <Text style={{
+                      fontFamily:'Montserrat-Normal',
+                      color:colors.bc,fontSize:14}}>{`Amount : `}
+                      <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
+                      {`${route.params.amount}`}
+                      </Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:15}}>{`Tenure ${route.params.year} y ${route.params.month} m ${route.params.days}d`}</Text>
+                        <Text style={{
+                          fontFamily:'Montserrat-Normal',
+                          color:colors.bc,fontSize:14,marginRight:15}}>
+                            {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>
                   </View>
@@ -368,9 +391,66 @@ const renderItem=(item)=>{
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
                  />
-<Text>
-  naren
-</Text>
+                 <View style={{
+                   width:'100%',
+                   bottom:20,
+                   flexDirection:'row',
+                   justifyContent:'space-between',
+                   paddingHorizontal:20,
+                   alignItems:'center'
+                   }}>
+                 <TouchableOpacity
+                  onPress={()=>compareFD()}
+                 style={{
+                  paddingHorizontal:20,
+                   paddingVertical:9,
+                   backgroundColor:'#fff',
+                   borderRadius:10
+                   }}>
+                   <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.bc}}>Compare</Text>
+                 </TouchableOpacity>
+                 <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                   <Image source={require('../../../assets/Image/filter.png')}/>
+                   <Text style={{fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:3}}>Sort By</Text>
+                 </View>
+                 <TouchableOpacity style={{
+                    paddingHorizontal:10,
+                    paddingVertical:0,
+                     backgroundColor:'#fff',
+                     borderRadius:10,
+                     flexDirection:'row',
+                     alignItems:'center',
+                   }}>
+                      <RNPickerSelect
+                          onValueChange={(val)=>setSort(val)}
+                          items={Sorting}
+                          style={{ 
+                          inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          }}
+                          value={sort}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{}}
+                      />   
+                   <Image style={{width:20,height:16,marginLeft:5}} 
+                   resizeMethod='resize' 
+                   source={require('../../../assets/Image/down.png')}/>
+                 </TouchableOpacity>
+                 <TouchableOpacity 
+                 onPress={()=>navigation.navigate('FDFilter',{
+                   data:route.params
+                 })}
+                 style={{
+                   backgroundColor:colors.bc,
+                   height:26,width:26,
+                   borderRadius:13,
+                   alignItems:'center',
+                   justifyContent:'center'
+                   }}>
+                   <Image source={require('../../../assets/Image/sort.png')}/>
+                 </TouchableOpacity>
+                 </View>
+              
               </View>
          
           <StatusBar/>
@@ -386,60 +466,85 @@ const SBType=[
   { label: 'Zero Balance', value: 'Zero Balance' },
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
-
+const Sorting=[
+  { label: 'Popular', value: 'Popular' },
+  { label: 'Alphabetical', value: 'Alphabetical' },
+  { label: 'Interest Rate', value: 'Interest Rate' },
+]
 const days=[
-  { label: '1', value: '1'},
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '4', value: '4' },
-  { label: '5', value: '5' },
-  { label: '6', value: '6' },
-  { label: '7', value: '7' },
-  { label: '8', value: '8' },
-  { label: '9', value: '9' },
-  { label: '10', value: '10' },
-  { label: '11', value: '11' },
-  { label: '12', value: '12' },
-  { label: '13', value: '13' },
-  { label: '14', value: '14' },
-  { label: '15', value: '15' },
-  { label: '16', value: '16' },
-  { label: '17', value: '17' },
-  { label: '18', value: '18' },
-  { label: '19', value: '19' },
-  { label: '20', value: '20' },
-  { label: '21', value: '21' },
-  { label: '22', value: '22' },
-  { label: '23', value: '23' },
-  { label: '24', value: '24' },
-  { label: '25', value: '25' },
-  { label: '26', value: '26' },
-  { label: '27', value: '27' },
-  { label: '28', value: '28' },
-  { label: '29', value: '29' },
-  { label: '30', value: '30' },
+   {label:'00',value:'0'},
+   { label: '01', value: '1'},
+   { label: '02', value: '2'},
+   { label: '03', value: '3' },
+   { label: '04', value: '4' },
+   { label: '05', value: '5' },
+   { label: '06', value: '6' },
+   { label: '07', value: '7' },
+   { label: '08', value: '8' },
+   { label: '09', value: '9' },
+   { label: '10', value: '10' },
+   { label: '11', value: '11' },
+   { label: '12', value: '12' },
+   { label: '13', value: '13' },
+   { label: '14', value: '14' },
+   { label: '15', value: '15' },
+   { label: '16', value: '16' },
+   { label: '17', value: '17' },
+   { label: '18', value: '18' },
+   { label: '19', value: '19' },
+   { label: '20', value: '20' },
+   { label: '21', value: '21' },
+   { label: '22', value: '22' },
+   { label: '23', value: '23' },
+   { label: '24', value: '24' },
+   { label: '25', value: '25' },
+   { label: '26', value: '26' },
+   { label: '27', value: '27' },
+   { label: '28', value: '28' },
+   { label: '29', value: '29' },
+   { label: '30', value: '30' },
 
 ]
 const Month=[
-  
-  { label: '1', value: '1' },
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '4', value: '4' },
-  { label: '5', value: '5' },
-  { label: '6', value: '6' },
-  { label: '7', value: '7' },
-  { label: '8', value: '8' },
-  { label: '9', value: '9' },
+  {label:'00',value:'0'},
+  { label: '01', value: '1' },
+  { label: '02', value: '2 ' },
+  { label: '03', value: '3' },
+  { label: '04', value: '4' },
+  { label: '05', value: '5' },
+  { label: '06', value: '6' },
+  { label: '07', value: '7' },
+  { label: '08', value: '8' },
+  { label: '09', value: '9' },
   { label: '10', value: '10' },
   { label: '11', value: '11' },
- 
+  { label: '12', value: '12' },
 ]
 
 const Years=[
-  { label: '1', value: '1' },
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '5', value: '5' },
+  {label:'00',value:'0'},
+  { label: '01', value: '1' },
+  { label: '02', value: '2' },
+  { label: '03', value: '3' },
+  { label: '04', value: '4'},
+  { label: '05', value: '5' },
+  
   
 ]
+const item = [ {
+  name: 'Regular',
+  id: 10,
+},
+{
+  name: 'Tax Saving',
+  id: 17,
+},
+{
+  name: 'NRI',
+  id: 13,
+},
+{
+  name: 'Senior Citizen',
+  id: 15,
+},
+];
