@@ -12,7 +12,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Toast from "react-native-simple-toast";
 import { useDispatch } from "react-redux";
 import * as RootNavigation from '../../../navigator/rootNavigation';
-
+import Modal from "react-native-modal";
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 let backPress=0
 let arrayOfOneFD=[]
@@ -20,6 +20,7 @@ const dashboard=()=>{
     const navigation=useNavigation()
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedItems1, setSelectedItems1] = useState([]);
+    const [isModalVisible, setModalVisible] = useState(false);
     const dispatch=useDispatch()
     useEffect(async()=>{
       dispatch({
@@ -105,7 +106,9 @@ const dashboard=()=>{
         })
        setSelectedItems1([])
        }
-
+      const model=()=>{
+      
+      };
     const ListItem = ({item, selected, onPress, onLongPress}) => (
        
            <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:100}}>
@@ -118,7 +121,7 @@ const dashboard=()=>{
                     </View>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
-                    <TouchableOpacity onPress={()=>Alert.alert('hi')} style={styles.circle}>
+                    <TouchableOpacity onPress={()=>setModalVisible(true)} style={styles.circle}>
                     <Text style={{fontSize:6,color:colors.bc,fontWeight:'700'}}>{`i`}</Text>
                     </TouchableOpacity>
                     </View>
@@ -132,7 +135,7 @@ const dashboard=()=>{
                     </View>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
-                    <TouchableOpacity onPress={()=>Alert.alert("HI")} style={[styles.circle,{borderColor:colors.white}]}>
+                    <TouchableOpacity style={[styles.circle,{borderColor:colors.white}]}>
                       <Text style={{color:colors.white,fontSize:6,fontWeight:'700'}}>i</Text>
                     </TouchableOpacity>
                     </View>
@@ -262,6 +265,35 @@ const dashboard=()=>{
             </View>
             </View>
             </ScrollView>
+        <View style={{paddingHorizontal:15}}> 
+        <Modal 
+         isVisible={isModalVisible}
+        >
+        <View style={styles.modal}>
+        <Text style={styles.modaltext}>{'Lorem ipsum, or lipsum as it is sometimes known,\nis dummy text used in laying out print.                     '}</Text>
+       <View style={{flexDirection:'row',}}>
+          <View style={styles.circleM}></View>
+          <Text style={styles.modaltext1}>{'Lorem ipsum is dolor sit amet.'}</Text>
+       </View>
+       <View style={{flexDirection:'row'}}>
+          <View style={styles.circleM}></View>
+          <Text style={styles.modaltext1}>{'Lorem ipsum is dolor sit amet.'}</Text>
+       </View>
+       <View style={{flexDirection:'row'}}>
+          <View style={styles.circleM}></View>
+          <Text style={styles.modaltext1}>{'Lorem ipsum is dolor sit amet.'}</Text>
+       </View>
+        <View
+            style={styles.modal1}>
+             <TouchableOpacity style={styles.ModelmsgView}
+              onPress={()=>setModalVisible(false)}
+             >
+            <Text style={styles.ModelMsgText}>{'OK'}</Text>
+        </TouchableOpacity>
+        </View>
+        </View>
+       </Modal>
+       </View>   
     <StatusBar/>
      <BottomTab/>
 </View>

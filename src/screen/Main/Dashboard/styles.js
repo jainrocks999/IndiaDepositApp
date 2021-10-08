@@ -157,6 +157,67 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         borderRadius:10 ,
         alignItems:'center',justifyContent:'center'
-   }
+   },
+   modal: {
+    width: 350,
+    height:200,
+    borderRadius: 10,
+    flexDirection: 'column',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor:colors.white,
+    //paddingHorizontal:15,
+    paddingVertical:12,
+    
+},
+  modal1:{
+      alignItems:'center',
+      justifyContent:'center',
+      height:44,
+      width:75,
+      borderRadius:10,
+      marginTop:15,
+      backgroundColor:colors.bc,
+    
+    },
+    modaltext:{
+        color: colors.textColor,
+        fontSize: fontSize.thirteen,
+        fontWeight: '500',
+        textAlign: 'center',
+    },
+  ModelMsgText: {
+    width: '99%',
+    color: colors.white,
+    fontSize: fontSize.nineteen,
+    textAlign: 'center',
+    fontWeight:'700'
+   // margin:10
+  },
+  ModelmsgView: {
+    width: '99%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+   // marginTop:10
+  },
+  circleM:{
+      height:8,
+    width:8,
+    borderRadius:4,
+    backgroundColor:colors.textColor,
+    alignItems:'center',
+    justifyContent:'center',
+   marginTop:17,
+   marginRight:8
+},
+modaltext1:{
+    color: colors.textColor,
+    fontSize: fontSize.twelve,
+    fontWeight: '500',
+    marginTop:12,
+    marginRight:100
+    //textAlign: 'center',
+},
 })
 
