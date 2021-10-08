@@ -1,5 +1,5 @@
-import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView} from 'react-native';
+import React,{useEffect, useRef,useState} from "react";
+import {View,Text,TextInput,ScrollView,BackHandler} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -38,11 +38,28 @@ const BankDetail=({route})=>{
         const [state,setState]=useState(data.item.state)
         const [country,setCountry]=useState(data.item.country)
         const [dob,setDob]=useState(data.item.dob)
-       console.log('hi narendra here pal',data.item);
-        const selector=useSelector(state=>state.CountryList)
+        const selector=useSelector(state=>state.CityList)
         const selector1=useSelector(state=>state.StateList)
         const [manageStateValue,setManageStateValue]=useState([])
-       
+useEffect(()=>{
+  const backHandler = BackHandler.addEventListener(
+    'hardwareBackPress',
+    handleBackButtonClick,
+  );
+  return () => backHandler.remove()
+},[])
+
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    Root.push('Profile')
+  return true;
+}
+ 
+}
+
+
+
+
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
         if(country==''){
@@ -65,7 +82,7 @@ const addUser=async(values)=>{
             name:values.name,
             address1:values.address1,
             address2:values.address2,
-            country:country,
+            country:1,
             state:state,
             city:city,
             dob:dob,
@@ -79,26 +96,36 @@ const addUser=async(values)=>{
       }
 const manageState=async(val)=>{
     setState(val)
-    try {
-        const data = new FormData();
-        data.append('state_id',20)
-        const response = await axios({
-          method: 'POST',
-          data,
-          headers: {
-            'content-type': 'multipart/form-data',
-            Accept: 'multipart/form-data',
-          },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-        });
-        console.log('this is response value',response);
-        setManageStateValue(response.data.data)
-      } catch (error) {
-       throw error;
+    dispatch({
+      type: 'City_List_Request',
+      url: 'citybyid',
+      state_id:val,
+      
+    })
+    // try {
+    //     const data = new FormData();
+    //     data.append('state_id',20)
+    //     const response = await axios({
+    //       method: 'POST',
+    //       data,
+    //       headers: {
+    //         'content-type': 'multipart/form-data',
+    //         Accept: 'multipart/form-data',
+    //       },
+    //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
+    //     });
+    //     console.log('this is response value',response);
+    //     setManageStateValue(response.data.data)
+    //   } catch (error) {
+    //    throw error;
         
-      }
+    //   }
 
      }
+     const Country=[
+      {label:'India',value:'101'},
+    ]
+
     return(
         <Formik
         enableReinitialize
@@ -118,7 +145,7 @@ const manageState=async(val)=>{
         {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
             <Header
-                    title={'Edit Nominee  '}
+                    title={'EDIT NOMINEE  '}
                     source={require('../../../../assets/Images/arrow.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
@@ -179,19 +206,18 @@ const manageState=async(val)=>{
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCountry(val)}
-                            items={selector}
+                            items={Country}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
                             placeholder:{color:colors.heading}
                             }}
                             value={country}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ }}
                         />                                  
                     </View>
                     <View style={styles.error}>
-                        {(errors.account_type && touched.account_type) &&
-                        <Text style={styles.warn}>{errors.account_type}</Text>}
+                       
                     </View>
                     <Text style={styles.better}>State</Text>
                       <View style={styles.drop}>
@@ -208,16 +234,14 @@ const manageState=async(val)=>{
                         />   
                     </View>
                     <View style={styles.error}>
-                        {(errors.ifsc_code && touched.ifsc_code) &&
-                        <Text style={styles.warn}>{errors.ifsc_code}</Text>}
+                      
                     </View>
 
                     <Text style={styles.better}>City</Text>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCity(val)}
-                           
-                            items={manageStateValue}
+                            items={selector}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
                             placeholder:{color:colors.heading}
@@ -228,8 +252,7 @@ const manageState=async(val)=>{
                         />   
                     </View>
                     <View style={styles.error}>
-                        {(errors.ifsc_code && touched.ifsc_code) &&
-                        <Text style={styles.warn}>{errors.ifsc_code}</Text>}
+                        
                     </View>
 
                     <Text style={styles.better}>Date of Birth</Text>
@@ -239,7 +262,7 @@ const manageState=async(val)=>{
                             date={dob=='0000-00-00'?'':dob}
                             mode="date"
                             placeholder="Date Of Birth"
-                            format="YYYY-MM-DD"
+                            format="DD-MM-YYYY"
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
                             maxDate={new Date()}
@@ -260,8 +283,7 @@ const manageState=async(val)=>{
                         />
                     </View>
                     <View style={styles.error}>
-                        {(errors.ifsc_code && touched.ifsc_code) &&
-                        <Text style={styles.warn}>{errors.ifsc_code}</Text>}
+                       
                     </View>
 
                     <Text style={styles.better}>Relationship</Text>
@@ -334,7 +356,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{marginTop:20}}>
                     <CustomButton
-                    title='Update'
+                    title='UPDATE'
                     onPress={()=> handleSubmit()}
                     />
                   </View>

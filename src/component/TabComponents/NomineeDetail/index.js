@@ -89,33 +89,33 @@ const Nominee=()=>{
                       style={styles.card}>
                      <View style={styles.cardView}>
                         {/* <Image source={require('../../../assets/Images/sbi.png')}/> */}
-                        <Text style={[styles.title,{marginLeft:5}]}>{`Name  : ${item.name}`}</Text>
+                        {/* <Text style={[styles.title,{marginLeft:5}]}>{`Name  : ${item.name}`}</Text> */}
                        <View style={{width:'20%',alignItems:'flex-end'}}>
                        </View>
                      </View>
                     
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Address1 : ${item.address1}`}</Text>
+                         <Text style={styles.same}>{`Name : ${item.name}`}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Address2 : ${item.address2}`}</Text>
+                         <Text style={styles.same}>{`Date of Birth : ${item.dob}`}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Guardian : ${item.guardian}`}</Text>
+                         <Text style={styles.same}>{`Relationship : ${item.relationship}`}</Text>
                      </View>
-                     <View style={[styles.row,{marginTop:10,width:'50%'}]}>
+                     <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
                      <TouchableOpacity
                      onPress={()=>renderModal(item)}
                      style={styles.button}>
                           <Text style={styles.text}>
-                              Delete
+                              DELETE
                           </Text>
                           </TouchableOpacity>
                           <TouchableOpacity
                           onPress={()=>editPost(item)}
-                           style={styles.button}>
+                           style={[styles.button,{marginLeft:15}]}>
                           <Text style={styles.text}>
-                              Edit
+                              EDIT
                           </Text>
                           </TouchableOpacity>
                      </View>
@@ -134,9 +134,11 @@ const Nominee=()=>{
                    style={{width:'100%',marginBottom:10,marginTop:5}}
                  />
               <View style={{justifyContent:'center',alignItems:'center',flex:1,marginBottom:40,marginTop:20}}>
-                  <TouchableOpacity style={{backgroundColor:colors.bc,paddingHorizontal:15,paddingVertical:6,borderRadius:10}}>
-              <Text onPress={()=>Root.replace('AddNominee')} 
-              style={{fontSize:14,color:colors.white}}>Add Nominee</Text>
+                  <TouchableOpacity
+                  onPress={()=>Root.replace('AddNominee')} 
+                   style={{backgroundColor:colors.bc,paddingHorizontal:15,paddingVertical:6,borderRadius:10}}>
+              <Text 
+              style={{fontSize:14,color:colors.white}}>ADD NOMINEE</Text>
               </TouchableOpacity>
               </View>
               </View>

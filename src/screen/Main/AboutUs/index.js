@@ -25,7 +25,8 @@ const showContent=()=>{
       if (selector.length>0) {
         return(
           <HTMLView
-          value={selector[0].value}
+           value={selector[0].value.trim().replace(/\s+/g,' ')}
+           addLineBreaks={false}
         />
         )
        

@@ -7,7 +7,7 @@ export default StyleSheet.create({
         fontSize:fontSize.ten,
         fontFamily:'Montserrat-Normal',
         color:colors.textColor,
-       
+        textAlign:'center'
        
        
     },
@@ -52,11 +52,8 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         justifyContent:'space-between',
-        // marginTop:7,
-        paddingHorizontal:5,
-        marginHorizontal:-8,
+        // paddingHorizontal:5,
         width:'100%',
-        marginLeft:2,
       
     },
     row2:
@@ -65,8 +62,8 @@ export default StyleSheet.create({
         justifyContent:'space-between',
         marginTop:7,
         paddingHorizontal:5,
-        marginHorizontal:-8,
-        width:'95%',
+        // marginHorizontal:-8,
+        
         marginLeft:2
     },
 
@@ -77,10 +74,10 @@ export default StyleSheet.create({
          flex:1
     },
     width:{
-        width:'20%',
-        alignSelf:'center',
+        //width:'20%',
+       // alignSelf:'center',
         justifyContent:'center',
-        alignItems:'center'
+       // alignItems:'center'
        // flex:1
     },
     image:{width:25,height:25},
@@ -114,7 +111,7 @@ export default StyleSheet.create({
     },
     view53:
     {
-        width:'27%'
+        width:'29%'
     },
     input5:
     {
@@ -125,7 +122,7 @@ export default StyleSheet.create({
     image4:
     {
         marginTop:16,
-        marginRight:0,
+        marginRight:-5,
         height:7,
         width:20,
     },

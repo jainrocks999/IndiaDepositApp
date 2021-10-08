@@ -13,7 +13,14 @@ const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     useEffect(async() => {
-    appVersion()
+      const value=await AsyncStorage.getItem('value')
+        if (value==1) {
+            setTimeout(() => navigation.replace("Notification"), 2000);
+            AsyncStorage.setItem('value','0')
+        } else {
+            appVersion()
+        }
+    // appVersion()
      //initial()
       }, []);
 

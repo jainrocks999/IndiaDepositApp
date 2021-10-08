@@ -21,14 +21,13 @@ const data2=selector.datavalue2[0]
                   source={require('../../../assets/Images/arrow.png')}
                   onPress={()=>navigation.goBack()}
                /> 
-               <ScrollView>
-                 <View style={styles.View}>
+               <View style={styles.View}>
                  <View style={styles.card}>
-                          <View style={styles.xview}>
+                          {/* <View style={styles.xview}>
                                 <View style={styles.row1}>
                                       <Text style={styles.xtext}>x</Text>
                                 </View>
-                         </View>
+                         </View> */}
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
@@ -42,11 +41,11 @@ const data2=selector.datavalue2[0]
                          </View>
                      </View> 
                       <View style={styles.card}>
-                          <View style={styles.xview}>
+                          {/* <View style={styles.xview}>
                                 <View style={styles.row1}>
                                       <Text style={styles.xtext}>x</Text>
                                 </View>
-                         </View>
+                         </View> */}
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
@@ -61,6 +60,8 @@ const data2=selector.datavalue2[0]
                      </View> 
                      
                 </View> 
+               <ScrollView>
+                 
                  <View>
                      <View style={styles.container}>
                          <Text style={styles.title}>{'Account type'}</Text>
@@ -75,8 +76,8 @@ const data2=selector.datavalue2[0]
                          <Text style={styles.title}>{'Rate of interest'}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.value}>{data1.rate_of_interest_slab1}</Text>
-                         <Text style={styles.value}>{data2.rate_of_interest_slab1}</Text>
+                         <Text style={styles.value}>{data1.rate}</Text>
+                         <Text style={styles.value}>{data2.rate}</Text>
                      </View>
                   </View>
                   <View>
@@ -174,8 +175,8 @@ const data2=selector.datavalue2[0]
                          <Text style={styles.title}>{'Non-Maitenance Penalty'}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.value}>{data1.non_maitenance_penalty_rural}</Text>
-                         <Text style={styles.value}>{data2.non_maitenance_penalty_rural}</Text>
+                         <Text style={styles.value}>{data1.non_maitenance_penalty_charges}</Text>
+                         <Text style={styles.value}>{data2.non_maitenance_penalty_charges}</Text>
                      </View>
                   </View>
                   <View>
@@ -305,7 +306,7 @@ const data2=selector.datavalue2[0]
                          <Text style={styles.value}>{data2.offers}</Text>
                      </View>
                   </View>
-                  <View style={{height:100,width:'100%', backgroundColor:'#DDDDDD',}}></View>
+                  <View style={{height:40,width:'100%', backgroundColor:'#DDDDDD',}}></View>
              {/* <View style={styles.df}>
                  <Button
                     title='DOWNLOAD FORM'

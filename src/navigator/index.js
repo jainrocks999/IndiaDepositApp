@@ -44,6 +44,8 @@ import EditUserBank from '../screen/Main/BankSection/EditUserBank';
 import NomineeList from '../screen/Main/BankSection/NomineeList';
 import AddNominee from '../screen/Main/BankSection/AddNominee';
 import EditNominee from '../screen/Main/BankSection/EditNominee';
+import FDFilter from '../screen/Main/FDFilter';
+import SBFilter from '../screen/Main/SBFilter';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -109,6 +111,8 @@ function Navigate() {
         <Stack.Screen name="NomineeList" component={NomineeList}/>
         <Stack.Screen name="AddNominee" component={AddNominee}/>
         <Stack.Screen name="EditNominee" component={EditNominee}/>
+        <Stack.Screen name="FDFilter" component={FDFilter} options={horizontalAnimation}/>
+        <Stack.Screen name="SBFilter" component={SBFilter} options={horizontalAnimation}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

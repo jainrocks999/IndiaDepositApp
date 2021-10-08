@@ -44,7 +44,7 @@ export default StyleSheet.create({
     },
     text: {
         marginLeft: 10,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.fourteen,
         color:colors.textColor
     },

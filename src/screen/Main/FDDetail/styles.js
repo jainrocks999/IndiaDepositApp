@@ -18,7 +18,9 @@ export default StyleSheet.create({
         fontSize:fontSize.fourteen,
         color:colors.bc,
         fontFamily:'Montserrat-Medium',
-        fontWeight:'600'
+        fontWeight:'600',
+        width:'70%',
+        textAlign:'center'
     },
     text1:
     {

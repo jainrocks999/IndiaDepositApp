@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,Text,Image,ScrollView,StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import Loader from '../../../component/loader';
@@ -18,16 +18,19 @@ const Privacy=()=>{
           key:'privacy',
     })
 },[])
+// replace(new RegExp('<p>', 'g'), '<span>')
 const showContent=()=>{
     if (selector.length>0) {
       return(
+        <View>
         <HTMLView
-        value={selector[0].value}
+        value={selector[0].value.trim().replace(new RegExp('<p>', 'g'), '<span>')}
+        addLineBreaks={false}
+        stylesheet={richTextStyles}
       />
+      <View style={{height:50}}></View>
+      </View>
       )
-      // return <Text style={styles.normal}>
-      //         {selector[0].value}
-      // </Text>
     } else {
       return<View></View>
     }
@@ -42,4 +45,10 @@ const showContent=()=>{
     )
 }
 export default Privacy;
+const richTextStyles = StyleSheet.create({
+  p: {
+    marginTop: 3,
+    marginBottom: 3
+  }
+})
 

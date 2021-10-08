@@ -59,7 +59,8 @@ export default StyleSheet.create({
     },
     view2:{
         flexDirection:'row',
-        width:'50%'
+        width:'50%',
+        alignItems:'center'
     },
    
     text1:{

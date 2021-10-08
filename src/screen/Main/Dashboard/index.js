@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from "react";
-import {View,Text,Image,TouchableOpacity,ScrollView,Pressable,BackHandler,ImageBackground} from 'react-native';
+import {View,Text,Image,TouchableOpacity,ScrollView,Pressable,BackHandler,ImageBackground, Alert} from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors'
 import styles from './styles';
@@ -10,14 +10,22 @@ import StatusBar from "../../../component/StatusBar";
 import BottomTab from '../../../component/StoreButtomTab';
 import { FlatList } from "react-native-gesture-handler";
 import Toast from "react-native-simple-toast";
+import { useDispatch } from "react-redux";
+import * as RootNavigation from '../../../navigator/rootNavigation';
+
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 let backPress=0
+let arrayOfOneFD=[]
 const dashboard=()=>{
     const navigation=useNavigation()
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectedItems1, setSelectedItems1] = useState([]);
-    
+    const dispatch=useDispatch()
     useEffect(async()=>{
+      dispatch({
+        type: 'Bank_Name_Request',
+        url: 'bankdetaillist',
+      })
         const photo=await AsyncStorage.getItem(Storage.photo)
         console.log(photo)
         const backHandler = BackHandler.addEventListener(
@@ -25,7 +33,8 @@ const dashboard=()=>{
           handleBackButtonClick,
         );
         return () => backHandler.remove()
-      
+
+        
     },[])
   
     const handleBackButtonClick=() =>{
@@ -48,19 +57,22 @@ const dashboard=()=>{
         if (selectedItems.length) {
           return selectItems(contact);
         }
-       navigation.navigate('FDSearch',{
-         type1:contact.name,
-         type2:'',
-         type3:'',
-         type4:'',
+      arrayOfOneFD=contact.name        
+       RootNavigation.navigate('FDSearch',{
+         type1:[contact.name],
+        //  type2:'',
+        //  type3:'',
+        //  type4:'',
+        //  data:[contact.name]
        })
       };
       const manageSearch=()=>{
-        navigation.navigate('FDSearch',{
-         type1:selectedItems[0]?selectedItems[0]:'',
-         type2:selectedItems[1]?selectedItems[1]:'',
-         type3:selectedItems[2]?selectedItems[2]:'',
-         type4:selectedItems[3]?selectedItems[3]:'',
+        RootNavigation.navigate('FDSearch',{
+         type1:selectedItems,
+        //  type2:selectedItems[1]?selectedItems[1]:'',
+        //  type3:selectedItems[2]?selectedItems[2]:'',
+        //  type4:selectedItems[3]?selectedItems[3]:'',
+        //  data:selectedItems
        })
        setSelectedItems([])
        }
@@ -70,22 +82,25 @@ const dashboard=()=>{
         if (selectedItems1.length) {
           return selectItems1(contact);
         }
-        navigation.navigate('SBSearch',{
-         type1:contact.name,
-         type2:'',
-         type3:'',
-         type4:'',
-         type4:''
+        RootNavigation.navigate('SBSearch',{
+         type1:[contact.name],
+        //  type2:'',
+        //  type3:'',
+        //  type4:'',
+        //  type5:'',
+        //  data:[contact.name]
         })
       };
 
       const manageSearch1=()=>{
-        navigation.navigate('SBSearch',{
-         type1:selectedItems1[0]?selectedItems1[0]:'',
-         type2:selectedItems1[1]?selectedItems1[1]:'',
-         type3:selectedItems1[2]?selectedItems1[2]:'',
-         type4:selectedItems1[3]?selectedItems1[3]:'',
-         type5:selectedItems[4]?selectedItems1[4]:'',
+        console.log('hi testing',selectedItems1);
+        RootNavigation.navigate('SBSearch',{
+         type1:selectedItems1
+        //  type2:selectedItems1[1]?selectedItems1[1]:'',
+        //  type3:selectedItems1[2]?selectedItems1[2]:'',
+        //  type4:selectedItems1[3]?selectedItems1[3]:'',
+        //  type5:selectedItems1[4]?selectedItems1[4]:'',
+        //  data:selectedItems1
 
         })
        setSelectedItems1([])
@@ -103,9 +118,9 @@ const dashboard=()=>{
                     </View>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
-                    <View style={styles.circle}>
-                    <Text style={{fontSize:8,color:colors.bc,fontWeight:'700'}}>{`i`}</Text>
-                    </View>
+                    <TouchableOpacity onPress={()=>Alert.alert('hi')} style={styles.circle}>
+                    <Text style={{fontSize:6,color:colors.bc,fontWeight:'700'}}>{`i`}</Text>
+                    </TouchableOpacity>
                     </View>
                     {selected && <View style={styles.enable}>
                        <TouchableOpacity 
@@ -117,9 +132,9 @@ const dashboard=()=>{
                     </View>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
-                    <View style={[styles.circle,{borderColor:colors.white}]}>
-                      <Text style={{color:colors.white,fontSize:8,fontWeight:'700'}}>i</Text>
-                    </View>
+                    <TouchableOpacity onPress={()=>Alert.alert("HI")} style={[styles.circle,{borderColor:colors.white}]}>
+                      <Text style={{color:colors.white,fontSize:6,fontWeight:'700'}}>i</Text>
+                    </TouchableOpacity>
                     </View>
                    
                 </TouchableOpacity>
@@ -170,15 +185,17 @@ const dashboard=()=>{
     onPress={()=>navigation.toggleDrawer()}
     source1={require('../../../assets/Image/notification.png')}
     onPress1={()=>navigation.navigate('Notification')}
- /> 
-      <ImageHeaderScrollView
-      maxHeight={220}
-      minHeight={0}
-      headerImage={require("../../../assets/Image/fixed-deposit.png")}
-    >
-      <View style={{ backgroundColor:colors.card}}>
-        <TriggeringView onHide={() => console.log("text hidden")}>
-        <View style={styles.view}>
+    /> 
+     <View 
+         style={styles.main}>
+             <Image
+             resizeMethod='resize'
+              source={require('../../../assets/Image/fixed-deposit.png')}/>
+          </View>
+         
+      <ScrollView style={{flex:1}}>
+        
+          <View style={styles.view}>
                 <View style={styles.item}>
                     <View style={styles.view1}>
                        <Text style={styles.text2}>{'Fixed Deposit'}</Text>
@@ -243,13 +260,11 @@ const dashboard=()=>{
                      <Text style={styles.Text1}>{'*Tap & Hold to make multiple selection'}</Text>
                 </View>:null}
             </View>
-        </View>
-        </TriggeringView>
-      </View>
-    </ImageHeaderScrollView>
+            </View>
+            </ScrollView>
     <StatusBar/>
      <BottomTab/>
-    </View>
+</View>
   );
       }
 export default dashboard;
@@ -258,7 +273,6 @@ const data=[
     image:require('../../../assets/Image/regular-fd-b.png'),
     image1:require('../../../assets/Image/regular-fd-w.png'),
     id:1,height:35,width:35},
-   
    
     {name:'Senior Citizen', 
     image:require('../../../assets/Image/senior_citizen-b.png'),

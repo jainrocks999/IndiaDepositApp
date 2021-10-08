@@ -27,6 +27,21 @@ class OtpVarification extends React.Component{
           mother_maiden_name:this.props.route.params.mother_maiden_name,
           dob:this.props.route.params.dob,
           gender:this.props.route.params.gender,
+
+          pan:this.props.route.params.pan,
+          address1:this.props.route.params.address1,
+          address2:this.props.route.params.address2,
+          occupation:this.props.route.params.occupation,
+          pincode:this.props.route.params.pincode,
+          country:this.props.route.params.country,
+          states:this.props.route.params.state,
+          city:this.props.route.params.city,
+          marital_status:this.props.route.params.marital_status,
+          education:this.props.route.params.education,
+          income_group:this.props.route.params.income_group,
+          residential_status:this.props.route.params.residential_status,
+
+
         };
       }
     componentDidMount() {
@@ -70,6 +85,19 @@ class OtpVarification extends React.Component{
         AsyncStorage.setItem(Storage.motherName,this.state.mother_maiden_name)
         AsyncStorage.setItem(Storage.dob,this.state.dob)
         AsyncStorage.setItem(Storage.gender,this.state.gender)
+
+        AsyncStorage.setItem(Storage.pan,this.state.pan),
+        AsyncStorage.setItem(Storage.address1,this.state.address1),
+        AsyncStorage.setItem(Storage.address2,this.state.address2),
+        AsyncStorage.setItem(Storage.occupation,this.state.occupation),
+        AsyncStorage.setItem(Storage.pincode,this.state.pincode),
+        AsyncStorage.setItem(Storage.country,this.state.country),
+        AsyncStorage.setItem(Storage.state,this.state.states),
+        AsyncStorage.setItem(Storage.city,this.state.city),
+        AsyncStorage.setItem(Storage.income_group,this.state.income_group),
+        AsyncStorage.setItem(Storage.education,this.state.education),
+        AsyncStorage.setItem(Storage.marital,this.state.marital_status),
+        AsyncStorage.setItem(Storage.residential,this.state.residential_status),
         this.props.navigation.replace('Main')
       }
       else{

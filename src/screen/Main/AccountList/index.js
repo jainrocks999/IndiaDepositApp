@@ -14,6 +14,10 @@ import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
+import MultiSelect from 'react-native-multiple-select';
+
+
+
 const SBAccountList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -24,8 +28,8 @@ const SBAccountList=({route})=>{
         const [balance,setBalance] = useState(route.params.balance)
         const [location,setLocation]=useState(route.params.location)
         const isFetching=useSelector((state)=>state.isFetching)
-
-      
+        const [selected,setSelected]=useState(route.params.type1)
+        const [sort,setSort]=useState('Alphabetical')
 const manageList=(item)=>{
   dispatch({
     type: 'SB_Detail_Request',
@@ -44,17 +48,24 @@ const manageSearch=async()=>{
     }else{
     dispatch({
        type: 'SB_Search_Request',
-       url: 'sblist',
+       url: 'sblist1',
        min_bal:balance,
        location:location,
-       type1:type,
-       type2:'',
-       type3:'',
-       type4:'',
-       type5:'',
+       type1:selected,
+         bank_id:'',
+         interest_rate:0,
+         nationalized:'',
+         offer:'',
+         insurance:'',
+         account_type:'',
+         account_sub_type:'',
+         non_maintenance_penalty:'',
+         debit_card_amc:'',
+         private:'',
        navigation:navigation
      })
      setVisible(false)
+    //  setSelected([])
   }
  }
 const handleonPress=(id)=>{
@@ -78,7 +89,16 @@ const handleSelectionMultiple = (id) => {
 const compareFD=async()=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   console.log('this is selected data',selectedData);
-  if(selectedData.length==2){
+  if(selectedData.length==0){
+    Toast.show('Please select SB for Compare')
+    }
+    else if(selectedData.length==1){
+      Toast.show('Please select one more SB')
+    }
+    else if(selectedData.length>2)(
+      Toast.show('Please select only two SB')
+    )
+  else{
     dispatch({
       type: 'SB_Compare_Request',
       url: 'sbcompare',
@@ -87,13 +107,13 @@ const compareFD=async()=>{
       value_id2:selectedData[1],
       navigation
     })
-    setSelectedData([])
-  }
-  else{
-     
+    // setSelectedData([])
   }
   }
-  
+const openDialog=()=>{
+  setVisible(true)
+  // setSelected([])
+}
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -101,7 +121,7 @@ const renderItem=(item)=>{
                     onLongPress={(val)=>handleSelectionMultiple(item.saving_account_id)}
                     onPress={()=>handleonPress(item.saving_account_id)}
                     style={[styles.card,{
-                      backgroundColor:selectedData.includes(item.saving_account_id) ? colors.bc :'#fff',
+                      backgroundColor:selectedData.includes(item.saving_account_id) ? '#c9c9f0' :'#fff',
                       padding:13,
                       }]}>
                    <View style={styles.cardView}>
@@ -126,7 +146,7 @@ const renderItem=(item)=>{
                        <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
                        </View>
                    </View>
-                   <View style={[styles.row2,{marginTop:0}]}>
+                   <View style={[styles.row2]}>
                    <View style={[styles.width,{  alignItems:'flex-start'}]}>
                        <Image 
                         style={styles.image}
@@ -158,7 +178,7 @@ const renderItem=(item)=>{
                      <View style={[styles.width,{  alignItems:'center'}]}>
                      <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
                      </View>
-                     <View style={[styles.width,{  alignItems:'center'}]}>
+                     <View style={[styles.width,{ justifyContent:'flex-end'}]}>
                      <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
                      </View>
                    </View>
@@ -176,13 +196,7 @@ const renderItem=(item)=>{
             <View style={styles.views}>
             <Text style={styles.texts}>{'SB A/C LISTING'} </Text>
             </View>
-            {selectedData.length==2?
-            <TouchableOpacity 
-             onPress={()=>compareFD()}
-            style={styles.squareView}>
-                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{'Campare'}</Text>
-            </TouchableOpacity>:<View></View>
-            }
+            <View></View>
            </View>
         </View>   
                {isFetching?<Loader/>:null}
@@ -245,21 +259,41 @@ const renderItem=(item)=>{
 
                        <View style={{marginTop:26}}>
                            <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
-                           <RNPickerSelect
-                                           onValueChange={(val)=>setType(val)}
-                                           items={SBType}
-                                           style={{ 
-                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
-                                           placeholder:{color:colors.heading1,fontSize:fontSize.twelve}
-                                           }}
-                                           value={type}
-                                           useNativeAndroidPickerStyle={false}
-                                           placeholder={{ label: "Select SB A/C", value: null }}
-                                           Icon={()=><Image 
-                                           style={{width:24,height:24,marginTop:5}} 
-                                           source={require('../../../assets/Image/down.png')}/>}
-                                       />
-                           <View style={{borderWidth:1,marginTop:-10,borderColor:'#3D4785',}}></View>
+                           
+
+                              <MultiSelect     
+                                items={item}
+                                uniqueKey="name"
+                                onSelectedItemsChange={(val)=>setSelected(val)}
+                                selectedItems={selected}
+                                searchIcon={false}
+                                tagBorderColor={colors.bc}
+                                tagRemoveIconColor={'#fff'}
+                                tagTextColor={'#fff'}
+                                selectText={selected.length>0?'':"Select SB A/C"}
+                                searchInputPlaceholderText="Select SB A/C"
+                                onChangeInput={ (text)=> console.log(text)}
+                                selectedItemTextColor={colors.bc}
+                                selectedItemIconColor={colors.bc}
+                                itemTextColor={colors.textColor}
+                                displayKey="name"
+                                
+                                // searchInputStyle={{ color: '#CCC' }}
+                                submitButtonColor={colors.bc}
+                                submitButtonText="Submit"
+                                // searchInputStyle={}
+                                textInputProps={{ editable: false,autoFocus:false }}
+                                searchInputPlaceholderText=""
+                                searchIcon={false}
+                                styleDropdownMenu={{
+                                  width:'100%',
+                                  borderBottomWidth:1.5,
+                                  borderColor:colors.bc,
+                                  height:55
+                                }}
+                                tagContainerStyle={{backgroundColor:colors.bc}}
+                              />
+                                       
                        </View>
                        <View style={styles.view8}>
                             <Button
@@ -274,12 +308,21 @@ const renderItem=(item)=>{
                       </Dialog>
               <View style={styles.list}>
                 <TouchableOpacity
-                onPress={()=>setVisible(true)}
+                onPress={()=>openDialog()}
                 style={{width:'100%',paddingHorizontal:5,paddingVertical:6}}>
-                  <View style={[styles.card,{flexDirection:'row',justifyContent:'space-between',alignItems:'center',paddingHorizontal:10,paddingVertical:8}]}>
-                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>{`Minimum balance : ${route.params.balance}`}</Text>
+                  <View style={[styles.card,{
+                    flexDirection:'row',justifyContent:'space-between',alignItems:'center',
+                    paddingHorizontal:15,paddingVertical:8
+                    }]}>
+                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>
+                      {`Minimum balance : `}
+                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
+                      {`${route.params.balance}`}
+                      </Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:15}}>{`Location : ${route.params.location}`}</Text>
+                        <Text style={{
+                          fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:5}}>
+                            {`Location : ${route.params.location}`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>
                   </View>
@@ -290,7 +333,68 @@ const renderItem=(item)=>{
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
                  />
-
+ <View style={{
+                   width:'100%',
+                   bottom:20,
+                   flexDirection:'row',
+                   justifyContent:'space-between',
+                   paddingHorizontal:20,
+                   alignItems:'center',
+                   backfaceVisibility:colors.card,
+                   
+                   }}>
+                 <TouchableOpacity
+                  onPress={()=>compareFD()}
+                 style={{
+                   paddingHorizontal:20,
+                   paddingVertical:9,
+                   backgroundColor:'#fff',
+                   borderRadius:10
+                   }}>
+                   <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.bc}}>Compare</Text>
+                 </TouchableOpacity>
+                 <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                   <Image source={require('../../../assets/Image/filter.png')}/>
+                   <Text style={{fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:3}}>Sort By</Text>
+                 </View>
+                 <TouchableOpacity style={{
+                   paddingHorizontal:10,
+                  paddingVertical:0,
+                   backgroundColor:'#fff',
+                   borderRadius:10,
+                   flexDirection:'row',
+                   alignItems:'center',
+                   }}>
+                     <RNPickerSelect
+                          onValueChange={(val)=>setSort(val)}
+                          items={Sorting}
+                          style={{ 
+                          inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          }}
+                          value={sort}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{}}
+                      />                              
+                   <Image style={{width:20,height:16,marginLeft:5,marginTop:-3}} 
+                   resizeMethod='resize' 
+                   source={require('../../../assets/Image/down.png')}/>
+                 </TouchableOpacity>
+                 <TouchableOpacity 
+                  onPress={()=>navigation.navigate('SBFilter',{
+                    data:route.params,
+                    data1:selected
+                  })}
+                  style={{
+                   backgroundColor:colors.bc,
+                   height:26,width:26,
+                   borderRadius:13,
+                   alignItems:'center',
+                   justifyContent:'center'
+                   }}>
+                   <Image source={require('../../../assets/Image/sort.png')}/>
+                 </TouchableOpacity>
+                 </View>
               </View>
          
           <StatusBar/>
@@ -306,3 +410,31 @@ const SBType=[
   { label: 'Zero Balance', value: 'Zero Balance' },
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
+const Sorting=[
+  { label: 'Popular', value: 'Popular' },
+  { label: 'Alphabetical', value: 'Alphabetical' },
+  { label: 'Interest Rate', value: 'Interest Rate' },
+]
+
+
+const item = [ {
+  name: 'Regular',
+  id: 10,
+},
+{
+  name: 'Zero Balance',
+  id: 17,
+},
+{
+  name: 'Female',
+  id: 13,
+},
+{
+  name: 'Defense',
+  id: 14,
+},
+{
+  name: 'Senior Citizen',
+  id: 15,
+},
+];

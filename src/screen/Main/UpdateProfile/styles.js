@@ -37,7 +37,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:13,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-SemiBold'
     },
     drop:{
         marginTop:5 ,
@@ -49,6 +49,7 @@ export default StyleSheet.create({
         justifyContent:'center',
         width:'100%',
         paddingHorizontal:10,
+        alignContent:'center'
        
     }, 
     dropCal:{

@@ -5,6 +5,7 @@ initialstate = {
   Logout: [],
   MLoginDetails:[],
   AboutUs:[],
+  Contact:[],
   Faq:[],
   Privacy:[],
   Security:[],
@@ -18,24 +19,33 @@ initialstate = {
   NomineeList:[],
   CountryList:[],
   StateList:[],
+  CityList:[],
   FDList:[],
   SBList:[],
   FDDetail:[],
   SBDetail:[],
   Story:[],
   FDCompareDetail:[],
-  SBCompareDetail:[]
+  SBCompareDetail:[],
+  UserData:[]
 };
 export default (state = initialstate, action) => {
   switch (action.type) {
-    //Login
-    case 'User_Login_Request':
+    //Login 
+    case 'User_Detail_Request':
       return { ...state, isFetching: true };
-    case 'User_Login_Success':
-      return { ...state, isFetching: false, UserDetails: action.payload };
-    case 'User_Login_Error':
+    case 'User_Detail_Success':
+      return { ...state, isFetching: false, UserData: action.payload };
+    case 'User_Detail_Error':
       return { ...state, isFetching: false };
 
+      case 'User_Login_Request':
+        return { ...state, isFetching: true };
+      case 'User_Login_Success':
+        return { ...state, isFetching: false, UserDetails: action.payload };
+      case 'User_Login_Error':
+        return { ...state, isFetching: false };
+  
     case 'User_MLogin_Request':
       return { ...state, isFetching: true };
     case 'User_MLogin_Success':
@@ -73,6 +83,13 @@ export default (state = initialstate, action) => {
       return { ...state, isFetching: false, AboutUs: action.payload };
     case 'About_Us_Error':
     return { ...state, isFetching: false };
+   //About us 
+    case 'Contact_Detail_Request':
+     return { ...state, isFetching: true };
+    case 'Contact_Detail_Success':
+     return { ...state, isFetching: false, Contact: action.payload };
+    case 'Contact_Detail_Error':
+     return { ...state, isFetching: false };
 
     //Faq
     case 'Faq_Request':
@@ -223,6 +240,13 @@ export default (state = initialstate, action) => {
   case 'State_List_Success':
     return { ...state, isFetching: false, StateList: action.payload };
   case 'State_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'City_List_Request':
+    return { ...state, isFetching: true };
+  case 'City_List_Success':
+    return { ...state, isFetching: false, CityList: action.payload };
+  case 'City_List_Error':
   return { ...state, isFetching: false };
 
   case 'FD_Search_Request':

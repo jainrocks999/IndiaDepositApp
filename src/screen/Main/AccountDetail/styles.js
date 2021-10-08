@@ -34,7 +34,10 @@ export default StyleSheet.create({
         marginTop:10,
         fontSize:fontSize.fourteen,
         color:colors.bc,
-        fontFamily:'Montserrat-Medium'
+        fontFamily:'Montserrat-Medium',
+        width:'70%',
+        textAlign:'center'
+        
      },
      Text2:
      {
@@ -147,12 +150,13 @@ export default StyleSheet.create({
     rupay:
     {
         marginRight:2,
-        height:11,
-        width:8,
+        height:16,
+        width:12,
         marginTop:2
     },
     rup:
     {
-        flexDirection:'row'
+        flexDirection:'row',
+        alignItems:'center'
     },
 })

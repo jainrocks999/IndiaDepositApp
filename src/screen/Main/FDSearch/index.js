@@ -19,44 +19,55 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
 const Contact=({route})=>{
     const navigation=useNavigation()
-    const [day, setDay] = useState('')
-    const [month, setMonth] = useState('')
-    const [year,setYear] = useState('')
+    const [day, setDay] = useState(0)
+    const [month, setMonth] = useState(0)
+    const [year,setYear] = useState(0)
     const [amount,setAmount] = useState('')
     const [pincode,setPincode]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
    console.log('this is narendra here',route.params);
+
    const manageSearch=async()=>{
-      if(year==''){
-       Toast.show('Please select year')
+      if(year==0 && month==0 && day==0){
+         Toast.show('Tenure should be more than 7 days')
       }
-      else if(month==''){
-         Toast.show('Please select month')
-      }
-      else if(day==''){
-         Toast.show('Please select days')
+      else if(year==0 && month==0 && day<7){
+         Toast.show('Tenure should be more than 7 days')
       }
       else if(amount==''){
          Toast.show('Please enter amount')
       }
       else if(pincode==''){
          Toast.show('Please enter location')
-      }else{
+      }
+      else{
       dispatch({
          type: 'FD_Search_Request',
-         url: 'fdlist',
+         url: 'fdlist1',
          year:year,
          month:month,
          days:day,
          amount:amount,
          location:pincode,
          type1:route.params.type1,
-         type2:route.params.type2,
-         type3:route.params.type3,
-         type4:route.params.type4,
-         type5:'',
+         bank_id:'',
+         interest_rate:'',
+         nationalized:'',
+         sb_account_required:'',
+         offer:'',
+         gender:'',
+         interest_payout:'',
+         premature_penalty:'',
+         loan:'',
          navigation:navigation
+
+         // type2:route.params.type2,
+         // type3:route.params.type3,
+         // type4:route.params.type4,
+         // type5:'',
+         // check:route.params.check,
+         // data:route.params.data,
        })
     }
    }
@@ -76,12 +87,13 @@ const Contact=({route})=>{
                   onPress={()=>navigation.goBack()}
               />
              <ScrollView style={styles.scroll}>
+             {isFetching?<Loader/>:null}
              <KeyboardAwareScrollView
                extraScrollHeight={10}
                enableOnAndroid={true} 
                keyboardShouldPersistTaps='handled'
                contentContainerStyle={{flex:1}}>
-                {isFetching?<Loader/>:null}
+              
                 <View style={styles.main}>
                   < View style={styles.view}>
                       <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
@@ -106,7 +118,7 @@ const Contact=({route})=>{
                                       }}
                                       value={year}
                                       useNativeAndroidPickerStyle={false}
-                                      placeholder={{ label: "YY", value: null }}
+                                      placeholder={{ label: "Year", value: 0 }}
                                       Icon={()=><Image 
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
@@ -125,7 +137,7 @@ const Contact=({route})=>{
                                           }}
                                           value={month}
                                           useNativeAndroidPickerStyle={false}
-                                          placeholder={{ label: "MM", value: null }}
+                                          placeholder={{ label: "Month", value:0 }}
                                           Icon={()=><Image 
                                           style={styles.image} 
                                           source={require('../../../assets/Image/down.png')}/>}
@@ -144,7 +156,7 @@ const Contact=({route})=>{
                                            }}
                                            value={day}
                                            useNativeAndroidPickerStyle={false}
-                                           placeholder={{ label: "Days", value: null }}
+                                           placeholder={{ label: "Days", value:0 }}
                                            Icon={()=><Image 
                                            style={styles.image} 
                                            source={require('../../../assets/Image/down.png')}/>}
@@ -160,7 +172,8 @@ const Contact=({route})=>{
                                <Text style={[styles.text1,{fontWeight:'700'}]}>Amount</Text>
                            </View>
                            <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
-                              <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
+                              <Image style={{width:12,height:18}} 
+                              source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
                                  style={{width:'90%'}}
                                  placeholderTextColor={colors.heading1}
@@ -212,58 +225,62 @@ const Contact=({route})=>{
 export default Contact;
 
 const days=[
-  { label: '1', value: '1'},
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '4', value: '4' },
-  { label: '5', value: '5' },
-  { label: '6', value: '6' },
-  { label: '7', value: '7' },
-  { label: '8', value: '8' },
-  { label: '9', value: '9' },
-  { label: '10', value: '10' },
-  { label: '11', value: '11' },
-  { label: '12', value: '12' },
-  { label: '13', value: '13' },
-  { label: '14', value: '14' },
-  { label: '15', value: '15' },
-  { label: '16', value: '16' },
-  { label: '17', value: '17' },
-  { label: '18', value: '18' },
-  { label: '19', value: '19' },
-  { label: '20', value: '20' },
-  { label: '21', value: '21' },
-  { label: '22', value: '22' },
-  { label: '23', value: '23' },
-  { label: '24', value: '24' },
-  { label: '25', value: '25' },
-  { label: '26', value: '26' },
-  { label: '27', value: '27' },
-  { label: '28', value: '28' },
-  { label: '29', value: '29' },
-  { label: '30', value: '30' },
+   {label:'00',value:'0'},
+   { label: '01', value: '1'},
+   { label: '02', value: '2'},
+   { label: '03', value: '3' },
+   { label: '04', value: '4' },
+   { label: '05', value: '5' },
+   { label: '06', value: '6' },
+   { label: '07', value: '7' },
+   { label: '08', value: '8' },
+   { label: '09', value: '9' },
+   { label: '10', value: '10' },
+   { label: '11', value: '11' },
+   { label: '12', value: '12' },
+   { label: '13', value: '13' },
+   { label: '14', value: '14' },
+   { label: '15', value: '15' },
+   { label: '16', value: '16' },
+   { label: '17', value: '17' },
+   { label: '18', value: '18' },
+   { label: '19', value: '19' },
+   { label: '20', value: '20' },
+   { label: '21', value: '21' },
+   { label: '22', value: '22' },
+   { label: '23', value: '23' },
+   { label: '24', value: '24' },
+   { label: '25', value: '25' },
+   { label: '26', value: '26' },
+   { label: '27', value: '27' },
+   { label: '28', value: '28' },
+   { label: '29', value: '29' },
+   { label: '30', value: '30' },
 
 ]
 const Month=[
+   {label:'00',value:'0'},
+   { label: '01', value: '1' },
+   { label: '02', value: '2 ' },
+   { label: '03', value: '3' },
+   { label: '04', value: '4' },
+   { label: '05', value: '5' },
+   { label: '06', value: '6' },
+   { label: '07', value: '7' },
+   { label: '08', value: '8' },
+   { label: '09', value: '9' },
+   { label: '10', value: '10' },
+   { label: '11', value: '11' },
+   { label: '12', value: '12' },
   
-  { label: '1', value: '1' },
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '4', value: '4' },
-  { label: '5', value: '5' },
-  { label: '6', value: '6' },
-  { label: '7', value: '7' },
-  { label: '8', value: '8' },
-  { label: '9', value: '9' },
-  { label: '10', value: '10' },
-  { label: '11', value: '11' },
- 
 ]
 
 const Years=[
-  { label: '1', value: '1' },
-  { label: '2', value: '2' },
-  { label: '3', value: '3' },
-  { label: '5', value: '5' },
-  
+   {label:'00',value:'0'},
+   { label: '01', value: '1' },
+   { label: '02', value: '2' },
+   { label: '03', value: '3' },
+   { label: '04', value: '4' },
+   { label: '05', value: '5' },
+   
 ]

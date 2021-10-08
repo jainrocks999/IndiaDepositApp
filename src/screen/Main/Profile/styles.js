@@ -88,7 +88,15 @@ export default StyleSheet.create({
         fontSize:fontSize.eleven,
        // marginHorizontal:20,
         marginTop:5,
-        color:colors.bc
+        color:colors.bc,
+    },
+    change1:
+    {
+        fontSize:fontSize.eleven,
+       // marginHorizontal:20,
+        marginTop:5,
+        color:colors.bc,
+        width:55
     },
     title:{ 
     // fontSize:,

@@ -54,7 +54,7 @@ export default StyleSheet.create({
     button:{
         backgroundColor:colors.bc,
         paddingVertical:3,
-        paddingHorizontal:10,
+        paddingHorizontal:4,
         borderRadius:6,
         alignItems:'center',
         justifyContent:'center',

@@ -1,4 +1,4 @@
-import React,{useRef} from 'react';
+import React,{useRef,useEffect, useState} from 'react';
 import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -26,11 +26,15 @@ const Contact=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
+    const selector=useSelector((state)=>state.Contact)
     const next1 = useRef(null);
     const next2 = useRef(null);
     const next3 = useRef(null);
-    
+    const detail=selector[0]
+    const link=[]
+    const [array,setArray] = useState([]);
 
+console.log('this is narendra here',selector);
   const validateUser=async(values)=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
    Keyboard.dismiss()
@@ -44,6 +48,11 @@ const Contact=({route})=>{
       message:values.message
   })
   }
+  {detail.followers.split(',').map((step, i) => (
+    link.push(step)
+    ))}
+    console.log('this .si link',link);
+
     return(
       <Formik
       initialValues={{ email:route.params.email,mobile:route.params.mobile,name:route.params.name,message:''}}
@@ -64,9 +73,9 @@ const Contact=({route})=>{
             <View style={styles.header}>
               <Text style={styles.toll}>TOLL FREE NUMBER</Text>
               <View style={[styles.view,{ marginTop:21}]}>
-                  <Text style={styles.num}>1800000000</Text>
+                  <Text style={styles.num}>{detail.mobile}</Text>
                     <TouchableOpacity 
-                    onPress={()=>Linking.openURL(`tel:1800000000`)}
+                    onPress={()=>Linking.openURL(`tel:${detail.mobile}`)}
                     style={styles.button}>
                         <Image 
                         style={{width:16,height:20}}
@@ -75,9 +84,9 @@ const Contact=({route})=>{
                     </TouchableOpacity>
               </View>
               <View style={[styles.view,{ marginTop:12}]}>
-                  <Text style={styles.num}>18110000000</Text>
+                  <Text style={styles.num}>{detail.mobile2}</Text>
                     <TouchableOpacity
-                    onPress={()=>Linking.openURL(`tel:18110000000`)}
+                    onPress={()=>Linking.openURL(`tel:${detail.mobile2}`)}
                     style={styles.button}>
                         <Image
                          style={{width:16,height:20}}
@@ -86,38 +95,45 @@ const Contact=({route})=>{
                     </TouchableOpacity>
               </View>
             </View>
-           
             <View style={styles.line}></View>
             <View style={styles.main}>
               <Text style={styles.toll}>FOLLOW US ON</Text>
                <View style={styles.bottom}>
                 <View style={styles.view1}>
-                  <View style={styles.view2}>
+                  <TouchableOpacity                     
+                  onPress={()=>Linking.openURL(link[0])}
+                  style={styles.view2}>
                       <View style={styles.fb}>
-                      <Image source={require('../../../assets/Images/fb.png')}/>
+                      <Image style={{width:17,height:17}} source={require('../../../assets/Image/icon-facebook.png')}/>
                       </View>
-                      <Text style={styles.text1}>@indiadeposit</Text>
-                  </View>
-                  <View style={styles.view2}>
+                      <Text style={styles.text1}>Facebook</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                  onPress={()=>Linking.openURL(link[3])}
+                  style={styles.view2}>
                       <View style={styles.fb}>
-                      <Image source={require('../../../assets/Images/in.png')}/>
+                      <Image style={{width:17,height:17}} source={require('../../../assets/Image/icon-linkdine.png')}/>
                       </View>
-                      <Text style={styles.text1}>@indiadeposit</Text>
-                  </View>
+                      <Text style={styles.text1}>Linkedin</Text>
+                  </TouchableOpacity>
                </View>
                <View style={[styles.view1,{marginTop:20}]}>
-               <View style={styles.view2}>
+               <TouchableOpacity 
+                  onPress={()=>Linking.openURL(link[1])}
+                  style={styles.view2}>
                       <View style={styles.fb}>
-                      <Image source={require('../../../assets/Images/twitter.png')}/>
+                      <Image style={{width:17,height:17}} source={require('../../../assets/Image/icon-twitter.png')}/>
                       </View>
-                      <Text style={styles.text1}>@indiadeposit</Text>
-               </View>
-               <View style={styles.view2}>
+                      <Text style={styles.text1}>Twitter</Text>
+               </TouchableOpacity>
+               <TouchableOpacity 
+              onPress={()=>Linking.openURL(link[2])}
+               style={styles.view2}>
                     <View style={styles.fb}>
-                    <Image source={require('../../../assets/Images/insta.png')}/>
+                    <Image style={{width:17,height:17}} source={require('../../../assets/Image/icon-instagram.png')}/>
                     </View>
-                    <Text style={styles.text1}>@indiadeposit</Text>
-               </View>
+                    <Text style={styles.text1}>Instagram</Text>
+               </TouchableOpacity>
                </View>
                </View>
             </View>
@@ -125,7 +141,8 @@ const Contact=({route})=>{
             <View style={styles.main}>
               <Text style={styles.toll}>WRITE US ON EMAIL</Text>
                <View style={{marginTop:18}}>
-                 <Text style={styles.india}>customercare@indiadeposit</Text>
+                 <Text onPress={()=> Linking.openURL(`mailto:${detail.email}`)} 
+                 style={styles.india}>{detail.email}</Text>
                </View>
             </View>
             <View style={styles.line}></View>

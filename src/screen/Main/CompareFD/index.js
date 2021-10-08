@@ -14,6 +14,9 @@ const selector=useSelector((state)=>state.FDCompareDetail)
 console.log('this is compare derrails',selector)
 const data1=selector.datavalue1[0]
 const data2=selector.datavalue2[0]
+console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd',data1);
+console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
+
     return(
         <View style={{flex:1}}>
               <Header
@@ -21,14 +24,13 @@ const data2=selector.datavalue2[0]
                   source={require('../../../assets/Images/arrow.png')}
                   onPress={()=>navigation.goBack()}
                /> 
-               <ScrollView>
-                 <View style={styles.View}>
+                <View style={styles.View}>
                  <View style={styles.card}>
-                          <View style={styles.xview}>
+                          {/* <View style={styles.xview}>
                                 <View style={styles.row1}>
                                       <Text style={styles.xtext}>x</Text>
                                 </View>
-                         </View>
+                         </View> */}
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
@@ -42,11 +44,6 @@ const data2=selector.datavalue2[0]
                          </View>
                      </View> 
                       <View style={styles.card}>
-                          <View style={styles.xview}>
-                                <View style={styles.row1}>
-                                      <Text style={styles.xtext}>x</Text>
-                                </View>
-                         </View>
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
@@ -61,6 +58,8 @@ const data2=selector.datavalue2[0]
                      </View> 
                      
                 </View> 
+               <ScrollView>
+                
                  <View>
                      <View style={styles.container}>
                          <Text style={styles.title}>{'Rate of interest'}</Text>
@@ -295,7 +294,7 @@ const data2=selector.datavalue2[0]
                          <Text style={styles.value}>{data2.offers}</Text>
                      </View>
                   </View>
-                  <View style={{height:100,width:'100%', backgroundColor:'#DDDDDD',}}></View>
+                  <View style={{height:40,width:'100%', backgroundColor:'#DDDDDD',}}></View>
             <View>
             </View>
             </ScrollView>

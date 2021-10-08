@@ -59,7 +59,7 @@ const showContent=()=>{
            <Header
             source={require('../../../assets/Images/arrow.png')}
            title={'NOTIFICATIONS'}
-           onPress={()=>navigation.goBack()}
+           onPress={()=>navigation.navigate('Main')}
            />
              {isFetching?<Loader/>:null}
              <View style={styles.card}>   

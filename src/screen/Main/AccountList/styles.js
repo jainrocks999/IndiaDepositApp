@@ -1,73 +1,3 @@
-// import { StyleSheet } from 'react-native';
-// import colors from '../../../component/colors';
-// import fontSize from '../../../component/fontSize';
-// export default StyleSheet.create({
-//     same:
-//     {
-//         fontSize:fontSize.eleven,
-//         fontFamily:'Montserrat-Normal',
-//         color:colors.bc,
-//         textAlign:'center'
-//     },
-//     same1:
-//     {
-//         fontSize:fontSize.eleven,
-//         fontFamily:'Montserrat-Normal',
-//         color:colors.textColor,
-//         textAlign:'center'
-//     },
-//     title:
-//     {
-//         fontSize:fontSize.fourteen,
-//         fontFamily:'Montserrat-Medium',
-//         color:colors.bc
-//     },
-//     cardView:
-//     {
-//         flexDirection:'row',
-//         justifyContent:'space-between',
-//         alignItems:'center'
-//     },
-//     card:
-//     {
-//         shadowColor:colors.black,
-//         shadowOpacity:0.25,
-//         shadowRadius:4,
-//         shadowOffset:{height:2,width:0},
-//         elevation:5,
-//         borderRadius:6,
-//         backgroundColor:colors.white,
-//        // height:85,
-//         padding:13,
-//     },
-//     cont:
-//     {
-//         paddingHorizontal:10,
-//         paddingVertical:8
-//     },
-//     row1:
-//     {
-//         flexDirection:'row',
-//         justifyContent:'space-between',
-//         marginTop:7,
-//         paddingHorizontal:0,
-//         width:'100%'
-//     },
-//     row:
-//     {
-//         flexDirection:'row',
-//         justifyContent:'space-between',
-//         marginTop:7,
-//         paddingHorizontal:10,
-//         width:'100%'
-//     },
-//     list:
-//     {
-//         alignItems:'center',
-//         justifyContent:'center',
-//         flex:1
-//     }
-// })
 import { StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
@@ -119,11 +49,9 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         justifyContent:'space-between',
-        // marginTop:7,
         paddingHorizontal:5,
         marginHorizontal:-8,
         width:'100%',
-        marginLeft:2,
       
     },
     row2:
@@ -133,7 +61,7 @@ export default StyleSheet.create({
         marginTop:7,
         paddingHorizontal:5,
         marginHorizontal:-8,
-        width:'95%',
+        width:'97%',
         marginLeft:2
     },
 
@@ -144,10 +72,10 @@ export default StyleSheet.create({
         flex:1
     },
     width:{
-        width:'20%',
-
+        // width:'20%',
+        //  alignItems:'flex-start',
         justifyContent:'center',
-      
+        alignSelf:'center'
        // flex:1
     },
     image:{width:25,height:25},

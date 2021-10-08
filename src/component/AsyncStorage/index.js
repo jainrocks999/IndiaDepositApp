@@ -11,5 +11,19 @@ export default {
     photo:'photo',
     token:'token',
     image:'image',
-    status:'status'
+    status:'status',
+    pan:'pan',
+    address1:'address1',
+    address2:'address2',
+    occupation:'occupation',
+    pincode:'pincode',
+    country:'country',
+    state:'state',
+    city:'city',
+    income_group:'income_group',
+    education:'education',
+    marital:'marital',
+    residential:'residential',
+    cityId:'cityId',
+    stateId:'stateId'
 }
