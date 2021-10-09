@@ -32,17 +32,17 @@ class OtpVarification extends React.Component{
           address1:this.props.route.params.address1,
           address2:this.props.route.params.address2,
           occupation:this.props.route.params.occupation,
-          pincode:this.props.route.params.pincode,
-          country:this.props.route.params.country,
+          pincode:this.props.route.params.pincode, 
           states:this.props.route.params.state,
           city:this.props.route.params.city,
           marital_status:this.props.route.params.marital_status,
           education:this.props.route.params.education,
           income_group:this.props.route.params.income_group,
           residential_status:this.props.route.params.residential_status,
-
+          value:0,
 
         };
+       // this.setState({value:('0')})
       }
     componentDidMount() {
         const { counter } = this.state;
@@ -71,8 +71,12 @@ class OtpVarification extends React.Component{
             type: 'User_MLogin_Request',
             url: 'mlogin',
             mobile:this.state.mobile,
-            navigation:this.props.navigation
+            navigation:this.props.navigation,
+            
+            
+           
         })
+        this.setState({value:this.state.value +1});
     }
     validateUser=()=>{
      console.log('tihs istesting details',this.state.user_id,this.state.name,this.state.otpData,this.state.mobile);
@@ -135,15 +139,29 @@ class OtpVarification extends React.Component{
                   />
                   <View style={[styles.textBottom,{marginTop:15}]}>
                       <Text style={styles.your}>
-                          {`Enter the OTP sent to your mobile number.`}
+                          {this.state.value>0 ? `You have entered wrong OTP, ${this.state.value} attempt left.`:`Enter the OTP sent to your mobile number.`}
                       </Text>
                   </View>
                 </View>          
                  <View style={styles.button}>
-                     <CustomButton
+                   <TouchableOpacity
+                    disabled={this.state.counter > 0 ? false :true}
+                    onPress={()=>this.validateUser()}
+                    style={{ width: "100%",
+                    height:50,
+                    backgroundColor:this.state.counter>0?colors.bc:'grey',
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius:30,}}
+                   >
+                      <Text style={{  alignSelf: "center",color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:16,}}>{'CONFIRM OTP'}</Text>
+
+
+                   </TouchableOpacity>
+                     {/* <CustomButton
                      title='CONFIRM OTP'
                      onPress={()=>this.validateUser()}
-                     />
+                     /> */}
                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
                       <Text style={styles.your}>
                           {`Didn’t Receive the OTP?`}

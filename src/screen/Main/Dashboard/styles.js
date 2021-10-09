@@ -185,6 +185,8 @@ export default StyleSheet.create({
         fontSize: fontSize.thirteen,
         fontWeight: '500',
         textAlign: 'center',
+        marginLeft:-10,
+       
     },
   ModelMsgText: {
     width: '99%',
