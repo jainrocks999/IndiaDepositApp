@@ -229,7 +229,8 @@ const renderItem=(item)=>{
                        <Dialog
                           dialogStyle={{width:'94%'}}
                           visible={visible}
-                          onTouchOutside={()=>setVisible(false)}
+                        
+                          //onTouchOutside={()=>setVisible(false)}
                           onHardwareBackPress={()=>setVisible(false)}
                          >
                        <DialogContent >
@@ -426,11 +427,12 @@ const renderItem=(item)=>{
                  />
                  <View style={{
                    width:'100%',
-                   bottom:20,
+                  // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
                    paddingHorizontal:20,
-                   alignItems:'center'
+                   alignItems:'center',
+                   paddingVertical:10
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}

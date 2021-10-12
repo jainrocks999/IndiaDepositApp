@@ -9,13 +9,14 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
      opacity: 50,
-     paddingVertical:10,
+     paddingBottom:8,
      shadowColor:colors.black,
     shadowOpacity:10,
     shadowOffset:{height:4,width:2},
     elevation:3,
-    borderTopWidth:3,
-    borderTopColor:'#afb3b0'
+    borderTopWidth:2,
+    borderTopColor:'#afb3b0',
+    paddingTop:3
     
   },
 

@@ -71,7 +71,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Calulator'}</Text>
+                         <Text style={styles.title}>{'Calculator'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{4}</Text>
@@ -143,7 +143,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Minumum Tenure'}</Text>
+                         <Text style={styles.title}>{'Minimum Tenure'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.min_tenure}</Text>
@@ -278,7 +278,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Insuarance'}</Text>
+                         <Text style={styles.title}>{'Insurance'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.insuarance}</Text>

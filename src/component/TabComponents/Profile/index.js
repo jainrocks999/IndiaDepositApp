@@ -227,12 +227,14 @@ const Profile=()=>{
                    </TouchableOpacity>
                    {visible1?<View>
 
-                      {value.address2==0||null?<View/>:<View>
+                      {/* {value.address2==0||null?<View/>: */}
+                      <View>
                         <Text style={styles.better}>Address Line2</Text>
                           <View style={styles.drop}>
                           <Text style={styles.better1}>{`${value.address2==0||null?'':value.address2}`}</Text>
                         </View>
-                      </View>}
+                      </View>
+                      {/* } */}
 
                       {/* {value.city==0||null?<View/>: */}
                       <View>

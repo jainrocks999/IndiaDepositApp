@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import axios from 'axios';
 class OtpVarification extends React.Component{
     constructor(props) {
         super(props);
@@ -45,13 +46,18 @@ class OtpVarification extends React.Component{
        // this.setState({value:('0')})
       }
     componentDidMount() {
+      setTimeout(() => {
+        console.log('hitdsfdsaf');
+      }, 10000);
         const { counter } = this.state;
         let timer = setInterval(this.tick, 1000);
         this.setState({ timer });
     }
     
     componentWillUnmount() {
-        clearInterval(this.state.timer);
+        // clearInterval(this.state.timer);
+        let timer = setInterval(this.tick, 1000);
+        this.setState({ timer });
     }
 
     tick = () => {
@@ -66,17 +72,38 @@ class OtpVarification extends React.Component{
     };
 
     
-    otpResend=()=>{
-        this.props.dispatch({
-            type: 'User_MLogin_Request',
-            url: 'mlogin',
-            mobile:this.state.mobile,
-            navigation:this.props.navigation,
+    otpResend=async()=>{
+      try {
+        const data = new FormData();
+        data.append('mobile',this.state.mobile)
+       
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/sendotp',
+        });
+        if(response.data.status==200){
+          Toast.show(response.data.messages)
+          this.setState({counter:this.state.counter+10})
+        }       
+      } catch (error) {
+       throw error;
+      }
+        // this.props.dispatch({
+        //     type: 'User_MLogin_Request',
+        //     url: 'mlogin',
+        //     mobile:this.state.mobile,
+        //     navigation:this.props.navigation,
             
             
            
-        })
-        this.setState({value:this.state.value +1});
+        // })
+
+      
     }
     validateUser=()=>{
      console.log('tihs istesting details',this.state.user_id,this.state.name,this.state.otpData,this.state.mobile);
@@ -105,6 +132,7 @@ class OtpVarification extends React.Component{
         this.props.navigation.replace('Main')
       }
       else{
+        this.setState({value:this.state.value +1});
         Toast.show('Please Enter Correct Otp Code')
       }
      }
@@ -144,7 +172,7 @@ class OtpVarification extends React.Component{
                   </View>
                 </View>          
                  <View style={styles.button}>
-                   <TouchableOpacity
+                   {/* <TouchableOpacity
                     disabled={this.state.counter > 0 ? false :true}
                     onPress={()=>this.validateUser()}
                     style={{ width: "100%",
@@ -157,11 +185,11 @@ class OtpVarification extends React.Component{
                       <Text style={{  alignSelf: "center",color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:16,}}>{'CONFIRM OTP'}</Text>
 
 
-                   </TouchableOpacity>
-                     {/* <CustomButton
+                   </TouchableOpacity> */}
+                     <CustomButton
                      title='CONFIRM OTP'
                      onPress={()=>this.validateUser()}
-                     /> */}
+                     />
                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
                       <Text style={styles.your}>
                           {`Didn’t Receive the OTP?`}
@@ -196,3 +224,123 @@ const mapStateToProps=(state)=>{
   }
   
   export default connect(mapStateToProps)(OtpVarification)
+
+// import React,{useState,useEffect} from 'react';
+// import { View,Text,Image,ScrollView} from 'react-native';
+// import CustomButton from '../../../component/button1';
+// import styles from './styles';
+// import Toast from 'react-native-simple-toast';
+// import StatusBar from '../../../component/StatusBar';
+// import OTPTextInput  from 'react-native-otp-textinput';
+// import colors from '../../../component/colors';
+// import { TouchableOpacity } from 'react-native';
+// import {connect} from 'react-redux';
+// import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+// import AsyncStorage from '@react-native-community/async-storage';
+// import Storage from '../../../component/AsyncStorage';
+// import axios from 'axios';
+// import { useNavigation } from '@react-navigation/native';
+// const OtpVarification=()=>{
+//      const [counter,setCounter]=useState(12)
+//      const [value,setValue]=useState()
+//      const [otp,setOtp]=useState('')
+//      const [timer,setTimer]=useState(null)
+//      const navigation=useNavigation()
+
+//      useEffect(()=>{
+//         let timer = setInterval(tick, 1000);
+//            setTimer( timer );
+//      },[])
+
+
+//      const tick = () => {
+//                if (counter == 0) {
+//               clearInterval(timer);
+//               } else {
+//                 setCounter(counter-1)
+//                 // this.setState({
+//                 //   counter: this.state.counter - 1,
+//                 // });
+//               }
+//           }
+
+//         return(
+//             <View style={styles.container}>
+             
+//               <KeyboardAwareScrollView contentContainerStyle={{height:1000}}>
+//               <View style={styles.imageContainer}>
+//                   <TouchableOpacity onPress={()=>navigation.goBack()}>
+//                   <Image style={{width:32,height:24}}  source={require('../../../assets/Image/arrowBack.png')}/>
+//                   </TouchableOpacity>
+//                   <View style={styles.round}>
+//                       <Image
+//                       source={require('../../../assets/Image/logo-icon.png')}/>
+//                   </View>
+//                   <View style={{width:'5%'}}></View>
+//               </View>
+//                <View style={styles.main}>
+//                <View style={styles.otpView}>
+//                 <Text style={styles.enter}>Enter OTP</Text>
+//                <OTPTextInput
+//                   containerStyle={styles.input}
+//                   handleTextChange={(code)=>setOtp(code)}
+//                   inputCount={4}
+//                   textInputStyle={styles.otp}
+//                   offTintColor={'white'}
+//                   tintColor={'white'}
+                  
+//                   />
+//                   <View style={[styles.textBottom,{marginTop:15}]}>
+//                       <Text style={styles.your}>
+//                           {value>0 ? `You have entered wrong OTP, ${value} attempt left.`:`Enter the OTP sent to your mobile number.`}
+//                       </Text>
+//                   </View>
+//                 </View>          
+//                  <View style={styles.button}>
+//                    {/* <TouchableOpacity
+//                     disabled={this.state.counter > 0 ? false :true}
+//                     onPress={()=>this.validateUser()}
+//                     style={{ width: "100%",
+//                     height:50,
+//                     backgroundColor:this.state.counter>0?colors.bc:'grey',
+//                     justifyContent: "center",
+//                     alignItems: "center",
+//                     borderRadius:30,}}
+//                    >
+//                       <Text style={{  alignSelf: "center",color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:16,}}>{'CONFIRM OTP'}</Text>
+
+
+//                    </TouchableOpacity> */}
+//                      <CustomButton
+//                      title='CONFIRM OTP'
+//                    //  onPress={validateUser()}
+//                      />
+//                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
+//                       <Text style={styles.your}>
+//                           {`Didn’t Receive the OTP?`}
+//                       </Text>
+//                       <TouchableOpacity
+//                       disabled={counter > 0 ? true : false}
+//                       //onPress={() => thisotpResend()}
+//                       >
+//                       <Text style={[styles.your,{color:counter>0?'grey':colors.bc,fontWeight:'700'}]}>
+//                           {` Resend again`}
+//                       </Text>
+//                       </TouchableOpacity>
+//                      </View>
+//                      {counter!=0?
+//                      <Text style={[styles.your,{textAlign:'center'}]}>
+//                          {`You can request OTP Resend\nafter 0${Math.floor(counter / 60)}:${(counter < 10 ? `0${counter%60}`:counter%60)} sec`}</Text>
+//                     :null
+//                     }
+//                  </View>
+                
+//                </View>
+//              </KeyboardAwareScrollView>
+//              <StatusBar/>
+//            </View>
+//         )
+//     }
+
+  
+//   export default OtpVarification;

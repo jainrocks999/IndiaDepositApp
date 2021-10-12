@@ -172,7 +172,7 @@ const data2=selector.datavalue2[0]
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Non-Maitenance Penalty'}</Text>
+                         <Text style={styles.title}>{'Non-Maintenance Penalty'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.non_maitenance_penalty_charges}</Text>
@@ -289,7 +289,7 @@ const data2=selector.datavalue2[0]
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Insuarance'}</Text>
+                         <Text style={styles.title}>{'Insurance'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.Insuarance_health_feature}</Text>

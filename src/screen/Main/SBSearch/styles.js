@@ -137,6 +137,19 @@ export default StyleSheet.create({
     {
         marginTop:16,
         marginRight:8
-    }
+    },
+    warn:
+    {
+        fontSize:fontSize.twelve,
+        color:'red'
+    },
+    error:
+    {
+        width:'90%',
+        justifyContent:'center',
+        alignItems:'flex-start',
+        paddingHorizontal:10,
+        marginTop:6
+    },
     
 })

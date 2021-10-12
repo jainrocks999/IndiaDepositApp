@@ -70,7 +70,7 @@ const SBAccount=({route})=>{
                               unknown typesetter book.</Text>
                               <View style={styles.view}>
                                   <Text style={[styles.text2,{fontWeight:'700'}]}>Minimum Balance </Text>
-                                  <View style={{flexDirection:'row',width:'100%'}}>
+                                  <View style={{flexDirection:'row',width:'100%',marginTop:7}}>
                                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                                   <TextInput
                                        style={styles.textinput}
@@ -116,7 +116,7 @@ const SBAccount=({route})=>{
                           </View>
                           </KeyboardAwareScrollView>
                   </ScrollView>
-                       <BottomTab/>
+                       {/* <BottomTab/> */}
                         <StatusBar/>
         </View>
        )

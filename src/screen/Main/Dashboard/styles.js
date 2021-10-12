@@ -159,7 +159,7 @@ export default StyleSheet.create({
         alignItems:'center',justifyContent:'center'
    },
    modal: {
-    width: 350,
+    width: 330,
     height:200,
     borderRadius: 10,
     flexDirection: 'column',
@@ -191,14 +191,15 @@ export default StyleSheet.create({
   ModelMsgText: {
     width: '99%',
     color: colors.white,
-    fontSize: fontSize.nineteen,
+    fontSize: fontSize.seventeen,
     textAlign: 'center',
     fontWeight:'700'
    // margin:10
   },
   ModelmsgView: {
-    width: '99%',
-    alignItems: 'center',
+    width: 75,
+    height:44
+,    alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
    // marginTop:10

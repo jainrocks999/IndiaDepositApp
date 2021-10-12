@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput,BackHandler} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -30,6 +30,10 @@ const SBAccountList=({route})=>{
         const isFetching=useSelector((state)=>state.isFetching)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
+
+
+
+
 const manageList=(item)=>{
   dispatch({
     type: 'SB_Detail_Request',
@@ -236,7 +240,8 @@ const renderItem=(item)=>{
                        <Dialog
                           dialogStyle={{width:'94%',paddingHorizontal:10}}
                           visible={visible}
-                          onTouchOutside={()=>setVisible(false)}
+                          onHardwareBackPress={()=> setVisible(false)}
+                         // onTouchOutside={()=>setVisible(false)}
                          >
                        <DialogContent >
                        <View >
@@ -367,14 +372,20 @@ const renderItem=(item)=>{
                    style={{width:'100%'}}
                  />
  <View style={{
-                   width:'100%',
-                   bottom:20,
+                  //  width:'100%',
+                  //  //bottom:20,
+                  //  flexDirection:'row',
+                  //  justifyContent:'space-between',
+                  //  paddingHorizontal:20,
+                  //  alignItems:'center',
+                  //  backfaceVisibility:colors.card,
+                  width:'100%',
+                  // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
                    paddingHorizontal:20,
                    alignItems:'center',
-                   backfaceVisibility:colors.card,
-                   
+                   paddingVertical:10
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}

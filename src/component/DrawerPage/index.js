@@ -234,7 +234,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/about.png')}/>
+                                source={require('../../assets/Image/contact_us.png')}/>
                             </View>
                             <Text style={styles.text}>{'Contact Us'}</Text>
                             </View>
