@@ -101,12 +101,12 @@ export default StyleSheet.create({
     text:{
         color:colors.bc,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text1:{
         color:colors.heading,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text2:{
         color:colors.heading
@@ -114,12 +114,12 @@ export default StyleSheet.create({
     text3:{
         color:colors.black,
         fontSize:fontSize.seventeen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text4:{
         color:colors.white,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text5:{
         fontSize:fontSize.sixteen,
@@ -128,7 +128,7 @@ export default StyleSheet.create({
     text6:{
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     img:{
         width: '100%',

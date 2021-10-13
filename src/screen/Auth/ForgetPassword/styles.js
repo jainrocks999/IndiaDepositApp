@@ -54,7 +54,7 @@ export default StyleSheet.create({
     heading:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading
     },
     input:

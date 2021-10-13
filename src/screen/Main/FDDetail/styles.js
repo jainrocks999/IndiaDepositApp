@@ -49,13 +49,13 @@ export default StyleSheet.create({
     item:
     {
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     item1:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading
     },
     view1:
@@ -86,7 +86,7 @@ export default StyleSheet.create({
     tds:
     {
         color:colors.black,
-    fontFamily:'Montserrat-Normal',
+    fontFamily:'Montserrat-Regular',
     marginTop:10,
     fontWeight:'700',
     fontSize:fontSize.fourteen
@@ -94,7 +94,7 @@ export default StyleSheet.create({
     lorem:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         marginTop:10,
         fontSize:fontSize.thirteen
     },
@@ -109,7 +109,7 @@ export default StyleSheet.create({
     pointText:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen,
         marginLeft:10,
         marginTop:1
@@ -127,19 +127,19 @@ export default StyleSheet.create({
     text3:
     {
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
     },
     text2:
     {
         color:colors.black,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         marginTop:10
     },
     bankDetails:
     {
         color:colors.bc,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontWeight:'700'
     },
     top:

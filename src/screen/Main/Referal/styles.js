@@ -93,7 +93,7 @@ export default StyleSheet.create({
     text1:
     {
         width:'90%',
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen,
         color:colors.textColor
     },
@@ -137,10 +137,10 @@ export default StyleSheet.create({
     },
     text3:{
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen
     },
     row:
-        {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Normal'}
+        {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Regular'}
     
 })

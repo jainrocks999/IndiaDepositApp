@@ -4,7 +4,7 @@ export default StyleSheet.create({
 heading:{
     fontSize:15,
     fontWeight:'500',
-    fontFamily:'Montserrat-Normal',
+    fontFamily:'Montserrat-Regular',
     color:colors.textColor
 },
 container:{

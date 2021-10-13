@@ -73,7 +73,7 @@ export default StyleSheet.create({
     heading:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading
     },
     input:
@@ -128,13 +128,13 @@ export default StyleSheet.create({
     agree:
     {
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     agree1:
     {
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.bc
     },
     text1:

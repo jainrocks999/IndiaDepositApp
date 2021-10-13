@@ -24,13 +24,13 @@ export default StyleSheet.create({
     {
         color:colors.white,
         fontSize:fontSize.nineteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     last:
     {
         color:colors.white,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     pfile:
     {
@@ -107,7 +107,7 @@ export default StyleSheet.create({
     Text1:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontWeight:'500'
     },
     buttomview1:
@@ -146,7 +146,7 @@ export default StyleSheet.create({
     search:{
         color:colors.white,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     enable:{
         position: 'absolute',

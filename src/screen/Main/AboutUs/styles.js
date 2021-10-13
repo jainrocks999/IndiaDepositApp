@@ -25,12 +25,12 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.eighteen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     normal:
     {
         fontSize:fontSize.fourteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
        // marginTop:10,
         paddingHorizontal:15,

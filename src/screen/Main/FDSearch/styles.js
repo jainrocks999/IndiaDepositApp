@@ -59,7 +59,7 @@ export default StyleSheet.create({
     text1:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         
     },
     main:

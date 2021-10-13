@@ -50,7 +50,7 @@ export default StyleSheet.create({
     heading:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading,
     },
     input:
@@ -80,7 +80,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.fourteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     account1:
     {

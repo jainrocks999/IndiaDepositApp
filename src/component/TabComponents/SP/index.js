@@ -117,7 +117,7 @@ const SIP=()=>{
                     <View style={{alignItems:'center'}}>
                         <Text style={{fontSize:fontsize.seventeen,
                             color:colors.textColor,
-                            fontFamily:'Montserrat-Normal'
+                            fontFamily:'Montserrat-Regular'
                             }}>Total Interest</Text>
 
                        {time && interest=='0'? <Text>0</Text>: 

@@ -48,7 +48,7 @@ export default StyleSheet.create({
     heading:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading
     },
     input:
@@ -77,12 +77,15 @@ export default StyleSheet.create({
     account:
     {
         color:colors.textColor,
-        fontSize:fontSize.thirteen
+        fontSize:fontSize.thirteen,
+        fontFamily:'Montserrat-Regular'
     },
     account1:
     {
         color:colors.bc,
-        fontSize:fontSize.thirteen
+        fontSize:fontSize.thirteen,
+        fontFamily:'Montserrat-Regular'
+
     },
     error:
     {
@@ -141,7 +144,7 @@ export default StyleSheet.create({
     {
         marginLeft:4,
         color:colors.heading,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen
     },
     text2:

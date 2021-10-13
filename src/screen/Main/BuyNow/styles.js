@@ -5,13 +5,13 @@ export default StyleSheet.create({
     same:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     title:
     {
         fontSize:fontSize.fourteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     text:{
@@ -39,13 +39,13 @@ export default StyleSheet.create({
     },
     title1:
     {
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         fontSize:fontSize.fefteen
     },
     value1:
     {
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve,
         color:colors.textColor
     },

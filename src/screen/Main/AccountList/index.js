@@ -248,7 +248,7 @@ const renderItem=(item)=>{
                   < View style={styles.view5}>
                      
                      <View  style={{marginTop:2}}>
-                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:16}}>Modify your search</Text>
+                        <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:16}}>Modify your search</Text>
                      </View>
                      <View style={styles.view5}>
                         <View style={styles.view52}>  
@@ -281,7 +281,7 @@ const renderItem=(item)=>{
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput
@@ -296,7 +296,7 @@ const renderItem=(item)=>{
                        </View>
 
                        <View style={{marginTop:26}}>
-                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Regularr',}}>Type of SB A/C</Text>
                            
 
                               <MultiSelect     
@@ -352,14 +352,14 @@ const renderItem=(item)=>{
                     flexDirection:'row',justifyContent:'space-between',alignItems:'center',
                     paddingHorizontal:15,paddingVertical:8
                     }]}>
-                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>
+                    <Text style={{fontFamily:'Montserrat-Regularrr',color:colors.bc,fontSize:14}}>
                       {`Minimum balance : `}
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                       {`${route.params.balance}`}
                       </Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{
-                          fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:5}}>
+                          fontFamily:'Montserrat-Regularr',color:colors.bc,fontSize:14,marginRight:5}}>
                             {`Location : ${route.params.location}`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>
@@ -395,11 +395,11 @@ const renderItem=(item)=>{
                    backgroundColor:'#fff',
                    borderRadius:10
                    }}>
-                   <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.bc}}>Compare</Text>
+                   <Text style={{fontSize:13,fontFamily:'Montserrat-Regular',color:colors.bc}}>Compare</Text>
                  </TouchableOpacity>
                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                    <Image source={require('../../../assets/Image/filter.png')}/>
-                   <Text style={{fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:3}}>Sort By</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
                  <TouchableOpacity style={{
                    paddingHorizontal:10,

@@ -5,7 +5,7 @@ export default StyleSheet.create({
     same:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     title:
@@ -62,7 +62,7 @@ export default StyleSheet.create({
     },
     text:{
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve
     },
     modal: {

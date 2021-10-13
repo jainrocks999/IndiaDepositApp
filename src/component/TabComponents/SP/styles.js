@@ -26,11 +26,11 @@ export default StyleSheet.create({
     heading:{
         fontSize:fontSize.eighteen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     normal:{
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         marginTop:10
     },
@@ -55,7 +55,7 @@ export default StyleSheet.create({
     text:{
         fontSize:fontSize.seventeen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     img:{
         width:20,

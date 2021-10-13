@@ -46,18 +46,18 @@ export default StyleSheet.create({
     text1:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     text2:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text3:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         marginLeft:30
     },
     textinput:

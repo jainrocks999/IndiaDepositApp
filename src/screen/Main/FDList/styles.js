@@ -5,7 +5,7 @@ export default StyleSheet.create({
     same:
     {
         fontSize:fontSize.ten,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         textAlign:'center'
        
@@ -101,7 +101,7 @@ export default StyleSheet.create({
     text5:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         
     },
     view52:

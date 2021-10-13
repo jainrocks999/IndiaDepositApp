@@ -47,21 +47,21 @@ export default StyleSheet.create({
     Textt:{
         fontSize:fontSize.fourteen,
         color:colors.black,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     Textp:{fontSize:fontSize.eleven,
         color:colors.heading,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     Textc:{
         fontSize:fontSize.thirteen,
         color:colors.black,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     Textr:{
         fontSize:fontSize.twelve,
         color:colors.bc,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     line:{
         borderWidth:1,
@@ -75,11 +75,11 @@ export default StyleSheet.create({
     heading:{
         fontSize:fontSize.eighteen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     normal:{
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         marginTop:10
     },

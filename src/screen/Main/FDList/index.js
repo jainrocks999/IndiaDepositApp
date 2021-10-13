@@ -328,7 +328,7 @@ const renderItem=(item)=>{
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput
@@ -342,7 +342,7 @@ const renderItem=(item)=>{
                            />
                        </View>
                        <View style={{marginTop:16}}>
-                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of FD</Text>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Regular',}}>Type of FD</Text>
                            <MultiSelect     
                                 items={item}
                                 uniqueKey="name"
@@ -405,14 +405,14 @@ const renderItem=(item)=>{
                     backgroundColor:'white'
                     }]}>
                     <Text style={{
-                      fontFamily:'Montserrat-Normal',
+                      fontFamily:'Montserrat-Regular',
                       color:colors.bc,fontSize:14}}>{`Amount : `}
                       <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
                       {`${route.params.amount}`}
                       </Text>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{
-                          fontFamily:'Montserrat-Normal',
+                          fontFamily:'Montserrat-Regular',
                           color:colors.bc,fontSize:14,marginRight:15}}>
                             {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
@@ -442,11 +442,11 @@ const renderItem=(item)=>{
                    backgroundColor:'#fff',
                    borderRadius:10
                    }}>
-                   <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.bc}}>Compare</Text>
+                   <Text style={{fontSize:13,fontFamily:'Montserrat-Regular',color:colors.bc}}>Compare</Text>
                  </TouchableOpacity>
                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                    <Image source={require('../../../assets/Image/filter.png')}/>
-                   <Text style={{fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:3}}>Sort By</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
                  <TouchableOpacity style={{
                     paddingHorizontal:10,
