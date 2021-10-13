@@ -76,13 +76,17 @@ export default StyleSheet.create({
     view2:{
         marginTop:15,
         flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        width:'100%',
+        justifyContent:'center'
     },
     view3:{
         backgroundColor:colors.bc,
         paddingHorizontal:12,
         paddingVertical:2,
-        marginLeft:12
+        alignItems:'center',
+        justifyContent:'center'
+        // marginLeft:12
     },
     view4:{
         width:'100%',
