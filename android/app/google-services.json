@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "371052927363",
+    "project_id": "indiadeposit-82786",
+    "storage_bucket": "indiadeposit-82786.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371052927363:android:fabdde9b6154fa64033eb6",
+        "android_client_info": {
+          "package_name": "com.indiadeposit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371052927363-rpbtghri3042ploidqa3e9fn893drhse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrK7uJFf8k9r2PblZMxVjlTKfRSHZ540g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371052927363-rpbtghri3042ploidqa3e9fn893drhse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
