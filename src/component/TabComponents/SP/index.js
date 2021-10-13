@@ -5,7 +5,6 @@ import styles from './styles';
 import ProgressBar from 'react-native-progress/Bar';
 import colors from '../../colors';
 import fontsize from '../../../component/fontSize';
-import RangeSlider from '@3beeepb/react-native-range-slider';
 import Slider  from "react-native-slider";
 const SIP=()=>{
     const navigation=useNavigation()

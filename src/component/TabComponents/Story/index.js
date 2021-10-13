@@ -100,9 +100,9 @@ const Blog=()=>{
                 renderItem={({item})=>(
                     <View style={styles.card}>
                         {/* <View style={styles.titleView}> */}
-                        <TouchableOpacity style={styles.titleView}>
+                        <View style={styles.titleView}>
                             <Text style={styles.Text1}>{item.title}</Text>
-                        </TouchableOpacity>
+                        </View>
                         {/* </View> */}
                         <View style={styles.view}>
                             <Text style={styles.Textt}>{item.short_content}</Text>
@@ -114,7 +114,7 @@ const Blog=()=>{
                             <Text style={styles.Textc}>{item.short_content}</Text>
                         </View> */}
                         <View style={styles.line}/>
-                        <TouchableOpacity onPress={()=>navigation.navigate('BlogCategory',{item})}>
+                        <TouchableOpacity onPress={()=>navigation.navigate('StoryCategory',{item})}>
                             <Text style={styles.Textr}>Read More</Text>
                         </TouchableOpacity>
                  </View>

@@ -82,7 +82,9 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         paddingHorizontal:12,
         paddingVertical:2,
-        marginLeft:12
+        alignItems:'center',
+        justifyContent:'center'
+       // marginLeft:12
     },
     view4:{
         width:'100%',

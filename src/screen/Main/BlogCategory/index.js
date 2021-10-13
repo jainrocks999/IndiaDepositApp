@@ -30,13 +30,16 @@ const BlogCategory=({route})=>{
                         <Text style={styles.text2}>{'  >>  '}</Text>
                         <Text style={styles.text1}>{data.title}</Text>
                     </View>
-                    <View style={styles.view5}>
-                      <Text style={styles.text3}>{`${data.description}`}</Text>
-                    </View>
-                    <View style={styles.view2}>
-                      <Text style={styles.text1}>{`Posted on july 14th, 2021`}</Text>
-                      <View style={styles.view3}>
+                    {data.short_content?<View style={styles.view5}>
+                      <Text style={styles.text3}>{`${data.short_content}`}</Text>
+                    </View>:null}
+                    <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center', marginTop:15,}}>
+                    <Text style={styles.text1}>{`published on ${data.created_date}`}</Text>
+                    <View style={styles.view3}>
                           <Text style={styles.text4}>{data.catergory_name}</Text>
+                      </View>
+                      <View style={styles.view3}>
+                          <Text style={styles.text4}>{data.tag_name}</Text>
                       </View>
                     </View>
                     <View style={styles.view4}>
@@ -50,11 +53,8 @@ const BlogCategory=({route})=>{
                     </View>
                     <View style={styles.view5}>
                     <HTMLView
-                      value={data.content}
+                      value={data.content.trim().replace(new RegExp('<p>', 'g'), '<span>')}
                     />
-                    
-                    
-                      {/* <Text style={styles.text6}>{`${}`}</Text> */}
                     </View>
                </View>
                </ScrollView>

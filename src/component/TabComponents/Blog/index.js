@@ -102,12 +102,17 @@ console.log('this is narendra here',Blogs);
                 showsVerticalScrollIndicator={false}
                 renderItem={({item})=>(
                     <View style={styles.card}>
-                        <TouchableOpacity style={styles.titleView}>
+                        <View style={styles.titleView}>
                             <Text style={styles.Text1}>{item.title}</Text>
-                        </TouchableOpacity>
-                        <View style={styles.view}>
-                            <Text style={styles.Textt}>{item.short_content}</Text>
                         </View>
+
+                        {item.short_content?<View style={styles.view}>
+                            <Text style={styles.Textt}>{item.short_content}</Text>
+                        </View>:
+                        <View style={styles.view}>
+                            <Text numberOfLines={1} style={styles.Textt}>{item.content}</Text>
+                        </View>}
+
                         <View style={styles.view}>
                             <Text style={styles.Textp}>{`published on ${item.created_date}`}</Text>
                         </View>
