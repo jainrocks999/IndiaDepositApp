@@ -18,7 +18,7 @@ const Header=({title,onPress1,titleTwo,source,onPress})=>{
             {titleTwo?
             <TouchableOpacity onPress={onPress1}
             style={styles.squareView}>
-                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Normal',}}>{titleTwo}</Text>
+                <Text style={{fontSize:fontSize.eleven,color:colors.bc,fontFamily:'Montserrat-Regular',}}>{titleTwo}</Text>
             </TouchableOpacity>:<View></View>
             }
            </View>

@@ -14,7 +14,7 @@ export default StyleSheet.create({
     },
     caption: {
         fontSize: fontSize.fourteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
    
@@ -168,7 +168,7 @@ export default StyleSheet.create({
         text3:{
             color:colors.white,
             fontSize:fontSize.fourteen,
-            fontFamily:'Montserrat-Normal'
+            fontFamily:'Montserrat-Regular'
         }, 
         view1:{ 
             flexDirection: 'row',

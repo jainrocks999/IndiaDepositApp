@@ -116,7 +116,7 @@ export default StyleSheet.create({
         alignSelf:'center',
         alignContent:'center',
         textAlign:'center',
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen
     },
    

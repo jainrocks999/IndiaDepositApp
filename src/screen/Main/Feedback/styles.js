@@ -56,7 +56,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         marginTop:20
     },
     star:
@@ -70,7 +70,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:13,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     drop:
     {
@@ -86,7 +86,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:13,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     bottom:
     {

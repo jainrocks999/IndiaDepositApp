@@ -45,7 +45,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     view:
     {
@@ -66,7 +66,7 @@ export default StyleSheet.create({
     text1:{
         marginLeft:10,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen
     },
 
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.seventeen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     call:
     {
@@ -112,7 +112,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     input:
     {  

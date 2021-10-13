@@ -35,7 +35,7 @@ flex: 1,
     heading:
     {
         fontSize:fontSize.seventeen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         alignContent:'center',
         textAlign:'center'
@@ -81,7 +81,7 @@ button:
     {
         color:colors.white,
         fontSize:fontSize.sixteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     view:
     {

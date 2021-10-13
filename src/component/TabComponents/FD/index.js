@@ -101,7 +101,7 @@ const FD=()=>{
                 </View>
                 <View style={{alignItems:'center',marginTop:20}}>
                       
-                        <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Normal'
+                        <Text style={{fontSize:fontsize.seventeen,color:colors.textColor,fontFamily:'Montserrat-Regular'
                       }}>{`Maturity Value  ₹ ${(totalInvestment*Math.pow((1+interest/100),(1*time))).toFixed(0)}`}</Text>
                 </View>
               </ScrollView>

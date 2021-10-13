@@ -38,7 +38,7 @@ const showContent=()=>{
                    <View>
                        <View style={styles.view2}>
                        <Text style={styles.text1}>{item.title}</Text>
-                       {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.title}</Text> */}
+                       {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Regular'}}>{item.title}</Text> */}
                        </View>
                        <Text style={styles.text3}>{item.notification}</Text>
                    </View>

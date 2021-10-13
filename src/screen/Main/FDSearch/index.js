@@ -194,7 +194,7 @@ const Contact=({route})=>{
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput

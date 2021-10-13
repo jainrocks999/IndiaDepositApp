@@ -19,20 +19,20 @@ export default StyleSheet.create({
     },
     text1:
     {
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve
     },
     text2:
     {
         color:colors.bc,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text3:
     {
         color:'grey',
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     line:
     {

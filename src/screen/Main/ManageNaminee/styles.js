@@ -54,7 +54,7 @@ export default StyleSheet.create({
     buttonText:
     {
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve
 
     },

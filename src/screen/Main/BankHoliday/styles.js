@@ -36,7 +36,7 @@ export default StyleSheet.create({
     month:
     {
         fontSize:fontSize.sixteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.white
     },
     border1:
@@ -71,26 +71,26 @@ export default StyleSheet.create({
     item1:
     {
         fontSize:fontSize.fefteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     item2:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     result:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen,
         marginTop:20
     },
     search:
     {
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen
     },
     button:
@@ -113,7 +113,7 @@ export default StyleSheet.create({
     dummy:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     fdata:{
