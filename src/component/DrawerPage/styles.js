@@ -112,8 +112,7 @@ export default StyleSheet.create({
         color:colors.white,
         fontSize: fontSize.fefteen,
         alignSelf: 'center',
-        fontFamily: 'Poppins-Bold',
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat-SemiBold',
         textAlign: 'center',
       },
       ModelMsgText: {

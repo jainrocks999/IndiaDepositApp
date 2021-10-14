@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput, Platform} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
@@ -305,7 +305,7 @@ const showVisible1=()=>{
                      <TextInput 
                      ref={ref4}
                       onFocus={()=>setBBorder(true)}
-                      style={[styles.input1,{marginLeft:-3,}]}
+                      style={[styles.input1,{marginLeft:Platform.OS=='android'? -3:0,marginTop:Platform.OS=='android'?0:5}]}
                       placeholder='BA52RT'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('referal')}
@@ -321,7 +321,7 @@ const showVisible1=()=>{
                 }
               </View>
               <View
-               style={{flexDirection:'row',alignItems:'center'}}>
+               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,}}>
                  <CheckBox
                     disabled={false}
                     value={toggleCheckBox}

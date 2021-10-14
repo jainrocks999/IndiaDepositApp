@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -213,7 +213,9 @@ const renderItem=(item)=>{
       )
 }
     return(
-        <View style={{flex:1,backgroundColor:colors.card}}>
+        <View style={{flex:1,backgroundColor:colors.card,
+        //paddingTop:Platform.OS=='android'?0:40
+        }}>
            <View>
             <View style={styles.mains}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
@@ -258,7 +260,7 @@ const renderItem=(item)=>{
                                       style={styles.image4} 
                                       source={require('../../../assets/Image/down.png')}/>}
                                     />
-                                      <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
+                                      <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -8:6}}/>
                                   </View>
                                </View>
                                <View style={styles.view53}>
@@ -277,7 +279,7 @@ const renderItem=(item)=>{
                                           style={styles.image4} 
                                           source={require('../../../assets/Image/down.png')}/>}
                                         />
-                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
+                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -8:8}}/>
                                      </View>
                                </View>
                                <View style={styles.view53}>
@@ -296,7 +298,7 @@ const renderItem=(item)=>{
                                            style={styles.image4} 
                                            source={require('../../../assets/Image/down.png')}/>}
                                        />
-                                         <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
+                                         <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -8:8}}/>
                                      </View>
                                  </View>
                              </View>
@@ -306,7 +308,7 @@ const renderItem=(item)=>{
                            <View style={styles.view4}>
                                <Text style={[styles.text5,{fontWeight:'700'}]}>Amount</Text>
                            </View>
-                           <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
+                           <View style={{flexDirection:'row',alignItems:'center',marginTop:Platform.OS=='android'? -10:6}}>
                              <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
                                  style={{width:'90%'}}
@@ -316,7 +318,7 @@ const renderItem=(item)=>{
                                  onChangeText={(val)=>setAmount(val)}
                               />
                            </View>
-                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:-10}}/>
+                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android'? -10:5}}/>
                       </View>
                       <View style={{marginTop:24}}>
                           <View style={styles.view4}>
@@ -332,7 +334,7 @@ const renderItem=(item)=>{
                        </View>
                       <View style={styles.view7}>
                            <TextInput
-                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:Platform.OS=='android'? 0:5}}
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={pincode}
@@ -404,12 +406,19 @@ const renderItem=(item)=>{
                     paddingVertical:8,
                     backgroundColor:'white'
                     }]}>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={{
                       fontFamily:'Montserrat-Regular',
                       color:colors.bc,fontSize:14}}>{`Amount : `}
+                         </Text>
                       <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{
+                      fontFamily:'Montserrat-Regular',
+                      color:colors.bc,fontSize:14}}>
                       {`${route.params.amount}`}
                       </Text>
+                   
+                      </View>
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{
                           fontFamily:'Montserrat-Regular',
@@ -450,7 +459,7 @@ const renderItem=(item)=>{
                  </View>
                  <TouchableOpacity style={{
                     paddingHorizontal:10,
-                    paddingVertical:0,
+                    paddingVertical:Platform.OS=='android'?0:8,
                      backgroundColor:'#fff',
                      borderRadius:10,
                      flexDirection:'row',
@@ -461,6 +470,7 @@ const renderItem=(item)=>{
                           items={Sorting}
                           style={{ 
                           inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          inputIOS:{color:colors.bc},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
                           }}
                           value={sort}

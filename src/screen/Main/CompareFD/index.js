@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, } from 'react-native';
+import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, Platform, } from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,9 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd',data1);
 console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
 
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+        //paddingTop:Platform.OS=='android'?0:40
+        }}>
               <Header
                   title={'COMPARE FD'}
                   source={require('../../../assets/Images/arrow.png')}

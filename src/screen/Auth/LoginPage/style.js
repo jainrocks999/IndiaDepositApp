@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform,} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -7,7 +7,9 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor:colors.card,
-        height:'100%'
+        height:'100%',
+      //  paddingTop: Platform.OS === "android" ?0: 40
+
     },
    
     imageContainer:
@@ -27,7 +29,7 @@ export default StyleSheet.create({
     input1:
     {
         width:'90%',
-        marginLeft:1,
+        marginLeft:Platform.OS=='android'?1:6,
         paddingVertical:-10,
         color:colors.textColor
     },
@@ -65,7 +67,7 @@ export default StyleSheet.create({
     button:
     {
         width:'100%',
-        marginTop:5
+        marginTop:Platform.OS=='android'?5:12
     },
     bottom:
     {
@@ -117,10 +119,11 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        // alignItems:'center',
-        // justifyContent:'center',
-        marginTop:5,
-        paddingHorizontal:16
+        alignItems:'center',
+        justifyContent:'center',
+        // marginTop:5,
+        paddingHorizontal:Platform.OS=='android'? 16:0,
+        // paddingVertical:10
     },
     view1:
     {
@@ -157,7 +160,8 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.thirteen,
         fontFamily:'Montserrat-Regular',
-        color:colors.textColor
+        color:colors.textColor,
+        marginLeft:Platform.OS=='android'?0:10
     },
      
    

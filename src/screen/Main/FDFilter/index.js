@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image, TextInput ,Switch,ScrollView} from "react-native";
+import { View,Text,Image, TextInput ,Switch,ScrollView,Platform} from "react-native";
 import colors from '../../../component/colors';
 import Slider  from "react-native-slider";
 import styles from './styles';
@@ -101,7 +101,9 @@ const FDFilter=({route})=>{
           console.log(selected,);
     }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+       // paddingTop:Platform.OS=='android'?0:40
+        }}>
             <View style={{
                 flexDirection:'row',
                 paddingHorizontal:20,

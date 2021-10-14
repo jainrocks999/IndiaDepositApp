@@ -84,14 +84,14 @@ const validateUser=async(values)=>{
         <View style={styles.container}>
          {isFetching?<Loader/>:null} 
          <KeyboardAwareScrollView
-        extraScrollHeight={100}
+         extraScrollHeight={100}
          enableOnAndroid={true} 
-        keyboardShouldPersistTaps='handled'
+         keyboardShouldPersistTaps='handled'
          contentContainerStyle={{flex:1}}>
            <View style={{flex:1}}>
           <View style={styles.imageContainer}>
               <View style={styles.round}>
-                  <Image style={styles.image} 
+                  <Image
                   source={require('../../../assets/Image/logo-icon.png')}/>
               </View>
           </View>
@@ -124,15 +124,7 @@ const validateUser=async(values)=>{
               </View>
              <View style={styles.view1}>
                <Text style={styles.text1}>Enter Your Pin</Text>
-              {/* <OTPTextInput
-              ref={next1 }
-              containerStyle={styles.OtpInput}
-              handleTextChange={(code)=>setOtp(code)}
-              inputCount={4}
-              textInputStyle={styles.otp}
-              offTintColor={'white'}
-              tintColor={'white'}
-              /> */}
+             
                 <View style={{width:'100%'}}>
                <OtpInputs
                 ref={next}
@@ -142,7 +134,7 @@ const validateUser=async(values)=>{
                  keyboardType={"numeric"} secureTextEntry ={visible}
                  style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
                  inputContainerStyles={styles.otp}
-                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor}}
+                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor,alignItems:'center'}}
                  returnKeyType='go'
                  onSubmitEditing={()=>handleSubmit()}
               />

@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
        flex: 1,
-        backgroundColor:colors.card
+        backgroundColor:colors.card,
+       // paddingTop:Platform.OS=='android'?0:40
     },
     scroll:
     {
@@ -144,7 +145,7 @@ export default StyleSheet.create({
     },
     image:
     {
-        marginTop:16,
+        marginTop:Platform.OS=='android'?16:4,
         marginRight:-5,
         height:7,
         width:20,

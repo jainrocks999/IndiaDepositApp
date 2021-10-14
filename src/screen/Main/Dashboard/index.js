@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from "react-native-modal";
 import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import { Platform } from "react-native";
 let backPress=0
 let arrayOfOneFD=[]
 const dashboard=()=>{
@@ -183,7 +184,7 @@ const dashboard=()=>{
     
 
     return(
-      <View style={{flexGrow:1}}>
+      <View style={{flexGrow:1,}}>
         <Header
     title={'DASHBOARD'}
     source ={require('../../../assets/Images/drawer.png')}

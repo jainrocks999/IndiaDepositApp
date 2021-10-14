@@ -1,5 +1,5 @@
 import React,{useState,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -238,7 +238,7 @@ const RegisterPage=({route})=>{
                                          placeholder={{ label: "Select Gender", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:14}} 
+                                         style={{marginLeft:12,width:25,height:9, marginTop:Platform.OS=='android'? 14:4}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
                                    />
                             </View>
@@ -422,7 +422,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Country", value: 0 }}
                         Icon={()=>
                            <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                      />                                    
                     </View>
@@ -446,7 +446,7 @@ const RegisterPage=({route})=>{
                            placeholder={{ label: "Select State", value: 0 }}
                            Icon={()=>
                            <Image 
-                           style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                      />                                
                     </View>
@@ -469,7 +469,7 @@ const RegisterPage=({route})=>{
                         placeholder={{label: "Select City", value:0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                   />                            
                     </View>
@@ -493,7 +493,7 @@ const RegisterPage=({route})=>{
                                          placeholder={{ label: "Select Income Group", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
                                    />
                     </View>
@@ -517,7 +517,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Education", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                      source={require('../../../assets/Image/down.png')}/>}   
                   />                             
                     </View>
@@ -541,7 +541,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Marital Status", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                   />                               
                     </View>
@@ -565,7 +565,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Residential Status", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                      source={require('../../../assets/Image/down.png')}/>}   
                   />                          
                     </View>

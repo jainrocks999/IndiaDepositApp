@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -121,8 +121,8 @@ export default StyleSheet.create({
     },
     image4:
     {
-        marginTop:16,
-        marginRight:-5,
+        marginTop:Platform.OS=='android'? 16:6,
+        marginRight:-2,
         height:7,
         width:20,
     },

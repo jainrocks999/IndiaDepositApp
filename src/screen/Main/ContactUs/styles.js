@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
     flex: 1,
-    backgroundColor:colors.card
+    backgroundColor:colors.card,
+    //paddingTop:Platform.OS=='android'?0:40
     },
     imageContainer:
     {
@@ -122,6 +123,7 @@ export default StyleSheet.create({
         borderRadius:6,
         borderColor:colors.textColor,
         paddingHorizontal:14,
+        justifyContent:'center'
         
     },
     input1:
@@ -137,8 +139,9 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         paddingHorizontal:14,
         alignItems:'flex-start',
-        justifyContent:'flex-start',
-        flex:1
+        justifyContent:'center',
+        flex:1,
+        paddingVertical:Platform.OS=='android'?0: 10
         
     },
     error:

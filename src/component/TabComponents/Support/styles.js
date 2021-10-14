@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../fontSize';
 export default StyleSheet.create({
@@ -39,17 +39,26 @@ export default StyleSheet.create({
         height:40,
         borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5,
+        paddingHorizontal:Platform.OS=='android'? 5:10,
         justifyContent:'center'
 
     },
     drop1:{
         marginTop:13 ,
         borderWidth:1,
-        height:70,
-        borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5, 
+        borderColor:colors.textColor,
+        paddingHorizontal:14,
+        alignItems:'flex-start',
+        justifyContent:'center',
+        flex:1,
+        paddingVertical:Platform.OS=='android'?0: 10
+        // borderWidth:1,
+        // height:70,
+        // borderColor:colors.textColor,
+        // borderRadius:6,
+        // paddingHorizontal:5, 
+        // paddingVertical:Platform.OS=='android'?0:10
     },
     error:{
         width:'90%',

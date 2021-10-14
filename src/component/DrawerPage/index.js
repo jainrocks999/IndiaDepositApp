@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from 'react';
-import { View, Image,TouchableOpacity } from 'react-native';
+import { View, Image,TouchableOpacity,Platform } from 'react-native';
 import {
     DrawerContentScrollView,
 } from '@react-navigation/drawer';
@@ -101,7 +101,7 @@ const DrawerContent=({props})=> {
   
     return (
         <DrawerContentScrollView
-        contentContainerStyle={{ paddingTop: 0 }}
+        contentContainerStyle={{  }}
         {...props}>
             <View style={{flex:1}}>
            {/* Bottom Code For Popup */}
