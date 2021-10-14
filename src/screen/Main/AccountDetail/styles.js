@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -6,7 +6,7 @@ export default StyleSheet.create({
     {
         flex:1,
         backgroundColor:colors.card,
-       
+       // paddingTop:Platform.OS=='android'?0:40
     },
     list:
     {

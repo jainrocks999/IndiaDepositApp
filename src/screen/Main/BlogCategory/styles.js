@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import fontSize from '../../../component/fontSize';
 import colors from '../../../component/colors';
 
@@ -6,7 +6,8 @@ import colors from '../../../component/colors';
 export default StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:colors.white
+        backgroundColor:colors.white,
+        //paddingTop:Platform.OS=='android'?0:40
     },
     card:{
         shadowColor:colors.black,

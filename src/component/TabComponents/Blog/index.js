@@ -108,10 +108,7 @@ console.log('this is narendra here',Blogs);
 
                         {item.short_content?<View style={styles.view}>
                             <Text style={styles.Textt}>{item.short_content}</Text>
-                        </View>:
-                        <View style={styles.view}>
-                            <Text numberOfLines={1} style={styles.Textt}>{item.content}</Text>
-                        </View>}
+                        </View>:null}
 
                         <View style={styles.view}>
                             <Text style={styles.Textp}>{`published on ${item.created_date}`}</Text>

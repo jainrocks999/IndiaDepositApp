@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -8,7 +8,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor:'#E5E5E5',
-        height:'100%'
+        height:'100%',
+        //paddingTop: Platform.OS === "android" ?0: 40
     },
    
     imageContainer:
@@ -129,7 +130,9 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.twelve,
         fontFamily:'Montserrat-Regular',
-        color:colors.textColor
+        color:colors.textColor,
+        marginLeft:Platform.OS=='android'?0:10,
+        width:'90%'
     },
     agree1:
     {

@@ -14,9 +14,11 @@ const Introduction=({route})=>{
         <View style={styles.container}>
           {/* <ScrollView style={{flex:1}}> */}
              <View style={styles.imageContainer}>
+               <View>
               <View style={styles.round}>
                   <Image
                   source={require('../../../assets/Image/logo-icon.png')}/>
+              </View>
               </View>
               <Text style={styles.india}>IndiaDeposit</Text>
             </View>

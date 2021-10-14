@@ -104,9 +104,9 @@ const Blog=()=>{
                             <Text style={styles.Text1}>{item.title}</Text>
                         </View>
                         {/* </View> */}
-                        <View style={styles.view}>
+                        {item.short_content? <View style={styles.view}>
                             <Text style={styles.Textt}>{item.short_content}</Text>
-                        </View>
+                        </View>:null}
                         <View style={styles.view}>
                         <Text style={styles.Textp}>{`published on ${item.created_date}`}</Text>
                         </View>

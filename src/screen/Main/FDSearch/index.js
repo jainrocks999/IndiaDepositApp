@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,Text,Image,ScrollView, Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -123,7 +123,7 @@ const Contact=({route})=>{
                                       style={styles.image} 
                                       source={require('../../../assets/Image/down.png')}/>}
                                     />
-                                    <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
+                                    <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -5:7}}/>
                                   </View>
                                </View>
                                <View style={styles.view3}>
@@ -142,7 +142,7 @@ const Contact=({route})=>{
                                           style={styles.image} 
                                           source={require('../../../assets/Image/down.png')}/>}
                                         />
-                                           <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
+                                           <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -5:7}}/>
                                      </View>
                                </View>
                                <View style={styles.view3}>
@@ -161,7 +161,7 @@ const Contact=({route})=>{
                                            style={styles.image} 
                                            source={require('../../../assets/Image/down.png')}/>}
                                        />
-                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-5}}/>
+                                          <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'? -5:7}}/>
                                      </View>
                                  </View>
                              </View>
@@ -171,18 +171,18 @@ const Contact=({route})=>{
                            <View style={styles.view4}>
                                <Text style={[styles.text1,{fontWeight:'700'}]}>Amount</Text>
                            </View>
-                           <View style={{flexDirection:'row',alignItems:'center',marginTop:-10}}>
+                           <View style={{flexDirection:'row',alignItems:'center',marginTop:Platform.OS=='android' ?-10:7}}>
                               <Image style={{width:12,height:18}} 
                               source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{width:'90%'}}
+                                 style={{width:'90%',marginLeft:Platform.OS=='android'?0:5}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
                                  onChangeText={(val)=>setAmount(val)}
                               />
                            </View>
-                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:-10}}/>
+                           <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android' ?-10:5}}/>
                       </View>
                       <View style={{marginTop:24}}>
                           <View style={styles.view4}>
@@ -206,7 +206,7 @@ const Contact=({route})=>{
                               keyboardType='number-pad'
                               maxLength={6}
                            />
-                              <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:-8}}/>
+                              <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'?-8:6}}/>
                        </View>
                        <View style={styles.view8}>
                             <Button

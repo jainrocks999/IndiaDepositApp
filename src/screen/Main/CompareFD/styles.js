@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -8,7 +8,8 @@ export default StyleSheet.create({
         height:45,
         backgroundColor:'#DDDDDD',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        // paddingTop:Platform.OS=='android'?0:40
     },
     title:
     {

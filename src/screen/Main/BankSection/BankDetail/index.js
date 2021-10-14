@@ -1,5 +1,5 @@
 import React,{useRef,useEffect, useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,Platform} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -122,7 +122,7 @@ const renderItem=(item)=>{
       )
 }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,}}>
               <Header
                     title={'Bank List'}
                     source={require('../../../../assets/Images/arrow.png')}

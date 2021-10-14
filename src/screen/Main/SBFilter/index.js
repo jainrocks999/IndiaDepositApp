@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image, TouchableOpacity ,Switch,ScrollView} from "react-native";
+import { View,Text,Image, TouchableOpacity ,Switch,ScrollView,Platform} from "react-native";
 import colors from '../../../component/colors';
 import Slider  from "react-native-slider";
 import styles from './styles';
@@ -60,7 +60,9 @@ const applyFilter=()=>{
       })
 }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+       // paddingTop:Platform.OS=='android'?0:40
+        }}>
             {isFetching?<Loader/>:null}
             <View style={{
                 flexDirection:'row',
