@@ -3,5 +3,5 @@ import { StatusBar } from "react-native";
 import colors from "../colors";
 
 export default (Status) => {
-  return <StatusBar barStyle="default" backgroundColor={colors.bc} />;
+  return <StatusBar  barStyle="default" backgroundColor={colors.bc} />;
 };
