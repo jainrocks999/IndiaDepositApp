@@ -86,7 +86,10 @@ const renderItem=(item)=>{
                 <View 
                     style={styles.card}>
                    <View style={styles.cardView}>
-                      <Image source={require('../../../../assets/Images/sbi.png')}/>
+                   <Image
+                       resizeMode='contain'
+                       style={{height:20,width:70}}
+                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
                       <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%',alignItems:'flex-end'}}>
                      </View>

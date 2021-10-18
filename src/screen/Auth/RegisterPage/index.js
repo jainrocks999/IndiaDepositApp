@@ -255,9 +255,7 @@ const showVisible1=()=>{
                       }}
                       secureTextEntry={visible}
                        />
-                     
                        {showVisible()}
-                     
                     </View>
                   </View>
                   <View style={styles.error}>

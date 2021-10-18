@@ -169,56 +169,6 @@ const renderItem=(item)=>{
 
                      </View>
                    </View>
-                   {/* <View style={[styles.row2,{paddingRight:10}]}>
-                     <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                       <Text style={styles.same}>{item.rate}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.debit_card_amc_charges1}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
-                       </View>
-                   </View>
-                   <View style={[styles.row2]}>
-                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
-                        </View>
-                        <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image
-                         style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/penalty.png')}/>
-                      </View>
-                      <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image 
-                        style={styles.image} 
-                       resizeMode='contain' source={require('../../../assets/Image/debit.png')}/>
-                      </View>
-                      <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/offer.png')}/>
-                        </View>
-                   </View>
-                   <View style={styles.row1}>
-                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                     <Text  style={styles.same}>{'Interest\n Rate'}</Text>
-                     </View>
-                     <View style={[styles.width,{  alignItems:'center'}]}>
-                     <Text  style={styles.same}>{'Non Maintenance\nPenalty'}</Text>
-                     </View>
-                     <View style={[styles.width,{  alignItems:'center'}]}>
-                     <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
-                     </View>
-                     <View style={[styles.width,{ justifyContent:'flex-end'}]}>
-                     <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
-                     </View>
-                   </View> */}
                  </TouchableOpacity>
           </View>
       )
