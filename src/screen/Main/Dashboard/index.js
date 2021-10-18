@@ -13,7 +13,6 @@ import Toast from "react-native-simple-toast";
 import { useDispatch } from "react-redux";
 import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from "react-native-modal";
-import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
 import { Platform } from "react-native";
 let backPress=0
 let arrayOfOneFD=[]

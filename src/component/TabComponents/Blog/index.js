@@ -3,7 +3,6 @@ import { View,Text,Image,ScrollView,FlatList,TouchableOpacity} from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { useSelector,useDispatch } from "react-redux";
-import { SearchBar } from "react-native-elements";
 import { TextInput } from 'react-native-gesture-handler';
 import colors from '../../colors';
 import axios from "axios";

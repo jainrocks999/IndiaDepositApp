@@ -10,8 +10,6 @@ import { useSelector,useDispatch } from 'react-redux';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../../../component/loader';
-import OptionsMenu from "react-native-option-menu";
-import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import axios from "axios";
 import Toast from 'react-native-simple-toast';
 
