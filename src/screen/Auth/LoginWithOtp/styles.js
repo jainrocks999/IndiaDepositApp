@@ -85,8 +85,10 @@ export default StyleSheet.create({
     },
     account1:
     {
-        color:colors.textColor,
-        fontSize:fontSize.twelve
+        color:colors.bc,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-Regular'
+
     },
     error:
     {

@@ -145,7 +145,9 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         flexDirection:'row',
         paddingHorizontal:20,
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginTop:-10
+        // flex:1
        },
        main1:{
            flexDirection:'row',
@@ -157,7 +159,8 @@ export default StyleSheet.create({
             borderRadius:42
         },
         view:{
-            marginLeft:20
+            marginLeft:20,
+            width:'65%'
         }, 
         text2:{
             color:colors.white,

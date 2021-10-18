@@ -132,7 +132,7 @@ class OtpVarification extends React.Component{
         this.props.navigation.replace('Main')
       }
       else{
-        this.setState({value:this.state.value +1});
+        // this.setState({value:this.state.value +1});
         Toast.show('Please Enter Correct Otp Code')
       }
      }
