@@ -129,6 +129,7 @@ export default StyleSheet.create({
     {
         color:colors.white,
         fontFamily:'Montserrat-Regular',
+        fontSize:13
     },
     text2:
     {
@@ -160,11 +161,12 @@ export default StyleSheet.create({
     },
     btCont:
     {
-        width:'47%',height:45,
+        width:'48%',height:45,
         borderRadius:20,
         backgroundColor:colors.bc,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        paddingHorizontal:10
     },
       rupay:
     {

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Alert} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,BackHandler} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -24,6 +24,22 @@ const Login=()=>{
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
     const [focus,setFocus]=useState(false)
+
+
+  useEffect(() => {
+      const backAction = () => {
+        navigation.push('Login')
+        return true;
+      };
+  
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+  
+      return () => backHandler.remove();
+  }, []);
+
 
 const showVisible=()=>{
   return(
@@ -67,9 +83,9 @@ const validateUser=async(mobile)=>{
                 style={styles.bottom}>
                   <Text 
                   style={[styles.account,{textAlign:'center'}]}>
-                      {'We will send you a OTP on\nyour phone number'}</Text>
+                      {'We will send you an OTP'}</Text>
                 </TouchableOpacity>
-              <View style={[styles.card,{borderColor:focus?colors.bc:colors.white}]}>
+              <View style={[styles.card,{borderColor:focus&&values.mobile?colors.bc:colors.white}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>      
                      {showVisible()}
@@ -81,7 +97,7 @@ const validateUser=async(mobile)=>{
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
-                      maxLength={13}
+                      maxLength={10}
                       keyboardType={'phone-pad'}
                       returnKeyType='go'
                       onSubmitEditing={()=>handleSubmit()}
@@ -102,7 +118,7 @@ const validateUser=async(mobile)=>{
                 </View>
                 
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('Login')}
+                onPress={()=>navigation.push('Login')}
                 style={styles.bottom}>
                   <Text style={styles.account1}>Login With Pin</Text>
                 </TouchableOpacity>

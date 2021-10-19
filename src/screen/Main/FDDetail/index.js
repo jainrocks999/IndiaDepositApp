@@ -36,7 +36,7 @@ console.log('this is userdetails',details);
                               <View style={styles.view2}>
                                  <View style={{flexDirection:'row'}}>
                                     <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                  <Text style={styles.item}>{`1 Lakh`}</Text>
+                                  <Text style={styles.item}>{details.principal_amount}</Text>
                                   </View>
                                   <Text style={styles.item1}>{`Principal Amount`}</Text>
                               </View>
@@ -47,7 +47,7 @@ console.log('this is userdetails',details);
                               <View style={styles.view2}>
                                    <View style={{flexDirection:'row'}}>
                                     <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                  <Text style={styles.item}>{`106 Lakh`}</Text>
+                                  <Text style={styles.item}>{details.maturity_amount}</Text>
                                   </View>
                                     <Text style={styles.item1}>{`Maturity Amount`}</Text>
                              </View>
@@ -55,7 +55,7 @@ console.log('this is userdetails',details);
                         <View style={styles.line}></View>
                         <View style={styles.container}>
                                 <View style={styles.view2}>
-                                     <Text style={styles.item}>{`14-july-22`}</Text>
+                                     <Text style={styles.item}>{details.date_of_maturity}</Text>
                                      <Text style={styles.item1}>{`Date of Maturity`}</Text>
                                 </View>
                                 <View style={styles.view2}>

@@ -121,9 +121,8 @@ export default StyleSheet.create({
         borderRadius:10,
         alignItems:'center',
         justifyContent:'center',
-        // marginTop:5,
         paddingHorizontal:Platform.OS=='android'? 16:0,
-        // paddingVertical:10
+        borderWidth:1
     },
     view1:
     {

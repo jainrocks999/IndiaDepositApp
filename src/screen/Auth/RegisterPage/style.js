@@ -157,5 +157,19 @@ export default StyleSheet.create({
     image:{
         width:24,
         height:24
+    },
+    cross:{
+        backgroundColor:colors.bc,
+        borderRadius:30,
+        height:30,width:30,
+        justifyContent:'center',
+        alignItems:'center'
+
+    },
+    x:{
+        color:colors.white,
+        fontFamily:'Montserrat-Regular',
+        fontSize:18,
+        marginBottom:5
     }
 })

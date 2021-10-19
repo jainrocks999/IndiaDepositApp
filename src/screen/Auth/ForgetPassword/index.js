@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
+import { View,Text,Image,BackHandler ,TouchableOpacity,TextInput} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
@@ -24,6 +24,20 @@ const ForgetPassword=()=>{
     const isFetching=useSelector((state)=>state.isFetching)
     const [focus,setFocus]=useState(false)
     const [focus1,setFocus1]=useState(false)
+useEffect(() => {
+  const backAction = () => {
+    navigation.push('Login')
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+}, []);
+
 
 const validateUser=(email,mobile)=>{
   console.log('hi',email,mobile);
@@ -72,7 +86,7 @@ const validateUser=(email,mobile)=>{
          {isFetching?<Loader/>:null} 
           <KeyboardAwareScrollView>
           <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <TouchableOpacity onPress={()=>navigation.push('Login')}>
             <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
             </TouchableOpacity>
               <View style={styles.round}>
@@ -82,8 +96,8 @@ const validateUser=(email,mobile)=>{
               <View style={{width:'5%'}}></View>
           </View>
            <View style={styles.main}>
-           <View style={[styles.card,{borderColor:focus?colors.bc:'#fff'}]}>
-                   <Text style={styles.heading}>Email</Text>
+           <View style={[styles.card,{borderColor:focus&&values.email?colors.bc:'#fff'}]}>
+                   <Text  style={styles.heading}>Email</Text>
                     <View style={styles.input}>
                      <Image resizeMode='contain'
                       style={{width:24,height:24}} 
@@ -96,7 +110,7 @@ const validateUser=(email,mobile)=>{
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
-                      maxLength={40}
+                      maxLength={30}
                       />
                   </View>
               </View>
@@ -108,7 +122,26 @@ const validateUser=(email,mobile)=>{
               <View style={{width:'100%',alignItems:'center',justifyContent:'center',paddingVertical:15}}>
                 <Text style={{color:colors.textColor,fontSize:fontSize.fefteen,fontWeight:'600'}}>OR</Text>
               </View>
-              <View style={[styles.card,{borderColor:focus1?colors.bc:'#fff'}]}>
+              <View style={[styles.card,{borderColor:focus1&&values.mobile?colors.bc:'#fff'}]}>
+                   <Text  style={styles.heading}>Mobile</Text>
+                    <View style={styles.input}>
+                     <Image resizeMode='contain'
+                      style={{width:24,height:24}} 
+                      source={require('../../../assets/Image/phone.png')}/>
+                     <TextInput
+                      onFocus={()=>setFocus1(true)}
+                      placeholder='9123456789'
+                      placeholderTextColor={colors.heading1}
+                      style={styles.input1}
+                      onChangeText={handleChange('mobile')}
+                      onBlur={handleBlur('mobile')}
+                      value={values.mobile}
+                      maxLength={10}
+                      keyboardType='number-pad'
+                      />
+                  </View>
+              </View>
+              {/* <View style={[styles.card,{borderColor:focus1&&values.mobile?colors.bc:'#fff'}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
                      <Image
@@ -123,11 +156,11 @@ const validateUser=(email,mobile)=>{
                       onChangeText={handleChange('mobile')}
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
-                      maxLength={11}
+                      maxLength={10}
                       keyboardType={'phone-pad'}
                       />
                   </View>
-              </View>
+              </View> */}
               <View style={styles.error}>
                    {(errors.mobile && touched.mobile) &&
                 <Text style={styles.error2}>{errors.mobile}</Text>

@@ -20,6 +20,7 @@ const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.FDList)
+        console.log('this is selector data from list page',selector);
         const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
@@ -30,14 +31,15 @@ const FDList=({route})=>{
         const [pincode,setPincode]=useState(route.params.location)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
-console.log('thisi sis selected',selected);
-     console.log('fdasfjkladsjfakldjfskldafjkldjs',route.params);
 
 const manageList=(item)=>{
   dispatch({
     type: 'FD_Detail_Request',
     url: 'fddetail',
     fixed_deposit_id:item,
+    principal_amount:'300',
+    rate:'3',
+    year:'2',
     navigation:navigation
   })
   

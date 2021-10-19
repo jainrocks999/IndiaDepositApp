@@ -156,6 +156,7 @@ import { useDispatch } from 'react-redux';
               }
             }
             catch(error){
+              console.log('dsfdsajfhdjkhsaj');
             Toast.show(error.messages)
             yield put({
               type: 'Forget_Password_Error',
@@ -1170,7 +1171,11 @@ function* FDDetail(action) {
   try{
     const data=new FormData()
     data.append('fixed_deposit_id',action.fixed_deposit_id)
-        const response =yield call(Api.fetchDataByPOST, action.url,data);
+    data.append('principal_amount',action.principal_amount)
+    data.append('rate',action.rate)
+    data.append('year',action.year)
+
+    const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'FD_Detail_Success',

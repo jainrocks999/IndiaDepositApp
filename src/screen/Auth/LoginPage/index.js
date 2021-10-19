@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Alert} from 'react-native';
+import { View,Text,Image,Alert ,TouchableOpacity,TextInput,BackHandler} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
@@ -32,8 +32,24 @@ const Login=()=>{
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [otp,setOtp]=useState('')
     const [focus,setFocus]=useState(false)
-    const next = useRef(null);
+    const [focus1,setFocus1]=useState(false)
 
+    const next = useRef(null);
+    useEffect(() => {
+      const backAction = () => {
+        navigation.push('Register')
+        return true;
+      };
+  
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+  
+      return () => backHandler.remove();
+    }, []);
+  
+ 
 const showVisible=()=>{
   return(
     <TouchableOpacity 
@@ -96,7 +112,7 @@ const validateUser=async(values)=>{
               </View>
           </View>
           <View style={styles.main}>
-              <View style={[styles.card,{borderColor:focus?colors.bc:colors.white}]}>
+              <View style={[styles.card,{borderColor:focus&&values.value?colors.bc:colors.white}]}>
                 <Text style={styles.heading}>Email / Mobile</Text>
                     <View style={styles.input}>
                      <Image style={{width:24,height:36}}
@@ -104,7 +120,7 @@ const validateUser=async(values)=>{
                      <TextInput 
                       style={styles.input1}
                       onFocus={()=>setFocus(true)}
-                      placeholder='example@domain.com'
+                      placeholder=''
                       onChangeText={handleChange('value')}
                       onBlur={handleBlur('value')}
                       value={values.value}
@@ -125,7 +141,7 @@ const validateUser=async(values)=>{
              <View style={styles.view1}>
                <Text style={styles.text1}>Enter Your Pin</Text>
              
-                <View style={{width:'100%'}}>
+                <View style={{width:'100%',marginTop:6}}>
                <OtpInputs
                 ref={next}
                  handleChange={handleChange('pin')}
@@ -133,10 +149,11 @@ const validateUser=async(values)=>{
                  numberOfInputs={4}
                  keyboardType={"numeric"} secureTextEntry ={visible}
                  style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
-                 inputContainerStyles={styles.otp}
+                 inputContainerStyles={[styles.otp,{borderColor:focus1&&values.pin? colors.bc:'#fff'}]}
                  inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor,alignItems:'center'}}
                  returnKeyType='go'
                  onSubmitEditing={()=>handleSubmit()}
+                 onFocus={()=>setFocus1(true)}
               />
                     <View style={styles.error}>
                     {(errors.pin && touched.pin) &&
@@ -157,7 +174,7 @@ const validateUser=async(values)=>{
                   <Text style={styles.text3}>Keep me logged in</Text>
                   </View>
                 <Text style={styles.text2}
-                 onPress={()=>navigation.navigate('Forget')}>Forgot pin?</Text>
+                 onPress={()=>navigation.push('Forget')}>Forgot pin?</Text>
               </View>
 
               <View style={styles.button}>
@@ -170,11 +187,11 @@ const validateUser=async(values)=>{
                 <View style={styles.bottom}>
                     <Text style={styles.account}>Don't have an account?</Text>
                     <Text 
-                    onPress={()=>navigation.navigate('Register')} 
+                    onPress={()=>navigation.push('Register')} 
                     style={styles.account1}> Register here</Text>
                 </View>
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('LoginWithOtp')}
+                onPress={()=>navigation.push('LoginWithOtp')}
                 style={styles.bottom}>
                   <Text style={styles.account1}>Login With OTP</Text>
                 </TouchableOpacity>

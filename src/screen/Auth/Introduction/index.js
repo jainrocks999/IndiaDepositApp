@@ -4,12 +4,28 @@ import Button from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
+import { useDispatch } from "react-redux";
 
 
 const Introduction=({route})=>{
     const navigation=useNavigation()
+    const dispatch=useDispatch()
     const data=route.params
-      console.log('this is data information',data);
+    useEffect(()=>{
+
+      dispatch({
+        type: 'Privacy_Request',
+        url: 'getpagecontent',
+        key:'privacy',
+  })
+
+      dispatch({
+        type: 'TermAndCondition_Request',
+        url: 'getpagecontent',
+        key:'term_condition',
+  })
+},[])
+
     return(
         <View style={styles.container}>
           {/* <ScrollView style={{flex:1}}> */}
