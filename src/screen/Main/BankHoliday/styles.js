@@ -1,11 +1,12 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet,Platform } from "react-native";
 import colors from '../../../component/colors';
 import fontSize from "../../../component/fontSize";
 export default StyleSheet.create({
     container1:
     {
         flex:1,
-        backgroundColor:colors.card
+        backgroundColor:colors.card,
+      //  paddingTop:Platform.OS=='android'?0:40
     },
     Textview:
     {
@@ -36,7 +37,7 @@ export default StyleSheet.create({
     month:
     {
         fontSize:fontSize.sixteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.white
     },
     border1:
@@ -71,26 +72,26 @@ export default StyleSheet.create({
     item1:
     {
         fontSize:fontSize.fefteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     item2:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     result:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen,
         marginTop:20
     },
     search:
     {
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen
     },
     button:
@@ -108,12 +109,13 @@ export default StyleSheet.create({
         height:40,
         borderRadius:10,
         paddingHorizontal:10,
-        borderColor:colors.black
+        borderColor:colors.black,
+        justifyContent:'center'
     },
     dummy:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     fdata:{

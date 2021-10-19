@@ -134,7 +134,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                       <View style={styles.drop1}>
                       <TextInput
                         multiline = {true}
-                        style={{height:70,color:colors.textColor}}
+                        style={{color:colors.textColor,width:'97%'}}
                         placeholder=''
                         placeholderTextColor={colors.heading1}
                         />

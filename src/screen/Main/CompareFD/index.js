@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, } from 'react-native';
+import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, Platform, } from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -18,7 +18,9 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd',data1);
 console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
 
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+        //paddingTop:Platform.OS=='android'?0:40
+        }}>
               <Header
                   title={'COMPARE FD'}
                   source={require('../../../assets/Images/arrow.png')}
@@ -71,7 +73,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Calulator'}</Text>
+                         <Text style={styles.title}>{'Calculator'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{4}</Text>
@@ -143,7 +145,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Minumum Tenure'}</Text>
+                         <Text style={styles.title}>{'Minimum Tenure'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.min_tenure}</Text>
@@ -278,7 +280,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Insuarance'}</Text>
+                         <Text style={styles.title}>{'Insurance'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.insuarance}</Text>

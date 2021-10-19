@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -8,7 +8,8 @@ export default StyleSheet.create({
         height:45,
         backgroundColor:'#DDDDDD',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        
     },
     title:
     {
@@ -27,7 +28,7 @@ export default StyleSheet.create({
     },
     value:
     {
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve,
         color:colors.textColor
     },
@@ -41,7 +42,7 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         height:150,
         alignItems:'center',
-        width:160,
+        width:'48%',
         paddingVertical:10
     },
     xview:

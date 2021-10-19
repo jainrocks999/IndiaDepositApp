@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -8,7 +8,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor:'#E5E5E5',
-        height:'100%'
+        height:'100%',
+        //paddingTop: Platform.OS === "android" ?0: 40
     },
    
     imageContainer:
@@ -73,7 +74,7 @@ export default StyleSheet.create({
     heading:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.heading
     },
     input:
@@ -128,13 +129,15 @@ export default StyleSheet.create({
     agree:
     {
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
-        color:colors.textColor
+        fontFamily:'Montserrat-Regular',
+        color:colors.textColor,
+        marginLeft:Platform.OS=='android'?0:10,
+        width:'90%'
     },
     agree1:
     {
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.bc
     },
     text1:
@@ -154,5 +157,19 @@ export default StyleSheet.create({
     image:{
         width:24,
         height:24
+    },
+    cross:{
+        backgroundColor:colors.bc,
+        borderRadius:30,
+        height:30,width:30,
+        justifyContent:'center',
+        alignItems:'center'
+
+    },
+    x:{
+        color:colors.white,
+        fontFamily:'Montserrat-Regular',
+        fontSize:18,
+        marginBottom:5
     }
 })

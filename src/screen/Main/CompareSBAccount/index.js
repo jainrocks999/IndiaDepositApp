@@ -1,5 +1,5 @@
 import React from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, } from 'react-native';
+import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, Platform} from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +15,9 @@ console.log('this is compare derrails',selector)
 const data1=selector.datavalue1[0]
 const data2=selector.datavalue2[0]
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+        //paddingTop:Platform.OS=='android'?0:40
+        }}>
               <Header
                   title={'COMPARE SB ACCOUNT'}
                   source={require('../../../assets/Images/arrow.png')}
@@ -172,7 +174,7 @@ const data2=selector.datavalue2[0]
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Non-Maitenance Penalty'}</Text>
+                         <Text style={styles.title}>{'Non-Maintenance Penalty'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.non_maitenance_penalty_charges}</Text>
@@ -289,7 +291,7 @@ const data2=selector.datavalue2[0]
                   </View>
                   <View>
                      <View style={styles.container}>
-                         <Text style={styles.title}>{'Insuarance'}</Text>
+                         <Text style={styles.title}>{'Insurance'}</Text>
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.value}>{data1.Insuarance_health_feature}</Text>

@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
     flex: 1,
-    backgroundColor:colors.card
+    backgroundColor:colors.card,
+    //paddingTop:Platform.OS=='android'?0:40
     },
     imageContainer:
     {
@@ -45,7 +46,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     view:
     {
@@ -66,7 +67,7 @@ export default StyleSheet.create({
     text1:{
         marginLeft:10,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen
     },
 
@@ -74,7 +75,7 @@ export default StyleSheet.create({
     {
         fontSize:fontSize.seventeen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     call:
     {
@@ -112,7 +113,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     input:
     {  
@@ -122,6 +123,7 @@ export default StyleSheet.create({
         borderRadius:6,
         borderColor:colors.textColor,
         paddingHorizontal:14,
+        justifyContent:'center'
         
     },
     input1:
@@ -137,8 +139,9 @@ export default StyleSheet.create({
         borderColor:colors.textColor,
         paddingHorizontal:14,
         alignItems:'flex-start',
-        justifyContent:'flex-start',
-        flex:1
+        justifyContent:'center',
+        flex:1,
+        paddingVertical:Platform.OS=='android'?0: 10
         
     },
     error:

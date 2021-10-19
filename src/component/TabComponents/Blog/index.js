@@ -3,7 +3,6 @@ import { View,Text,Image,ScrollView,FlatList,TouchableOpacity} from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { useSelector,useDispatch } from "react-redux";
-import { SearchBar } from "react-native-elements";
 import { TextInput } from 'react-native-gesture-handler';
 import colors from '../../colors';
 import axios from "axios";
@@ -102,12 +101,14 @@ console.log('this is narendra here',Blogs);
                 showsVerticalScrollIndicator={false}
                 renderItem={({item})=>(
                     <View style={styles.card}>
-                        <TouchableOpacity style={styles.titleView}>
+                        <View style={styles.titleView}>
                             <Text style={styles.Text1}>{item.title}</Text>
-                        </TouchableOpacity>
-                        <View style={styles.view}>
-                            <Text style={styles.Textt}>{item.short_content}</Text>
                         </View>
+
+                        {item.short_content?<View style={styles.view}>
+                            <Text style={styles.Textt}>{item.short_content}</Text>
+                        </View>:null}
+
                         <View style={styles.view}>
                             <Text style={styles.Textp}>{`published on ${item.created_date}`}</Text>
                         </View>

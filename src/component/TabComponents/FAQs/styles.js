@@ -17,7 +17,7 @@ export default StyleSheet.create({
       fontSize: 14,
       fontWeight: '600',
       color:colors.white,
-      fontFamily:'Montserrat-Normal'
+      fontFamily:'Montserrat-Regular'
     },
     separator: {
       height: 0.5,
@@ -30,7 +30,7 @@ export default StyleSheet.create({
       fontSize: 13,
       color: colors.textColor,
       padding: 10,
-      fontFamily:'Montserrat-Normal',
+      fontFamily:'Montserrat-Regular',
       fontWeight:'400'
     },
     content: {

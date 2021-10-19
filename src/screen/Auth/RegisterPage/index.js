@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput, Platform} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
@@ -15,6 +15,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import HTMLView from 'react-native-htmlview';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
+
+
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`)
@@ -36,6 +40,8 @@ const loginValidationSchema=yup.object().shape({
 const RegisterPage=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
+    const selector=useSelector(state=>state.Privacy)
+    const selector1=useSelector(state=>state.TermCondition)
     const isFetching=useSelector((state)=>state.isFetching)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [fBorder,setFBorder]=useState(false)
@@ -46,6 +52,8 @@ const RegisterPage=()=>{
     const [bBorder,setBBorder]=useState(false)
     const [visible,setVisible]=useState(true)
     const [visible1,setVisible1]=useState(true)
+    const [showModal,setShowModal]=useState(false)
+    const [showModal1,setShowModal1]=useState(false)
 
     const ref=useRef(null)
     const ref1=useRef(null)
@@ -53,7 +61,8 @@ const RegisterPage=()=>{
     const ref3=useRef(null)
     const ref4=useRef(null)
 
-  
+    
+
     const validateUser=async(name,email,mobile,pin)=>{
       const device_type= DeviceInfo.getSystemName()
       let token=await AsyncStorage.getItem(Storage.token);
@@ -97,8 +106,10 @@ const RegisterPage=()=>{
 const showVisible=()=>{
   return(
     <TouchableOpacity 
-     
-        onPress={()=>visible?setVisible(false):setVisible(true)}>
+        onPressIn={()=>setVisible(false)}
+        onPressOut={()=>setVisible(true)}
+        //onPress={()=>visible?setVisible(false):setVisible(true)}
+        >
         {!visible?<Image 
         style={{width:24,height:24,marginLeft:'25%'}} 
         source={require('../../../assets/Image/eye.png')}/>:
@@ -111,7 +122,10 @@ const showVisible=()=>{
 const showVisible1=()=>{
     return(
       <TouchableOpacity 
-          onPress={()=>visible1?setVisible1(false):setVisible1(true)}>
+      onPressIn={()=>setVisible1(false)}
+      onPressOut={()=>setVisible1(true)}
+         // onPress={()=>visible1?setVisible1(false):setVisible1(true)}
+          >
           {!visible1?<Image 
           style={{width:24,height:24,marginLeft:'25%'}} 
           source={require('../../../assets/Image/eye.png')}/>:
@@ -147,19 +161,20 @@ const showVisible1=()=>{
               </View>
           </View>
           <View style={styles.main}>
-              <View style={[styles.card,{borderColor:fBorder?colors.bc:'white'}]}>
+              <View style={[styles.card,{borderColor:fBorder&&values.name?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Full Name</Text>
                     <View style={styles.input}>
                      <Image style={styles.image} source={require('../../../assets/Image/profile.png')}/>
                      <TextInput 
                         onFocus={()=>setFBorder(true)}
-                        style={[styles.input1,{marginLeft:10}]}
+                        
+                        style={[styles.input1]}
                         placeholder='John Methew'
                         placeholderTextColor={colors.heading1}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
                         value={values.name}
-                        maxLength={40}
+                        maxLength={30}
                         returnKeyType='next'
                         onSubmitEditing={() => {
                           ref.current.focus()
@@ -173,7 +188,7 @@ const showVisible1=()=>{
                 <Text style={styles.warn}>{errors.name}</Text>
                 }
               </View>
-              <View style={[styles.card,{borderColor:eBorder?colors.bc:'white'}]}>
+              <View style={[styles.card,{borderColor:eBorder&&values.email?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Email</Text>
                     <View style={styles.input}>
                      <Image
@@ -188,7 +203,8 @@ const showVisible1=()=>{
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
-                      maxLength={40}
+                      maxLength={30}
+                      keyboardType='email-address'
                       returnKeyType='next'
                       onSubmitEditing={() => {
                         ref1.current.focus()
@@ -201,7 +217,7 @@ const showVisible1=()=>{
                 <Text style={styles.warn}>{errors.email}</Text>
                 }
               </View>
-              <View style={[styles.card,{borderColor:mBorder?colors.bc:'white'}]}>
+              <View style={[styles.card,{borderColor:mBorder&&values.mobile?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
                     <View style={styles.input}>
                      <Image 
@@ -217,7 +233,7 @@ const showVisible1=()=>{
                       onBlur={handleBlur('mobile')}
                       value={values.mobile}
                       keyboardType={'number-pad'}
-                      maxLength={11}
+                      maxLength={10}
                       returnKeyType='next'
                       onSubmitEditing={() => {
                         ref2.current.focus()
@@ -232,7 +248,7 @@ const showVisible1=()=>{
               </View>
               <View style={styles.view2}>
                 <View style={styles.view1}>
-                <View style={[styles.card1,{borderColor:pBorder?colors.bc:'white'}]}>
+                <View style={[styles.card1,{borderColor:pBorder&&values.pin?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Set Your Pin</Text>
                     <View style={styles.input}>
                      <Image 
@@ -255,9 +271,7 @@ const showVisible1=()=>{
                       }}
                       secureTextEntry={visible}
                        />
-                     
                        {showVisible()}
-                     
                     </View>
                   </View>
                   <View style={styles.error}>
@@ -266,7 +280,7 @@ const showVisible1=()=>{
                 </View>
                 </View>
                 <View  style={styles.view1}>
-                <View style={[styles.card1,{borderColor:cBorder?colors.bc:'white'}]}>
+                <View style={[styles.card1,{borderColor:cBorder&&values.confirmPin?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Confirm Pin</Text>
                     <View style={styles.input}>
                      <Image
@@ -299,13 +313,13 @@ const showVisible1=()=>{
                 </View>
               </View>
              
-              <View style={[styles.card,{borderColor:bBorder?colors.bc:'white'}]}>
+              <View style={[styles.card,{borderColor:bBorder&&values.referal?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Enter Referral Code (Optional)</Text>
                     <View style={styles.input}>
                      <TextInput 
                      ref={ref4}
                       onFocus={()=>setBBorder(true)}
-                      style={[styles.input1,{marginLeft:-3,}]}
+                      style={[styles.input1,{marginLeft:Platform.OS=='android'? -3:0,marginTop:Platform.OS=='android'?0:5}]}
                       placeholder='BA52RT'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('referal')}
@@ -321,7 +335,7 @@ const showVisible1=()=>{
                 }
               </View>
               <View
-               style={{flexDirection:'row',alignItems:'center'}}>
+               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,}}>
                  <CheckBox
                     disabled={false}
                     value={toggleCheckBox}
@@ -330,9 +344,9 @@ const showVisible1=()=>{
                   />
                   <Text style={styles.agree}>
                     {'I agree with '}
-                    <Text style={styles.agree1}>{`Terms & Conditions`}</Text>
+                    <Text onPress={()=>setShowModal1(true)} style={styles.agree1}>{`Terms & Conditions`}</Text>
                     <Text> and </Text>
-                    <Text style={styles.agree1}>{`Privacy Policy`}</Text>
+                    <Text onPress={()=>setShowModal(true)} style={styles.agree1}>{`Privacy Policy`}</Text>
                     
                      </Text>
               </View>
@@ -348,13 +362,56 @@ const showVisible1=()=>{
              <View style={[styles.bottom]}>
                  <Text style={styles.account}>Already have an account?</Text>
                  <Text 
-                 onPress={()=>navigation.navigate('Login')} 
+                 onPress={()=>navigation.push('Login')} 
                  style={styles.account1}> Login here</Text>
              </View>
           </View>
           </View>
+              
          </KeyboardAwareScrollView>
          </ScrollView>
+         <Dialog
+                dialogStyle={{width:'95%',paddingHorizontal:0,height:'90%',paddingTop:10}}
+                  visible={showModal}
+                  onHardwareBackPress={()=> setShowModal(false)}>
+                  <DialogContent >
+                       <View style={{alignSelf:'flex-end',padding:-20}}>
+                         <TouchableOpacity
+                         onPress={()=>setShowModal(false)}
+                         style={styles.cross}>
+                         <Text style={styles.x}>x</Text>
+                         </TouchableOpacity>
+                        </View>
+                      <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{marginBottom:30}}>
+                       <HTMLView
+                        value={selector[0].value.trim().replace(new RegExp('<p>', 'g'), '<span>')} 
+                        addLineBreaks={false}/>
+                        </View>
+                        </ScrollView>
+                  </DialogContent>
+        </Dialog>
+        <Dialog
+                dialogStyle={{width:'95%',paddingHorizontal:0,height:'90%',paddingTop:10}}
+                  visible={showModal1}
+                  onHardwareBackPress={()=> setShowModal1(false)}>
+                  <DialogContent >
+                       <View style={{alignSelf:'flex-end'}}>
+                         <TouchableOpacity
+                         onPress={()=>setShowModal1(false)}
+                         style={styles.cross}>
+                         <Text style={styles.x}>x</Text>
+                         </TouchableOpacity>
+                        </View>
+                      <ScrollView showsVerticalScrollIndicator={false}>
+                        <View style={{marginBottom:30}}>
+                       <HTMLView
+                        value={selector1[0].value.trim().replace(new RegExp('<p>', 'g'), '<span>')} 
+                        addLineBreaks={false}/>
+                        </View>
+                        </ScrollView>
+                  </DialogContent>
+        </Dialog>
          <StatusBar/>
        </View>
          )}

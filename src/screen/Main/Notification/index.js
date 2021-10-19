@@ -9,12 +9,12 @@ import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
-const Contact=()=>{
+const Notification=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Notification)
     const isFetching=useSelector(state=>state.isFetching)
-    console.log('this is log valie',selector);
+    
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     dispatch({
@@ -38,7 +38,7 @@ const showContent=()=>{
                    <View>
                        <View style={styles.view2}>
                        <Text style={styles.text1}>{item.title}</Text>
-                       {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Normal'}}>{item.title}</Text> */}
+                       {/* <Text style={{color:colors.bc,fontSize:12,fontFamily:'Montserrat-Regular'}}>{item.title}</Text> */}
                        </View>
                        <Text style={styles.text3}>{item.notification}</Text>
                    </View>
@@ -70,5 +70,5 @@ const showContent=()=>{
        </View>
     )
 }
-export default Contact;
+export default Notification;
 

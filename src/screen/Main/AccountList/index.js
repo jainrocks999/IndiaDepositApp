@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput,Platform} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -30,6 +30,10 @@ const SBAccountList=({route})=>{
         const isFetching=useSelector((state)=>state.isFetching)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
+
+
+
+
 const manageList=(item)=>{
   dispatch({
     type: 'SB_Detail_Request',
@@ -165,62 +169,14 @@ const renderItem=(item)=>{
 
                      </View>
                    </View>
-                   {/* <View style={[styles.row2,{paddingRight:10}]}>
-                     <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                       <Text style={styles.same}>{item.rate}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.debit_card_amc_charges1}</Text>
-                       </View>
-                       <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
-                       </View>
-                   </View>
-                   <View style={[styles.row2]}>
-                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
-                        </View>
-                        <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image
-                         style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/penalty.png')}/>
-                      </View>
-                      <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image 
-                        style={styles.image} 
-                       resizeMode='contain' source={require('../../../assets/Image/debit.png')}/>
-                      </View>
-                      <View style={[styles.width,{  alignItems:'center'}]}>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/offer.png')}/>
-                        </View>
-                   </View>
-                   <View style={styles.row1}>
-                   <View style={[styles.width,{  alignItems:'flex-start'}]}>
-                     <Text  style={styles.same}>{'Interest\n Rate'}</Text>
-                     </View>
-                     <View style={[styles.width,{  alignItems:'center'}]}>
-                     <Text  style={styles.same}>{'Non Maintenance\nPenalty'}</Text>
-                     </View>
-                     <View style={[styles.width,{  alignItems:'center'}]}>
-                     <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
-                     </View>
-                     <View style={[styles.width,{ justifyContent:'flex-end'}]}>
-                     <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
-                     </View>
-                   </View> */}
                  </TouchableOpacity>
           </View>
       )
 }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,
+       // paddingTop:Platform.OS=='android'?0:40
+        }}>
                <View>
             <View style={styles.mains}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
@@ -236,14 +192,15 @@ const renderItem=(item)=>{
                        <Dialog
                           dialogStyle={{width:'94%',paddingHorizontal:10}}
                           visible={visible}
-                          onTouchOutside={()=>setVisible(false)}
+                          onHardwareBackPress={()=> setVisible(false)}
+                         // onTouchOutside={()=>setVisible(false)}
                          >
                        <DialogContent >
                        <View >
                   < View style={styles.view5}>
                      
                      <View  style={{marginTop:2}}>
-                        <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:16}}>Modify your search</Text>
+                        <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:16}}>Modify your search</Text>
                      </View>
                      <View style={styles.view5}>
                         <View style={styles.view52}>  
@@ -254,17 +211,17 @@ const renderItem=(item)=>{
                            <View style={styles.view4}>
                                <Text style={[styles.text5,{fontSize:14}]}>Minimum Balance</Text>
                            </View>
-                           <View style={{flexDirection:'row',alignItems:'center'}}>
+                           <View style={{flexDirection:'row',alignItems:'center',marginTop:Platform.OS=='android'?0:6}}>
                                <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{paddingBottom:-10,width:'100%',marginTop:-10}}
+                                 style={{paddingBottom:-10,width:'100%',marginTop:Platform.OS=='android'?-10:0}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  defaultValue={balance}
                                  onChangeText={(val)=>setBalance(val)}
                               />
                            </View>
-                           <View style={{borderWidth:1,marginTop:-1,borderColor:'#3D4785',}}></View>
+                           <View style={{borderWidth:1,marginTop:Platform.OS=='android'?-1:6,borderColor:'#3D4785',}}></View>
                       </View>
                       <View style={{marginTop:25}}>
                           <View style={styles.view4}>
@@ -276,11 +233,11 @@ const renderItem=(item)=>{
                           </View>
                        </View>
                        <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Normal'}}>OR</Text>
+                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
                        </View>
                       <View style={styles.view7}>
                            <TextInput
-                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:0}}
+                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:Platform.OS=='android'?0:6}}
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={location}
@@ -291,7 +248,7 @@ const renderItem=(item)=>{
                        </View>
 
                        <View style={{marginTop:26}}>
-                           <Text style={{fontSize:14,fontFamily:'Montserrat-Normal',}}>Type of SB A/C</Text>
+                           <Text style={{fontSize:14,fontFamily:'Montserrat-Regular',}}>Type of SB A/C</Text>
                            
 
                               <MultiSelect     
@@ -345,16 +302,21 @@ const renderItem=(item)=>{
                 style={{width:'100%',paddingHorizontal:5,paddingVertical:6}}>
                   <View style={[styles.card,{
                     flexDirection:'row',justifyContent:'space-between',alignItems:'center',
-                    paddingHorizontal:15,paddingVertical:8
+                    paddingHorizontal:15,paddingVertical:8,backgroundColor:'white'
                     }]}>
-                    <Text style={{fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14}}>
-                      {`Minimum balance : `}
+                    
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
+                      {`Minimum balance : `}</Text>
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
                       {`${route.params.balance}`}
                       </Text>
+                      </View>
+                      {/* </Text> */}
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{
-                          fontFamily:'Montserrat-Normal',color:colors.bc,fontSize:14,marginRight:5}}>
+                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14,marginRight:5}}>
                             {`Location : ${route.params.location}`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>
@@ -367,14 +329,20 @@ const renderItem=(item)=>{
                    style={{width:'100%'}}
                  />
  <View style={{
-                   width:'100%',
-                   bottom:20,
+                  //  width:'100%',
+                  //  //bottom:20,
+                  //  flexDirection:'row',
+                  //  justifyContent:'space-between',
+                  //  paddingHorizontal:20,
+                  //  alignItems:'center',
+                  //  backfaceVisibility:colors.card,
+                  width:'100%',
+                  // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
                    paddingHorizontal:20,
                    alignItems:'center',
-                   backfaceVisibility:colors.card,
-                   
+                   paddingVertical:10
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}
@@ -384,15 +352,15 @@ const renderItem=(item)=>{
                    backgroundColor:'#fff',
                    borderRadius:10
                    }}>
-                   <Text style={{fontSize:13,fontFamily:'Montserrat-Normal',color:colors.bc}}>Compare</Text>
+                   <Text style={{fontSize:13,fontFamily:'Montserrat-Regular',color:colors.bc}}>Compare</Text>
                  </TouchableOpacity>
                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                    <Image source={require('../../../assets/Image/filter.png')}/>
-                   <Text style={{fontFamily:'Montserrat-Normal',fontSize:13,marginLeft:3}}>Sort By</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
                  <TouchableOpacity style={{
                    paddingHorizontal:10,
-                  paddingVertical:0,
+                  paddingVertical:Platform.OS=='android'?0:8,
                    backgroundColor:'#fff',
                    borderRadius:10,
                    flexDirection:'row',
@@ -403,6 +371,7 @@ const renderItem=(item)=>{
                           items={Sorting}
                           style={{ 
                           inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          inputIOS:{color:colors.bc},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
                           }}
                           value={sort}

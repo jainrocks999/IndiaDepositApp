@@ -13,7 +13,7 @@ import Toast from "react-native-simple-toast";
 import { useDispatch } from "react-redux";
 import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from "react-native-modal";
-import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';
+import { Platform } from "react-native";
 let backPress=0
 let arrayOfOneFD=[]
 const dashboard=()=>{
@@ -112,13 +112,15 @@ const dashboard=()=>{
     const ListItem = ({item, selected, onPress, onLongPress}) => (
        
            <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:100}}>
-               <TouchableOpacity 
+               <View 
+                    
+                    style={styles.touch1}>
+                    <TouchableOpacity 
                     onPress={onPress}
                     onLongPress={onLongPress}
-                    style={styles.touch1}>
-                    <View style={styles.imageView}>
+                    style={styles.imageView}>
                         <Image style={{height:item.height,width:item.width}} source={item.image}/> 
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
                     <TouchableOpacity onPress={()=>setModalVisible(true)} style={styles.circle}>
@@ -144,7 +146,7 @@ const dashboard=()=>{
 
                     </View>
                     }
-                </TouchableOpacity>
+                </View>
                
             </View>                                           
       
@@ -181,7 +183,7 @@ const dashboard=()=>{
     
 
     return(
-      <View style={{flexGrow:1}}>
+      <View style={{flexGrow:1,}}>
         <Header
     title={'DASHBOARD'}
     source ={require('../../../assets/Images/drawer.png')}

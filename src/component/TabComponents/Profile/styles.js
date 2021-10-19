@@ -43,7 +43,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         // marginTop:13,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
     },
     drop:{
         marginTop:5 ,

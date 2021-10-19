@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from 'react';
-import { View, Image,TouchableOpacity } from 'react-native';
+import { View, Image,TouchableOpacity,Platform } from 'react-native';
 import {
     DrawerContentScrollView,
 } from '@react-navigation/drawer';
@@ -101,7 +101,7 @@ const DrawerContent=({props})=> {
   
     return (
         <DrawerContentScrollView
-        contentContainerStyle={{ paddingTop: 0 }}
+        contentContainerStyle={{  }}
         {...props}>
             <View style={{flex:1}}>
            {/* Bottom Code For Popup */}
@@ -173,7 +173,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/user.png')}/>
+                                source={require('../../assets/Image/user.png')}/>
                             </View>
                             <Text style={styles.text}>{'Profile'}</Text>
                             </View>
@@ -193,7 +193,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/cal.png')}/>
+                                source={require('../../assets/Image/cal.png')}/>
                             </View>
                             <Text style={styles.text}>{'Calculator'}</Text>
                             </View>
@@ -213,7 +213,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/about.png')}/>
+                                source={require('../../assets/Image/about.png')}/>
                             </View>
                             <Text style={styles.text}>{'About Us'}</Text>
                             </View>
@@ -234,7 +234,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/about.png')}/>
+                                source={require('../../assets/Image/contact_us.png')}/>
                             </View>
                             <Text style={styles.text}>{'Contact Us'}</Text>
                             </View>
@@ -249,7 +249,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/noti.png')}/>
+                                source={require('../../assets/Image/noti.png')}/>
                             </View>
                             <Text style={styles.text}>{'Notification'}</Text>
                             </View>
@@ -263,7 +263,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/knowledege.png')}/>
+                                source={require('../../assets/Image/knowledege.png')}/>
                             </View>
                             <Text style={styles.text}>{'Knowledge Center'}</Text>
                             </View>
@@ -278,7 +278,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/support.png')}/>
+                                source={require('../../assets/Image/support.png')}/>
                             </View>
                             <Text style={styles.text}>{'Support'}</Text>
                             </View>
@@ -295,7 +295,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/feedback.png')}/>
+                                source={require('../../assets/Image/feedback.png')}/>
                             </View>
                             <Text style={styles.text}>{'Feedback'}</Text>
                             </View>
@@ -325,7 +325,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/privacy.png')}/>
+                                source={require('../../assets/Image/privacy.png')}/>
                             </View>
                             <Text style={styles.text}>{'Policy'}</Text>
                             </View>
@@ -341,7 +341,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view2}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/newImage/logout.png')}/>
+                                source={require('../../assets/Image/logout.png')}/>
                             </View>
                             <Text style={styles.text}>{'Logout'}</Text>
                             </View>

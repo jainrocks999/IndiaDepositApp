@@ -14,7 +14,7 @@ export default StyleSheet.create({
     },
     caption: {
         fontSize: fontSize.fourteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
    
@@ -112,8 +112,7 @@ export default StyleSheet.create({
         color:colors.white,
         fontSize: fontSize.fefteen,
         alignSelf: 'center',
-        fontFamily: 'Poppins-Bold',
-        fontWeight: 'bold',
+        fontFamily: 'Montserrat-SemiBold',
         textAlign: 'center',
       },
       ModelMsgText: {
@@ -146,7 +145,9 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         flexDirection:'row',
         paddingHorizontal:20,
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginTop:-10
+        // flex:1
        },
        main1:{
            flexDirection:'row',
@@ -158,7 +159,8 @@ export default StyleSheet.create({
             borderRadius:42
         },
         view:{
-            marginLeft:20
+            marginLeft:20,
+            width:'65%'
         }, 
         text2:{
             color:colors.white,
@@ -168,7 +170,7 @@ export default StyleSheet.create({
         text3:{
             color:colors.white,
             fontSize:fontSize.fourteen,
-            fontFamily:'Montserrat-Normal'
+            fontFamily:'Montserrat-Regular'
         }, 
         view1:{ 
             flexDirection: 'row',

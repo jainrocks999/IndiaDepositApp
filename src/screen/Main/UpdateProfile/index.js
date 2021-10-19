@@ -1,5 +1,5 @@
 import React,{useState,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -22,9 +22,9 @@ const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
    .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
    father:yup.string().max(40,({max})=>`Father name must be maximum ${max} character`)
-   .required('Please enter your Father Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father name"),
+   .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
    mother:yup.string().max(40,({max})=>`Mother name must be maximum ${max} character`)
-   .required('Please enter your Mother Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother name"),
+   .required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
    email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
    pan:yup.string().required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
    mobile:yup.string().required('Please enter mobile number'),
@@ -71,6 +71,9 @@ const RegisterPage=({route})=>{
       else if(city==0||''){
          Toast.show('Please select city name')
       }
+      else if(income_group==0||''){
+         Toast.show('Please select income group')
+      }
       else if(education==0||''){
          Toast.show('Please select education')
       }
@@ -80,9 +83,7 @@ const RegisterPage=({route})=>{
       else if(residential_address==0||''){
          Toast.show('Please select residential status')
       }
-      else if(income_group==0||''){
-         Toast.show('Please select income group')
-      }
+     
       else{
       dispatch({
       type: 'Edit_Profile_Request',
@@ -237,7 +238,7 @@ const RegisterPage=({route})=>{
                                          placeholder={{ label: "Select Gender", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:14}} 
+                                         style={{marginLeft:12,width:25,height:9, marginTop:Platform.OS=='android'? 14:4}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
                                    />
                             </View>
@@ -421,7 +422,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Country", value: 0 }}
                         Icon={()=>
                            <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                      />                                    
                     </View>
@@ -445,7 +446,7 @@ const RegisterPage=({route})=>{
                            placeholder={{ label: "Select State", value: 0 }}
                            Icon={()=>
                            <Image 
-                           style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                      />                                
                     </View>
@@ -468,7 +469,7 @@ const RegisterPage=({route})=>{
                         placeholder={{label: "Select City", value:0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                   />                            
                     </View>
@@ -492,7 +493,7 @@ const RegisterPage=({route})=>{
                                          placeholder={{ label: "Select Income Group", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
                                    />
                     </View>
@@ -516,7 +517,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Education", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                      source={require('../../../assets/Image/down.png')}/>}   
                   />                             
                     </View>
@@ -540,7 +541,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Marital Status", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                         source={require('../../../assets/Image/down.png')}/>}   
                   />                               
                     </View>
@@ -564,7 +565,7 @@ const RegisterPage=({route})=>{
                         placeholder={{ label: "Select Residential Status", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:11}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
                      source={require('../../../assets/Image/down.png')}/>}   
                   />                          
                     </View>

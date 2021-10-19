@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
@@ -7,7 +7,8 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor:colors.card
+    backgroundColor:colors.card,
+    //paddingTop: Platform.OS === "android" ?0: 40
     },
     main:
     {
@@ -116,7 +117,7 @@ export default StyleSheet.create({
         alignSelf:'center',
         alignContent:'center',
         textAlign:'center',
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen
     },
    

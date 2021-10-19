@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
          flex: 1,
-         backgroundColor:colors.card
+         backgroundColor:colors.card,
+         //paddingTop:Platform.OS=='android'?0:40
     },
     main:
     {
@@ -93,7 +94,7 @@ export default StyleSheet.create({
     text1:
     {
         width:'90%',
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen,
         color:colors.textColor
     },
@@ -137,10 +138,10 @@ export default StyleSheet.create({
     },
     text3:{
         color:colors.white,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:fontSize.fourteen
     },
     row:
-        {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Normal'}
+        {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Regular'}
     
 })

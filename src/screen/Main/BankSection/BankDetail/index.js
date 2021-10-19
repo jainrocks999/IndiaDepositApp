@@ -1,5 +1,5 @@
 import React,{useRef,useEffect, useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,Platform} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -10,8 +10,6 @@ import { useSelector,useDispatch } from 'react-redux';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../../../component/loader';
-import OptionsMenu from "react-native-option-menu";
-import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 import axios from "axios";
 import Toast from 'react-native-simple-toast';
 
@@ -86,7 +84,10 @@ const renderItem=(item)=>{
                 <View 
                     style={styles.card}>
                    <View style={styles.cardView}>
-                      <Image source={require('../../../../assets/Images/sbi.png')}/>
+                   <Image
+                       resizeMode='contain'
+                       style={{height:20,width:70}}
+                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
                       <Text style={styles.title}>{item.name}</Text>
                      <View style={{width:'20%',alignItems:'flex-end'}}>
                      </View>
@@ -122,7 +123,7 @@ const renderItem=(item)=>{
       )
 }
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1,}}>
               <Header
                     title={'Bank List'}
                     source={require('../../../../assets/Images/arrow.png')}

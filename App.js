@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, LogBox, Button } from 'react-native';
+import { View, Text, StyleSheet, LogBox, Button ,Platform,SafeAreaView} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { Provider } from 'react-redux';
@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from './src/component/AsyncStorage';
 import * as RootNavigation from './src/navigator/rootNavigation';
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import colors from "./src/component/colors";
 
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
@@ -85,11 +86,13 @@ const App = () => {
     }
   }
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1,  backgroundColor:Platform.OS=='ios'? colors.bc:'white'}}>
+    {/* <View style={{ flex: 1 }}> */}
       <Provider store={Store}>
         <RootApp />
       </Provider>
-    </View>
+    {/* </View> */}
+    </SafeAreaView>
   )
 }
 export default App;

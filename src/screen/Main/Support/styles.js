@@ -1,10 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,platform} from 'react-native';
 import  colors  from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:colors.card
+        backgroundColor:colors.card,
+        //paddingTop:Platform.OS=='android'?0:40
     },
     card:{
         shadowColor:colors.black,
@@ -48,7 +49,7 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginTop:15,
         fontSize:fontSize.fefteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     better1:{
         fontFamily:'Montserrat-SemiBold',

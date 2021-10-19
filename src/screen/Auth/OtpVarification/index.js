@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import axios from 'axios';
 class OtpVarification extends React.Component{
     constructor(props) {
         super(props);
@@ -45,13 +46,18 @@ class OtpVarification extends React.Component{
        // this.setState({value:('0')})
       }
     componentDidMount() {
+      setTimeout(() => {
+        console.log('hitdsfdsaf');
+      }, 10000);
         const { counter } = this.state;
         let timer = setInterval(this.tick, 1000);
         this.setState({ timer });
     }
     
     componentWillUnmount() {
-        clearInterval(this.state.timer);
+        // clearInterval(this.state.timer);
+        let timer = setInterval(this.tick, 1000);
+        this.setState({ timer });
     }
 
     tick = () => {
@@ -66,20 +72,29 @@ class OtpVarification extends React.Component{
     };
 
     
-    otpResend=()=>{
-        this.props.dispatch({
-            type: 'User_MLogin_Request',
-            url: 'mlogin',
-            mobile:this.state.mobile,
-            navigation:this.props.navigation,
-            
-            
-           
-        })
-        this.setState({value:this.state.value +1});
+    otpResend=async()=>{
+      try {
+        const data = new FormData();
+        data.append('mobile',this.state.mobile)
+       
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/sendotp',
+        });
+        if(response.data.status==200){
+          Toast.show(response.data.messages)
+          this.setState({counter:this.state.counter+10})
+        }       
+      } catch (error) {
+       throw error;
+      }
     }
     validateUser=()=>{
-     console.log('tihs istesting details',this.state.user_id,this.state.name,this.state.otpData,this.state.mobile);
       if(this.state.otp==this.state.otpData){
         AsyncStorage.setItem(Storage.name,this.state.name)
         AsyncStorage.setItem(Storage.user_id,this.state.user_id)
@@ -105,12 +120,12 @@ class OtpVarification extends React.Component{
         this.props.navigation.replace('Main')
       }
       else{
+        // this.setState({value:this.state.value +1});
         Toast.show('Please Enter Correct Otp Code')
       }
      }
   
     render(){
-        console.log('this is construxskf',this.state.otpData,this.state.mobile);
         return(
             <View style={styles.container}>
              
@@ -139,29 +154,15 @@ class OtpVarification extends React.Component{
                   />
                   <View style={[styles.textBottom,{marginTop:15}]}>
                       <Text style={styles.your}>
-                          {this.state.value>0 ? `You have entered wrong OTP, ${this.state.value} attempt left.`:`Enter the OTP sent to your mobile number.`}
+                          {this.state.value>0 ? `You have entered wrong OTP, ${this.state.value} attempt left.`:`Enter the OTP sent on ${this.state.mobile}.`}
                       </Text>
                   </View>
                 </View>          
                  <View style={styles.button}>
-                   <TouchableOpacity
-                    disabled={this.state.counter > 0 ? false :true}
-                    onPress={()=>this.validateUser()}
-                    style={{ width: "100%",
-                    height:50,
-                    backgroundColor:this.state.counter>0?colors.bc:'grey',
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius:30,}}
-                   >
-                      <Text style={{  alignSelf: "center",color:colors.white,fontFamily:'Montserrat-SemiBold',fontSize:16,}}>{'CONFIRM OTP'}</Text>
-
-
-                   </TouchableOpacity>
-                     {/* <CustomButton
+                     <CustomButton
                      title='CONFIRM OTP'
                      onPress={()=>this.validateUser()}
-                     /> */}
+                     />
                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
                       <Text style={styles.your}>
                           {`Didn’t Receive the OTP?`}
@@ -180,8 +181,7 @@ class OtpVarification extends React.Component{
                          {`You can request OTP Resend\nafter 0${Math.floor(this.state.counter / 60)}:${(this.state.counter < 10 ? `0${this.state.counter%60}`:this.state.counter%60)} sec`}</Text>
                     :null
                     }
-                 </View>
-                
+                 </View>                
                </View>
              </KeyboardAwareScrollView>
              <StatusBar/>
@@ -196,3 +196,4 @@ const mapStateToProps=(state)=>{
   }
   
   export default connect(mapStateToProps)(OtpVarification)
+

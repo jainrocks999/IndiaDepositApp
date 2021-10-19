@@ -1,12 +1,13 @@
 
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
        flex: 1,
-       backgroundColor:colors.card
+       backgroundColor:colors.card,
+      // paddingTop:Platform.OS=='android'?0:40
     },
     scroll:
     {
@@ -46,18 +47,18 @@ export default StyleSheet.create({
     text1:
     {
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor
     },
     text2:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     text3:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         marginLeft:30
     },
     textinput:
@@ -137,6 +138,19 @@ export default StyleSheet.create({
     {
         marginTop:16,
         marginRight:8
-    }
+    },
+    warn:
+    {
+        fontSize:fontSize.twelve,
+        color:'red'
+    },
+    error:
+    {
+        width:'90%',
+        justifyContent:'center',
+        alignItems:'flex-start',
+        paddingHorizontal:10,
+        marginTop:6
+    },
     
 })

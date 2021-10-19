@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     same:
     {
         fontSize:fontSize.ten,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         textAlign:'center'
        
@@ -101,7 +101,7 @@ export default StyleSheet.create({
     text5:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         
     },
     view52:
@@ -121,8 +121,8 @@ export default StyleSheet.create({
     },
     image4:
     {
-        marginTop:16,
-        marginRight:-5,
+        marginTop:Platform.OS=='android'? 16:6,
+        marginRight:-2,
         height:7,
         width:20,
     },

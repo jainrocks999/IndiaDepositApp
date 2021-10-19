@@ -1,11 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet ,Platform,StatusBar} from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
     container:
     {
-flex: 1,
-    backgroundColor:'#E5E5E5'
+    flex: 1,
+    backgroundColor:'#E5E5E5',
+    //paddingTop: Platform.OS === "android" ?0: 40
     },
     imageContainer:
     {
@@ -35,7 +36,7 @@ flex: 1,
     heading:
     {
         fontSize:fontSize.seventeen,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         alignContent:'center',
         textAlign:'center'
@@ -81,7 +82,7 @@ button:
     {
         color:colors.white,
         fontSize:fontSize.sixteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     view:
     {

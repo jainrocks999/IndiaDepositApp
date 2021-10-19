@@ -24,13 +24,13 @@ export default StyleSheet.create({
     {
         color:colors.white,
         fontSize:fontSize.nineteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     last:
     {
         color:colors.white,
         fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     pfile:
     {
@@ -107,7 +107,7 @@ export default StyleSheet.create({
     Text1:
     {
         fontSize:fontSize.eleven,
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontWeight:'500'
     },
     buttomview1:
@@ -146,7 +146,7 @@ export default StyleSheet.create({
     search:{
         color:colors.white,
         fontSize:fontSize.twelve,
-        fontFamily:'Montserrat-Normal'
+        fontFamily:'Montserrat-Regular'
     },
     enable:{
         position: 'absolute',
@@ -160,7 +160,7 @@ export default StyleSheet.create({
         
    },
    modal: {
-    width: 350,
+    width: 330,
     height:200,
     borderRadius: 10,
     flexDirection: 'column',
@@ -192,14 +192,15 @@ export default StyleSheet.create({
   ModelMsgText: {
     width: '99%',
     color: colors.white,
-    fontSize: fontSize.nineteen,
+    fontSize: fontSize.seventeen,
     textAlign: 'center',
     fontWeight:'700'
    // margin:10
   },
   ModelmsgView: {
-    width: '99%',
-    alignItems: 'center',
+    width: 75,
+    height:44
+,    alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
    // marginTop:10
