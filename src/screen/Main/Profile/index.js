@@ -9,6 +9,7 @@ import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import Profile from '../../../component/TabComponents/Profile';
 import BankDetail from '../../../component/TabComponents/BankDetail';
 import NomineeDetail from '../../../component/TabComponents/NomineeDetail';
+import FamilyDetail from '../../../component/TabComponents/FamilyDetail';
 import ImagePicker  from 'react-native-image-crop-picker';
 import { TouchableOpacity } from 'react-native';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
@@ -22,7 +23,8 @@ import Loader from '../../../component/loader';
   const renderScene = SceneMap({
       first: Profile,
       second: BankDetail,
-      third:NomineeDetail
+      third:NomineeDetail,
+      four:FamilyDetail
   });
 
 
@@ -95,8 +97,8 @@ const ProfileScreen=()=>{
     // const education=await AsyncStorage.getItem(Storage.education)
     // const stateId=await AsyncStorage.getItem(Storage.stateId)
     // const cityId=await AsyncStorage.getItem(Storage.cityId)
-    // let image=await AsyncStorage.getItem(Storage.image)
-    // setImage(image)
+     let image=await AsyncStorage.getItem(Storage.image)
+     setImage(image)
      setName(name)
     setEmail(email)
     // setFName(father)
@@ -128,9 +130,10 @@ const ProfileScreen=()=>{
   },[])
   
   const [routes] = React.useState([
-    { key: 'first', title: 'PERSONAL DETAILS' },
-    { key: 'second', title: 'BANK DETAILS' },
-    { key: 'third', title: 'NOMINEE DETAILS' },
+    { key: 'first', title: 'PERSONAL' },
+    { key: 'second', title: 'BANK' },
+    { key: 'third', title: 'NOMINEE' },
+    { key: 'four', title: 'FAMILY' },
   ]);
 
   const save1=async(image)=>{

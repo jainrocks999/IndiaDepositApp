@@ -102,25 +102,6 @@ const manageState=async(val)=>{
       state_id:val,
       
     })
-    // try {
-    //     const data = new FormData();
-    //     data.append('state_id',20)
-    //     const response = await axios({
-    //       method: 'POST',
-    //       data,
-    //       headers: {
-    //         'content-type': 'multipart/form-data',
-    //         Accept: 'multipart/form-data',
-    //       },
-    //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-    //     });
-    //     console.log('this is response value',response);
-    //     setManageStateValue(response.data.data)
-    //   } catch (error) {
-    //    throw error;
-        
-    //   }
-
      }
      const Country=[
       {label:'India',value:'101'},

@@ -6,12 +6,11 @@ import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
 import { useDispatch,useSelector } from 'react-redux';
 
-const FDList=()=>{
+const FDDetail=({route})=>{
 const navigation=useNavigation()
 const dispatch=useDispatch()
 const selector=useSelector(state=>state.FDDetail)
 const details=selector[0]
-console.log('this is userdetails',details);
 
     return(
         <View style={styles.container1}>
@@ -184,9 +183,22 @@ console.log('this is userdetails',details);
                          </Text>
                       </View>
                      <View style={styles.button}>
-                         <TouchableOpacity style={styles.btCont}>
+                        {details.fd_from=='setu'? 
+                        <TouchableOpacity 
+                         onPress={()=>navigation.navigate('FDView',{
+                              amount:details.principal_amount,
+                              tenure:route.params.tenure
+                         })}
+                         style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
+                         :details.fd_from=='nbfc'?
+                         <TouchableOpacity 
+                         //onPress={()=>navigation.navigate('FDView')}
+                         style={styles.btCont}>
+                           <Text style={styles.text3}>CREATE FD</Text>
+                         </TouchableOpacity>
+                         :null}
                          <TouchableOpacity style={styles.btCont}>
                            <Text style={styles.text3}>DOWNLOAD FORM</Text>
                          </TouchableOpacity>
@@ -197,4 +209,4 @@ console.log('this is userdetails',details);
        
     )
 }
-export default FDList;
+export default FDDetail;
