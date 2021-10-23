@@ -24,7 +24,7 @@ const details=selector[0]
                          <Image  resizeMode='contain'
                        style={{height:20,width:80}}
                          source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`}}/>
-                         <Text style={styles.text}>{details.type}</Text>
+                         <Text style={styles.text}>{details.bankname}</Text>
                          {/* <Text style={styles.text1}>Fixed Deposit</Text> */}
                      </View>
                  </View>
@@ -102,7 +102,13 @@ const details=selector[0]
                       <View style={styles.bank}>
                            <TouchableOpacity>
 
-                               <Text style={styles.bankDetails}>BANK DETAILS</Text>
+                               <Text style={styles.bankDetails}
+                                onPress ={()=>navigation.navigate('BankCalu',{
+                                     type:details.bankname,
+                                     image:selector[0].bank_logo,
+                                    principal:details.principal_amount
+                                   }
+                                )}>BANK DETAILS</Text>
                           </TouchableOpacity>
                           <TouchableOpacity>
                                <Text style={styles.bankDetails}>DOWNLOAD FORM</Text>
