@@ -87,6 +87,7 @@ const RegisterPage=({route})=>{
       }
      
       else{
+         console.log('constry dfsakfl;sd',country,city,state);
       dispatch({
       type: 'Add_Family_Request',
       url: 'createfamily',
@@ -106,7 +107,7 @@ const RegisterPage=({route})=>{
       relation:relation,
       state:state,
       pincode:values.pincode,
-      country:101,
+      country:country,
       marital_status:marital_status,
       occupation:values.occupation,
       income_group:income_group,
@@ -146,7 +147,7 @@ const RegisterPage=({route})=>{
             {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
                <View style={styles.container}>
                   <Header
-                     source={require('../../../../assets/Images/arrow.png')}
+                     source={require('../../../../assets/Image/arrow2.png')}
                      title='ADD FAMILY MEMBER'
                      onPress={()=>navigation.replace('Profile')}
                   />
@@ -632,5 +633,5 @@ const Incom_Group=[
    { label: '15-20Lakhs',value:'15-20Lakhs'}
 ]
 const Country=[
-   { label: 'India', value: 'India' },
+   { label: 'India', value: '101' },
 ]

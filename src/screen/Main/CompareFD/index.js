@@ -23,7 +23,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
         }}>
               <Header
                   title={'COMPARE FD'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
                /> 
                 <View style={styles.View}>

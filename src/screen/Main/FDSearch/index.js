@@ -83,7 +83,7 @@ const Contact=({route})=>{
         <View style={styles.container}>
               <Header
                   title={'FD SEARCH'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
               />
              <ScrollView style={styles.scroll}>

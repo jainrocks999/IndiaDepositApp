@@ -59,7 +59,7 @@ const Knowledge=()=>{
              </ScrollView>
               <StatusBar/>
               <View style={styles.buttomview}>
-                 <BottomTab/>
+                 {/* <BottomTab/> */}
               </View>
         </View>
     )

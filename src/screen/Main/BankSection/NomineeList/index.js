@@ -123,7 +123,7 @@ const renderItem=(item)=>{
         <View style={{flex:1}}>
               <Header
                     title={'Nominee List'}
-                    source={require('../../../../assets/Images/arrow.png')}
+                    source={require('../../../../assets/Image/arrow2.png')}
                     titleTwo='Add Nominee'
                     onPress={()=>navigation.navigate('FDDetail')}
                     onPress1={()=>navigation.navigate('AddNominee')}

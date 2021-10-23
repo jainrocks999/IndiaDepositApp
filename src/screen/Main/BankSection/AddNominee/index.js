@@ -1,5 +1,5 @@
 import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView} from 'react-native';
+import {View,Text,TextInput,ScrollView,Image} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -118,7 +118,7 @@ const addUser=async(values)=>{
         <View style={styles.container}>
             <Header
                     title={'ADD NOMINEE   '}
-                    source={require('../../../../assets/Images/arrow.png')}
+                    source={require('../../../../assets/Image/arrow2.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
@@ -128,7 +128,12 @@ const addUser=async(values)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
+                <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -143,11 +148,16 @@ const addUser=async(values)=>{
                         {(errors.name && touched.name) &&
                         <Text style={styles.warn}>{errors.name}</Text>}
                     </View>
-                      <Text style={styles.better}>Address Line1</Text>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Address Line1</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter your address1'
+                        placeholder='Please enter your address line1'
                         placeholderTextColor={colors.heading1}
                         value={values.address1}
                         onChangeText={handleChange('address1')}
@@ -158,11 +168,16 @@ const addUser=async(values)=>{
                         {(errors.address1 && touched.address1) &&
                         <Text style={styles.warn}>{errors.address1}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Address Line2</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter your address2'
+                        placeholder='Please enter your address line2'
                         placeholderTextColor={colors.heading1}
                         value={values.address2}
                         onChangeText={handleChange('address2')}
@@ -174,7 +189,12 @@ const addUser=async(values)=>{
                         {(errors.address2 && touched.address2) &&
                         <Text style={styles.warn}>{errors.address2}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCountry(val)}
@@ -194,7 +214,12 @@ const addUser=async(values)=>{
                         {/* {(errors.account_type && touched.account_type) &&
                         <Text style={styles.warn}>{errors.account_type}</Text>} */}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>State</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>manageState(val)}
@@ -212,8 +237,12 @@ const addUser=async(values)=>{
                         {/* {(errors.ifsc_code && touched.ifsc_code) &&
                         <Text style={styles.warn}>{errors.ifsc_code}</Text>} */}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>City</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCity(val)}
@@ -231,8 +260,12 @@ const addUser=async(values)=>{
                         {/* {(errors.ifsc_code && touched.ifsc_code) &&
                         <Text style={styles.warn}>{errors.ifsc_code}</Text>} */}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Date of Birth</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <DatePicker
                         style={{width: '99%'}}
@@ -264,8 +297,12 @@ const addUser=async(values)=>{
                         {/* {(errors.ifsc_code && touched.ifsc_code) &&
                         <Text style={styles.warn}>{errors.ifsc_code}</Text>} */}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Relationship</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -281,8 +318,12 @@ const addUser=async(values)=>{
                         {(errors.relationship && touched.relationship) &&
                         <Text style={styles.warn}>{errors.relationship}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -298,8 +339,12 @@ const addUser=async(values)=>{
                         {(errors.guardian && touched.guardian) &&
                         <Text style={styles.warn}>{errors.guardian}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian Relationship</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -315,8 +360,13 @@ const addUser=async(values)=>{
                         {(errors.guardian_relationship && touched.guardian_relationship) &&
                         <Text style={styles.warn}>{errors.guardian_relationship}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Pincode</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    </View>
+                   
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}

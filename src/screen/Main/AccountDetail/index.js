@@ -16,7 +16,7 @@ const details=selector[0]
        <View style={styles.container1}>
          <Header
           title={'SB A/C DETAILS'}
-          source={require('../../../assets/Image/arrow.png')}
+          source={require('../../../assets/Image/arrow2.png')}
           onPress={()=>navigation.goBack()}
          /> 
          <View style={{marginTop:12}}>

@@ -54,7 +54,7 @@ const share=async()=>{
     return(
         <View style={styles.container}>
               <Header
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   title={'REFERRAL'}
                   onPress={()=>navigation.goBack()}
                />

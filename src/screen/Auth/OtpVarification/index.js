@@ -136,7 +136,7 @@ class OtpVarification extends React.Component{
     }
     validateUser=async()=>{
       const device_type= DeviceInfo.getSystemName()
-      let token=await AsyncStorage.getItem(Storage.token);
+      const token=await AsyncStorage.getItem(Storage.token);
       if(this.state.type=='Register'){
         
       if(this.state.otp==this.state.otpData){

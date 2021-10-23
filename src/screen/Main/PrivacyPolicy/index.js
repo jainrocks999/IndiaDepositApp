@@ -26,7 +26,7 @@ const Calculator=()=>{
     return(
            <View style={styles.container}>
                <Header
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   title={'POLICY'}
                   onPress={()=>navigation.goBack()}
                />

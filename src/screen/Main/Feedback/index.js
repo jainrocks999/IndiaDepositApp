@@ -64,7 +64,7 @@ const validateUser=async()=>{
           <View style={styles.container}>
               <Header
                   title={'FEEDBACK'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
              />
              <ScrollView>

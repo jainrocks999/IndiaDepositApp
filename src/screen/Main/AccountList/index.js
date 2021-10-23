@@ -296,13 +296,40 @@ const renderItem=(item)=>{
                         </DialogContent>
                        
                       </Dialog>
-                      <View style={{
+              
+              <View style={styles.list}>
+                <TouchableOpacity
+                onPress={()=>openDialog()}
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
+                  <View style={[styles.card,{
+                    flexDirection:'row',justifyContent:'space-between',alignItems:'center',
+                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white'
+                    }]}>
+                    
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
+                      {`Minimum balance : `}</Text>
+                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
+                      {`${route.params.balance}`}
+                      </Text>
+                      </View>
+                      {/* </Text> */}
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{
+                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5}}>
+                            {`Location : ${route.params.location}`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
+               <View style={{
                   width:'100%',
                    flexDirection:'row',
                    justifyContent:'space-between',
                    paddingHorizontal:10,
                    alignItems:'center',
-                   paddingTop:10,
+                   paddingTop:5,
                    paddingBottom:5
                    }}>
                  <TouchableOpacity
@@ -358,32 +385,6 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
-              <View style={styles.list}>
-                <TouchableOpacity
-                onPress={()=>openDialog()}
-                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
-                  <View style={[styles.card,{
-                    flexDirection:'row',justifyContent:'space-between',alignItems:'center',
-                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white'
-                    }]}>
-                    
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
-                      {`Minimum balance : `}</Text>
-                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
-                      {`${route.params.balance}`}
-                      </Text>
-                      </View>
-                      {/* </Text> */}
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{
-                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5}}>
-                            {`Location : ${route.params.location}`}</Text>
-                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
-                    </View>
-                  </View>
-               </TouchableOpacity>
                 <FlatList
                    data={selector}
                    renderItem={({item})=>renderItem(item)}

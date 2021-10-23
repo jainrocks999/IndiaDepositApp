@@ -107,5 +107,14 @@ export default StyleSheet.create({
         fontSize:fontSize.twelve,
         color:'red'
     },
+    row:{
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    star:{
+        height:10,
+        width:10,
+        marginTop:6
+    }
    
 })

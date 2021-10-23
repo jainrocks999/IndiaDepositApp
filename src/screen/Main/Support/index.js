@@ -49,7 +49,11 @@ const Supports=({route})=>{
   
       return(
         <Formik
-        initialValues={{ name: route.params.name,email:route.params.email,mobile:route.params.mobile,subject:'',message:''}}
+        initialValues={{ 
+          name: '',
+          email:'',
+          mobile:'',
+          subject:'',message:''}}
         onSubmit={values => validateUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -64,7 +68,13 @@ const Supports=({route})=>{
                     contentContainerStyle={{flex:1}}>
                       {isFetching?<Loader/>:null}
                     <Text style={styles.better1}>How can we help you?</Text>
-                      <Text style={styles.better}>Name</Text>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Name</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                     
                         <View style={styles.drop}>
                           <TextInput
                             style={{color:colors.textColor}}
@@ -81,7 +91,12 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.name}</Text>
                         }
                       </View>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Email</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                         <View style={styles.drop}>
                           <TextInput
                            style={{color:colors.textColor}}
@@ -98,7 +113,12 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         }
                       </View>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Mobile Number</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                         <View style={styles.drop}>
                           <TextInput
                          style={{color:colors.textColor}}
@@ -116,7 +136,12 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.mobile}</Text>
                         }
                       </View>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Subject</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                         <View style={styles.drop}>
                         <TextInput
                            style={{color:colors.textColor}}
@@ -134,7 +159,13 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.subject}</Text>
                         }
                       </View>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Message</Text>
+                    <Image style={{ height:10,
+                      width:10,
+                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                     
                         <View style={styles.drop1}>
                         <TextInput
                           multiline = {true}
@@ -185,7 +216,7 @@ const Supports=({route})=>{
     return(
             <View style={styles.container}>
                  <Header
-                     source={require('../../../assets/Images/arrow.png')}
+                     source={require('../../../assets/Image/arrow2.png')}
                      title={'SUPPORT'}
                      onPress={()=>navigation.goBack()}
                   />

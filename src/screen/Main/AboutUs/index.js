@@ -15,6 +15,12 @@ const Contact=()=>{
   
    
 useEffect(()=>{
+  
+  dispatch({
+    type: 'About_Us_Request',
+    url: 'getpagecontent',
+    key:'about_us',
+  })
   const backAction = () => {
     navigation.goBack()
     return true;
@@ -26,11 +32,6 @@ useEffect(()=>{
   );
 
   return () => backHandler.remove();
-  dispatch({
-    type: 'About_Us_Request',
-    url: 'getpagecontent',
-    key:'about_us',
-  })
 },[])
 const showContent=()=>{
       if (selector.length>0) {
@@ -48,7 +49,7 @@ const showContent=()=>{
     return(
      <View style={styles.container}>
            <Header
-             source={require('../../../assets/Image/arrow.png')}
+             source={require('../../../assets/Image/arrow2.png')}
              title={'ABOUT US'}
              onPress={()=>navigation.goBack()}
            />

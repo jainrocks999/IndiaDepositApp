@@ -163,7 +163,7 @@ const RegisterPage=({route})=>{
             {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
                <View style={styles.container}>
                   <Header
-                     source={require('../../../assets/Images/arrow.png')}
+                     source={require('../../../assets/Image/arrow2.png')}
                      title='EDIT PROFILE'
                      onPress={()=>navigation.replace('Profile')}
                   />
@@ -176,7 +176,11 @@ const RegisterPage=({route})=>{
                      contentContainerStyle={{flex:1}}>
                      <View style={styles.main}>
                   <Text style={{color:colors.textColor,fontSize:16,fontFamily:'Montserrat-SemiBold'}}>Personal Details:</Text>
+                    <View style={styles.row}>
                     <Text style={styles.better}>Name</Text>
+                       <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                   
                       <View style={styles.drop}>
                         <TextInput
                          style={styles.input}
@@ -192,7 +196,11 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.name}</Text>
                         }
                      </View>
-                    <Text style={styles.better}>Father/Spouse Name</Text>
+                     <View style={styles.row}>
+                     <Text style={styles.better}>Father/Spouse Name</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                   
                       <View style={styles.drop}>
                         <TextInput
                          style={styles.input}
@@ -207,7 +215,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.father}</Text>
                         }
                      </View>
-                    <Text style={styles.better}>Mother Maiden Name</Text>
+                     <View style={styles.row}>
+                     <Text style={styles.better}>Mother Maiden Name</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -224,7 +235,10 @@ const RegisterPage=({route})=>{
                      </View>
                     <View style={{flexDirection:'row' ,justifyContent:'space-between',width:'100%'}}>
                         <View style={{width:'47%'}}>
-                            <Text style={styles.better}>Gender</Text>
+                        <View style={styles.row}>
+                        <Text style={styles.better}>Gender</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                             <View style={styles.drop}>
                                <RNPickerSelect
                                          onValueChange={(val)=>setGender(val)}
@@ -245,7 +259,10 @@ const RegisterPage=({route})=>{
                         </View>
                        
                         <View style={{width:'47%',}}>
-                            <Text style={styles.better}>Date of Birth</Text>
+                        <View style={styles.row}>
+                        <Text style={styles.better}>Date of Birth</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                             <View style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
                                <DatePicker
@@ -279,8 +296,10 @@ const RegisterPage=({route})=>{
                             </View>
                         </View>
                     </View>
-                   
+                    <View style={styles.row}>
                     <Text style={styles.better}>E-mail</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -298,8 +317,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         }
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Mobile</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -317,7 +338,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.mobile}</Text>
                         }
                      </View>
+                     <View style={styles.row}>
                      <Text style={styles.better}>PAN</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -333,11 +357,14 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.pan}</Text>
                         }
                      </View>
+                     <View style={styles.row}>
                      <Text style={styles.better}>Address Line1</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter address line2'
+                        placeholder='Please enter address line1'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.addressLine1}
                         onChangeText={handleChange('addressLine1')}
@@ -356,7 +383,10 @@ const RegisterPage=({route})=>{
                         fontFamily:'Montserrat-SemiBold',
                         marginTop:10
                         }}>Additional Details:</Text>
-                   <Text style={styles.better}>Address Line2</Text>
+                         <View style={styles.row}>
+                         <Text style={styles.better}>Address Line2</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -372,7 +402,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.addressLine2}</Text>
                         }
                      </View>
+                     <View style={styles.row}>
                      <Text style={styles.better}>Occupation</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -389,7 +422,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.occupation}</Text>
                         }
                      </View>
+                     <View style={styles.row}>
                      <Text style={styles.better}>Pincode</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -407,8 +443,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.pincode}</Text>
                         }
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Country</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setCountry(val)}
@@ -432,7 +470,10 @@ const RegisterPage=({route})=>{
                         } */}
                      </View>
 
+                     <View style={styles.row}>
                      <Text style={styles.better}>State</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                            onValueChange={(val)=>manageState(val)}
@@ -455,7 +496,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         } */}
                      </View>
+                     <View style={styles.row}>
                      <Text style={styles.better}>City</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setCity(val)}
@@ -478,8 +522,10 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         } */}
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Income Group</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                                          onValueChange={(val)=>setIncome_group(val)}
@@ -502,8 +548,11 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         } */}
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Education</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                  
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setEducation(val)}
@@ -526,8 +575,11 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         } */}
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Marital Status</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+              
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setMarital_status(val)}
@@ -550,8 +602,11 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         } */}
                      </View>
-
+                     <View style={styles.row}>
                      <Text style={styles.better}>Residential Status</Text>
+                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    </View>
+                    
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setResidential_address(val)}

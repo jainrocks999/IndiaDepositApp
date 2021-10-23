@@ -60,7 +60,7 @@ const showContent=()=>{
              </ScrollView>
              <StatusBar/>
              <View style={styles.buttomview}>
-               <BottomTab/>
+               {/* <BottomTab/> */}
              </View>
         </View>
    )

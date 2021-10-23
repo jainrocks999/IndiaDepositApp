@@ -297,7 +297,7 @@ const dashboard=()=>{
        </Modal>
        </View>   
     <StatusBar/>
-     <BottomTab/>
+     {/* <BottomTab/> */}
 </View>
   );
       }

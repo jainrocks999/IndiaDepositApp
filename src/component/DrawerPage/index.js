@@ -272,6 +272,36 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
+                    onPress={()=>navigation.navigate('BankHoliday')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={styles.view1}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/bank-holiday.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Bank Holiday'}</Text>
+                            </View>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Trending')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={styles.view1}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/icon-chart-line1.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Trending'}</Text>
+                            </View>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
                     onPress={()=>validateUser1()}
                     style={[styles.drawer]}>
                          <View style={styles.row}>

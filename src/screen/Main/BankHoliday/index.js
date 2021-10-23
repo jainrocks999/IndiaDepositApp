@@ -310,7 +310,7 @@ const Holiday=()=>{
               </View>
            </View>
            </ScrollView>
-          <BottomTab/>
+          {/* <BottomTab/> */}
        </View>
     )
 }

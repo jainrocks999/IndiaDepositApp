@@ -20,7 +20,7 @@ const data2=selector.datavalue2[0]
         }}>
               <Header
                   title={'COMPARE SB ACCOUNT'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
                /> 
                <View style={styles.View}>

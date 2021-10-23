@@ -55,7 +55,7 @@ console.log('this is narendra here',selector);
 
     return(
       <Formik
-      initialValues={{ email:route.params.email,mobile:route.params.mobile,name:route.params.name,message:''}}
+      initialValues={{ email:'',mobile:'',name:'',message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -64,14 +64,14 @@ console.log('this is narendra here',selector);
         <View style={styles.container}>
           <Header 
           title='CONTACT US'
-          source={require('../../../assets/Images/arrow.png')}
+          source={require('../../../assets/Image/arrow2.png')}
           onPress={()=>navigation.goBack()}
           />
           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
             <View style={styles.card}>
             {isFetching?<Loader/>:null}
             <View style={styles.header}>
-              <Text style={styles.toll}>TOLL FREE NUMBER</Text>
+              <Text style={styles.toll}>Call us on</Text>
               <View style={[styles.view,{ marginTop:21}]}>
                   <Text style={styles.num}>{detail.mobile}</Text>
                     <TouchableOpacity 

@@ -373,14 +373,48 @@ const renderItem=(item)=>{
                        
                       </Dialog>
               <View style={styles.list}>
-              <View style={{
+              
+                <TouchableOpacity
+                onPress={()=>openDialog()}
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
+                  <View style={[styles.card,{
+                    flexDirection:'row',
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    paddingHorizontal:10,
+                    paddingVertical:8,
+                    backgroundColor:'white'
+                    }]}>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={{
+                      fontFamily:'Montserrat-Regular',
+                      color:colors.bc,fontSize:13}}>{`Amount : `}
+                         </Text>
+                      <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{
+                      fontFamily:'Montserrat-Regular',
+                      color:colors.bc,fontSize:13}}>
+                      {`${route.params.amount}`}
+                      </Text>
+                   
+                      </View>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{
+                          fontFamily:'Montserrat-Regular',
+                          color:colors.bc,fontSize:13,marginRight:15}}>
+                            {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
+               <View style={{
                    width:'100%',
                   // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
                    paddingHorizontal:10,
                    alignItems:'center',
-                   paddingTop:10,
+                   paddingTop:5,
                    paddingBottom:5
                    }}>
                  <TouchableOpacity
@@ -435,39 +469,6 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
-                <TouchableOpacity
-                onPress={()=>openDialog()}
-                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
-                  <View style={[styles.card,{
-                    flexDirection:'row',
-                    justifyContent:'space-between',
-                    alignItems:'center',
-                    paddingHorizontal:10,
-                    paddingVertical:8,
-                    backgroundColor:'white'
-                    }]}>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={{
-                      fontFamily:'Montserrat-Regular',
-                      color:colors.bc,fontSize:13}}>{`Amount : `}
-                         </Text>
-                      <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
-                      <Text style={{
-                      fontFamily:'Montserrat-Regular',
-                      color:colors.bc,fontSize:13}}>
-                      {`${route.params.amount}`}
-                      </Text>
-                   
-                      </View>
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{
-                          fontFamily:'Montserrat-Regular',
-                          color:colors.bc,fontSize:13,marginRight:15}}>
-                            {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
-                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
-                    </View>
-                  </View>
-               </TouchableOpacity>
                 <FlatList
                    data={selector}
                    renderItem={({item})=>renderItem(item)}

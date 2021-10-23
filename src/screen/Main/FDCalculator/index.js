@@ -28,7 +28,7 @@ const FDCalculator=()=>{
         <View style={styles.container}>
               <Header
                     title="FD CALCULATOR"
-                    source={require('../../../assets/Images/arrow.png')}
+                    source={require('../../../assets/Image/arrow2.png')}
                     onPress={()=>navigation.goBack()}
                 />
              <ScrollView style={{flex:1}}>

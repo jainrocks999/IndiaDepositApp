@@ -1,5 +1,5 @@
 import React,{useEffect}from 'react';
-import { View,Text} from 'react-native';
+import { View,Text,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -57,14 +57,16 @@ const showContent=()=>{
     return(
         <View style={styles.container}>
            <Header
-            source={require('../../../assets/Images/arrow.png')}
+            source={require('../../../assets/Image/arrow2.png')}
            title={'NOTIFICATIONS'}
            onPress={()=>navigation.navigate('Main')}
            />
              {isFetching?<Loader/>:null}
+             <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
              <View style={styles.card}>   
                 {showContent()}
              </View>
+             </ScrollView>
            <StatusBar/>
            {/* <BottomTab/> */}
        </View>

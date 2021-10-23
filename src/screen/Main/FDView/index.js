@@ -17,7 +17,7 @@ setuser_id(user_id)
         <View style={{flex:1}}>
              <Header
                 title={'CREATE FD'}
-                source={require('../../../assets/Images/arrow.png')}
+                source={require('../../../assets/Image/arrow2.png')}
                 onPress={()=>navigation.goBack()}
             /> 
 {/* https://demo.webshowcase-india.com/indiadeposit/public/apis/fdsdk?user_id=10&amount=10000&tenure=365 */}
