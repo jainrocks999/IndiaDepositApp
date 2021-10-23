@@ -7,11 +7,11 @@ import styles from './style';
 import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
-import fontSize from '../../../component/fontSize';
-import { Alert } from 'react-native';
+import { useDispatch } from 'react-redux';
 const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
+    const dispatch=useDispatch()
     useEffect(async() => {
       const value=await AsyncStorage.getItem('value')
         if (value==1) {
@@ -20,12 +20,23 @@ const Splash=()=>{
         } else {
             appVersion()
         }
+        dispatch({
+          type: 'Privacy_Request',
+          url: 'getpagecontent',
+          key:'privacy',
+         })
+      dispatch({
+          type: 'TermAndCondition_Request',
+          url: 'getpagecontent',
+          key:'term_condition',
+    })
     // appVersion()
      //initial()
       }, []);
 
       const appVersion = async (url) => {
         const id=await AsyncStorage.getItem(Storage.user_id)
+        console.log('this is id',user_id);
         const user_id=id==null ? '':id
         console.log('this isi user id',user_id);
         const name=await AsyncStorage.getItem(Storage.name)

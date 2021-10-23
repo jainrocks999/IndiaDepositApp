@@ -87,7 +87,7 @@ const validateUser=async(values)=>{
                     pin:values.newPassword,
                     email:data.email,
                     navigation
-                    })
+                    }) 
             }
 }
     return(
@@ -104,7 +104,7 @@ const validateUser=async(values)=>{
           <ScrollView>
           <View style={styles.imageContainer}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-            <Image source={require('../../../assets/Image/arrowBack.png')}/>
+            <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
             </TouchableOpacity>
               <View style={styles.round}>
                   <Image

@@ -35,7 +35,19 @@ const Login=()=>{
     const [focus1,setFocus1]=useState(false)
 
     const next = useRef(null);
+    
     useEffect(() => {
+  //     dispatch({
+  //       type: 'Privacy_Request',
+  //       url: 'getpagecontent',
+  //       key:'privacy',
+  // })
+
+  //     dispatch({
+  //       type: 'TermAndCondition_Request',
+  //       url: 'getpagecontent',
+  //       key:'term_condition',
+  // })
       const backAction = () => {
         navigation.push('Register')
         return true;

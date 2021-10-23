@@ -48,7 +48,6 @@ import { useDispatch } from 'react-redux';
                 AsyncStorage.setItem(Storage.residential,response.data.residential_status),
 
                 
-
                   Toast.show(response.messages);
                   action.navigation.replace('Main')
               } else {
@@ -106,6 +105,7 @@ import { useDispatch } from 'react-redux';
                         marital_status:response.data.data.marital_status,
                         residential_status:response.data.data.residential_status,
                         education:response.data.data.education,
+                        type:'LoginWithOtp'
                         }
                       ) 
                 } else {
@@ -122,9 +122,9 @@ import { useDispatch } from 'react-redux';
             }
             }
 
-            function* forgotpasword(action) {
-              console.log('this is action',action);
-              try{
+function* forgotpasword(action) {
+      console.log('this is action',action);
+        try{
               const data = new FormData();
               if (action.mobile) {
                 data.append('mobile',action.mobile)
@@ -134,7 +134,7 @@ import { useDispatch } from 'react-redux';
               const response = yield call(Api.fetchDataByPOST, action.url, data);
               if (response.status==200) {
                 yield put({
-                  type: 'Forget_Password_Success',
+                  type: 'Send_Otp_Success',
                   payload: response.data,
                 });
                 Toast.show(response.messages);
@@ -151,15 +151,14 @@ import { useDispatch } from 'react-redux';
              else {
                 Toast.show(response.messages);
                 yield put({
-                  type: 'Forget_Password_Error',
+                  type: 'Send_Otp_Error',
                 });
               }
             }
             catch(error){
-              console.log('dsfdsajfhdjkhsaj');
             Toast.show(error.messages)
             yield put({
-              type: 'Forget_Password_Error',
+              type: 'Send_Otp_Error',
             });
             }
             }
@@ -202,33 +201,41 @@ import { useDispatch } from 'react-redux';
                   type: 'User_Register_Success',
                   payload: response.data,
                 });
-                if(action && action.navigation){
-                  action.navigation.replace('Otp',
-                  {
-                    otp:response.otp,
-                    mobile:action.mobile,
-                    user_id:response.data[0].user_id,
-                    name:response.data[0].name,
-                    email:response.data[0].email,
-                    father_spouse_name:response.data[0].father_spouse_name,
-                    mother_maiden_name:response.data[0].mother_maiden_name,
-                    dob:response.data[0].dob,
-                    gender:response.data[0].gender,
-                        pan:response.data[0].pan,
-                        address1:response.data[0].address1,
-                        address2:response.data[0].address2,
-                        occupation:response.data[0].occupation,
-                        pincode:response.data[0].pincode,
-                        country:response.data[0].country,
-                        state:response.data[0].state,
-                        city:response.data[0].city,
-                        income_group:response.data[0].income_group,
-                        marital_status:response.data[0].marital_status,
-                        residential_status:response.data[0].residential_status,
-                        education:response.data[0].education,
-                  }
-                    )
-                  }
+                Toast.show(response.messages)
+                AsyncStorage.setItem(Storage.user_id,response.data[0].user_id)
+                AsyncStorage.setItem(Storage.name,response.data[0].name)
+                AsyncStorage.setItem(Storage.email,response.data[0].email)
+                AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
+
+                action.navigation.navigate('Main')
+            
+                // if(action && action.navigation){
+                //   action.navigation.replace('Otp',
+                //   {
+                //     otp:response.otp,
+                //     mobile:action.mobile,
+                //     user_id:response.data[0].user_id,
+                //     name:response.data[0].name,
+                //     email:response.data[0].email,
+                //     father_spouse_name:response.data[0].father_spouse_name,
+                //     mother_maiden_name:response.data[0].mother_maiden_name,
+                //     dob:response.data[0].dob,
+                //     gender:response.data[0].gender,
+                //         pan:response.data[0].pan,
+                //         address1:response.data[0].address1,
+                //         address2:response.data[0].address2,
+                //         occupation:response.data[0].occupation,
+                //         pincode:response.data[0].pincode,
+                //         country:response.data[0].country,
+                //         state:response.data[0].state,
+                //         city:response.data[0].city,
+                //         income_group:response.data[0].income_group,
+                //         marital_status:response.data[0].marital_status,
+                //         residential_status:response.data[0].residential_status,
+                //         education:response.data[0].education,
+                //   }
+                //     )
+                //   }
               } else {
                 if(response.messages.email){
                   Toast.show(response.messages.email);
@@ -673,27 +680,27 @@ function* editProfile(action) {
                 
                AsyncStorage.setItem(Storage.name,response.data[0].name)
                 AsyncStorage.setItem(Storage.email,response.data[0].email)
-                AsyncStorage.setItem(Storage.fatherName,response.data[0].father_spouse_name)
-                AsyncStorage.setItem(Storage.motherName,response.data[0].mother_maiden_name)
-                AsyncStorage.setItem(Storage.dob,response.data[0].dob)
-                AsyncStorage.setItem(Storage.gender,response.data[0].gender)
+                // AsyncStorage.setItem(Storage.fatherName,response.data[0].father_spouse_name)
+                // AsyncStorage.setItem(Storage.motherName,response.data[0].mother_maiden_name)
+                // AsyncStorage.setItem(Storage.dob,response.data[0].dob)
+                // AsyncStorage.setItem(Storage.gender,response.data[0].gender)
                 AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
 
-                AsyncStorage.setItem(Storage.pan,response.data[0].pan),
-                AsyncStorage.setItem(Storage.address1,response.data[0].address1),
-                AsyncStorage.setItem(Storage.address2,response.data[0].address2),
-                AsyncStorage.setItem(Storage.occupation,response.data[0].occupation),
-                AsyncStorage.setItem(Storage.pincode,response.data[0].pincode),
-                AsyncStorage.setItem(Storage.country,response.data[0].country_name),
-                AsyncStorage.setItem(Storage.state,response.data[0].state_name),
-                AsyncStorage.setItem(Storage.city,response.data[0].city_name),
-                AsyncStorage.setItem(Storage.stateId,response.data[0].state),
-                AsyncStorage.setItem(Storage.cityId,response.data[0].city),
+                // AsyncStorage.setItem(Storage.pan,response.data[0].pan),
+                // AsyncStorage.setItem(Storage.address1,response.data[0].address1),
+                // AsyncStorage.setItem(Storage.address2,response.data[0].address2),
+                // AsyncStorage.setItem(Storage.occupation,response.data[0].occupation),
+                // AsyncStorage.setItem(Storage.pincode,response.data[0].pincode),
+                // AsyncStorage.setItem(Storage.country,response.data[0].country_name),
+                // AsyncStorage.setItem(Storage.state,response.data[0].state_name),
+                // AsyncStorage.setItem(Storage.city,response.data[0].city_name),
+                // AsyncStorage.setItem(Storage.stateId,response.data[0].state),
+                // AsyncStorage.setItem(Storage.cityId,response.data[0].city),
 
-                AsyncStorage.setItem(Storage.income_group,response.data[0].income_group),
-                AsyncStorage.setItem(Storage.education,response.data[0].education),
-                AsyncStorage.setItem(Storage.marital,response.data[0].marital_status),
-                AsyncStorage.setItem(Storage.residential,response.data[0].residential_status),
+                // AsyncStorage.setItem(Storage.income_group,response.data[0].income_group),
+                // AsyncStorage.setItem(Storage.education,response.data[0].education),
+                // AsyncStorage.setItem(Storage.marital,response.data[0].marital_status),
+                // AsyncStorage.setItem(Storage.residential,response.data[0].residential_status),
                 Toast.show(response.messages);  
                 action.navigation.replace('Profile')
             } else {
@@ -709,6 +716,99 @@ function* editProfile(action) {
     console.log('this is working narendra herer');
       yield put({
             type: 'Edit_Profile_Error',
+          });
+    }
+}
+
+
+function* AddFamily(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('name',action.name)
+      data.append('email',action.email)
+      data.append('dob',action.dob)
+      data.append('gender',action.gender)
+      data.append('father_spouse_name',action.father_spouse_name)
+      data.append('mother_maiden_name',action.mother_maiden_name)
+      data.append('pan',action.pan)
+      data.append('mobile',action.mobile)
+      data.append('address1',action.address1)
+      data.append('address2',action.address2)
+      data.append('occupation',action.occupation)
+      data.append('pincode',action.pincode)
+      data.append('country',action.country)
+      data.append('state',action.state)
+      data.append('city',action.city)
+      data.append('relation',action.relation)
+      data.append('income_group',action.income_group)
+      data.append('education',action.education)
+      data.append('marital_status',action.marital_status)
+      data.append('residential_status',action.residential_status)
+
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Add_Family_Success',
+              });   
+                action.navigation.replace('Profile')
+            } else {
+              yield put({
+                type: 'Add_Family_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Add_Family_Error',
+          });
+    }
+}
+
+
+function* EditFamily(action) {
+  try{
+    const data = new FormData();
+      data.append('family_id',action.family_id)
+      data.append('name',action.name)
+      data.append('email',action.email)
+      data.append('dob',action.dob)
+      data.append('gender',action.gender)
+      data.append('father_spouse_name',action.father_spouse_name)
+      data.append('mother_maiden_name',action.mother_maiden_name)
+      data.append('pan',action.pan)
+      data.append('relation',action.relation)
+      data.append('mobile',action.mobile)
+      data.append('address1',action.address1)
+      data.append('address2',action.address2)
+      data.append('occupation',action.occupation)
+      data.append('pincode',action.pincode)
+      data.append('country',action.country)
+      data.append('state',action.state)
+      data.append('city',action.city)
+      data.append('income_group',action.income_group)
+      data.append('education',action.education)
+      data.append('marital_status',action.marital_status)
+      data.append('residential_status',action.residential_status)
+
+        const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Edit_Family_Success',
+              });  
+              Toast.show(response.messages) 
+              action.navigation.replace('Profile')
+            } else {
+              yield put({
+                type: 'Edit_Family_Error',
+              });
+              Toast.show(response.messages);
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Edit_Family_Error',
           });
     }
 }
@@ -1181,7 +1281,9 @@ function* FDDetail(action) {
                 type: 'FD_Detail_Success',
                 payload: response.data,
               });  
-              action.navigation.navigate('FDDetail')
+              action.navigation.navigate('FDDetail',{
+                tenure:action.year
+              })
             } else {
               yield put({
                 type: 'FD_Detail_Error',
@@ -1325,12 +1427,70 @@ function* SBCompare(action) {
           });
     }
 }
+function* SendOtp(action) {
+  try{
+    const data = new FormData();
+      data.append('mobile',action.mobile)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Send_RegOtp_Success',
+                payload: response,
+
+              });  
+              Toast.show(response.messages)
+              action.navigation.push('Otp',{
+                type:'Register',
+                name:action.name,
+                email:action.email,
+                mobile:action.mobile,
+                pin:action.pin,
+                otp:response.otp,
+                countryCode:action.code
+              })
+            } else {
+              yield put({
+                type: 'Send_RegOtp_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Send_RegOtp_Error',
+          });
+    }
+}
+
+function* FamilyList(action) {
+  try{
+    const data = new FormData();
+    data.append('user_id',130)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Family_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'Family_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Family_List_Error',
+          });
+    }
+}
 export default function* authSaga() {
+  yield takeEvery('Send_RegOtp_Request',SendOtp)
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_Detail_Request',userDetails)
   yield takeEvery('User_MLogin_Request', mLogin);
   yield takeEvery('User_Register_Request', doRegister);
-  yield takeEvery('Forget_Password_Request', forgotpasword);
+  yield takeEvery('Send_Otp_Request', forgotpasword);
   yield takeEvery('Change_Password_Request', changepassword);
   yield takeEvery('User_Logout_Request', logout);
   yield takeEvery('About_Us_Request',aboutus)
@@ -1366,5 +1526,11 @@ export default function* authSaga() {
   yield takeEvery('SB_Search_Request',SBSearch)
   yield takeEvery('FD_Compare_Request',FDCompare)
   yield takeEvery('SB_Compare_Request',SBCompare)
+  yield takeEvery('Add_Family_Request',AddFamily)
+  yield takeEvery('Edit_Family_Request',EditFamily)
+  yield takeEvery('Family_List_Request',FamilyList)
+
+  
+
 
 }

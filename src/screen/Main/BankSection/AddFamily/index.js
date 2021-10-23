@@ -2,18 +2,18 @@ import React,{useState,useRef} from 'react';
 import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import StatusBar from '../../../component/StatusBar';
+import StatusBar from '../../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 import RNPickerSelect from 'react-native-picker-select';
-import colors from '../../../component/colors';
-import Header from '../../../component/compareHeader';
+import colors from '../../../../component/colors';
+import Header from '../../../../component/compareHeader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Storage from '../../../component/AsyncStorage';
+import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
-import CustomButton from '../../../component/button1';
-import Loader from '../../../component/loader';
+import CustomButton from '../../../../component/button1';
+import Loader from '../../../../component/loader';
 import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -40,20 +40,19 @@ const RegisterPage=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-    const [gender, setGender] = useState(user.gender);
-    const [dob, setDob] = useState(user.dob);
-    const [city,setCity]=useState(`${user.city}`)
-    const [state,setState]=useState(`${user.state}`)
+    const [gender, setGender] = useState('');
+    const [dob, setDob] = useState('');
+    const [city,setCity]=useState('')
+    const [state,setState]=useState('')
     const [country,setCountry]=useState('India')
-    const [income_group,setIncome_group]=useState(user.income_group)
-    const [education,setEducation]=useState(user.education)
-    const [marital_status,setMarital_status]=useState(user.marital_status)
-    const [residential_address,setResidential_address]=useState(user.residential_status)
+    const [income_group,setIncome_group]=useState()
+    const [education,setEducation]=useState('')
+    const [relation,setRelation]=useState('')
+    const [marital_status,setMarital_status]=useState('')
+    const [residential_address,setResidential_address]=useState()
     const selector1=useSelector(state=>state.StateList)
     const selector2=useSelector(state=>state.CityList)
-    
-    const [manageStateValue,setManageStateValue]=useState([])
- console.log('this is sele',selector2);
+
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       if(gender==0||''){
@@ -71,6 +70,9 @@ const RegisterPage=({route})=>{
       else if(city==0||''){
          Toast.show('Please select city name')
       }
+      else if(relation==0||''){
+         Toast.show('Please select relationship')
+      }
       else if(income_group==0||''){
          Toast.show('Please select income group')
       }
@@ -86,8 +88,8 @@ const RegisterPage=({route})=>{
      
       else{
       dispatch({
-      type: 'Edit_Profile_Request',
-      url: 'editprofile',
+      type: 'Add_Family_Request',
+      url: 'createfamily',
       user_id,
       name:values.name,
       email:values.email,
@@ -101,6 +103,7 @@ const RegisterPage=({route})=>{
       address1:values.addressLine1,
       address2:values.addressLine2,
       city:city,
+      relation:relation,
       state:state,
       pincode:values.pincode,
       country:101,
@@ -121,40 +124,20 @@ const RegisterPage=({route})=>{
          state_id:val,
          
        })
-      // console.log('this si isisi isi si',val);
-      // try {
-      //     const data = new FormData();
-      //     data.append('state_id',val)
-      //     const response = await axios({
-      //       method: 'POST',
-      //       data,
-      //       headers: {
-      //         'content-type': 'multipart/form-data',
-      //         Accept: 'multipart/form-data',
-      //       },
-      //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-      //     });
-      //     console.log('this is response value',response);
-      //     setManageStateValue(response.data.data)
-      //   } catch (error) {
-      //    throw error;
-          
-      //   }
-  
        }
          return(
             <Formik
             initialValues={{ 
-               name:user.name==0||null?'':user.name,
-               father:user.father_spouse_name==0||null?'':user.father_spouse_name,
-               mother:user.mother_maiden_name==0||null?'':user.mother_maiden_name,
-               email:user.email==0||null?'':user.email,
-               pan:user.pan==0||null?'':user.pan,
-               addressLine1:user.address1==0||null?'':user.address1,
-               addressLine2:user.address2==0||null?'':user.address2,
-               mobile:user.mobile==0||null?'':user.mobile,
-               occupation:user.occupation==0||null?'':user.occupation,
-               pincode:user.pincode==0||null?'':user.pincode,
+               name:'',
+               father:'',
+               mother:'',
+               email:'',
+               pan:'',
+               addressLine1:'',
+               addressLine2:'',
+               mobile:'',
+               occupation:'',
+               pincode:'',
             }}
             onSubmit={values => validateUser(values)}
             validateOnMount={true}
@@ -163,8 +146,8 @@ const RegisterPage=({route})=>{
             {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
                <View style={styles.container}>
                   <Header
-                     source={require('../../../assets/Images/arrow.png')}
-                     title='EDIT PROFILE'
+                     source={require('../../../../assets/Images/arrow.png')}
+                     title='ADD FAMILY MEMBER'
                      onPress={()=>navigation.replace('Profile')}
                   />
                { isFetching?<Loader/>:null}
@@ -239,7 +222,7 @@ const RegisterPage=({route})=>{
                                          Icon={()=>
                                           <Image 
                                          style={{marginLeft:12,width:25,height:9, marginTop:Platform.OS=='android'? 14:4}} 
-                                        source={require('../../../assets/Image/down.png')}/>}   
+                                        source={require('../../../../assets/Image/down.png')}/>}   
                                    />
                             </View>
                         </View>
@@ -275,7 +258,7 @@ const RegisterPage=({route})=>{
                                   /> 
                                   </View>
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
-                                    source={require('../../../assets/Image/down.png')}/>
+                                    source={require('../../../../assets/Image/down.png')}/>
                             </View>
                         </View>
                     </View>
@@ -289,7 +272,8 @@ const RegisterPage=({route})=>{
                         defaultValue={values.email}
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
-                        editable={false}
+                        editable={true}
+                        keyboardType='email-address'
                         
                         />
                     </View>
@@ -309,7 +293,8 @@ const RegisterPage=({route})=>{
                         onChangeText={handleChange('mobile')}
                         onBlur={handleBlur('mobile')} 
                         keyboardType='number-pad' 
-                        editable={false}                      
+                        maxLength={10}
+                        editable={true}                      
                         />
                     </View>
                     <View style={styles.error}>
@@ -337,7 +322,7 @@ const RegisterPage=({route})=>{
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter address line2'
+                        placeholder='Please enter address line1'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.addressLine1}
                         onChangeText={handleChange('addressLine1')}
@@ -423,7 +408,7 @@ const RegisterPage=({route})=>{
                         Icon={()=>
                            <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../assets/Image/down.png')}/>}   
+                        source={require('../../../../assets/Image/down.png')}/>}   
                      />                                    
                     </View>
                     <View style={styles.error}>
@@ -447,7 +432,7 @@ const RegisterPage=({route})=>{
                            Icon={()=>
                            <Image 
                            style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../assets/Image/down.png')}/>}   
+                        source={require('../../../../assets/Image/down.png')}/>}   
                      />                                
                     </View>
                     <View style={styles.error}>
@@ -470,7 +455,7 @@ const RegisterPage=({route})=>{
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../assets/Image/down.png')}/>}   
+                        source={require('../../../../assets/Image/down.png')}/>}   
                   />                            
                     </View>
                     <View style={styles.error}>
@@ -479,7 +464,25 @@ const RegisterPage=({route})=>{
                         } */}
                      </View>
 
-                     <Text style={styles.better}>Income Group</Text>
+                     <Text style={styles.better}>Relationship</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                                         onValueChange={(val)=>setRelation(val)}
+                                         items={Relation}
+                                         style={{ 
+                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                                         }}
+                                         value={relation==0||null?'':relation}
+                                         useNativeAndroidPickerStyle={false}
+                                         placeholder={{ label: "Select Relationship", value: 0 }}
+                                         Icon={()=>
+                                          <Image 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                                        source={require('../../../../assets/Image/down.png')}/>}   
+                                   />
+                    </View>
+                    <Text style={styles.better}>Income Group</Text>
                       <View style={styles.drop}>
                       <RNPickerSelect
                                          onValueChange={(val)=>setIncome_group(val)}
@@ -494,7 +497,7 @@ const RegisterPage=({route})=>{
                                          Icon={()=>
                                           <Image 
                                          style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                                        source={require('../../../assets/Image/down.png')}/>}   
+                                        source={require('../../../../assets/Image/down.png')}/>}   
                                    />
                     </View>
                     <View style={styles.error}>
@@ -518,7 +521,7 @@ const RegisterPage=({route})=>{
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                     source={require('../../../assets/Image/down.png')}/>}   
+                     source={require('../../../../assets/Image/down.png')}/>}   
                   />                             
                     </View>
                     <View style={styles.error}>
@@ -542,7 +545,7 @@ const RegisterPage=({route})=>{
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../assets/Image/down.png')}/>}   
+                        source={require('../../../../assets/Image/down.png')}/>}   
                   />                               
                     </View>
                     <View style={styles.error}>
@@ -566,16 +569,17 @@ const RegisterPage=({route})=>{
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                     source={require('../../../assets/Image/down.png')}/>}   
+                     source={require('../../../../assets/Image/down.png')}/>}   
                   />                          
                     </View>
+                   
                     <View style={styles.error}>
                     
                      </View>
                     
                     <View style={{paddingVertical:30,marginBottom:10}}>
                      <CustomButton
-                     title='UPDATE'
+                     title='ADD'
                      onPress={()=>handleSubmit()}
                      />
                     </View>
@@ -597,10 +601,18 @@ const data=[
    { label: 'Female', value: 'Female' },
    { label: 'Others', value: 'Others'}
 ]
+const Relation=[
+   { label: 'Father', value: 'Father' },
+   { label: 'Mother', value: 'Mother' },
+   { label: 'Sister', value: 'Sister'},
+   { label: 'Brother', value: 'Brother'},
+   { label: 'Other', value: 'Other'},
+
+]
+
 const Residential_Status=[
    { label: 'Resident', value: 'Resident' },
    { label: 'Non Resident', value: 'Non Resident' },
-  
 ]
 const Marital_Status=[
    { label: 'Married', value: 'Married' },

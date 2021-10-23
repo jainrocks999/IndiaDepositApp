@@ -35,6 +35,7 @@ const Contact=()=>{
     const [message,setMessage]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
+
 const validateUser=async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     if(value==''){
@@ -90,7 +91,7 @@ const validateUser=async()=>{
                                 halfStar={require('../../../assets/Images/half.png')}
                               />
                            </View>
-                            <Text style={styles.what}>What do you like most about the India Deposit    app?</Text>
+                            <Text style={styles.what}>What do you like most about the India Deposit app?</Text>
                             <View style={styles.drop}>
                                   <RNPickerSelect
                                          onValueChange={(val)=>setValue(val)}

@@ -1,5 +1,5 @@
 import React,{useEffect, useState}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,BackHandler,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -15,6 +15,17 @@ const Contact=()=>{
   
    
 useEffect(()=>{
+  const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
   dispatch({
     type: 'About_Us_Request',
     url: 'getpagecontent',

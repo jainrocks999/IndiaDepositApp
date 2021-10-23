@@ -20,7 +20,6 @@ const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.FDList)
-        console.log('this is selector data from list page',selector);
         const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
@@ -33,13 +32,14 @@ const FDList=({route})=>{
         const [sort,setSort]=useState('Alphabetical')
 
 const manageList=(item)=>{
+  const value=((year*365+month*30+day)/365).toFixed(2)
   dispatch({
     type: 'FD_Detail_Request',
     url: 'fddetail',
-    fixed_deposit_id:item,
-    principal_amount:'300',
-    rate:'3',
-    year:'2',
+    fixed_deposit_id:item.fixed_deposit_id,
+    principal_amount:amount,
+    rate:item.rate,
+    year:value,
     navigation:navigation
   })
   
@@ -108,11 +108,11 @@ else{
 }
 
 
-const handleonPress=(id)=>{
+const handleonPress=(item)=>{
   if(selectedData.length){
-    handleSelectionMultiple(id)
+    handleSelectionMultiple(item.fixed_deposit_id)
   }else{
-    manageList(id)
+    manageList(item)
   }
 }
 
@@ -132,11 +132,12 @@ const openDialog=()=>{
   // setSelected([])
 }
 const renderItem=(item)=>{
+  console.log('this is item bvdjfdskfl for verify',item);
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
                     onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
-                    onPress={()=>handleonPress(item.fixed_deposit_id)}
+                    onPress={()=>handleonPress(item)}
                     style={[styles.card,
                       {
                       backgroundColor:selectedData.includes(item.fixed_deposit_id) ? '#c9c9f0' :'#fff',
@@ -184,32 +185,7 @@ const renderItem=(item)=>{
                      <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
                      </View>
                    </View>
-                   {/* <View style={[styles.row2,{width:'93%'}]}>
-                       <Text style={styles.same}>{item.rate}</Text>
-                       <Text style={styles.same}>{item.min_amount}</Text>
-                       <Text style={styles.same}>{item.loan}</Text>
-                       <Text style={styles.same}>{item.premature_penality}</Text>
-                   </View>
-                   <View style={[styles.row2,{width:'96%'}]}>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
-                       <Image
-                         style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
-                       <Image 
-                        style={styles.image} 
-                       resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
-                       <Image 
-                        style={styles.image}
-                        resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
-                   </View>
-                   <View style={styles.row1}>
-                     <Text  style={styles.same}>{'Interest\n Rate'}</Text>
-                     <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
-                     <Text  style={styles.same}>{'  Loan'}</Text>
-                     <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
-                   </View> */}
+                  
                  </TouchableOpacity>
           </View>
       )
@@ -397,53 +373,15 @@ const renderItem=(item)=>{
                        
                       </Dialog>
               <View style={styles.list}>
-                <TouchableOpacity
-                onPress={()=>openDialog()}
-                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
-                  <View style={[styles.card,{
-                    flexDirection:'row',
-                    justifyContent:'space-between',
-                    alignItems:'center',
-                    paddingHorizontal:10,
-                    paddingVertical:8,
-                    backgroundColor:'white'
-                    }]}>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={{
-                      fontFamily:'Montserrat-Regular',
-                      color:colors.bc,fontSize:14}}>{`Amount : `}
-                         </Text>
-                      <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
-                      <Text style={{
-                      fontFamily:'Montserrat-Regular',
-                      color:colors.bc,fontSize:14}}>
-                      {`${route.params.amount}`}
-                      </Text>
-                   
-                      </View>
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{
-                          fontFamily:'Montserrat-Regular',
-                          color:colors.bc,fontSize:14,marginRight:15}}>
-                            {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
-                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
-                    </View>
-                  </View>
-               </TouchableOpacity>
-                <FlatList
-                   data={selector}
-                   renderItem={({item})=>renderItem(item)}
-                   keyExtractor={(item, index) => item.source}
-                   style={{width:'100%'}}
-                 />
-                 <View style={{
+              <View style={{
                    width:'100%',
                   // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
-                   paddingHorizontal:20,
+                   paddingHorizontal:10,
                    alignItems:'center',
-                   paddingVertical:10
+                   paddingTop:10,
+                   paddingBottom:5
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}
@@ -497,6 +435,46 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
+                <TouchableOpacity
+                onPress={()=>openDialog()}
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
+                  <View style={[styles.card,{
+                    flexDirection:'row',
+                    justifyContent:'space-between',
+                    alignItems:'center',
+                    paddingHorizontal:10,
+                    paddingVertical:8,
+                    backgroundColor:'white'
+                    }]}>
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={{
+                      fontFamily:'Montserrat-Regular',
+                      color:colors.bc,fontSize:13}}>{`Amount : `}
+                         </Text>
+                      <Image style={{height:18,width:12}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{
+                      fontFamily:'Montserrat-Regular',
+                      color:colors.bc,fontSize:13}}>
+                      {`${route.params.amount}`}
+                      </Text>
+                   
+                      </View>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{
+                          fontFamily:'Montserrat-Regular',
+                          color:colors.bc,fontSize:13,marginRight:15}}>
+                            {`Tenure : ${route.params.year}y-${route.params.month}m-${route.params.days}d`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
+                <FlatList
+                   data={selector}
+                   renderItem={({item})=>renderItem(item)}
+                   keyExtractor={(item, index) => item.source}
+                   style={{width:'100%'}}
+                 />
+                 
               
               </View>
          

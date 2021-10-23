@@ -296,53 +296,14 @@ const renderItem=(item)=>{
                         </DialogContent>
                        
                       </Dialog>
-              <View style={styles.list}>
-                <TouchableOpacity
-                onPress={()=>openDialog()}
-                style={{width:'100%',paddingHorizontal:5,paddingVertical:6}}>
-                  <View style={[styles.card,{
-                    flexDirection:'row',justifyContent:'space-between',alignItems:'center',
-                    paddingHorizontal:15,paddingVertical:8,backgroundColor:'white'
-                    }]}>
-                    
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
-                      {`Minimum balance : `}</Text>
-                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
-                      {`${route.params.balance}`}
-                      </Text>
-                      </View>
-                      {/* </Text> */}
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{
-                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14,marginRight:5}}>
-                            {`Location : ${route.params.location}`}</Text>
-                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
-                    </View>
-                  </View>
-               </TouchableOpacity>
-                <FlatList
-                   data={selector}
-                   renderItem={({item})=>renderItem(item)}
-                   keyExtractor={(item, index) => item.source}
-                   style={{width:'100%'}}
-                 />
- <View style={{
-                  //  width:'100%',
-                  //  //bottom:20,
-                  //  flexDirection:'row',
-                  //  justifyContent:'space-between',
-                  //  paddingHorizontal:20,
-                  //  alignItems:'center',
-                  //  backfaceVisibility:colors.card,
+                      <View style={{
                   width:'100%',
-                  // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
-                   paddingHorizontal:20,
+                   paddingHorizontal:10,
                    alignItems:'center',
-                   paddingVertical:10
+                   paddingTop:10,
+                   paddingBottom:5
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}
@@ -397,6 +358,39 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
+              <View style={styles.list}>
+                <TouchableOpacity
+                onPress={()=>openDialog()}
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
+                  <View style={[styles.card,{
+                    flexDirection:'row',justifyContent:'space-between',alignItems:'center',
+                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white'
+                    }]}>
+                    
+                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
+                      {`Minimum balance : `}</Text>
+                      <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
+                      {`${route.params.balance}`}
+                      </Text>
+                      </View>
+                      {/* </Text> */}
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Text style={{
+                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5}}>
+                            {`Location : ${route.params.location}`}</Text>
+                        <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
+                    </View>
+                  </View>
+               </TouchableOpacity>
+                <FlatList
+                   data={selector}
+                   renderItem={({item})=>renderItem(item)}
+                   keyExtractor={(item, index) => item.source}
+                   style={{width:'100%'}}
+                 />
+               
               </View>
          
           <StatusBar/>

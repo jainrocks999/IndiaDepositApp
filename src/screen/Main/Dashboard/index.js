@@ -338,7 +338,7 @@ const data1=[
     image1:require('../../../assets/Image/sb-female-w.png'),
     id:6,height:35,width:35},
     
-    {name:'Defense',
+    {name:'Defence',
     image:require('../../../assets/Image/sb-defence-b.png'),
     image1:require('../../../assets/Image/sb-defence-w.png'),
     id:7,height:35,width:35},

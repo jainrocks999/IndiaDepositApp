@@ -17,7 +17,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import HTMLView from 'react-native-htmlview';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
-
+import axios from "axios";
+import RNPickerSelect from "react-native-picker-select";
+import fontSize from '../../../component/fontSize';
+import {CountryPicker} from "react-native-country-codes-picker/components/CountryPicker";
 
 
 const loginValidationSchema=yup.object().shape({
@@ -42,6 +45,9 @@ const RegisterPage=()=>{
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Privacy)
     const selector1=useSelector(state=>state.TermCondition)
+    const [code,setCode]=useState('+91')
+    // const [selector,setSelector]=useState([])
+    // const [selector1,setSelector1]=useState([])
     const isFetching=useSelector((state)=>state.isFetching)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [fBorder,setFBorder]=useState(false)
@@ -54,14 +60,15 @@ const RegisterPage=()=>{
     const [visible1,setVisible1]=useState(true)
     const [showModal,setShowModal]=useState(false)
     const [showModal1,setShowModal1]=useState(false)
+    const [show, setShow] = useState(false);
 
     const ref=useRef(null)
     const ref1=useRef(null)
     const ref2=useRef(null)
     const ref3=useRef(null)
     const ref4=useRef(null)
+  
 
-    
 
     const validateUser=async(name,email,mobile,pin)=>{
       const device_type= DeviceInfo.getSystemName()
@@ -71,35 +78,16 @@ const RegisterPage=()=>{
         Toast.show('Please Confirm Terms and Condition')
       }
       else{
-      dispatch({
-       type: 'User_Register_Request',
-       url: 'adduserdetails',
-       name,
-       email,
-       mobile,
-       pin,
-       refferal_code:0,
-       mobile_country_code:0,
-       father_spouse_name:0,
-       mother_maiden_name:0,
-       gender:0,
-       dob:0,
-       pan:0,
-       address1:0,
-       address2:0,
-       city:0,
-       state:0,
-       country:0,
-       pincode:0,
-       residential_status:0,
-       profile_pic:0,
-       education:0,
-       occupation:0,
-       marital_status:0,
-       navigation: navigation,
-       device_token:token,
-       device_type:device_type
-    })
+    dispatch({
+      type: 'Send_RegOtp_Request',
+      url: 'sendotp1',
+      name,
+      email,
+      mobile,
+      pin,
+      code:code,
+      navigation
+   })
   }
 }
 
@@ -174,7 +162,7 @@ const showVisible1=()=>{
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
                         value={values.name}
-                        maxLength={30}
+                        maxLength={35}
                         returnKeyType='next'
                         onSubmitEditing={() => {
                           ref.current.focus()
@@ -203,7 +191,7 @@ const showVisible1=()=>{
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
-                      maxLength={30}
+                      maxLength={35}
                       keyboardType='email-address'
                       returnKeyType='next'
                       onSubmitEditing={() => {
@@ -219,14 +207,32 @@ const showVisible1=()=>{
               </View>
               <View style={[styles.card,{borderColor:mBorder&&values.mobile?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
-                    <View style={styles.input}>
+                    <View style={[styles.input,{marginTop:-8,marginBottom:-8}]}>
                      <Image 
                      style={styles.image}
                      source={require('../../../assets/Image/phone.png')}/>
+                
+                      <RNPickerSelect
+                          onValueChange={(val)=>setCode(val)}
+                          items={Country}
+                          style={{ 
+                          inputAndroid: { color: colors.textColor,height:35,marginTop:6,width:50},
+                          inputIOS:{color:colors.textColor},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          }}
+                          value={code}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{}}
+                          Icon={()=><Image 
+                            style={{width:20,height:20,marginTop:11}} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                
+                  />
+                  
                      <TextInput 
                       ref={ref1}
                       onFocus={()=>setMBorder(true)}
-                      style={styles.input1}
+                      style={[styles.input1]}
                       placeholder='9123456789'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('mobile')}
@@ -241,6 +247,7 @@ const showVisible1=()=>{
                       />
                   </View>
               </View>
+              
               <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
                 <Text style={styles.warn}>{errors.mobile}</Text>
@@ -335,20 +342,34 @@ const showVisible1=()=>{
                 }
               </View>
               <View
-               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,}}>
+               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,width:'100%',justifyContent:'space-between',marginTop:10}}>
                  <CheckBox
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
+                  {/* <View style={{flexDirection:'row',alignItems:'center',width:'70%',flex:1}}> 
+                    <Text>{'I agree with '}</Text>
+                    <TouchableOpacity 
+                    onPress={()=>setShowModal1(true)}>
+                    <Text style={styles.agree1}>{`Terms & Conditions`}</Text>
+                   </TouchableOpacity>
+                   <Text> and </Text>
+                   <TouchableOpacity onPress={()=>setShowModal(true)}>
+                    <Text style={styles.agree1}>{`Privacy Policy`}</Text>
+                    </TouchableOpacity>
+                  </View> */}
                   <Text style={styles.agree}>
                     {'I agree with '}
-                    <Text onPress={()=>setShowModal1(true)} style={styles.agree1}>{`Terms & Conditions`}</Text>
+                     {/* <TouchableOpacity> */}
+                    <Text onPress={()=>setShowModal1(true)} style={[styles.agree1,{height:50}]}>{`Terms & Conditions`}</Text>
+                   {/* </TouchableOpacity> */}
                     <Text> and </Text>
+                    {/* <TouchableOpacity > */}
                     <Text onPress={()=>setShowModal(true)} style={styles.agree1}>{`Privacy Policy`}</Text>
-                    
-                     </Text>
+                    {/* </TouchableOpacity> */}
+                  </Text>
               </View>
               <View style={styles.button}>
                  <CustomButton
@@ -419,3 +440,10 @@ const showVisible1=()=>{
     )
 }
 export default RegisterPage;
+const Country=[
+  { label: '+91', value: '+91' },
+  { label: '+975', value: '+975' },
+  { label: '+55', value: '+55' },
+  { label: '+1', value: '+1' },
+  { label: '+86', value: '+86' },
+]
