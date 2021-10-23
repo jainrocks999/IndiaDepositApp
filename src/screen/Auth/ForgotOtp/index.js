@@ -21,9 +21,13 @@ class OtpVarification extends React.Component{
           otpData:this.props.route.params.otp,
           mobile:this.props.route.params.mobile,
           email:this.props.route.params.email,
+          count:0
+
         };
       }
-    componentDidMount() {
+    async componentDidMount() {
+      const count=await AsyncStorage.getItem('otp_value')
+      this.setState({count:count})
         console.log('just cheking',this.state.email,this.state.mobile);
         const { counter } = this.state;
         let timer = setInterval(this.tick, 1000);
@@ -46,21 +50,31 @@ class OtpVarification extends React.Component{
     };
 
     
-    otpResend=()=>{
+    otpResend=async()=>{
+      const value=await AsyncStorage.getItem('otp_value')
+     if(value==0){
+      AsyncStorage.setItem('otp_value',"1")
+     }
+     else if(value==1){
+      AsyncStorage.setItem('otp_value',"2")
+     }
+     else{
+      AsyncStorage.setItem('otp_value',"3")
+     }
         if(!this.state.email){
-            dispatch({
-                type: 'Forget_Password_Request',
-                url: 'verfiyopt',
-                mobile,
-                navigation
+            this.props.dispatch({
+                type: 'Send_Otp_Request',
+                url: 'sendotp',
+                mobile:this.state.mobile,
+                navigation:this.props.navigation
               })
         }
         else{
-            dispatch({
-                type: 'Forget_Password_Request',
-                url: 'verfiyopt',
-                email,
-                navigation
+            this.props.dispatch({
+                type: 'Send_Otp_Request',
+                url: 'sendotp',
+                email:this.state.email,
+                navigation:this.props.navigation
               })
         }
        
@@ -69,6 +83,7 @@ class OtpVarification extends React.Component{
     validateUser=()=>{
       if(this.state.otp==this.state.otpData){
           if(!this.state.email){
+            AsyncStorage.setItem('otp_value','0')
               console.log('this is mobile value');
              this.props.navigation.replace('CreatePin',{
             mobile:this.state.mobile
@@ -76,6 +91,7 @@ class OtpVarification extends React.Component{
          }
         else{
             console.log('this is email value');
+            AsyncStorage.setItem('otp_value','0')
             this.props.navigation.replace('CreatePin',{
                 email:this.state.email
                 })
@@ -94,7 +110,7 @@ class OtpVarification extends React.Component{
               <KeyboardAwareScrollView>
               <View style={styles.imageContainer}>
                   <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
-                  <Image source={require('../../../assets/Image/arrowBack.png')}/>
+                  <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
                   </TouchableOpacity>
                   <View style={styles.round}>
                       <Image
@@ -112,11 +128,12 @@ class OtpVarification extends React.Component{
                   textInputStyle={styles.otp}
                   offTintColor={'white'}
                   tintColor={'white'}
-                  
                   />
                   <View style={[styles.textBottom,{marginTop:15}]}>
                       <Text style={styles.your}>
-                          {`Enter the OTP sent to your ${this.state.mobile==null?'email address':'mobile number'}.`}
+                      {this.state.count>0 ? `You have entered wrong OTP, ${this.state.count} attempt left.`:`Enter the OTP sent to ${this.state.mobile==null?this.state.email:this.state.mobile}.`}
+
+                          {/* {`Enter the OTP sent to ${this.state.mobile==null?this.state.email:this.state.mobile}.`} */}
                       </Text>
                   </View>
                 </View>          
@@ -130,17 +147,22 @@ class OtpVarification extends React.Component{
                           {`Didn’t Receive the OTP?`}
                       </Text>
                       <TouchableOpacity
-                      disabled={this.state.counter > 0 ? true : false}
+                      disabled={this.state.counter > 0 || this.state.count==2 ? true : false}
                       onPress={() => this.otpResend()}
                       >
-                      <Text style={[styles.your,{color:this.state.counter>0?'grey':colors.bc}]}>
+                      <Text style={[styles.your,{color:this.state.counter || this.state.count==2 ?'grey':colors.bc}]}>
                           {`Resend again`}
                       </Text>
                       </TouchableOpacity>
                      </View>
-                     {this.state.counter!=0?
+                     {/* {this.state.counter!=0?
                      <Text style={[styles.your,{textAlign:'center'}]}>
                          {`You can request OTP Resend\nafter ${Math.floor(this.state.counter / 60)}:${this.state.counter % 60}  minutes!`}</Text>
+                    :null
+                    } */}
+                     {this.state.counter!=0?
+                     <Text style={[styles.your,{textAlign:'center'}]}>
+                         {`You can request OTP Resend\nafter 0${Math.floor(this.state.counter / 60)}:${(this.state.counter < 10 ? `0${this.state.counter%60}`:this.state.counter%60)} sec`}</Text>
                     :null
                     }
                  </View>
