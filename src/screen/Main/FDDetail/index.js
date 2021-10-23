@@ -103,7 +103,7 @@ const details=selector[0]
                            <TouchableOpacity>
 
                                <Text style={styles.bankDetails}
-                                onPress ={()=>navigation.navigate('BankCal',{
+                                onPress ={()=>navigation.navigate('BankCalu',{
                                      type:details.bankname,
                                      image:selector[0].bank_logo,
                                     principal:details.principal_amount

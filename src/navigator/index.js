@@ -50,6 +50,7 @@ import UserSelection from '../screen/Main/NBFCPage/UserSelection';
 import AddFamily from '../screen/Main/BankSection/AddFamily';
 import EditFamily from '../screen/Main/BankSection/EditFamily';
 import FDView from '../screen/Main/FDView';
+import BankCalu from "../screen/Main/NBFCFDdetails";
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -122,7 +123,7 @@ function Navigate() {
         <Stack.Screen name="AddFamily" component={AddFamily}/>
         <Stack.Screen name="EditFamily" component={EditFamily}/>
         <Stack.Screen name="FDView" component={FDView}/>
-
+        <Stack.Screen name="BankCalu" component={BankCalu}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

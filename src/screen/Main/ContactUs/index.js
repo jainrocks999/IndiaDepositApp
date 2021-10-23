@@ -1,5 +1,5 @@
 import React,{useRef,useEffect, useState} from 'react';
-import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard} from 'react-native';
+import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -13,7 +13,7 @@ import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
-
+let backPress=0
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name ')
   .matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
@@ -35,6 +35,14 @@ const Contact=({route})=>{
     const [array,setArray] = useState([]);
 
 console.log('this is narendra here',selector);
+
+
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+  };
+}, []);
   const validateUser=async(values)=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
    Keyboard.dismiss()
@@ -52,6 +60,10 @@ console.log('this is narendra here',selector);
     link.push(step)
     ))}
     console.log('this .si link',link);
+    const handleBackButtonClick=() =>{
+      navigation.goBack();
+      return true;
+    }
 
     return(
       <Formik

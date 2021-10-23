@@ -78,7 +78,7 @@ return(
            <View style={{marginTop:-2}}>
              <TextInput style={{width:'90%',marginLeft:10}}
                 placeholder=' Enter your deposit amount'
-                value={demo1}
+                value={data1.principal}
                 placeholderTextColor={colors.heading1}
                 keyboardType='number-pad'
                 style={{color:colors.textColor,width:'80%'}}
