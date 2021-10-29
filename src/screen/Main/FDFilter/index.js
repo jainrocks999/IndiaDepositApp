@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image, TextInput ,Switch,ScrollView,Platform} from "react-native";
+import { View,Text,Image, TextInput ,Switch,ScrollView,BackHandler} from "react-native";
 import colors from '../../../component/colors';
 import Slider  from "react-native-slider";
 import styles from './styles';
@@ -35,6 +35,21 @@ const FDFilter=({route})=>{
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
     const data=route.params.data
+
+useEffect(()=>{
+    const backAction = () => {
+        navigation.goBack()
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
+},[])
+
     const manageCheck=()=>{
          setToggleCheckBox(true)
          setToggleCheckBox1(false)

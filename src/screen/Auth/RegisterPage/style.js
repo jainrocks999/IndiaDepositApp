@@ -174,5 +174,8 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize:18,
         marginBottom:5
-    }
+    },
+
+
+   
 })

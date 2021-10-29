@@ -44,12 +44,12 @@ const FamilyDetails=()=>{
               url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deletefamily',
             });
             console.log('this is response value',response);
-            if (response.data.status==200) {
-                Toast.show(response.data.messages)
+            if (response.data.status==200|| response.data.status==400) {
+                // Toast.show(response.data.messages)
                 dispatch({
                     type: 'Family_List_Request',
                     url: 'getfamilylist',
-                    user_id:130
+                    user_id:user_id
                   })        
             } 
           } catch (error) {

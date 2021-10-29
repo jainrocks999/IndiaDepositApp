@@ -34,15 +34,18 @@ const Contact=({route})=>{
     const link=[]
     const [array,setArray] = useState([]);
 
-console.log('this is narendra here',selector);
-
-
 useEffect(() => {
   BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
   return () => {
     BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
   };
 }, []);
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    navigation.navigate('Main')
+  return true;
+  }
+}
   const validateUser=async(values)=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
    Keyboard.dismiss()
@@ -60,10 +63,7 @@ useEffect(() => {
     link.push(step)
     ))}
     console.log('this .si link',link);
-    const handleBackButtonClick=() =>{
-      navigation.goBack();
-      return true;
-    }
+   
 
     return(
       <Formik

@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,Text,Image,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -8,8 +8,7 @@ import BottomTab from '../../../component/StoreButtomTab';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import HTMLView from 'react-native-htmlview';
-const Trending=()=>
-{
+const Trending=()=>{
      const navigation=useNavigation()
      const dispatch=useDispatch()
      const selector=useSelector(state=>state.Trending)
@@ -21,6 +20,18 @@ const Trending=()=>
           url: 'getpagecontent',
           key:'trending',
     })
+    const backAction = () => {
+      if(navigation.isFocused)
+      navigation.navigate('Main')
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+  
+    return () => backHandler.remove();
 },[])
 const showContent=()=>{
     if (selector.length>0) {
@@ -43,10 +54,10 @@ const showContent=()=>{
         <View style={styles.container}>
             <Header
             title={'TRENDING'}
-            source ={require('../../../assets/Images/drawer.png')}
-            onPress={()=>navigation.toggleDrawer()}
-            source1={require('../../../assets/Image/notification.png')}
-            onPress1={()=>navigation.navigate('Notification')}
+            source ={require('../../../assets/Image/arrow2.png')}
+            onPress={()=>navigation.goBack()}
+            // source1={require('../../../assets/Image/notification.png')}
+            // onPress1={()=>navigation.navigate('Notification')}
             /> 
              {/* <ScrollView
               contentContainerStyle={{flex:1}}

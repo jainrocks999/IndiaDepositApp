@@ -51,6 +51,9 @@ import AddFamily from '../screen/Main/BankSection/AddFamily';
 import EditFamily from '../screen/Main/BankSection/EditFamily';
 import FDView from '../screen/Main/FDView';
 import BankCalu from "../screen/Main/NBFCFDdetails";
+import Trending from '../screen/Main/Trending';
+import BankHoliday from '../screen/Main/BankHoliday';
+import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -124,6 +127,11 @@ function Navigate() {
         <Stack.Screen name="EditFamily" component={EditFamily}/>
         <Stack.Screen name="FDView" component={FDView}/>
         <Stack.Screen name="BankCalu" component={BankCalu}/>
+        <Stack.Screen name="Trending" component={Trending} options={horizontalAnimation}/>
+        <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
+        <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

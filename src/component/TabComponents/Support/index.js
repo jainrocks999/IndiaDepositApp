@@ -55,7 +55,7 @@ console.log('name email,mobile',name1,email1,mobile1);
 
     return(
       <Formik
-      initialValues={{ name: '',email:'',mobile:'',subject:'',message:''}}
+      initialValues={{ name: name1,email:email1,mobile:mobile1,subject:'',message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}

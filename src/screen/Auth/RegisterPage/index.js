@@ -20,7 +20,8 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog';
 import axios from "axios";
 import RNPickerSelect from "react-native-picker-select";
 import fontSize from '../../../component/fontSize';
-import {CountryPicker} from "react-native-country-codes-picker/components/CountryPicker";
+import Admin from '../../../assets/Images/administrator.svg';
+import Modal from "react-native-modal";
 
 
 const loginValidationSchema=yup.object().shape({
@@ -46,8 +47,9 @@ const RegisterPage=()=>{
     const selector=useSelector(state=>state.Privacy)
     const selector1=useSelector(state=>state.TermCondition)
     const [code,setCode]=useState('+91')
-    // const [selector,setSelector]=useState([])
-    // const [selector1,setSelector1]=useState([])
+    const [isVisible1,setIsVisible1]=useState(false)
+    const [isVisible2,setIsVisible2]=useState(false)
+
     const isFetching=useSelector((state)=>state.isFetching)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [fBorder,setFBorder]=useState(false)
@@ -70,7 +72,7 @@ const RegisterPage=()=>{
   
 
 
-    const validateUser=async(name,email,mobile,pin)=>{
+    const validateUser=async(name,email,mobile,pin,referal)=>{
       const device_type= DeviceInfo.getSystemName()
       let token=await AsyncStorage.getItem(Storage.token);
       console.log('testing',device_type,token);
@@ -78,16 +80,18 @@ const RegisterPage=()=>{
         Toast.show('Please Confirm Terms and Condition')
       }
       else{
-    dispatch({
-      type: 'Send_RegOtp_Request',
-      url: 'sendotp1',
-      name,
-      email,
-      mobile,
-      pin,
-      code:code,
-      navigation
-   })
+        console.log('this is referal',referal);
+        dispatch({
+          type: 'Send_RegOtp_Request',
+          url: 'sendotp1',
+          name,
+          email,
+          mobile,
+          pin,
+          referal,
+          code:code,
+          navigation
+      })
   }
 }
 
@@ -96,7 +100,6 @@ const showVisible=()=>{
     <TouchableOpacity 
         onPressIn={()=>setVisible(false)}
         onPressOut={()=>setVisible(true)}
-        //onPress={()=>visible?setVisible(false):setVisible(true)}
         >
         {!visible?<Image 
         style={{width:24,height:24,marginLeft:'25%'}} 
@@ -112,7 +115,6 @@ const showVisible1=()=>{
       <TouchableOpacity 
       onPressIn={()=>setVisible1(false)}
       onPressOut={()=>setVisible1(true)}
-         // onPress={()=>visible1?setVisible1(false):setVisible1(true)}
           >
           {!visible1?<Image 
           style={{width:24,height:24,marginLeft:'25%'}} 
@@ -124,18 +126,36 @@ const showVisible1=()=>{
         </TouchableOpacity>
       )
 }
+const handleClick=()=>{
+  setIsVisible1(true)
+  setTimeout(() => {
+    setIsVisible1(false)
+    setShowModal(true)
+  }, 2000);
+}
+const handleClick1=()=>{
+  setIsVisible2(true)
+  setTimeout(() => {
+    setIsVisible2(false)
+    setShowModal1(true)
+  }, 2000);
+}
+
 
     return(
       <Formik
       initialValues={{ email: '',mobile:'',name:'',pin:'',confirmPin:'',referal:''}}
-      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.pin)}
+      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.pin,values.referal)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
-         {isFetching?<Loader/>:null} 
+         {isFetching || isVisible1==true || isVisible2==true ?<Loader/>:null} 
+         {isVisible1==true ?<Loader/>:null} 
          <ScrollView>
+         {/* <Admin height={100} width={100}  fill={colors.bc} /> */}
+
          <KeyboardAwareScrollView
           extraScrollHeight={10}
           enableOnAndroid={true} 
@@ -207,7 +227,7 @@ const showVisible1=()=>{
               </View>
               <View style={[styles.card,{borderColor:mBorder&&values.mobile?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
-                    <View style={[styles.input,{marginTop:-8,marginBottom:-8}]}>
+                    <View style={[styles.input,{marginTop:-6,marginBottom:-8}]}>
                      <Image 
                      style={styles.image}
                      source={require('../../../assets/Image/phone.png')}/>
@@ -216,7 +236,7 @@ const showVisible1=()=>{
                           onValueChange={(val)=>setCode(val)}
                           items={Country}
                           style={{ 
-                          inputAndroid: { color: colors.textColor,height:35,marginTop:6,width:50},
+                          inputAndroid: { color: colors.textColor,height:40,marginTop:1,width:50},
                           inputIOS:{color:colors.textColor},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
                           }}
@@ -327,7 +347,7 @@ const showVisible1=()=>{
                      ref={ref4}
                       onFocus={()=>setBBorder(true)}
                       style={[styles.input1,{marginLeft:Platform.OS=='android'? -3:0,marginTop:Platform.OS=='android'?0:5}]}
-                      placeholder='BA52RT'
+                      placeholder='xxx111'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('referal')}
                       value={values.referal}
@@ -349,26 +369,12 @@ const showVisible1=()=>{
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
-                  {/* <View style={{flexDirection:'row',alignItems:'center',width:'70%',flex:1}}> 
-                    <Text>{'I agree with '}</Text>
-                    <TouchableOpacity 
-                    onPress={()=>setShowModal1(true)}>
-                    <Text style={styles.agree1}>{`Terms & Conditions`}</Text>
-                   </TouchableOpacity>
-                   <Text> and </Text>
-                   <TouchableOpacity onPress={()=>setShowModal(true)}>
-                    <Text style={styles.agree1}>{`Privacy Policy`}</Text>
-                    </TouchableOpacity>
-                  </View> */}
+                 
                   <Text style={styles.agree}>
                     {'I agree with '}
-                     {/* <TouchableOpacity> */}
-                    <Text onPress={()=>setShowModal1(true)} style={[styles.agree1,{height:50}]}>{`Terms & Conditions`}</Text>
-                   {/* </TouchableOpacity> */}
+                    <Text onPress={()=> handleClick()} style={[styles.agree1,{height:50}]}>{`Terms & Conditions`}</Text>
                     <Text> and </Text>
-                    {/* <TouchableOpacity > */}
-                    <Text onPress={()=>setShowModal(true)} style={styles.agree1}>{`Privacy Policy`}</Text>
-                    {/* </TouchableOpacity> */}
+                    <Text onPress={()=>handleClick1()} style={styles.agree1}>{`Privacy Policy`}</Text>
                   </Text>
               </View>
               <View style={styles.button}>
@@ -433,6 +439,8 @@ const showVisible1=()=>{
                         </ScrollView>
                   </DialogContent>
         </Dialog>
+
+        
          <StatusBar/>
        </View>
          )}

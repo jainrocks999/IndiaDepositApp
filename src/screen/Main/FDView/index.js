@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react';
-import { View,Text } from 'react-native';
+import { View,Text ,BackHandler} from 'react-native';
 import { WebView } from 'react-native-webview';
 import Header from '../../../component/header';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -10,8 +10,20 @@ const navigation=useNavigation()
 const [user_id,setuser_id]=useState()
 console.log('narendra here---------------------------------------------------------------------',user_id,route.params);
 useEffect(async()=>{
+
 const user_id=await AsyncStorage.getItem(Storage.user_id)
 setuser_id(user_id)
+const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
 })
     return(
         <View style={{flex:1}}>

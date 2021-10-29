@@ -28,8 +28,12 @@ initialstate = {
   FDCompareDetail:[],
   SBCompareDetail:[],
   UserData:[],
-  FamilyList:[]
+  FamilyList:[],
+  ResendData:'',
+  ResenData:''
+
 };
+// Resend_Otp_Success
 export default (state = initialstate, action) => {
   switch (action.type) {
     //Login 
@@ -39,6 +43,20 @@ export default (state = initialstate, action) => {
       return { ...state, isFetching: false, UserData: action.payload };
     case 'User_Detail_Error':
       return { ...state, isFetching: false };
+
+      case 'Resend_Otp_Request':
+        return { ...state, isFetching: true };
+      case 'Resend_Otp_Success':
+        return { ...state, isFetching: false, ResendData: action.payload };
+      case 'Resend_Otp_Error':
+        return { ...state, isFetching: false };
+
+      case 'Resen_Otp_Request':
+        return { ...state, isFetching: true };
+      case 'Resen_Otp_Success':
+        return { ...state, isFetching: false, ResenData: action.payload };
+      case 'Resen_Otp_Error':
+        return { ...state, isFetching: false };
 
       case 'User_Login_Request':
         return { ...state, isFetching: true };

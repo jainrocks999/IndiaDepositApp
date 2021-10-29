@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text,TouchableOpacity,Image,ScrollView} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text,TouchableOpacity,Image,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -10,6 +10,21 @@ import HTMLView from 'react-native-htmlview';
 const StoryCategory=({route})=>{
    const navigation=useNavigation()
    const data=route.params.item
+
+useEffect(()=>{
+  const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
+
     return(
       <View style={styles.container}>
              

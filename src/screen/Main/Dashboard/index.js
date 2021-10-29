@@ -13,7 +13,7 @@ import Toast from "react-native-simple-toast";
 import { useDispatch } from "react-redux";
 import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from "react-native-modal";
-import { Platform } from "react-native";
+import axios from "axios";
 let backPress=0
 let arrayOfOneFD=[]
 const dashboard=()=>{
@@ -23,6 +23,29 @@ const dashboard=()=>{
     const [isModalVisible, setModalVisible] = useState(false);
     const dispatch=useDispatch()
     useEffect(async()=>{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
+      try {
+        const data = new FormData();
+        data.append('user_id',user_id)
+   
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getprofilepic',
+        });
+        console.log('this is response value',response);
+        if (response.data.status==200) {
+        AsyncStorage.setItem(Storage.image,response.data.profile_pic)
+        } 
+      } catch (error) {
+       throw error;
+      }
+
+
       dispatch({
         type: 'Bank_Name_Request',
         url: 'bankdetaillist',
@@ -35,6 +58,7 @@ const dashboard=()=>{
         );
         return () => backHandler.remove()
 
+        
         
     },[])
   
@@ -309,7 +333,8 @@ const data=[
     id:1,height:35,width:35},
    
     {name:'Senior Citizen', 
-    image:require('../../../assets/Image/senior_citizen-b.png'),
+    // image:require('../../../assets/Image/senior_citizen-b.png'),
+    image:require('../../../assets/Image/old-age.png'),
     image1:require('../../../assets/Image/senior_citizen-w.png')
     ,id:4,height:35,width:35},
     {name:'Tax Saving',
@@ -318,9 +343,11 @@ const data=[
     ,id:2,height:35,width:35},
 
     {name:'NRI',
-    image:require('../../../assets/Image/nri-fd-b.png'),
+    image:require('../../../assets/Image/globe.png'),
+
+    // image:require('../../../assets/Image/nri-fd-b.png'),
     image1:require('../../../assets/Image/nri-fd-w.png'),
-    id:3,height:35,width:35},
+    id:3,height:37,width:45},
 ]
 
 const data1=[
@@ -339,11 +366,14 @@ const data1=[
     id:6,height:35,width:35},
     
     {name:'Defence',
-    image:require('../../../assets/Image/sb-defence-b.png'),
+    image:require('../../../assets/Image/gourd.png'),
+
+    // image:require('../../../assets/Image/sb-defence-b.png'),
     image1:require('../../../assets/Image/sb-defence-w.png'),
     id:7,height:35,width:35},
     {name:'Senior Citizen',
-    image:require('../../../assets/Image/senior_citizen-b.png'),
+    // image:require('../../../assets/Image/senior_citizen-b.png'),
+    image:require('../../../assets/Image/old-age.png'),
     image1:require('../../../assets/Image/senior_citizen-w.png'),
     id:9,height:35,width:35},
 ]

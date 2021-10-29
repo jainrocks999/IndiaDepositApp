@@ -7,7 +7,7 @@ import colors from '../../../component/colors';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import FAQs from '../../../component/TabComponents/FAQs';
 import Support from '../../../component/TabComponents/Support';
-import { View,Text,Image,ScrollView,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,BackHandler} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -27,6 +27,20 @@ const loginValidationSchema=yup.object().shape({
 })
 
 const Supports=({route})=>{
+
+useEffect(()=>{
+  const backAction = () => {
+    navigation.navigate('Main')
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
 
   const SecondRoute = () => {
     const dispatch=useDispatch()
@@ -68,13 +82,8 @@ const Supports=({route})=>{
                     contentContainerStyle={{flex:1}}>
                       {isFetching?<Loader/>:null}
                     <Text style={styles.better1}>How can we help you?</Text>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Name</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
-                     
+                    
+                      <Text style={styles.better}>Name</Text>
                         <View style={styles.drop}>
                           <TextInput
                             style={{color:colors.textColor}}
@@ -91,12 +100,7 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.name}</Text>
                         }
                       </View>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Email</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
                         <View style={styles.drop}>
                           <TextInput
                            style={{color:colors.textColor}}
@@ -113,12 +117,7 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.email}</Text>
                         }
                       </View>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Mobile Number</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
                         <View style={styles.drop}>
                           <TextInput
                          style={{color:colors.textColor}}
@@ -136,12 +135,7 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.mobile}</Text>
                         }
                       </View>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Subject</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
                         <View style={styles.drop}>
                         <TextInput
                            style={{color:colors.textColor}}
@@ -159,13 +153,7 @@ const Supports=({route})=>{
                         <Text style={styles.warn}>{errors.subject}</Text>
                         }
                       </View>
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
                       <Text style={styles.better}>Message</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
-                     
                         <View style={styles.drop1}>
                         <TextInput
                           multiline = {true}

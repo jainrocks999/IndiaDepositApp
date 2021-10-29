@@ -1,5 +1,5 @@
-import React,{useState,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform} from 'react-native';
+import React,{useState,useRef,useEffect} from 'react';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform,BackHandler, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -31,7 +31,7 @@ const loginValidationSchema=yup.object().shape({
    addressLine1:yup.string().required('Please enter address line1'),
    addressLine2:yup.string().required('Please enter address line2'),
    pincode:yup.string().required('Please enter pincode'),
-   occupation:yup.string().required('Please enter occupation')
+   occupation:yup.string()
  })
 
 const RegisterPage=({route})=>{
@@ -49,11 +49,25 @@ const RegisterPage=({route})=>{
     const [education,setEducation]=useState(user.education)
     const [marital_status,setMarital_status]=useState(user.marital_status)
     const [residential_address,setResidential_address]=useState(user.residential_status)
+    const [occupation,setOccupation]=useState(user.occupation==0||null?'':user.occupation) 
+
     const selector1=useSelector(state=>state.StateList)
     const selector2=useSelector(state=>state.CityList)
     
-    const [manageStateValue,setManageStateValue]=useState([])
- console.log('this is sele',selector2);
+
+   useEffect(()=>{
+      const backAction = () => {
+         navigation.goBack()
+         return true;
+       };
+     
+       const backHandler = BackHandler.addEventListener(
+         "hardwareBackPress",
+         backAction
+       );
+     
+       return () => backHandler.remove();
+   },[])
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       if(gender==0||''){
@@ -61,6 +75,12 @@ const RegisterPage=({route})=>{
       }
       else if(dob==''){
          Toast.show('Please select date of birth')
+      }
+      else if(occupation==0||''){
+         Toast.show('Please select occupation')
+      }
+      else if(occupation=='Others'&& values.occupation==''){
+            Toast.show('Please specify occupation')
       }
       else if(country==0||''){
          Toast.show('Please select country name')
@@ -105,7 +125,7 @@ const RegisterPage=({route})=>{
       pincode:values.pincode,
       country:101,
       marital_status:marital_status,
-      occupation:values.occupation,
+      occupation:occupation=='Others'?values.occupation:occupation,
       income_group:income_group,
       education:education,
       residential_status:residential_address
@@ -153,8 +173,8 @@ const RegisterPage=({route})=>{
                addressLine1:user.address1==0||null?'':user.address1,
                addressLine2:user.address2==0||null?'':user.address2,
                mobile:user.mobile==0||null?'':user.mobile,
-               occupation:user.occupation==0||null?'':user.occupation,
                pincode:user.pincode==0||null?'':user.pincode,
+               occupation:''
             }}
             onSubmit={values => validateUser(values)}
             validateOnMount={true}
@@ -178,7 +198,8 @@ const RegisterPage=({route})=>{
                   <Text style={{color:colors.textColor,fontSize:16,fontFamily:'Montserrat-SemiBold'}}>Personal Details:</Text>
                     <View style={styles.row}>
                     <Text style={styles.better}>Name</Text>
-                       <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                       {/* <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/> */}
                     </View>
                    
                       <View style={styles.drop}>
@@ -198,7 +219,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Father/Spouse Name</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                    
                       <View style={styles.drop}>
@@ -217,7 +238,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Mother Maiden Name</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -237,8 +258,8 @@ const RegisterPage=({route})=>{
                         <View style={{width:'47%'}}>
                         <View style={styles.row}>
                         <Text style={styles.better}>Gender</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
-                    </View>
+                        <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                          </View>
                             <View style={styles.drop}>
                                <RNPickerSelect
                                          onValueChange={(val)=>setGender(val)}
@@ -261,7 +282,7 @@ const RegisterPage=({route})=>{
                         <View style={{width:'47%',}}>
                         <View style={styles.row}>
                         <Text style={styles.better}>Date of Birth</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                        <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                             <View style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
@@ -298,7 +319,8 @@ const RegisterPage=({route})=>{
                     </View>
                     <View style={styles.row}>
                     <Text style={styles.better}>E-mail</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -319,7 +341,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Mobile</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -340,7 +362,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>PAN</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -358,8 +380,9 @@ const RegisterPage=({route})=>{
                         }
                      </View>
                      <View style={styles.row}>
+                
                      <Text style={styles.better}>Address Line1</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -385,7 +408,7 @@ const RegisterPage=({route})=>{
                         }}>Additional Details:</Text>
                          <View style={styles.row}>
                          <Text style={styles.better}>Address Line2</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                         <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -403,28 +426,48 @@ const RegisterPage=({route})=>{
                         }
                      </View>
                      <View style={styles.row}>
-                     <Text style={styles.better}>Occupation</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+
+                    
+                       <Text style={styles.better}>Occupation</Text>
+                       <Text style={{marginTop:10,color:colors.red}}>*</Text>   
                     </View>
+
                       <View style={styles.drop}>
-                        <TextInput
-                        style={styles.input}
-                        placeholder='Please enter occupation'
-                        placeholderTextColor={colors.heading1}
-                        defaultValue={values.occupation}
-                        onChangeText={handleChange('occupation')}
-                        onBlur={handleBlur('occupation')}
-                                                
-                        />
+                      <RNPickerSelect
+                        onValueChange={(val)=>setOccupation(val)}
+                        items={Occupation}
+                        style={{ 
+                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={occupation==null||0?'':occupation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select Occupation", value: 0 }}
+                        Icon={()=>
+                           <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../assets/Image/down.png')}/>}   
+                     />       
                     </View>
-                    <View style={styles.error}>
-                     {(errors.occupation && touched.occupation) &&
-                        <Text style={styles.warn}>{errors.occupation}</Text>
+                        {occupation=='Others'?
+                           <View style={styles.drop}>
+                           <TextInput
+                           style={styles.input}
+                           placeholder='Please Specify'
+                           placeholderTextColor={colors.heading1}
+                           defaultValue={values.occupation}
+                           onChangeText={handleChange('occupation')}
+                           onBlur={handleBlur('occupation')}
+                           maxLength={30}                       
+                           />
+                        </View>:null
                         }
+                        
+                    <View style={styles.error}>
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Pincode</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -445,7 +488,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Country</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -472,7 +515,7 @@ const RegisterPage=({route})=>{
 
                      <View style={styles.row}>
                      <Text style={styles.better}>State</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -497,8 +540,10 @@ const RegisterPage=({route})=>{
                         } */}
                      </View>
                      <View style={styles.row}>
+
+                  
                      <Text style={styles.better}>City</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -523,8 +568,9 @@ const RegisterPage=({route})=>{
                         } */}
                      </View>
                      <View style={styles.row}>
+                   
                      <Text style={styles.better}>Income Group</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -550,7 +596,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Education</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                   
                       <View style={styles.drop}>
@@ -577,7 +623,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Marital Status</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
               
                       <View style={styles.drop}>
@@ -604,7 +650,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Residential Status</Text>
-                     <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                     
                       <View style={styles.drop}>
@@ -653,27 +699,52 @@ const data=[
    { label: 'Others', value: 'Others'}
 ]
 const Residential_Status=[
-   { label: 'Resident', value: 'Resident' },
-   { label: 'Non Resident', value: 'Non Resident' },
+   { label: 'Indian', value: 'Indian' },
+   { label: 'Foreign Resident', value: 'Foreign Resident' },
   
-]
+] 
 const Marital_Status=[
    { label: 'Married', value: 'Married' },
    { label: 'Unmarried', value: 'Unmarried' },
 ]
 const Education=[
-   { label: 'High School', value: 'High School' },
-   { label: 'High Secondary', value: 'High Secondary' },
-   { label: `Bachelor's Degree`, value: `Bachelor's Degree`},
-   { label: 'Master Degree', value: 'Master Degree'},
-   { label: 'Ph.D', value: 'Ph.D'}
+   { label: 'Senior Secondary (Class X)', value: 'Senior Secondary (Class X)' },
+   { label: 'Upto Higher Secondary(Class XII)', value: 'Upto Higher Secondary(Class XII)' },
+   { label: `Upto Graduate`, value: `Upto Graduate`},
+   { label: 'Post Graduate', value: 'Post Graduate'},
+   { label: 'Professional', value: 'Professional'},
+   { label: 'Diploma Holder', value: 'Diploma Holder'}
+
 ]
 const Incom_Group=[
-   { label: '0-5Lakhs', value: '0-5Lakhs' },
-   { label: '5-10Lakhs', value: '5-10Lakhs' },
-   { label: '10-15Lakhs', value: '10-15Lakhs'},
-   { label: '15-20Lakhs',value:'15-20Lakhs'}
+   { label: '<50000', value: '<50000' },
+   { label: '50000 - 100000', value: '50000 - 100000' },
+   { label: '100000- 300000', value: '100000- 300000'},
+   { label: '300000 - 500000',value:'300000 - 500000'},
+   { label: '500000 - 100000',value:'500000 - 100000'},
+   { label: '1000000 - 1500000',value:'1000000 - 1500000'},
+   { label: '>1500000',value:'>1500000'}
+
 ]
+
 const Country=[
    { label: 'India', value: 'India' },
 ]
+const Occupation=[
+   { label: 'Occupation', value: 'Occupation' },
+   { label: 'Salaried', value: 'Salaried' },
+   { label: 'Self-employed', value: 'Self-employed'},
+   { label: 'Retired',value:'Retired'},
+   { label: 'Housewife',value:'Housewife'},
+   { label: 'Student',value:'Student'},
+   { label: 'Others',value:'Others'}
+
+]
+
+// 1) Occupation 
+// 2) Salaried
+// 3) Self-employed 
+// 4) Retired 
+// 5) Housewife 
+// 6) Student 
+// Others (pls specify) ______________

@@ -70,9 +70,9 @@ export default StyleSheet.create({
     },
     otp:
     {
-        width: 50,
-        height: 50,
-        borderWidth: 2,
+        // width: 50,
+        // height: 50,
+        borderWidth: 1,
         color:colors.black,
         backgroundColor:colors.white,
         shadowColor:colors.black,

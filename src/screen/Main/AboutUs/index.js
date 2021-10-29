@@ -22,7 +22,7 @@ useEffect(()=>{
     key:'about_us',
   })
   const backAction = () => {
-    navigation.goBack()
+    navigation.navigate('Main')
     return true;
   };
 

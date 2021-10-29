@@ -139,9 +139,7 @@ const manageState=async(val)=>{
                 <View style={styles.card}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -159,9 +157,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Address Line1</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -179,9 +175,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Address Line2</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -200,9 +194,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -222,9 +214,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>State</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -244,9 +234,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>City</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -266,9 +254,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Date of Birth</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <DatePicker
@@ -301,9 +287,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Relationship</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -322,9 +306,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -343,9 +325,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian Relationship</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -364,9 +344,7 @@ const manageState=async(val)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Pincode</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                    
                       <View style={styles.drop}>

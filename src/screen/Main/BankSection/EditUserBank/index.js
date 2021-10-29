@@ -89,9 +89,7 @@ const addUser=async(values)=>{
                 <View style={styles.card}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
              
                       <View style={styles.drop}>
@@ -110,9 +108,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Bank Name</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                      
                       <View style={styles.drop}>
@@ -135,9 +131,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Account Number</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                     
                       <View style={styles.drop}>
@@ -158,9 +152,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Account Type</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -182,9 +174,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>IFSC Code</Text>
-                    <Image style={{ height:10,
-                      width:10,
-                      marginTop:6}} source={require('../../../../assets/Image/star1.png')}/>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                    
                       <View style={styles.drop}>

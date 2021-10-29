@@ -53,13 +53,14 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     text:{
-        fontSize:fontSize.seventeen,
+        fontSize:fontSize.fefteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Regular'
     },
     img:{
         width:20,
-        height:22
+        height:22,
+        marginTop:8
     },
     
    

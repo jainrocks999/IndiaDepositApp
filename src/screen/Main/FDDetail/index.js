@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import {View,Text,FlatList,Image,ScrollView} from 'react-native';
+import {View,Text,BackHandler,Image,ScrollView} from 'react-native';
 import Header from '../../../component/compareHeader';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
@@ -12,6 +12,19 @@ const dispatch=useDispatch()
 const selector=useSelector(state=>state.FDDetail)
 const details=selector[0]
 
+useEffect(()=>{
+     const backAction = () => {
+          navigation.goBack()
+          return true;
+        };
+      
+        const backHandler = BackHandler.addEventListener(
+          "hardwareBackPress",
+          backAction
+        );
+      
+        return () => backHandler.remove();
+},[])
     return(
         <View style={styles.container1}>
                        <Header

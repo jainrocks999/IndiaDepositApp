@@ -21,17 +21,23 @@ class OtpVarification extends React.Component{
           otpData:this.props.route.params.otp,
           mobile:this.props.route.params.mobile,
           email:this.props.route.params.email,
-          count:0
-
+          count:0,
+          old_email:'',
+          old_mobile:''
         };
       }
     async componentDidMount() {
-      const count=await AsyncStorage.getItem('otp_value')
-      this.setState({count:count})
-        console.log('just cheking',this.state.email,this.state.mobile);
         const { counter } = this.state;
         let timer = setInterval(this.tick, 1000);
         this.setState({ timer });
+        const mobile=   await AsyncStorage.getItem('old_mobile')
+        const email=  await AsyncStorage.getItem('old_email')
+  
+        this.setState({old_mobile:mobile})  
+        this.setState({old_email:email})  
+  
+        const count=await AsyncStorage.getItem('otp_value')
+        this.setState({count:count})
     }
     
     componentWillUnmount() {
@@ -51,47 +57,46 @@ class OtpVarification extends React.Component{
 
     
     otpResend=async()=>{
-      const value=await AsyncStorage.getItem('otp_value')
-     if(value==0){
-      AsyncStorage.setItem('otp_value',"1")
-     }
-     else if(value==1){
-      AsyncStorage.setItem('otp_value',"2")
-     }
-     else{
-      AsyncStorage.setItem('otp_value',"3")
-     }
-        if(!this.state.email){
-            this.props.dispatch({
-                type: 'Send_Otp_Request',
-                url: 'sendotp',
-                mobile:this.state.mobile,
-                navigation:this.props.navigation
-              })
-        }
-        else{
-            this.props.dispatch({
-                type: 'Send_Otp_Request',
-                url: 'sendotp',
-                email:this.state.email,
-                navigation:this.props.navigation
-              })
-        }
-       
-
+      AsyncStorage.setItem('old_mobile',this.state.mobile)
+      AsyncStorage.setItem('old_email',this.state.email)
+      if(this.state.mobile){
+      this.props.dispatch({
+        type: 'Resen_Otp_Request',
+        url: 'resendotp',
+        mobile:this.state.mobile,
+        navigation:this.props.navigation,
+     })
+    }
+    else{
+      this.props.dispatch({
+        type: 'Resen_Otp_Request',
+        url: 'resendotp',
+        email:this.state.email,
+        navigation:this.props.navigation,
+     })
+    }
     }
     validateUser=()=>{
+    
+      if(this.state.otpData==''){
+        if(this.state.email){
+          Toast.show('Your email has been blocked for a day due to maximum number of wrong attempts.')
+        }else{
+          Toast.show('Your number has been blocked for a day due to maximum number of wrong attempts.')
+        }
+      
+      }
+      else{
       if(this.state.otp==this.state.otpData){
           if(!this.state.email){
-            AsyncStorage.setItem('otp_value','0')
-              console.log('this is mobile value');
+            AsyncStorage.setItem('old_mobile','')
+      
              this.props.navigation.replace('CreatePin',{
-            mobile:this.state.mobile
+             mobile:this.state.mobile
             })
          }
         else{
-            console.log('this is email value');
-            AsyncStorage.setItem('otp_value','0')
+          AsyncStorage.setItem('old_email','')
             this.props.navigation.replace('CreatePin',{
                 email:this.state.email
                 })
@@ -100,10 +105,60 @@ class OtpVarification extends React.Component{
       else{
         Toast.show('Please Enter Correct Otp Code')
       }
+    }
      }
-  
+   manageAttempt=()=>{
+     if(this.state.mobile){
+       if(this.state.mobile==this.state.old_mobile){
+        return(
+          <View style={[styles.textBottom,{marginTop:15}]}>
+          
+              <Text style={styles.your}>
+              {this.props.attempt? `You have entered wrong OTP, ${this.props.attempt.attempt} attempt left.`:`Enter the OTP sent on ${this.state.mobile}.`}              </Text>
+         </View>
+         )
+       }
+       else{
+        return(
+          <View style={[styles.textBottom,{marginTop:15}]}>
+            
+              <Text style={styles.your}>
+              {`Enter the OTP sent on ${this.state.mobile}.`}             
+               </Text>
+         </View>
+         )
+       }
+    
+     }
+     else if(this.state.email){
+       console.log('hi',this.state.email,this.state.old_email);
+       if(this.state.email==this.state.old_email){
+         console.log('hello');
+        return(
+          <View style={[styles.textBottom,{marginTop:15}]}>
+           
+              <Text style={styles.your}>
+              {this.props.attempt? `You have entered wrong OTP, ${this.props.attempt.attempt} attempt left.`:`Enter the OTP sent on ${this.state.email}.`}             
+               </Text>
+          </View>
+         )
+       }
+       else{
+        console.log('hi working' );
+        return(
+          <View style={[styles.textBottom,{marginTop:15}]}>
+          
+              <Text style={styles.your}>
+                {`Enter the OTP sent on ${this.state.email}.`}
+              </Text>
+          </View>
+         )
+       }
+      
+     }
+   }  
     render(){
-        console.log('this is construxskf',this.state.otpData,this.state.mobile);
+        console.log('this is construxskf',this.state.otpData,this.props.attempt);
         return(
             <View style={styles.container}>
              
@@ -126,22 +181,17 @@ class OtpVarification extends React.Component{
                   handleTextChange={(code)=>this.setState({otp:code})}
                   inputCount={4}
                   textInputStyle={styles.otp}
-                  offTintColor={'white'}
-                  tintColor={'white'}
+                  offTintColor={colors.bc}
+                  tintColor={colors.bc}
                   />
-                  <View style={[styles.textBottom,{marginTop:15}]}>
-                      <Text style={styles.your}>
-                      {this.state.count>0 ? `You have entered wrong OTP, ${this.state.count} attempt left.`:`Enter the OTP sent to ${this.state.mobile==null?this.state.email:this.state.mobile}.`}
-
-                          {/* {`Enter the OTP sent to ${this.state.mobile==null?this.state.email:this.state.mobile}.`} */}
-                      </Text>
-                  </View>
+                 {this.manageAttempt()}
                 </View>          
                  <View style={styles.button}>
                      <CustomButton
                      title='CONFIRM OTP'
                      onPress={()=>this.validateUser()}
                      />
+                    {this.state.otpData=='' ? <View/> :<View>
                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
                       <Text style={styles.your}>
                           {`Didn’t Receive the OTP?`}
@@ -150,21 +200,17 @@ class OtpVarification extends React.Component{
                       disabled={this.state.counter > 0 || this.state.count==2 ? true : false}
                       onPress={() => this.otpResend()}
                       >
-                      <Text style={[styles.your,{color:this.state.counter || this.state.count==2 ?'grey':colors.bc}]}>
+                      <Text style={[styles.your,{color:this.state.counter || this.state.count==2 ?'grey':colors.bc,fontWeight:'700'}]}>
                           {`Resend again`}
                       </Text>
                       </TouchableOpacity>
                      </View>
-                     {/* {this.state.counter!=0?
-                     <Text style={[styles.your,{textAlign:'center'}]}>
-                         {`You can request OTP Resend\nafter ${Math.floor(this.state.counter / 60)}:${this.state.counter % 60}  minutes!`}</Text>
-                    :null
-                    } */}
                      {this.state.counter!=0?
                      <Text style={[styles.your,{textAlign:'center'}]}>
                          {`You can request OTP Resend\nafter 0${Math.floor(this.state.counter / 60)}:${(this.state.counter < 10 ? `0${this.state.counter%60}`:this.state.counter%60)} sec`}</Text>
                     :null
                     }
+                    </View>}
                  </View>
                 
                </View>
@@ -177,6 +223,7 @@ class OtpVarification extends React.Component{
 const mapStateToProps=(state)=>{
     return{
         isFetching:state.isFetching,
+        attempt:state.ResenData
     }
   }
   

@@ -33,21 +33,10 @@ const Login=()=>{
     const [otp,setOtp]=useState('')
     const [focus,setFocus]=useState(false)
     const [focus1,setFocus1]=useState(false)
-
     const next = useRef(null);
     
+   
     useEffect(() => {
-  //     dispatch({
-  //       type: 'Privacy_Request',
-  //       url: 'getpagecontent',
-  //       key:'privacy',
-  // })
-
-  //     dispatch({
-  //       type: 'TermAndCondition_Request',
-  //       url: 'getpagecontent',
-  //       key:'term_condition',
-  // })
       const backAction = () => {
         navigation.push('Register')
         return true;
@@ -85,6 +74,7 @@ const validateUser=async(values)=>{
           device_token:token,
           device_type:device_type,
           navigation:navigation,
+          keep:toggleCheckBox
         })
       }
         else{
@@ -95,11 +85,49 @@ const validateUser=async(values)=>{
             pin:values.pin,
             device_token:token,
             device_type:device_type,
+            keep:toggleCheckBox,
             navigation: navigation,
           })
         
       }
         
+}
+
+const renderError=(values,errors,touched)=>{
+  let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+  const reg1 = /^[0]?[6-9]\d{9}$/;
+  if(values.value){
+    if(isNaN(values.value)){
+      if(reg.test(values.value)===false)
+      return(
+        <View style={styles.error}>
+        {(touched.value) &&
+          <Text style={styles.warn}>{'Please enter valid email'}</Text>
+          }
+        </View>
+      )
+    }
+    else{
+      if(reg1.test(values.value)===false){
+      return(
+        <View style={styles.error}>
+        {(touched.value) &&
+          <Text style={styles.warn}>{'Please enter valid mobile number'}</Text>
+          }
+        </View>
+      )
+    }
+  }
+  }
+  else{
+    return(
+      <View style={styles.error}>
+      {(errors.value && touched.value) &&
+        <Text style={styles.warn}>{errors.value}</Text>
+        }
+      </View>
+    )
+  }
 }
     return(
       <Formik
@@ -144,12 +172,7 @@ const validateUser=async(values)=>{
                       />
                   </View>
               </View>
-              
-              <View style={styles.error}>
-              {(errors.value && touched.value) &&
-                <Text style={styles.warn}>{errors.value}</Text>
-                }
-              </View>
+              {renderError(values,errors,touched)}
              <View style={styles.view1}>
                <Text style={styles.text1}>Enter Your Pin</Text>
              

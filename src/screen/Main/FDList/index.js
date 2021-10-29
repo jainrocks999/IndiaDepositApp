@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -30,6 +30,19 @@ const FDList=({route})=>{
         const [pincode,setPincode]=useState(route.params.location)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
+useEffect(()=>{
+  const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
 
 const manageList=(item)=>{
   const value=((year*365+month*30+day)/365).toFixed(2)
@@ -149,7 +162,7 @@ const renderItem=(item)=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                      <Text style={styles.title}>{item.name}</Text>
+                      {/* <Text style={styles.title}>{item.name}</Text> */}
                      <View style={{width:'20%'}}></View>
                    </View>
                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,}}>
@@ -421,7 +434,7 @@ const renderItem=(item)=>{
                   onPress={()=>compareFD()}
                  style={{
                   paddingHorizontal:20,
-                   paddingVertical:9,
+                   paddingVertical:10,
                    backgroundColor:'#fff',
                    borderRadius:10
                    }}>
@@ -432,7 +445,7 @@ const renderItem=(item)=>{
                    <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
                  <TouchableOpacity style={{
-                    paddingHorizontal:10,
+                    paddingHorizontal:6,
                     paddingVertical:Platform.OS=='android'?0:8,
                      backgroundColor:'#fff',
                      borderRadius:10,
@@ -443,9 +456,9 @@ const renderItem=(item)=>{
                           onValueChange={(val)=>setSort(val)}
                           items={Sorting}
                           style={{ 
-                          inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
                           inputIOS:{color:colors.bc},
-                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
                           }}
                           value={sort}
                           useNativeAndroidPickerStyle={false}

@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text,Image,TouchableOpacity} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text,Image,TouchableOpacity,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -12,6 +12,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 const BlogCategory=({route})=>{
    const navigation=useNavigation()
    const data=route.params.item
+
+useEffect(()=>{
+  const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
     return(
            <View style={styles.container}>
             

@@ -3,11 +3,10 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
-import Root from '../../navigator/rootNavigation';
-import { useDispatch } from 'react-redux';
 
 //Login
             function* doLogin(action) {
+              console.log('this is action',action.keep);
               try{
               const data = new FormData();
               if(action.email){
@@ -45,11 +44,15 @@ import { useDispatch } from 'react-redux';
                 AsyncStorage.setItem(Storage.income_group,response.data.income_group),
                 AsyncStorage.setItem(Storage.education,response.data.education),
                 AsyncStorage.setItem(Storage.marital,response.data.marital_status),
-                AsyncStorage.setItem(Storage.residential,response.data.residential_status),
-
-                
+                AsyncStorage.setItem(Storage.residential,response.data.residential_status)
+                if(action.keep==true){
+                  AsyncStorage.setItem("KeepmeLogin",JSON.stringify(1))
+                }
+                else{
+                  AsyncStorage.setItem("KeepmeLogin",JSON.stringify(0))
+                }
                   Toast.show(response.messages);
-                  action.navigation.replace('Main')
+                   action.navigation.replace('Main')
               } else {
                 Toast.show(response.messages);
                 yield put({
@@ -82,30 +85,35 @@ import { useDispatch } from 'react-redux';
                 });
               
                   Toast.show(response.messages);
+                  AsyncStorage.setItem(Storage.Rname,response.data.data.name)
+                  AsyncStorage.setItem(Storage.Remail,response.data.data.email)
+                  AsyncStorage.setItem(Storage.Rmobile,action.mobile)
+                  AsyncStorage.setItem('user',response.data.data.user_id)
                     action.navigation.replace('Otp',{
                         otp:response.data.otp,
                         mobile:action.mobile,
-                        name:response.data.data.name,
-                        email:response.data.data.email,
-                        father_spouse_name:response.data.data.father_spouse_name,
-                        mother_maiden_name:response.data.data.mother_maiden_name,
-                        dob:response.data.data.dob,
-                        gender:response.data.data.gender,
-                        user_id:response.data.data.user_id,
-
-                        pan:response.data.data.pan,
-                        address1:response.data.data.address1,
-                        address2:response.data.data.address2,
-                        occupation:response.data.data.occupation,
-                        pincode:response.data.data.pincode,
-                        country:response.data.data.country,
-                        state:response.data.data.state,
-                        city:response.data.data.city,
-                        income_group:response.data.data.income_group,
-                        marital_status:response.data.data.marital_status,
-                        residential_status:response.data.data.residential_status,
-                        education:response.data.data.education,
                         type:'LoginWithOtp'
+                        // name:response.data.data.name,
+                        // email:response.data.data.email,
+                        // father_spouse_name:response.data.data.father_spouse_name,
+                        // mother_maiden_name:response.data.data.mother_maiden_name,
+                        // dob:response.data.data.dob,
+                        // gender:response.data.data.gender,
+                        // user_id:response.data.data.user_id,
+
+                        // pan:response.data.data.pan,
+                        // address1:response.data.data.address1,
+                        // address2:response.data.data.address2,
+                        // occupation:response.data.data.occupation,
+                        // pincode:response.data.data.pincode,
+                        // country:response.data.data.country,
+                        // state:response.data.data.state,
+                        // city:response.data.data.city,
+                        // income_group:response.data.data.income_group,
+                        // marital_status:response.data.data.marital_status,
+                        // residential_status:response.data.data.residential_status,
+                        // education:response.data.data.education,
+                  
                         }
                       ) 
                 } else {
@@ -123,7 +131,6 @@ import { useDispatch } from 'react-redux';
             }
 
 function* forgotpasword(action) {
-      console.log('this is action',action);
         try{
               const data = new FormData();
               if (action.mobile) {
@@ -206,8 +213,15 @@ function* forgotpasword(action) {
                 AsyncStorage.setItem(Storage.name,response.data[0].name)
                 AsyncStorage.setItem(Storage.email,response.data[0].email)
                 AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
+                AsyncStorage.setItem("KeepmeLogin",JSON.stringify(0))
+                AsyncStorage.setItem(Storage.Rname,'')
+                AsyncStorage.setItem(Storage.Remail,'')
+                AsyncStorage.setItem(Storage.Rmobile,'')
+                AsyncStorage.setItem(Storage.RcountryCode,'')
+                AsyncStorage.setItem(Storage.Rpin,'')
+                AsyncStorage.setItem(Storage.Rreferal,'')
 
-                action.navigation.navigate('Main')
+                action.navigation.replace('Main')
             
                 // if(action && action.navigation){
                 //   action.navigation.replace('Otp',
@@ -261,7 +275,6 @@ function* logout(action) {
     const data = new FormData();
       data.append('user_id',action.user_id)
         const response = yield call(Api.fetchDataByPOST, action.url, data);
-            console.log('thiss dflkdsjfaslkdfsald',response);
             if (response.status==200) {
               yield put({
                 type: 'User_Logout_Success',
@@ -269,7 +282,7 @@ function* logout(action) {
               });
                 Toast.show(response.messages);
                 action.navigation.replace('Login')
-
+                AsyncStorage.setItem("KeepmeLogin",JSON.stringify(0))
                 AsyncStorage.setItem(Storage.name,'')
                 AsyncStorage.setItem(Storage.user_id,'')
                 AsyncStorage.setItem(Storage.email,'')
@@ -581,9 +594,16 @@ function* feedback(action) {
   try{
     const data = new FormData();
       data.append('user_id',action.user_id)
-      data.append('rating',action.rating)
-      data.append('ans_key1',action.ans_key1)
-      data.append('ans_key2',action.ans_key2)
+      data.append('information_rating',action.information_rating)
+      data.append('information_msg_rating',action.information_msg_rating)
+      data.append('navigation_rating',action.navigation_rating)
+      data.append('navigation_msg_rating',action.navigation_msg_rating)
+      data.append('product_rating',action.product_rating)
+      data.append('product_msg_rating',action.product_msg_rating)
+      data.append('onboarding_rating',action.onboarding_rating)
+      data.append('onboarding_msg_rating',action.onboarding_msg_rating)
+      data.append('service_rating',action.service_rating)
+      data.append('service_msg_rating',action.service_msg_rating)
       data.append('message',action.message)
 
         const response =yield call(Api.fetchDataByPOST, action.url, data);
@@ -604,7 +624,7 @@ function* feedback(action) {
           }
   catch(error){
       yield put({
-            type: 'Feedback_Request',
+            type: 'Feedback_Error',
           });
     }
 }
@@ -747,11 +767,13 @@ function* AddFamily(action) {
       data.append('residential_status',action.residential_status)
 
         const response =yield call(Api.fetchDataByPOST, action.url, data);
+        console.log('this is user response',response);
             if (response.status==200) {
               yield put({
                 type: 'Add_Family_Success',
               });   
-                action.navigation.replace('Profile')
+              Toast.show(response.messages)
+                 action.navigation.replace('Profile')
             } else {
               yield put({
                 type: 'Add_Family_Error',
@@ -768,6 +790,7 @@ function* AddFamily(action) {
 
 
 function* EditFamily(action) {
+  console.log('thisis is action value-----------------------',action);
   try{
     const data = new FormData();
       data.append('family_id',action.family_id)
@@ -793,12 +816,13 @@ function* EditFamily(action) {
       data.append('residential_status',action.residential_status)
 
         const response =yield call(Api.fetchDataByPOST, action.url, data);
+        console.log('this isi response value',response);
             if (response.status==200) {
               yield put({
                 type: 'Edit_Family_Success',
               });  
               Toast.show(response.messages) 
-              action.navigation.replace('Profile')
+               action.navigation.replace('Profile')
             } else {
               yield put({
                 type: 'Edit_Family_Error',
@@ -1374,7 +1398,7 @@ function* FDCompare(action) {
     const data = new FormData();
       data.append('value_id1',action.value_id1)
       data.append('value_id2',action.value_id2)
-      // data.append('user_id',action.user_id)
+      data.append('user_id',action.user_id)
 
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
@@ -1431,7 +1455,8 @@ function* SendOtp(action) {
   try{
     const data = new FormData();
       data.append('mobile',action.mobile)
-
+      data.append('old_email',action.email)
+      data.append('refferal_code',action.referal)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -1439,20 +1464,23 @@ function* SendOtp(action) {
                 payload: response,
 
               });  
+              AsyncStorage.setItem(Storage.Rname,action.name)
+              AsyncStorage.setItem(Storage.Remail,action.email)
+              AsyncStorage.setItem(Storage.Rmobile,action.mobile)
+              AsyncStorage.setItem(Storage.RcountryCode,action.code)
+              AsyncStorage.setItem(Storage.Rpin,action.pin)
+              AsyncStorage.setItem(Storage.Rreferal,action.referal)
               Toast.show(response.messages)
               action.navigation.push('Otp',{
                 type:'Register',
-                name:action.name,
-                email:action.email,
-                mobile:action.mobile,
-                pin:action.pin,
                 otp:response.otp,
-                countryCode:action.code
+                mobile:action.mobile
               })
             } else {
               yield put({
                 type: 'Send_RegOtp_Error',
               });
+              Toast.show(response.messages)
             }
           }
   catch(error){
@@ -1462,10 +1490,87 @@ function* SendOtp(action) {
     }
 }
 
+function* ResendOtp(action) {
+  try{
+    const data = new FormData();
+      data.append('mobile',action.mobile)
+      data.append('otpwithoutconfrim',action.boolean)
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Resend_Otp_Success',
+                payload: response,
+              });  
+              Toast.show(response.messages)
+              action.navigation.push('Otp',{
+                mobile:action.mobile,
+                pin:action.pin,
+                otp:response.otp,
+                type:action.type1,
+                user_id:action.user_id,
+                // attemptbool:response.attemptbool
+              })
+            } else {
+              Toast.show(response.messages)
+
+              yield put({
+                type: 'Resend_Otp_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Resend_Otp_Error',
+          });
+    }
+}
+
+function* ResenOtp(action) {
+  console.log('thisisi our acton-----------------------------------------------------------------',action);
+  try{
+    const data = new FormData();
+          if (action.mobile) {
+            data.append('mobile',action.mobile)
+          } else if(action.email) {
+            data.append('email',action.email)
+          }
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this.respasdfjkldasjfdkljdsaklfjlkdf',response);
+            if (response.status==200) {
+              yield put({
+                type: 'Resen_Otp_Success',
+                payload: response,
+
+              });  
+              Toast.show(response.messages)
+              if(action && action.navigation){
+                action.navigation.replace('ForgotOtp',
+                {
+                  otp:response.otp,
+                  mobile: response.mobile,
+                  email: response.email
+                }
+                  )
+                }
+            } else {
+              Toast.show(response.messages)
+
+              yield put({
+                type: 'Resen_Otp_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Resen_Otp_Error',
+          });
+    }
+}
+
 function* FamilyList(action) {
   try{
     const data = new FormData();
-    data.append('user_id',130)
+    data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
@@ -1485,6 +1590,8 @@ function* FamilyList(action) {
     }
 }
 export default function* authSaga() {
+  yield takeEvery('Resend_Otp_Request',ResendOtp)
+  yield takeEvery('Resen_Otp_Request',ResenOtp)
   yield takeEvery('Send_RegOtp_Request',SendOtp)
   yield takeEvery('User_Login_Request', doLogin);
   yield takeEvery('User_Detail_Request',userDetails)

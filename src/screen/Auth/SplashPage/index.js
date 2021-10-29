@@ -8,6 +8,8 @@ import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
+import Avatar from '../../../assets/Images/avatar.svg';
+
 const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
@@ -30,8 +32,8 @@ const Splash=()=>{
           url: 'getpagecontent',
           key:'term_condition',
     })
-    // appVersion()
-     //initial()
+    appVersion()
+    //  initial()
       }, []);
 
       const appVersion = async (url) => {
@@ -40,6 +42,7 @@ const Splash=()=>{
         const user_id=id==null ? '':id
         console.log('this isi user id',user_id);
         const name=await AsyncStorage.getItem(Storage.name)
+        const KeepmeLogin=await AsyncStorage.getItem('KeepmeLogin')
         try {
           const data = new FormData();
           data.append('user_id',user_id)
@@ -59,9 +62,9 @@ const Splash=()=>{
                if (response.data.useractive==0) {
                 AsyncStorage.setItem(Storage.user_id, '')
                 AsyncStorage.setItem(Storage.name, '')
-                initial(response.data.img_url,response.data.intro_speech,name);
+                initial(response.data.img_url,response.data.intro_speech,name,KeepmeLogin);
                } else {
-                initial(response.data.img_url,response.data.intro_speech,name);
+                initial(response.data.img_url,response.data.intro_speech,name,KeepmeLogin);
                }
              }
           } else {
@@ -83,17 +86,26 @@ const Splash=()=>{
           
         }
       };
-      const initial = async (image_url,intro_speech,name) => {
+      const initial = async (image_url,intro_speech,name,KeepmeLogin) => {
        
-        console.log('this iis na',name);
-        if (!name) {
-         setTimeout(() => navigation.replace("Introduction",{
-          image_url:image_url,
-          intro_speech:intro_speech
-         }), 2000);
-        } else {
-           setTimeout(() => navigation.replace("Main"), 2000);
+        console.log('this iis na',name,KeepmeLogin);
+       
+        if (KeepmeLogin==1) {
+          setTimeout(() => navigation.replace("Main"), 2000);
+        } 
+        else{
+          setTimeout(() => navigation.replace("Introduction",{
+            image_url:image_url,
+            intro_speech:intro_speech
+           }), 2000);
         }
+        // else if(KeepmeLogin==0){
+        //   setTimeout(() => navigation.replace("Introduction",{
+        //     image_url:image_url,
+        //     intro_speech:intro_speech
+        //    }), 2000);
+        // }
+       
       }
     return(
         <View style={styles.container}>
@@ -133,6 +145,7 @@ const Splash=()=>{
                   <View style={styles.view3}>
                 <Text style={styles.text2}>We secure your details</Text>
                 </View>
+                {/* <Avatar height={200} width={100}/> */}
                  <View style={styles.view4}>
                    <Image style={styles.img} source={require('../../../assets/Image/iso.png')}/>
                    <Image style={styles.img1} source={require('../../../assets/Image/ssl.png')}/>

@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -14,16 +14,28 @@ import SIP from '../../../component/TabComponents/SP';
     second: FD,
    
   });
-const Calculator=()=>
-{
+const Calculator=()=>{
    const navigation=useNavigation()
    const [index, setIndex] = useState(0);
-   const [routes] = React.useState
-   ([
+   const [routes] = React.useState([
      { key: 'first', title: 'SIP' },
      { key: 'second', title: 'FD' },
    
     ]);
+
+  useEffect(()=>{
+    const backAction = () => {
+      navigation.navigate('Main')
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+  
+    return () => backHandler.remove();
+  })
     return(
            <View style={styles.container}>
               <Header
@@ -37,6 +49,7 @@ const Calculator=()=>
                     renderScene={renderScene}
                     onIndexChange={setIndex}
                     initialLayout={{ width: '100%' }}
+                    swipeEnabled={false}
                     renderTabBar={props => <TabBar
                     indicatorStyle=
                      {{ 

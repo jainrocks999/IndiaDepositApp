@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text,Image,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -47,6 +47,20 @@ const SBAccount=({route})=>{
        })
     }
    }
+
+   useEffect(()=>{
+      const backAction = () => {
+         navigation.navigate('Main')
+         return true;
+       };
+     
+       const backHandler = BackHandler.addEventListener(
+         "hardwareBackPress",
+         backAction
+       );
+     
+       return () => backHandler.remove();
+   },[])
     return(
         <View style={styles.container}>
                  <Header
