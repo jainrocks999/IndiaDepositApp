@@ -1,5 +1,5 @@
 import React,{useEffect}from 'react';
-import { View,Text} from 'react-native';
+import { View,Text,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -22,6 +22,17 @@ useEffect(async()=>{
         url: 'getnotification',
         user_id:user_id,
     })
+    const backAction = () => {
+        navigation.push('Main')
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
 },[])
 
 const showContent=()=>{
@@ -57,13 +68,15 @@ const showContent=()=>{
     return(
         <View style={styles.container}>
            <Header
-            source={require('../../../assets/Images/arrow.png')}
+            source={require('../../../assets/Image/arrow2.png')}
            title={'NOTIFICATIONS'}
-           onPress={()=>navigation.navigate('Main')}
+           onPress={()=>navigation.push('Main')}
            />
              {isFetching?<Loader/>:null}
+             <View style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
              <View style={styles.card}>   
                 {showContent()}
+             </View>
              </View>
            <StatusBar/>
            {/* <BottomTab/> */}

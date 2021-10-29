@@ -1,5 +1,5 @@
 import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView} from 'react-native';
+import {View,Text,TextInput,ScrollView,Image} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -77,7 +77,7 @@ const addUser=async(values)=>{
         <View style={styles.container}>
             <Header
                     title={'EDIT BANK'}
-                    source={require('../../../../assets/Images/arrow.png')}
+                    source={require('../../../../assets/Image/arrow2.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
@@ -87,7 +87,11 @@ const addUser=async(values)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
+                <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
+                <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+             
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -102,7 +106,11 @@ const addUser=async(values)=>{
                         {(errors.name && touched.name) &&
                         <Text style={styles.warn}>{errors.name}</Text>}
                     </View>
-                      <Text style={styles.better}>Bank Name</Text>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Bank Name</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+                     
                       <View style={styles.drop}>
                        <RNPickerSelect
                             onValueChange={(val)=>set_bank_name(val)}
@@ -121,7 +129,11 @@ const addUser=async(values)=>{
                         {(errors.bank_name && touched.bank_name) &&
                         <Text style={styles.warn}>{errors.bank_name}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Account Number</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+                    
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -138,7 +150,10 @@ const addUser=async(values)=>{
                         {(errors.account_number && touched.account_number) &&
                         <Text style={styles.warn}>{errors.account_number}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Account Type</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>set_account_type(val)}
@@ -157,7 +172,11 @@ const addUser=async(values)=>{
                         {(errors.account_type && touched.account_type) &&
                         <Text style={styles.warn}>{errors.account_type}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>IFSC Code</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+                   
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}

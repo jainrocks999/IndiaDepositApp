@@ -1,23 +1,35 @@
 import React,{useEffect} from "react";
-import {View,Text,FlatList,Image,ScrollView} from 'react-native';
+import {View,Text,BackHandler,Image,ScrollView} from 'react-native';
 import Header from '../../../component/compareHeader';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
 import { useDispatch,useSelector } from 'react-redux';
 
-const FDList=()=>{
+const FDDetail=({route})=>{
 const navigation=useNavigation()
 const dispatch=useDispatch()
 const selector=useSelector(state=>state.FDDetail)
 const details=selector[0]
-console.log('this is userdetails',details);
 
+useEffect(()=>{
+     const backAction = () => {
+          navigation.goBack()
+          return true;
+        };
+      
+        const backHandler = BackHandler.addEventListener(
+          "hardwareBackPress",
+          backAction
+        );
+      
+        return () => backHandler.remove();
+},[])
     return(
         <View style={styles.container1}>
                        <Header
                          title={'FD DETAILS'}
-                         source={require('../../../assets/Images/arrow.png')}
+                         source={require('../../../assets/Image/arrow2.png')}
                          onPress={()=>navigation.goBack()}
                        /> 
                        <View>
@@ -25,7 +37,7 @@ console.log('this is userdetails',details);
                          <Image  resizeMode='contain'
                        style={{height:20,width:80}}
                          source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`}}/>
-                         <Text style={styles.text}>{details.type}</Text>
+                         <Text style={styles.text}>{details.bankname}</Text>
                          {/* <Text style={styles.text1}>Fixed Deposit</Text> */}
                      </View>
                  </View>
@@ -103,7 +115,13 @@ console.log('this is userdetails',details);
                       <View style={styles.bank}>
                            <TouchableOpacity>
 
-                               <Text style={styles.bankDetails}>BANK DETAILS</Text>
+                               <Text style={styles.bankDetails}
+                                onPress ={()=>navigation.navigate('BankCalu',{
+                                     type:details.bankname,
+                                     image:selector[0].bank_logo,
+                                    principal:details.principal_amount
+                                   }
+                                )}>BANK DETAILS</Text>
                           </TouchableOpacity>
                           <TouchableOpacity>
                                <Text style={styles.bankDetails}>DOWNLOAD FORM</Text>
@@ -178,9 +196,22 @@ console.log('this is userdetails',details);
                          </Text>
                       </View>
                      <View style={styles.button}>
-                         <TouchableOpacity style={styles.btCont}>
+                        {details.fd_from=='setu'? 
+                        <TouchableOpacity 
+                         onPress={()=>navigation.navigate('FDView',{
+                              amount:details.principal_amount,
+                              tenure:route.params.tenure
+                         })}
+                         style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
+                         :details.fd_from=='nbfc'?
+                         <TouchableOpacity 
+                         //onPress={()=>navigation.navigate('FDView')}
+                         style={styles.btCont}>
+                           <Text style={styles.text3}>CREATE FD</Text>
+                         </TouchableOpacity>
+                         :null}
                          <TouchableOpacity style={styles.btCont}>
                            <Text style={styles.text3}>DOWNLOAD FORM</Text>
                          </TouchableOpacity>
@@ -191,4 +222,4 @@ console.log('this is userdetails',details);
        
     )
 }
-export default FDList;
+export default FDDetail;

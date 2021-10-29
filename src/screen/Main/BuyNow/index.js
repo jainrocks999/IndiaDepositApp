@@ -48,7 +48,7 @@ const FDList=()=>
         <View style={{flex:1}}>
             <Header
               title={'BUY NOW'}
-              source={require('../../../assets/Images/arrow.png')}
+              source={require('../../../assets/Image/arrow2.png')}
               onPress={()=>navigation.goBack()}
             /> 
             <View style={styles.flat}>

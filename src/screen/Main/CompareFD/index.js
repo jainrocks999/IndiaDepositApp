@@ -1,5 +1,5 @@
-import React from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, Platform, } from 'react-native';
+import React,{useEffect} from "react";
+import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, BackHandler, } from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -14,8 +14,20 @@ const selector=useSelector((state)=>state.FDCompareDetail)
 console.log('this is compare derrails',selector)
 const data1=selector.datavalue1[0]
 const data2=selector.datavalue2[0]
-console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd',data1);
-console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
+
+useEffect(()=>{
+    const backAction = () => {
+        navigation.goBack()
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
+},[])
 
     return(
         <View style={{flex:1,
@@ -23,7 +35,7 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
         }}>
               <Header
                   title={'COMPARE FD'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
                /> 
                 <View style={styles.View}>
@@ -76,8 +88,8 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                          <Text style={styles.title}>{'Calculator'}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.value}>{4}</Text>
-                         <Text style={styles.value}>{4}</Text>
+                         <Text style={styles.value}>{''}</Text>
+                         <Text style={styles.value}>{''}</Text>
                      </View>
                   </View>
                   <View>
@@ -85,8 +97,8 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                          <Text style={styles.title}>{'Amount'}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.value}>{4}</Text>
-                         <Text style={styles.value}>{4}</Text>
+                         <Text style={styles.value}>{''}</Text>
+                         <Text style={styles.value}>{''}</Text>
                      </View>
                   </View>
                   <View>
@@ -94,8 +106,8 @@ console.log('tjhasdjhkljshdjkdshafdjkhdaskjhfkd2',data2);
                          <Text style={styles.title}>{'Growth %'}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.value}>{4}</Text>
-                         <Text style={styles.value}>{4}</Text>
+                         <Text style={styles.value}>{''}</Text>
+                         <Text style={styles.value}>{''}</Text>
                      </View>
                   </View>
                   <View>

@@ -1,5 +1,5 @@
 import React,{useEffect, useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView,BackHandler} from 'react-native';
+import {View,Text,TextInput,ScrollView,BackHandler,Image} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -102,25 +102,6 @@ const manageState=async(val)=>{
       state_id:val,
       
     })
-    // try {
-    //     const data = new FormData();
-    //     data.append('state_id',20)
-    //     const response = await axios({
-    //       method: 'POST',
-    //       data,
-    //       headers: {
-    //         'content-type': 'multipart/form-data',
-    //         Accept: 'multipart/form-data',
-    //       },
-    //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-    //     });
-    //     console.log('this is response value',response);
-    //     setManageStateValue(response.data.data)
-    //   } catch (error) {
-    //    throw error;
-        
-    //   }
-
      }
      const Country=[
       {label:'India',value:'101'},
@@ -146,7 +127,7 @@ const manageState=async(val)=>{
         <View style={styles.container}>
             <Header
                     title={'EDIT NOMINEE  '}
-                    source={require('../../../../assets/Images/arrow.png')}
+                    source={require('../../../../assets/Image/arrow2.png')}
                     onPress={()=>Root.push('Profile')}
                    /> 
              <ScrollView style={styles.main}>
@@ -156,7 +137,10 @@ const manageState=async(val)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
+                <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
+                <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
@@ -171,11 +155,14 @@ const manageState=async(val)=>{
                         {(errors.name && touched.name) &&
                         <Text style={styles.warn}>{errors.name}</Text>}
                     </View>
-                      <Text style={styles.better}>Address1</Text>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Address Line1</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter your address1'
+                        placeholder='Please enter your address line1'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.address1}
                         onChangeText={handleChange('address1')}
@@ -186,11 +173,14 @@ const manageState=async(val)=>{
                         {(errors.address1 && touched.address1) &&
                         <Text style={styles.warn}>{errors.address1}</Text>}
                     </View>
-                    <Text style={styles.better}>Address2</Text>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Address Line2</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Please enter your address2'
+                        placeholder='Please enter your address line2'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.address2}
                         onChangeText={handleChange('address2')}
@@ -202,7 +192,10 @@ const manageState=async(val)=>{
                         {(errors.address2 && touched.address2) &&
                         <Text style={styles.warn}>{errors.address2}</Text>}
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCountry(val)}
@@ -219,7 +212,10 @@ const manageState=async(val)=>{
                     <View style={styles.error}>
                        
                     </View>
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>State</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>manageState(val)}
@@ -236,8 +232,10 @@ const manageState=async(val)=>{
                     <View style={styles.error}>
                       
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>City</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>setCity(val)}
@@ -254,8 +252,10 @@ const manageState=async(val)=>{
                     <View style={styles.error}>
                         
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Date of Birth</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                       <DatePicker
                         style={{width: '99%'}}
@@ -285,8 +285,10 @@ const manageState=async(val)=>{
                     <View style={styles.error}>
                        
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Relationship</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -302,8 +304,10 @@ const manageState=async(val)=>{
                         {(errors.relationship && touched.relationship) &&
                         <Text style={styles.warn}>{errors.relationship}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -319,8 +323,10 @@ const manageState=async(val)=>{
                         {(errors.guardian && touched.guardian) &&
                         <Text style={styles.warn}>{errors.guardian}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian Relationship</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}
@@ -336,8 +342,11 @@ const manageState=async(val)=>{
                         {(errors.guardian_relationship && touched.guardian_relationship) &&
                         <Text style={styles.warn}>{errors.guardian_relationship}</Text>}
                     </View>
-
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Pincode</Text>
+                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+                   
                       <View style={styles.drop}>
                         <TextInput
                             style={styles.input}

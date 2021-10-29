@@ -11,20 +11,20 @@ const Introduction=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const data=route.params
-    useEffect(()=>{
+//     useEffect(()=>{
 
-      dispatch({
-        type: 'Privacy_Request',
-        url: 'getpagecontent',
-        key:'privacy',
-  })
+//       dispatch({
+//         type: 'Privacy_Request',
+//         url: 'getpagecontent',
+//         key:'privacy',
+//   })
 
-      dispatch({
-        type: 'TermAndCondition_Request',
-        url: 'getpagecontent',
-        key:'term_condition',
-  })
-},[])
+//       dispatch({
+//         type: 'TermAndCondition_Request',
+//         url: 'getpagecontent',
+//         key:'term_condition',
+//   })
+// },[])
 
     return(
         <View style={styles.container}>

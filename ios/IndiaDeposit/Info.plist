@@ -62,11 +62,7 @@
 		<string>Montserrat-SemiBold.ttf</string>
 		<string>Montserrat-Medium.ttf</string>
 		<string>Montserrat-Regular.ttf</string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
-		<string></string>
+		<string/>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

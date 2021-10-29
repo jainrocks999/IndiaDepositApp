@@ -36,6 +36,23 @@ const Holiday=()=>{
     const [march,setMarch]=useState(false)
     const [april,setAp]=useState(false)
     const [may,setMay]=useState(false)
+
+useEffect(()=>{
+  const backAction = () => {
+    if(navigation.isFocused)
+    // navigation.goBack('Dashboard')
+       navigation.navigate('Main')
+      return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
+
   const checkJan=()=>
   {
      if(jan==true)
@@ -95,8 +112,8 @@ const Holiday=()=>{
             <View style={styles.container1}>
                    <Header
                       title={'BANK HOLIDAYS'}
-                      source ={require('../../../assets/Images/drawer.png')}
-                      onPress={()=>navigation.toggleDrawer()}
+                      source ={require('../../../assets/Image/arrow2.png')}
+                      onPress={()=>navigation.goBack()}
                       source1={require('../../../assets/Image/download.png')}
                    /> 
                <ScrollView>
@@ -310,7 +327,7 @@ const Holiday=()=>{
               </View>
            </View>
            </ScrollView>
-          <BottomTab/>
+          {/* <BottomTab/> */}
        </View>
     )
 }

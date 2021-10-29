@@ -5,5 +5,6 @@ export default {
   heading:'#777777',
   black:'#000',
   card:'#E5E5E5',
-  heading1:'#777777'
+  heading1:'#777777',
+  red:'red'
   };

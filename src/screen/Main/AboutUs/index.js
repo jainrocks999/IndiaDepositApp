@@ -1,5 +1,5 @@
 import React,{useEffect, useState}from 'react';
-import { View,Text,Image,ScrollView} from 'react-native';
+import { View,BackHandler,ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -15,11 +15,23 @@ const Contact=()=>{
   
    
 useEffect(()=>{
+  
   dispatch({
     type: 'About_Us_Request',
     url: 'getpagecontent',
     key:'about_us',
   })
+  const backAction = () => {
+    navigation.navigate('Main')
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
 },[])
 const showContent=()=>{
       if (selector.length>0) {
@@ -37,7 +49,7 @@ const showContent=()=>{
     return(
      <View style={styles.container}>
            <Header
-             source={require('../../../assets/Image/arrow.png')}
+             source={require('../../../assets/Image/arrow2.png')}
              title={'ABOUT US'}
              onPress={()=>navigation.goBack()}
            />

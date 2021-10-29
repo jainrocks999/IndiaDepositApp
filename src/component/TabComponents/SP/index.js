@@ -6,40 +6,29 @@ import ProgressBar from 'react-native-progress/Bar';
 import colors from '../../colors';
 import fontsize from '../../../component/fontSize';
 import Slider  from "react-native-slider";
+import PieChart from 'react-native-pie-chart';
+
 const SIP=()=>{
     const navigation=useNavigation()
     const [interest,setInterest]=useState('1')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('500')
-   
-   
-
-    const handleValueChange = useCallback((low, high, isUpdate) => {
-        if (isUpdate) {
-          setTotalInvestment(JSON.stringify(low))
-        }
-      }, []);
-
-      const handleValueChange1 = useCallback((low, high, isUpdate) => {
-        if (isUpdate) {
-          setInterest(JSON.stringify(low))
-        }
-      }, []);
-
-      const handleValueChange2 = useCallback((low, high, isUpdate) => {
-        if (isUpdate) {
-          setTime(JSON.stringify(low))
-        }
-      }, []);
-    return(
+   console.log(interest,'dlskfjdsklafjdlk');
+  const investmentAmount=totalInvestment*time*12
+  const interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
+  (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
+  const maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
+    console.log('this is user list',maturityAmount,investmentAmount,interestAmount);
+  return(
         <View style={styles.container}>
-             <ScrollView style={{flex:1}}>
+             <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
                 <View style={styles.view}>
                     <Text 
                     style={styles.text}>
                         Monthly Investment</Text>
                     <View style={styles.view}>
                         <Image style={styles.img} source={require('../../../assets/Image/rupay.png')}/>
+                        <View>
                         <TextInput 
                         defaultValue={totalInvestment}
                         style={{borderBottomWidth:0,}}
@@ -47,6 +36,9 @@ const SIP=()=>{
                         onChangeText={(val)=>setTotalInvestment(val)}
                         maxLength={6}
                         />
+                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        </View>
+
                     </View>
                 </View>
                 <View>
@@ -65,22 +57,25 @@ const SIP=()=>{
                     style={styles.text}>
                         Expected Return Rate</Text>
                     <View style={styles.view3}>
+                      <View>
                     <TextInput 
-                    onChangeText={(val)=>setInterest(val)}
+                    onChangeText={(val)=>setInterest(val==''?1:val)}
                     defaultValue={interest}
                     style={{borderBottomWidth:0,}}
                     keyboardType='number-pad'
                     maxLength={2}
                     />
-                    <Text>{'%'}</Text>
+                   <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                    </View>
+                    <Text style={{marginLeft:2,marginTop:8}}>{'%'}</Text>
                     </View>
                 </View>
                 <Slider
-                        minimumValue={0}
+                        minimumValue={1}
                         maximumValue={15}
                         onValueChange={(val)=>setInterest(JSON.stringify(val))}
                         step={1}
-                        value={parseInt(interest==''?0:interest)}
+                        value={parseInt(interest==''?1:interest)}
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
@@ -89,7 +84,7 @@ const SIP=()=>{
                     style={styles.text}>
                         Time Period</Text>
                     <View style={styles.view}>
-                       
+                       <View>
                         <TextInput 
                         onChangeText={(val)=>setTime(val)}
                         style={{borderBottomWidth:0,}}
@@ -97,51 +92,68 @@ const SIP=()=>{
                         keyboardType='number-pad'
                         maxLength={2}
                         />
-                          <Text>{'year'}</Text>
+                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        </View>
+                        <Text style={{marginLeft:2,marginTop:5,fontSize:12,color:colors.textColor}}>{'Year'}</Text>
                     </View>
                 </View>
                    <Slider
-                        minimumValue={0}
+                        minimumValue={1}
                         maximumValue={10}
                         onValueChange={(val)=>setTime(JSON.stringify(val))}
                         step={1}
                         value={parseInt(time==''?0:time)}
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
+                        // thumbImage={source=require('../../../assets/Image/down.png')}
                         />
                 <View style={styles.view1}>
                     <View style={styles.view2}> 
                         <Text style={styles.text}>Total Investment</Text>
-                        <Text>{time==0?'0':totalInvestment*time*12}</Text>
+                        <Text>{investmentAmount==0||''?6000:investmentAmount}</Text>
                     </View>
                     <View style={{alignItems:'center'}}>
-                        <Text style={{fontSize:fontsize.seventeen,
+                        <Text style={{fontSize:fontsize.fefteen,
                             color:colors.textColor,
                             fontFamily:'Montserrat-Regular'
                             }}>Total Interest</Text>
-
-                       {time && interest=='0'? <Text>0</Text>: 
-                       <Text>{((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
-                        (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)}</Text>}
+                       <Text>{interestAmount==0||''?0:interestAmount}</Text>
+                      {/* } */}
                     </View>
                 </View>
                 <View style={{alignItems:'center',marginTop:20}}>
-                      
-                       {time && interest=='0'?<Text
-                       style={styles.text}>{`Maturity Value  ₹ 0`}</Text>: <Text style={styles.text}> 
-                   
-                     {`Maturity Value  ₹ ${(totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0)}`}
-                     </Text> } 
-                     
-                     {/* {} */}
+                        <Text style={styles.text}> 
+                     {`Maturity Value  ₹ ${maturityAmount==0||''?6000:maturityAmount}`}
+                     </Text> 
+                      </View>
+                <View style={{alignItems:'center',marginBottom:100,marginTop:20}}>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%',marginBottom:20}}>
+                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                      <View style={{width:30,height:10,backgroundColor:'#FA5E8E'}}/>
+                      <Text style={{fontSize:12,color:colors.textColor,fontFamily:'Montserrat-Regular',marginLeft:5}}>Invest Amount</Text>
+                    </View>
+                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                      <View style={{width:30,height:10,backgroundColor:'#AC4BE0'}}/>
+                      <Text style={{fontSize:12,color:colors.textColor,fontFamily:'Montserrat-Regular',marginLeft:5}}>Total Interest</Text>
+                    </View>
+                  </View>
+                <PieChart
+                  widthAndHeight={250}
+                  series={[
+                    // 100,200
+                    parseInt(interestAmount==0||''?0:interestAmount), parseInt(investmentAmount==0||''?6000:investmentAmount)
+                   ]}
+                  sliceColor={['#AC4BE0','#FA5E8E']}
+                  doughnut={true}
+                  coverRadius={0.45}
+                  coverFill={'#FFF'}
+                />
                 </View>
               </ScrollView>
-              {/* totalInvestment * (Math.pow(1 + (interest/12/100), 12*time) - 1) /( interest/12/100) */}
        </View>
     )
 }
 export default SIP;
-  {/* {`Maturity Value  ₹ ${(totalInvestment * (1+interest/100) *
-  ((Math.pow((1+interest/100),12*time)) - 1)/(interest/100)).toFixed(0)}`}*/}
+
 
 

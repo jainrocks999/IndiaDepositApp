@@ -47,8 +47,8 @@ const validateUser=(email,mobile)=>{
     else if(email){
          console.log('this is working');
          dispatch({
-          type: 'Forget_Password_Request',
-          url: 'verfiyopt',
+          type: 'Send_Otp_Request',
+          url: 'sendotp',
           email,
           navigation
         })
@@ -56,8 +56,8 @@ const validateUser=(email,mobile)=>{
     else if(mobile){
       console.log('this is working1');
       dispatch({
-        type: 'Forget_Password_Request',
-        url: 'verfiyopt',
+        type: 'Send_Otp_Request',
+        url: 'sendotp',
         mobile,
         navigation
       })
@@ -110,7 +110,8 @@ const validateUser=(email,mobile)=>{
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
-                      maxLength={30}
+                      maxLength={35}
+                      keyboardType='email-address'
                       />
                   </View>
               </View>

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import { View,Text,Image, TouchableOpacity ,Switch,ScrollView,Platform} from "react-native";
+import { View,Text,Image, TouchableOpacity ,Switch,ScrollView,BackHandler} from "react-native";
 import colors from '../../../component/colors';
 import Slider  from "react-native-slider";
 import styles from './styles';
@@ -25,6 +25,20 @@ const FDFilter=({route})=>{
     const [value2,setValue2]=useState('')
     const data=route.params.data
     console.log('this is data from render',data,route.params);
+
+useEffect(()=>{
+    const backAction = () => {
+        navigation.goBack()
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
+},[])
 const manageFilter=()=>{
     setIsEnabled1(false)
     setIsEnabled2(false)

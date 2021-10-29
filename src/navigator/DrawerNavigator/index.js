@@ -29,9 +29,9 @@ function MyDrawer() {
     drawerStyle={{width:'100%'}}
     drawerContent={() => <DrawerContent/>}>
         <Drawer.Screen name="Dashboard" component={Dashboard} />
-        <Drawer.Screen name="Trending" component={Trending} />
+        {/* <Drawer.Screen name="Trending" component={Trending} />
         <Drawer.Screen name="BankHoliday" component={BankHoliday}/>
-        <Drawer.Screen name="KnowledgeCenter" component ={KnowledgeCenter}/>
+        <Drawer.Screen name="KnowledgeCenter" component ={KnowledgeCenter}/> */}
     </Drawer.Navigator>
   );
 

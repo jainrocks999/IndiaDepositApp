@@ -27,8 +27,13 @@ initialstate = {
   Story:[],
   FDCompareDetail:[],
   SBCompareDetail:[],
-  UserData:[]
+  UserData:[],
+  FamilyList:[],
+  ResendData:'',
+  ResenData:''
+
 };
+// Resend_Otp_Success
 export default (state = initialstate, action) => {
   switch (action.type) {
     //Login 
@@ -38,6 +43,20 @@ export default (state = initialstate, action) => {
       return { ...state, isFetching: false, UserData: action.payload };
     case 'User_Detail_Error':
       return { ...state, isFetching: false };
+
+      case 'Resend_Otp_Request':
+        return { ...state, isFetching: true };
+      case 'Resend_Otp_Success':
+        return { ...state, isFetching: false, ResendData: action.payload };
+      case 'Resend_Otp_Error':
+        return { ...state, isFetching: false };
+
+      case 'Resen_Otp_Request':
+        return { ...state, isFetching: true };
+      case 'Resen_Otp_Success':
+        return { ...state, isFetching: false, ResenData: action.payload };
+      case 'Resen_Otp_Error':
+        return { ...state, isFetching: false };
 
       case 'User_Login_Request':
         return { ...state, isFetching: true };
@@ -54,18 +73,26 @@ export default (state = initialstate, action) => {
       return { ...state, isFetching: false };
 
     //Register
-    case 'User_Register_Request':
+    _Success
+    case 'Send_RegOtp_Request':
+      return { ...state, isFetching: true };
+    case 'Send_RegOtp_Success':
+      return { ...state, isFetching: false,};
+    case 'Send_RegOtp_Error':
+      return { ...state, isFetching: false };
+
+      case 'User_Register_Request':
       return { ...state, isFetching: true };
     case 'User_Register_Success':
       return { ...state, isFetching: false, RegisterDetails: action.payload };
     case 'User_Register_Error':
       return { ...state, isFetching: false };
 
-    case 'Forget_Password_Request':
+    case 'Send_Otp_Request':
       return { ...state, isFetching: true };
-    case 'Forget_Password_Success':
+    case 'Send_Otp_Success':
       return { ...state, isFetching: false };
-    case 'Forget_Password_Error':
+    case 'Send_Otp_Error':
       return { ...state, isFetching: false };
       
     //Logout
@@ -290,6 +317,28 @@ export default (state = initialstate, action) => {
     return { ...state, isFetching: false, SBCompareDetail: action.payload };
   case 'SB_Compare_Error':
   return { ...state, isFetching: false };
+
+  case 'Add_Family_Request':
+    return { ...state, isFetching: true };
+  case 'Add_Family_Success':
+    return { ...state, isFetching: false };
+  case 'Add_Family_Error':
+  return { ...state, isFetching: false };
+
+  case 'Edit_Family_Request':
+    return { ...state, isFetching: true };
+  case 'Edit_Family_Success':
+    return { ...state, isFetching: false };
+  case 'Edit_Family_Error':
+  return { ...state, isFetching: false };
+
+  case 'Family_List_Request':
+    return { ...state, isFetching: true };
+  case 'Family_List_Success':
+    return { ...state, isFetching: false, FamilyList: action.payload };
+  case 'Family_List_Error':
+  return { ...state, isFetching: false };
+
     default:
       return state;
   }

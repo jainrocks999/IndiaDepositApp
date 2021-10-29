@@ -56,22 +56,22 @@ export default StyleSheet.create({
     how:
     {
         color:colors.textColor,
-        fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Regular',
-        marginTop:20
+        fontSize:fontSize.fourteen,
+        fontFamily:'Montserrat-SemiBold',
+         marginTop:5
     },
     star:
     {
         alignItems:'flex-start',
         marginLeft:-8,
-        marginTop:13
+        marginTop:3
     },
     what:
     {
         color:colors.textColor,
         marginTop:13,
-        fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Regular'
+        fontSize:fontSize.fourteen,
+        fontFamily:'Montserrat-SemiBold'
     },
     drop:
     {
@@ -86,8 +86,8 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         marginTop:13,
-        fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Regular'
+        fontSize:fontSize.fourteen,
+        fontFamily:'Montserrat-SemiBold'
     },
     bottom:
     {
@@ -108,6 +108,18 @@ export default StyleSheet.create({
     bottomView:{
         marginTop:18,
         marginBottom:20
+    },
+    bordrView:{ 
+        marginTop:5 ,
+        borderWidth:1,
+        // height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
+        justifyContent:'center',
+        width:'100%',
+        paddingHorizontal:10,
+        // paddingVertical:-10
     }
     
    

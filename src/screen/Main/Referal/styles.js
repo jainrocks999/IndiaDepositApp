@@ -139,7 +139,7 @@ export default StyleSheet.create({
     text3:{
         color:colors.white,
         fontFamily:'Montserrat-Regular',
-        fontSize:fontSize.fourteen
+        fontSize:fontSize.thirteen
     },
     row:
         {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Regular'}

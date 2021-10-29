@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView, Platform} from 'react-native';
+import { View,Text,Image,ScrollView, Platform,BackHandler, TouchableOpacityBase, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -15,8 +15,12 @@ import { useDispatch, useSelector, } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+// import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
+// AIzaSyBOI4aRSc1wCel3nDgRNIgzt9IFdq2G1rM
 
-Geocoder.init("AIzaSyAzFr0YEmrn58EC4u9Z5y6GAgHKvdhFjco");
+// AIzaSyDgYXtmURSI5-bmZb_CURF8O56uKBRbz4o
+// AIzaSyDgYXtmURSI5-bmZb_CURF8O56uKBRbz4o
 const Contact=({route})=>{
     const navigation=useNavigation()
     const [day, setDay] = useState(0)
@@ -27,6 +31,21 @@ const Contact=({route})=>{
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
    console.log('this is narendra here',route.params);
+   
+   // AIzaSyCSqp7M6d0nwQxaFRG-2oKRqv0monDdtxI
+useEffect(()=>{
+   const backAction = () => {
+      navigation.navigate('Main')
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+  
+    return () => backHandler.remove();
+},[])
 
    const manageSearch=async()=>{
       if(year==0 && month==0 && day==0){
@@ -71,19 +90,32 @@ const Contact=({route})=>{
        })
     }
    }
-   //  Geocoder.from("Colosseum")
-   //  .then(json => {
-   //     var location = json.results[0].geometry.location;
-   //     console.log('narendra hereh dklfjdskfldsjk',location);
-   //  })
-   //  .catch(error => console.warn(error));
-
-
+  
+  const getAddress=()=>{
+   Geolocation.getCurrentPosition(
+      (position) => {
+         console.log('your are here',position.coords);
+          Geocoder.from(position.coords.latitude, position.coords.longitude)
+              .then(json => {
+                  console.log(json);
+                  var addressComponent = json.results[0].address_components;
+                  
+                  console.log(addressComponent);
+              })
+              .catch(error => console.warn(error));
+      },
+      (error) => {
+          // See error code charts below.
+           console.log(error.code, error.message);
+       },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 100000 }
+  );
+  }
     return(
         <View style={styles.container}>
               <Header
                   title={'FD SEARCH'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
               />
              <ScrollView style={styles.scroll}>
@@ -189,7 +221,9 @@ const Contact=({route})=>{
                               <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
                           <View style={styles.view5}>
+                             <TouchableOpacity onPress={()=>getAddress()}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
+                              </TouchableOpacity>
                                 <Text style={[styles.text1,{marginLeft:10}]}>Current Location</Text>
                           </View>
                        </View>

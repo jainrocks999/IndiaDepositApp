@@ -70,17 +70,17 @@ export default StyleSheet.create({
     },
     otp:
     {
-        width: 50,
-        height: 50,
-        borderWidth: 2,
-        color:colors.black,
+        // width: 50,
+        // height: 50,
+        borderWidth:1,
         backgroundColor:colors.white,
-        shadowColor:colors.black,
+        shadowColor:colors.white,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
-        borderRadius:10,
+        borderRadius:6,
+        
     },
     titleCont:
     {

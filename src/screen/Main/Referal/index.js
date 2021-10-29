@@ -1,5 +1,5 @@
 import React,{useEffect,useState}from 'react';
-import { View,Text,Image,ScrollView,TextInput,Share, ToastAndroid} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,Share, BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -39,6 +39,18 @@ useEffect(async()=>{
        throw error;
         
       }
+      const backAction = () => {
+        navigation.navigate('Main')
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
+
 },[])
 const share=async()=>{
     await Share.share({
@@ -54,7 +66,7 @@ const share=async()=>{
     return(
         <View style={styles.container}>
               <Header
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   title={'REFERRAL'}
                   onPress={()=>navigation.goBack()}
                />

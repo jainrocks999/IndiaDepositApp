@@ -1,5 +1,5 @@
 import React,{useRef,useEffect, useState} from 'react';
-import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard} from 'react-native';
+import { View,Text,Image,ScrollView,Linking,TouchableOpacity,TextInput,Keyboard,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -13,7 +13,7 @@ import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
-
+let backPress=0
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`).required('Please enter your Name ')
   .matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
@@ -34,7 +34,18 @@ const Contact=({route})=>{
     const link=[]
     const [array,setArray] = useState([]);
 
-console.log('this is narendra here',selector);
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+  };
+}, []);
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    navigation.navigate('Main')
+  return true;
+  }
+}
   const validateUser=async(values)=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
    Keyboard.dismiss()
@@ -52,10 +63,11 @@ console.log('this is narendra here',selector);
     link.push(step)
     ))}
     console.log('this .si link',link);
+   
 
     return(
       <Formik
-      initialValues={{ email:route.params.email,mobile:route.params.mobile,name:route.params.name,message:''}}
+      initialValues={{ email:'',mobile:'',name:'',message:''}}
       onSubmit={values => validateUser(values)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
@@ -64,14 +76,14 @@ console.log('this is narendra here',selector);
         <View style={styles.container}>
           <Header 
           title='CONTACT US'
-          source={require('../../../assets/Images/arrow.png')}
+          source={require('../../../assets/Image/arrow2.png')}
           onPress={()=>navigation.goBack()}
           />
           <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
             <View style={styles.card}>
             {isFetching?<Loader/>:null}
             <View style={styles.header}>
-              <Text style={styles.toll}>TOLL FREE NUMBER</Text>
+              <Text style={styles.toll}>Call us on</Text>
               <View style={[styles.view,{ marginTop:21}]}>
                   <Text style={styles.num}>{detail.mobile}</Text>
                     <TouchableOpacity 

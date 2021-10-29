@@ -124,7 +124,7 @@ export default StyleSheet.create({
     {
         alignItems:'center',
         width:'98%',
-        paddingVertical:15,
+        paddingVertical:22,
         borderRadius:10,
     
     },
@@ -156,7 +156,8 @@ export default StyleSheet.create({
         height:90,
         backgroundColor:colors.bc,
         borderRadius:10 ,
-        alignItems:'center',justifyContent:'center'
+        alignItems:'center',justifyContent:'center',
+        
    },
    modal: {
     width: 330,

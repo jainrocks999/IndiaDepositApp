@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text,ScrollView} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -22,14 +22,29 @@ const Knowledge=()=>{
     { key: 'second', title: 'STORY' },
    
   ]);
+
+  useEffect(()=>{
+    const backAction = () => {
+      if(navigation.isFocused)
+      navigation.navigate('Main')
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+  
+    return () => backHandler.remove();
+  },[])
     return(
         <View style={styles.container}>
               <Header
                   title={'KNOWLEDGE CENTER'}
-                  source ={require('../../../assets/Images/drawer.png')}
-                  onPress={()=>navigation.toggleDrawer()}
-                 source1={require('../../../assets/Image/notification.png')}
-                 onPress1={()=>navigation.navigate('Notification')}
+                  source ={require('../../../assets/Image/arrow2.png')}
+                  onPress={()=>navigation.goBack()}
+                //  source1={require('../../../assets/Image/notification.png')}
+                //  onPress1={()=>navigation.navigate('Notification')}
               /> 
               
              <ScrollView
@@ -59,7 +74,7 @@ const Knowledge=()=>{
              </ScrollView>
               <StatusBar/>
               <View style={styles.buttomview}>
-                 <BottomTab/>
+                 {/* <BottomTab/> */}
               </View>
         </View>
     )

@@ -36,7 +36,8 @@ export default StyleSheet.create({
     },
     img:{
         width:20,
-        height:22
+        height:22,
+        marginTop:7
     },
     
    main:{
@@ -51,13 +52,14 @@ export default StyleSheet.create({
        paddingHorizontal:20
     },
     total:{
-        fontSize:fontSize.seventeen,
+        fontSize:fontSize.fefteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Regular'
     }, 
    input:{
        flexDirection:'row',
-       alignItems:'center'
+       alignItems:'center',
+       
     },
     
 })

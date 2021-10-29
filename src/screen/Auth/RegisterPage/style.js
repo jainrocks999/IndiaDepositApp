@@ -132,7 +132,10 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         color:colors.textColor,
         marginLeft:Platform.OS=='android'?0:10,
-        width:'90%'
+        width:'90%',
+        // alignItems:'center',
+        // justifyContent:'center',
+        // flexDirection:'row'
     },
     agree1:
     {
@@ -171,5 +174,8 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize:18,
         marginBottom:5
-    }
+    },
+
+
+   
 })

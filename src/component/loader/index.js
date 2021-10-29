@@ -7,6 +7,7 @@ import {
   Platform,
   StyleSheet,
 } from 'react-native';
+import colors from '../colors';
 
 
 //Main loader component0
@@ -14,7 +15,7 @@ export default class Loading extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size={Platform.OS == 'ios' ? 1 : 40} color={'red'} />
+        <ActivityIndicator size={Platform.OS == 'ios' ? 1 : 40} color={colors.bc} />
       </View>
     );
   }

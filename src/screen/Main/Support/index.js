@@ -7,7 +7,7 @@ import colors from '../../../component/colors';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import FAQs from '../../../component/TabComponents/FAQs';
 import Support from '../../../component/TabComponents/Support';
-import { View,Text,Image,ScrollView,TextInput} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,BackHandler} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -27,6 +27,20 @@ const loginValidationSchema=yup.object().shape({
 })
 
 const Supports=({route})=>{
+
+useEffect(()=>{
+  const backAction = () => {
+    navigation.navigate('Main')
+    return true;
+  };
+
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
 
   const SecondRoute = () => {
     const dispatch=useDispatch()
@@ -49,7 +63,11 @@ const Supports=({route})=>{
   
       return(
         <Formik
-        initialValues={{ name: route.params.name,email:route.params.email,mobile:route.params.mobile,subject:'',message:''}}
+        initialValues={{ 
+          name: '',
+          email:'',
+          mobile:'',
+          subject:'',message:''}}
         onSubmit={values => validateUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -64,6 +82,7 @@ const Supports=({route})=>{
                     contentContainerStyle={{flex:1}}>
                       {isFetching?<Loader/>:null}
                     <Text style={styles.better1}>How can we help you?</Text>
+                    
                       <Text style={styles.better}>Name</Text>
                         <View style={styles.drop}>
                           <TextInput
@@ -185,7 +204,7 @@ const Supports=({route})=>{
     return(
             <View style={styles.container}>
                  <Header
-                     source={require('../../../assets/Images/arrow.png')}
+                     source={require('../../../assets/Image/arrow2.png')}
                      title={'SUPPORT'}
                      onPress={()=>navigation.goBack()}
                   />

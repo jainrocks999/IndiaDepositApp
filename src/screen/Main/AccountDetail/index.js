@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import {View,Text,FlatList,Image,ScrollView} from 'react-native';
+import React, { useEffect, useState } from "react";
+import {View,Text,FlatList,Image,ScrollView,BackHandler} from 'react-native';
 import Header from '../../../component/compareHeader';
 import colors from '../../../component/colors';
 import styles from './styles';
@@ -12,11 +12,26 @@ const FDList=()=>{
 const navigation=useNavigation()
 const selector=useSelector((state)=>state.SBDetail)
 const details=selector[0]
+
+useEffect(()=>{
+      const backAction = () => {
+            navigation.goBack()
+            return true;
+          };
+        
+          const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+          );
+        
+          return () => backHandler.remove();
+},[])
+
  return(
        <View style={styles.container1}>
          <Header
           title={'SB A/C DETAILS'}
-          source={require('../../../assets/Image/arrow.png')}
+          source={require('../../../assets/Image/arrow2.png')}
           onPress={()=>navigation.goBack()}
          /> 
          <View style={{marginTop:12}}>

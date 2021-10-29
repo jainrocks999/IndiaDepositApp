@@ -1,5 +1,5 @@
-import React,{useState}from 'react';
-import { View,Text, ScrollView} from 'react-native';
+import React,{useState,useEffect}from 'react';
+import { View,Text, ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -23,10 +23,24 @@ const Calculator=()=>{
     { key: 'second', title: 'Security' },
     { key: 'third', title: 'Term & Condition' },
   ]);
+
+  useEffect(()=>{
+    const backAction = () => {
+      navigation.navigate('Main')
+      return true;
+    };
+  
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+  
+    return () => backHandler.remove();
+  },[])
     return(
            <View style={styles.container}>
                <Header
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   title={'POLICY'}
                   onPress={()=>navigation.goBack()}
                />

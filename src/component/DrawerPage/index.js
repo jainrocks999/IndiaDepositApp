@@ -1,5 +1,5 @@
 import React, { useState,useEffect} from 'react';
-import { View, Image,TouchableOpacity,Platform } from 'react-native';
+import { View, Image,TouchableOpacity,Platform ,BackHandler, Alert} from 'react-native';
 import {
     DrawerContentScrollView,
 } from '@react-navigation/drawer';
@@ -13,8 +13,9 @@ import colors from '../colors';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../AsyncStorage';
 import Modal from "react-native-modal";
-import fontSize from '../fontSize';
-import Root from '../../navigator/rootNavigation';
+
+
+let backPress=0
 const DrawerContent=({props})=> {
     const navigation = useNavigation();
     const dispatch=useDispatch()
@@ -27,10 +28,29 @@ const DrawerContent=({props})=> {
     const [dob, setDob] = useState('');
     const [mobile,setMobile]=useState('')
     const [image,setImage]=useState('')
+console.log('this is user iage------------------------------------------------------------------------------------------------------------------------------',image);
+    useEffect(() => {
+        BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+        return () => {
+          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+        };
+      }, []);
+      const handleBackButtonClick=() =>{
+          if(backPress>0){
+            navigation.goBack();
+              backPress = 0;
+            }
+            else{
+            backPress++
+            navigation.goBack();
+            setTimeout( () => { backPress = 0}, 2000);
+            BackHandler.removeEventListener('hardwareBackPress');
+            }  
+        return true;
+      }
 
     useEffect(async()=>{
         let user_id=await AsyncStorage.getItem(Storage.user_id)
-
         dispatch({
             type: 'User_Detail_Request',
             url: 'profile',
@@ -135,11 +155,12 @@ const DrawerContent=({props})=> {
                  <View style={styles.main1}>
                  {image?<Image style={styles.img} 
                     source={{uri: image}}
-                 />
-                        :<Image style={{ height:84,
-                            width:84,
-                            borderRadius:42}}
-                            source={require('../../assets/Image/user-couple.png')}/>}
+                 />:null
+                //  <Image style={{ height:84,
+                //     width:84,
+                //     borderRadius:42}}
+                //     ource={require('../../assets/Image/user-couple.png')}/>
+                    }
                             {/* <TouchableOpacity
                                     // onPress={()=>setVisible(true)} 
                                       style={styles.camera}>
@@ -266,6 +287,36 @@ const DrawerContent=({props})=> {
                                 source={require('../../assets/Image/knowledege.png')}/>
                             </View>
                             <Text style={styles.text}>{'Knowledge Center'}</Text>
+                            </View>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('BankHoliday')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={styles.view1}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/bank-holiday.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Bank Holiday'}</Text>
+                            </View>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate('Trending')}
+                    style={[styles.drawer]}>
+                        <View style={styles.row}>
+                            <View style={styles.view1}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/icon-chart-line1.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'Trending'}</Text>
                             </View>
                             <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>

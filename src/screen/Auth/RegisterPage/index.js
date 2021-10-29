@@ -17,7 +17,11 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import HTMLView from 'react-native-htmlview';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
-
+import axios from "axios";
+import RNPickerSelect from "react-native-picker-select";
+import fontSize from '../../../component/fontSize';
+import Admin from '../../../assets/Images/administrator.svg';
+import Modal from "react-native-modal";
 
 
 const loginValidationSchema=yup.object().shape({
@@ -42,6 +46,10 @@ const RegisterPage=()=>{
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Privacy)
     const selector1=useSelector(state=>state.TermCondition)
+    const [code,setCode]=useState('+91')
+    const [isVisible1,setIsVisible1]=useState(false)
+    const [isVisible2,setIsVisible2]=useState(false)
+
     const isFetching=useSelector((state)=>state.isFetching)
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [fBorder,setFBorder]=useState(false)
@@ -54,16 +62,17 @@ const RegisterPage=()=>{
     const [visible1,setVisible1]=useState(true)
     const [showModal,setShowModal]=useState(false)
     const [showModal1,setShowModal1]=useState(false)
+    const [show, setShow] = useState(false);
 
     const ref=useRef(null)
     const ref1=useRef(null)
     const ref2=useRef(null)
     const ref3=useRef(null)
     const ref4=useRef(null)
+  
 
-    
 
-    const validateUser=async(name,email,mobile,pin)=>{
+    const validateUser=async(name,email,mobile,pin,referal)=>{
       const device_type= DeviceInfo.getSystemName()
       let token=await AsyncStorage.getItem(Storage.token);
       console.log('testing',device_type,token);
@@ -71,35 +80,18 @@ const RegisterPage=()=>{
         Toast.show('Please Confirm Terms and Condition')
       }
       else{
-      dispatch({
-       type: 'User_Register_Request',
-       url: 'adduserdetails',
-       name,
-       email,
-       mobile,
-       pin,
-       refferal_code:0,
-       mobile_country_code:0,
-       father_spouse_name:0,
-       mother_maiden_name:0,
-       gender:0,
-       dob:0,
-       pan:0,
-       address1:0,
-       address2:0,
-       city:0,
-       state:0,
-       country:0,
-       pincode:0,
-       residential_status:0,
-       profile_pic:0,
-       education:0,
-       occupation:0,
-       marital_status:0,
-       navigation: navigation,
-       device_token:token,
-       device_type:device_type
-    })
+        console.log('this is referal',referal);
+        dispatch({
+          type: 'Send_RegOtp_Request',
+          url: 'sendotp1',
+          name,
+          email,
+          mobile,
+          pin,
+          referal,
+          code:code,
+          navigation
+      })
   }
 }
 
@@ -108,7 +100,6 @@ const showVisible=()=>{
     <TouchableOpacity 
         onPressIn={()=>setVisible(false)}
         onPressOut={()=>setVisible(true)}
-        //onPress={()=>visible?setVisible(false):setVisible(true)}
         >
         {!visible?<Image 
         style={{width:24,height:24,marginLeft:'25%'}} 
@@ -124,7 +115,6 @@ const showVisible1=()=>{
       <TouchableOpacity 
       onPressIn={()=>setVisible1(false)}
       onPressOut={()=>setVisible1(true)}
-         // onPress={()=>visible1?setVisible1(false):setVisible1(true)}
           >
           {!visible1?<Image 
           style={{width:24,height:24,marginLeft:'25%'}} 
@@ -136,18 +126,36 @@ const showVisible1=()=>{
         </TouchableOpacity>
       )
 }
+const handleClick=()=>{
+  setIsVisible1(true)
+  setTimeout(() => {
+    setIsVisible1(false)
+    setShowModal(true)
+  }, 2000);
+}
+const handleClick1=()=>{
+  setIsVisible2(true)
+  setTimeout(() => {
+    setIsVisible2(false)
+    setShowModal1(true)
+  }, 2000);
+}
+
 
     return(
       <Formik
       initialValues={{ email: '',mobile:'',name:'',pin:'',confirmPin:'',referal:''}}
-      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.pin)}
+      onSubmit={values => validateUser(values.name,values.email,values.mobile,values.pin,values.referal)}
       validateOnMount={true}
       validationSchema={loginValidationSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
-         {isFetching?<Loader/>:null} 
+         {isFetching || isVisible1==true || isVisible2==true ?<Loader/>:null} 
+         {isVisible1==true ?<Loader/>:null} 
          <ScrollView>
+         {/* <Admin height={100} width={100}  fill={colors.bc} /> */}
+
          <KeyboardAwareScrollView
           extraScrollHeight={10}
           enableOnAndroid={true} 
@@ -174,7 +182,7 @@ const showVisible1=()=>{
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
                         value={values.name}
-                        maxLength={30}
+                        maxLength={35}
                         returnKeyType='next'
                         onSubmitEditing={() => {
                           ref.current.focus()
@@ -203,7 +211,7 @@ const showVisible1=()=>{
                       onChangeText={handleChange('email')}
                       onBlur={handleBlur('email')}
                       value={values.email}
-                      maxLength={30}
+                      maxLength={35}
                       keyboardType='email-address'
                       returnKeyType='next'
                       onSubmitEditing={() => {
@@ -219,14 +227,32 @@ const showVisible1=()=>{
               </View>
               <View style={[styles.card,{borderColor:mBorder&&values.mobile?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
-                    <View style={styles.input}>
+                    <View style={[styles.input,{marginTop:-6,marginBottom:-8}]}>
                      <Image 
                      style={styles.image}
                      source={require('../../../assets/Image/phone.png')}/>
+                
+                      <RNPickerSelect
+                          onValueChange={(val)=>setCode(val)}
+                          items={Country}
+                          style={{ 
+                          inputAndroid: { color: colors.textColor,height:40,marginTop:1,width:50},
+                          inputIOS:{color:colors.textColor},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          }}
+                          value={code}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{}}
+                          Icon={()=><Image 
+                            style={{width:20,height:20,marginTop:11}} 
+                            source={require('../../../assets/Image/down.png')}/>}
+                
+                  />
+                  
                      <TextInput 
                       ref={ref1}
                       onFocus={()=>setMBorder(true)}
-                      style={styles.input1}
+                      style={[styles.input1]}
                       placeholder='9123456789'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('mobile')}
@@ -241,6 +267,7 @@ const showVisible1=()=>{
                       />
                   </View>
               </View>
+              
               <View style={styles.error}>
               {(errors.mobile && touched.mobile) &&
                 <Text style={styles.warn}>{errors.mobile}</Text>
@@ -320,7 +347,7 @@ const showVisible1=()=>{
                      ref={ref4}
                       onFocus={()=>setBBorder(true)}
                       style={[styles.input1,{marginLeft:Platform.OS=='android'? -3:0,marginTop:Platform.OS=='android'?0:5}]}
-                      placeholder='BA52RT'
+                      placeholder='xxx111'
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('referal')}
                       value={values.referal}
@@ -335,20 +362,20 @@ const showVisible1=()=>{
                 }
               </View>
               <View
-               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,}}>
+               style={{flexDirection:'row',alignItems:'center',paddingVertical:Platform.OS=='android'?3:10,width:'100%',justifyContent:'space-between',marginTop:10}}>
                  <CheckBox
                     disabled={false}
                     value={toggleCheckBox}
                     onValueChange={(newValue) => setToggleCheckBox(newValue)}
                     tintColors={{ true: '#5A4392', false: '#5A4392' }}
                   />
+                 
                   <Text style={styles.agree}>
                     {'I agree with '}
-                    <Text onPress={()=>setShowModal1(true)} style={styles.agree1}>{`Terms & Conditions`}</Text>
+                    <Text onPress={()=> handleClick()} style={[styles.agree1,{height:50}]}>{`Terms & Conditions`}</Text>
                     <Text> and </Text>
-                    <Text onPress={()=>setShowModal(true)} style={styles.agree1}>{`Privacy Policy`}</Text>
-                    
-                     </Text>
+                    <Text onPress={()=>handleClick1()} style={styles.agree1}>{`Privacy Policy`}</Text>
+                  </Text>
               </View>
               <View style={styles.button}>
                  <CustomButton
@@ -412,6 +439,8 @@ const showVisible1=()=>{
                         </ScrollView>
                   </DialogContent>
         </Dialog>
+
+        
          <StatusBar/>
        </View>
          )}
@@ -419,3 +448,10 @@ const showVisible1=()=>{
     )
 }
 export default RegisterPage;
+const Country=[
+  { label: '+91', value: '+91' },
+  { label: '+975', value: '+975' },
+  { label: '+55', value: '+55' },
+  { label: '+1', value: '+1' },
+  { label: '+86', value: '+86' },
+]

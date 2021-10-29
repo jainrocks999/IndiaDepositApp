@@ -46,6 +46,15 @@ import AddNominee from '../screen/Main/BankSection/AddNominee';
 import EditNominee from '../screen/Main/BankSection/EditNominee';
 import FDFilter from '../screen/Main/FDFilter';
 import SBFilter from '../screen/Main/SBFilter';
+import UserSelection from '../screen/Main/NBFCPage/UserSelection';
+import AddFamily from '../screen/Main/BankSection/AddFamily';
+import EditFamily from '../screen/Main/BankSection/EditFamily';
+import FDView from '../screen/Main/FDView';
+import BankCalu from "../screen/Main/NBFCFDdetails";
+import Trending from '../screen/Main/Trending';
+import BankHoliday from '../screen/Main/BankHoliday';
+import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
+
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -104,7 +113,7 @@ function Navigate() {
         <Stack.Screen name="StoryCategory" component={StoryCategory} options={horizontalAnimation}/>
         <Stack.Screen name="ForgotOtp" component={ForgotOtp}/>
         <Stack.Screen name="CreatePin" component={CreatePin}/>
-        <Stack.Screen name="UpdateProfile"component={UpdateProfile}  options={horizontalAnimation}/>
+        <Stack.Screen name="UpdateProfile"component={UpdateProfile} options={horizontalAnimation}/>
         <Stack.Screen name="BankDetail" component={BankDetail}/>
         <Stack.Screen name="AddBank" component={AddBank}/>
         <Stack.Screen name="EditUserBank" component={EditUserBank}/>
@@ -113,6 +122,16 @@ function Navigate() {
         <Stack.Screen name="EditNominee" component={EditNominee}/>
         <Stack.Screen name="FDFilter" component={FDFilter} options={horizontalAnimation}/>
         <Stack.Screen name="SBFilter" component={SBFilter} options={horizontalAnimation}/>
+        <Stack.Screen name="UserSelection" component={UserSelection}/>
+        <Stack.Screen name="AddFamily" component={AddFamily}/>
+        <Stack.Screen name="EditFamily" component={EditFamily}/>
+        <Stack.Screen name="FDView" component={FDView}/>
+        <Stack.Screen name="BankCalu" component={BankCalu}/>
+        <Stack.Screen name="Trending" component={Trending} options={horizontalAnimation}/>
+        <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
+        <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

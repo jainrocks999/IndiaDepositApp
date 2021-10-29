@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput,Platform} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput,Platform,BackHandler} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -32,7 +32,19 @@ const SBAccountList=({route})=>{
         const [sort,setSort]=useState('Alphabetical')
 
 
+useEffect(()=>{
+  const backAction = () => {
+    navigation.goBack()
+    return true;
+  };
 
+  const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    backAction
+  );
+
+  return () => backHandler.remove();
+},[])
 
 const manageList=(item)=>{
   dispatch({
@@ -133,7 +145,7 @@ const renderItem=(item)=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                      <Text style={styles.title}>{item.name}</Text>
+                      {/* <Text style={styles.title}>{item.name}</Text> */}
                      <View style={{width:'20%'}}></View>
                    </View>
                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7}}>
@@ -296,53 +308,41 @@ const renderItem=(item)=>{
                         </DialogContent>
                        
                       </Dialog>
+              
               <View style={styles.list}>
                 <TouchableOpacity
                 onPress={()=>openDialog()}
-                style={{width:'100%',paddingHorizontal:5,paddingVertical:6}}>
+                style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
                   <View style={[styles.card,{
                     flexDirection:'row',justifyContent:'space-between',alignItems:'center',
-                    paddingHorizontal:15,paddingVertical:8,backgroundColor:'white'
+                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white'
                     }]}>
                     
                       <View style={{flexDirection:'row',alignItems:'center'}}>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
                       {`Minimum balance : `}</Text>
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
-                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14}}>
+                      <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
                       {`${route.params.balance}`}
                       </Text>
                       </View>
                       {/* </Text> */}
                      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
                         <Text style={{
-                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:14,marginRight:5}}>
+                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5}}>
                             {`Location : ${route.params.location}`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>
                   </View>
                </TouchableOpacity>
-                <FlatList
-                   data={selector}
-                   renderItem={({item})=>renderItem(item)}
-                   keyExtractor={(item, index) => item.source}
-                   style={{width:'100%'}}
-                 />
- <View style={{
-                  //  width:'100%',
-                  //  //bottom:20,
-                  //  flexDirection:'row',
-                  //  justifyContent:'space-between',
-                  //  paddingHorizontal:20,
-                  //  alignItems:'center',
-                  //  backfaceVisibility:colors.card,
+               <View style={{
                   width:'100%',
-                  // bottom:10,
                    flexDirection:'row',
                    justifyContent:'space-between',
-                   paddingHorizontal:20,
+                   paddingHorizontal:10,
                    alignItems:'center',
-                   paddingVertical:10
+                   paddingTop:5,
+                   paddingBottom:5
                    }}>
                  <TouchableOpacity
                   onPress={()=>compareFD()}
@@ -359,7 +359,7 @@ const renderItem=(item)=>{
                    <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
                  <TouchableOpacity style={{
-                   paddingHorizontal:10,
+                   paddingHorizontal:6,
                   paddingVertical:Platform.OS=='android'?0:8,
                    backgroundColor:'#fff',
                    borderRadius:10,
@@ -370,9 +370,9 @@ const renderItem=(item)=>{
                           onValueChange={(val)=>setSort(val)}
                           items={Sorting}
                           style={{ 
-                          inputAndroid: { color: colors.bc,height:35,marginTop:2},
+                          inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
                           inputIOS:{color:colors.bc},
-                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
+                          placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
                           }}
                           value={sort}
                           useNativeAndroidPickerStyle={false}
@@ -397,6 +397,13 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
+                <FlatList
+                   data={selector}
+                   renderItem={({item})=>renderItem(item)}
+                   keyExtractor={(item, index) => item.source}
+                   style={{width:'100%'}}
+                 />
+               
               </View>
          
           <StatusBar/>

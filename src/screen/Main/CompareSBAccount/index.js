@@ -1,5 +1,5 @@
-import React from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, Platform} from 'react-native';
+import React,{useEffect} from "react";
+import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, BackHandler} from 'react-native';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
@@ -11,16 +11,29 @@ import { useSelector } from "react-redux"
 const FDList=()=>{
 const navigation=useNavigation()
 const selector=useSelector((state)=>state.SBCompareDetail)
-console.log('this is compare derrails',selector)
 const data1=selector.datavalue1[0]
 const data2=selector.datavalue2[0]
+
+useEffect(()=>{
+    const backAction = () => {
+        navigation.goBack()
+        return true;
+      };
+    
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+    
+      return () => backHandler.remove();
+},[])
     return(
         <View style={{flex:1,
         //paddingTop:Platform.OS=='android'?0:40
         }}>
               <Header
                   title={'COMPARE SB ACCOUNT'}
-                  source={require('../../../assets/Images/arrow.png')}
+                  source={require('../../../assets/Image/arrow2.png')}
                   onPress={()=>navigation.goBack()}
                /> 
                <View style={styles.View}>

@@ -25,5 +25,12 @@ export default {
     marital:'marital',
     residential:'residential',
     cityId:'cityId',
-    stateId:'stateId'
+    stateId:'stateId',
+    // blow register refrence
+    Rname:'Rname',
+    Remail:'Remail',
+    Rmobile:'Rmobile',
+    RcountryCode:'RcountryCode',
+    Rpin:'Rpin',
+    Rreferal:'Rreferal'
 }
