@@ -40,7 +40,7 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:6,
         backgroundColor:colors.white,
-        height:150,
+        // height:150,
         alignItems:'center',
         width:'48%',
         paddingVertical:10

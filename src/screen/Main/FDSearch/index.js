@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView, Platform,BackHandler, TouchableOpacityBase, TouchableOpacity} from 'react-native';
+import { View,Text,Image,ScrollView, Platform,BackHandler,PermissionsAndroid, TouchableOpacity, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -15,12 +15,9 @@ import { useDispatch, useSelector, } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-// import Geolocation from '@react-native-community/geolocation';
 import Geolocation from 'react-native-geolocation-service';
-// AIzaSyBOI4aRSc1wCel3nDgRNIgzt9IFdq2G1rM
-
-// AIzaSyDgYXtmURSI5-bmZb_CURF8O56uKBRbz4o
-// AIzaSyDgYXtmURSI5-bmZb_CURF8O56uKBRbz4o
+Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
+// AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
 const Contact=({route})=>{
     const navigation=useNavigation()
     const [day, setDay] = useState(0)
@@ -28,11 +25,10 @@ const Contact=({route})=>{
     const [year,setYear] = useState(0)
     const [amount,setAmount] = useState('')
     const [pincode,setPincode]=useState('')
+    const [address,setAddress]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-   console.log('this is narendra here',route.params);
    
-   // AIzaSyCSqp7M6d0nwQxaFRG-2oKRqv0monDdtxI
 useEffect(()=>{
    const backAction = () => {
       navigation.navigate('Main')
@@ -57,8 +53,11 @@ useEffect(()=>{
       else if(amount==''){
          Toast.show('Please enter amount')
       }
-      else if(pincode==''){
-         Toast.show('Please enter location')
+      else if(pincode=='' && address==''){
+         Toast.show('Please confirm location')
+      }
+      else if(pincode!=''&&address!=''){
+         Toast.show('Please confirm pincode or current location')
       }
       else{
       dispatch({
@@ -68,7 +67,7 @@ useEffect(()=>{
          month:month,
          days:day,
          amount:amount,
-         location:pincode,
+         location:pincode?pincode:address,
          type1:route.params.type1,
          bank_id:'',
          interest_rate:'',
@@ -80,36 +79,68 @@ useEffect(()=>{
          premature_penalty:'',
          loan:'',
          navigation:navigation
-
-         // type2:route.params.type2,
-         // type3:route.params.type3,
-         // type4:route.params.type4,
-         // type5:'',
-         // check:route.params.check,
-         // data:route.params.data,
        })
     }
    }
-  
-  const getAddress=()=>{
-   Geolocation.getCurrentPosition(
-      (position) => {
-         console.log('your are here',position.coords);
-          Geocoder.from(position.coords.latitude, position.coords.longitude)
-              .then(json => {
-                  console.log(json);
-                  var addressComponent = json.results[0].address_components;
-                  
-                  console.log(addressComponent);
-              })
-              .catch(error => console.warn(error));
-      },
-      (error) => {
-          // See error code charts below.
-           console.log(error.code, error.message);
-       },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 100000 }
-  );
+   const getCurrentLocation=()=>{
+      Geolocation.requestAuthorization();
+      Geolocation.getCurrentPosition(
+         (position) => {
+             Geocoder.from(position.coords.latitude, position.coords.longitude)
+                 .then(json => {
+                      var addressComponent = json.results[2].address_components;
+                        let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                        setAddress(address)
+                 })
+                 .catch(error => console.warn(error));
+         },
+         (error) => {
+              console.log(error.code, error.message);
+          },
+         { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+     );
+    }
+  const getAddress=async()=>{
+   if(Platform.OS === 'ios'){
+   getCurrentLocation();
+    }else{
+      try {
+       const granted = await PermissionsAndroid.request(
+         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+         {
+           title: 'Device current location permission',
+           message:
+             'Allow app to get your current location',
+           buttonNeutral: 'Ask Me Later',
+           buttonNegative: 'Cancel',
+           buttonPositive: 'OK',
+         },
+       );
+       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+         Geolocation.getCurrentPosition(
+            (position) => {
+                Geocoder.from(position.coords.latitude, position.coords.longitude)
+                    .then(json => {
+                        var addressComponent = json.results[2].address_components;
+                        let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                        setAddress(address)
+                    })
+                    .catch(error => console.warn(error));
+            },
+            (error) => {
+                 console.log(error.code, error.message);
+             },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+        );
+      
+       } else {
+         console.log('Location permission denied');
+       }
+     } catch (err) {
+       console.warn(err);
+     }
+    }
+
   }
     return(
         <View style={styles.container}>
@@ -221,10 +252,19 @@ useEffect(()=>{
                               <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
                           <View style={styles.view5}>
+                             <View style={{flexDirection:'row',alignItems:'center'}}>
                              <TouchableOpacity onPress={()=>getAddress()}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                               </TouchableOpacity>
-                                <Text style={[styles.text1,{marginLeft:10}]}>Current Location</Text>
+                              {address? <Text style={[styles.text1,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
+                                <Text style={[styles.text1,{marginLeft:10}]}>Current Location</Text>}
+                                </View>
+                                {address?
+                              <TouchableOpacity
+                              onPress={()=>setAddress('')}
+                              style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
+                              <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
+                              </TouchableOpacity>:null}
                           </View>
                        </View>
                        <View style={styles.view6}>

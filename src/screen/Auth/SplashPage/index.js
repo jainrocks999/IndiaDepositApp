@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import { View,Image,Text,TouchableOpacity } from 'react-native';
+import { View,Image,Text,TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
@@ -9,19 +9,14 @@ import axios from 'axios';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
 import Avatar from '../../../assets/Images/avatar.svg';
-
+let value;
 const Splash=()=>{
     const navigation=useNavigation()
     const [isModalVisible, setModalVisible] = useState(false);
     const dispatch=useDispatch()
     useEffect(async() => {
-      const value=await AsyncStorage.getItem('value')
-        if (value==1) {
-            setTimeout(() => navigation.replace("Notification"), 2000);
-            AsyncStorage.setItem('value','0')
-        } else {
-            appVersion()
-        }
+       value=await AsyncStorage.getItem('value')
+      appVersion()
         dispatch({
           type: 'Privacy_Request',
           url: 'getpagecontent',
@@ -32,7 +27,7 @@ const Splash=()=>{
           url: 'getpagecontent',
           key:'term_condition',
     })
-    appVersion()
+    // appVersion()
     //  initial()
       }, []);
 
@@ -88,23 +83,29 @@ const Splash=()=>{
       };
       const initial = async (image_url,intro_speech,name,KeepmeLogin) => {
        
-        console.log('this iis na',name,KeepmeLogin);
-       
         if (KeepmeLogin==1) {
-          setTimeout(() => navigation.replace("Main"), 2000);
+          if (value==1&&name) {
+            setTimeout(() => navigation.replace("Notification"), 0);
+            AsyncStorage.setItem('value','0')
         } 
-        else{
+         else if(name){
+          setTimeout(() => navigation.replace("Main"), 2000);
+          }
+        } 
+        else if(value==1&&KeepmeLogin==0){
           setTimeout(() => navigation.replace("Introduction",{
             image_url:image_url,
             intro_speech:intro_speech
            }), 2000);
+           AsyncStorage.setItem('value','0')
+
         }
-        // else if(KeepmeLogin==0){
-        //   setTimeout(() => navigation.replace("Introduction",{
-        //     image_url:image_url,
-        //     intro_speech:intro_speech
-        //    }), 2000);
-        // }
+        else{
+          setTimeout(() => navigation.replace("Introduction",{
+            image_url:image_url,
+            intro_speech:intro_speech
+           }),2000);
+        }
        
       }
     return(

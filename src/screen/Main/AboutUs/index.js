@@ -15,7 +15,6 @@ const Contact=()=>{
   
    
 useEffect(()=>{
-  
   dispatch({
     type: 'About_Us_Request',
     url: 'getpagecontent',

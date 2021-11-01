@@ -31,7 +31,6 @@ useEffect(()=>{
 
     return(
         <View style={{flex:1,
-        //paddingTop:Platform.OS=='android'?0:40
         }}>
               <Header
                   title={'COMPARE FD'}
@@ -40,17 +39,11 @@ useEffect(()=>{
                /> 
                 <View style={styles.View}>
                  <View style={styles.card}>
-                          {/* <View style={styles.xview}>
-                                <View style={styles.row1}>
-                                      <Text style={styles.xtext}>x</Text>
-                                </View>
-                         </View> */}
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`}}/> 
-                          <Text style={styles.title1}>{data1.name}</Text> 
-                         <View style={{position:'absolute',bottom:15}}>
+                         <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'INVEST NOW'}</Text>
@@ -62,8 +55,7 @@ useEffect(()=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`}}/> 
-                          <Text style={styles.title1}>{data2.name}</Text> 
-                         <View style={{position:'absolute',bottom:15}}>
+                         <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'INVEST NOW'}</Text>

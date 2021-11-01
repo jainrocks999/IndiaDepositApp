@@ -155,7 +155,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting2(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -168,6 +168,7 @@ const validateUser=async()=>{
                                style={{color:colors.textColor,marginVertical:-6}}
                                onChangeText={(val)=>setMsg2(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Products :</Text>
@@ -177,7 +178,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting3(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -190,6 +191,7 @@ const validateUser=async()=>{
                                style={{color:colors.textColor,marginVertical:-6}}
                                onChangeText={(val)=>setMsg3(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Onboarding :</Text>
@@ -199,7 +201,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting4(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -212,6 +214,7 @@ const validateUser=async()=>{
                                style={{color:colors.textColor,marginVertical:-6}}
                                onChangeText={(val)=>setMsg4(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Service :</Text>
@@ -221,7 +224,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting5(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -234,6 +237,7 @@ const validateUser=async()=>{
                                style={{color:colors.textColor,marginVertical:-6}}
                                onChangeText={(val)=>setMsg5(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                           <Text style={styles.better}>In case you have other suggestions / feedback, please provide</Text>

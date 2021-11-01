@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput,Platform,BackHandler} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput,Platform,BackHandler,PermissionsAndroid} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -15,7 +15,9 @@ import Loader from '../../../component/loader';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import MultiSelect from 'react-native-multiple-select';
-
+import Geolocation from 'react-native-geolocation-service';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
 
 
 const SBAccountList=({route})=>{
@@ -26,7 +28,8 @@ const SBAccountList=({route})=>{
         const [visible,setVisible]=useState(false)
         const [type, setType] = useState(route.params.type1)
         const [balance,setBalance] = useState(route.params.balance)
-        const [location,setLocation]=useState(route.params.location)
+        const [location,setLocation]=useState(!isNaN(route.params.location)?route.params.location:'')
+        const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
         const isFetching=useSelector((state)=>state.isFetching)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
@@ -59,14 +62,18 @@ const manageSearch=async()=>{
     if(balance==''){
         Toast.show('Please enter minimum balance')
     }
-    else if(location==''){
-       Toast.show('Please enter location')
-    }else{
+    else if(location==''&&address==''){
+       Toast.show('Please confirm location')
+    }
+    else if(location!=''&&address!=''){
+      Toast.show('Please confirm current location or pincode')
+    }
+    else{
     dispatch({
        type: 'SB_Search_Request',
        url: 'sblist1',
        min_bal:balance,
-       location:location,
+       location:location==''?address:location,
        type1:selected,
          bank_id:'',
          interest_rate:0,
@@ -130,6 +137,69 @@ const openDialog=()=>{
   setVisible(true)
   // setSelected([])
 }
+
+const getCurrentLocation=()=>{
+  Geolocation.requestAuthorization();
+  Geolocation.getCurrentPosition(
+     (position) => {
+        console.log('your are here',position.coords);
+         Geocoder.from(position.coords.latitude, position.coords.longitude)
+             .then(json => {
+              var addressComponent = json.results[2].address_components;
+              let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+              setAddress(address)
+             })
+             .catch(error => console.warn(error));
+     },
+     (error) => {
+          console.log(error.code, error.message);
+      },
+     { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+ );
+}
+const getAddress=async()=>{
+if(Platform.OS === 'ios'){
+getCurrentLocation();
+}else{
+  try {
+   const granted = await PermissionsAndroid.request(
+     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+     {
+       title: 'Device current location permission',
+       message:
+         'Allow app to get your current location',
+       buttonNeutral: 'Ask Me Later',
+       buttonNegative: 'Cancel',
+       buttonPositive: 'OK',
+     },
+   );
+   if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+     Geolocation.getCurrentPosition(
+        (position) => {
+            Geocoder.from(position.coords.latitude, position.coords.longitude)
+                .then(json => {
+                  var addressComponent = json.results[2].address_components;
+                  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                  setAddress(address)
+                })
+                .catch(error => console.warn(error));
+        },
+        (error) => {
+             console.log(error.code, error.message);
+         },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+    );
+  
+   } else {
+     console.log('Location permission denied');
+   }
+ } catch (err) {
+   console.warn(err);
+ }
+}
+
+}
+
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -187,6 +257,7 @@ const renderItem=(item)=>{
 }
     return(
         <View style={{flex:1,
+          backgroundColor:colors.card
        // paddingTop:Platform.OS=='android'?0:40
         }}>
                <View>
@@ -239,9 +310,20 @@ const renderItem=(item)=>{
                           <View style={styles.view4}>
                               <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
                           </View>
-                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28}}>
+                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28,justifyContent:'space-between'}}>
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                            <TouchableOpacity onPress={()=>getAddress()}> 
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
-                                <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>
+                                </TouchableOpacity>
+                                {address?<Text style={[styles.text5,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
+                                <Text style={[styles.text5,{marginLeft:10}]}>Current Location</Text>}
+                                </View>
+                                 {address?
+                                             <TouchableOpacity
+                                             onPress={()=>setAddress('')}
+                                             style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
+                                             <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
+                                             </TouchableOpacity>:null}
                           </View>
                        </View>
                        <View style={styles.view6}>
@@ -315,10 +397,10 @@ const renderItem=(item)=>{
                 style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
                   <View style={[styles.card,{
                     flexDirection:'row',justifyContent:'space-between',alignItems:'center',
-                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white'
+                    paddingHorizontal:10,paddingVertical:8,backgroundColor:'white',width:'100%'
                     }]}>
                     
-                      <View style={{flexDirection:'row',alignItems:'center'}}>
+                      <View style={{flexDirection:'row',alignItems:'center',width:'45%'}}>
                       <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
                       {`Minimum balance : `}</Text>
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
@@ -327,9 +409,11 @@ const renderItem=(item)=>{
                       </Text>
                       </View>
                       {/* </Text> */}
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{
-                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5}}>
+                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'45%'}}>
+                        <Text 
+                        numberOfLines={1}
+                        style={{
+                          fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13,marginRight:5,width:'80%'}}>
                             {`Location : ${route.params.location}`}</Text>
                         <Image resizeMode='contain' source={require('../../../assets/Images/down.png')}/>
                     </View>

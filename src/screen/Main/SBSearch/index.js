@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView,BackHandler} from 'react-native';
+import { View,Text,Image,ScrollView,BackHandler,PermissionsAndroid} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -12,26 +12,36 @@ import Toast from 'react-native-simple-toast'
 import { useDispatch,useSelector } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../component/loader';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Geolocation from 'react-native-geolocation-service';
+import Geocoder from 'react-native-geocoding';
+
+Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
+
 const SBAccount=({route})=>{
    
     const navigation=useNavigation()
     const [balance,setBalance]=useState('')
     const [location,setLocation]=useState('')
+    const [address,setAddress]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
-    console.log('this is user value',route.params);
     const manageSearch=async()=>{ 
       if(balance==''){
          Toast.show('Please enter minimum balance')
       }
-      else if(location==''){
-         Toast.show('Please enter location')
-      }else{
+      else if(location==''&&address==''){
+         Toast.show('Please confirm location')
+      }
+      else if(location!=''&&address!=''){
+         Toast.show('Please confirm pincode or current location')
+      }
+      else{
       dispatch({
          type: 'SB_Search_Request',
          url: 'sblist1',
          min_bal:balance,
-         location:location,
+         location:location==''?address:location,
          type1:route.params.type1,
          bank_id:'',
          interest_rate:'',
@@ -61,6 +71,68 @@ const SBAccount=({route})=>{
      
        return () => backHandler.remove();
    },[])
+
+
+   const getCurrentLocation=()=>{
+      Geolocation.requestAuthorization();
+      Geolocation.getCurrentPosition(
+         (position) => {
+             Geocoder.from(position.coords.latitude, position.coords.longitude)
+                 .then(json => {
+                  var addressComponent = json.results[2].address_components;
+                  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                  setAddress(address)
+                 })
+                 .catch(error => console.warn(error));
+         },
+         (error) => {
+              console.log(error.code, error.message);
+          },
+         { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+     );
+    }
+  const getAddress=async()=>{
+   if(Platform.OS === 'ios'){
+   getCurrentLocation();
+    }else{
+      try {
+       const granted = await PermissionsAndroid.request(
+         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+         {
+           title: 'Device current location permission',
+           message:
+             'Allow app to get your current location',
+           buttonNeutral: 'Ask Me Later',
+           buttonNegative: 'Cancel',
+           buttonPositive: 'OK',
+         },
+       );
+       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+         Geolocation.getCurrentPosition(
+            (position) => {
+                Geocoder.from(position.coords.latitude, position.coords.longitude)
+                    .then(json => {
+                     var addressComponent = json.results[2].address_components;
+                     let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                     setAddress(address)
+                    })
+                    .catch(error => console.warn(error));
+            },
+            (error) => {
+                 console.log(error.code, error.message);
+             },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+        );
+      
+       } else {
+         console.log('Location permission denied');
+       }
+     } catch (err) {
+       console.warn(err);
+     }
+    }
+
+  }
     return(
         <View style={styles.container}>
                  <Header
@@ -102,9 +174,20 @@ const SBAccount=({route})=>{
                                  <View style={styles.view1}>
                                      <Text style={[styles.text2,{fontWeight:'700'}]}>Location</Text>
                                   </View>
-                                  <View style={{marginTop:10,flexDirection:'row',alignItems:'center'}}>
+                                  <View style={{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
+                                     <View style={{flexDirection:'row',alignItems:'center'}}>
+                                         <TouchableOpacity onPress={()=>getAddress()}>
                                           <Image style={{width:24,height:24}}  source={require('../../../assets/Image/search.png')}/>
-                                           <Text style={styles.text3}>Current Location</Text>
+                                          </TouchableOpacity>
+                                          {address?<Text style={[styles.text3,{fontSize:12,width:'70%'}]}>{address}</Text>:
+                                           <Text style={styles.text3}>Current Location</Text>}
+                                           </View>
+                                             {address?
+                                             <TouchableOpacity
+                                             onPress={()=>setAddress('')}
+                                             style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
+                                             <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
+                                             </TouchableOpacity>:null}
                                   </View>
                               </View>
                               <View style={[styles.view,{alignItems:'center'}]}>

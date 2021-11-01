@@ -37,7 +37,6 @@ const dashboard=()=>{
           },
           url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getprofilepic',
         });
-        console.log('this is response value',response);
         if (response.data.status==200) {
         AsyncStorage.setItem(Storage.image,response.data.profile_pic)
         } 
@@ -51,7 +50,6 @@ const dashboard=()=>{
         url: 'bankdetaillist',
       })
         const photo=await AsyncStorage.getItem(Storage.photo)
-        console.log(photo)
         const backHandler = BackHandler.addEventListener(
           'hardwareBackPress',
           handleBackButtonClick,
@@ -118,7 +116,6 @@ const dashboard=()=>{
       };
 
       const manageSearch1=()=>{
-        console.log('hi testing',selectedItems1);
         RootNavigation.navigate('SBSearch',{
          type1:selectedItems1
         //  type2:selectedItems1[1]?selectedItems1[1]:'',
@@ -209,12 +206,12 @@ const dashboard=()=>{
     return(
       <View style={{flexGrow:1,}}>
         <Header
-    title={'DASHBOARD'}
-    source ={require('../../../assets/Images/drawer.png')}
-    onPress={()=>navigation.toggleDrawer()}
-    source1={require('../../../assets/Image/notification.png')}
-    onPress1={()=>navigation.navigate('Notification')}
-    /> 
+          title={'DASHBOARD'}
+          source ={require('../../../assets/Images/drawer.png')}
+          onPress={()=>navigation.toggleDrawer()}
+          source1={require('../../../assets/Image/notification.png')}
+          onPress1={()=>RootNavigation.push('Notification')}
+          /> 
      <View 
          style={styles.main}>
              <Image
@@ -335,7 +332,7 @@ const data=[
     {name:'Senior Citizen', 
     // image:require('../../../assets/Image/senior_citizen-b.png'),
     image:require('../../../assets/Image/old-age.png'),
-    image1:require('../../../assets/Image/senior_citizen-w.png')
+    image1:require('../../../assets/Image/old-age-white.png')
     ,id:4,height:35,width:35},
     {name:'Tax Saving',
     image:require('../../../assets/Image/tax-fd-b.png'),
@@ -346,7 +343,7 @@ const data=[
     image:require('../../../assets/Image/globe.png'),
 
     // image:require('../../../assets/Image/nri-fd-b.png'),
-    image1:require('../../../assets/Image/nri-fd-w.png'),
+    image1:require('../../../assets/Image/globe-white.png'),
     id:3,height:37,width:45},
 ]
 
@@ -369,12 +366,12 @@ const data1=[
     image:require('../../../assets/Image/gourd.png'),
 
     // image:require('../../../assets/Image/sb-defence-b.png'),
-    image1:require('../../../assets/Image/sb-defence-w.png'),
+    image1:require('../../../assets/Image/gourd-white.png'),
     id:7,height:35,width:35},
     {name:'Senior Citizen',
     // image:require('../../../assets/Image/senior_citizen-b.png'),
     image:require('../../../assets/Image/old-age.png'),
-    image1:require('../../../assets/Image/senior_citizen-w.png'),
+    image1:require('../../../assets/Image/old-age-white.png'),
     id:9,height:35,width:35},
 ]
 // import { ImageHeaderScrollView, TriggeringView } from 'react-native-image-header-scroll-view';

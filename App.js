@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, LogBox, Button ,Platform,SafeAreaView} from 'react-native';
+import { View, Text, StyleSheet, LogBox, Button ,Platform,SafeAreaView, Alert} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { Provider } from 'react-redux';
@@ -10,9 +10,8 @@ import Storage from './src/component/AsyncStorage';
 import * as RootNavigation from './src/navigator/rootNavigation';
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import colors from "./src/component/colors";
-import Geocoder from 'react-native-geocoding';
 
-Geocoder.init("AIzaSyDsRnd2KkG9craZKfU6RuNe_1dRqd9iu9k");
+
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 PushNotification.createChannel(
@@ -47,12 +46,14 @@ const App = () => {
         message: notification.title,
       });
       if(notification.userInteraction===true && notification.foreground==false) {
+        // Alert.alert('narendra here')
         RootNavigation.navigate('Splash')
         AsyncStorage.setItem('value','1')
       }
       else{
         if (notification.userInteraction==true && notification.foreground==true) {
-          RootNavigation.navigate('Main')
+
+          // RootNavigation.navigate('Main')
         }
       }
       notification.finish(PushNotificationIOS.FetchResult.NoData);
