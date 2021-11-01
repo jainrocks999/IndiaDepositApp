@@ -10,9 +10,9 @@ import Storage from './src/component/AsyncStorage';
 import * as RootNavigation from './src/navigator/rootNavigation';
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import colors from "./src/component/colors";
-import Geocoder from 'react-native-geocoding';
+// import Geocoder from 'react-native-geocoding';
 
-Geocoder.init("AIzaSyDsRnd2KkG9craZKfU6RuNe_1dRqd9iu9k");
+// Geocoder.init("AIzaSyDsRnd2KkG9craZKfU6RuNe_1dRqd9iu9k");
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
 PushNotification.createChannel(

@@ -237,7 +237,7 @@ const handleClick1=()=>{
                           items={Country}
                           style={{ 
                           inputAndroid: { color: colors.textColor,height:40,marginTop:1,width:50},
-                          inputIOS:{color:colors.textColor},
+                          inputIOS:{color:colors.textColor,height:40,marginTop:1,width:50},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2},
                           }}
                           value={code}

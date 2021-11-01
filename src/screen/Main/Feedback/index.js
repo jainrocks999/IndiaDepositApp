@@ -141,7 +141,7 @@ const validateUser=async()=>{
                            {rating1!=''&&rating1<3?
                            <View style={styles.bordrView}>
                                <TextInput
-                               style={{color:colors.textColor,marginVertical:-6}}
+                               style={{color:colors.textColor,marginVertical:-6,marginBottom:1}}
                                onChangeText={(val)=>setMsg1(val)}
                                placeholder='Any Suggestion/Feedback'
                                multiline
@@ -165,9 +165,10 @@ const validateUser=async()=>{
                            {rating2!=''&&rating2<3?
                            <View style={styles.bordrView}>
                                <TextInput
-                               style={{color:colors.textColor,marginVertical:-6}}
+                               style={{color:colors.textColor,marginVertical:-6,marginBottom:1}}
                                onChangeText={(val)=>setMsg2(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Products :</Text>
@@ -187,8 +188,9 @@ const validateUser=async()=>{
                            {rating3!=''&&rating3<3?
                            <View style={styles.bordrView}>
                                <TextInput
-                               style={{color:colors.textColor,marginVertical:-6}}
+                               style={{color:colors.textColor,marginVertical:-6,marginBottom:1}}
                                onChangeText={(val)=>setMsg3(val)}
+                               multiline
                                placeholder='Any Suggestion/Feedback'
                                />
                            </View>:<View/>}
@@ -209,9 +211,10 @@ const validateUser=async()=>{
                            {rating4!=''&&rating4<3?
                            <View style={styles.bordrView}>
                                <TextInput
-                               style={{color:colors.textColor,marginVertical:-6}}
+                               style={{color:colors.textColor,marginVertical:-6,marginBottom:1}}
                                onChangeText={(val)=>setMsg4(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Service :</Text>
@@ -231,9 +234,10 @@ const validateUser=async()=>{
                            {rating5!=''&&rating5<3?
                            <View style={styles.bordrView}>
                                <TextInput
-                               style={{color:colors.textColor,marginVertical:-6}}
+                               style={{color:colors.textColor,marginVertical:-6,marginBottom:1}}
                                onChangeText={(val)=>setMsg5(val)}
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                           <Text style={styles.better}>In case you have other suggestions / feedback, please provide</Text>

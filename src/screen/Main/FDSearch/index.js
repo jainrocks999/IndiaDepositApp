@@ -10,13 +10,13 @@ import Header from '../../../component/header';
 import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
 import fontSize from '../../../component/fontSize';
-import Geocoder from 'react-native-geocoding';
+// import Geocoder from 'react-native-geocoding';
 import { useDispatch, useSelector, } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 // import Geolocation from '@react-native-community/geolocation';
-import Geolocation from 'react-native-geolocation-service';
+// import Geolocation from 'react-native-geolocation-service';
 // AIzaSyBOI4aRSc1wCel3nDgRNIgzt9IFdq2G1rM
 
 // AIzaSyDgYXtmURSI5-bmZb_CURF8O56uKBRbz4o
@@ -92,24 +92,24 @@ useEffect(()=>{
    }
   
   const getAddress=()=>{
-   Geolocation.getCurrentPosition(
-      (position) => {
-         console.log('your are here',position.coords);
-          Geocoder.from(position.coords.latitude, position.coords.longitude)
-              .then(json => {
-                  console.log(json);
-                  var addressComponent = json.results[0].address_components;
+//    Geolocation.getCurrentPosition(
+//       (position) => {
+//          console.log('your are here',position.coords);
+//           Geocoder.from(position.coords.latitude, position.coords.longitude)
+//               .then(json => {
+//                   console.log(json);
+//                   var addressComponent = json.results[0].address_components;
                   
-                  console.log(addressComponent);
-              })
-              .catch(error => console.warn(error));
-      },
-      (error) => {
-          // See error code charts below.
-           console.log(error.code, error.message);
-       },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 100000 }
-  );
+//                   console.log(addressComponent);
+//               })
+//               .catch(error => console.warn(error));
+//       },
+//       (error) => {
+//           // See error code charts below.
+//            console.log(error.code, error.message);
+//        },
+//       { enableHighAccuracy: false, timeout: 10000, maximumAge: 100000 }
+//   );
   }
     return(
         <View style={styles.container}>

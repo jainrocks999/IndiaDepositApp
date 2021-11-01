@@ -98,7 +98,8 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         alignItems:'flex-start',
         justifyContent:'flex-start',
-        flex:1
+        flex:1,
+        paddingVertical:Platform.OS=='android'?0:10
     },
     input:
     {
@@ -117,9 +118,10 @@ export default StyleSheet.create({
         borderRadius:6,
         paddingHorizontal:5,
         justifyContent:'center',
+
         width:'100%',
         paddingHorizontal:10,
-        // paddingVertical:-10
+        paddingVertical:Platform.OS=='android'?0:10,
     }
     
    
