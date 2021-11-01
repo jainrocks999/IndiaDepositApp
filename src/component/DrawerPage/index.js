@@ -28,7 +28,6 @@ const DrawerContent=({props})=> {
     const [dob, setDob] = useState('');
     const [mobile,setMobile]=useState('')
     const [image,setImage]=useState('')
-console.log('this is user iage------------------------------------------------------------------------------------------------------------------------------',image);
     useEffect(() => {
         BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         return () => {
@@ -264,7 +263,7 @@ console.log('this is user iage--------------------------------------------------
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Notification')}
+                    onPress={()=>{navigation.navigate('Notification')}}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
                             <View style={styles.view1}>

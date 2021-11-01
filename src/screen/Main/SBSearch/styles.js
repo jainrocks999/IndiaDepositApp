@@ -59,7 +59,7 @@ export default StyleSheet.create({
     {
         color:colors.textColor,
         fontFamily:'Montserrat-Regular',
-        marginLeft:30
+        marginLeft:10
     },
     textinput:
     {

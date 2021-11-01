@@ -155,7 +155,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting2(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -178,7 +178,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting3(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -192,6 +192,7 @@ const validateUser=async()=>{
                                onChangeText={(val)=>setMsg3(val)}
                                multiline
                                placeholder='Any Suggestion/Feedback'
+                               multiline
                                />
                            </View>:<View/>}
                            <Text style={styles.how}>Onboarding :</Text>
@@ -201,7 +202,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting4(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
@@ -224,7 +225,7 @@ const validateUser=async()=>{
                                 default={0}
                                 update={(val)=>setRatting5(val)}
                                 spacing={10}
-                                starSize={40}
+                                starSize={35}
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}

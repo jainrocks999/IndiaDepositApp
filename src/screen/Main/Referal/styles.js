@@ -95,7 +95,7 @@ export default StyleSheet.create({
     {
         width:'90%',
         fontFamily:'Montserrat-Regular',
-        fontSize:fontSize.fourteen,
+        fontSize:fontSize.thirteen,
         color:colors.textColor
     },
     text2:

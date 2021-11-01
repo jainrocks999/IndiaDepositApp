@@ -47,8 +47,8 @@ useEffect(()=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`}}/> 
-                          <Text style={styles.title1}>{data1.name}</Text> 
-                         <View style={{position:'absolute',bottom:15}}>
+                          {/* <Text style={styles.title1}>{data1.name}</Text>  */}
+                         <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
@@ -65,8 +65,8 @@ useEffect(()=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`}}/> 
-                          <Text style={styles.title1}>{data2.name}</Text> 
-                         <View style={{position:'absolute',bottom:15}}>
+                          {/* <Text style={styles.title1}>{data2.name}</Text>  */}
+                         <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>

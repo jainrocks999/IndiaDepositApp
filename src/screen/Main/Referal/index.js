@@ -16,7 +16,7 @@ const Refferal=()=>{
     const navigation=useNavigation()
     const [code,setCode]=useState('')
     const [copiedText, setCopiedText] = useState('');
-
+    const [link,setLink]=useState('')
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     try {
@@ -33,6 +33,7 @@ useEffect(async()=>{
         });
        
         if(response.data.status==200){
+            setLink(response.data.link)
             setCode(response.data.refferal_code)
         }
       } catch (error) {
@@ -55,13 +56,13 @@ useEffect(async()=>{
 const share=async()=>{
     await Share.share({
       message:
-       `Referal Code ${code} `
+       `${code} ${link} `
     });
   }
 
    const copyToClipboard = () => {
     Clipboard.setString(code);
-    Toast.show('code copied')
+    Toast.show('Code Copied')
   };
     return(
         <View style={styles.container}>

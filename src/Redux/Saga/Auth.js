@@ -487,7 +487,14 @@ function* notification(action) {
                 type: 'Notification_Success',
                 payload: response.data,
               });       
-            } else {
+            } 
+           else if (response.status==500) {
+              yield put({
+                type: 'Notification_Success',
+                payload: response.data,
+              });       
+            } 
+            else {
               yield put({
                 type: 'Notification_Error',
               });

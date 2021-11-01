@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler, PermissionsAndroid} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -15,7 +15,9 @@ import Loader from '../../../component/loader';
 import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
-
+import Geolocation from 'react-native-geolocation-service';
+import Geocoder from 'react-native-geocoding';
+Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -27,8 +29,10 @@ const FDList=({route})=>{
         const [month, setMonth] = useState(route.params.month)
         const [year,setYear] = useState(route.params.year)
         const [amount,setAmount] = useState(route.params.amount)
-        const [pincode,setPincode]=useState(route.params.location)
+        const [pincode,setPincode]=useState(!isNaN(route.params.location)?route.params.location:'')
         const [selected,setSelected]=useState(route.params.type1)
+        const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
+        console.log('this is address------------------------------------------',address,"pincode",pincode);
         const [sort,setSort]=useState('Alphabetical')
 useEffect(()=>{
   const backAction = () => {
@@ -67,8 +71,11 @@ if(year==0 && month==0 && day==0){
   else if(amount==''){
      Toast.show('Please enter amount')
   }
-  else if(pincode==''){
-     Toast.show('Please enter location')
+  else if(pincode==''&& address==''){
+     Toast.show('Please confirm location')
+  }
+  else if(pincode!=''&&address!=''){
+    Toast.show('Please confirm pincode or current location')
   }
    
   else{
@@ -79,7 +86,7 @@ if(year==0 && month==0 && day==0){
      month:month,
      days:day,
      amount:amount,
-     location:pincode,
+     location:pincode==''?address:pincode,
      type1:selected,
      bank_id:'',
      interest_rate:'',
@@ -143,6 +150,67 @@ const handleSelectionMultiple = (id) => {
 const openDialog=()=>{
   setVisible(true)
   // setSelected([])
+}
+const getCurrentLocation=()=>{
+  Geolocation.requestAuthorization();
+  Geolocation.getCurrentPosition(
+     (position) => {
+        console.log('your are here',position.coords);
+         Geocoder.from(position.coords.latitude, position.coords.longitude)
+             .then(json => {
+              var addressComponent = json.results[2].address_components;
+              let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+              setAddress(address)
+             })
+             .catch(error => console.warn(error));
+     },
+     (error) => {
+          console.log(error.code, error.message);
+      },
+     { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+ );
+}
+const getAddress=async()=>{
+if(Platform.OS === 'ios'){
+getCurrentLocation();
+}else{
+  try {
+   const granted = await PermissionsAndroid.request(
+     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+     {
+       title: 'Device current location permission',
+       message:
+         'Allow app to get your current location',
+       buttonNeutral: 'Ask Me Later',
+       buttonNegative: 'Cancel',
+       buttonPositive: 'OK',
+     },
+   );
+   if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+     Geolocation.getCurrentPosition(
+        (position) => {
+            Geocoder.from(position.coords.latitude, position.coords.longitude)
+                .then(json => {
+                  var addressComponent = json.results[2].address_components;
+                  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                  setAddress(address)
+                })
+                .catch(error => console.warn(error));
+        },
+        (error) => {
+             console.log(error.code, error.message);
+         },
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+    );
+  
+   } else {
+     console.log('Location permission denied');
+   }
+ } catch (err) {
+   console.warn(err);
+ }
+}
+
 }
 const renderItem=(item)=>{
   console.log('this is item bvdjfdskfl for verify',item);
@@ -315,9 +383,20 @@ const renderItem=(item)=>{
                           <View style={styles.view4}>
                               <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
                           </View>
-                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28}}>
+                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28,justifyContent:'space-between'}}>
+                            <View style={{flexDirection:'row',alignItems:'center'}}>
+                            <TouchableOpacity onPress={()=>getAddress()}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
-                                <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>
+                            </TouchableOpacity>
+                               {address?<Text style={[styles.text5,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
+                               <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>} 
+                               </View>
+                               {address?
+                              <TouchableOpacity
+                              onPress={()=>setAddress('')}
+                              style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
+                              <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
+                              </TouchableOpacity>:null}
                           </View>
                        </View>
                        <View style={styles.view6}>
