@@ -54,7 +54,7 @@ import BankCalu from "../screen/Main/NBFCFDdetails";
 import Trending from '../screen/Main/Trending';
 import BankHoliday from '../screen/Main/BankHoliday';
 import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
-
+import FD_FORM from '../screen/Main/FD_FORM';
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -130,7 +130,7 @@ function Navigate() {
         <Stack.Screen name="Trending" component={Trending} options={horizontalAnimation}/>
         <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
         <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
-
+        <Stack.Screen name="FD_FORM" component={FD_FORM}/>
 
       </Stack.Navigator>
     </NavigationContainer>

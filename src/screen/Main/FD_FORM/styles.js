@@ -20,14 +20,15 @@ export default StyleSheet.create({
         marginBottom:40,
         paddingHorizontal:15,
         paddingVertical:20,
-        // height:'100%'
+        height:'100%'
     },
     
     heading:
     {
-        fontSize:fontSize.eighteen,
-        color:colors.textColor,
-        fontFamily:'Montserrat-Regular'
+        fontSize:13,
+        fontWeight:'500',
+        fontFamily:'Montserrat-Regular',
+        color:colors.textColor
     },
     normal:
     {
@@ -35,8 +36,16 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         color:colors.textColor,
        // marginTop:10,
-        paddingHorizontal:15,
+        paddingHorizontal:10,
         paddingVertical:20
     },
+    view:{
+        width:'48%',
+        borderWidth:1,
+        borderRadius:10,
+        justifyContent:'center',
+        paddingHorizontal:5,
+        borderColor:colors.textColor
+     }
     
 })

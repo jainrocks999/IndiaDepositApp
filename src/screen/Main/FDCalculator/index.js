@@ -49,6 +49,7 @@ const FDCalculator=()=>{
                                     placeholder='Amount'
                                     placeholderTextColor={colors.heading1}
                                     keyboardType='number-pad'
+                                    returnKeyType='done'
                                 />
                             </View>
                       </View>
@@ -60,6 +61,7 @@ const FDCalculator=()=>{
                                   placeholder='Interest'
                                   placeholderTextColor={colors.heading1}
                                   keyboardType={'number-pad'}
+                                  returnKeyType='done'
                                 />
                                 <Image style={{marginRight:5}} 
                                   source={require('../../../assets/Images/percent.png')}/>

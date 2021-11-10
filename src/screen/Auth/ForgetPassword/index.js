@@ -112,6 +112,7 @@ const validateUser=(email,mobile)=>{
                       value={values.email}
                       maxLength={35}
                       keyboardType='email-address'
+                      returnKeyType='done'
                       />
                   </View>
               </View>
@@ -139,6 +140,7 @@ const validateUser=(email,mobile)=>{
                       value={values.mobile}
                       maxLength={10}
                       keyboardType='number-pad'
+                      returnKeyType='done'
                       />
                   </View>
               </View>

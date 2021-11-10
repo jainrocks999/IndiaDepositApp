@@ -112,7 +112,7 @@ const share=async()=>{
                      <Text style={styles.row}>{'You and your\nfriends get\nrewarded'}</Text>
                      </View>
                      <View style={styles.view4}>
-                          <Text style={styles.text2}>ENTER REFERRAL CODE</Text>
+                          <Text style={styles.text2}>REFERRAL CODE</Text>
                            <View style={styles.view5}>
                                    <TextInput
                                    style={{color:'#000'}}

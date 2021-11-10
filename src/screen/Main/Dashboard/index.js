@@ -131,17 +131,14 @@ const dashboard=()=>{
       
       };
     const ListItem = ({item, selected, onPress, onLongPress}) => (
-       
            <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:100}}>
-               <View 
-                    
+               <View
                     style={styles.touch1}>
-                    <TouchableOpacity 
+                    <Pressable 
                     onPress={onPress}
-                    onLongPress={onLongPress}
-                    style={styles.imageView}>
+                    onLongPress={onLongPress}>
                         <Image style={{height:item.height,width:item.width}} source={item.image}/> 
-                    </TouchableOpacity>
+                    </Pressable>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
                     <TouchableOpacity onPress={()=>setModalVisible(true)} style={styles.circle}>
@@ -149,7 +146,7 @@ const dashboard=()=>{
                     </TouchableOpacity>
                     </View>
                     {selected && <View style={styles.enable}>
-                       <TouchableOpacity 
+                       <Pressable 
                     onPress={onPress}
                     onLongPress={onLongPress}
                     style={styles.touch1}>
@@ -163,7 +160,7 @@ const dashboard=()=>{
                     </TouchableOpacity>
                     </View>
                    
-                </TouchableOpacity>
+                </Pressable>
 
                     </View>
                     }

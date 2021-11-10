@@ -173,6 +173,7 @@ const RegisterPage=({route})=>{
                          onChangeText={handleChange('name')}
                          onBlur={handleBlur('name')}
                          keyboardType='default'
+                         returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -188,6 +189,7 @@ const RegisterPage=({route})=>{
                          value={values.father}
                          onChangeText={handleChange('father')}
                          onBlur={handleBlur('father')}
+                         returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -203,6 +205,7 @@ const RegisterPage=({route})=>{
                         defaultValue={values.mother}
                         onChangeText={handleChange('mother')}
                         onBlur={handleBlur('mother')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -313,7 +316,8 @@ const RegisterPage=({route})=>{
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.pan}
                         onChangeText={handleChange('pan')}
-                        onBlur={handleBlur('pan')}                        
+                        onBlur={handleBlur('pan')} 
+                        returnKeyType='done'                       
                         />
                     </View>
                     <View style={styles.error}>
@@ -329,7 +333,8 @@ const RegisterPage=({route})=>{
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.addressLine1}
                         onChangeText={handleChange('addressLine1')}
-                        onBlur={handleBlur('addressLine1')}                        
+                        onBlur={handleBlur('addressLine1')} 
+                        returnKeyType='done'                       
                         />
                     </View>
                     <View style={styles.error}>
@@ -352,7 +357,8 @@ const RegisterPage=({route})=>{
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.addressLine2}
                         onChangeText={handleChange('addressLine2')}
-                        onBlur={handleBlur('addressLine2')}                        
+                        onBlur={handleBlur('addressLine2')} 
+                        returnKeyType='done'                       
                         />
                     </View>
                     <View style={styles.error}>
@@ -396,7 +402,8 @@ const RegisterPage=({route})=>{
                            defaultValue={values.occupation}
                            onChangeText={handleChange('occupation')}
                            onBlur={handleBlur('occupation')}
-                           maxLength={30}                       
+                           maxLength={30}    
+                           returnKeyType='done'                   
                            />
                         </View>:null
                         }
@@ -415,7 +422,8 @@ const RegisterPage=({route})=>{
                         onChangeText={handleChange('pincode')}
                         onBlur={handleBlur('pincode')}
                         keyboardType={'number-pad'} 
-                        maxLength={6}                       
+                        maxLength={6}     
+                        returnKeyType='done'                  
                         />
                     </View>
                     <View style={styles.error}>

@@ -1255,22 +1255,19 @@ function* Search(action) {
             data.append('amount',action.amount)
             data.append('location',action.location)
             data.append('type1',JSON.stringify(action.type1))
-
-            data.append('bank_id',JSON.stringify(action.bank_id))
+            data.append('bank_id',action.bank_id)
             data.append('interest_rate',action.interest_rate)
             data.append('nationalized',action.nationalized)
             data.append('sb_account_required',action.sb_account_required)
             data.append('offer',action.offer)
+            data.append('insurance',action.insurance)
             data.append('gender',action.gender)
             data.append('interest_payout',action.interest_payout)
             data.append('premature_penalty',action.premature_penalty)
             data.append('loan',action.loan)
-            // data.append('type2',action.type2)
-            // data.append('type3',action.type3)
-            // data.append('type4',action.type4)
-            // data.append('type5',action.type5)
+            data.append('order_on',action.order_on)
+            data.append('order_to',action.order_to)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
-            console.log('this is user response',response);
             if (response.status==200) {
               yield put({
                 type: 'FD_Search_Success',
@@ -1283,6 +1280,8 @@ function* Search(action) {
                  month:action.month,
                  location:action.location,
                  type1:action.type1,
+                 order_on:action.order_on,
+                 order_to:action.order_to
                })     
             } else {
               Toast.show(response.messages)
@@ -1353,23 +1352,24 @@ function* SBDetail(action) {
 }
 
 function* SBSearch(action) {
-  console.log('this is working',action);
+  console.log('this is working--------------------------------------------------------------------------------',action);
   try{
     const data = new FormData();
       data.append('min_bal',action.min_bal)
       data.append('location',action.location)
       data.append('type1',JSON.stringify(action.type1))
-      data.append('bank_id',JSON.stringify(action.bank_id))
+      data.append('bank_id',action.bank_id)
       data.append('interest_rate',action.interest_rate)
       data.append('nationalized',action.nationalized)
       data.append('offer',action.offer)
-      data.append('private/public',action.private)
+      // data.append('private/public',action.private)
       data.append('insurance',action.insurance)
-      data.append('account_type',action.account_type)
+      // data.append('account_type',action.account_type)
       data.append('account_sub_type',action.account_sub_type)
       data.append('non_maintenance_penalty',action.non_maintenance_penalty)
       data.append('debit_card_amc',action.debit_card_amc)
-
+      data.append('order_on',action.order_on)
+      data.append('order_to',action.order_to)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
             if (response.status==200) {
@@ -1382,6 +1382,8 @@ function* SBSearch(action) {
                  balance:action.min_bal,
                  location:action.location,
                  type1:action.type1,
+                 order_on:action.order_on,
+                 order_to:action.order_to
                })     
             } else {
               Toast.show(response.messages)

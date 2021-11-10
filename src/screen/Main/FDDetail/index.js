@@ -5,6 +5,8 @@ import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
 import { useDispatch,useSelector } from 'react-redux';
+import HTMLView from 'react-native-htmlview';
+import axios from "axios";
 
 const FDDetail=({route})=>{
 const navigation=useNavigation()
@@ -25,6 +27,35 @@ useEffect(()=>{
       
         return () => backHandler.remove();
 },[])
+
+const manageForm=async()=>{
+     try {
+          const data = new FormData();
+          data.append('form_type','common')
+          data.append('form_for_id',details.fixed_deposit_id)
+          data.append('from_for','fixeddeposit')
+
+          const response = await axios({
+            method: 'POST',
+            data,
+            headers: {
+              'content-type': 'multipart/form-data',
+              Accept: 'multipart/form-data',
+            },
+            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+          });
+          if (response.data.status==200) {
+               navigation.navigate('FD_FORM',{
+                id:details.fixed_deposit_id,
+                from:'fixeddeposit',
+                response:response.data.data,
+                type:'common'
+               })
+          } 
+        } catch (error) {
+         throw error;
+        }
+}
     return(
         <View style={styles.container1}>
                        <Header
@@ -48,7 +79,7 @@ useEffect(()=>{
                               <View style={styles.view2}>
                                  <View style={{flexDirection:'row'}}>
                                     <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                  <Text style={styles.item}>{details.principal_amount}</Text>
+                                  <Text style={styles.item}>{ parseInt(details.principal_amount).toFixed(0)}</Text>
                                   </View>
                                   <Text style={styles.item1}>{`Principal Amount`}</Text>
                               </View>
@@ -59,7 +90,7 @@ useEffect(()=>{
                               <View style={styles.view2}>
                                    <View style={{flexDirection:'row'}}>
                                     <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                  <Text style={styles.item}>{details.maturity_amount}</Text>
+                                  <Text style={styles.item}>{parseInt(details.maturity_amount).toFixed(0)}</Text>
                                   </View>
                                     <Text style={styles.item1}>{`Maturity Amount`}</Text>
                              </View>
@@ -112,35 +143,50 @@ useEffect(()=>{
                      </View>
            
                        {/*  ButtonView */}
-                      <View style={styles.bank}>
+                      {/* <View style={styles.bank}>
                            <TouchableOpacity>
 
                                <Text style={styles.bankDetails}
-                                onPress ={()=>navigation.navigate('BankCalu',{
-                                     type:details.bankname,
-                                     image:selector[0].bank_logo,
-                                    principal:details.principal_amount
-                                   }
-                                )}>BANK DETAILS</Text>
+                              //   onPress ={()=>navigation.navigate('BankCalu',{
+                              //        type:details.bankname,
+                              //        image:selector[0].bank_logo,
+                              //       principal:details.principal_amount
+                              //      }
+                              //   )}
+                                >BANK DETAILS</Text>
                           </TouchableOpacity>
                           <TouchableOpacity>
                                <Text style={styles.bankDetails}>DOWNLOAD FORM</Text>
                           </TouchableOpacity>
-                      </View>
+                      </View> */}
                       {/* Second row */}
                       <View style={styles.top}>
-                           <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
+                    { details.tds_info==''?<View/>: <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>}
+                      <HTMLView
+                              value={details.tds_info.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         />
+                           {/* 
                          <Text style={styles.lorem}>
                             TDS is applicable to various interest income a taxpayer
                             earns during the financial year. There are many
                             taxpayers who have an income that is eligible for TDS
                             deduction but the total tax payable in a financial year
                             is nil.
-                          </Text>
+                          </Text> */}
                        </View>
                        <View style={styles.top}>
-                          <Text style={styles.tds}>Feature :</Text>
-                          <View style={styles.view3}>
+                    
+                          { details.salient_feature==''?<View/>:
+                          <View>  
+                         <Text style={styles.tds}>{'Feature :'}</Text>
+                          <HTMLView
+                              value={details.salient_feature.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+
+                          {/* <View style={styles.view3}>
                                <View style={styles.point}></View>
                                   <Text style={styles.pointText}>
                                      {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
@@ -157,11 +203,19 @@ useEffect(()=>{
                                             <Text style={styles.pointText}>
                                                 {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
                                              </Text> 
-                                     </View>
+                                     </View> */}
                      </View>
 
                      <View style={styles.top}>
-                           <Text style={styles.tds}>Insurance :</Text>
+                     { details.insuarance_terms==''?<View/>:
+                          <View>  
+                         <Text style={styles.tds}>{'Insurance :'}</Text>
+                          <HTMLView
+                              value={details.insuarance_terms.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+                           {/* <Text style={styles.tds}>Insurance :</Text>
                            <Text style={styles.lorem}>
                              Lorem Ipsum is simply dummy text of the printing and 
                              typesetting industry. Lorem Ipsum has been the
@@ -179,11 +233,19 @@ useEffect(()=>{
                                   <Text style={styles.pointText}>
                                     {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
                                  </Text> 
-                         </View>
+                         </View> */}
                      </View>
 
                       <View style={styles.top}>
-                          <Text style={styles.tds}>Eligibility :</Text>
+                      { details.eligibility==''?<View/>:
+                          <View>  
+                         <Text style={styles.tds}>{'Eligibility :'}</Text>
+                          <HTMLView
+                              value={details.eligibility.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+                          {/* <Text style={styles.tds}>Eligibility :</Text>
                          <Text style={styles.lorem}>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                             sed do eiusmod tempor incididunt ut labore et dolore
@@ -193,10 +255,10 @@ useEffect(()=>{
                             voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                             Excepteur sint occaecat cupidatat non proident, sunt in
                             culpa qui officia deserunt mollit anim id est laborum.
-                         </Text>
+                         </Text> */}
                       </View>
                      <View style={styles.button}>
-                        {details.fd_from=='setu'? 
+                        {/* {details.fd_from=='setu'? 
                         <TouchableOpacity 
                          onPress={()=>navigation.navigate('FDView',{
                               amount:details.principal_amount,
@@ -205,14 +267,16 @@ useEffect(()=>{
                          style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         :details.fd_from=='nbfc'?
+                         :details.fd_from=='nbfc'? */}
                          <TouchableOpacity 
                          //onPress={()=>navigation.navigate('FDView')}
                          style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         :null}
-                         <TouchableOpacity style={styles.btCont}>
+                         {/* :null} */}
+                         <TouchableOpacity
+                         onPress={()=>manageForm()}
+                         style={styles.btCont}>
                            <Text style={styles.text3}>DOWNLOAD FORM</Text>
                          </TouchableOpacity>
                      </View>

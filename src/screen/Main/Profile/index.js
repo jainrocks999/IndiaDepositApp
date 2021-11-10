@@ -24,7 +24,7 @@ import Loader from '../../../component/loader';
       first: Profile,
       second: BankDetail,
       third:NomineeDetail,
-      four:FamilyDetail
+      // four:FamilyDetail
   });
 
 
@@ -70,10 +70,10 @@ const ProfileScreen=()=>{
   },[])
   
   const [routes] = React.useState([
-    { key: 'first', title: 'PERSONAL' },
-    { key: 'second', title: 'BANK' },
-    { key: 'third', title: 'NOMINEE' },
-    { key: 'four', title: 'FAMILY' },
+    { key: 'first', title: 'PERSONAL\nDETAILS' },
+    { key: 'second', title: 'BANK\nDETAILS' },
+    { key: 'third', title: 'NOMINEE\nDETAILS' },
+    // { key: 'four', title: 'FAMILY' },
   ]);
 
   const save1=async(image)=>{

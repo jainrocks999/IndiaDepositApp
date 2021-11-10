@@ -144,7 +144,7 @@ useEffect(()=>{
                           onChangeText={handleChange('subject')}
                           onBlur={handleBlur('subject')}
                           value={values.subject}
-                         
+                         returnKeyType='done'
                           />
                           
                       </View>
@@ -163,6 +163,7 @@ useEffect(()=>{
                           onChangeText={handleChange('message')}
                           onBlur={handleBlur('message')}
                           value={values.message}
+                          
                           />
                           
                       </View>

@@ -166,7 +166,7 @@ export default StyleSheet.create({
         backgroundColor:colors.bc,
         alignItems:'center',
         justifyContent:'center',
-        paddingHorizontal:10
+        paddingHorizontal:6
     },
       rupay:
     {

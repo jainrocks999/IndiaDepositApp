@@ -13,12 +13,46 @@ const SIP=()=>{
     const [interest,setInterest]=useState('1')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('500')
-   console.log(interest,'dlskfjdsklafjdlk');
   const investmentAmount=totalInvestment*time*12
   const interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
   (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
   const maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
-    console.log('this is user list',maturityAmount,investmentAmount,interestAmount);
+
+  const principalOnchange=(val)=>{
+    if(val>100000){
+      setTotalInvestment(JSON.stringify(100000))
+    }
+    // else if(val<500){
+    //   setTotalInvestment(JSON.stringify(500))
+    // }
+    else{
+      setTotalInvestment(val)
+    }
+  }
+  const rateOnchange=(val)=>{
+    if(val>15){
+      setInterest(JSON.stringify(15))
+    }
+    // else if(val<1){
+    //   setInterest(JSON.stringify(1))
+    // }
+    else{
+      setInterest(val)
+    }
+  }
+  const timeOnchange=(val)=>{
+    if(val>25){
+      setTime(JSON.stringify(25))
+    }
+    // else if(val<1){
+    //   setTime(JSON.stringify(1))
+    // }
+    else{
+      setTime(val)
+    }
+  }
+
+
   return(
         <View style={styles.container}>
              <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
@@ -33,8 +67,9 @@ const SIP=()=>{
                         defaultValue={totalInvestment}
                         style={{borderBottomWidth:0,}}
                         keyboardType='number-pad'
-                        onChangeText={(val)=>setTotalInvestment(val)}
+                        onChangeText={(val)=>principalOnchange(val)}
                         maxLength={6}
+                        returnKeyType='done'
                         />
                         <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
                         </View>
@@ -59,11 +94,12 @@ const SIP=()=>{
                     <View style={styles.view3}>
                       <View>
                     <TextInput 
-                    onChangeText={(val)=>setInterest(val==''?1:val)}
+                    onChangeText={(val)=>rateOnchange(val==''?1:val)}
                     defaultValue={interest}
                     style={{borderBottomWidth:0,}}
                     keyboardType='number-pad'
                     maxLength={2}
+                    returnKeyType='done'
                     />
                    <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
                     </View>
@@ -86,11 +122,12 @@ const SIP=()=>{
                     <View style={styles.view}>
                        <View>
                         <TextInput 
-                        onChangeText={(val)=>setTime(val)}
+                        onChangeText={(val)=>timeOnchange(val)}
                         style={{borderBottomWidth:0,}}
                         defaultValue={time}
                         keyboardType='number-pad'
                         maxLength={2}
+                        returnKeyType='done'
                         />
                         <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
                         </View>
@@ -99,7 +136,7 @@ const SIP=()=>{
                 </View>
                    <Slider
                         minimumValue={1}
-                        maximumValue={10}
+                        maximumValue={25}
                         onValueChange={(val)=>setTime(JSON.stringify(val))}
                         step={1}
                         value={parseInt(time==''?0:time)}

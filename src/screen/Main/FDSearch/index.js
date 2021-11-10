@@ -16,7 +16,7 @@ import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Geolocation from 'react-native-geolocation-service';
-Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
+Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
 const Contact=({route})=>{
     const navigation=useNavigation()
@@ -78,6 +78,8 @@ useEffect(()=>{
          interest_payout:'',
          premature_penalty:'',
          loan:'',
+         order_on:'',
+         order_to:'',
          navigation:navigation
        })
     }
@@ -243,6 +245,7 @@ useEffect(()=>{
                                  keyboardType='number-pad'
                                  value={amount}
                                  onChangeText={(val)=>setAmount(val)}
+                                 returnKeyType='done'
                               />
                            </View>
                            <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android' ?-10:5}}/>
@@ -279,6 +282,7 @@ useEffect(()=>{
                               onChangeText={(val)=>setPincode(val)}
                               keyboardType='number-pad'
                               maxLength={6}
+                              returnKeyType='done'
                            />
                               <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'?-8:6}}/>
                        </View>

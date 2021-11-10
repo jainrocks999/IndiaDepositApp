@@ -8,6 +8,7 @@ import colors from '../../../component/colors';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import FD from '../../../component/TabComponents/FD';
 import SIP from '../../../component/TabComponents/SP';
+import * as root from "../../../navigator/rootNavigation";
 
   const renderScene = SceneMap({
     first: SIP,
@@ -41,7 +42,7 @@ const Calculator=()=>{
               <Header
                 source={require('../../../assets/Image/arrow2.png')}
                 title={'CALCULATOR'}
-                onPress={()=>navigation.goBack()}
+                onPress={()=>navigation.navigate('Main')}
               />
              <View style={styles.card}>
                 <TabView

@@ -87,6 +87,7 @@ console.log('this is narendra here',Blogs);
               placeholderTextColor={colors.heading1}
               onChangeText={(val)=>searchFilterFunction(val)}
               style={{color:colors.textColor,width:'70%'}}
+              returnKeyType='done'
               />
              </View>{search?
             <TouchableOpacity

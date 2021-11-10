@@ -62,7 +62,7 @@ return(
      <View style={styles.container}>
           <TouchableOpacity  onPress={()=>navigation.goBack()}>
             <Image  style={styles.img}
-              source={require('../../../assets/Images/arrow.png')}
+              source={require('../../../assets/Image/arrow2.png')}
             />
           </TouchableOpacity>
        <Image  resizeMode='contain'

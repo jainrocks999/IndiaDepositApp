@@ -95,6 +95,7 @@ const RegisterPage=()=>{
                                          onBlur={handleBlur('name')}
                                          value={values.name}
                                          maxLength={40}
+                                         returnKeyType='done'
                                        />
                                   </View>
                                   <View style={styles.error}>
@@ -112,6 +113,7 @@ const RegisterPage=()=>{
                                              value={values.mobile}
                                              keyboardType={'number-pad'}
                                              maxLength={11}
+                                             returnKeyType='done'
                                         />
                                   </View>
                                   <View style={styles.error}>
@@ -158,6 +160,7 @@ const RegisterPage=()=>{
                                              onChangeText={handleChange('address')}
                                              onBlur={handleBlur('address')}
                                              value={values.address}
+                                             returnKeyType='done'
                                         />
                                  </View>
                                  <View style={styles.error}>
@@ -174,6 +177,7 @@ const RegisterPage=()=>{
                                          onBlur={handleBlur('relation')}
                                          value={values.relation}
                                          maxLength={40}
+                                         returnKeyType='done'
                                     />
                                   </View>
                                  <View style={styles.error}>

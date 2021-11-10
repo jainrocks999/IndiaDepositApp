@@ -97,6 +97,7 @@ const addUser=async(values)=>{
                         value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -141,6 +142,7 @@ const addUser=async(values)=>{
                         onBlur={handleBlur('account_number')}
                         keyboardType='number-pad'
                         maxLength={16}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -183,6 +185,7 @@ const addUser=async(values)=>{
                             onChangeText={handleChange('ifsc_code')}
                             onBlur={handleBlur('ifsc_code')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>

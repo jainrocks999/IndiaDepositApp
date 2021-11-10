@@ -1,5 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler, PermissionsAndroid} from 'react-native';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler, PermissionsAndroid, Alert} from 'react-native';
 import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -32,8 +32,8 @@ const FDList=({route})=>{
         const [pincode,setPincode]=useState(!isNaN(route.params.location)?route.params.location:'')
         const [selected,setSelected]=useState(route.params.type1)
         const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
-        console.log('this is address------------------------------------------',address,"pincode",pincode);
         const [sort,setSort]=useState('Alphabetical')
+        const [asc,setAsc]=useState('')
 useEffect(()=>{
   const backAction = () => {
     navigation.goBack()
@@ -62,6 +62,8 @@ const manageList=(item)=>{
   
 }
 const manageSearch=async()=>{
+  console.log('manage search is calling',sort,asc);
+
 if(year==0 && month==0 && day==0){
     Toast.show('Tenure should be more than 7 days')
  }
@@ -77,7 +79,15 @@ if(year==0 && month==0 && day==0){
   else if(pincode!=''&&address!=''){
     Toast.show('Please confirm pincode or current location')
   }
-   
+  // else if(sort=='popular'){
+  //   setAsc('DESC')
+  // }
+  // else if(sort=='interest_rate'){
+  //   setAsc('DESC')
+  // }
+  // else if(sort=='alphabet'){
+  //   setAsc('ASC')
+  // }
   else{
   dispatch({
      type: 'FD_Search_Request',
@@ -96,13 +106,24 @@ if(year==0 && month==0 && day==0){
      gender:'',
      interest_payout:'',
      premature_penalty:'',
-     oan:'',
+     loan:'',
+     order_on:sort,
+     order_to:sort=='alphabet'?'ASC':'DESC',
      navigation:navigation
    })
+   console.log('its working now');
+
    setVisible(false)
   //  setSelected([])
 }
 }
+
+const handleSorting=(val)=>{
+  setSort(val)
+  console.log('this is changing here');
+    manageSearch()
+}
+
 const compareFD=async()=>{
 const user_id=await AsyncStorage.getItem(Storage.user_id)
 if(selectedData.length==0){
@@ -210,10 +231,8 @@ getCurrentLocation();
    console.warn(err);
  }
 }
-
 }
 const renderItem=(item)=>{
-  console.log('this is item bvdjfdskfl for verify',item);
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
@@ -278,7 +297,7 @@ const renderItem=(item)=>{
            <View>
             <View style={styles.mains}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Images/arrow.png')}/>
+            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Image/arrow2.png')}/>
             </TouchableOpacity>
             <View style={styles.views}>
             <Text style={styles.texts}>{'FD LISTING'} </Text>
@@ -370,11 +389,12 @@ const renderItem=(item)=>{
                            <View style={{flexDirection:'row',alignItems:'center',marginTop:Platform.OS=='android'? -10:6}}>
                              <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                               <TextInput
-                                 style={{width:'90%'}}
+                                 style={{width:'90%',fontFamily:'Montserrat-Regular',color:colors.textColor}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
                                  onChangeText={(val)=>setAmount(val)}
+                                 returnKeyType='done'
                               />
                            </View>
                            <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android'? -10:5}}/>
@@ -411,6 +431,7 @@ const renderItem=(item)=>{
                               onChangeText={(val)=>setPincode(val)}
                               keyboardType='number-pad'
                               maxLength={6}
+                              returnKeyType='done'
                            />
                        </View>
                        <View style={{marginTop:16}}>
@@ -532,7 +553,7 @@ const renderItem=(item)=>{
                      alignItems:'center',
                    }}>
                       <RNPickerSelect
-                          onValueChange={(val)=>setSort(val)}
+                          onValueChange={(val)=>handleSorting(val)}
                           items={Sorting}
                           style={{ 
                           inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
@@ -585,9 +606,9 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting=[
-  { label: 'Popular', value: 'Popular' },
-  { label: 'Alphabetical', value: 'Alphabetical' },
-  { label: 'Interest Rate', value: 'Interest Rate' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Alphabetical', value: 'alphabet' },
+  { label: 'Interest Rate', value: 'interest_rate' },
 ]
 const days=[
    {label:'00',value:'0'},
