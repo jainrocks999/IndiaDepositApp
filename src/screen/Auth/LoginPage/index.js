@@ -185,10 +185,11 @@ const renderError=(values,errors,touched)=>{
                  keyboardType={"numeric"} secureTextEntry ={visible}
                  style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
                  inputContainerStyles={[styles.otp,{borderColor:focus1&&values.pin? colors.bc:'#fff'}]}
-                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor,alignItems:'center'}}
+                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor,marginLeft:4}}
                  returnKeyType='go'
                  onSubmitEditing={()=>handleSubmit()}
                  onFocus={()=>setFocus1(true)}
+              
               />
                     <View style={styles.error}>
                     {(errors.pin && touched.pin) &&

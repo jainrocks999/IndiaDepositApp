@@ -18,13 +18,13 @@ const FDFilter=({route})=>{
     const [isEnabled5, setIsEnabled5] = useState(false);
     const [isEnabled6, setIsEnabled6] = useState(false);
     const [selected,setSelected]=useState([])
-    const [value,setValue]=useState('')
+    const [value,setValue]=useState('0')
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
-    const [value1,setValue1]=useState('')
-    const [value2,setValue2]=useState('')
+    const [value1,setValue1]=useState('0')
+    const [value2,setValue2]=useState('0')
     const data=route.params.data
-    console.log('this is data from render',data,route.params);
+    console.log('this is data from render',route.params);
 
 useEffect(()=>{
     const backAction = () => {
@@ -51,7 +51,7 @@ const manageFilter=()=>{
     setValue1('')
     setValue2('')
 }
-
+console.log('hi narendra here',value,value1,);
 const applyFilter=()=>{
     dispatch({
         type: 'SB_Search_Request',
@@ -59,17 +59,18 @@ const applyFilter=()=>{
         min_bal:data.balance,
         location:data.location,
         type1:data.type1,
-          bank_id:selected,
+          bank_id:selected[0],
           interest_rate:value2,
-          nationalized:isEnabled1,
-          private:isEnabled2,
-          offer:isEnabled3,
-          insurance:isEnabled4,
-          account_type:isEnabled5,
-          account_sub_type:isEnabled6,
+          nationalized:isEnabled1==true?1:0,
+          private:isEnabled2==true?1:0,
+          offer:isEnabled3==true?1:0,
+          insurance:isEnabled4==true?1:0,
+          account_type:isEnabled5==true?1:0,
+          account_sub_type:isEnabled6==true?1:0,
           non_maintenance_penalty:value,
           debit_card_amc:value1,
-
+          order_on:data.order_on,
+          order_to:data.order_to,
           navigation:navigation
       })
 }
@@ -96,6 +97,7 @@ const applyFilter=()=>{
               <View style={{width:'100%',marginTop:5}}>
               <MultiSelect     
                                 items={selector}
+                                single={true}
                                 uniqueKey="value"
                                 onSelectedItemsChange={(val)=>setSelected(val)}
                                 selectedItems={selected}
@@ -130,12 +132,12 @@ const applyFilter=()=>{
               </View>
               <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:15}}> 
                   <Text style={styles.heading}>Interest Rate Slider</Text>
-                  <Text>{`${value2}%`}</Text>
+                  <Text>{`${parseFloat(value2).toFixed(1)}%`}</Text>
               </View>
                 <Slider
                     minimumValue={0}
                     maximumValue={10}
-                    step={1}
+                    step={.1}
                     value={parseInt(value2==''?0:value2)}
                     thumbTintColor={colors.bc}
                     minimumTrackTintColor={colors.bc}

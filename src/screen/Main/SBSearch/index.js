@@ -53,6 +53,8 @@ const SBAccount=({route})=>{
          non_maintenance_penalty:'',
          debit_card_amc:'',
          private:'',
+         order_on:'',
+         order_to:'',
          navigation:navigation
        })
     }
@@ -164,6 +166,7 @@ const SBAccount=({route})=>{
                                        keyboardType='number-pad'
                                        value={balance}
                                        onChangeText={(val)=>setBalance(val)}
+                                       returnKeyType='done'
                                   />
                                  
                                   </View>
@@ -202,6 +205,7 @@ const SBAccount=({route})=>{
                                        value={location}
                                        onChangeText={(val)=>setLocation(val)}
                                        maxLength={6}
+                                       returnKeyType='done'
                                     />
                                </View>
                                <View style={styles.view2}>

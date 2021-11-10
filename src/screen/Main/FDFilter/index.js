@@ -11,6 +11,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Loader from '../../../component/loader';
+import Toast from 'react-native-simple-toast';
 
 const FDFilter=({route})=>{
     const dispatch=useDispatch()
@@ -27,10 +28,10 @@ const FDFilter=({route})=>{
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [toggleCheckBox1,setToggleCheckBox1]=useState(false)
     const [toggleCheckBox2,setToggleCheckBox2]=useState(false)
-    const [value1,setValue1]=useState('')
+    const [value1,setValue1]=useState('0')
     const [penalty,setPenalty]=useState('')
     const [loan1,setLoan]=useState('')
-
+console.log('selcted ',selected);
 
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
@@ -83,6 +84,10 @@ useEffect(()=>{
     console.log('this is testing',data,selected);
 
     const applyFilter=()=>{
+        if(toggleCheckBox==false&&toggleCheckBox1==false&&toggleCheckBox2==false){
+         Toast.show('Please select gender')
+        }
+        else{
       dispatch({
             type: 'FD_Search_Request',
             url: 'fdlist1',
@@ -92,29 +97,23 @@ useEffect(()=>{
             amount:data.amount,
             location:data.location,
             type1:data.type1,
-            // bank_id:'',
-            // interest_rate:'2',
-            // nationalized:'true',
-            // sb_account_required:'true',
-            // offer:'true',
-            // gender:'Male',
-            // interest_payout:'true',
-            // premature_penalty:'10',
-            // loan:'10',
-            // navigation:navigation
-            bank_id:selected,
+            order_on:data.order_on,
+            order_to:data.order_to,
+            bank_id:selected[0],
             interest_rate:value1,
-            nationalized:isEnabled1,
-            sb_account_required:isEnabled2,
-            offer:isEnabled3,
-            gender:toggleCheckBox==true?'Male':toggleCheckBox1==true?'Female':toggleCheckBox2==true?'Transgender':'',
-            interest_payout:isEnabled6,
-            premature_penalty:penalty,
-            loan:loan1,
+            nationalized:isEnabled1==true?1:0,
+            sb_account_required:isEnabled2==true?1:0,
+            offer:isEnabled3==true?1:0,
+            insurance:isEnabled4==true?1:0,
+            gender:toggleCheckBox==true?'1':toggleCheckBox1==true?'2':toggleCheckBox2==true?'3':'0',
+            interest_payout:isEnabled6==true?1:0,
+            premature_penalty:isEnabled7==true?1:0,
+            loan:isEnabled8==true?1:0,
             navigation:navigation
           })
-          console.log(selected,);
+        }
     }
+    console.log('thisis fkadjfdkjf',value1,isEnabled1,isEnabled2,isEnabled6,penalty,loan1);
     return(
         <View style={{flex:1,
        // paddingTop:Platform.OS=='android'?0:40
@@ -148,6 +147,7 @@ useEffect(()=>{
                                 tagTextColor={'#fff'}
                                 selectText={selected.length>0?'':"Select Bank"}
                                 // selectedItems
+                                single={true}
                                 searchInputPlaceholderText="Select Bank"
                                 onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
@@ -175,12 +175,12 @@ useEffect(()=>{
               </View>
               <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:30}}> 
                   <Text style={styles.heading}>Interest Rate Slider</Text>
-                  <Text>{`${value1}%`}</Text>
+                  <Text>{`${parseFloat(value1).toFixed(1)} %`}</Text>
               </View>
                 <Slider
                     minimumValue={0}
                     maximumValue={10}
-                    step={1}
+                    step={.1}
                     value={parseInt(value1==''?0:value1)}
                     thumbTintColor={colors.bc}
                     minimumTrackTintColor={colors.bc}
@@ -288,7 +288,14 @@ useEffect(()=>{
                 />
                 </View>
                 {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
-                               <RNPickerSelect
+                    <TextInput
+                    placeholder='Enter Here'
+                    returnKeyType='done'
+                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
+                    onChangeText={(val)=>setPenalty(val)}
+                    value={penalty}
+                    />
+                               {/* <RNPickerSelect
                                          onValueChange={(val)=>setPenalty(val)}
                                          items={penaltys}
                                          style={{ 
@@ -302,7 +309,7 @@ useEffect(()=>{
                                           <Image 
                                          style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
-                                   />
+                                   /> */}
                 </View>:<View/>}
                 <View style={[styles.container1]}>
                     <Text style={styles.heading}>Loan</Text>
@@ -315,6 +322,14 @@ useEffect(()=>{
                 />
                 </View>
                 {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
+                    {/* <TextInput
+                    placeholder='Enter Here'
+                    onChangeText={(val)=>setLoan(val)}
+                    value={loan}
+                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
+                    returnKeyType='done'
+                    
+                    /> */}
                                <RNPickerSelect
                                          onValueChange={(val)=>setLoan(val)}
                                          items={loan}

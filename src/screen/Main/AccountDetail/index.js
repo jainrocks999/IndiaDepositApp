@@ -8,6 +8,8 @@ import { TouchableOpacity } from "react-native";
 import StatusBar from '../../../component/StatusBar';
 import BottomTab from '../../../component/StoreButtomTab';
 import { useSelector } from 'react-redux';
+import HTMLView from 'react-native-htmlview';
+
 const FDList=()=>{
 const navigation=useNavigation()
 const selector=useSelector((state)=>state.SBDetail)
@@ -131,26 +133,34 @@ useEffect(()=>{
                      </View>
             </View>
                {/*  ButtonView */}
-            <View style={styles.bank}>
+            {/* <View style={styles.bank}>
                  <TouchableOpacity>
                       <Text style={styles.bankDetails}>BANK DETAILS</Text>
                   </TouchableOpacity>
                   <TouchableOpacity>
                           <Text style={styles.bankDetails}>DOWNLOAD FORM</Text>
                    </TouchableOpacity>
-            </View>
+            </View> */}
             {/* Second row */}
             <View style={styles.top}>
-                   <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
+            { details.tds_info==''?<View/>:
+                          <View>  
+                         <Text style={styles.tds}>{'TDS applicable with info of 15 G option :'}</Text>
+                          <HTMLView
+                              value={details.tds_info.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+                   {/* <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
                      <Text style={styles.lorem}>
                             TDS is applicable to various interest income a taxpayer
                             earns during the financial year. There are many
                             taxpayers who have an income that is eligible for TDS
                             deduction but the total tax payable in a financial year
                             is nil.
-                     </Text>
+                     </Text> */}
              </View>
-            <View style={styles.top}>
+            {/* <View style={styles.top}>
                  <Text style={styles.tds}>Feature :</Text>
                <View style={styles.Textview}>
                    <View style={styles.point}></View>
@@ -170,10 +180,18 @@ useEffect(()=>{
                                {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
                           </Text> 
                </View>
-         </View>
+         </View> */}
 
          <View style={styles.top}>
-               <Text style={styles.tds}>Insurance :</Text>
+         { details.insuarance_terms==''?<View/>:
+                          <View>  
+                         <Text style={styles.tds}>{'Insurance :'}</Text>
+                          <HTMLView
+                              value={details.insuarance_terms.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+               {/* <Text style={styles.tds}>Insurance :</Text>
                <Text style={styles.lorem}>
                      Lorem Ipsum is simply dummy text of the printing and 
                      typesetting industry. Lorem Ipsum has been the
@@ -191,11 +209,20 @@ useEffect(()=>{
                     <Text style={styles.pointText}>
                           {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
                     </Text> 
-               </View>
+               </View> */}
           </View>
 
-         <View style={styles.top}>
-                 <Text style={styles.Text3}>Eligibility :</Text>
+         <View style={[styles.top]}>
+         { details.eligibility==''?<View/>:
+                          <View>  
+                         <Text style={styles.Text3}>{'Eligibility :'}</Text>
+                          <HTMLView
+                              value={details.eligibility.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         }
+
+                 {/* <Text style={styles.Text3}>Eligibility :</Text>
                  <Text style={styles.lorem}>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore
@@ -205,10 +232,10 @@ useEffect(()=>{
                       voluptate velit esse cillum dolore eu fugiat nulla pariatur.
                       Excepteur sint occaecat cupidatat non proident, sunt in
                        culpa qui officia deserunt mollit anim id est laborum.
-                 </Text>
+                 </Text> */}
          </View>
 
-            <View style={[styles.top,{marginBottom:10}]}>
+            {/* <View style={[styles.top,{marginBottom:10}]}>
                  <Text style={styles.Text3}>Bank contact information :</Text>
                   <Text style={[styles.lorem,{marginBottom:20}]}>
                          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -220,8 +247,8 @@ useEffect(()=>{
                         Excepteur sint occaecat cupidatat non proident, sunt in
                         culpa qui officia deserunt mollit anim id est laborum.
                   </Text>
-            </View>
-           
+            </View> */}
+           <View style={{height:30}}></View>
          </ScrollView>
          {/* <BottomTab/> */}
          <StatusBar/>

@@ -76,7 +76,7 @@ const manageSearch=async()=>{
        location:location==''?address:location,
        type1:selected,
          bank_id:'',
-         interest_rate:0,
+         interest_rate:'',
          nationalized:'',
          offer:'',
          insurance:'',
@@ -85,12 +85,19 @@ const manageSearch=async()=>{
          non_maintenance_penalty:'',
          debit_card_amc:'',
          private:'',
-       navigation:navigation
+         order_on:sort,
+         order_to:sort=='alphabet'?'ASC':'DESC',
+         navigation:navigation
      })
      setVisible(false)
     //  setSelected([])
   }
  }
+
+const manageFilter=(val)=>{
+  setSort(val)
+  manageSearch()
+}
 const handleonPress=(id)=>{
   if(selectedData.length){
     handleSelectionMultiple(id)
@@ -263,7 +270,7 @@ const renderItem=(item)=>{
                <View>
             <View style={styles.mains}>
             <TouchableOpacity onPress={()=>navigation.goBack()}>
-            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Images/arrow.png')}/>
+            <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Image/arrow2.png')}/>
             </TouchableOpacity>
             <View style={styles.views}>
             <Text style={styles.texts}>{'SB A/C LISTING'} </Text>
@@ -302,6 +309,7 @@ const renderItem=(item)=>{
                                  keyboardType='number-pad'
                                  defaultValue={balance}
                                  onChangeText={(val)=>setBalance(val)}
+                                 returnKeyType='done'
                               />
                            </View>
                            <View style={{borderWidth:1,marginTop:Platform.OS=='android'?-1:6,borderColor:'#3D4785',}}></View>
@@ -338,6 +346,7 @@ const renderItem=(item)=>{
                               onChangeText={(val)=>setLocation(val)}
                               keyboardType='number-pad'
                               maxLength={6}
+                              returnKeyType='done'
                            />
                        </View>
 
@@ -451,7 +460,7 @@ const renderItem=(item)=>{
                    alignItems:'center',
                    }}>
                      <RNPickerSelect
-                          onValueChange={(val)=>setSort(val)}
+                          onValueChange={(val)=>manageFilter(val)}
                           items={Sorting}
                           style={{ 
                           inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
@@ -504,9 +513,9 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting=[
-  { label: 'Popular', value: 'Popular' },
-  { label: 'Alphabetical', value: 'Alphabetical' },
-  { label: 'Interest Rate', value: 'Interest Rate' },
+  { label: 'Popular', value: 'popular' },
+  { label: 'Alphabetical', value: 'alphabet' },
+  { label: 'Interest Rate', value: 'interest_rate' },
 ]
 
 

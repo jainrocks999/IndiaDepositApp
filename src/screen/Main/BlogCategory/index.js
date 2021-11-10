@@ -32,7 +32,7 @@ useEffect(()=>{
               <View style={styles.main5}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
                   <Image style={{height:32,width:32,tintColor:colors.white}}   
-                  source={require('../../../assets/Images/arrow.png')}/>
+                  source={require('../../../assets/Image/arrow2.png')}/>
                 </TouchableOpacity>
                 <Text style={styles.textTitle}>{data.title} </Text>
            </View>

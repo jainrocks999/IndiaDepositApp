@@ -140,6 +140,7 @@ const addUser=async(values)=>{
                         value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -158,6 +159,7 @@ const addUser=async(values)=>{
                         value={values.address1}
                         onChangeText={handleChange('address1')}
                         onBlur={handleBlur('address1')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -176,7 +178,7 @@ const addUser=async(values)=>{
                         value={values.address2}
                         onChangeText={handleChange('address2')}
                         onBlur={handleBlur('address2')}
-                        
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -296,6 +298,7 @@ const addUser=async(values)=>{
                             onChangeText={handleChange('relationship')}
                             onBlur={handleBlur('relationship')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -315,6 +318,7 @@ const addUser=async(values)=>{
                             onChangeText={handleChange('guardian')}
                             onBlur={handleBlur('guardian')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -334,6 +338,7 @@ const addUser=async(values)=>{
                             onChangeText={handleChange('guardian_relationship')}
                             onBlur={handleBlur('guardian_relationship')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -355,6 +360,7 @@ const addUser=async(values)=>{
                             onBlur={handleBlur('pincode')}
                             maxLength={6}
                             keyboardType='number-pad'
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>

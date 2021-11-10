@@ -13,6 +13,8 @@ import colors from '../colors';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../AsyncStorage';
 import Modal from "react-native-modal";
+// import * as root from "../../navigator/rootNavigation";
+import * as RootNavigation from '../../navigator/rootNavigation';
 
 
 let backPress=0
@@ -206,7 +208,7 @@ const DrawerContent=({props})=> {
                     </TouchableOpacity>
                    
                 <TouchableOpacity
-                onPress={() => navigation.navigate('Calculator')}
+                onPress={() => RootNavigation.navigate('Calculator')}
                     >
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>

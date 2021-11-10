@@ -131,6 +131,7 @@ useEffect(()=>{
                                   <TextInput
                                       placeholder='Search Bank'
                                       style={{color:colors.textColor}}
+                                      returnKeyType='done'
                                   />
                               </View>
                         </View>

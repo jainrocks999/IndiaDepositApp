@@ -79,6 +79,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                           onChangeText={handleChange('name')}
                           onBlur={handleBlur('name')}
                           value={values.name}
+                          returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -95,6 +96,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                          onChangeText={handleChange('email')}
                          onBlur={handleBlur('email')}
                          value={values.email}
+                         returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -112,6 +114,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                         onChangeText={handleChange('mobile')}
                         onBlur={handleBlur('mobile')}
                         value={values.mobile}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -128,6 +131,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                         onChangeText={handleChange('subject')}
                         onBlur={handleBlur('subject')}
                         value={values.subject}
+                        returnKeyType='done'
                         />
                     </View>
                     <Text style={styles.better}>Message</Text>
@@ -137,6 +141,7 @@ console.log('name email,mobile',name1,email1,mobile1);
                         style={{color:colors.textColor,width:'97%'}}
                         placeholder=''
                         placeholderTextColor={colors.heading1}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={{marginTop:20}}>

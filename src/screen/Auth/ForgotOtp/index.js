@@ -183,6 +183,7 @@ class OtpVarification extends React.Component{
                   textInputStyle={styles.otp}
                   offTintColor={colors.bc}
                   tintColor={colors.bc}
+                  
                   />
                  {this.manageAttempt()}
                 </View>          

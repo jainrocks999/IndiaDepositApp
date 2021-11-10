@@ -145,6 +145,7 @@ const validateUser=async()=>{
                                onChangeText={(val)=>setMsg1(val)}
                                placeholder='Any Suggestion/Feedback'
                                multiline
+                              
                                />
                            </View>:<View/>}
 

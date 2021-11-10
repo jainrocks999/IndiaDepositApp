@@ -149,6 +149,7 @@ const manageState=async(val)=>{
                         defaultValue={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -167,6 +168,7 @@ const manageState=async(val)=>{
                         defaultValue={values.address1}
                         onChangeText={handleChange('address1')}
                         onBlur={handleBlur('address1')}
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -185,7 +187,7 @@ const manageState=async(val)=>{
                         defaultValue={values.address2}
                         onChangeText={handleChange('address2')}
                         onBlur={handleBlur('address2')}
-                        
+                        returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -298,6 +300,7 @@ const manageState=async(val)=>{
                             onChangeText={handleChange('relationship')}
                             onBlur={handleBlur('relationship')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -317,6 +320,7 @@ const manageState=async(val)=>{
                             onChangeText={handleChange('guardian')}
                             onBlur={handleBlur('guardian')}
                             maxLength={11}
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -335,7 +339,7 @@ const manageState=async(val)=>{
                             defaultValue={values.guardian_relationship}
                             onChangeText={handleChange('guardian_relationship')}
                             onBlur={handleBlur('guardian_relationship')}
-                           
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
@@ -357,6 +361,7 @@ const manageState=async(val)=>{
                             onBlur={handleBlur('pincode')}
                             maxLength={6}
                             keyboardType='number-pad'
+                            returnKeyType='done'
                         />
                     </View>
                     <View style={styles.error}>
