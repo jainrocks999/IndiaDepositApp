@@ -1,5 +1,5 @@
 import React,{useState,useCallback}from 'react';
-import { View,Text,Image,ScrollView, TextInput} from 'react-native';
+import { View,Text,Image,ScrollView, TextInput, Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import ProgressBar from 'react-native-progress/Bar';
@@ -36,7 +36,7 @@ const SIP=()=>{
                         onChangeText={(val)=>setTotalInvestment(val)}
                         maxLength={6}
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-8:0,borderColor:colors.bc}}/>
                         </View>
 
                     </View>
@@ -65,9 +65,9 @@ const SIP=()=>{
                     keyboardType='number-pad'
                     maxLength={2}
                     />
-                   <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                   <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-8:0,borderColor:colors.bc}}/>
                     </View>
-                    <Text style={{marginLeft:2,marginTop:8}}>{'%'}</Text>
+                    <Text style={{marginLeft:2,marginTop:Platform.OS=='android'?8:0}}>{'%'}</Text>
                     </View>
                 </View>
                 <Slider
@@ -92,9 +92,9 @@ const SIP=()=>{
                         keyboardType='number-pad'
                         maxLength={2}
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-8:0,borderColor:colors.bc}}/>
                         </View>
-                        <Text style={{marginLeft:2,marginTop:5,fontSize:12,color:colors.textColor}}>{'Year'}</Text>
+                        <Text style={{marginLeft:2,marginTop:Platform.OS=='android'?5:0,fontSize:12,color:colors.textColor}}>{'Year'}</Text>
                     </View>
                 </View>
                    <Slider

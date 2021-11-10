@@ -10,7 +10,7 @@ import Header from '../../../component/header';
 import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
 import fontSize from '../../../component/fontSize';
-// import Geocoder from 'react-native-geocoding';
+import Geocoder from 'react-native-geocoding';
 import { useDispatch, useSelector, } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';

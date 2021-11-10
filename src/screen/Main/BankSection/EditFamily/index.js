@@ -220,7 +220,9 @@ const RegisterPage=({route})=>{
                                          style={{ 
                                          inputAndroid: { color: colors.textColor,height:40,width:'100%' },
                                          placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
-                                         }}
+                                        ,inputIOS:{color: colors.textColor,height:40,width:'100%'},
+
+                                       }}
                                          value={gender==null||0?'':gender}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Gender", value: 0 }}
@@ -367,7 +369,9 @@ const RegisterPage=({route})=>{
                         items={Occupation}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={occupation==null||0?'':occupation}
                         useNativeAndroidPickerStyle={false}
@@ -431,7 +435,9 @@ const RegisterPage=({route})=>{
                         items={Country}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={country==null||0?'':country}
                         useNativeAndroidPickerStyle={false}
@@ -455,7 +461,9 @@ const RegisterPage=({route})=>{
                            items={selector1}
                            style={{ 
                            inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                           placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                           placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},
+                           inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                            }}
                            value={state==null||0?'':state}
                            useNativeAndroidPickerStyle={false}
@@ -478,7 +486,9 @@ const RegisterPage=({route})=>{
                         items={selector2}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={city==null||0?'':city}
                         useNativeAndroidPickerStyle={false}
@@ -503,7 +513,9 @@ const RegisterPage=({route})=>{
                                          style={{ 
                                          inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                                          placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
+                                       , inputIOS:{color: colors.textColor,height:35,width:'100%'},
+ 
+                                       }}
                                          value={relation==0||null?'':relation}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Relationship", value: 0 }}
@@ -522,7 +534,9 @@ const RegisterPage=({route})=>{
                                          style={{ 
                                          inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                                          placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
+                                       ,  inputIOS:{color: colors.textColor,height:35,width:'100%'},
+ 
+                                       }}
                                          value={income_group==0||null?'':income_group}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Income Group", value: 0 }}
@@ -545,7 +559,9 @@ const RegisterPage=({route})=>{
                         items={Education}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={education==0||null?'':education}
                         useNativeAndroidPickerStyle={false}
@@ -569,7 +585,9 @@ const RegisterPage=({route})=>{
                         items={Marital_Status}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={marital_status==0||null?'':marital_status}
                         useNativeAndroidPickerStyle={false}
@@ -593,7 +611,9 @@ const RegisterPage=({route})=>{
                         items={Residential_Status}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'},                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+                        inputIOS:{color: colors.textColor,height:35,width:'100%'},
+
                         }}
                         value={residential_address==0||null?'':residential_address}
                         useNativeAndroidPickerStyle={false}
