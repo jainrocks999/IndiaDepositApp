@@ -17,13 +17,18 @@ class OtpVarification extends React.Component{
         this.state = {
           otp:'',
           timer: null,
-          counter: 12,
+          counter: 30,
           otpData:this.props.route.params.otp,
           mobile:this.props.route.params.mobile,
           email:this.props.route.params.email,
+          attemptbool:this.props.route.params.attemptbool,
+          boolean2:this.props.route.params.boolean2,
+          boolean:true,
           count:0,
           old_email:'',
-          old_mobile:''
+          old_mobile:'',
+          enable:true
+
         };
       }
     async componentDidMount() {
@@ -38,6 +43,12 @@ class OtpVarification extends React.Component{
   
         const count=await AsyncStorage.getItem('otp_value')
         this.setState({count:count})
+        if(this.props.attempt.attempt==0){
+          this.setState({enable:false})
+          setTimeout(() => {
+            this.setState({enable:true})
+          }, 65000);
+        }
     }
     
     componentWillUnmount() {
@@ -54,35 +65,126 @@ class OtpVarification extends React.Component{
           });
         }
     };
-
     
     otpResend=async()=>{
       AsyncStorage.setItem('old_mobile',this.state.mobile)
       AsyncStorage.setItem('old_email',this.state.email)
-      if(this.state.mobile){
-      this.props.dispatch({
-        type: 'Resen_Otp_Request',
-        url: 'resendotp',
-        mobile:this.state.mobile,
-        navigation:this.props.navigation,
-     })
+      console.log('this is attempt bool',this.state.attemptbool,this.state.boolean);
+
+      if(this.state.attemptbool==undefined){
+        if(this.state.boolean==true){
+          if(this.state.mobile){
+            this.props.dispatch({
+              type: 'Resen_Otp_Request',
+              url: 'resendotp',
+              mobile:this.state.mobile,
+              navigation:this.props.navigation,
+              boolean:this.state.boolean
+           })
+          }
+          else{
+            this.props.dispatch({
+              type: 'Resen_Otp_Request',
+              url: 'resendotp',
+              email:this.state.email,
+              navigation:this.props.navigation,
+              boolean:this.state.boolean
+           })
+          }
+        }
+        else if(this.state.boolean==false){
+          if(this.state.mobile){
+            this.props.dispatch({
+              type: 'Resen_Otp_Request',
+              url: 'resendotp',
+              mobile:this.state.mobile,
+              navigation:this.props.navigation,
+              boolean:''
+           })
+          }
+          else{
+            this.props.dispatch({
+              type: 'Resen_Otp_Request',
+              url: 'resendotp',
+              email:this.state.email,
+              navigation:this.props.navigation,
+              boolean:''
+           })
+          }
+        }    
+      }
+      else if(this.state.attemptbool=="false"){
+        if(this.state.mobile){
+          this.props.dispatch({
+            type: 'Resen_Otp_Request',
+            url: 'resendotp',
+            mobile:this.state.mobile,
+            navigation:this.props.navigation,
+            boolean:''
+         })
+        }
+        else{
+          this.props.dispatch({
+            type: 'Resen_Otp_Request',
+            url: 'resendotp',
+            email:this.state.email,
+            navigation:this.props.navigation,
+            boolean:''
+         })
+        }
+       
     }
-    else{
-      this.props.dispatch({
-        type: 'Resen_Otp_Request',
-        url: 'resendotp',
-        email:this.state.email,
-        navigation:this.props.navigation,
-     })
+    else if(this.state.boolean==false&&this.state.attemptbool=="true"){
+      if(this.state.mobile){
+        this.props.dispatch({
+          type: 'Resen_Otp_Request',
+          url: 'resendotp',
+          mobile:this.state.mobile,
+          navigation:this.props.navigation,
+          boolean:true,
+          boolean2:this.state.boolean
+       })
+      }
+      else{
+        this.props.dispatch({
+          type: 'Resen_Otp_Request',
+          url: 'resendotp',
+          email:this.state.email,
+          navigation:this.props.navigation,
+          boolean:true,
+          boolean2:this.state.boolean
+       })
+      }
+    }
+    else if(this.state.boolean==true&&this.state.attemptbool=="true"){
+      if(this.state.mobile){
+        this.props.dispatch({
+          type: 'Resen_Otp_Request',
+          url: 'resendotp',
+          mobile:this.state.mobile,
+          navigation:this.props.navigation,
+          boolean:this.state.boolean
+       })
+      }
+      else{
+        this.props.dispatch({
+          type: 'Resen_Otp_Request',
+          url: 'resendotp',
+          email:this.state.email,
+          navigation:this.props.navigation,
+          boolean:this.state.boolean
+       })
+      }
     }
     }
     validateUser=()=>{
-    
-      if(this.state.otpData==''){
+      AsyncStorage.setItem('old_mobile',this.state.mobile)
+      AsyncStorage.setItem('old_email',this.state.email)
+      if(this.props.attempt.messages=='You have reached the maximum number of attempts. Try after 1 minute!'){
         if(this.state.email){
-          Toast.show('Your email has been blocked for a day due to maximum number of wrong attempts.')
+          // Toast.show('Your email has been blocked for 1 minute due to maximum number of wrong attempts.')
         }else{
-          Toast.show('Your number has been blocked for a day due to maximum number of wrong attempts.')
+          // Toast.show('Your number has been blocked for 1 minute due to maximum number of wrong attempts.')
         }
       
       }
@@ -90,7 +192,6 @@ class OtpVarification extends React.Component{
       if(this.state.otp==this.state.otpData){
           if(!this.state.email){
             AsyncStorage.setItem('old_mobile','')
-      
              this.props.navigation.replace('CreatePin',{
              mobile:this.state.mobile
             })
@@ -99,17 +200,66 @@ class OtpVarification extends React.Component{
           AsyncStorage.setItem('old_email','')
             this.props.navigation.replace('CreatePin',{
                 email:this.state.email
-                })
+            })
         }
       }
       else{
+        if(this.state.otp==''||this.state.otp.length<4){
+          Toast.show('Please Enter Otp')
+        }else{
+          this.setState({
+            boolean:false
+          })
         Toast.show('Please Enter Correct Otp Code')
+        if(this.state.email){
+          console.log('this. is working');
+        this.props.dispatch({
+          type: 'Verifyf_Otp_Request',
+          url: 'verifyotp',
+          email:this.state.email,
+          navigation:this.props.navigation,
+          boolean:this.state.attemptbool=='true'?true:'',
+          otp:this.state.otpData
+       })
       }
+      else{
+        this.props.dispatch({
+          type: 'Verifyf_Otp_Request',
+          url: 'verifyotp',
+          mobile:this.state.mobile,
+          navigation:this.props.navigation,
+          boolean:this.state.attemptbool=='true'?true:'',
+          otp:this.state.otpData
+       })
+      }
+    }
+      this.setState({otp:''})
+    }
     }
      }
    manageAttempt=()=>{
+    if(this.state.attemptbool=='false'){
      if(this.state.mobile){
        if(this.state.mobile==this.state.old_mobile){
+        if(this.props.attempt.messages=='You have reached the maximum number of attempts. Try after 1 minute!'){
+          return(
+            <View style={[styles.textBottom,{marginTop:15}]}>
+                <Text style={styles.your}>
+                { `You have reached the maximum number of attempts. Try after 1 minute!`}
+                </Text>
+           </View>
+           )
+        }
+        else if(this.props.attempt.attempt==0){
+          return(
+            <View style={[styles.textBottom,{marginTop:15}]}>
+                <Text style={styles.your}>
+                {/* { `You have reached the maximum number of attempts. Try after 1 minute!`} */}
+                </Text>
+           </View>
+           )
+        }
+        else{
         return(
           <View style={[styles.textBottom,{marginTop:15}]}>
           
@@ -117,6 +267,7 @@ class OtpVarification extends React.Component{
               {this.props.attempt? `You have entered wrong OTP, ${this.props.attempt.attempt} attempt left.`:`Enter the OTP sent on ${this.state.mobile}.`}              </Text>
          </View>
          )
+        }
        }
        else{
         return(
@@ -131,40 +282,118 @@ class OtpVarification extends React.Component{
     
      }
      else if(this.state.email){
-       console.log('hi',this.state.email,this.state.old_email);
        if(this.state.email==this.state.old_email){
-         console.log('hello');
+         if(this.props.attempt.messages=='You have reached the maximum number of attempts. Try after 1 minute!'){
+          return(
+            <View style={[styles.textBottom,{marginTop:15}]}>
+                <Text style={styles.your}>
+                { `You have reached the maximum number of attempts. Try after 1 minute!`}
+                 </Text>
+            </View>
+           )
+         }
+         else if(this.props.attempt.attempt==0){
+          return(
+            <View style={[styles.textBottom,{marginTop:15}]}>
+                <Text style={styles.your}>
+                {/* { `You have reached the maximum number of attempts. Try after 1 minute!`} */}
+                 </Text>
+            </View>
+           )
+         }
+         else{
         return(
           <View style={[styles.textBottom,{marginTop:15}]}>
-           
               <Text style={styles.your}>
               {this.props.attempt? `You have entered wrong OTP, ${this.props.attempt.attempt} attempt left.`:`Enter the OTP sent on ${this.state.email}.`}             
                </Text>
           </View>
-         )
+         )}
        }
        else{
-        console.log('hi working' );
         return(
           <View style={[styles.textBottom,{marginTop:15}]}>
-          
               <Text style={styles.your}>
                 {`Enter the OTP sent on ${this.state.email}.`}
               </Text>
           </View>
          )
        }
-      
      }
+    }
+    else if(this.state.attemptbool=='true'){
+      if(this.props.attempt){
+        if(this.props.attempt.messages=='You have reached the maximum number of attempts. Try after 1 minute!'){
+          return(
+          <Text style={[styles.your,{marginTop:15}]}>
+        { `You have reached the maximum number of attempts. Try after 1 minute!`}
+         </Text>
+          )
+        }
+        else if(this.props.attempt.attempt==0){
+          return(
+            <Text style={[styles.your,{marginTop:15}]}>
+          {/* { `You have reached the maximum number of attempts. Try after 1 minute!`} */}
+           </Text>
+            )
+        }
+        else{
+          if(this.state.boolean2==false){
+            return(
+              <Text style={[styles.your,{marginTop:15}]}>
+              { `You have entered wrong OTP, ${3-this.props.attempt.attempt} attempt left.`}
+             </Text>
+            )
+          }
+          return(
+            <Text style={[styles.your,{marginTop:15}]}>
+            { `${3-this.props.attempt.attempt} attempt left.`}
+           </Text>
+          )
+        }
+      }
+      else{
+        if(this.state.mobile){
+        return(
+          <Text style={[styles.your,{marginTop:15}]}>
+          { `Enter the OTP sent on ${this.state.mobile}.`}
+         </Text>
+        )
+        }
+        else{
+          return(
+            <Text style={[styles.your,{marginTop:15}]}>
+            { `Enter the OTP sent on ${this.state.email}.`}
+           </Text>
+          )
+        }
+      }
+    }
+    else{
+      if(this.state.mobile){
+      return(
+        <Text style={[styles.your,{marginTop:15}]}>
+          { `Enter the OTP sent on ${this.state.mobile}.`}
+         </Text>
+      )
+      }
+      else{
+        return(
+          <Text style={[styles.your,{marginTop:15}]}>
+            { `Enter the OTP sent on ${this.state.email}.`}
+           </Text>
+        )
+      }
+    }
    }  
     render(){
-        console.log('this is construxskf',this.state.otpData,this.props.attempt);
+      console.log('this is attemp data',this.props.attempt);
         return(
             <View style={styles.container}>
              
               <KeyboardAwareScrollView>
               <View style={styles.imageContainer}>
-                  <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
+                  <TouchableOpacity onPress={()=>this.props.navigation.navigate('Forget')}>
                   <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
                   </TouchableOpacity>
                   <View style={styles.round}>
@@ -192,7 +421,7 @@ class OtpVarification extends React.Component{
                      title='CONFIRM OTP'
                      onPress={()=>this.validateUser()}
                      />
-                    {this.state.otpData=='' ? <View/> :<View>
+                   {this.state.enable==true? <View>
                     <View style={[styles.textBottom,{marginTop:10,flexDirection:'row',alignItems:'center',justifyContent:'center'}]}>
                       <Text style={styles.your}>
                           {`Didn’t Receive the OTP?`}
@@ -211,7 +440,7 @@ class OtpVarification extends React.Component{
                          {`You can request OTP Resend\nafter 0${Math.floor(this.state.counter / 60)}:${(this.state.counter < 10 ? `0${this.state.counter%60}`:this.state.counter%60)} sec`}</Text>
                     :null
                     }
-                    </View>}
+                    </View>:<View/>}
                  </View>
                 
                </View>

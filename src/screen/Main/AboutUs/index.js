@@ -55,9 +55,7 @@ const showContent=()=>{
              <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
            <View style={styles.card}>
               {isFetching?<Loader/>:null}
-            
                  {showContent()}
-            
            </View>
            </ScrollView>
          <StatusBar/>

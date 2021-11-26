@@ -1,10 +1,10 @@
-import React,{useState,useRef,useEffect} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform,BackHandler, Alert} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import { View,Text,Image,ScrollView,TextInput,Platform,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
-import DatePicker from 'react-native-datepicker';
+// import DatePicker from 'react-native-datepicker';
 import RNPickerSelect from 'react-native-picker-select';
 import colors from '../../../component/colors';
 import Header from '../../../component/compareHeader';
@@ -14,9 +14,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import CustomButton from '../../../component/button1';
 import Loader from '../../../component/loader';
-import axios from 'axios';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import  DatePicker  from "react-native-date-picker";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
@@ -35,7 +36,8 @@ const loginValidationSchema=yup.object().shape({
  })
 
 const RegisterPage=({route})=>{
-   const userDetail=useSelector(state=>state.UserData)
+    const userDetail=useSelector(state=>state.UserData)
+    const CountryList=useSelector(state=>state.CountryList)
     const user=userDetail[0]
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -44,18 +46,23 @@ const RegisterPage=({route})=>{
     const [dob, setDob] = useState(user.dob);
     const [city,setCity]=useState(`${user.city}`)
     const [state,setState]=useState(`${user.state}`)
-    const [country,setCountry]=useState('India')
+    const [country,setCountry]=useState(``)
     const [income_group,setIncome_group]=useState(user.income_group)
     const [education,setEducation]=useState(user.education)
     const [marital_status,setMarital_status]=useState(user.marital_status)
     const [residential_address,setResidential_address]=useState(user.residential_status)
     const [occupation,setOccupation]=useState(user.occupation==0||null?'':user.occupation) 
-
+    const [open,setOpen]=useState(false)
+    const [date, setDate] = useState(new Date())
     const selector1=useSelector(state=>state.StateList)
     const selector2=useSelector(state=>state.CityList)
-    
+    console.log('this is date'
+    );
 
-   useEffect(()=>{
+   const value1= date.toISOString().split('T')[0]  
+   const [yyyy ,mm ,dd]=value1.split('-')
+    const value=`${dd}-${mm}-${yyyy}`
+    useEffect(()=>{
       const backAction = () => {
          navigation.goBack()
          return true;
@@ -113,7 +120,7 @@ const RegisterPage=({route})=>{
       email:values.email,
       father_spouse_name:values.father,
       mother_maiden_name:values.mother,
-      dob:dob,
+      dob:value,
       gender:gender,
       navigation:navigation,
       pan:values.pan,
@@ -123,7 +130,7 @@ const RegisterPage=({route})=>{
       city:city,
       state:state,
       pincode:values.pincode,
-      country:101,
+      country:country,
       marital_status:marital_status,
       occupation:occupation=='Others'?values.occupation:occupation,
       income_group:income_group,
@@ -141,27 +148,17 @@ const RegisterPage=({route})=>{
          state_id:val,
          
        })
-      // console.log('this si isisi isi si',val);
-      // try {
-      //     const data = new FormData();
-      //     data.append('state_id',val)
-      //     const response = await axios({
-      //       method: 'POST',
-      //       data,
-      //       headers: {
-      //         'content-type': 'multipart/form-data',
-      //         Accept: 'multipart/form-data',
-      //       },
-      //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-      //     });
-      //     console.log('this is response value',response);
-      //     setManageStateValue(response.data.data)
-      //   } catch (error) {
-      //    throw error;
-          
-      //   }
-  
-       }
+   }
+   const manageCountry=async(val)=>{
+      setCountry(val)
+      dispatch({
+         type: 'State_List_Request',
+         url: 'statebyid',
+         country_id:val,
+         
+       })
+   }
+
          return(
             <Formik
             initialValues={{ 
@@ -287,9 +284,25 @@ const RegisterPage=({route})=>{
                         <Text style={styles.better}>Date of Birth</Text>
                         <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
-                            <View style={styles.dropCal}>
-                              <View style={{width:'80%',marginLeft:0}}>
-                               <DatePicker
+                            <TouchableOpacity onPress={()=>setOpen(true)} style={styles.dropCal}>
+                              <View style={{width:'80%'}}>
+                                 <Text style={{color:colors.textColor}}>{value}</Text>
+                              <DatePicker 
+                              date={date}
+                              modal
+                              mode={'date'}
+                              open={open}
+                              style={{alignItems:'center'}}
+                              onConfirm={(date) => {
+                                setOpen(false)
+                               setDate(date)
+                              }}
+                              onCancel={() => {
+                                setOpen(false)
+                              }}
+                              textColor={colors.textColor}                              
+                              />
+                               {/* <DatePicker
                                   //  style={{width: '100%',}}
                                      date={dob=='0'||null?'':dob}
                                      mode="date"
@@ -313,11 +326,13 @@ const RegisterPage=({route})=>{
                                         }
                                       }}
                                       onDateChange={(date)=> setDob(date)}                                   
-                                  /> 
+                                  />  */}
                                   </View>
+                                  <TouchableOpacity onPress={()=>setOpen(true)}>
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
                                     source={require('../../../assets/Image/down.png')}/>
-                            </View>
+                                    </TouchableOpacity>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.row}>
@@ -434,6 +449,28 @@ const RegisterPage=({route})=>{
                         }
                      </View>
                      <View style={styles.row}>
+                     <Text style={styles.better}>Pincode</Text>
+                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    </View>
+                      <View style={styles.drop}>
+                        <TextInput
+                        style={styles.input}
+                        placeholder='Please enter pincode'
+                        placeholderTextColor={colors.heading1}
+                        defaultValue={values.pincode}
+                        onChangeText={handleChange('pincode')}
+                        onBlur={handleBlur('pincode')}
+                        keyboardType={'number-pad'} 
+                        maxLength={6}  
+                        returnKeyType='done'                     
+                        />
+                    </View>
+                    <View style={styles.error}>
+                     {(errors.pincode && touched.pincode) &&
+                        <Text style={styles.warn}>{errors.pincode}</Text>
+                        }
+                     </View>
+                     <View style={styles.row}>
 
                     
                        <Text style={styles.better}>Occupation</Text>
@@ -474,36 +511,15 @@ const RegisterPage=({route})=>{
                         
                     <View style={styles.error}>
                      </View>
-                     <View style={styles.row}>
-                     <Text style={styles.better}>Pincode</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
-                    </View>
-                      <View style={styles.drop}>
-                        <TextInput
-                        style={styles.input}
-                        placeholder='Please enter pincode'
-                        placeholderTextColor={colors.heading1}
-                        defaultValue={values.pincode}
-                        onChangeText={handleChange('pincode')}
-                        onBlur={handleBlur('pincode')}
-                        keyboardType={'number-pad'} 
-                        maxLength={6}  
-                        returnKeyType='done'                     
-                        />
-                    </View>
-                    <View style={styles.error}>
-                     {(errors.pincode && touched.pincode) &&
-                        <Text style={styles.warn}>{errors.pincode}</Text>
-                        }
-                     </View>
+                    
                      <View style={styles.row}>
                      <Text style={styles.better}>Country</Text>
                      <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
-                        onValueChange={(val)=>setCountry(val)}
-                        items={Country}
+                        onValueChange={(val)=>manageCountry(val)}
+                        items={CountryList}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
@@ -565,7 +581,7 @@ const RegisterPage=({route})=>{
                         }}
                         value={city==null||0?'':city}
                         useNativeAndroidPickerStyle={false}
-                        placeholder={{label: "Select City", value:0 }}
+                        placeholder={{label: "Select City", value:'' }}
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 

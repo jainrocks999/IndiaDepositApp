@@ -1,5 +1,5 @@
 import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView,Image} from 'react-native';
+import {View,Text,TextInput,ScrollView,TouchableOpacity} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -14,9 +14,10 @@ import CustomButton from '../../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
-import DatePicker from 'react-native-datepicker'
-import axios from 'axios';
+// import DatePicker from 'react-native-datepicker'
+import DatePicker from 'react-native-date-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import Loader from '../../../../component/loader';
 
 const loginValidationSchema=yup.object().shape({
     name:yup.string().max(40).required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
@@ -34,12 +35,20 @@ const BankDetail=({route})=>{
         const dispatch=useDispatch()
         const [city,setCity]=useState('')
         const [state,setState]=useState('')
-        const [country,setCountry]=useState('India')
+        const [country,setCountry]=useState('')
         const [dob,setDob]=useState('')
         const selector=useSelector(state=>state.CityList)
         const selector1=useSelector(state=>state.StateList)
+        const CountryList=useSelector(state=>state.CountryList)
+        const isFetching=useSelector(state=>state.isFetching)
         const [manageStateValue,setManageStateValue]=useState([])
-        
+        const [open,setOpen]=useState(false)
+        const [date, setDate] = useState(new Date())
+
+        const value1= date.toISOString().split('T')[0]  
+        const [yyyy ,mm ,dd]=value1.split('-')
+        const value=`${dd}-${mm}-${yyyy}`
+
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
         if(country==''){
@@ -51,8 +60,8 @@ const addUser=async(values)=>{
         else if(city==''){
             Toast.show('Please Select City Name')
         }
-        else if(dob==''){
-            Toast.show('Please Select Date of Birth')
+        else if(!value){
+            Toast.show('Please Select Date Birth')
         }else{
         dispatch({
             type: 'Add_Nominee_Request',
@@ -61,10 +70,10 @@ const addUser=async(values)=>{
             name:values.name,
             address1:values.address1,
             address2:values.address2,
-            country:101,
+            country:country,
             state:state,
             city:city,
-            dob:dob,
+            dob:value,
             relationship:values.relationship,
             guardian:values.guardian,
             guardian_relationship:values.guardian_relationship,
@@ -82,31 +91,16 @@ const addUser=async(values)=>{
           state_id:val,
           
         })
-        // try {
-        //     const data = new FormData();
-        //     data.append('state_id',val)
-        //     const response = await axios({
-        //       method: 'POST',
-        //       data,
-        //       headers: {
-        //         'content-type': 'multipart/form-data',
-        //         Accept: 'multipart/form-data',
-        //       },
-        //       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/citybyid',
-        //     });
-        //     console.log('this is response value',response);
-        //     setManageStateValue(response.data.data)
-        //   } catch (error) {
-        //    throw error;
-            
-        //   }
-    
-         }
-    
-         const Country=[
-          {label:'India',value:'101'},
-        ]
-
+      }
+      const manageCountry=async(val)=>{
+        setCountry(val)
+        dispatch({
+           type: 'State_List_Request',
+           url: 'statebyid',
+           country_id:val,
+           
+         })
+     }
     return(
         <Formik
         initialValues={{name:'',address1:'',address2:'',pincode:'',relationship:'',guardian:'',guardian_relationship:''}}
@@ -119,9 +113,10 @@ const addUser=async(values)=>{
             <Header
                     title={'ADD NOMINEE   '}
                     source={require('../../../../assets/Image/arrow2.png')}
-                    onPress={()=>Root.push('Profile')}
+                    onPress={()=>navigation.goBack()}
                    /> 
              <ScrollView style={styles.main}>
+               {isFetching?<Loader/>:null}
              <KeyboardAwareScrollView
                 extraScrollHeight={10}
                 enableOnAndroid={true} 
@@ -191,8 +186,8 @@ const addUser=async(values)=>{
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
-                            onValueChange={(val)=>setCountry(val)}
-                            items={Country}
+                            onValueChange={(val)=>manageCountry(val)}
+                            items={CountryList}
                             //style={{ inputAndroid: { color: 'black' } }}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
@@ -254,8 +249,24 @@ const addUser=async(values)=>{
                     <Text style={styles.better}>Date of Birth</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
-                      <View style={styles.drop}>
-                      <DatePicker
+                      <TouchableOpacity onPress={()=>setOpen(true)} style={styles.drop}>
+                      <Text style={{color:colors.textColor}}>{value}</Text>
+                              <DatePicker 
+                              date={date}
+                              modal
+                              mode={'date'}
+                              open={open}
+                              style={{alignItems:'center'}}
+                              onConfirm={(date) => {
+                                setOpen(false)
+                               setDate(date)
+                              }}
+                              onCancel={() => {
+                                setOpen(false)
+                              }}
+                              textColor={colors.textColor}                              
+                              />
+                      {/* <DatePicker
                         style={{width: '99%'}}
                             date={dob}
                             mode="date"
@@ -279,8 +290,8 @@ const addUser=async(values)=>{
                             }
                             }}
                             onDateChange={(date) => setDob(date)}
-                        />
-                    </View>
+                        /> */}
+                    </TouchableOpacity>
                     <View style={styles.error}>
                         {/* {(errors.ifsc_code && touched.ifsc_code) &&
                         <Text style={styles.warn}>{errors.ifsc_code}</Text>} */}

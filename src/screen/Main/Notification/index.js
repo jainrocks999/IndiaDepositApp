@@ -1,5 +1,5 @@
-import React,{useEffect}from 'react';
-import { View,Text,ScrollView,BackHandler, Alert} from 'react-native';
+import React,{useEffect,useState}from 'react';
+import { View,Text,ScrollView,BackHandler, Image,TextInput,TouchableOpacity, Alert, Keyboard} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -10,23 +10,73 @@ import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import * as RootNavigation from '../../../navigator/rootNavigation';
+import colors from '../../../component/colors';
+import axios from 'axios';
+import OptionsMenu from "react-native-option-menu";
 
 const Notification=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Notification)
     const isFetching=useSelector(state=>state.isFetching)
-    
+    console.log('this is selector',selector);
+    const [search,setSearch]=useState('')
+    const [filteredDataSource, setFilteredDataSource] = useState(selector);
+    const [masterDataSource, setMasterDataSource] = useState(selector);
+
+
+    const searchFilterFunction = (text) => {
+        if (text) {
+          const newData = masterDataSource.filter(function (item) {
+            const itemData = `${item.created_date} ${item.title} ${item.notification}`
+              ? `${item.created_date} ${item.title} ${item.notification}`.toUpperCase()
+              : ''.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1;
+          });
+          setFilteredDataSource(newData);
+          setSearch(text);
+        } else {
+          setFilteredDataSource(masterDataSource);
+          setSearch(text);
+        }
+      };
+  
+    const handleSearch=()=>{
+      Keyboard.dismiss()
+      setSearch('')
+      setFilteredDataSource(masterDataSource);
+    }
+
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-    // Alert.alert('working')
-    dispatch({
-        type: 'Notification_Request',
-        url: 'getnotification',
-        user_id:user_id,
-    })
+    try {
+      const data = new FormData();
+      data.append('user_id',user_id)
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',
+      });
+      if (response.data.status==200) {console.log('this is narendra',response.data.data);
+        setFilteredDataSource(response.data.data)
+        setMasterDataSource(response.data.data)
+      } 
+    } catch (error) {
+     throw error;
+    }
+    // dispatch({
+    //     type: 'Notification_Request',
+    //     url: 'getnotification',
+    //     user_id:user_id,
+    // })
     const backAction = () => {
-        RootNavigation.replace('Main')
+        // RootNavigation.replace('Main')
+        navigation.goBack()
         return true;
       };
     
@@ -37,25 +87,73 @@ useEffect(async()=>{
     
       return () => backHandler.remove();
 },[])
-
+const deletePost=async(item)=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  try {
+    const data = new FormData();
+    data.append('notification_id',item)
+    const response = await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deletenotification',
+    });
+    if (response.data.status==200) {
+    try {
+      const data = new FormData();
+      data.append('user_id',user_id)
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',
+      });
+      if (response.data.status==200) {
+        setFilteredDataSource(response.data.data)
+        setMasterDataSource(response.data.data)
+      } 
+    } catch (error) {
+     throw error;
+    }
+      // setFilteredDataSource(response.data.data)
+      // setMasterDataSource(response.data.data)
+    } 
+  } catch (error) {
+   throw error;
+  }
+}
 const showContent=()=>{
-    if (selector) {
-        console.log('this is log valie',selector);
+    if (filteredDataSource) {
+        console.log('this is filter data source',filteredDataSource);
         return(
             <View>
                  <FlatList
               showsVerticalScrollIndicator={false}
-              data={selector}
+              data={filteredDataSource}
               style={{marginBottom:10}}
               renderItem={({item})=>
               <View>
-              {selector[0].notification_id==item.notification_id?<View/>:<View style={styles.line}></View>}
+              {filteredDataSource[0].notification_id==item.notification_id?<View/>:<View style={styles.line}></View>}
                <View style={styles.view1}>
                    <View>
                        <View style={styles.view2}>
                        <Text style={styles.text1}>{item.title}</Text>
+                       <Text style={{fontFamily:'Montserrat-Regular',fontSize:11,color:colors.textColor}}>{item.created_date}</Text>
+                       <OptionsMenu
+                          button={require('../../../assets/Image/menu3.png')}
+                          buttonStyle={{ width: 16, height: 18 }}
+                          destructiveIndex={1}
+                          options={["Delete", "Cancel"]}
+                          actions={[()=>deletePost(item.notification_id)]}
+                          />
                        </View>
-                       <Text style={styles.text3}>{item.notification}</Text>
+                       <Text style={[styles.text3,{marginTop:5}]}>{item.notification}</Text>
                    </View>
                </View>
               </View>
@@ -73,11 +171,33 @@ const showContent=()=>{
            <Header
             source={require('../../../assets/Image/arrow2.png')}
            title={'NOTIFICATIONS'}
-           onPress={()=>RootNavigation.replace('Main')}
+           onPress={()=>navigation.goBack()}
            />
           
-            {selector[0]? <View style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
-       
+           <View style={{width:'100%',paddingHorizontal:15,marginTop:10}}>
+          <View style={styles.container1}>
+            <View style={styles.blog}>
+             <Image 
+             style={{width:25,height:24 }}
+              source={require('../../../assets/Image/search1.png')}/>
+             <TextInput style={{marginLeft:10}}
+              placeholder='Search Here'
+              value={search}
+              placeholderTextColor={colors.heading1}
+              onChangeText={(val)=>searchFilterFunction(val)}
+              style={{color:colors.textColor,width:'70%'}}
+              returnKeyType='done'
+              />
+             </View>{search?
+            <TouchableOpacity
+            onPress={()=> handleSearch()}
+            style={styles.button}>
+             <Text style={styles.x}>x</Text>
+             </TouchableOpacity>:null}
+           </View>
+           </View>
+         
+            {filteredDataSource[0]? <View style={{flex:1,paddingHorizontal:15,paddingVertical:10}}>
              <View style={styles.card}>  
              {isFetching?<Loader/>:null} 
                 {showContent()}

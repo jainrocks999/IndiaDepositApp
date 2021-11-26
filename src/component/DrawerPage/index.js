@@ -67,9 +67,13 @@ const DrawerContent=({props})=> {
             url: 'getfaq',
         })
         dispatch({
-            type: 'State_List_Request',
-            url: 'statelist',
-          })
+            type: 'Country_List_Request',
+            url: 'countrylist',
+          })    
+        // dispatch({
+        //     type: 'State_List_Request',
+        //     url: 'statelist',
+        //   })
         
         let name=await AsyncStorage.getItem(Storage.name)
         let motherName=await AsyncStorage.getItem(Storage.motherName)
@@ -119,7 +123,47 @@ const DrawerContent=({props})=> {
         navigation.navigate('Feedback')
          navigation.dispatch(DrawerActions.closeDrawer())
     }
-  
+    const validateUser3=()=>{
+        navigation.navigate('Calculator')
+        navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser4=()=>{
+        navigation.navigate('AboutUs')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser5=()=>{
+        navigation.navigate('Contact',{
+            name:name,
+            email:email,
+            mobile:mobile
+       })
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser6=()=>{
+        navigation.navigate('Notification')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser7=()=>{
+        navigation.navigate('KnowledgeCenter')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser8=()=>{
+        navigation.navigate('BankHoliday')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser9=()=>{
+        navigation.navigate('Trending')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser10=()=>{
+        navigation.navigate('Referal')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+    const validateUser11=()=>{
+        navigation.navigate('Policy')
+         navigation.dispatch(DrawerActions.closeDrawer())
+    }
+
     return (
         <DrawerContentScrollView
         contentContainerStyle={{  }}
@@ -194,8 +238,8 @@ const DrawerContent=({props})=> {
                         <View style={styles.row}>
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
-                                <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/user.png')}/>
+                                <Image style={{height:26,width:26,marginLeft:3}} 
+                                source={require('../../assets/Image/person1.png')}/>
                             </View>
                             <Text style={styles.text}>{'Profile'}</Text>
                             </View>
@@ -208,7 +252,7 @@ const DrawerContent=({props})=> {
                     </TouchableOpacity>
                    
                 <TouchableOpacity
-                onPress={() => RootNavigation.navigate('Calculator')}
+                onPress={() => validateUser3()}
                     >
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
@@ -227,9 +271,7 @@ const DrawerContent=({props})=> {
                     </View>  
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('AboutUs')
-                    }}>
+                    onPress={() => validateUser4()}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
                             <View style={styles.view1}>
@@ -244,13 +286,7 @@ const DrawerContent=({props})=> {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => {
-                        navigation.navigate('Contact',{
-                             name:name,
-                             email:email,
-                             mobile:mobile
-                        })
-                    }}>
+                    onPress={() => validateUser5()}>
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
                             <View style={styles.view1}>
@@ -264,8 +300,22 @@ const DrawerContent=({props})=> {
                         </View>
                     </View>
                 </TouchableOpacity>
+                {/* <TouchableOpacity 
+                    onPress={()=>{navigation.navigate('MyFD')}}
+                    style={[styles.drawer]}>
+                         <View style={styles.row}>
+                            <View style={styles.view1}>
+                            <View style={styles.iconView}>
+                                <Image style={styles.imageicon} 
+                                source={require('../../assets/Image/noti.png')}/>
+                            </View>
+                            <Text style={styles.text}>{'My FD'}</Text>
+                            </View>
+                            <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
+                        </View>
+                </TouchableOpacity> */}
                 <TouchableOpacity 
-                    onPress={()=>{navigation.navigate('Notification')}}
+                    onPress={()=>validateUser6()}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
                             <View style={styles.view1}>
@@ -279,7 +329,7 @@ const DrawerContent=({props})=> {
                         </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('KnowledgeCenter')}
+                    onPress={()=>validateUser7()}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
                             <View style={styles.view1}>
@@ -294,7 +344,7 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('BankHoliday')}
+                    onPress={()=>validateUser8()}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
                             <View style={styles.view1}>
@@ -309,7 +359,7 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={()=>navigation.navigate('Trending')}
+                    onPress={()=>validateUser9()}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
                             <View style={styles.view1}>
@@ -330,7 +380,7 @@ const DrawerContent=({props})=> {
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
                                 <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/support.png')}/>
+                                source={require('../../assets/Image/support1.png')}/>
                             </View>
                             <Text style={styles.text}>{'Support'}</Text>
                             </View>
@@ -346,8 +396,8 @@ const DrawerContent=({props})=> {
                         <View style={styles.row}>
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
-                                <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/feedback.png')}/>
+                                <Image style={{width:26,height:26,marginLeft:3}} 
+                                source={require('../../assets/Image/feedback1.png')}/>
                             </View>
                             <Text style={styles.text}>{'Feedback'}</Text>
                             </View>
@@ -356,7 +406,7 @@ const DrawerContent=({props})=> {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                onPress={()=>navigation.navigate('Referal')}
+                onPress={()=>validateUser10()}
                     style={[styles.drawer]}>
                         <View style={styles.row}>
                             <View style={styles.view1}>
@@ -370,14 +420,14 @@ const DrawerContent=({props})=> {
                         </View>
                 </TouchableOpacity>
                 <TouchableOpacity
-                     onPress={() => navigation.navigate('Policy')}
+                     onPress={() => validateUser11()}
                     >
                     <View style={[styles.drawer]}>
                     <View style={styles.row}>
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
-                                <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/privacy.png')}/>
+                                <Image style={{height:26,width:26,marginLeft:3}} 
+                                source={require('../../assets/Image/policy.png')}/>
                             </View>
                             <Text style={styles.text}>{'Policy'}</Text>
                             </View>

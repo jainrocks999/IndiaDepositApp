@@ -6,7 +6,6 @@ export default StyleSheet.create({
     {
     flex: 1,
     backgroundColor:colors.card,
-    //paddingTop:Platform.OS=='android'?0:40
     },
     view1:
     {
@@ -47,21 +46,6 @@ export default StyleSheet.create({
         marginTop:50,
         marginBottom:20
     }, 
-    // card:
-    // {
-    //     shadowColor:colors.black,
-    //     shadowOpacity:0.25,
-    //     shadowRadius:8,
-    //     shadowOffset:{height:2,width:0},
-    //     elevation:5,
-    //     borderTopLeftRadius:10,
-    //     borderTopRightRadius:10,
-    //     backgroundColor:colors.white,
-    //     marginHorizontal:15,
-    //     paddingHorizontal:18,
-    //     marginTop:20,
-    //     height:'89%'
-    // },
     card:
     {
         shadowColor:colors.black,
@@ -71,7 +55,38 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:10,
         backgroundColor:colors.white,
-        // marginBottom:40,
         paddingHorizontal:15,
     },
+    button:{
+        backgroundColor:colors.bc,
+        borderRadius:15,
+        justifyContent:'center',
+        height:30,
+        width:30,
+        alignItems:'center'
+    },
+    container1:{
+        width:'100%',
+        height:40,
+        backgroundColor:'#fff',
+        borderRadius:10,
+        elevation:3,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        paddingHorizontal:10,
+        paddingRight:10,
+    },
+    blog:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start',
+        width:'90%'
+    },
+    x:{
+        marginRight:10,
+        color:'#fff',
+        marginLeft:10,
+        marginBottom:3
+    }
 })

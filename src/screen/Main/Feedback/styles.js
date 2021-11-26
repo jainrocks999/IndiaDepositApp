@@ -58,7 +58,6 @@ export default StyleSheet.create({
         color:colors.textColor,
         fontSize:fontSize.fourteen,
         fontFamily:'Montserrat-SemiBold',
-         marginTop:5
     },
     star:
     {
@@ -120,8 +119,11 @@ export default StyleSheet.create({
         width:'100%',
         paddingHorizontal:10,
         // paddingVertical:-10
-    }
-    
-   
-    
+    },
+    same:{
+        marginTop:7,
+        flexDirection:'row',
+        alignItems:'center'
+    },
+    font:{width:8,height:8,borderRadius:4,backgroundColor:colors.bc}
 })

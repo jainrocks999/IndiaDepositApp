@@ -12,11 +12,11 @@ const TermAndCondition=()=>{
     const selector=useSelector(state=>state.TermCondition)
     const isFetching=useSelector(state=>state.isFetching)
 useEffect(()=>{
-        dispatch({
-          type: 'TermAndCondition_Request',
-          url: 'getpagecontent',
-          key:'term_condition',
-    })
+    //     dispatch({
+    //       type: 'TermAndCondition_Request',
+    //       url: 'getpagecontent',
+    //       key:'term_condition',
+    // })
 },[])
 
 const showContent=()=>{

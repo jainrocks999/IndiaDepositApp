@@ -23,7 +23,6 @@ const loginValidationSchema=yup.object().shape({
     ifsc_code:yup.string().min(11,({min})=>`IFSC code must be 11 digits`)
     .required('Please enter IFSC Code')
     .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid IFSC code"),
-    name:yup.string().required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   })
 const data2=[
     { label: 'Saving Account', value: 'Saving Account'},
@@ -51,7 +50,6 @@ const addUser=async(values)=>{
             user_id,
             user_bank_id:data.item.user_bank_id,
             bank_id:bank_name,
-            name:values.name,
             account_number:values.account_number,
             account_type:account_type,
             ifsc_code:values.ifsc_code,
@@ -67,7 +65,6 @@ const addUser=async(values)=>{
         initialValues={{ 
             account_number:data.item.account_number,
             ifsc_code:data.item.ifsc_code,
-            name:data.item.name
         }}
         onSubmit={values => addUser(values)}
         validateOnMount={true}
@@ -87,26 +84,6 @@ const addUser=async(values)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                <Text style={styles.better}>Name</Text>
-                <Text style={{marginTop:10,color:colors.red}}>*</Text>
-                    </View>
-             
-                      <View style={styles.drop}>
-                        <TextInput
-                        style={styles.input}
-                        placeholder='Please enter your name'
-                        placeholderTextColor={colors.heading1}
-                        value={values.name}
-                        onChangeText={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        returnKeyType='done'
-                        />
-                    </View>
-                    <View style={styles.error}>
-                        {(errors.name && touched.name) &&
-                        <Text style={styles.warn}>{errors.name}</Text>}
-                    </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Bank Name</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>

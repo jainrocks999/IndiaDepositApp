@@ -52,9 +52,6 @@ const changeValue1=(val)=>{
   setFormFor(val)
   manageFilter()
 }
-
-
-
    const actualDownload = (url) => {
         const { dirs } = RNFetchBlob.fs;
        RNFetchBlob.config({
@@ -115,12 +112,12 @@ const renderItem=(item)=>{
           <View style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
              {data.length>0? <View style={styles.card}>
               <Text style={styles.heading}>{'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic orweb designs. The passage is attributed to an unknown typesetter book.'}</Text>
-             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
+             {/* <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginTop:10}}>
                <View style={styles.view}>
                      <RNPickerSelect
                         onValueChange={(val)=>changeValue(val)}
                         items={Data}
-                        style={{ 
+                        style={{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' ,fontSize:13,fontFamily:'Montserrat-Regular'},
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
@@ -150,7 +147,7 @@ const renderItem=(item)=>{
                      source={require('../../../assets/Image/down.png')}/>}   
                   />        
                </View>
-             </View>
+             </View> */}
               <FlatList
               data={data}
               renderItem={({item})=>renderItem(item)}
@@ -167,7 +164,7 @@ const renderItem=(item)=>{
 export default fd_form
 const Data=[
   { label: 'Specific', value: 'specific' },
-  { label: 'Common', value: 'common' },
+  { label: 'Comman', value: 'common' },
 ]
 const Data1=[
   { label: 'Fixed Deposit', value: 'fixeddeposit' },

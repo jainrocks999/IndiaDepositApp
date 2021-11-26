@@ -9,6 +9,8 @@ import Storage from '../../AsyncStorage';
 import axios from "axios";
 import * as Root from '../../../navigator/rootNavigation';
 import colors from '../../colors';
+import OptionsMenu from "react-native-option-menu";
+
 const Nominee=()=>{
     const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -20,16 +22,6 @@ const Nominee=()=>{
             type: 'Nominee_List_Request',
             url: 'nomineelist',
             user_id
-          })
-    
-        dispatch({
-            type: 'Country_List_Request',
-            url: 'countrylist',
-          })
-    
-        dispatch({
-            type: 'State_List_Request',
-            url: 'statelist',
           })
     },[])
     
@@ -83,27 +75,28 @@ const Nominee=()=>{
     }
     
     const renderItem=(item)=>{
+      console.log('this is nominee id',item.user_nominee_id);
         return(
             <View style={styles.cont}>
                   <View 
                       style={styles.card}>
-                     <View style={styles.cardView}>
-                        {/* <Image source={require('../../../assets/Images/sbi.png')}/> */}
-                        {/* <Text style={[styles.title,{marginLeft:5}]}>{`Name  : ${item.name}`}</Text> */}
-                       <View style={{width:'20%',alignItems:'flex-end'}}>
-                       </View>
-                     </View>
-                    
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Name : ${item.name}`}</Text>
+                         <OptionsMenu
+                          button={require('../../../assets/Image/menu3.png')}
+                          buttonStyle={{ width: 16, height: 18 }}
+                          destructiveIndex={1}
+                          options={["Edit","Delete", "Cancel"]}
+                          actions={[()=>editPost(item),()=>renderModal(item)]}
+                          />
                      </View>
-                     <View style={styles.row}>
+                     <View style={[styles.row,{marginTop:1}]}>
                          <Text style={styles.same}>{`Date of Birth : ${item.dob}`}</Text>
                      </View>
-                     <View style={styles.row}>
+                     <View style={[styles.row,{marginTop:5}]}>
                          <Text style={styles.same}>{`Relationship : ${item.relationship}`}</Text>
                      </View>
-                     <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
+                     {/* <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
                      <TouchableOpacity
                      onPress={()=>renderModal(item)}
                      style={styles.button}>
@@ -118,7 +111,7 @@ const Nominee=()=>{
                               EDIT
                           </Text>
                           </TouchableOpacity>
-                     </View>
+                     </View> */}
                    </View>
             </View>
         )

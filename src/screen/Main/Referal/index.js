@@ -71,11 +71,11 @@ const share=async()=>{
                   title={'REFERRAL'}
                   onPress={()=>navigation.goBack()}
                />
-               <ScrollView>
                <View style={styles.pfile}> 
                    <Image 
                       source={require('../../../assets/Image/Invite-fd.png')}/>
                </View> 
+               <ScrollView style={{paddingHorizontal:15,paddingVertical:5}}>
                <View style={styles.card}>
                      <View style={styles.view1}>
                            <Image source={require('../../../assets/Image/Vect.png')}/>
@@ -89,24 +89,22 @@ const share=async()=>{
                              <View style={styles.round}>
                                  <Text style={styles.text}>1</Text>
                              </View>
-                               {/* <Text>{'Invites your\nfriends to\nsign up'}</Text> */}
                          </View>
                          <View style={styles.line1}></View>
                          <View>
                              <View style={styles.round}>
                                <Text style={styles.text}>2</Text>
                              </View>
-                             {/* <Text>{'Invites your\nfriends to\nsign up'}</Text> */}
                          </View>
                           <View style={styles.line1}></View>
                          <View>
                              <View style={styles.round}>
                                  <Text style={styles.text}>3</Text>
                              </View>
-                             {/* <Text>{'Invites your\nfriends to\nsign up'}</Text> */}
                          </View>
                      </View>
-                     <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:0,paddingHorizontal:20}}>
+                     <View style={{flexDirection:'row',
+                     justifyContent:'space-between',marginTop:0,paddingHorizontal:0}}>
                      <Text style={styles.row}>{'Invites your\nfriends to\nsign up'}</Text>
                      <Text style={styles.row}>{'Your friends\nget a product\nfrom us'}</Text>
                      <Text style={styles.row}>{'You and your\nfriends get\nrewarded'}</Text>

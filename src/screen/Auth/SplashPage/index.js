@@ -4,11 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import styles from './style';
-import colors from '../../../component/colors';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
-import Avatar from '../../../assets/Images/avatar.svg';
+import StatusBar from '../../../component/StatusBar';
 let value;
 const Splash=()=>{
     const navigation=useNavigation()
@@ -153,7 +152,7 @@ const Splash=()=>{
                  </View>
                 </View>
             </View>
-            
+            <StatusBar/>
         </View>
     )
 }

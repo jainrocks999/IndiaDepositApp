@@ -41,9 +41,8 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         justifyContent:'space-between',
-        marginTop:7,
-        paddingHorizontal:5,
-        width:'90%'
+        // paddingHorizontal:5,
+        width:'100%'
     },
     list:
     {

@@ -30,7 +30,8 @@ export default StyleSheet.create({
         borderRadius:6,
         backgroundColor:colors.white,
       //  height:85,
-        padding:13,
+        paddingHorizontal:13,
+        paddingVertical:10
     },
     cont:
     {
@@ -42,8 +43,13 @@ export default StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         marginTop:7,
-        paddingHorizontal:5,
         width:'90%'
+    },
+    row1:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        width:'100%',
     },
     list:
     {

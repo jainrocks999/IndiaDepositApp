@@ -31,7 +31,7 @@ useEffect(()=>{
 const manageForm=async()=>{
      try {
           const data = new FormData();
-          data.append('form_type','common')
+          data.append('form_type','specific')
           data.append('form_for_id',details.fixed_deposit_id)
           data.append('from_for','fixeddeposit')
 
@@ -119,7 +119,7 @@ const manageForm=async()=>{
                                        <Text style={[styles.item1,{textAlign:'center'}]}>{`Premature Penalty`}</Text>
                                  </View>
                                  <View style={styles.view2}>
-                                     <Text style={styles.item}>{details.pan_required}</Text>
+                                     <Text style={styles.item}>{details.pan_required==0?'No':'Yes'}</Text>
                                      <Text style={styles.item1}>{`Pan Requirement`}</Text>
                                  </View>
                                  <View style={styles.view2}>
@@ -160,25 +160,17 @@ const manageForm=async()=>{
                           </TouchableOpacity>
                       </View> */}
                       {/* Second row */}
-                      <View style={styles.top}>
-                    { details.tds_info==''?<View/>: <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>}
+                    { details.tds_info==null?<View/>:
+                    <View style={styles.top}> 
+                     <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
                       <HTMLView
                               value={details.tds_info.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          />
-                           {/* 
-                         <Text style={styles.lorem}>
-                            TDS is applicable to various interest income a taxpayer
-                            earns during the financial year. There are many
-                            taxpayers who have an income that is eligible for TDS
-                            deduction but the total tax payable in a financial year
-                            is nil.
-                          </Text> */}
-                       </View>
-                       <View style={styles.top}>
+                         </View>}
                     
-                          { details.salient_feature==''?<View/>:
-                          <View>  
+                          { details.salient_feature==null?<View/>:
+                          <View style={styles.top}>  
                          <Text style={styles.tds}>{'Feature :'}</Text>
                           <HTMLView
                               value={details.salient_feature.trim().replace(/\s+/g,' ')}
@@ -186,79 +178,29 @@ const manageForm=async()=>{
                          /></View>
                          }
 
-                          {/* <View style={styles.view3}>
-                               <View style={styles.point}></View>
-                                  <Text style={styles.pointText}>
-                                     {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                                  </Text> 
-                         </View>
-                               <View style={styles.view3}> 
-                                       <View style={styles.point}></View>
-                                            <Text style={styles.pointText}>
-                                               {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                                            </Text> 
-                                </View>
-                                 <View style={styles.view3}> 
-                                        <View style={styles.point}></View>
-                                            <Text style={styles.pointText}>
-                                                {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                                             </Text> 
-                                     </View> */}
-                     </View>
-
-                     <View style={styles.top}>
-                     { details.insuarance_terms==''?<View/>:
-                          <View>  
+                     { details.insuarance_terms==null?<View/>:
+                          <View style={styles.top}>  
                          <Text style={styles.tds}>{'Insurance :'}</Text>
                           <HTMLView
                               value={details.insuarance_terms.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          /></View>
                          }
-                           {/* <Text style={styles.tds}>Insurance :</Text>
-                           <Text style={styles.lorem}>
-                             Lorem Ipsum is simply dummy text of the printing and 
-                             typesetting industry. Lorem Ipsum has been the
-                             industry's standard dummy text ever since the 1500s,
-                             when an unknown printer took a galley.
-                         </Text>
-                         <View style={styles.view3}>
-                              <View style={styles.point}></View>
-                               <Text style={styles.pointText}>
-                                  {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                               </Text> 
-                         </View>
-                         <View style={styles.view3}>
-                               <View style={styles.point}></View>
-                                  <Text style={styles.pointText}>
-                                    {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                                 </Text> 
-                         </View> */}
-                     </View>
 
-                      <View style={styles.top}>
-                      { details.eligibility==''?<View/>:
-                          <View>  
+                      { details.eligibility==''||null?<View/>:
+                          <View style={styles.top}>   
                          <Text style={styles.tds}>{'Eligibility :'}</Text>
                           <HTMLView
                               value={details.eligibility.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          /></View>
                          }
-                          {/* <Text style={styles.tds}>Eligibility :</Text>
-                         <Text style={styles.lorem}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                            sed do eiusmod tempor incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud
-                            exercitation ullamco laboris nisi ut aliquip ex ea comm
-                            odo consequat. Duis aute irure dolor in reprehenderit in 
-                            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                            Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                         </Text> */}
-                      </View>
-                     <View style={styles.button}>
-                        {/* {details.fd_from=='setu'? 
+                         <View style={{marginBottom:80}}></View>
+                        
+                  
+         </ScrollView>
+         <View style={styles.button}>
+            {details.fd_from=='setu'? 
                         <TouchableOpacity 
                          onPress={()=>navigation.navigate('FDView',{
                               amount:details.principal_amount,
@@ -267,20 +209,23 @@ const manageForm=async()=>{
                          style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         :details.fd_from=='nbfc'? */}
+                         :details.fd_from=='nbfc'?
                          <TouchableOpacity 
-                         //onPress={()=>navigation.navigate('FDView')}
+                         onPress={()=>navigation.navigate('SelectPlan',{
+                              image:selector[0].bank_logo,
+                              name:details.bankname,
+                              amount:route.params.amount
+                         })}
                          style={styles.btCont}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         {/* :null} */}
+                         :null}
                          <TouchableOpacity
                          onPress={()=>manageForm()}
                          style={styles.btCont}>
                            <Text style={styles.text3}>DOWNLOAD FORM</Text>
                          </TouchableOpacity>
                      </View>
-         </ScrollView>
         
      </View>
        

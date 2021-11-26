@@ -3,6 +3,7 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
+import { Alert } from 'react-native';
 
 //Login
             function* doLogin(action) {
@@ -92,14 +93,14 @@ import Storage from '../../component/AsyncStorage';
                     action.navigation.replace('Otp',{
                         otp:response.data.otp,
                         mobile:action.mobile,
-                        type:'LoginWithOtp'
-                        // name:response.data.data.name,
-                        // email:response.data.data.email,
+                        type:'LoginWithOtp',
+                         name:response.data.data.name,
+                         email:response.data.data.email,
                         // father_spouse_name:response.data.data.father_spouse_name,
                         // mother_maiden_name:response.data.data.mother_maiden_name,
                         // dob:response.data.data.dob,
                         // gender:response.data.data.gender,
-                        // user_id:response.data.data.user_id,
+                         user_id:response.data.data.user_id,
 
                         // pan:response.data.data.pan,
                         // address1:response.data.data.address1,
@@ -984,7 +985,6 @@ function* addBank(action) {
     const data = new FormData();
     data.append('user_id',action.user_id)
     data.append('bank_id',action.bank_id)
-    data.append('name',action.name)
     data.append('account_number',action.account_number)
     data.append('account_type',action.account_type)
     data.append('ifsc_code',action.ifsc_code)
@@ -1202,7 +1202,11 @@ function* countryList(action) {
 
 function* stateList(action) {
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+        const data = new FormData();
+        data.append('country_id',action.country_id)
+          const response =yield call(Api.fetchDataByPOST, action.url,data);
+          console.log('this is user response',response);
+          // Alert.alert('hi',response)
             if (response.status==200) {
               yield put({
                 type: 'State_List_Success',
@@ -1233,7 +1237,7 @@ function* cityList(action) {
                 payload: response.data,
               });       
             } else {
-              Toast.show(response.messages)
+              // Toast.show(response.messages)
               yield put({
                 type: 'City_List_Error',
               });
@@ -1284,14 +1288,31 @@ function* Search(action) {
                  order_to:action.order_to
                })     
             } else {
+              if(action.data=='FdList'){
+                yield put({
+                  type: 'FD_Search_Success',
+                  payload: response.data,
+                });  
+                 action.navigation.navigate('FDList',{
+                   amount:action.amount,
+                   days:action.days,
+                   year:action.year,
+                   month:action.month,
+                   location:action.location,
+                   type1:action.type1,
+                   order_on:action.order_on,
+                   order_to:action.order_to
+                 })
+              }else{
+                yield put({
+                  type: 'FD_Search_Error',
+                });
+              }
               Toast.show(response.messages)
-              yield put({
-                type: 'FD_Search_Error',
-              });
+             
             }
           }
   catch(error){
-  Toast.show('hi')
       yield put({
             type: 'FD_Search_Error',
           });
@@ -1312,7 +1333,8 @@ function* FDDetail(action) {
                 payload: response.data,
               });  
               action.navigation.navigate('FDDetail',{
-                tenure:action.year
+                tenure:action.year,
+                amount:action.principal_amount
               })
             } else {
               yield put({
@@ -1386,10 +1408,25 @@ function* SBSearch(action) {
                  order_to:action.order_to
                })     
             } else {
+              if(action.data=='AccountList'){
+                yield put({
+                  type: 'SB_Search_Success',
+                  payload: response.data,
+  
+                });  
+                 action.navigation.navigate('AccountList',{
+                   balance:action.min_bal,
+                   location:action.location,
+                   type1:action.type1,
+                   order_on:action.order_on,
+                   order_to:action.order_to
+                 })   
+              }else{
+                yield put({
+                  type: 'SB_Search_Error',
+                });
+              }
               Toast.show(response.messages)
-              yield put({
-                type: 'SB_Search_Error',
-              });
             }
           }
   catch(error){
@@ -1517,7 +1554,9 @@ function* ResendOtp(action) {
                 otp:response.otp,
                 type:action.type1,
                 user_id:action.user_id,
-                // attemptbool:response.attemptbool
+                attemptbool:response.attemptbool,
+                boolean2:action.boolean2,
+                attempt:response.attempt
               })
             } else {
               Toast.show(response.messages)
@@ -1533,15 +1572,87 @@ function* ResendOtp(action) {
           });
     }
 }
-
+function* verifydOtp(action) {
+  try{
+    const data = new FormData();
+    if(action.email){
+      data.append('email',action.mobile)
+    }
+    else{
+      data.append('mobile',action.mobile)
+    }
+      data.append('otpwithoutconfrim',action.boolean)
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this is response',response);
+            if (response.status==200) {
+              yield put({
+                type: 'Verify_Otp_Success',
+                payload: response,
+              });
+              // Toast.show(response.messages)
+              action.navigation.push('Otp',{
+                mobile:action.mobile,
+                otp:action.otp,
+                type:action.type1,
+                user_id:action.user_id,
+                attemptbool:response.attemptbool,
+              })
+            } else {
+              // Toast.show(response.messages)
+              yield put({
+                type: 'Verify_Otp_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Verify_Otp_Error',
+          });
+    }
+}
+function* verifydOtpForgot(action) {
+  try{
+    const data = new FormData();
+    if(action.email){
+      data.append('email',action.email)
+    }
+    else{
+      data.append('mobile',action.mobile)
+    }
+      data.append('otpwithoutconfrim',action.boolean)
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'Verifyf_Otp_Success',
+                payload: response,
+              });
+              action.navigation.push('ForgotOtp',{
+                mobile:action.mobile,
+                otp:action.otp,
+                attemptbool:response.attemptbool,
+                email:action.email
+              })
+            } else {
+              yield put({
+                type: 'Verifyf_Otp_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Verifyf_Otp_Error',
+          });
+    }
+}
 function* ResenOtp(action) {
-  console.log('thisisi our acton-----------------------------------------------------------------',action);
   try{
     const data = new FormData();
           if (action.mobile) {
             data.append('mobile',action.mobile)
+            data.append('otpwithoutconfrim',action.boolean)
           } else if(action.email) {
             data.append('email',action.email)
+            data.append('otpwithoutconfrim',action.boolean)
           }
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this.respasdfjkldasjfdkljdsaklfjlkdf',response);
@@ -1557,7 +1668,9 @@ function* ResenOtp(action) {
                 {
                   otp:response.otp,
                   mobile: response.mobile,
-                  email: response.email
+                  email: response.email,
+                  attemptbool:response.attemptbool,
+                  boolean2:action.boolean2
                 }
                   )
                 }
@@ -1598,7 +1711,70 @@ function* FamilyList(action) {
           });
     }
 }
+function* createFD(action) {
+  try{
+    const data = new FormData();
+    data.append('formtype',action.formtype)
+    data.append('deposit_option',action.deposit_option)
+    data.append('amount',action.amount)
+    data.append('tenure',action.tenure)
+    data.append('name',action.name)
+    data.append('mobile_number',action.mobile_number)
+    data.append('email',action.email)
+    data.append('address_communication',action.address_communication)
+    data.append('address_permanent',action.address_permanent)
+    data.append('qualifications',action.qualifications)
+    data.append('mother_name',action.mother_name)
+    data.append('father_name',action.father_name)
+    data.append('marital_status',action.marital_status)
+    data.append('my_fixed_deposit_id',action.my_fixed_deposit_id)
+    data.append('spouse_name',action.spouse_name)
+    data.append('occupation',action.occupation)
+    data.append('annual_income',action.annual_income)
+    data.append('fd_user_id',action.fd_user_id)
+    data.append('cheque_copy',action.cheque_copy)
+    data.append('address_proof',action.address_proof)
+    data.append('pan_card',action.pan_card)
+    data.append('user_photo',action.user_photo)
+    data.append('nominee_name',action.nominee_name)
+    data.append('relationship',action.relationship)
+    data.append('dob',action.user_id)
+    data.append('nominee_address',action.nominee_address)
+
+    const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'Create_FD_Success',
+                payload: response.data,
+              });   
+              if(action&&action.navigation){
+                if(action.formtype=='selectplan'){
+                action.navigation.navigate('UserSelection',{
+                  my_fixed_deposit_id:response.my_fixed_deposit_id
+                })
+                }else if(action.formtype=='userinfo'){
+                     action.navigation.navigate('UploadDocument')
+                }else if(action.formtype=='dcoument'){
+                      action.navigation.navigate('Nominee')
+                }else if(action.formtype=='nomineedetail'){
+                      action.navigation.navigate('PaymentDetail')
+                }
+              }
+            } else {
+              yield put({
+                type: 'Create_FD_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'Create_FD_Error',
+          });
+    }
+}
 export default function* authSaga() {
+  yield takeEvery('Verify_Otp_Request',verifydOtp)
+  yield takeEvery('Verifyf_Otp_Request',verifydOtpForgot)
   yield takeEvery('Resend_Otp_Request',ResendOtp)
   yield takeEvery('Resen_Otp_Request',ResenOtp)
   yield takeEvery('Send_RegOtp_Request',SendOtp)
@@ -1645,6 +1821,7 @@ export default function* authSaga() {
   yield takeEvery('Add_Family_Request',AddFamily)
   yield takeEvery('Edit_Family_Request',EditFamily)
   yield takeEvery('Family_List_Request',FamilyList)
+  yield takeEvery('Create_FD_Request',createFD)
 
   
 

@@ -3,11 +3,9 @@ import { View,Text,Image,ScrollView,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import color from '../../../component/colors';
 import Stars from 'react-native-stars';
 import CustomButton from '../../../component/button1';
 import { TextInput } from 'react-native';
-import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -96,7 +94,7 @@ const validateUser=async()=>{
               <Header
                   title={'FEEDBACK'}
                   source={require('../../../assets/Image/arrow2.png')}
-                  onPress={()=>navigation.goBack()}
+                  onPress={()=>navigation.navigate('Main')}
              />
              <ScrollView>
               <KeyboardAwareScrollView
@@ -123,11 +121,13 @@ const validateUser=async()=>{
                               />
                            </View> */}
                            <Text style={[styles.how,{marginTop:15}]}>How would you rate your experience with India Deposit app?</Text>
-                           <Text style={styles.how}>Information :</Text>
-
+                          <View style={styles.same}>
+                            <View style={styles.font}/>
+                           <Text style={[styles.how,{marginLeft:7}]}>Information :</Text>
+                           </View>
                           <View style={styles.star}>
                               <Stars
-                                half={true}
+                                half={false}
                                 default={0}
                                 update={(val)=>setRatting1(val)}
                                 spacing={10}
@@ -135,7 +135,7 @@ const validateUser=async()=>{
                                 count={5}
                                 emptyStar={require('../../../assets/Image/icon-star-blank.png')}
                                 fullStar={require('../../../assets/Image/icon-star.png')}
-                                halfStar={require('../../../assets/Image/icon-star-half.png')}
+                                // halfStar={require('../../../assets/Image/icon-star-half.png')}
                               />
                            </View>
                            {rating1!=''&&rating1<3?
@@ -148,11 +148,13 @@ const validateUser=async()=>{
                               
                                />
                            </View>:<View/>}
-
-                           <Text style={styles.how}>Navigation :</Text>
+                           <View style={styles.same}>
+                            <View style={styles.font}/>
+                            <Text style={[styles.how,{marginLeft:7}]}>Navigation :</Text>
+                           </View>
                           <View style={styles.star}>
                               <Stars
-                                half={true}
+                                half={false}
                                 default={0}
                                 update={(val)=>setRatting2(val)}
                                 spacing={10}
@@ -160,7 +162,7 @@ const validateUser=async()=>{
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
-                                halfStar={require('../../../assets/Image/star-half.png')}
+                                // halfStar={require('../../../assets/Image/star-half.png')}
                               />
                            </View>
                            {rating2!=''&&rating2<3?
@@ -172,10 +174,13 @@ const validateUser=async()=>{
                                multiline
                                />
                            </View>:<View/>}
-                           <Text style={styles.how}>Products :</Text>
+                           <View style={styles.same}>
+                            <View style={styles.font}/>
+                            <Text style={[styles.how,{marginLeft:7}]}>Products :</Text>
+                           </View>
                           <View style={styles.star}>
                               <Stars
-                                half={true}
+                                half={false}
                                 default={0}
                                 update={(val)=>setRatting3(val)}
                                 spacing={10}
@@ -183,7 +188,7 @@ const validateUser=async()=>{
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
-                                halfStar={require('../../../assets/Image/star-half.png')}
+                                // halfStar={require('../../../assets/Image/star-half.png')}
                               />
                            </View>
                            {rating3!=''&&rating3<3?
@@ -195,10 +200,14 @@ const validateUser=async()=>{
                                multiline
                                />
                            </View>:<View/>}
-                           <Text style={styles.how}>Onboarding :</Text>
+                           <View style={styles.same}>
+                            <View style={styles.font}/>
+                            <Text style={[styles.how,{marginLeft:7}]}>Onboarding :</Text>
+                           </View>
                           <View style={styles.star}>
                               <Stars
-                                half={true}
+                                
+                                half={false}
                                 default={0}
                                 update={(val)=>setRatting4(val)}
                                 spacing={10}
@@ -206,7 +215,7 @@ const validateUser=async()=>{
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
-                                halfStar={require('../../../assets/Image/star-half.png')}
+                                // halfStar={require('../../../assets/Image/star-half.png')}
                               />
                            </View>
                            {rating4!=''&&rating4<3?
@@ -218,10 +227,13 @@ const validateUser=async()=>{
                                multiline
                                />
                            </View>:<View/>}
-                           <Text style={styles.how}>Service :</Text>
+                           <View style={styles.same}>
+                            <View style={styles.font}/>
+                            <Text style={[styles.how,{marginLeft:7}]}>Service :</Text>
+                           </View>
                           <View style={styles.star}>
                               <Stars
-                                half={true}
+                                half={false}
                                 default={0}
                                 update={(val)=>setRatting5(val)}
                                 spacing={10}
@@ -229,7 +241,7 @@ const validateUser=async()=>{
                                 count={5}
                                 emptyStar={require('../../../assets/Image/star-blank.png')}
                                 fullStar={require('../../../assets/Image/star.png')}
-                                halfStar={require('../../../assets/Image/star-half.png')}
+                                // halfStar={require('../../../assets/Image/star-half.png')}
                               />
                            </View>
                            {rating5!=''&&rating5<3?

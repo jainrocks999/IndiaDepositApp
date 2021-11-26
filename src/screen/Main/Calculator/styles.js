@@ -13,19 +13,11 @@ export default StyleSheet.create({
     },
     card:
     {
-        shadowColor:colors.black,
-        shadowOpacity:0.25,
-        shadowRadius:8,
-        shadowOffset:{height:2,width:0},
-        elevation:5,
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
-        backgroundColor:colors.white,
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10,
         marginHorizontal:15,
-        // paddingVertical:20,
         marginTop:20,
-        
-         height:'100%'
+        height:'100%',
     }, 
     main:
     {

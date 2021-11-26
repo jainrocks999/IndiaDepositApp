@@ -46,13 +46,12 @@ const App = () => {
         message: notification.title,
       });
       if(notification.userInteraction===true && notification.foreground==false) {
-        // Alert.alert('narendra here')
         RootNavigation.navigate('Splash')
+
         AsyncStorage.setItem('value','1')
       }
       else{
         if (notification.userInteraction==true && notification.foreground==true) {
-
           // RootNavigation.navigate('Main')
         }
       }

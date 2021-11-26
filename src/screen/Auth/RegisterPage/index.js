@@ -17,12 +17,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import HTMLView from 'react-native-htmlview';
 import Dialog, { DialogContent } from 'react-native-popup-dialog';
-import axios from "axios";
 import RNPickerSelect from "react-native-picker-select";
 import fontSize from '../../../component/fontSize';
-import Admin from '../../../assets/Images/administrator.svg';
-import Modal from "react-native-modal";
-
+import CountryPicker from 'react-native-country-picker-modal';
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be only ${max} character`)
@@ -62,8 +59,9 @@ const RegisterPage=()=>{
     const [visible1,setVisible1]=useState(true)
     const [showModal,setShowModal]=useState(false)
     const [showModal1,setShowModal1]=useState(false)
-    const [show, setShow] = useState(false);
-
+    const [countryCode,setcountryCode]=useState('IN')
+    const [callingCode,setcallingCode]=useState('91')
+    const [show,setShow]=useState(false)
     const ref=useRef(null)
     const ref1=useRef(null)
     const ref2=useRef(null)
@@ -154,8 +152,7 @@ const handleClick1=()=>{
          {isFetching || isVisible1==true || isVisible2==true ?<Loader/>:null} 
          {isVisible1==true ?<Loader/>:null} 
          <ScrollView>
-         {/* <Admin height={100} width={100}  fill={colors.bc} /> */}
-
+        
          <KeyboardAwareScrollView
           extraScrollHeight={10}
           enableOnAndroid={true} 
@@ -168,6 +165,7 @@ const handleClick1=()=>{
                   source={require('../../../assets/Image/logo-icon.png')}/>
               </View>
           </View>
+         
           <View style={styles.main}>
               <View style={[styles.card,{borderColor:fBorder&&values.name?colors.bc:'white'}]}>
                   <Text style={styles.heading}>Full Name</Text>
@@ -227,12 +225,36 @@ const handleClick1=()=>{
               </View>
               <View style={[styles.card,{borderColor:mBorder&&values.mobile?colors.bc:'white'}]}>
                    <Text style={styles.heading}>Mobile</Text>
-                    <View style={[styles.input,{marginTop:-6,marginBottom:-8}]}>
+                    <View style={[styles.input,{marginTop:-6,marginBottom:0}]}>
                      <Image 
                      style={styles.image}
                      source={require('../../../assets/Image/phone.png')}/>
-                
-                      <RNPickerSelect
+                     <Text style={{paddingHorizontal:5}}>{`+${callingCode}`}</Text>
+                 <CountryPicker
+          withFilter
+          countryCode={countryCode}
+          visible={show}
+          withFlag={true}
+          withAlphaFilter={false}
+          withCurrencyButton={false}
+          withFlagButton={false}
+          withCallingCode
+          onSelect={
+            country=>{
+              console.log('this is country',country);
+              const {cca2,callingCode}=country
+              setcountryCode(cca2)
+              setcallingCode(callingCode[0])
+            }
+          }
+          onClose={()=>setShow(false)}
+          />
+          <TouchableOpacity onPress={()=>setShow(true)}>
+           <Image 
+            style={{width:10,height:20,marginTop:4}} 
+            source={require('../../../assets/Image/down.png')}/>
+            </TouchableOpacity>
+                      {/* <RNPickerSelect
                           onValueChange={(val)=>setCode(val)}
                           items={Country}
                           style={{ 
@@ -243,11 +265,13 @@ const handleClick1=()=>{
                           value={code}
                           useNativeAndroidPickerStyle={false}
                           placeholder={{}}
-                          Icon={()=><Image 
+                          Icon={()=>
+                          <Image 
                             style={{width:20,height:20,marginTop:11}} 
-                            source={require('../../../assets/Image/down.png')}/>}
+                            source={require('../../../assets/Image/down.png')}/>
+                          }
                 
-                  />
+                  /> */}
                   
                      <TextInput 
                       ref={ref1}

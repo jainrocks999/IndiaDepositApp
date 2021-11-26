@@ -4,23 +4,17 @@ import fontSize from '../../fontSize';
 export default StyleSheet.create({
     container:{
     flex: 1,
-    padding:16
-    // backgroundColor:'#E5E5E5'
     },
     card:{
         shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
-        elevation:5,
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10,
         backgroundColor:colors.white,
-        marginHorizontal:15,
-        paddingHorizontal:18,
-        paddingVertical:20,
-        marginTop:20,
-        height:'100%'
+        paddingHorizontal:10,
+        paddingBottom:20,
     },
     
     heading:{
@@ -40,10 +34,10 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     view1:{
-        flexDirection:'row',
-        justifyContent:'space-between',
+        // flexDirection:'row',
+        // justifyContent:'space-between',
         marginTop:20,
-        paddingHorizontal:20
+        // paddingHorizontal:20
     },
     view2:{
         alignItems:'center'
@@ -53,7 +47,7 @@ export default StyleSheet.create({
         alignItems:'center'
     },
     text:{
-        fontSize:fontSize.fefteen,
+        fontSize:fontSize.thirteen,
         color:colors.textColor,
         fontFamily:'Montserrat-Regular'
     },
@@ -62,6 +56,39 @@ export default StyleSheet.create({
         height:22,
         marginTop:8
     },
+    font:{
+        fontSize:fontSize.thirteen,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Regular'
+    },
+    row:{
+        alignItems:'center',
+        // marginBottom:20,
+        marginTop:20,
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    colorBox:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
+    },
+    total:{
+        fontSize:12,
+        color:colors.textColor,
+        fontFamily:'Montserrat-Regular',
+        marginLeft:5
+    },
+    box:{
+        width:30,
+        height:10,
+        backgroundColor:'#FA5E8E'
+    },
+    box1:{
+        width:30,
+        height:10,
+        backgroundColor:'#AC4BE0'
+    }
     
    
     

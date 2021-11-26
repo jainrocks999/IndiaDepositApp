@@ -24,7 +24,7 @@ const loginValidationSchema=yup.object().shape({
     ifsc_code:yup.string().min(11,({min})=>`IFSC Code must be 11 digits`)
     .required('Please enter IFSC Code')
     .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid IFSC code"),
-    name:yup.string().required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
+    // name:yup.string().required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   })
 const data=[
     { label: 'Saving Account', value: 'Saving Account'},
@@ -52,7 +52,6 @@ const addUser=async(values)=>{
             url: 'adduserbank',
             user_id,
             bank_id:bank_name,
-            name:values.name,
             account_number:values.account_number,
             account_type:account_type,
             ifsc_code:values.ifsc_code,
@@ -65,7 +64,7 @@ const addUser=async(values)=>{
 
     return(
         <Formik
-        initialValues={{account_number:'',ifsc_code:'',name:''}}
+        initialValues={{account_number:'',ifsc_code:''}}
         onSubmit={values => addUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -84,7 +83,7 @@ const addUser=async(values)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
-                  <View style={{flexDirection:'row',alignItems:'center'}}>
+                  {/* <View style={{flexDirection:'row',alignItems:'center'}}>
                   <Text style={styles.better}>Name</Text>
                   <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
@@ -99,11 +98,11 @@ const addUser=async(values)=>{
                         onBlur={handleBlur('name')}
                         returnKeyType='done'
                         />
-                    </View>
+        </View>*/}
                     <View style={styles.error}>
                         {(errors.name && touched.name) &&
                         <Text style={styles.warn}>{errors.name}</Text>}
-                    </View>
+                    </View> 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Bank Name</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>

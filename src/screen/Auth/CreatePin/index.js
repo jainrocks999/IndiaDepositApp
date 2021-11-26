@@ -103,7 +103,7 @@ const validateUser=async(values)=>{
         
           <ScrollView>
           <View style={styles.imageContainer}>
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Login')}>
             <Image style={{width:32,height:24}} source={require('../../../assets/Image/arrowBack.png')}/>
             </TouchableOpacity>
               <View style={styles.round}>

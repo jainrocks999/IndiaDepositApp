@@ -22,7 +22,7 @@ import Introduction from '../screen/Auth/Introduction';
 import Main from './DrawerNavigator';
 import AboutUs from '../screen/Main/AboutUs';
 import Feedback from '../screen/Main/Feedback';
-import Notification from '../screen/Main/Notification';
+import Notification from './NotificationStack';
 import BankLocator from '../screen/Main/BankLocator';
 import Support from '../screen/Main/Support';
 import Policy from '../screen/Main/PrivacyPolicy'
@@ -46,7 +46,6 @@ import AddNominee from '../screen/Main/BankSection/AddNominee';
 import EditNominee from '../screen/Main/BankSection/EditNominee';
 import FDFilter from '../screen/Main/FDFilter';
 import SBFilter from '../screen/Main/SBFilter';
-import UserSelection from '../screen/Main/NBFCPage/UserSelection';
 import AddFamily from '../screen/Main/BankSection/AddFamily';
 import EditFamily from '../screen/Main/BankSection/EditFamily';
 import FDView from '../screen/Main/FDView';
@@ -55,6 +54,19 @@ import Trending from '../screen/Main/Trending';
 import BankHoliday from '../screen/Main/BankHoliday';
 import KnowledgeCenter from '../screen/Main/KnowledgeCenter';
 import FD_FORM from '../screen/Main/FD_FORM';
+import UserSelection from '../screen/Main/NBFCPage/UserSelection';
+import SelectPlan from '../screen/Main/NBFCPage/SelectPlan';
+import UploadDocument from '../screen/Main/NBFCPage/UploadDocument';
+import Nominee from '../screen/Main/NBFCPage/NomineeList';
+import UserInfo from '../screen/Main/NBFCPage/UserInfo';
+import NomineeUserInfo from '../screen/Main/NBFCPage/NomineeUserInfo';
+import MyFD from '../screen/Main/MyFD';
+import MyFD2 from '../screen/Main/MyFD2';
+import PaymentDetail from '../screen/Main/NBFCPage/PaymentDetail';
+import PaymentDetail1 from '../screen/Main/NBFCPage/PaymentDetail1';
+
+
+
 const Stack = createStackNavigator();
 function Navigate() {
 
@@ -122,7 +134,6 @@ function Navigate() {
         <Stack.Screen name="EditNominee" component={EditNominee}/>
         <Stack.Screen name="FDFilter" component={FDFilter} options={horizontalAnimation}/>
         <Stack.Screen name="SBFilter" component={SBFilter} options={horizontalAnimation}/>
-        <Stack.Screen name="UserSelection" component={UserSelection}/>
         <Stack.Screen name="AddFamily" component={AddFamily}/>
         <Stack.Screen name="EditFamily" component={EditFamily}/>
         <Stack.Screen name="FDView" component={FDView}/>
@@ -130,7 +141,19 @@ function Navigate() {
         <Stack.Screen name="Trending" component={Trending} options={horizontalAnimation}/>
         <Stack.Screen name="KnowledgeCenter" component={KnowledgeCenter} options={horizontalAnimation}/>
         <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
+        <Stack.Screen name="MyFD" component={MyFD} options={horizontalAnimation}/>
+        <Stack.Screen name="MyFD2" component={MyFD2} options={horizontalAnimation}/>
+
         <Stack.Screen name="FD_FORM" component={FD_FORM}/>
+        <Stack.Screen name="UserSelection" component={UserSelection}/>
+        <Stack.Screen name="SelectPlan" component={SelectPlan}/>
+        <Stack.Screen name="UploadDocument" component={UploadDocument}/>
+        <Stack.Screen name="Nominee" component={Nominee}/>
+        <Stack.Screen name="UserInfo" component={UserInfo}/>
+        <Stack.Screen name="NomineeUserInfo" component={NomineeUserInfo}/>
+        <Stack.Screen name="PaymentDetail" component={PaymentDetail}/>
+        <Stack.Screen name="PaymentDetail1" component={PaymentDetail1}/>
+
 
       </Stack.Navigator>
     </NavigationContainer>

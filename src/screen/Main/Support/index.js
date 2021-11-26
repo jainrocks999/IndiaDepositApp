@@ -92,7 +92,7 @@ useEffect(()=>{
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
-                            editable={false}
+                            // editable={false}
                           />
                       </View>
                       <View style={styles.error}>
@@ -109,7 +109,7 @@ useEffect(()=>{
                            onChangeText={handleChange('email')}
                            onBlur={handleBlur('email')}
                            value={values.email}
-                           editable={false}
+                          //  editable={false}
                           />
                       </View>
                       <View style={styles.error}>
@@ -127,7 +127,7 @@ useEffect(()=>{
                           onChangeText={handleChange('mobile')}
                           onBlur={handleBlur('mobile')}
                           value={values.mobile}
-                          editable={false}
+                          // editable={false}
                           />
                       </View>
                       <View style={styles.error}>
@@ -144,7 +144,7 @@ useEffect(()=>{
                           onChangeText={handleChange('subject')}
                           onBlur={handleBlur('subject')}
                           value={values.subject}
-                         returnKeyType='done'
+                          returnKeyType='done'
                           />
                           
                       </View>

@@ -12,11 +12,11 @@ const Privacy=()=>{
     const selector=useSelector(state=>state.Privacy)
     const isFetching=useSelector(state=>state.isFetching)
     useEffect(()=>{
-        dispatch({
-          type: 'Privacy_Request',
-          url: 'getpagecontent',
-          key:'privacy',
-    })
+    //     dispatch({
+    //       type: 'Privacy_Request',
+    //       url: 'getpagecontent',
+    //       key:'privacy',
+    // })
 },[])
 // replace(new RegExp('<p>', 'g'), '<span>')
 const showContent=()=>{

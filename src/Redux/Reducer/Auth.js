@@ -30,8 +30,8 @@ initialstate = {
   UserData:[],
   FamilyList:[],
   ResendData:'',
-  ResenData:''
-
+  ResenData:'',
+  Data:''
 };
 // Resend_Otp_Success
 export default (state = initialstate, action) => {
@@ -50,6 +50,21 @@ export default (state = initialstate, action) => {
         return { ...state, isFetching: false, ResendData: action.payload };
       case 'Resend_Otp_Error':
         return { ...state, isFetching: false };
+
+        case 'Verify_Otp_Request':
+          return { ...state, isFetching: true };
+        case 'Verify_Otp_Success':
+          return { ...state, isFetching: false, ResendData: action.payload };
+        case 'Verify_Otp_Error':
+          return { ...state, isFetching: false };
+
+
+          case 'Verifyf_Otp_Request':
+            return { ...state, isFetching: true };
+          case 'Verifyf_Otp_Success':
+            return { ...state, isFetching: false, ResenData: action.payload };
+          case 'Verifyf_Otp_Error':
+            return { ...state, isFetching: false };
 
       case 'Resen_Otp_Request':
         return { ...state, isFetching: true };
@@ -337,6 +352,13 @@ export default (state = initialstate, action) => {
   case 'Family_List_Success':
     return { ...state, isFetching: false, FamilyList: action.payload };
   case 'Family_List_Error':
+  return { ...state, isFetching: false };
+
+  case 'Create_FD_Request':
+    return { ...state, isFetching: true };
+  case 'Create_FD_Success':
+    return { ...state, isFetching: false,};
+  case 'Create_FD_Error':
   return { ...state, isFetching: false };
 
     default:

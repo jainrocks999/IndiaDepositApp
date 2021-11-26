@@ -50,8 +50,11 @@ useEffect(()=>{
       else if(year==0 && month==0 && day<7){
          Toast.show('Tenure should be more than 7 days')
       }
-      else if(amount==''){
+      else if(amount==''||amount==0){
          Toast.show('Please enter amount')
+      }
+      else if(amount>20000000){
+         Toast.show('Amount should not be more than 20000000')
       }
       else if(pincode=='' && address==''){
          Toast.show('Please confirm location')
@@ -90,9 +93,11 @@ useEffect(()=>{
          (position) => {
              Geocoder.from(position.coords.latitude, position.coords.longitude)
                  .then(json => {
-                      var addressComponent = json.results[2].address_components;
-                        let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-                        setAddress(address)
+                     //  var addressComponent = json.results[2].address_components;
+                      var addressComponent = json.results[0].formatted_address;
+
+                        // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                        setAddress(addressComponent)
                  })
                  .catch(error => console.warn(error));
          },
@@ -123,9 +128,10 @@ useEffect(()=>{
             (position) => {
                 Geocoder.from(position.coords.latitude, position.coords.longitude)
                     .then(json => {
-                        var addressComponent = json.results[2].address_components;
-                        let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-                        setAddress(address)
+                       console.log(json.results);
+                        var addressComponent = json.results[0].formatted_address;
+                        // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                        setAddress(addressComponent)
                     })
                     .catch(error => console.warn(error));
             },
@@ -260,7 +266,7 @@ useEffect(()=>{
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                               </TouchableOpacity>
                               {address? <Text style={[styles.text1,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
-                                <Text style={[styles.text1,{marginLeft:10}]}>Current Location</Text>}
+                                <Text onPress={()=>getAddress()} style={[styles.text1,{marginLeft:10}]}>Current Location</Text>}
                                 </View>
                                 {address?
                               <TouchableOpacity

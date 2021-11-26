@@ -34,6 +34,8 @@ const FDList=({route})=>{
         const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
         const [sort,setSort]=useState('Alphabetical')
         const [asc,setAsc]=useState('')
+        const period=((year*365+month*30+day)/365).toFixed(2)
+
 useEffect(()=>{
   const backAction = () => {
     navigation.goBack()
@@ -56,14 +58,12 @@ const manageList=(item)=>{
     fixed_deposit_id:item.fixed_deposit_id,
     principal_amount:amount,
     rate:item.rate,
-    year:value,
+    year:JSON.stringify(value),
     navigation:navigation
   })
-  
 }
 const manageSearch=async()=>{
   console.log('manage search is calling',sort,asc);
-
 if(year==0 && month==0 && day==0){
     Toast.show('Tenure should be more than 7 days')
  }
@@ -72,6 +72,9 @@ if(year==0 && month==0 && day==0){
  }
   else if(amount==''){
      Toast.show('Please enter amount')
+  }
+  else if(amount>20000000){
+    Toast.show('Amount should not be more than 20000000')
   }
   else if(pincode==''&& address==''){
      Toast.show('Please confirm location')
@@ -109,7 +112,8 @@ if(year==0 && month==0 && day==0){
      loan:'',
      order_on:sort,
      order_to:sort=='alphabet'?'ASC':'DESC',
-     navigation:navigation
+     navigation:navigation,
+     data:'FdList'
    })
    console.log('its working now');
 
@@ -179,9 +183,9 @@ const getCurrentLocation=()=>{
         console.log('your are here',position.coords);
          Geocoder.from(position.coords.latitude, position.coords.longitude)
              .then(json => {
-              var addressComponent = json.results[2].address_components;
-              let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-              setAddress(address)
+              var addressComponent = json.results[0].formatted_address;
+              // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+              setAddress(addressComponent)
              })
              .catch(error => console.warn(error));
      },
@@ -212,9 +216,9 @@ getCurrentLocation();
         (position) => {
             Geocoder.from(position.coords.latitude, position.coords.longitude)
                 .then(json => {
-                  var addressComponent = json.results[2].address_components;
-                  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-                  setAddress(address)
+                  var addressComponent = json.results[0].formatted_address;
+                  // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                  setAddress(addressComponent)
                 })
                 .catch(error => console.warn(error));
         },
@@ -249,13 +253,13 @@ const renderItem=(item)=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                      {/* <Text style={styles.title}>{item.name}</Text> */}
+                      <Text style={styles.title}>{item.type}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,}}>
 
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.rate}</Text>
+                     <Text style={styles.same}>{`${item.rate}%`}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
@@ -263,7 +267,9 @@ const renderItem=(item)=>{
                      </View>
 
                      <View style={{alignItems:'center'}}>
-                       <Text style={styles.same}>{item.min_amount}</Text>
+                       <Text style={styles.same}>
+                         {(amount* Math.pow((1 + (item.rate/ (1 * 100))), (1 * period))).toFixed(2)}
+                         </Text>
                        <Image
                          style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/>
@@ -271,18 +277,18 @@ const renderItem=(item)=>{
                      </View>
 
                      <View style={{alignItems:'center'}}>
-                       <Text style={styles.same}>{item.loan}</Text>
+                       <Text style={styles.same}>{item.loan==0?'No':'Yes'}</Text>
                        <Image 
                         style={styles.image} 
                        resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
                      <Text  style={styles.same}>{'Loan'}</Text>
                          </View>  
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.premature_penality}</Text>
+                     <Text style={styles.same}>{item.premature_withdrawals==0?'No':'Yes'}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
-                     <Text  style={[styles.same]}>{'Premature\nPenalty'}</Text>
+                     <Text  style={[styles.same]}>{'Premature\nWithdrawal'}</Text>
                      </View>
                    </View>
                   
@@ -409,7 +415,7 @@ const renderItem=(item)=>{
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                             </TouchableOpacity>
                                {address?<Text style={[styles.text5,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
-                               <Text style={[styles.text5,{marginLeft:20}]}>Current Location</Text>} 
+                               <Text onPress={()=>getAddress()} style={[styles.text5,{marginLeft:20}]}>Current Location</Text>} 
                                </View>
                                {address?
                               <TouchableOpacity
@@ -582,12 +588,25 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
-                <FlatList
+               {selector.length>0?<FlatList
                    data={selector}
                    renderItem={({item})=>renderItem(item)}
                    keyExtractor={(item, index) => item.source}
                    style={{width:'100%'}}
-                 />
+                 />:
+                 <View style={{
+                   flex:1,
+                   justifyContent:'center',
+                   alignItems:'center',
+                   paddingHorizontal:20
+                   }}>
+                   <Text 
+                   style={{
+                   fontSize:15,
+                   fontFamily:'Montserrat-Regular'
+                   }}>We don't have any bank listed on this pincode try another nearest pincode</Text>
+                 </View>
+                   }
                  
               
               </View>

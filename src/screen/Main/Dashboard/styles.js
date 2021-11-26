@@ -15,7 +15,7 @@ export default StyleSheet.create({
     text:
     {
         fontFamily:'Montserrat-SemiBold',
-        fontSize:fontSize.twelve,
+        fontSize:fontSize.eleven,
         marginTop:6,
         fontWeight:'500',
         textAlign: 'center',
@@ -150,7 +150,7 @@ export default StyleSheet.create({
     },
     enable:{
         position: 'absolute',
-        top: 0,
+        top: 10,
         left: 0,
         width:'100%',
         height:90,

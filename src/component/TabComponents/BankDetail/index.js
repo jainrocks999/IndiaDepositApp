@@ -11,6 +11,8 @@ import axios from "axios";
 import * as Root from '../../../navigator/rootNavigation';
 import colors from '../../colors';
 import Modal from "react-native-modal";
+import OptionsMenu from "react-native-option-menu";
+
 const BankDetails=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -81,33 +83,42 @@ const BankDetails=()=>{
         ]
       )
     }
+
     const renderItem=(item)=>{
         return(
             <View style={styles.cont}>
 
                   <View 
                       style={styles.card}>
-                     <View style={styles.cardView}>
-                       
+                    {/* {item.bank_logo?  */}
+                    <View style={styles.cardView}>
                         <Image
                          resizeMode='contain'
                          style={{height:20,width:70}} 
                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                        <Text style={styles.title}>{item.name}</Text>
+                        {/* <Text style={styles.title}>{item.name}</Text> */}
                        <View style={{width:'20%',alignItems:'flex-end'}}>
                        </View>
+                       <OptionsMenu
+                          button={require('../../../assets/Image/menu3.png')}
+                          buttonStyle={{ width: 16, height: 18 }}
+                          destructiveIndex={1}
+                          options={["Edit","Delete", "Cancel"]}
+                          actions={[()=>editPost(item),()=>renderModal(item)]}
+                          />
                      </View>
+                     {/* :<View/>} */}
                     
-                     <View style={styles.row}>
+                     <View style={[styles.row,{marginTop:item.bank_logo?5:0}]}>
                          <Text style={styles.same}>{`Account No : XXXXXXXXXX${item.account_number.substr(-4)}`}</Text>
                      </View>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{` IFSC Code : ${item.ifsc_code}`}</Text>
+                         <Text style={[styles.same,{marginTop:5}]}>{`IFSC Code : ${item.ifsc_code}`}</Text>
                      </View>
-                     <View style={styles.row}>
+                     <View style={[styles.row,{marginTop:5}]}>
                          <Text style={styles.same}>{`Account Type : ${item.account_type}`}</Text>
                      </View>
-                     <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
+                     {/* <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
                      <TouchableOpacity
                      onPress={()=>renderModal(item)
                          }
@@ -123,7 +134,7 @@ const BankDetails=()=>{
                               EDIT
                           </Text>
                           </TouchableOpacity>
-                     </View>
+                     </View> */}
                    </View>
                   
             </View>

@@ -24,7 +24,7 @@ import Loader from '../../../component/loader';
       first: Profile,
       second: BankDetail,
       third:NomineeDetail,
-      // four:FamilyDetail
+      four:FamilyDetail
   });
 
 
@@ -73,7 +73,7 @@ const ProfileScreen=()=>{
     { key: 'first', title: 'PERSONAL\nDETAILS' },
     { key: 'second', title: 'BANK\nDETAILS' },
     { key: 'third', title: 'NOMINEE\nDETAILS' },
-    // { key: 'four', title: 'FAMILY' },
+    { key: 'four', title: 'FAMILY\nDETAILS' },
   ]);
 
   const save1=async(image)=>{
@@ -190,15 +190,6 @@ const save=async(images)=>{
                      <View style={styles.card}>
                             <View style={styles.main}>
                                 <View style={styles.view2}>
-                                   <Text  
-                                     onPress={()=>RootNavigation.replace('UpdateProfile'
-                                    //  ,{
-                                    //    name,email,gender,dob,father,mother,pan,mobile,
-                                    //    address1,address2,city,state,country,marital_status,residential_status,
-                                    //    income_group,education,occupation,pincode,cityId,stateId
-                                    //  }
-                                     )} 
-                                     style={styles.change1}>{name&&email?'Edit Profile':  '              '}</Text>
                                       <View style={styles.imageContainer}>
                                         {photos?<Image 
                                         style={{width:'100%',height:'100%',borderRadius:57}} 
@@ -207,7 +198,6 @@ const save=async(images)=>{
                                           style={{width:'100%',height:'100%',borderRadius:57}} 
                                           source={{uri: image}}/>
                                           :
-                                          // <View style={{width:'100%',height:'100%',borderRadius:57}} />
                                           <Image style={styles.img} 
                                           source={require('../../../assets/Image/user-couple.png')}/>
                                         }
@@ -220,9 +210,6 @@ const save=async(images)=>{
                                          source={require('../../../assets/Image/camera.png')}/>
                                      </TouchableOpacity>
                                      </View>
-                                     <Text  
-                                     onPress={()=>navigation.navigate('ChangePassword')} 
-                                     style={styles.change}>Change Pin</Text>
                                 </View>
                              </View>
                               <TabView

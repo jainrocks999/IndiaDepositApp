@@ -175,7 +175,46 @@ export default StyleSheet.create({
         fontSize:18,
         marginBottom:5
     },
-
+    pickerTitleStyle: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        fontWeight: 'bold',
+        flex: 1,
+        marginLeft: 10,
+        fontSize: 16,
+        color: '#000',
+      },
+      pickerStyle: {
+        height: 60,
+        width: 250,
+        marginBottom: 10,
+        justifyContent: 'center',
+        padding: 10,
+        borderWidth: 2,
+        borderColor: '#303030',
+        backgroundColor: 'white',
+      },
+      selectedCountryTextStyle: {
+        paddingLeft: 5,
+        paddingRight: 5,
+        color: '#000',
+        textAlign: 'right',
+      },
+    
+      countryNameTextStyle: {
+        paddingLeft: 10,
+        color: '#000',
+        textAlign: 'right',
+      },
+    
+      searchBarStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginLeft: 8,
+        marginRight: 10,
+      },
 
    
 })

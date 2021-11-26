@@ -33,8 +33,9 @@ export default StyleSheet.create({
     view2:
     {
         width:'100%',
-        flexDirection:'row',
-        justifyContent:'space-between'
+        // flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
     },
     img:
     {
@@ -103,6 +104,7 @@ export default StyleSheet.create({
     // fontSize:,
         fontSize:fontSize.ten,
         fontFamily:'Montserrat-SemiBold' ,
+        textAlign:'center'
     },
     modalView:
     {

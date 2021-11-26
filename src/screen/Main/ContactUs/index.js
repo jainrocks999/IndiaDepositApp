@@ -172,7 +172,6 @@ const handleBackButtonClick=() =>{
                 value={values.name}
                 maxLength={40}
                 returnKeyType='next'
-                editable={false}
                 onSubmitEditing={() => {
                   next1.current.focus()
                 }}
@@ -195,7 +194,6 @@ const handleBackButtonClick=() =>{
                 value={values.email}
                 maxLength={40}
                 returnKeyType='next'
-                editable={false}
                 onSubmitEditing={() => {
                   next2.current.focus()
                 }}
@@ -218,7 +216,6 @@ const handleBackButtonClick=() =>{
                 value={values.mobile}
                 keyboardType={'number-pad'}
                 maxLength={11}
-                editable={false}
                 returnKeyType='next'
                 onSubmitEditing={() => {
                   next3.current.focus()

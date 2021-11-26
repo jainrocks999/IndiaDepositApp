@@ -11,6 +11,9 @@ import axios from "axios";
 import * as Root from '../../../navigator/rootNavigation';
 import colors from '../../colors';
 import Toast from 'react-native-simple-toast';
+import OptionsMenu from "react-native-option-menu";
+
+
 const FamilyDetails=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -76,13 +79,18 @@ const FamilyDetails=()=>{
 
                   <View 
                       style={styles.card}>
-                    
-                    
-                    
-                     <View style={styles.row}>
+                     <View style={styles.row1}>
                          <Text style={styles.same}>{`Name : ${item.name}`}</Text>
+                         <OptionsMenu
+                          button={require('../../../assets/Image/menu3.png')}
+                          buttonStyle={{ width: 16, height: 18 }}
+                          destructiveIndex={1}
+                          options={["Edit","Delete", "Cancel"]}
+                          actions={[()=>editPost(item),()=>renderModal(item)]}
+                          />
                      </View>
-                     <View style={styles.row}>
+                     <View style={{marginTop:-6}}>
+                     <View style={[styles.row]}>
                          <Text style={styles.same}>{`Email : ${item.email}`}</Text>
                      </View>
                      <View style={styles.row}>
@@ -136,24 +144,8 @@ const FamilyDetails=()=>{
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Marital Status : ${item.marital_status}`}</Text>
                      </View>
-                     
-                     <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
-                     <TouchableOpacity
-                     onPress={()=>renderModal(item)
-                         }
-                     style={styles.button}>
-                          <Text style={styles.text}>
-                              DELETE
-                          </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                          onPress={()=>editPost(item)}
-                           style={[styles.button,{marginLeft:10}]}>
-                          <Text style={styles.text}>
-                              EDIT
-                          </Text>
-                          </TouchableOpacity>
                      </View>
+                    
                    </View>
                   
             </View>

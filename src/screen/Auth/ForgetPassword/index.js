@@ -144,26 +144,6 @@ const validateUser=(email,mobile)=>{
                       />
                   </View>
               </View>
-              {/* <View style={[styles.card,{borderColor:focus1&&values.mobile?colors.bc:'#fff'}]}>
-                   <Text style={styles.heading}>Mobile</Text>
-                    <View style={styles.input}>
-                     <Image
-                      resizeMode='contain'
-                      style={{width:24,height:24}} 
-                     source={require('../../../assets/Image/phone.png')}/>
-                     <TextInput
-                      onFocus={()=>setFocus1()}
-                      placeholder='9123456789'
-                      placeholderTextColor={colors.heading1}
-                      style={styles.input1}
-                      onChangeText={handleChange('mobile')}
-                      onBlur={handleBlur('mobile')}
-                      value={values.mobile}
-                      maxLength={10}
-                      keyboardType={'phone-pad'}
-                      />
-                  </View>
-              </View> */}
               <View style={styles.error}>
                    {(errors.mobile && touched.mobile) &&
                 <Text style={styles.error2}>{errors.mobile}</Text>

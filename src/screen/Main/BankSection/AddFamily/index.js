@@ -4,7 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
-import DatePicker from 'react-native-datepicker';
+// import DatePicker from 'react-native-datepicker';
+import DatePicker from "react-native-date-picker";
 import RNPickerSelect from 'react-native-picker-select';
 import colors from '../../../../component/colors';
 import Header from '../../../../component/compareHeader';
@@ -44,15 +45,23 @@ const RegisterPage=({route})=>{
     const [dob, setDob] = useState('');
     const [city,setCity]=useState('')
     const [state,setState]=useState('')
-    const [country,setCountry]=useState('India')
+    const [country,setCountry]=useState('')
     const [income_group,setIncome_group]=useState()
     const [education,setEducation]=useState('')
     const [relation,setRelation]=useState('')
     const [marital_status,setMarital_status]=useState('')
     const [residential_address,setResidential_address]=useState()
     const [occupation,setOccupation]=useState('') 
+    const [open,setOpen]=useState(false)
+    const [date, setDate] = useState(new Date())
+
+    const value1= date.toISOString().split('T')[0]  
+    const [yyyy ,mm ,dd]=value1.split('-')
+     const value=`${dd}-${mm}-${yyyy}`
+
     const selector1=useSelector(state=>state.StateList)
     const selector2=useSelector(state=>state.CityList)
+    const selector3=useSelector(state=>state.CountryList)
 
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -103,7 +112,7 @@ const RegisterPage=({route})=>{
       email:values.email,
       father_spouse_name:values.father,
       mother_maiden_name:values.mother,
-      dob:dob,
+      dob:value,
       gender:gender,
       navigation:navigation,
       pan:values.pan,
@@ -123,16 +132,23 @@ const RegisterPage=({route})=>{
        })
      }
    }
-
    const manageState=async(val)=>{
-      setState(val)
-      dispatch({
-         type: 'City_List_Request',
-         url: 'citybyid',
-         state_id:val,
-         
-       })
-       }
+         setState(val)
+         dispatch({
+            type: 'City_List_Request',
+            url: 'citybyid',
+            state_id:val,
+            
+          })
+      }
+   const manageCountry=async(val)=>{
+         setCountry(val)
+         dispatch({
+            type: 'State_List_Request',
+            url: 'statebyid',
+            country_id:val,
+          })
+      }
          return(
             <Formik
             initialValues={{ 
@@ -156,7 +172,7 @@ const RegisterPage=({route})=>{
                   <Header
                      source={require('../../../../assets/Image/arrow2.png')}
                      title='ADD FAMILY MEMBER'
-                     onPress={()=>navigation.replace('Profile')}
+                     onPress={()=>navigation.goBack()}
                   />
                { isFetching?<Loader/>:null}
                   <ScrollView style={styles.scroll}>
@@ -240,9 +256,25 @@ const RegisterPage=({route})=>{
                        
                         <View style={{width:'47%',}}>
                             <Text style={styles.better}>Date of Birth</Text>
-                            <View style={styles.dropCal}>
+                            <TouchableOpacity onPress={()=>setOpen(true)} style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
-                               <DatePicker
+                              <Text style={{color:colors.textColor}}>{value}</Text>
+                              <DatePicker 
+                              date={date}
+                              modal
+                              mode={'date'}
+                              open={open}
+                              style={{alignItems:'center'}}
+                              onConfirm={(date) => {
+                                setOpen(false)
+                               setDate(date)
+                              }}
+                              onCancel={() => {
+                                setOpen(false)
+                              }}
+                              textColor={colors.textColor}                              
+                              />
+                               {/* <DatePicker
                                   //  style={{width: '100%',}}
                                      date={dob=='0'||null?'':dob}
                                      mode="date"
@@ -266,11 +298,11 @@ const RegisterPage=({route})=>{
                                         }
                                       }}
                                       onDateChange={(date)=> setDob(date)}                                   
-                                  /> 
+                                  />  */}
                                   </View>
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
                                     source={require('../../../../assets/Image/down.png')}/>
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                    
@@ -372,48 +404,6 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.addressLine2}</Text>
                         }
                      </View>
-                     <Text style={styles.better}>Occupation</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                        onValueChange={(val)=>setOccupation(val)}
-                        items={Occupation}
-                        style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                        }}
-                        value={occupation==null||0?'':occupation}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select Occupation", value: 0 }}
-                        Icon={()=>
-                           <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../../assets/Image/down.png')}/>}   
-                     />   
-                        {/* <TextInput
-                        style={styles.input}
-                        placeholder='Please enter occupation'
-                        placeholderTextColor={colors.heading1}
-                        defaultValue={values.occupation}
-                        onChangeText={handleChange('occupation')}
-                        onBlur={handleBlur('occupation')}
-                                                
-                        /> */}
-                    </View>
-                    {occupation=='Others'?
-                           <View style={styles.drop}>
-                           <TextInput
-                           style={styles.input}
-                           placeholder='Please Specify'
-                           placeholderTextColor={colors.heading1}
-                           defaultValue={values.occupation}
-                           onChangeText={handleChange('occupation')}
-                           onBlur={handleBlur('occupation')}
-                           maxLength={30}    
-                           returnKeyType='done'                   
-                           />
-                        </View>:null
-                        }
-                    
                      <Text style={styles.better}>Pincode</Text>
                       <View style={styles.drop}>
                         <TextInput
@@ -433,12 +423,46 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.pincode}</Text>
                         }
                      </View>
+                     <Text style={styles.better}>Occupation</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                        onValueChange={(val)=>setOccupation(val)}
+                        items={Occupation}
+                        style={{ 
+                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={occupation==null||0?'':occupation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select Occupation", value: 0 }}
+                        Icon={()=>
+                           <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                     />   
+                    </View>
+                    {occupation=='Others'?
+                           <View style={styles.drop}>
+                           <TextInput
+                           style={styles.input}
+                           placeholder='Please Specify'
+                           placeholderTextColor={colors.heading1}
+                           defaultValue={values.occupation}
+                           onChangeText={handleChange('occupation')}
+                           onBlur={handleBlur('occupation')}
+                           maxLength={30}    
+                           returnKeyType='done'                   
+                           />
+                        </View>:null
+                        }
+                    
+                    
 
                      <Text style={styles.better}>Country</Text>
                       <View style={styles.drop}>
                       <RNPickerSelect
-                        onValueChange={(val)=>setCountry(val)}
-                        items={Country}
+                        onValueChange={(val)=>manageCountry(val)}
+                        items={selector3}
                         style={{ 
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}

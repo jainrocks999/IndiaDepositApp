@@ -142,115 +142,38 @@ useEffect(()=>{
                    </TouchableOpacity>
             </View> */}
             {/* Second row */}
-            <View style={styles.top}>
-            { details.tds_info==''?<View/>:
+            { details.tds_info==null?<View/>:
+                    <View style={styles.top}>
                           <View>  
                          <Text style={styles.tds}>{'TDS applicable with info of 15 G option :'}</Text>
                           <HTMLView
                               value={details.tds_info.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          /></View>
-                         }
-                   {/* <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
-                     <Text style={styles.lorem}>
-                            TDS is applicable to various interest income a taxpayer
-                            earns during the financial year. There are many
-                            taxpayers who have an income that is eligible for TDS
-                            deduction but the total tax payable in a financial year
-                            is nil.
-                     </Text> */}
-             </View>
-            {/* <View style={styles.top}>
-                 <Text style={styles.tds}>Feature :</Text>
-               <View style={styles.Textview}>
-                   <View style={styles.point}></View>
-                      <Text style={styles.pointText}>
-                          {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                      </Text> 
-               </View>
-               <View style={styles.Textview}>
-                    <View style={styles.point}></View>
-                       <Text style={styles.pointText}>
-                           {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                      </Text> 
-               </View>
-               <View style={styles.Textview}>
-                     <View style={styles.point}></View>
-                          <Text style={styles.pointText}>
-                               {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                          </Text> 
-               </View>
-         </View> */}
-
-         <View style={styles.top}>
-         { details.insuarance_terms==''?<View/>:
+                     </View>}
+         { details.insuarance_terms==null?<View/>:
+                       <View style={styles.top}>
                           <View>  
                          <Text style={styles.tds}>{'Insurance :'}</Text>
                           <HTMLView
                               value={details.insuarance_terms.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
-                         /></View>
+                          />
+                         </View>
+                        </View>
                          }
-               {/* <Text style={styles.tds}>Insurance :</Text>
-               <Text style={styles.lorem}>
-                     Lorem Ipsum is simply dummy text of the printing and 
-                     typesetting industry. Lorem Ipsum has been the
-                     industry's standard dummy text ever since the 1500s,
-                     when an unknown printer took a galley.
-               </Text>
-               <View style={styles.Textview}>
-                     <View style={styles.point}></View>
-                      <Text style={styles.pointText}>
-                           {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                    </Text> 
-               </View>
-               <View style={styles.Textview}>
-                     <View style={styles.point}></View>
-                    <Text style={styles.pointText}>
-                          {`The returns on your deposit are assured and remain\nunaffected by market fluctuations.`}
-                    </Text> 
-               </View> */}
-          </View>
-
-         <View style={[styles.top]}>
-         { details.eligibility==''?<View/>:
+                     { details.eligibility==null?<View/>:
+                        <View style={[styles.top]}>
                           <View>  
                          <Text style={styles.Text3}>{'Eligibility :'}</Text>
                           <HTMLView
                               value={details.eligibility.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          /></View>
-                         }
-
-                 {/* <Text style={styles.Text3}>Eligibility :</Text>
-                 <Text style={styles.lorem}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
-                      magna aliqua. Ut enim ad minim veniam, quis nostrud
-                      exercitation ullamco laboris nisi ut aliquip ex ea comm
-                      odo consequat. Duis aute irure dolor in reprehenderit in 
-                      voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                      Excepteur sint occaecat cupidatat non proident, sunt in
-                       culpa qui officia deserunt mollit anim id est laborum.
-                 </Text> */}
-         </View>
-
-            {/* <View style={[styles.top,{marginBottom:10}]}>
-                 <Text style={styles.Text3}>Bank contact information :</Text>
-                  <Text style={[styles.lorem,{marginBottom:20}]}>
-                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea comm
-                        odo consequat. Duis aute irure dolor in reprehenderit in 
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
-                  </Text>
-            </View> */}
+                         </View>}
            <View style={{height:30}}></View>
          </ScrollView>
-         {/* <BottomTab/> */}
+       
          <StatusBar/>
      </View>
        

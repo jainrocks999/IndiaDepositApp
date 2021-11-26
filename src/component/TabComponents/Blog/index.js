@@ -17,12 +17,6 @@ console.log('this is narendra here',Blogs);
    
 
     useEffect(async()=>{
-        // dispatch({
-        //     type: 'Get_Blog_Request',
-        //     url: 'getpost',
-        //     post_category_id:1
-        // })
-
         try {
           const data = new FormData();
           data.append('post_category_id',1)

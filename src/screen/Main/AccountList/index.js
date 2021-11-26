@@ -52,7 +52,7 @@ useEffect(()=>{
 const manageList=(item)=>{
   dispatch({
     type: 'SB_Detail_Request',
-    url: 'sblist',
+    url: 'sbdetail',
     saving_account_id:item,
     navigation:navigation
   })
@@ -87,7 +87,8 @@ const manageSearch=async()=>{
          private:'',
          order_on:sort,
          order_to:sort=='alphabet'?'ASC':'DESC',
-         navigation:navigation
+         navigation:navigation,
+         data:'AccountList'
      })
      setVisible(false)
     //  setSelected([])
@@ -152,9 +153,9 @@ const getCurrentLocation=()=>{
         console.log('your are here',position.coords);
          Geocoder.from(position.coords.latitude, position.coords.longitude)
              .then(json => {
-              var addressComponent = json.results[2].address_components;
-              let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-              setAddress(address)
+              var addressComponent = json.results[0].formatted_address;
+              // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+              setAddress(addressComponent)
              })
              .catch(error => console.warn(error));
      },
@@ -185,9 +186,9 @@ getCurrentLocation();
         (position) => {
             Geocoder.from(position.coords.latitude, position.coords.longitude)
                 .then(json => {
-                  var addressComponent = json.results[2].address_components;
-                  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-                  setAddress(address)
+                  var addressComponent = json.results[0].formatted_address;
+                  // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
+                  setAddress(addressComponent)
                 })
                 .catch(error => console.warn(error));
         },
@@ -222,12 +223,12 @@ const renderItem=(item)=>{
                        resizeMode='contain'
                        style={{height:20,width:70}}
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                      {/* <Text style={styles.title}>{item.name}</Text> */}
+                      <Text style={styles.title}>{item.type}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7}}>
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.rate}</Text>
+                     <Text style={styles.same}>{`${item.rate}%`}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
@@ -324,7 +325,7 @@ const renderItem=(item)=>{
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                                 </TouchableOpacity>
                                 {address?<Text style={[styles.text5,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
-                                <Text style={[styles.text5,{marginLeft:10}]}>Current Location</Text>}
+                                <Text onPress={()=>getAddress()} style={[styles.text5,{marginLeft:10}]}>Current Location</Text>}
                                 </View>
                                  {address?
                                              <TouchableOpacity
@@ -409,7 +410,7 @@ const renderItem=(item)=>{
                     paddingHorizontal:10,paddingVertical:8,backgroundColor:'white',width:'100%'
                     }]}>
                     
-                      <View style={{flexDirection:'row',alignItems:'center',width:'45%'}}>
+                      <View style={{flexDirection:'row',alignItems:'center',width:'40%'}}>
                       <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
                       {`Minimum balance : `}</Text>
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
@@ -418,7 +419,9 @@ const renderItem=(item)=>{
                       </Text>
                       </View>
                       {/* </Text> */}
-                     <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'45%'}}>
+                     <View style={{
+                       flexDirection:'row',
+                       justifyContent:'space-between',alignItems:'center',width:'40%'}}>
                         <Text 
                         numberOfLines={1}
                         style={{
@@ -490,12 +493,27 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/sort.png')}/>
                  </TouchableOpacity>
                  </View>
+                
+                 {selector.length>0?
                 <FlatList
-                   data={selector}
-                   renderItem={({item})=>renderItem(item)}
-                   keyExtractor={(item, index) => item.source}
-                   style={{width:'100%'}}
-                 />
+                  data={selector}
+                  renderItem={({item})=>renderItem(item)}
+                  keyExtractor={(item, index) => item.source}
+                  style={{width:'100%'}}
+                  />:
+                 <View style={{
+                   flex:1,
+                   justifyContent:'center',
+                   alignItems:'center',
+                   paddingHorizontal:20
+                   }}>
+                   <Text 
+                   style={{
+                   fontSize:15,
+                   fontFamily:'Montserrat-Regular'
+                   }}>We don't have any bank listed on this pincode try another nearest pincode</Text>
+                 </View>
+                   }
                
               </View>
          

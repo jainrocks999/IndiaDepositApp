@@ -10,52 +10,67 @@ import PieChart from 'react-native-pie-chart';
 
 const SIP=()=>{
     const navigation=useNavigation()
-    const [interest,setInterest]=useState('1')
+    const [interest,setInterest]=useState(1)
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('500')
-  const investmentAmount=totalInvestment*time*12
-  const interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
+  let investmentAmount=totalInvestment*time*12
+  let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
   (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
-  const maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
-
+  let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
+ const [len,setLen]=useState(5)
+ console.log(investmentAmount,interestAmount,maturityAmount);
   const principalOnchange=(val)=>{
     if(val>100000){
       setTotalInvestment(JSON.stringify(100000))
     }
-    // else if(val<500){
-    //   setTotalInvestment(JSON.stringify(500))
-    // }
     else{
+      if(isNaN(val)){
+
+      }
+      else{
       setTotalInvestment(val)
+      }
     }
   }
   const rateOnchange=(val)=>{
     if(val>15){
       setInterest(JSON.stringify(15))
     }
-    // else if(val<1){
-    //   setInterest(JSON.stringify(1))
-    // }
     else{
-      setInterest(val)
+      if(isNaN(val)){}
+      else{
+        let value=parseFloat(val).toFixed(2)
+        setInterest(value)
+        if(val<10){
+        setLen(4)}
+        else{
+          setLen(5)
+        }
+      }
+   }
+  }
+  const rateOnchange1=(val)=>{
+    if(!isNaN(val)){
+      const float = parseFloat(val)
+      setInterest(float.toFixed(2))
     }
   }
   const timeOnchange=(val)=>{
     if(val>25){
       setTime(JSON.stringify(25))
     }
-    // else if(val<1){
-    //   setTime(JSON.stringify(1))
-    // }
     else{
+      if(isNaN(val)){
+        
+      }else{
       setTime(val)
+      }
     }
   }
-
-
   return(
         <View style={styles.container}>
              <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
+               <View style={styles.card}>
                 <View style={styles.view}>
                     <Text 
                     style={styles.text}>
@@ -98,7 +113,7 @@ const SIP=()=>{
                     defaultValue={interest}
                     style={{borderBottomWidth:0,}}
                     keyboardType='number-pad'
-                    maxLength={2}
+                    maxLength={len}
                     returnKeyType='done'
                     />
                    <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
@@ -107,10 +122,10 @@ const SIP=()=>{
                     </View>
                 </View>
                 <Slider
-                        minimumValue={1}
+                        minimumValue={.1}
                         maximumValue={15}
-                        onValueChange={(val)=>setInterest(JSON.stringify(val))}
-                        step={1}
+                        onValueChange={(val)=>setInterest(parseFloat(JSON.stringify(val)).toFixed(2))}
+                        step={.1}
                         value={parseInt(interest==''?1:interest)}
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
@@ -142,43 +157,37 @@ const SIP=()=>{
                         value={parseInt(time==''?0:time)}
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
-                        // thumbImage={source=require('../../../assets/Image/down.png')}
                         />
-                <View style={styles.view1}>
-                    <View style={styles.view2}> 
+                <View style={{flexDirection:'row',width:'100%'}}>
+                  <View style={{width:'50%'}}> 
+                  <View style={styles.view1}>
+                    <View > 
                         <Text style={styles.text}>Total Investment</Text>
-                        <Text>{investmentAmount==0||''?6000:investmentAmount}</Text>
+                        <View style={{marginLeft:30}}>
+                        <Text style={styles.font}>{investmentAmount==0||''?6000:isNaN(investmentAmount)?6000:investmentAmount}</Text>
+                        </View>
                     </View>
-                    <View style={{alignItems:'center'}}>
-                        <Text style={{fontSize:fontsize.fefteen,
-                            color:colors.textColor,
-                            fontFamily:'Montserrat-Regular'
-                            }}>Total Interest</Text>
-                       <Text>{interestAmount==0||''?0:interestAmount}</Text>
-                      {/* } */}
+                    <View style={{marginTop:10}}>
+                        <Text style={styles.font}>Total Interest</Text>
+                        <View style={{marginLeft:30}}>
+                        <Text style={styles.font}>{interestAmount==0||''?0:isNaN(interestAmount)?0:interestAmount}</Text>
+                        </View>
                     </View>
                 </View>
-                <View style={{alignItems:'center',marginTop:20}}>
-                        <Text style={styles.text}> 
-                     {`Maturity Value  ₹ ${maturityAmount==0||''?6000:maturityAmount}`}
-                     </Text> 
-                      </View>
-                <View style={{alignItems:'center',marginBottom:100,marginTop:20}}>
-                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%',marginBottom:20}}>
-                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-                      <View style={{width:30,height:10,backgroundColor:'#FA5E8E'}}/>
-                      <Text style={{fontSize:12,color:colors.textColor,fontFamily:'Montserrat-Regular',marginLeft:5}}>Invest Amount</Text>
-                    </View>
-                    <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
-                      <View style={{width:30,height:10,backgroundColor:'#AC4BE0'}}/>
-                      <Text style={{fontSize:12,color:colors.textColor,fontFamily:'Montserrat-Regular',marginLeft:5}}>Total Interest</Text>
-                    </View>
+                <View style={{marginTop:10}}>
+                  <Text style={styles.font}>{'Maturity Value'}</Text>
+                  <View style={{marginLeft:30}}>
+                        <Text style={styles.text}>{`${maturityAmount==0||''?6000:isNaN(maturityAmount)?6000:maturityAmount}`}</Text> 
                   </View>
+                  </View>
+                  </View>
+                  <View style={{width:'50%'}}>
+                  <View style={{alignItems:'center',marginTop:20,width:'100%'}}>
+                 
                 <PieChart
-                  widthAndHeight={250}
+                  widthAndHeight={140}
                   series={[
-                    // 100,200
-                    parseInt(interestAmount==0||''?0:interestAmount), parseInt(investmentAmount==0||''?6000:investmentAmount)
+                    parseInt(interestAmount==0||''||isNaN(interestAmount)?0:interestAmount), parseInt(investmentAmount==0||''||isNaN(investmentAmount)?6000:investmentAmount)
                    ]}
                   sliceColor={['#AC4BE0','#FA5E8E']}
                   doughnut={true}
@@ -186,6 +195,21 @@ const SIP=()=>{
                   coverFill={'#FFF'}
                 />
                 </View>
+                
+                  </View>
+                  
+                </View>
+                <View style={styles.row}>
+                    <View style={styles.colorBox}>
+                      <View style={styles.box}/>
+                      <Text style={styles.total}>Invest Amount</Text>
+                    </View>
+                    <View style={styles.colorBox}>
+                      <View style={styles.box1}/>
+                      <Text style={styles.total}>Total Interest</Text>
+                    </View>
+                  </View>
+               </View>
               </ScrollView>
        </View>
     )

@@ -22,14 +22,11 @@ export default StyleSheet.create({
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
-        borderTopLeftRadius:10,
-        borderTopRightRadius:10,
+        borderRadius:10,
         backgroundColor:colors.white,
-        marginHorizontal:15,
-        paddingVertical:18,
-        //paddingHorizontal:20,
-        marginTop:-32,
-        height:'100%'
+        marginBottom:40,
+        paddingHorizontal:15,
+        paddingVertical:20,
     },
     pfile:
     {
@@ -41,9 +38,8 @@ export default StyleSheet.create({
        
     },
     touch:{
-        width:'50%',
-        backgroundColor:colors.bc
-        ,height:40,
+        // width:'50%',
+        backgroundColor:colors.bc,height:40,
         borderRadius:30,
         flexDirection:'row',
         justifyContent:'space-between',
@@ -95,7 +91,7 @@ export default StyleSheet.create({
     {
         width:'90%',
         fontFamily:'Montserrat-Regular',
-        fontSize:fontSize.thirteen,
+        fontSize:fontSize.twelve,
         color:colors.textColor
     },
     text2:
@@ -117,7 +113,7 @@ export default StyleSheet.create({
     },
     line1:
     {
-        width:60,
+        width:'23%',
         height:1,
         backgroundColor:colors.black,
     },
@@ -139,7 +135,8 @@ export default StyleSheet.create({
     text3:{
         color:colors.white,
         fontFamily:'Montserrat-Regular',
-        fontSize:fontSize.thirteen
+        fontSize:fontSize.thirteen,
+        marginLeft:10
     },
     row:
         {color:colors.textColor,textAlign:'center',fontSize:11,fontFamily:'Montserrat-Regular'}
