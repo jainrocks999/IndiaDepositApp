@@ -95,7 +95,7 @@ const Profile=()=>{
                         <View style={styles.view1}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
-                            <Text style={styles.better1}>{`${value.gender==0||null?'':value.gender}`}</Text>
+                            <Text style={styles.better1}>{`${value.gender==0||value.gender==null||value.gender=='undefined'?'':value.gender}`}</Text>
                             </View>
                         </View>
                         {/* } */}
@@ -114,12 +114,22 @@ const Profile=()=>{
                      {/* {value.email==0||null?<View/>: */}
                      <View>
                       <Text style={styles.better}>E-mail</Text>
-                      <View style={styles.drop}>
+                      {/* <View style={styles.drop}>
                       <Text style={styles.better1}>{`${value.email==0||null?'':value.email}`}</Text>
-                    </View>
-                    </View>
+                       </View> */}
+                        <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
+                        <Text style={styles.better1}>{`${value.email==0||null?'':value.email}`}</Text>
+                      {value.email_status==1? <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>:null}
+                      </View>
+                      </View>
                     {/* } */}
-
+                    <View>
+                      <Text style={styles.better}>Mobile</Text>
+                      <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
+                       <Text style={styles.better1}>{value.mobile==0||null?'':value.mobile}</Text>
+                       <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>
+                      </View>
+                    </View>
                     {/* {value.pan==0||null?<View/>: */}
                     <View>
                     <Text style={styles.better}>Pan Card</Text>
@@ -130,13 +140,7 @@ const Profile=()=>{
                     {/* } */}
 
                      {/* {value.mobile==0||null?<View/>: */}
-                     <View>
-                      <Text style={styles.better}>Mobile</Text>
-                      <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
-                       <Text style={styles.better1}>{value.mobile==0||null?'':value.mobile}</Text>
-                       <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>
-                      </View>
-                    </View>
+                    
                     {/* } */}
 
                     {/* {value.address1==0||null?<View/>: */}

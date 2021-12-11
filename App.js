@@ -32,11 +32,9 @@ const App = () => {
     }
   }, [])
   PushNotification.configure({
-    
     onRegister: function (token) {
       console.log('TOKENs:', token.token);
       AsyncStorage.setItem(Storage.token,token.token);
-      
     },
   
     onNotification: function (notification) {
@@ -52,7 +50,7 @@ const App = () => {
       }
       else{
         if (notification.userInteraction==true && notification.foreground==true) {
-          // RootNavigation.navigate('Main')
+          RootNavigation.push('Notification')
         }
       }
       notification.finish(PushNotificationIOS.FetchResult.NoData);

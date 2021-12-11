@@ -3,10 +3,9 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
-import { Alert } from 'react-native';
 
 //Login
-            function* doLogin(action) {
+        function* doLogin(action) {
               console.log('this is action',action.keep);
               try{
               const data = new FormData();
@@ -149,7 +148,7 @@ function* forgotpasword(action) {
                 if(action && action.navigation){
                   action.navigation.replace('ForgotOtp',
                   {
-                    otp:'0852',
+                    otp:response.otp,
                     mobile: response.mobile,
                     email: response.email
                   }
@@ -674,6 +673,7 @@ function* createPin(action) {
 }
 
 function* editProfile(action) {
+  console.log('this is action  value',action);
   try{
     const data = new FormData();
       data.append('user_id',action.user_id)
@@ -682,7 +682,6 @@ function* editProfile(action) {
       data.append('dob',action.dob)
       data.append('gender',action.gender)
       data.append('father_spouse_name',action.father_spouse_name)
-
       data.append('mother_maiden_name',action.mother_maiden_name)
       data.append('pan',action.pan)
       data.append('mobile',action.mobile)
@@ -700,40 +699,17 @@ function* editProfile(action) {
 
       
         const response =yield call(Api.fetchDataByPOST, action.url, data);
-        console.log('this is responce value -dssfdf-------sdf------------------------------------=============================================================================================================================================================',response);
+        console.log('this is ser response',response);
             if (response.status==200) {
               yield put({
                 type: 'Edit_Profile_Success',
               });  
-                
                AsyncStorage.setItem(Storage.name,response.data[0].name)
                 AsyncStorage.setItem(Storage.email,response.data[0].email)
-                // AsyncStorage.setItem(Storage.fatherName,response.data[0].father_spouse_name)
-                // AsyncStorage.setItem(Storage.motherName,response.data[0].mother_maiden_name)
-                // AsyncStorage.setItem(Storage.dob,response.data[0].dob)
-                // AsyncStorage.setItem(Storage.gender,response.data[0].gender)
                 AsyncStorage.setItem(Storage.mobile,response.data[0].mobile)
-
-                // AsyncStorage.setItem(Storage.pan,response.data[0].pan),
-                // AsyncStorage.setItem(Storage.address1,response.data[0].address1),
-                // AsyncStorage.setItem(Storage.address2,response.data[0].address2),
-                // AsyncStorage.setItem(Storage.occupation,response.data[0].occupation),
-                // AsyncStorage.setItem(Storage.pincode,response.data[0].pincode),
-                // AsyncStorage.setItem(Storage.country,response.data[0].country_name),
-                // AsyncStorage.setItem(Storage.state,response.data[0].state_name),
-                // AsyncStorage.setItem(Storage.city,response.data[0].city_name),
-                // AsyncStorage.setItem(Storage.stateId,response.data[0].state),
-                // AsyncStorage.setItem(Storage.cityId,response.data[0].city),
-
-                // AsyncStorage.setItem(Storage.income_group,response.data[0].income_group),
-                // AsyncStorage.setItem(Storage.education,response.data[0].education),
-                // AsyncStorage.setItem(Storage.marital,response.data[0].marital_status),
-                // AsyncStorage.setItem(Storage.residential,response.data[0].residential_status),
                 Toast.show(response.messages);  
                 action.navigation.replace('Profile')
             } else {
-              console.log('this is working narendra herer======');
-
               yield put({
                 type: 'Edit_Profile_Error',
               });
@@ -741,7 +717,6 @@ function* editProfile(action) {
             }
           }
   catch(error){
-    console.log('this is working narendra herer');
       yield put({
             type: 'Edit_Profile_Error',
           });
@@ -1230,7 +1205,6 @@ function* cityList(action) {
     const data = new FormData();
           data.append('state_id',action.state_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
-        console.log('this isi fdkljadfklsdjflkadjflskdaadjkfhjhdfkjasdhfdjknkjyfnnjlkdsdyuweyihdskjfhaiuryeuiwfhjkdahsfdklyweiualfhcuidayrseufhalsfadsuriyeiluwafhdosauryoefhiadyeyruidhsdiuyeiafhdsuaifyriewuafhdsauyfeiouwafhidfha-=========================================================================',response);
             if (response.status==200) {
               yield put({
                 type: 'City_List_Success',
@@ -1252,6 +1226,8 @@ function* cityList(action) {
 
 function* Search(action) {
   try{
+
+    console.log('this is action',action);
           const data = new FormData();
             data.append('year',action.year)
             data.append('month',action.month)
@@ -1259,7 +1235,7 @@ function* Search(action) {
             data.append('amount',action.amount)
             data.append('location',action.location)
             data.append('type1',JSON.stringify(action.type1))
-            data.append('bank_id',action.bank_id)
+            data.append('bank_id',JSON.stringify(action.bank_id))
             data.append('interest_rate',action.interest_rate)
             data.append('nationalized',action.nationalized)
             data.append('sb_account_required',action.sb_account_required)
@@ -1325,6 +1301,8 @@ function* FDDetail(action) {
     data.append('principal_amount',action.principal_amount)
     data.append('rate',action.rate)
     data.append('year',action.year)
+    data.append('month',action.month)
+    data.append('days',action.days)
 
     const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
@@ -1334,7 +1312,10 @@ function* FDDetail(action) {
               });  
               action.navigation.navigate('FDDetail',{
                 tenure:action.year,
-                amount:action.principal_amount
+                amount:action.principal_amount,
+                year:action.year,
+                month:action.month,
+                days:action.days
               })
             } else {
               yield put({
@@ -1359,7 +1340,9 @@ function* SBDetail(action) {
                 type: 'SB_Detail_Success',
                 payload: response.data,
               });  
-              action.navigation.navigate('AccountDetail')
+              action.navigation.navigate('AccountDetail',{
+                branch_type:action.branch_type
+              })
             } else {
               yield put({
                 type: 'SB_Detail_Error',
@@ -1371,22 +1354,19 @@ function* SBDetail(action) {
             type: 'SB_Detail_Error',
           });
     }
-}
+}      
 
 function* SBSearch(action) {
-  console.log('this is working--------------------------------------------------------------------------------',action);
   try{
     const data = new FormData();
       data.append('min_bal',action.min_bal)
       data.append('location',action.location)
       data.append('type1',JSON.stringify(action.type1))
-      data.append('bank_id',action.bank_id)
+      data.append('bank_id',JSON.stringify(action.bank_id))
       data.append('interest_rate',action.interest_rate)
       data.append('nationalized',action.nationalized)
       data.append('offer',action.offer)
-      // data.append('private/public',action.private)
       data.append('insurance',action.insurance)
-      // data.append('account_type',action.account_type)
       data.append('account_sub_type',action.account_sub_type)
       data.append('non_maintenance_penalty',action.non_maintenance_penalty)
       data.append('debit_card_amc',action.debit_card_amc)
@@ -1439,12 +1419,14 @@ function* SBSearch(action) {
 
 
 function* FDCompare(action) {
-  console.log('this is working',action);
   try{
     const data = new FormData();
       data.append('value_id1',action.value_id1)
       data.append('value_id2',action.value_id2)
       data.append('user_id',action.user_id)
+      data.append('year',action.year)
+      data.append('days',action.days)
+      data.append('month',action.month)
 
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
@@ -1454,7 +1436,13 @@ function* FDCompare(action) {
                 payload: response,
 
               });  Toast.show(response.messages)
-             action.navigation.navigate('CompareFD')
+             action.navigation.navigate('CompareFD',{
+               period:action.period,
+               amount:action.amount,
+               year:action.year,
+               month:action.month,
+               days:action.days
+             })
             } else {
               yield put({
                 type: 'FD_Compare_Error',
@@ -1474,7 +1462,6 @@ function* SBCompare(action) {
     const data = new FormData();
       data.append('value_id1',action.value_id1)
       data.append('value_id2',action.value_id2)
-      // data.append('user_id',action.user_id)
 
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
@@ -1484,7 +1471,10 @@ function* SBCompare(action) {
                 payload: response,
 
               });  
-               action.navigation.navigate('CompareSBAccount')
+               action.navigation.navigate('CompareSBAccount',{
+                 branch_type1:action.branch_type1,
+                 branch_type2:action.branch_type2
+               })
             } else {
               yield put({
                 type: 'SB_Compare_Error',
@@ -1732,6 +1722,7 @@ function* createFD(action) {
     data.append('occupation',action.occupation)
     data.append('annual_income',action.annual_income)
     data.append('fd_user_id',action.fd_user_id)
+    data.append('user_id',action.user_id)
     data.append('cheque_copy',action.cheque_copy)
     data.append('address_proof',action.address_proof)
     data.append('pan_card',action.pan_card)
@@ -1757,7 +1748,8 @@ function* createFD(action) {
                 }else if(action.formtype=='dcoument'){
                       action.navigation.navigate('Nominee')
                 }else if(action.formtype=='nomineedetail'){
-                      action.navigation.navigate('PaymentDetail')
+                  console.log('this is user fixed deposit id',response);
+                      // action.navigation.navigate('PaymentDetail',{my_fixed_deposit_id:response.my_fixed_deposit_id})
                 }
               }
             } else {
@@ -1772,6 +1764,32 @@ function* createFD(action) {
           });
     }
 }
+
+function* myFDList(action) {
+  try{
+    const data = new FormData();
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'MYFD_List_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'MYFD_List_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'MYFD_List_Error',
+          });
+    }
+}
+
+
+
 export default function* authSaga() {
   yield takeEvery('Verify_Otp_Request',verifydOtp)
   yield takeEvery('Verifyf_Otp_Request',verifydOtpForgot)
@@ -1816,14 +1834,12 @@ export default function* authSaga() {
   yield takeEvery('Get_Story_Request',getStory)
   yield takeEvery('FD_Search_Request',Search)
   yield takeEvery('SB_Search_Request',SBSearch)
+
   yield takeEvery('FD_Compare_Request',FDCompare)
   yield takeEvery('SB_Compare_Request',SBCompare)
   yield takeEvery('Add_Family_Request',AddFamily)
   yield takeEvery('Edit_Family_Request',EditFamily)
   yield takeEvery('Family_List_Request',FamilyList)
-  yield takeEvery('Create_FD_Request',createFD)
-
-  
-
-
+  yield takeEvery('Create_FD_Request',createFD) 
+  yield takeEvery('MYFD_List_Request',myFDList)
 }

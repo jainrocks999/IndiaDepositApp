@@ -83,8 +83,13 @@ const handleBackButtonClick=() =>{
             <View style={styles.card}>
             {isFetching?<Loader/>:null}
             <View style={styles.header}>
-              <Text style={styles.toll}>Call us on</Text>
-              <View style={[styles.view,{ marginTop:21}]}>
+            <Image 
+                 style={{width:'100%',height:47}} 
+                  resizeMode='contain'
+                  source={require('../../../assets/Image/indiaIcon.png')}/>
+
+              <Text style={[styles.toll,{marginTop:10}]}>Call us on</Text>
+              <View style={[styles.view,{ marginTop:15}]}>
                   <Text style={styles.num}>{detail.mobile}</Text>
                     <TouchableOpacity 
                     onPress={()=>Linking.openURL(`tel:${detail.mobile}`)}

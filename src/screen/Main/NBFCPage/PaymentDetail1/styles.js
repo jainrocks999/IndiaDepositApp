@@ -53,7 +53,7 @@ export default StyleSheet.create({
         shadowOpacity:0.25,
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
-        elevation:5,
+        elevation:2,
         borderRadius:10,
         backgroundColor:colors.white,
         paddingHorizontal:15,

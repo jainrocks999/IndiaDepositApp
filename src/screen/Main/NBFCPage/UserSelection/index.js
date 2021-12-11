@@ -22,29 +22,12 @@ class UserSelection extends React.Component{
   };
 
   toggleChecked = (itemId,item) => {
+     console.log('thisi isfasfkld;skfl;dkfdlfkdlfklk toggle working');
     if(this.state.ids.includes(itemId)){
       this.setState({ids:[]})
     }
     this.setState({ids:itemId})
     this.setState({data:item})
-    // const ids = [...this.state.ids, itemId];
-    // if (this.isChecked(itemId)) {
-    //   this.setState({
-    //     ...this.state,
-    //     ids: this.state.ids.filter((id) => id !== itemId),
-    //   });
-    //   this.setState({data:''})
-    // } else {
-    // if(this.state.ids.length>0){
-    //     Toast.show('You can select only 1 user at a time')
-    // }else{
-    //   this.setState({
-    //     ...this.state,
-    //     ids,
-    //   });
-    //   this.setState({data:item})
-    // }
-    // }
   };
   renderItem=(item)=>{
     return(

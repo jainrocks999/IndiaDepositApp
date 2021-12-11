@@ -19,7 +19,7 @@ const RegisterPage=({route})=>{
     const my_fixed_deposit_id=route.params.my_fixed_deposit_id
 
    const validateUser=async()=>{
-      console.log('this is working');
+    AsyncStorage.setItem('my_fixed_deposit_id',my_fixed_deposit_id)
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       dispatch({
         type: 'Create_FD_Request',
@@ -42,6 +42,7 @@ const RegisterPage=({route})=>{
         occupation:data.occupation,
         annual_income:data.income_group,
         fd_user_id:user_id,
+        user_id:user_id,
         cheque_copy:'',
         address_proof:'',
         pan_card:'',

@@ -10,10 +10,13 @@ import BottomTab from '../../../component/StoreButtomTab';
 import { useSelector } from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 
-const FDList=()=>{
+const FDList=({route})=>{
 const navigation=useNavigation()
 const selector=useSelector((state)=>state.SBDetail)
 const details=selector[0]
+
+console.log('thsjfhsfjklghfjkladshdsjkhajkfhgjskd',details.debit_card_type);
+
 
 useEffect(()=>{
       const backAction = () => {
@@ -28,6 +31,37 @@ useEffect(()=>{
         
           return () => backHandler.remove();
 },[])
+
+const renderMab=()=>{
+      if(route.params.branch_type=='Metropolitan'){
+      return(
+        <View>
+          <Text style={styles.item}>{details.min_balance_metropolitan}</Text>
+        </View>
+      )
+      }
+      else if(route.params.branch_type=='Rural'){
+        return(
+          <View>
+            <Text style={styles.item}>{details.min_balance_rural}</Text>
+          </View>
+        )
+      }
+      else if(route.params.branch_type=='Semiurban'){
+        return(
+          <View>
+            <Text style={styles.item}>{details.min_balance_semiurban}</Text>
+          </View>
+        )
+      }
+      else if(route.params.branch_type=='Urban'){
+        return(
+          <View>
+            <Text style={styles.item}>{details.min_balance_urban}</Text>
+          </View>
+        )
+      }
+    }
 
  return(
        <View style={styles.container1}>
@@ -55,30 +89,31 @@ useEffect(()=>{
                       </View>
                      <View style={styles.undercard}>
                            <View style={styles.rup}>
-                               <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                <Text style={styles.item}>{details.non_maitenance_penalty_charges}</Text>
+                               {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                {renderMab()}
                           </View>
-                          <Text style={styles.item1}>{`Non-Maintenance Penalty`}</Text>
+                          <Text style={styles.item1}>{`MAB`}</Text>
                        </View>
                        <View style={styles.undercard}>
                             <Text style={styles.item}>{details.locker_facility}</Text>
-                            <Text style={styles.item1}>{`Locker Facility`}</Text>
+                            <Text style={styles.item1}>{`ATM Points`}</Text>
                         </View>
                   </View>
                   <View style={styles.line}></View>
                    <View style={styles.container}>
                          <View style={styles.undercard}>
-                              <Text style={styles.item}>{details.joining_kit}</Text>
-                              <Text style={styles.item1}>{`Joining Kit`}</Text>
+                              <Text style={styles.item}>{''}</Text>
+                              <Text style={styles.item1}>{`Interest Frequency`}</Text>
                          </View>
                          <View style={styles.undercard}>
-                               <Text style={styles.item}>{details.net_banking_operation}</Text>
-                               <Text style={styles.item1}>{`Net banking`}</Text>
+                               <Text style={styles.item}>{details.nomination==0?'No':'Yes'}</Text>
+                               <Text style={styles.item1}>{`Nomination`}</Text>
                          </View>
                          <View style={styles.undercard}>
-                                <Text style={styles.item}>{details.phone_banking}</Text>
-                                <Text style={[styles.item1,{textAlign:'center'}]}>{`Phone Banking`}</Text>
-                         </View>
+                                  <Text style={styles.item}>{`${details.free_cheques} per annum`}</Text>
+                                  <Text style={styles.item1}>{`Free Cheques`}</Text>
+                            </View>
+                        
                      </View>
             </View>
             {/* first row */}
@@ -86,51 +121,100 @@ useEffect(()=>{
                  <View style={styles.container}>
                           <View style={styles.undercard}>
                                 <View style={styles.rup}> 
-                                  <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                   <Text style={styles.item}>{details.cash_withdrawal_limit}</Text>
+                                  {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                   <Text style={styles.item}>{details.net_banking_operation==0?'No':'Yes'}</Text>
                               </View> 
-                             <Text style={[styles.item1,{textAlign:'center'}]}>{`Cash Withdrawal\nLimit`}</Text>
+                             <Text style={[styles.item1,{textAlign:'center'}]}>{`Net Banking Operation`}</Text>
                            </View>
                            <View style={styles.undercard}>
                                   <View style={styles.rup}>
-                                      <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                      <Text style={styles.item}>{`1 Lakh`}</Text>
+                                      {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                      <Text style={styles.item}>{details.joining_kit==0?'No':'Yes'}</Text>
                                   </View>
-                                  <Text style={styles.item1}>{`Cash Deposit limit`}</Text>
+                                  <Text style={styles.item1}>{`Joining Kit`}</Text>
                             </View>
                             <View style={styles.undercard}>
                                   <Text style={styles.item}>{details.free_atm_transaction_homebank}</Text>
-                                  <Text style={[styles.item1,{textAlign:'center'}]}>{`Atm Free no of\nTransaction`}</Text>
+                                  <Text style={[styles.item1,{textAlign:'center'}]}>{`Free ATM Transaction Home`}</Text>
                             </View>
                   </View>
                   <View style={styles.line}></View>
                     <View style={styles.container}>
                             <View style={styles.undercard}>
-                                  <Text style={styles.item}>{details.pan_required}</Text>
-                                  <Text style={styles.item1}>{`Pan requirement`}</Text>
+                                  <Text style={styles.item}>{details.pan_required==0?'No':'Yes'}</Text>
+                                  <Text style={styles.item1}>{`ECS/IMPS/NEFT/RTGS`}</Text>
                             </View>
                             <View style={styles.undercard}>
-                                 <Text style={styles.item}>{details.atm_points}</Text>
-                                 <Text style={styles.item1}>{`Bank Atm points`}</Text>
+                                 <Text style={styles.item}>{details.debit_card_type}</Text>
+                                 <Text style={styles.item1}>{`Debit Card`}</Text>
                            </View>
                             <View style={styles.undercard}>
                                    <View style={styles.rup}>
-                                        <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                        <Text style={styles.item}>{details.free_atm_transaction_homebank_charges}</Text>
+                                        {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                        <Text style={styles.item}>{details.phone_banking==0?'No':'Yes'}</Text>
                                     </View>
-                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`ATM transaction\ncharges`}</Text>
+                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`Phone Banking`}</Text>
                              </View>
                     </View>
                     <View style={styles.line}></View>
                     <View style={styles.container}>
-                           <View style={styles.undercard}>
-                                 <View style={styles.rup}>
-                                      <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> 
-                                       <Text style={styles.item}>{details.free_atm_transaction_otherbank}</Text>
-                                 </View>
-                               <Text style={[styles.item1,{textAlign:'center'}]}>{`ATM Free transaction\nfrom other bank`}</Text>
-                         </View>
-                     </View>
+                          
+                            <View style={styles.undercard}>
+                                 <Text style={styles.item}>{details.locker_facility==0?'No':'Yes'}</Text>
+                                 <Text style={styles.item1}>{`Locker Facility`}</Text>
+                                 <Text style={[styles.item,{textAlign:'center'}]}>{'subject to availiblity at branch'}</Text>
+                           </View>
+                            <View style={styles.undercard}>
+                                   <View style={styles.rup}>
+                                        {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                        <Text style={styles.item}>{details.cash_transaction_limit_atm}</Text>
+                                    </View>
+                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`Cash Transaction Limit ATM`}</Text>
+                                   <Text style ={[styles.item,{textAlign:'center'}]}>{'subject to ATM at branch'}</Text>
+                             </View>
+                             <View style={styles.undercard}>
+                                 <Text style={styles.item}>{details.pan_required==0?'No':'Yes'}</Text>
+                                 <Text style={styles.item1}>{`Pan Card Required`}</Text>
+                                 <Text style={[styles.item,{textAlign:'center'}]}>
+                        {'If you don’t have PAN card then you will need to fill Form 16'}</Text>
+                           </View>
+                    </View>
+                    <View style={styles.line}></View>
+                    <View style={styles.container}>
+                            {/* <View style={styles.undercard}>
+                                  <Text style={styles.item}>{details.salient_feature}</Text>
+                                  <Text style={styles.item1}>{`Salient Feature`}</Text>
+                            </View> */}
+                            {/* <View style={styles.undercard}>
+                                 <Text style={styles.item}>{details.insuarance_accidental_feature==null?0:details.insuarance_accidental_feature}</Text>
+                                 <Text style={[styles.item1,{textAlign:'center'}]}>{`Insuarance Accidental\nFeature`}</Text>
+                           </View> */}
+                            <View style={styles.undercard}>
+                                   <View style={styles.rup}>
+                                        {/* <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/> */}
+                                        <Text style={styles.item}>{details.free_atm_transaction_homebank}</Text>
+                                    </View>
+                                   <Text style={[styles.item1,{textAlign:'center'}]}>{`Free Atm Transaction Homebank`}</Text>
+                             </View>
+                             <View style={styles.undercard}>
+                                  <Text style={styles.item}>{details.free_atm_transaction_otherbank}</Text>
+                                  <Text style={[styles.item1,{textAlign:'center'}]}>{`Free Atm Transaction Otherbank`}</Text>
+                            </View>
+                            <View style={styles.undercard}>
+                                  <Text style={styles.item}>{details.cash_withdrawal_limit}</Text>
+                                  <Text style={[styles.item1,{textAlign:'center'}]}>{`Cash Withdrawal Limit Branch`}</Text>
+                            </View>
+                            <View style={styles.undercard}>
+                            <Text style={[styles.item,{marginRight:10}]}></Text>
+                                  <Text style={[styles.item1,{textAlign:'center'}]}></Text>
+                            </View>
+                           
+                    </View>
+                    <View style={styles.line}></View>
+                    <View style={styles.container}>
+                           
+                           
+                    </View>
             </View>
                {/*  ButtonView */}
             {/* <View style={styles.bank}>
@@ -142,7 +226,7 @@ useEffect(()=>{
                    </TouchableOpacity>
             </View> */}
             {/* Second row */}
-            { details.tds_info==null?<View/>:
+                  { details.tds_info==null||details.tds_info==''?<View/>:
                     <View style={styles.top}>
                           <View>  
                          <Text style={styles.tds}>{'TDS applicable with info of 15 G option :'}</Text>
@@ -151,23 +235,33 @@ useEffect(()=>{
                               addLineBreaks={false}
                          /></View>
                      </View>}
-         { details.insuarance_terms==null?<View/>:
+                    { details.salient_feature==null||details.salient_feature==''?<View/>:
                        <View style={styles.top}>
                           <View>  
-                         <Text style={styles.tds}>{'Insurance :'}</Text>
+                         <Text style={styles.tds}>{'Salient feature :'}</Text>
                           <HTMLView
-                              value={details.insuarance_terms.trim().replace(/\s+/g,' ')}
+                              value={details.salient_feature.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                           />
                          </View>
                         </View>
                          }
-                     { details.eligibility==null?<View/>:
+                     { details.eligibility==null||details.eligibility==''?<View/>:
                         <View style={[styles.top]}>
                           <View>  
                          <Text style={styles.Text3}>{'Eligibility :'}</Text>
                           <HTMLView
                               value={details.eligibility.trim().replace(/\s+/g,' ')}
+                              addLineBreaks={false}
+                         /></View>
+                         </View>}
+
+                         { details.insuarance_accidental_feature==null||details.insuarance_accidental_feature==''?<View/>:
+                        <View style={[styles.top]}>
+                          <View>  
+                         <Text style={styles.Text3}>{'Insuarance Accidental Feature	 :'}</Text>
+                          <HTMLView
+                              value={details.insuarance_accidental_feature.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
                          /></View>
                          </View>}

@@ -20,18 +20,26 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 const loginValidationSchema=yup.object().shape({
-   name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
-   .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
-   father:yup.string().max(40,({max})=>`Father name must be maximum ${max} character`)
-   .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
-   mother:yup.string().max(40,({max})=>`Mother name must be maximum ${max} character`)
-   .required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
-   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
-   pan:yup.string().required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
+   name:yup.string()
+   .max(40,({max})=>`Name must be maximum ${max} character`)
+  .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
+   father:yup.string(),
+  // .max(40,({max})=>`Father name must be maximum ${max} character`)
+  // .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
+   mother:yup.string(),
+   //.max(40,({max})=>`Mother name must be maximum ${max} character`)
+   //.required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
+   email:yup.string().email('Please enter valid Email '),
+   // .required('Please enter your Email '),
+   pan:yup.string(),
+   //.required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
    mobile:yup.string().required('Please enter mobile number'),
-   addressLine1:yup.string().required('Please enter address line1'),
-   addressLine2:yup.string().required('Please enter address line2'),
-   pincode:yup.string().required('Please enter pincode'),
+   addressLine1:yup.string(),
+   //.required('Please enter address line1'),
+   addressLine2:yup.string(),
+   // .required('Please enter address line2'),
+   pincode:yup.string(),
+   // .required('Please enter pincode'),
    occupation:yup.string()
  })
 
@@ -65,42 +73,43 @@ const RegisterPage=({route})=>{
 
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
-      if(gender==0||''){
+      if(gender==0||gender==''||gender==null){
          Toast.show('Please select gender')
       }
-      else if(dob==''){
+      else if(date==''){
          Toast.show('Please select date of birth')
       }
-      else if(occupation==0||''){
-         Toast.show('Please select occupation')
-      }
-      else if(occupation=='Others' && values.occupation==''){
-         Toast.show('Please specify occupation')
-      }
-      else if(country==0||''){
-         Toast.show('Please select country name')
-      }
-      else if(state==0||''){
-         Toast.show('Please select state name')
-      }
-      else if(city==0||''){
-         Toast.show('Please select city name')
-      }
-      else if(relation==0||''){
+      else if(relation==0||relation==''||relation==null||relation=='undefined'){
          Toast.show('Please select relationship')
       }
-      else if(income_group==0||''){
-         Toast.show('Please select income group')
-      }
-      else if(education==0||''){
-         Toast.show('Please select education')
-      }
-      else if(marital_status==0||''){
-         Toast.show('Please select marital status')
-      }
-      else if(residential_address==0||''){
-         Toast.show('Please select residential status')
-      }
+      // else if(occupation==0||''){
+      //    Toast.show('Please select occupation')
+      // }
+      // else if(occupation=='Others' && values.occupation==''){
+      //    Toast.show('Please specify occupation')
+      // }
+      // else if(country==0||''){
+      //    Toast.show('Please select country name')
+      // }
+      // else if(state==0||''){
+      //    Toast.show('Please select state name')
+      // }
+      // else if(city==0||''){
+      //    Toast.show('Please select city name')
+      // }
+     
+      // else if(income_group==0||''){
+      //    Toast.show('Please select income group')
+      // }
+      // else if(education==0||''){
+      //    Toast.show('Please select education')
+      // }
+      // else if(marital_status==0||''){
+      //    Toast.show('Please select marital status')
+      // }
+      // else if(residential_address==0||''){
+      //    Toast.show('Please select residential status')
+      // }
      
       else{
          console.log('constry dfsakfl;sd',country,city,state);
@@ -272,7 +281,8 @@ const RegisterPage=({route})=>{
                               onCancel={() => {
                                 setOpen(false)
                               }}
-                              textColor={colors.textColor}                              
+                              textColor={colors.textColor}   
+                              maximumDate={new Date()}                           
                               />
                                {/* <DatePicker
                                   //  style={{width: '100%',}}
@@ -305,22 +315,23 @@ const RegisterPage=({route})=>{
                             </TouchableOpacity>
                         </View>
                     </View>
-                   
+                    <View></View>  
                     <Text style={styles.better}>E-mail</Text>
-                      <View style={styles.drop}>
-                        <TextInput
+                    <View style={styles.drop}>
+                    <TextInput
                         style={styles.input}
                         placeholder='example@gmail.com'
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.email}
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
-                        editable={true}
                         keyboardType='email-address'
                         returnKeyType='done'
-                        
                         />
                     </View>
+                 
+                    
+                     
                     <View style={styles.error}>
                      {(errors.email && touched.email) &&
                         <Text style={styles.warn}>{errors.email}</Text>
@@ -467,7 +478,7 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={country==null||0?'':country}
+                        value={country==null||country==0?'':country}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Country", value: 0 }}
                         Icon={()=>
@@ -532,20 +543,20 @@ const RegisterPage=({route})=>{
                      <Text style={styles.better}>Relationship</Text>
                       <View style={styles.drop}>
                       <RNPickerSelect
-                                         onValueChange={(val)=>setRelation(val)}
-                                         items={Relation}
-                                         style={{ 
-                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
-                                         value={relation==0||null?'':relation}
-                                         useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select Relationship", value: 0 }}
-                                         Icon={()=>
-                                          <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                                        source={require('../../../../assets/Image/down.png')}/>}   
-                                   />
+                        onValueChange={(val)=>setRelation(val)}
+                        items={Relation}
+                        style={{ 
+                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={relation==0||null?'':relation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select Relationship", value: 0 }}
+                        Icon={()=>
+                        <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                  />                      
                     </View>
                     <Text style={styles.better}>Income Group</Text>
                       <View style={styles.drop}>
@@ -671,6 +682,9 @@ const Relation=[
    { label: 'Mother', value: 'Mother' },
    { label: 'Sister', value: 'Sister'},
    { label: 'Brother', value: 'Brother'},
+  
+   { label: 'Spouse',value:'Spouse'},
+   { label: 'Daughter',value:'Daughter'},
    { label: 'Other', value: 'Other'},
 
 ]

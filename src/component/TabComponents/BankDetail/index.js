@@ -72,7 +72,7 @@ const BankDetails=()=>{
     const renderModal=(item)=>{
       Alert.alert(
         "CONFIRM",
-        "Are you sure you want to delete Bank Details?",
+        "Are you sure you want to delete Bank detail?",
         [
           {
             text: "Cancel",

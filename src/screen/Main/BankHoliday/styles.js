@@ -11,13 +11,21 @@ export default StyleSheet.create({
     Textview:
     {
          backgroundColor:colors.white,
-         marginTop:20,
-         borderRadius:6
+         borderRadius:10,
+         shadowColor:colors.black,
+         shadowOpacity:0.25,
+         shadowRadius:8,
+         shadowOffset:{height:2,width:0},
+         elevation:5,
+         marginBottom:40,
+        
+        //  paddingHorizontal:15,
+        //  paddingVertical:20,
     },
     Textview1:
     {
         paddingHorizontal:20,
-        marginTop:20
+        marginTop:20,
     },
    jan:
    {
@@ -84,14 +92,14 @@ export default StyleSheet.create({
     result:
     {
         color:colors.textColor,
-        fontFamily:'Montserrat-Regular',
+        fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.fourteen,
         marginTop:20
     },
     search:
     {
         color:colors.white,
-        fontFamily:'Montserrat-Regular',
+        fontFamily:'Montserrat-Bold',
         fontSize:fontSize.fourteen
     },
     button:
@@ -122,4 +130,14 @@ export default StyleSheet.create({
         color:colors.textColor,
         fontSize:fontSize.thirteen
     },
+    headerText: {
+        fontSize: 14,
+        fontWeight: '600',
+        color:colors.white,
+        fontFamily:'Montserrat-Regular'
+      },
 })
+
+
+
+

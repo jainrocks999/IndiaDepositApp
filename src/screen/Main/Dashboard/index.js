@@ -23,6 +23,7 @@ const dashboard=()=>{
     const [selectedItems1, setSelectedItems1] = useState([]);
     const [isModalVisible, setModalVisible] = useState(false);
     const isFetching=useSelector(state=>state.isFetching)
+    console.log('this  is selected data',selectedItems1);
     const dispatch=useDispatch()
     useEffect(async()=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -111,11 +112,12 @@ const dashboard=()=>{
            <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:100}}>
                <View
                     style={[styles.touch1]}>
-                    <View style={{width:'90%',alignItems:'flex-end'}}>
-                      <TouchableOpacity onPress={()=>setModalVisible(true)} style={styles.circle}>
-                    <Text style={{fontSize:6,color:colors.bc,fontWeight:'700'}}>{`i`}</Text>
+                    <TouchableOpacity onPress={()=>setModalVisible(true)} style={{width:'90%',alignItems:'flex-end'}}>
+                      {/* <View  style={styles.circle}> */}
+                    {/* <Text style={{fontSize:6,color:colors.bc,fontWeight:'700'}}>{`i`}</Text> */}
+                    <Image style={{width:14,height:14}} source={require('../../../assets/Image/information.png')}/>
+                    {/* </View> */}
                     </TouchableOpacity>
-                    </View>
                     <TouchableOpacity 
                     style={{alignItems:'center'}}
                     onPress={onPress}
@@ -137,9 +139,6 @@ const dashboard=()=>{
                     </View>
                     <View style={styles.view2}>
                         <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
-                    {/* <TouchableOpacity style={[styles.circle,{borderColor:colors.white}]}>
-                      <Text style={{color:colors.white,fontSize:6,fontWeight:'700'}}>i</Text>
-                    </TouchableOpacity> */}
                     </View>
                    
                 </Pressable>
@@ -185,7 +184,7 @@ const dashboard=()=>{
     return(
       <View style={{flexGrow:1,}}>
         <Header
-          title={'DASHBOARD'}
+          title={'IndiaDeposit'}
           source ={require('../../../assets/Images/drawer.png')}
           onPress={()=>navigation.toggleDrawer()}
           source1={require('../../../assets/Image/notification.png')}
@@ -196,11 +195,12 @@ const dashboard=()=>{
              <Image
              resizeMethod='resize'
               source={require('../../../assets/Image/fixed-deposit.png')}/>
+               {isFetching?<Loader/>:null}
           </View>
-          {isFetching?<Loader/>:null}
+       
 
       <ScrollView style={{flex:1}}>
-
+     
           <View style={styles.view}>
                 <View style={styles.item}>
                     <View style={styles.view1}>
@@ -269,7 +269,7 @@ const dashboard=()=>{
             </View>
             </ScrollView>
         <View style={{paddingHorizontal:15}}> 
-        <Modal 
+        {/* <Modal 
          isVisible={isModalVisible}
         >
         <View style={styles.modal}>
@@ -295,7 +295,28 @@ const dashboard=()=>{
         </TouchableOpacity>
         </View>
         </View>
-       </Modal>
+       </Modal> */}
+        <Modal isVisible={isModalVisible}>
+                <View style={styles.modal}>
+                {/* <View style={styles.modal1}>
+                    <Text
+                    style={styles.modaltext}>
+                    CONFIRM
+                    </Text>
+                </View> */}
+                <TouchableOpacity style={styles.ModelmsgView}>
+                <Text style={styles.modaltext}>{'Lorem ipsum, or lipsum as it is sometimes known,is dummy text used in laying out print.'}</Text>
+                </TouchableOpacity>
+                <View
+                    style={styles.modal2}>
+                    <TouchableOpacity style={styles.popup}
+                     onPress={()=>setModalVisible(false)}
+                     >
+                    <Text style={styles.ModelBtntext}>OK</Text>
+                    </TouchableOpacity>
+                </View>
+                </View>
+            </Modal>
        </View>   
     <StatusBar/>
      {/* <BottomTab/> */}
@@ -310,7 +331,6 @@ const data=[
     id:1,height:35,width:35},
    
     {name:'Senior Citizen', 
-    // image:require('../../../assets/Image/senior_citizen-b.png'),
     image:require('../../../assets/Image/old-age-copy.png'),
     image1:require('../../../assets/Image/old-age-copy-w.png')
     ,id:4,height:35,width:35},
@@ -321,8 +341,6 @@ const data=[
 
     {name:'NRI',
     image:require('../../../assets/Image/globe.png'),
-
-    // image:require('../../../assets/Image/nri-fd-b.png'),
     image1:require('../../../assets/Image/globe-white.png'),
     id:3,height:37,width:45},
 ]
@@ -332,25 +350,23 @@ const data1=[
     image:require('../../../assets/Image/saving-ac-b.png'),
     image1:require('../../../assets/Image/saving-ac-w.png'),
     id:5,height:35,width:35},
+    {name:'Senior Citizen',
+    image:require('../../../assets/Image/old-age.png'),
+    image1:require('../../../assets/Image/old-age-white.png'),
+    id:9,height:35,width:35},
     
-    {name:'Zero Balance',
-    image:require('../../../assets/Image/sb-zb-b.png'),
-    image1:require('../../../assets/Image/sb-zb-w.png'),
-    id:8,height:35,width:35},
     {name:'Female',
     image:require('../../../assets/Image/sb-female-b.png'),
     image1:require('../../../assets/Image/sb-female-w.png'),
     id:6,height:35,width:35},
+    {name:'Zero Balance',
+    image:require('../../../assets/Image/sb-zb-b.png'),
+    image1:require('../../../assets/Image/sb-zb-w.png'),
+    id:8,height:35,width:35},
     
-    {name:'Defence',
-    image:require('../../../assets/Image/guard-copy.png'),
-
-    // image:require('../../../assets/Image/sb-defence-b.png'),
-    image1:require('../../../assets/Image/gaurd.png'),
-    id:7,height:35,width:35},
-    {name:'Senior Citizen',
-    // image:require('../../../assets/Image/senior_citizen-b.png'),
-    image:require('../../../assets/Image/old-age.png'),
-    image1:require('../../../assets/Image/old-age-white.png'),
-    id:9,height:35,width:35},
+    // {name:'Defence',
+    // image:require('../../../assets/Image/guard-copy.png'),
+    // image1:require('../../../assets/Image/gaurd.png'),
+    // id:7,height:35,width:35},
+   
 ]

@@ -159,52 +159,7 @@ export default StyleSheet.create({
         alignItems:'center',justifyContent:'center',
         
    },
-   modal: {
-    width: 330,
-    height:200,
-    borderRadius: 10,
-    flexDirection: 'column',
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor:colors.white,
-    //paddingHorizontal:15,
-    paddingVertical:12,
-    
-},
-  modal1:{
-      alignItems:'center',
-      justifyContent:'center',
-      height:44,
-      width:75,
-      borderRadius:10,
-      marginTop:15,
-      backgroundColor:colors.bc,
-    
-    },
-    modaltext:{
-        color: colors.textColor,
-        fontSize: fontSize.thirteen,
-        fontWeight: '500',
-        textAlign: 'center',
-        marginLeft:-10,
-       
-    },
-  ModelMsgText: {
-    width: '99%',
-    color: colors.white,
-    fontSize: fontSize.seventeen,
-    textAlign: 'center',
-    fontWeight:'700'
-   // margin:10
-  },
-  ModelmsgView: {
-    width: 75,
-    height:44
-,    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-   // marginTop:10
-  },
+  
   circleM:{
       height:8,
     width:8,
@@ -215,13 +170,63 @@ export default StyleSheet.create({
    marginTop:17,
    marginRight:8
 },
-modaltext1:{
+modal: {
+    width: 320,
+    height:172,
+    borderRadius: 10,
+    flexDirection: 'column',
+    alignSelf: 'center',
+    alignItems: 'center',
+    backgroundColor:colors.white,
+  },
+  modal1:{
+      width: '100%',
+      borderWidth:1,
+      backgroundColor:colors.bc,
+      paddingVertical:5
+    },
+    modal2:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        width: '100%',
+        bottom:20,
+        position:'absolute'
+        },
+    modaltext:{
+        color: colors.textColor,
+        // textAlign: 'center',
+    },
+  ModelBtntext: {
+    color:colors.white,
+    fontSize: fontSize.fefteen,
+    alignSelf: 'center',
+    fontFamily: 'Montserrat-SemiBold',
+    textAlign: 'center',
+  },
+  ModelMsgText: {
+    width: '99%',
     color: colors.textColor,
-    fontSize: fontSize.twelve,
-    fontWeight: '500',
-    marginTop:12,
-    marginRight:100
-    //textAlign: 'center',
-},
+    fontSize: fontSize.sixteen,
+    // textAlign: 'center',
+    margin:10
+  },
+  ModelmsgView: {
+    width: '99%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop:10,paddingHorizontal:20
+  },
+  popup: {
+    height: 40,
+    width:100,
+    marginTop: 10,
+    backgroundColor:colors.bc,
+    justifyContent: 'center',
+    borderRadius: 4,
+    alignItems: 'center',
+    alignSelf: 'center',
+    paddingHorizontal:10
+  },
 })
 

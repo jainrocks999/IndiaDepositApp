@@ -17,6 +17,7 @@ import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Geolocation from 'react-native-geolocation-service';
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
+
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
 const Contact=({route})=>{
     const navigation=useNavigation()
@@ -28,6 +29,8 @@ const Contact=({route})=>{
     const [address,setAddress]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
+    const re = /^[0-9\b]+$/;
+    const [error,setError]=useState(false)
    
 useEffect(()=>{
    const backAction = () => {
@@ -67,7 +70,7 @@ useEffect(()=>{
          type: 'FD_Search_Request',
          url: 'fdlist1',
          year:year,
-         month:month,
+         month:parseInt(month),
          days:day,
          amount:amount,
          location:pincode?pincode:address,
@@ -236,7 +239,7 @@ useEffect(()=>{
                                      </View>
                                  </View>
                              </View>
-                        </View>
+                          </View>
                       </View>
                       <View style={{marginTop:23}}>
                            <View style={styles.view4}>
@@ -250,7 +253,12 @@ useEffect(()=>{
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
-                                 onChangeText={(val)=>setAmount(val)}
+                                 onChangeText={(val)=>{
+                                    if(re.test(val)||val==''){
+                                       setAmount(val)
+                                    }
+                                 }
+                              }
                                  returnKeyType='done'
                               />
                            </View>
@@ -285,7 +293,10 @@ useEffect(()=>{
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={pincode}
-                              onChangeText={(val)=>setPincode(val)}
+                              onChangeText={(val)=>{
+                              if (re.test(val)||val=='') {
+                                 setPincode(val)}}
+                              }   
                               keyboardType='number-pad'
                               maxLength={6}
                               returnKeyType='done'

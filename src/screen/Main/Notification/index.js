@@ -19,6 +19,7 @@ const Notification=()=>{
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Notification)
     const isFetching=useSelector(state=>state.isFetching)
+    const [loader,setLoader]=useState(false)
     console.log('this is selector',selector);
     const [search,setSearch]=useState('')
     const [filteredDataSource, setFilteredDataSource] = useState(selector);
@@ -90,6 +91,7 @@ useEffect(async()=>{
 const deletePost=async(item)=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   try {
+    setLoader(true)
     const data = new FormData();
     data.append('notification_id',item)
     const response = await axios({
@@ -110,22 +112,23 @@ const deletePost=async(item)=>{
         data,
         headers: {
           'content-type': 'multipart/form-data',
-          Accept: 'multipart/form-data',
+          Accept: 'multipart/form-data',    
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',         
       });
-      if (response.data.status==200) {
+      if (response.data.status) { 
+        setLoader(false)                                                                                                
         setFilteredDataSource(response.data.data)
-        setMasterDataSource(response.data.data)
+        setMasterDataSource(response.data.data)      
       } 
     } catch (error) {
-     throw error;
+    setLoader(false)
     }
       // setFilteredDataSource(response.data.data)
       // setMasterDataSource(response.data.data)
     } 
   } catch (error) {
-   throw error;
+  setLoader(false)
   }
 }
 const showContent=()=>{
@@ -173,8 +176,9 @@ const showContent=()=>{
            title={'NOTIFICATIONS'}
            onPress={()=>navigation.goBack()}
            />
-          
+        
            <View style={{width:'100%',paddingHorizontal:15,marginTop:10}}>
+         
           <View style={styles.container1}>
             <View style={styles.blog}>
              <Image 
@@ -199,7 +203,7 @@ const showContent=()=>{
          
             {filteredDataSource[0]? <View style={{flex:1,paddingHorizontal:15,paddingVertical:10}}>
              <View style={styles.card}>  
-             {isFetching?<Loader/>:null} 
+             {loader?<Loader/>:null}
                 {showContent()}
              </View>
              </View>:null}

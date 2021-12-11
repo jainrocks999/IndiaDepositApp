@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     view1:
     {
-        marginBottom:10,marginTop:5
+        marginBottom:15,marginTop:0
     },
     view2:
     {
@@ -57,6 +57,6 @@ export default StyleSheet.create({
         borderRadius:10,
         backgroundColor:colors.white,
         paddingHorizontal:15,
-        paddingVertical:20
+        paddingVertical:10
     },
 })

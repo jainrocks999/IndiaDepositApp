@@ -31,7 +31,8 @@ initialstate = {
   FamilyList:[],
   ResendData:'',
   ResenData:'',
-  Data:''
+  Data:'',
+  MYFDList:[]
 };
 // Resend_Otp_Success
 export default (state = initialstate, action) => {
@@ -359,6 +360,13 @@ export default (state = initialstate, action) => {
   case 'Create_FD_Success':
     return { ...state, isFetching: false,};
   case 'Create_FD_Error':
+  return { ...state, isFetching: false };
+
+  case 'MYFD_List_Request':
+    return { ...state, isFetching: true };
+  case 'MYFD_List_Success':
+    return { ...state, isFetching: false,MYFDList: action.payload};
+  case 'MYFD_List_Error':
   return { ...state, isFetching: false };
 
     default:

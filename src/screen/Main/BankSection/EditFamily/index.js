@@ -19,16 +19,24 @@ import * as yup from 'yup';
 const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
    .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
-   father:yup.string().max(40,({max})=>`Father name must be maximum ${max} character`)
-   .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
-   mother:yup.string().max(40,({max})=>`Mother name must be maximum ${max} character`)
-   .required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
-   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
-   pan:yup.string().required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
-   mobile:yup.string().required('Please enter mobile number'),
-   addressLine1:yup.string().required('Please enter address line1'),
-   addressLine2:yup.string().required('Please enter address line2'),
-   pincode:yup.string().required('Please enter pincode'),
+   father:yup.string(),
+   //.max(40,({max})=>`Father name must be maximum ${max} character`)
+  // .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
+   mother:yup.string(),
+   //.max(40,({max})=>`Mother name must be maximum ${max} character`)
+   //.required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
+   email:yup.string().email('Please enter valid Email '),
+   //.required('Please enter your Email '),
+   pan:yup.string(),
+   //.required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
+   mobile:yup.string(),
+   //.required('Please enter mobile number'),
+   addressLine1:yup.string(),
+   //.required('Please enter address line1'),
+   addressLine2:yup.string(),
+   //.required('Please enter address line2'),
+   pincode:yup.string(),
+   //.required('Please enter pincode'),
    occupation:yup.string()
  })
 
@@ -60,39 +68,42 @@ const RegisterPage=({route})=>{
      const value=`${dd}-${mm}-${yyyy}`
 
     const validateUser=async(values)=>{
-      if(gender==0||''){
+      if(gender==0||gender==''||gender==null){
          Toast.show('Please select gender')
       }
-      else if(dob==''){
+      else if(date==''){
          Toast.show('Please select date of birth')
       }
-      else if(occupation==0||''){
-         Toast.show('Please select occupation')
+      else if(relation==0||relation==''||relation==null||relation=='undefined'){
+         Toast.show('Please select relationship')
       }
-      else if(occupation=='Others'&& values.occupation==''){
-         Toast.show('Please specify occupation')
-      }
-      else if(country==0||''){
-         Toast.show('Please select country name')
-      }
-      else if(state==0||''){
-         Toast.show('Please select state name')
-      }
-      else if(city==0||''){
-         Toast.show('Please select city name')
-      }
-      else if(income_group==0||''){
-         Toast.show('Please select income group')
-      }
-      else if(education==0||''){
-         Toast.show('Please select education')
-      }
-      else if(marital_status==0||''){
-         Toast.show('Please select marital status')
-      }
-      else if(residential_address==0||''){
-         Toast.show('Please select residential status')
-      }
+      // else if(occupation==0||''){
+      //    Toast.show('Please select occupation')
+      // }
+      // else if(occupation=='Others'&& values.occupation==''){
+      //    Toast.show('Please specify occupation')
+      // }
+      // else if(country==0||''){
+      //    Toast.show('Please select country name')
+      // }
+      // else if(state==0||''){
+      //    Toast.show('Please select state name')
+      // }
+      // else if(city==0||''){
+      //    Toast.show('Please select city name')
+      // }
+      // else if(income_group==0||''){
+      //    Toast.show('Please select income group')
+      // }
+      // else if(education==0||''){
+      //    Toast.show('Please select education')
+      // }
+      // else if(marital_status==0||''){
+      //    Toast.show('Please select marital status')
+      // }
+      // else if(residential_address==0||''){
+      //    Toast.show('Please select residential status')
+      // }
      
       else{
       dispatch({
@@ -113,7 +124,7 @@ const RegisterPage=({route})=>{
       city:city,
       state:state,
       pincode:values.pincode,
-      country:101,
+      country:country,
       relation:relation,
       marital_status:marital_status,
       occupation:occupation=='Others'?values.occupation:occupation,
@@ -265,7 +276,8 @@ const RegisterPage=({route})=>{
                               onCancel={() => {
                                 setOpen(false)
                               }}
-                              textColor={colors.textColor}                              
+                              textColor={colors.textColor}    
+                              maximumDate={new Date()}                          
                               />
                                {/* <DatePicker
                                      date={dob=='0'||null?'':dob}
@@ -306,9 +318,7 @@ const RegisterPage=({route})=>{
                         placeholderTextColor={colors.heading1}
                         defaultValue={values.email}
                         onChangeText={handleChange('email')}
-                        onBlur={handleBlur('email')}
-                        editable={false}
-                        
+                        onBlur={handleBlur('email')}                        
                         />
                     </View>
                     <View style={styles.error}>
@@ -327,7 +337,6 @@ const RegisterPage=({route})=>{
                         onChangeText={handleChange('mobile')}
                         onBlur={handleBlur('mobile')} 
                         keyboardType='number-pad' 
-                        editable={false}                      
                         />
                     </View>
                     <View style={styles.error}>
@@ -669,6 +678,8 @@ const Relation=[
    { label: 'Mother', value: 'Mother' },
    { label: 'Sister', value: 'Sister'},
    { label: 'Brother', value: 'Brother'},
+   { label: 'Spouse',value:'Spouse'},
+   { label: 'Daughter',value:'Daughter'},
    { label: 'Other', value: 'Other'},
 
 ]

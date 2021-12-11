@@ -30,7 +30,8 @@ export default StyleSheet.create({
     {
         fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve,
-        color:colors.textColor
+        color:colors.textColor,
+        // width:'45%'
     },
     card:
     {

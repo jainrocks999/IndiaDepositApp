@@ -43,6 +43,7 @@ const RegisterPage=({route})=>{
         occupation:'',
         annual_income:'',
         fd_user_id:user_id,
+        user_id:user_id,
         cheque_copy:'',
         address_proof:'',
         pan_card:'',

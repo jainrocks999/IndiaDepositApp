@@ -54,6 +54,7 @@ const changeValue1=(val)=>{
 }
    const actualDownload = (url) => {
         const { dirs } = RNFetchBlob.fs;
+        console.log('this isi working');
        RNFetchBlob.config({
          fileCache: true,
          addAndroidDownloads: {
@@ -74,6 +75,7 @@ const changeValue1=(val)=>{
      }
      
     const downloadFile = async(item) => {
+    
        try {
            const granted = await PermissionsAndroid.
            request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
@@ -95,7 +97,7 @@ const renderItem=(item)=>{
     <Text style={{fontSize:14,fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{item.form_name}</Text>
     <TouchableOpacity
     onPress={()=>downloadFile(item.form_attachment)}
-    style={{marginLeft:30}}>
+    style={{marginLeft:30,width:60,height:60,alignItems:'center',justifyContent:'center'}}>
      <Image source={require('../../../assets/Image/pdf.png')}/>
     </TouchableOpacity>
 </View>
@@ -105,7 +107,7 @@ const renderItem=(item)=>{
     return(
         <View style={styles.container}>
           <Header
-          title={'FD FORM'}
+          title={'FORM'}
           source={require('../../../assets/Image/arrow2.png')}
           onPress={()=>navigation.goBack()}
           />
@@ -155,7 +157,12 @@ const renderItem=(item)=>{
               keyExtractor={(item)=>item.form_id}
               />
               </View>:
-              <Loader/>
+              // setTimeout(() => {
+              //   <Loader/>
+              // }, 2000)
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+               <Text style={{fontFamily:'Montserrat-Regular',fontSize:15}}>{`We don't have any forms available for download.`}</Text>
+           </View>
               }
           </View>
         </View>

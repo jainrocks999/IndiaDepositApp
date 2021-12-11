@@ -12,6 +12,7 @@
   import AsyncStorage from '@react-native-community/async-storage';
   import Storage from '../../../component/AsyncStorage';
   import DeviceInfo from 'react-native-device-info';
+  import OtpInputs from 'react-native-otp-inputs';
   class OtpVarification extends React.Component{
       constructor(props) {
           super(props);
@@ -341,10 +342,6 @@
         )
       }
     }
-
-
-
-    
       render(){
         console.log('this is otp data ',this.state.otpData);
           return(
@@ -367,14 +364,37 @@
                  <View style={styles.main}>
                  <View style={styles.otpView}>
                   <Text style={styles.enter}>Enter OTP</Text>
-                 <OTPTextInput
+                  <OtpInputs
+                      handleChange={(code)=>this.setState({otp:code})}
+                      numberOfInputs={4}
+                      autofillFromClipboard={true}
+                      keyboardType={"numeric"}
+                      style={{justifyContent:'space-between',
+                      alignItems:'center',flexDirection:'row',width:'100%',marginTop:8}}
+                      inputContainerStyles={[styles.otp,{borderWidth:0}]}
+                      focusStyles={{borderWidth:1,borderColor:colors.bc}}
+                      inputStyles={{
+                        fontSize:16,
+                        color:colors.textColor,
+                        width:50,
+                        alignContent:'center',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        textAlign:'center',
+                        borderRadius:10,
+                        borderWidth:0
+                       }}
+                    //  returnKeyType='go'
+                    //   onSubmitEditing={()=>handleSubmit()}
+                    />
+                 {/* <OTPTextInput
                     containerStyle={styles.input}
                     handleTextChange={(code)=>this.setState({otp:code})}
                     inputCount={4}
                     textInputStyle={styles.otp}
                     offTintColor={colors.bc}
                     tintColor={colors.bc}
-                    />
+                    /> */}
                     {this.renderCount()}
                    
                   </View>          

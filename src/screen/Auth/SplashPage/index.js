@@ -8,6 +8,7 @@ import axios from 'axios';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
 import StatusBar from '../../../component/StatusBar';
+import Toast from 'react-native-simple-toast';
 let value;
 const Splash=()=>{
     const navigation=useNavigation()
@@ -75,7 +76,9 @@ const Splash=()=>{
              }
           }
         } catch (error) {
-          // Alert.alert(error)
+          if(error.message=='Network Error'){
+            Toast.show('Please check your network')
+          }
          throw error;
           
         }

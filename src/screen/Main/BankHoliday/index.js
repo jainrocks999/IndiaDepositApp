@@ -1,46 +1,55 @@
 import React, { useState,useEffect } from "react";
-import {View,Text,FlatList,ScrollView,Image,BackHandler} from 'react-native';
+import {View,Text,FlatList,ScrollView,Image,BackHandler,Pressable, MaskedViewBase} from 'react-native';
 import Header from '../../../component/header';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-import BottomTab from '../../../component/StoreButtomTab';
 import { TextInput } from "react-native-gesture-handler";
 import colors from "../../../component/colors";
 import { TouchableOpacity } from "react-native";
-import fontSize from "../../../component/fontSize";
-const data =
-[
-          {title:'Bank ',value:'STATE BANK OF INDIA'},
-          {title:'Address',value:'OPP. GOVT. GIRLS HR.\nSEC. SCHOOL, A.B.\nROAD, RAU'},
-          {title:'State',value:'Madhya Pradesh'},
-          {title:'District',value:'Indore'},
-          {title:'Branch',value:'A.B.ROAD, RAU,INDORE'},
-          {title:'Contact',value:'+91 000 0000 000'},
-          {title:'IFSC Code',value:'SBIN0030460'},
-          {title:'Branch Code',value:'Last six characters of\nIFSC Code represent\n Branch code.'},
-          {title:'MICR Code',value:'452002076'}
-]
-const data1 =
-[
-          {title:'Bank Timings\nFor Week days\n[Monday to Friday] ',value:'10.00 AM to 4:00 PM'},
-          {title:'Bank Timings on\n1st, 3rd and 5th\nSaturday of Month',value:'10.00 AM to 4:00 PM'},
-          {title:'Bank Timings on\n2nd and 4th\nSaturday of Month',value:'Closed'},
-          {title:'Bank Timings For\nall Sundays',value:'Closed'},
-  
-]
+import { useSelector,useDispatch } from "react-redux";
+import RNPickerSelect from "react-native-picker-select";
+import axios from "axios";
+import Toast from 'react-native-simple-toast';
+import {LayoutAnimation} from 'react-native'
+import Loader from '../../../component/loader';
+
+
+
+
+
 
 const Holiday=()=>{
     const navigation=useNavigation()
-    const [jan,setJan]=useState(false)
-    const [feb,setFeb]=useState(false)
-    const [march,setMarch]=useState(false)
-    const [april,setAp]=useState(false)
-    const [may,setMay]=useState(false)
+    const selector=useSelector(state=>state.BankNameList)
+    const [bank_name,set_bank_name]=useState('')
+    const [pincode,setPincode]=useState('')
+    const [listDataSource, setListDataSource] = useState([]);
+    const [listDataSource1, setListDataSource1] = useState([]);
+    const [multiSelect, setMultiSelect] = useState(false);
+    const [expand,setExpand]=useState(false)
+    const [boolean,setBoolean]=useState(false)
+    const [loader,setLoader]=useState(false)
+    const re = /^[0-9\b]+$/;
 
-useEffect(()=>{
+useEffect(async()=>{
+  try {
+    const response = await axios({
+      method: 'POST',
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',    
+      },
+      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/bankholiday',         
+    });
+    if (response) { 
+      setListDataSource1(response.data.data)
+    } 
+  } catch (error) {
+  
+  }
+ 
   const backAction = () => {
     if(navigation.isFocused)
-    // navigation.goBack('Dashboard')
        navigation.navigate('Main')
       return true;
   };
@@ -53,288 +62,308 @@ useEffect(()=>{
   return () => backHandler.remove();
 },[])
 
-  const checkJan=()=>
-  {
-     if(jan==true)
-     {
-       setJan(false)
-     }
-     else
-     {
-       setJan(true)
-     }
+const data=[{}]
+
+  const renderSearch=async()=>{
+    if(bank_name==''||bank_name==null||bank_name==0){
+        Toast.show('Please select bank name')
+    }
+    else if(pincode==''){
+       Toast.show('Please enter pincode')
+    }
+    else{
+    try {
+      const data = new FormData();
+      data.append('location',pincode)
+      data.append('bank_id',bank_name)
+      console.log('this isworign');
+      setLoader(true)
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',    
+        },
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getbranchbypincode',         
+      });
+      if (response) { 
+        setLoader(false)
+        setBoolean(true)
+        setListDataSource(response.data.data)
+        console.log('thislkf;asdl;fk;kfl;dsafkdl;fkds;',response.data.data);
+      } 
+    } catch (error) {
+    setLoader(false)
+    }
   }
-  const checkFeb=()=>
-  {
-     if(feb==true) 
-     {
-       setFeb(false)
-     }
-     else
-     {
-       setFeb(true)
-     }
-  }
-  const checkMarch=()=>
-  {
-    if(march==true)
-     {
-       setMarch(false)
-     }
-     else
-      {
-       setMarch(true)
+}
+
+  const updateLayout = (index) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    const array = [...listDataSource];
+    if (multiSelect) {
+      array[index]['isExpanded'] = !array[index]['isExpanded'];
+    } else {
+      array.map((value, placeindex) =>
+        placeindex === index
+          ? (array[placeindex]['isExpanded'] =
+             !array[placeindex]['isExpanded'])
+          : (array[placeindex]['isExpanded'] = false),
+      );
+    }
+    setListDataSource(array);
+  };
+
+  const dropDown = (index) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    const array = [...listDataSource1];
+    if (multiSelect) {
+      array[index]['isExpanded'] = !array[index]['isExpanded'];
+    } else {
+      array.map((value, placeindex) =>
+        placeindex === index
+          ? (array[placeindex]['isExpand'] =
+             !array[placeindex]['isExpand'])
+          : (array[placeindex]['isExpand'] = false),
+      );
+    }
+    setListDataSource1(array);
+  };
+
+
+
+  const ExpandableComponent = ({item, onClickFunction}) => {
+    const [layoutHeight, setLayoutHeight] = useState(0);
+    useEffect(() => {
+      if (item.isExpanded) {
+        setLayoutHeight(null);
+        setExpand(true)
+      } else {
+        setLayoutHeight(0);
       }
-  }
-  const checkApril=()=>
-  {
-    if(april==true)
-    {
-       setAp(false)
-     }
-     else
-      {
-       setAp(true)
-     }
-  }
-  const checkMay=()=>
-  {
-    if(may==true)
-     {
-       setMay(false)
-     }
-    else
-     {
-       setMay(true)
-     }
-  }
+    }, [item.isExpanded]);
+    return (
+      <View >
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onClickFunction}
+          style={{
+              width:'100%',
+              height:40,
+              backgroundColor:colors.bc,
+              marginTop:5,
+              justifyContent:'space-between',
+              paddingHorizontal:15,
+              flexDirection:'row',
+              alignItems:'center'
+              }}>
+          <Text style={styles.headerText}>
+            {item.branch_name}
+          </Text>
+         {item.isExpanded?<Image style={{width:26,height:18}} source={require('../../../assets/Image/wDown.png')}/>:
+         <Image style={{width:26,height:18}} source={require('../../../assets/Image/wFarword.png')}/>}
+        </TouchableOpacity>
+       
+        <View
+          style={{
+            height:layoutHeight,
+            overflow: 'hidden',
+            paddingHorizontal:10
+          }}>
+                          <View style={styles.border1}></View>
+                            <View style={styles.container}>
+                                  <Text style={styles.item2}>{`Bank Name : ${item.branchdetail.bankname}`}</Text>                                
+                               </View>
+                               <View style={styles.border1}></View>
+                            <View style={styles.container}>
+                                  <Text style={styles.item2}>{`Pincode : ${item.branchdetail.pin_code}`}</Text>
+                               </View>
+                               <View style={styles.border1}></View>
+                            <View style={styles.container}>
+                                        <Text style={styles.item2}>{`Address : ${item.branchdetail.address}`}</Text>
+                               </View>
+                               <View style={styles.border1}></View>
+                            <View style={styles.container}>
+                                <Text style={styles.item2}>{`IFSC Code : ${item.branchdetail.ifsc_code}`}</Text>
+                               </View>                             
+               
+        </View>
+      </View>
+    );
+  };
+  
+  const HolidayComponent = ({item, onClickFunction}) => {
+    const [layoutHeight, setLayoutHeight] = useState(0);
+    useEffect(() => {
+      if (item.isExpand) {
+        setLayoutHeight(null);
+      
+      } else {
+        setLayoutHeight(0);
+      }
+    }, [item.isExpand]);
+    return (
+      <View >
+       {item.details.length>0? <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={onClickFunction}
+          style={{
+              width:'100%',
+              height:40,
+              backgroundColor:colors.bc,
+              marginTop:5,
+              justifyContent:'space-between',
+              paddingHorizontal:15,
+              flexDirection:'row',
+              alignItems:'center'
+              }}>
+          <Text style={styles.headerText}>
+            {item.month}
+          </Text>
+         {item.isExpand?<Image style={{width:26,height:18}} source={require('../../../assets/Image/wDown.png')}/>:
+         <Image style={{width:26,height:18}} source={require('../../../assets/Image/wFarword.png')}/>}
+        </TouchableOpacity>:null}
+       
+        <View
+          style={{
+            height:layoutHeight,
+            overflow: 'hidden',
+            paddingHorizontal:10
+          }}>
+            {item.details.length>0?<FlatList
+            data={item.details}
+            renderItem={({item})=>(
+
+              <View>
+             <View style={styles.border1}></View>
+                <View style={styles.container}>
+                 
+                  <Text style={styles.fdata}>{item.date}</Text>
+                  <Text style={styles.fdata}>{item.title}</Text>
+                  <Text style={styles.fdata}>{item.description}</Text>
+                </View>
+             </View>
+            )}
+            />:
+            <View style={{alignItems:'center',justifyContent:'center',paddingHorizontal:20,paddingVertical:4}}>
+              <Text style={{fontFamily:'Montserrat-Regular',fontSize:14}}>{'There is no holidays in this month'}</Text>
+            </View>
+            }
+        </View>
+      </View>
+    );
+  };
     return(
             <View style={styles.container1}>
                    <Header
                       title={'BANK HOLIDAYS'}
                       source ={require('../../../assets/Image/arrow2.png')}
                       onPress={()=>navigation.goBack()}
-                      source1={require('../../../assets/Image/download.png')}
                    /> 
-               <ScrollView>
-                    <View style={styles.Textview}>
+                   {loader?<Loader/>:null}
+                   <ScrollView style={{paddingHorizontal:15,paddingVertical:20}}>
+                    <View style={[styles.Textview,{
+                       paddingBottom:listDataSource.length>0?0:20
+                    }]}>
+                      
                        <View style={styles.Textview1}>
-                         <Text style={styles.dummy}>
-                                 Lorem ipsum, or lipsum as it is sometimes known,
-                                 is dummy text used in laying out print, graphic or
-                                  web designs. The passage is attributed to an
-                                 unknown typesetter book.
-                          </Text>
-                       </View>
-                       <View style={styles.Textview1}>
-                             <View style={styles.input}>
-                                  <TextInput
-                                      placeholder='Search Bank'
-                                      style={{color:colors.textColor}}
-                                      returnKeyType='done'
-                                  />
+                       <View style={{marginTop:0}}>
+                              <Text style={{fontFamily:'Montserrat-SemiBold'}}>Bank Name</Text>
+                             <View style={[styles.input,{marginTop:2}]}>
+                                  <RNPickerSelect
+                                    onValueChange={(val)=>set_bank_name(val)}
+                                    items={selector}
+                                    style={{ 
+                                    inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                                    placeholder:{color:colors.heading}
+                                    }}
+                                    value={bank_name}
+                                    useNativeAndroidPickerStyle={false}
+                                    placeholder={{ label: "Please Select Bank", value: '' }}
+                                /> 
+                              </View>
+                              </View>
+                              <View style={{marginTop:20}}>
+                              <Text style={{fontFamily:'Montserrat-SemiBold'}}>Pincode</Text>
+                                <View style={[styles.input,{marginTop:2}]}>
+                                   <TextInput
+                                   placeholder='Please Enter Pincode'
+                                   value={pincode}
+                                   keyboardType={'number-pad'}
+                                   maxLength={6}
+                                   onChangeText={(val)=>{
+                                     if(re.test(val)||val==''){
+                                         setPincode(val)
+                                     }
+                                   }}
+                                   />
+                                </View>
                               </View>
                         </View>
-                       <View style={styles.Textview1}>
-                            <TouchableOpacity style={styles.button}>
+                       <View style={[styles.Textview1,{alignItems:'center'}]}>
+                            <TouchableOpacity
+                            onPress={()=>renderSearch()}
+                            style={styles.button}>
                                  <Text style={styles.search}>SEARCH</Text>
                             </TouchableOpacity>
-                           <Text style={styles.result}>Result of your search</Text>
-                       </View>
-                {/* Branch Detail */}
-                       <View style={styles.main}>
+                          {listDataSource.length>0?<View>
+                           <Text style={[styles.result,{marginBottom:20}]}>Result of your search</Text>
                            <Text style={styles.heading}>{`BRANCH DETAILS`}</Text>
-                          <FlatList
-                             data={data}
-                             style={{width:'100%'}}
-                            renderItem={({item})=>(
-                            <View>
-                                <View style={styles.border1}></View>
-                                 <View style={styles.container}>
-                                    <View style={{width:'50%'}}>
-                                         <Text style={styles.item1}>{item.title}</Text>
-                                    </View>
-                                    <View style={{width:'50%'}}>
-                                        <Text style={styles.item2}>{item.value}</Text>
-                                     </View>
-                               </View>
-                             </View>
-                             )}
+                           </View>
+                           :null}
+                       </View>
+                     
+                        {listDataSource.length>0? listDataSource.map((item, key) => (
+                          <ExpandableComponent
+                            onClickFunction={() => {
+                              updateLayout(key);
+                            }}
+                            item={item}
                           />
-                       </View>
-                {/* Branch Timing */}
-                   <View style={styles.main}>
-                              <Text style={styles.heading}>{`BRANCH TIMING`}</Text>
-                         <FlatList
-                              data={data1}
-                              style={{width:'100%'}}
-                             renderItem={({item})=>(
-                               <View>
-                                  <View style={styles.border1}></View>
-                                     <View style={styles.container}>
-                                          <View style={{width:'50%'}}>
-                                               <Text style={styles.item1}>{item.title}</Text>
-                                          </View>
-                                          <View style={{width:'50%'}}>
-                                                <Text style={styles.item2}>{item.value}</Text>
-                                          </View>
-                                     </View>
-                               </View>
-                              )}
-                           />
-                     </View>
-                {/* Bank Holiday */}
-                   <View style={styles.main}>
-                           <Text style={styles.heading}>{`BANK HOLIDAYS LIST`}</Text>
-                          <View style={styles.border}></View>
-                          <TouchableOpacity style={styles.jan}
-                                   onPress={()=>checkJan()}>
-                                   <Text style={styles.month}>January</Text>
-                                    {jan ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
-                                    <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>}
-                           </TouchableOpacity> 
-                 </View>
-                      {jan ==true?<View>
-                            <FlatList 
-                                 data={Holidays}
-                                renderItem={({item})=>(
-                              <View>
-                                   <View style={styles.container}>
-                                        <Text style={styles.fdata}>{item.date}</Text>
-                                        <Text style={styles.fdata}>{item.day}</Text>
-                                        <Text style={styles.fdata}>{item.leave}</Text>
-                                   </View>
-                                   <View style={styles.border1}></View>
-                               </View>
-                                  )}
-                            />
-                            </View>:null
-                        } 
-                    <View>
-                          <View style={styles.border}></View>
-                         <TouchableOpacity style={styles.jan}
-                                onPress={()=>checkFeb()}>
-                                <Text style={styles.month}>February</Text>
-                                {
-                                 feb ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
-                                 <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
-                                }
-                         </TouchableOpacity> 
-                    </View>
-                    {feb ==true?<View>
-                            <FlatList 
-                                data={Holidays}
-                                 renderItem={({item})=>(
-                                  <View>
-                                    <View style={styles.border1}></View>
-                                        <View style={styles.container}>
-                                              <Text style={styles.fdata}>{item.date}</Text>
-                                              <Text style={styles.fdata}>{item.day}</Text>
-                                              <Text style={styles.fdata}>{item.leave}</Text>
-                                         </View>
-                                   </View>
-                                 )}
-                             />
-                         </View>:null
-                       } 
-                      <View>
-                             <View style={styles.border}></View>
-                             <TouchableOpacity style={styles.jan}
-                                   onPress={()=>checkMarch()}>
-                                   <Text style={styles.month}>March</Text>
-                                    {
-                                       march ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
-                                       <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
-                                    }
-                              </TouchableOpacity> 
-                       </View>
-                    {march ==true?<View>
-                            <FlatList 
-                                data={Holidays}
-                               renderItem={({item})=>(
-                                 <View>
-                                     <View style={styles.border1}></View>
-                                     <View style={styles.container}>
-                                          <Text style={styles.fdata}>{item.date}</Text>
-                                          <Text style={styles.fdata}>{item.day}</Text>
-                                          <Text style={styles.fdata}>{item.leave}</Text>
-                                     </View>
-                                   </View>
-                                )}
-                           />
-                          </View>:null
-                    } 
-
-
-                         <View>
-                              <View style={styles.border}></View>
-                                     <TouchableOpacity style={styles.jan}
-                                          onPress={()=>checkApril()}>
-                                         <Text style={styles.month}>April</Text>
-                                          { 
-                                            april ==false? <Image
-                                            style={{width:24,height:16}}
-                                             source={require('../../../assets/Image/wFarword.png')}/>:
-                                             <Image  style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
-                                          }
-                                     </TouchableOpacity> 
-                        </View>
-                      {april ==true?<View>
-                            <FlatList 
-                                  data={Holidays}
-                                  renderItem={({item})=>(
-                                    <View>
-                                       <View style={styles.border1}></View>
-                                             <View style={styles.container}>
-                                                   <Text style={styles.fdata}>{item.date}</Text>
-                                                   <Text style={styles.fdata}>{item.day}</Text>
-                                                   <Text style={styles.fdata}>{item.leave}</Text>
-                                              </View>
-                                    </View>
-                                  )}
-                            />
-                           </View>:null
-                      } 
-
-                        <View>
-                            <View style={styles.border}></View>
-                            <TouchableOpacity style={styles.jan}
-                                      onPress={()=>checkMay()}>
-                                     <Text style={styles.month}>May</Text>
-                                     {
-                                          may ==false? <Image style={{width:24,height:16}} source={require('../../../assets/Image/wFarword.png')}/>:
-                                          <Image style={{width:24,height:16}} source={require('../../../assets/Image/wDown.png')}/>
-                                      }
-                            </TouchableOpacity> 
-                        </View>
-                    {may ==true?<View>
-                            <FlatList 
-                                 data={Holidays}
-                                 renderItem={({item})=>(
-                                   <View>
-                                       <View style={styles.border1}></View>
-                                       <View style={styles.container}>
-                                             <Text style={styles.fdata}>{item.date}</Text>
-                                             <Text style={styles.fdata}>{item.day}</Text>
-                                            <Text style={styles.fdata}>{item.leave}</Text>
-                                        </View>
-                                   </View>
-                                  )}
-                            />
-                         </View>:null
-                     } 
-                <View>
+                        ))
+                        :
+                        boolean==true?
+                        <View style={{paddingHorizontal:20,marginTop:20,justifyContent:'center',alignItems:'center'}}>
+                        <Text style={{fontSize:14,fontFamily:'Montserrat-Regular',color:colors.textColor,textAlign:'center'}}>{`We don't have any bank listed on this pincode try another nearest pincode`}</Text>
+                        </View>:null
+                        
+                      }
+                    
+                          </View>
+                          <View style={styles.Textview}>
+                            <View style={{alignItems:'center',marginTop:10}}>
+                            <Text style={styles.heading}>BANK HOLIDAYS</Text>
+                            </View>
+                          {listDataSource1.length>0? listDataSource1.map((item, key) => (
                        
-              </View>
+                       <HolidayComponent
+                         onClickFunction={() => {
+                           dropDown(key)
+                         }}
+                         item={item}
+                       />
+                     
+                     )):
+                     <View style={{paddingHorizontal:20,marginTop:20,justifyContent:'center',alignItems:'center'}}>
+                     </View>
+                     }
+                      
+                    
+                         </View>
+                    <View>
+                
+                      
            </View>
+         
            </ScrollView>
           {/* <BottomTab/> */}
        </View>
     )
 }
 export default Holiday;
-const Holidays=[
-    {date:'January 09',day:'Saturday',leave:'Second Saturday'},
-    {date:'January 23',day:'Saturday',leave:'Fourth Saturday'},
-    {date:'January 26',day:'Tuesday',leave:'Republic Day/\nGaan-Ngai'}
+const data23=[
+    {name:'January 09'},
+    
 ]
+

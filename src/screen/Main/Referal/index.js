@@ -68,7 +68,7 @@ const share=async()=>{
         <View style={styles.container}>
               <Header
                   source={require('../../../assets/Image/arrow2.png')}
-                  title={'REFERRAL'}
+                  title={'Refer IndiaDeposit'}
                   onPress={()=>navigation.goBack()}
                />
                <View style={styles.pfile}> 

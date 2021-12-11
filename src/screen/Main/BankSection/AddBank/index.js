@@ -111,7 +111,6 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                        <RNPickerSelect
                              onValueChange={(val)=>set_bank_name(val)}
-                            // onValueChange={handleChange('bank_name')}
                             items={selector}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },

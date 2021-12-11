@@ -9,7 +9,7 @@ import RNPickerSelect from 'react-native-picker-select';
 let maturityAmount=0
 let interestAmount=0
 const FD=()=>{
-    const [interest,setInterest]=useState(1)
+    const [interest,setInterest]=useState('1')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('1000')
     const [period,setPeriod]=useState('1')
@@ -23,8 +23,10 @@ if (f==0) {
   let data1=totalInvestment
   maturityAmount=(parseInt(data)+parseInt(data1)).toFixed(0)
 } else {
-  maturityAmount= parseInt(totalInvestment*Math.pow(1+(interest/(100*f)),(time*(f/period)))).toFixed(0)
-  interestAmount=parseInt(maturityAmount-totalInvestment).toFixed(0)
+  // maturityAmount= parseInt(totalInvestment*Math.pow(1+(interest/(100*f)),(time*(f/period)))).toFixed(0)
+ let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(time*f))).toFixed(2)
+  interestAmount=parseFloat((maturityAmount1-totalInvestment)*(f==1?12:f==3?4:f==6?2:1)).toFixed(2)
+  maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))
 }
   let effective=(interestAmount/totalInvestment/time*100).toFixed(2)
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
@@ -43,19 +45,16 @@ if (f==0) {
       }
     }
   }
-  const rateOnchange=(val)=>{
-    if(val>15){
-      setInterest(JSON.stringify(15))
+  const rateOnchange=(value)=>{
+    if(value>15){
+      setInterest(parseFloat(15).toString())
     }
-    
     else{
-      if(isNaN(val)){
-
+      if(isNaN(value)){
       }
       else{
-        var data=parseFloat(val)
-      setInterest(data.toFixed(2))
-      if(val<10){
+      setInterest(value)
+      if(value<10){
         setLen(4)
       }
       else{
@@ -105,15 +104,14 @@ if (f==0) {
                          thumbTintColor={colors.bc}
                          minimumTrackTintColor={colors.bc}
                          onValueChange={(value) =>setTotalInvestment(JSON.stringify(value))} 
-                            />
+                        />
                 <View style={styles.main}>
                     <Text style={styles.total}>Rate of Interest</Text>
                     <View style={styles.input}>
                      <View>
                         <TextInput 
-                        onChangeText={(val)=>rateOnchange(val==''?1:val)}
-                        defaultValue={interest}
-                        style={{borderBottomWidth:0,}}
+                        onChangeText={(val)=>rateOnchange(val==''?0:val)}
+                        value={interest}
                         keyboardType='number-pad'
                         maxLength={len}
                         returnKeyType='done'
@@ -200,10 +198,10 @@ if (f==0) {
                         
 
                     <View style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row'}}> 
-                    <Text style={styles.total}>{'Frequency'}</Text>
+                    <Text style={styles.total}>{'Payout Frequency'}</Text>
 
                     <View style={{
-                      borderWidth:1,
+                      // borderWidth:1,
                       height:40,
                       borderColor:colors.textColor,
                       borderRadius:6,
@@ -214,11 +212,12 @@ if (f==0) {
                       flexDirection:'row',
                       justifyContent:'space-between'
                     }}>
-                      <Text style={{marginRight:10,color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>
-                        {f==1?'Annually':
-                        f==2?'Half-Yearly':
-                        f==4?'Quarterly':
-                        f==12?'Monthly':
+                      <Text style={{marginRight:10,
+                        color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>
+                        {f==12?'Yearly':
+                        f==6?'Half-Yearly':
+                        f==3?'Quarterly':
+                        f==1?'Monthly':
                         f==0?'SimpleInterest':''
                         }
                         </Text>
@@ -229,44 +228,59 @@ if (f==0) {
                         inputAndroid: { 
                           color: colors.textColor,
                           fontFamily:'Montserrat-Regular',
-                          width:0,
+                          width:30,
                           fontSize:0
 
                         },
                         placeholder:{color:colors.heading1,alignSelf:'center'}
                         }}
-                        value={f==null||0?'':f}
+                        value={f==null||f==0?'':f}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ }}
                         Icon={()=>
                           <Image 
-                         style={{marginRight:-8,width:25,height:9, marginTop:Platform.OS=='android'? 14:4}} 
+                         style={{marginRight:-8,width:25,height:9, marginTop:Platform.OS=='android'? 16:4}} 
                         source={require('../../../assets/Image/down.png')}/>} 
                         />    
                 </View>
                </View>
                
-                <View style={styles.main1}>
-                <View style={{alignItems:'center'}}>
+                <View style={{
+                    flexDirection:'row',
+                    marginTop:20,
+                    width:'100%',
+                    justifyContent:'space-between'
+                }}>
+                  <View>
+                    <View style={{alignItems:'center'}}>
                         <Text style={styles.total}>Maturity Value</Text>
-                        <Text style={{fontSize:fontsize.fefteen,color:colors.textColor,fontFamily:'Montserrat-Regular'
-                      }}>{` ₹ ${(maturityAmount==0||''?1000:isNaN(maturityAmount)?1000:maturityAmount)}`}</Text>
+                        <Text style={styles.total}>{` ₹ ${(maturityAmount==0||''?1000:isNaN(maturityAmount)?1000:maturityAmount)}`}</Text>
                     </View>
-                    <View style={{alignItems:'center',}}> 
-                        <Text style={[styles.total,{textAlign:'center'}]}>{`Interest Earned`}</Text>
+                    <View style={{alignItems:'center',marginTop:10}}> 
+                        <Text style={[styles.total]}>{`Interest Earned`}</Text>
                         <Text style={styles.total}>{`₹ ${isNaN(interestAmount)?0:interestAmount}`}</Text>
                     </View>
-                   
-                   
-                </View>
-                <View style={[styles.main1,{alignItems:'center',justifyContent:'center'}]}>
-                <View style={{alignItems:'center'}}> 
+                    <View style={{alignItems:'center',marginTop:10}}> 
                         <Text style={styles.total}>{`Effective Rate`}</Text>
                         <Text style={styles.total}>{`${isNaN(effectiveRate)?0:effectiveRate} %`}</Text>
                     </View>
-                   
+                  </View>
+                    <PieChart
+                  widthAndHeight={140}
+                  // series={[100,100]}
+                  series={[parseInt(interestAmount==0||''||isNaN(interestAmount)?0:interestAmount),parseInt(investmentAmount==0||''||isNaN(investmentAmount)?1010:investmentAmount)
+                   ]}
+                  sliceColor={['#AC4BE0','#FA5E8E']}
+                  doughnut={true}
+                  coverRadius={0.45}
+                  coverFill={'#FFF'}
+                />
                 </View>
-                <View style={{justifyContent:'space-between',
+                {/* <View style={[styles.main1,{alignItems:'center',justifyContent:'center'}]}>
+               
+                   
+                </View> */}
+                {/* <View style={{justifyContent:'space-between',
                 alignItems:'center',flexDirection:'row',marginTop:15}}> 
                     <Text style={styles.total}>{'Payout'}</Text>
 
@@ -310,8 +324,8 @@ if (f==0) {
                         />    
                     
                 </View>
-               </View>
-               <View style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',marginTop:10}}> 
+               </View>// */}
+               {/* <View style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',marginTop:10}}> 
                     <Text style={styles.total}>{'Amount'}</Text>
 
                     <View style={{
@@ -322,10 +336,10 @@ if (f==0) {
                     }}>
                     <Text style={styles.total}>{isNaN(payout)?0:payout}</Text>    
                 </View>
-               </View>
+               </View> */}
 
-                <View style={{alignItems:'center',marginBottom:20,marginTop:20}}>
-                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%',marginBottom:20}}>
+                <View style={{alignItems:'center',marginBottom:0,marginTop:20}}>
+                  <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%',marginBottom:0}}>
                     <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                       <View style={{width:30,height:10,backgroundColor:'#FA5E8E'}}/>
                       <Text style={{fontSize:12,color:colors.textColor,
@@ -337,16 +351,7 @@ if (f==0) {
                         fontFamily:'Montserrat-Regular',marginLeft:5}}>Interest Earned</Text>
                     </View>
                   </View>
-                <PieChart
-                  widthAndHeight={250}
-                  // series={[100,100]}
-                  series={[parseInt(interestAmount==0||''||isNaN(interestAmount)?0:interestAmount),parseInt(investmentAmount==0||''||isNaN(investmentAmount)?1010:investmentAmount)
-                   ]}
-                  sliceColor={['#AC4BE0','#FA5E8E']}
-                  doughnut={true}
-                  coverRadius={0.45}
-                  coverFill={'#FFF'}
-                />
+               
                 </View>
                 </View>
               </ScrollView>
@@ -361,11 +366,11 @@ const Data=[
   { label: 'Years', value: '1'},
 ]
 const Data1=[
-  { label: 'Simple Interest', value: '0' },
-  { label: 'Monthly', value: '12' },
-  { label: 'Quarterly', value: '4'},
-  { label: 'Half-Yearly', value: '2'},
-  { label: 'Annually', value: '1'},
+  // { label: 'Simple Interest', value: '0' },
+  { label: 'Monthly', value: '1' },
+  { label: 'Quarterly', value: '3'},
+  { label: 'Half-Yearly', value: '6'},
+  { label: 'Yearly', value: '12'},
 
 ]
 const Data2=[

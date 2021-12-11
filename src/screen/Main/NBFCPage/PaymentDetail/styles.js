@@ -59,4 +59,42 @@ export default StyleSheet.create({
         paddingHorizontal:15,
         paddingVertical:20
     },
+    warn:
+    {
+        fontSize:fontSize.twelve,
+        color:'red'
+    },
+    error:
+    {
+        width:'90%',
+        justifyContent:'center',
+        alignItems:'flex-start',
+        paddingHorizontal:8,
+        marginTop:6
+    },
+    drop:{
+        marginTop:5 ,
+        borderWidth:1,
+        height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
+        justifyContent:'center',
+        width:'100%',
+        paddingHorizontal:10,
+        alignContent:'center'
+    }, 
+    drop1:{
+        marginTop:5 ,
+        borderWidth:1,
+        height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
+        justifyContent:'space-between',
+        width:'100%',
+        paddingHorizontal:10,
+        flexDirection:'row',
+        alignItems:'center'
+    }, 
 })

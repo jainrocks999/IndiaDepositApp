@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { TextInput } from 'react-native-gesture-handler';
 import colors from '../../colors';
 import axios from "axios";
+import HTMLView from 'react-native-htmlview';
 const Blog=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -96,21 +97,24 @@ console.log('this is narendra here',Blogs);
                 showsVerticalScrollIndicator={false}
                 renderItem={({item})=>(
                     <View style={styles.card}>
-                        <View style={styles.titleView}>
+                        {/* <View style={styles.titleView}>
                             <Text style={styles.Text1}>{item.title}</Text>
-                        </View>
+                        </View> */}
 
-                        {item.short_content?<View style={styles.view}>
-                            <Text style={styles.Textt}>{item.short_content}</Text>
+                        {item.content?<View style={styles.view}>
+                        <HTMLView
+                      value={item.content.trim().replace(new RegExp('<p>', 'g'), '<span>')}
+                    />
                         </View>:null}
 
-                        <View style={styles.view}>
+                      
+                        <View style={styles.line}/>
+                        <View style={{}}>
                             <Text style={styles.Textp}>{`published on ${item.created_date}`}</Text>
                         </View>
-                        <View style={styles.line}/>
-                        <TouchableOpacity onPress={()=>navigation.navigate('BlogCategory',{item})}>
+                        {/* <TouchableOpacity onPress={()=>navigation.navigate('BlogCategory',{item})}>
                             <Text style={styles.Textr}>Read More</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                  </View>
                 )}
                 />

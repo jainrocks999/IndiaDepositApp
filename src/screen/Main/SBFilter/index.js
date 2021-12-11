@@ -59,7 +59,7 @@ const applyFilter=()=>{
         min_bal:data.balance,
         location:data.location,
         type1:data.type1,
-          bank_id:selected[0],
+          bank_id:selected,
           interest_rate:value2,
           nationalized:isEnabled1==true?1:0,
           private:isEnabled2==true?1:0,
@@ -97,7 +97,7 @@ const applyFilter=()=>{
               <View style={{width:'100%',marginTop:5}}>
               <MultiSelect     
                                 items={selector}
-                                single={true}
+                                single={false}
                                 uniqueKey="value"
                                 onSelectedItemsChange={(val)=>setSelected(val)}
                                 selectedItems={selected}

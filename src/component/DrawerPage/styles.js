@@ -160,7 +160,7 @@ export default StyleSheet.create({
         },
         view:{
             marginLeft:20,
-            width:'65%'
+            width:'70%'
         }, 
         text2:{
             color:colors.white,

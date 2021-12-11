@@ -37,8 +37,8 @@ const styles=StyleSheet.create({
     },
     text:{
         color:colors.white,
-        fontSize:fontSize.eighteen,
-        fontFamily:'Montserrat-SemiBold',
+        fontSize:fontSize.seventeen,
+        fontFamily:'Montserrat-Bold',
         marginLeft:10
     },
 })

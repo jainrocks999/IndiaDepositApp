@@ -31,27 +31,33 @@ class NomineeSelection extends React.Component{
     const isThere = this.state.ids.includes(itemId);
     return isThere;
   };
-
   toggleChecked = (itemId,item) => {
-    const ids = [...this.state.ids, itemId];
-    if (this.isChecked(itemId)) {
-      this.setState({
-        ...this.state,
-        ids: this.state.ids.filter((id) => id !== itemId),
-      });
-      this.setState({data:''})
-    } else {
-    if(this.state.ids.length>0){
-        Toast.show('You can select only 1 user at a time')
-    }else{
-      this.setState({
-        ...this.state,
-        ids,
-      });
-      this.setState({data:item})
-    }
-    }
-  };
+   if(this.state.ids.includes(itemId)){
+     this.setState({ids:[]})
+   }
+   this.setState({ids:itemId})
+   this.setState({data:item})
+ };
+  // toggleChecked = (itemId,item) => {
+  //   const ids = [...this.state.ids, itemId];
+  //   if (this.isChecked(itemId)) {
+  //     this.setState({
+  //       ...this.state,
+  //       ids: this.state.ids.filter((id) => id !== itemId),
+  //     });
+  //     this.setState({data:''})
+  //   } else {
+  //   if(this.state.ids.length>0){
+  //       Toast.show('You can select only 1 user at a time')
+  //   }else{
+  //     this.setState({
+  //       ...this.state,
+  //       ids,
+  //     });
+  //     this.setState({data:item})
+  //   }
+  //   }
+  // };
   renderItem=(item)=>{
     return(
         <View style={[styles.card,{marginTop:10}]}>
@@ -62,16 +68,22 @@ class NomineeSelection extends React.Component{
                      <Text style={styles.text}>{`Relationship : ${item.relationship==null?'':item.relationship}`}</Text>
                      <Text style={styles.text}>{`Pincode : ${item.pincode}`}</Text>
                  </View>
-                
                <View>
                <CheckBox
                     center
-                    // title='Click Here'
                     checkedIcon='dot-circle-o'
                     uncheckedIcon='circle-o'
-                    checked={this.isChecked(item.id)}
-                    onPress={() => this.toggleChecked(item.id,item)}
+                    checked={this.isChecked(item.user_nominee_id)}
+                    onPress={() => this.toggleChecked(item.user_nominee_id,item)}
+                    checkedColor={colors.bc}
                     />
+                      {/* <CheckBox
+                    center
+                    checkedIcon='dot-circle-o'
+                    uncheckedIcon='circle-o'
+                    checkedColor={colors.bc}
+                    checked={this.isChecked(item.user_id)}
+                    onPress={() => this.toggleChecked(item.user_id,item)}/> */}
                </View>
                </View>
                
@@ -82,6 +94,7 @@ class NomineeSelection extends React.Component{
 
 render(){
   const isFetching=this.props.isFetching
+  console.log('this is not a user otherwise there',this.state.data);
         return(
             <View style={{flex:1,backgroundColor:colors.card}}>
               <Header

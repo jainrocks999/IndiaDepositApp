@@ -172,6 +172,7 @@ const DrawerContent=({props})=> {
            {/* Bottom Code For Popup */}
            <Modal isVisible={isModalVisible}>
                 <View style={styles.modal}>
+                    
                 <View style={styles.modal1}>
                     <Text
                     style={styles.modaltext}>
@@ -196,40 +197,36 @@ const DrawerContent=({props})=> {
                 </View>
                 </View>
             </Modal>
-            <View style={styles.main}>
-                 <View style={styles.main1}>
+            <View style={[styles.main,{width:'100%'}]}>
+                 <View style={[styles.main1,{width:'100%'}]}>
                  {image?<Image style={styles.img} 
                     source={{uri: image}}
                  />:null
-                //  <Image style={{ height:84,
-                //     width:84,
-                //     borderRadius:42}}
-                //     ource={require('../../assets/Image/user-couple.png')}/>
-                    }
-                            {/* <TouchableOpacity
-                                    // onPress={()=>setVisible(true)} 
-                                      style={styles.camera}>
-                                         <Image source={require('../../assets/Image/camera.png')}/>
-                                     </TouchableOpacity> */}
+                   }
                 { !name?
                     <View style={styles.view}>
+                        <View >
                         <Text style={styles.text2}>John</Text>
+                        </View>
                         <Text style={styles.text3}>9633984668</Text>
                         <Text style={styles.text3}>test@gmail.com</Text>
                     </View>:
                     <View style={styles.view}>
-                        <Text style={styles.text2}>{name}</Text>
+                        <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={styles.text2}>{name}</Text>
+                            <TouchableOpacity 
+                            onPress={()=>navigation.dispatch(DrawerActions.closeDrawer())}
+                            style={{marginTop:0,height:25,width:40,alignItems:'flex-end'}}>
+                                <Image style={{width:20,height:25}} source={require('../../assets/Image/arrow2.png')}/>
+                            </TouchableOpacity>
+                        </View>
                         <Text style={styles.text3}>{mobile}</Text>
                         <Text style={styles.text3}>{email}</Text>
                     </View>
                     }
                  
                   </View>
-                  <TouchableOpacity 
-                  onPress={()=>navigation.dispatch(DrawerActions.closeDrawer())}
-                  style={{marginTop:10,}}>
-                    <Image style={{width:20,height:32}} source={require('../../assets/Image/arrow2.png')}/>
-                  </TouchableOpacity>
+                  
               </View>
                 <TouchableOpacity
                     onPress={() => validateUser()}
@@ -300,7 +297,7 @@ const DrawerContent=({props})=> {
                         </View>
                     </View>
                 </TouchableOpacity>
-                {/* <TouchableOpacity 
+                <TouchableOpacity 
                     onPress={()=>{navigation.navigate('MyFD')}}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
@@ -309,11 +306,11 @@ const DrawerContent=({props})=> {
                                 <Image style={styles.imageicon} 
                                 source={require('../../assets/Image/noti.png')}/>
                             </View>
-                            <Text style={styles.text}>{'My FD'}</Text>
+                            <Text style={styles.text}>{`My FD's`}</Text>
                             </View>
                             <Image style={styles.arrow} source={require('../../assets/Image/arrowF.png')}/>
                         </View>
-                </TouchableOpacity> */}
+                </TouchableOpacity>
                 <TouchableOpacity 
                     onPress={()=>validateUser6()}
                     style={[styles.drawer]}>

@@ -72,14 +72,14 @@ export default StyleSheet.create({
     {
         // width: 50,
         // height: 50,
-        borderWidth:1,
+        // borderWidth:1,
         backgroundColor:colors.white,
         shadowColor:colors.white,
         shadowOpacity:0.25,
         shadowRadius:4,
         shadowOffset:{height:2,width:0},
         elevation:2,
-        borderRadius:6,
+        borderRadius:10,
         
     },
     titleCont:

@@ -46,15 +46,24 @@ useEffect(()=>{
             {data.short_content?<View style={styles.view5}>
               <Text style={styles.text3}>{`${data.short_content}`}</Text>
             </View>:null}
-            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center', marginTop:15,}}>
-                    <Text style={styles.text1}>{`published on ${data.created_date}`}</Text>
-                    <View style={styles.view3}>
+            <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center', marginTop:10,}}>
+                    <Text style={styles.text1}>{`Published on ${data.created_date}`}</Text>
+                    {/* <View style={styles.view3}>
                           <Text style={styles.text4}>{data.catergory_name}</Text>
                       </View>
                       <View style={styles.view3}>
                           <Text style={styles.text4}>{data.tag_name}</Text>
+                      </View> */}
+            </View>
+            <View style={{flexDirection:'row',alignItems:'center', marginTop:10,}}>
+                    {/* <Text style={styles.text1}>{`Published on ${data.created_date}`}</Text> */}
+                      <View style={styles.view3}>
+                          <Text style={styles.text4}>{data.catergory_name}</Text>
                       </View>
-                    </View>
+                      <View style={[styles.view3,{marginLeft:5}]}>
+                          <Text style={styles.text4}>{data.tag_name}</Text>
+                      </View>
+            </View>
             <View style={styles.view4}>
              { !data.image?  <Text style={styles.text5}>Dummy Image</Text>:
              <Image 

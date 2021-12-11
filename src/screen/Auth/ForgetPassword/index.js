@@ -45,7 +45,6 @@ const validateUser=(email,mobile)=>{
        Toast.show('Please Enter Email or Mobile Number')
     }
     else if(email){
-         console.log('this is working');
          dispatch({
           type: 'Send_Otp_Request',
           url: 'sendotp',
@@ -54,7 +53,6 @@ const validateUser=(email,mobile)=>{
         })
     }
     else if(mobile){
-      console.log('this is working1');
       dispatch({
         type: 'Send_Otp_Request',
         url: 'sendotp',

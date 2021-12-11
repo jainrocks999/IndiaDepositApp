@@ -106,20 +106,6 @@ const validateUser=async()=>{
                 <View style={styles.view1}>
                     {isFetching?<Loader/>:null}
                         <View style={styles.main}>
-                          {/* <Text style={styles.how}>How would you rate your experience with India Deposit app?</Text>
-                          <View style={styles.star}>
-                              <Stars
-                                half={true}
-                                default={0}
-                                update={(val)=>setRatting(val)}
-                                spacing={10}
-                                starSize={40}
-                                count={5}
-                                emptyStar={require('../../../assets/Image/star-blank.png')}
-                                fullStar={require('../../../assets/Image/star.png')}
-                                halfStar={require('../../../assets/Image/star-half.png')}
-                              />
-                           </View> */}
                            <Text style={[styles.how,{marginTop:15}]}>How would you rate your experience with India Deposit app?</Text>
                           <View style={styles.same}>
                             <View style={styles.font}/>

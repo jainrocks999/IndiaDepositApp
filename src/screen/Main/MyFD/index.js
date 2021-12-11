@@ -1,5 +1,5 @@
 import React,{useEffect, useState}from 'react';
-import { View,Text,ScrollView,BackHandler, Image} from 'react-native';
+import { View,Text,BackHandler, Image,SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import colors from '../../../component/colors';
@@ -8,166 +8,131 @@ import Header from '../../../component/header';
 import { FlatList } from 'react-native';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
-import AsyncStorage from "@react-native-community/async-storage";
-import Storage from '../../../component/AsyncStorage';
-import { RadioButton } from 'react-native-paper';
-import CustomButton from '../../../component/button1';
+import RNPickerSelect from "react-native-picker-select";
+import fontSize from '../../../component/fontSize';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Storage from "../../../component/AsyncStorage";
+import AsyncStorage from '@react-native-community/async-storage';
+
 const Notification=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
-    const [checked,setChecked]=useState(false)
-    const [checked1,setChecked1]=useState(false)
-
+    const fdData=useSelector(state=>state.MYFDList)
+    console.log('this is user data',fdData);
+    const [sort,setSort]=useState('Alphabetical')
     
 useEffect(async()=>{
+    
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-    // dispatch({
-    //     type: 'Notification_Request',
-    //     url: 'getnotification',
-    //     user_id:user_id,
-    // })
+
+    dispatch({
+        type: 'MYFD_List_Request',
+        url: 'dropfd',
+        user_id
+      })
+
     const backAction = () => {
         navigation.navigate('Main')
         return true;
       };
-    
-      const backHandler = BackHandler.addEventListener(
+    const backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         backAction
       );
       return () => backHandler.remove();
 },[])
 
+
 const showContent=()=>{
-    if (selector) {
-        console.log('this is log valie',selector);
+    if (fdData.length>0) {
         return(
-            <View>
-                 <FlatList
+            <SafeAreaView style={{marginBottom:60}}>
+            <FlatList
               showsVerticalScrollIndicator={false}
-              data={selector}
+              data={fdData}
               renderItem={({item})=>
               <View>
                <View style={styles.view1}>
-                   <View style={styles.card}>
+                   <TouchableOpacity 
+                   onPress={()=>navigation.navigate('MyFDDetailPage')}
+                   style={styles.card}>
                        <View style={styles.view2}>
-                       <Text style={styles.text1}>{item.title}</Text>
+                       <Text style={styles.text1}>{item.username}</Text>
+                       <TouchableOpacity style={{
+                           backgroundColor:colors.bc,
+                           paddingHorizontal:8,
+                           borderRadius:6,
+                           alignItems:'center',
+                           justifyContent:'center',
+                           paddingVertical:3
+                           }}>
+                           <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.white}}>Active</Text>
+                       </TouchableOpacity>
                        </View>
-                       <Text style={styles.text3}>{item.des}</Text>
-                       <Text style={styles.text3}>{item.des}</Text>
-
+                       {/* <Text style={styles.text3}>{item.des}</Text>
                        <Text style={styles.text3}>{item.des}</Text>
 
                        <Text style={styles.text3}>{item.des}</Text>
-                       <Text style={styles.text3}>{item.des}</Text>
 
-                   </View>
+                       <Text style={styles.text3}>{item.des}</Text>
+                       <Text style={styles.text3}>{item.des}</Text> */}
+
+                   </TouchableOpacity>
                </View>
               </View>
               }
               /> 
-            </View>
+            </SafeAreaView>
         )
         
     } else {
         
     }
 }
-
-const manageCheck=()=>{
-    setChecked(true)
-    setChecked1(false)
-}
-const manageCheck1=()=>{
-   setChecked(false)
-   setChecked1(true)
-}
     return(
         <View style={styles.container}>
            <Header
             source={require('../../../assets/Image/arrow2.png')}
-           title={'My FD'}
+           title={`My FD's`}
            onPress={()=>navigation.goBack()}
            />
-            {/* {selector[0]? <View style={{flex:1,paddingHorizontal:15,}}>
+            {fdData.length>0? <View style={{flex:1,paddingHorizontal:15,}}>
+            <View style={{
+                paddingHorizontal:20,
+                paddingVertical:2, 
+                marginVertical:10,
+                borderRadius:10,
+                borderColor:colors.textColor,
+                backgroundColor:'white',
+                justifyContent:'center'
+                }}>
+            <RNPickerSelect
+                onValueChange={(val)=>console.log(val)}
+                items={Sorting}
+                style={{ 
+                inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
+                inputIOS:{color:colors.bc},
+                placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
+                }}
+                value={sort}
+                useNativeAndroidPickerStyle={false}
+                placeholder={{}}
+                Icon={()=>
+                    <Image 
+                    style={{
+                        width:25,height:9,
+                        alignSelf:'center',justifyContent:'center',
+                        marginTop:Platform.OS=='android'?11:4
+                    }} 
+                 source={require('../../../assets/Image/down.png')}/>}   
+         />             
+            </View>
              <View>  
              {isFetching?<Loader/>:null} 
                 {showContent()}
              </View>
-             </View>:<View/>} */}
-             <View style={{paddingHorizontal:15,paddingVertical:10}}>
-               <Text style={{
-                   fontSize:17,
-                   fontFamily:'Montserrat-Semibold',
-                   color:colors.textColor,fontWeight:'700'
-                   }}>Select Payment Mode</Text>
-               <View style={[styles.card,{marginTop:10}]}>
-                  <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
-                        value={checked}
-                        status={ checked === true ? 'checked' : 'unchecked' }
-                        onPress={() =>manageCheck()}
-                        color={colors.bc}/>
-                        <View>
-                    <Text style={{
-                        marginLeft:10,
-                        fontWeight:'500',
-                        fontFamily:'Montserrat-SemiBold',
-                        color:colors.textColor,
-                        fontSize:16
-                        }}>{'Net Banking'}</Text>
-                        </View>
-                   </View>
-                   <Text style={{fontSize:12,marginLeft:48,fontFamily:'Montserrat-Regular',color:colors.textColor}}>Instant Payment</Text>
-               </View>
-             {checked?  <View style={{paddingVertical:20,paddingHorizontal:10}}>
-                   <Text style={{color:colors.bc,fontSize:16,fontFamily:'Montserrat-Regular'}}>{'+ Add supported bank account'}</Text>
-                   <Text style={{color:colors.textColor,fontSize:12,fontFamily:'Montserrat-Regular'}}>{'*Max limit may very depending upon th account type and bank'}</Text>
-               </View>:<View style={{height:20}}/>}
-               <View style={[styles.card,{marginTop:0}]}>
-                  <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
-                        value={checked1}
-                        status={ checked1 === true ? 'checked' : 'unchecked' }
-                        onPress={() =>manageCheck1()}
-                        color={colors.bc}/>
-                        <View>
-                    <Text style={{
-                        marginLeft:10,
-                        fontWeight:'500',
-                        fontFamily:'Montserrat-SemiBold',
-                        color:colors.textColor,
-                        fontSize:16
-                        }}>{'NEFT/RTGS'}</Text>
-                        </View>
-                   </View>
-                   <Text style={{
-                       fontSize:12,
-                       marginLeft:48,
-                       fontFamily:'Montserrat-Regular',
-                       color:colors.textColor
-                       }}>Requires adding a beneficiary and making the payment</Text>
-               </View>
-               {checked1?  <View style={{paddingVertical:20,paddingHorizontal:10}}>
-                   <Text style={{color:colors.bc,fontSize:16,fontFamily:'Montserrat-Regular'}}>{'+ Add supported bank account'}</Text>
-                   <Text style={{color:colors.textColor,fontSize:12,fontFamily:'Montserrat-Regular'}}>{'*Max limit may very depending upon th account type and bank'}</Text>
-               </View>:<View style={{height:20}}/>}
-             </View>
-             <View style={{bottom:20,position:'absolute',left:0,right:0,borderTopWidth:2,paddingVertical:10}}>
-             <View style={{paddingHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                 <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:14,color:colors.textColor}}>Investment Amount</Text>
-                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                     <Image style={{height:20,width:14}} source={require('../../../assets/Image/rupay.png')}/>
-                     <Text style={{marginLeft:2}}>{'10,000'}</Text>
-                 </View>
-             </View>
-             <View style={{paddingHorizontal:15,marginTop:20}}>
-              <CustomButton 
-              onPress={()=>navigation.navigate('MyFD2')}
-              title={'Continue'}/>
-             </View>
-             </View>
+             </View>:<View/>}
            <StatusBar/>
        </View>
     )
@@ -183,4 +148,9 @@ const selector=[
 {title:'testing',des:'this is your fd fixed'},
 {title:'testing',des:'this is your fd fixed'},
 {title:'testing',des:'this is your fd fixed'}
+]
+const Sorting=[
+    { label: 'Draft FD', value: 'Draft FD' },
+    { label: 'Active FD', value: 'Active FD' },
+    { label: 'Redeemed FD', value: 'Redeemed FD' },
 ]

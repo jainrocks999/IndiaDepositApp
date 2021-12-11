@@ -18,21 +18,27 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import  DatePicker  from "react-native-date-picker";
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import axios from "axios";
 
 const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
-   .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
+    .required('Please enter your Full Name ').matches( /^[^.,*+!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Name"),
    father:yup.string().max(40,({max})=>`Father name must be maximum ${max} character`)
    .required('Please enter your Father/Spouse Name').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Father/Spouse Name"),
    mother:yup.string().max(40,({max})=>`Mother name must be maximum ${max} character`)
    .required('Please enter your Mother Maiden Name ').matches( /^[^!0-9-\/:-@\[-`{-~]+$/,"Please enter valid Mother Maiden Name"),
    email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
-   pan:yup.string().required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
-   mobile:yup.string().required('Please enter mobile number'),
-   addressLine1:yup.string().required('Please enter address line1'),
-   addressLine2:yup.string().required('Please enter address line2'),
-   pincode:yup.string().required('Please enter pincode'),
-   occupation:yup.string()
+   pan:yup.string(''),
+   // .required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
+   mobile:yup.string(''),
+   // .required('Please enter mobile number'),
+   addressLine1:yup.string(''),
+   // .required('Please enter address line1'),
+   addressLine2:yup.string(''),
+   // .required('Please enter address line2'),
+   pincode:yup.string(''),
+   // .required('Please enter pincode'),
+   occupation:yup.string('')
  })
 
 const RegisterPage=({route})=>{
@@ -46,7 +52,7 @@ const RegisterPage=({route})=>{
     const [dob, setDob] = useState(user.dob);
     const [city,setCity]=useState(`${user.city}`)
     const [state,setState]=useState(`${user.state}`)
-    const [country,setCountry]=useState(``)
+    const [country,setCountry]=useState('')
     const [income_group,setIncome_group]=useState(user.income_group)
     const [education,setEducation]=useState(user.education)
     const [marital_status,setMarital_status]=useState(user.marital_status)
@@ -77,65 +83,66 @@ const RegisterPage=({route})=>{
    },[])
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
-      if(gender==0||''){
+      if(gender==0||gender==''||gender==null){
          Toast.show('Please select gender')
       }
-      else if(dob==''){
+      else if(value==''){
          Toast.show('Please select date of birth')
       }
-      else if(occupation==0||''){
-         Toast.show('Please select occupation')
-      }
-      else if(occupation=='Others'&& values.occupation==''){
-            Toast.show('Please specify occupation')
-      }
-      else if(country==0||''){
-         Toast.show('Please select country name')
-      }
-      else if(state==0||''){
-         Toast.show('Please select state name')
-      }
-      else if(city==0||''){
-         Toast.show('Please select city name')
-      }
-      else if(income_group==0||''){
-         Toast.show('Please select income group')
-      }
-      else if(education==0||''){
-         Toast.show('Please select education')
-      }
-      else if(marital_status==0||''){
-         Toast.show('Please select marital status')
-      }
-      else if(residential_address==0||''){
-         Toast.show('Please select residential status')
-      }
+      // else if(occupation==0||''){
+      //    Toast.show('Please select occupation')
+      // }
+      // else if(occupation=='Others'&& values.occupation==''){
+      //       Toast.show('Please specify occupation')
+      // }
+      // else if(country==0||country==''){
+      //    Toast.show('Please select country name')
+      // }
+      // else if(state==0||state==''){
+      //    Toast.show('Please select state name')
+      // }
+      // else if(city==0||city==''){
+      //    Toast.show('Please select city name')
+      // }
+      // else if(income_group==0||''){
+      //    Toast.show('Please select income group')
+      // }
+      // else if(education==0||''){
+      //    Toast.show('Please select education')
+      // }
+      // else if(marital_status==0||''){
+      //    Toast.show('Please select marital status')
+      // }
+      // else if(residential_address==0||''){
+      //    Toast.show('Please select residential status')
+      // }
      
       else{
+         console.log('this sissdldskfl;dskfl;dkfl;dkfl;d',gender,value);
       dispatch({
-      type: 'Edit_Profile_Request',
-      url: 'editprofile',
-      user_id,
-      name:values.name,
-      email:values.email,
-      father_spouse_name:values.father,
-      mother_maiden_name:values.mother,
-      dob:value,
-      gender:gender,
-      navigation:navigation,
-      pan:values.pan,
-      mobile:values.mobile,
-      address1:values.addressLine1,
-      address2:values.addressLine2,
-      city:city,
-      state:state,
-      pincode:values.pincode,
-      country:country,
-      marital_status:marital_status,
-      occupation:occupation=='Others'?values.occupation:occupation,
-      income_group:income_group,
-      education:education,
-      residential_status:residential_address
+            type: 'Edit_Profile_Request',
+            url: 'editprofile',
+            user_id,
+            name:values.name,
+            email:values.email,
+            father_spouse_name:values.father,
+            mother_maiden_name:values.mother,
+            dob:value,
+            gender:gender,
+            pan:values.pan,
+            mobile:values.mobile,
+            address1:values.addressLine1,
+            address2:values.addressLine2,
+            city:city,
+            state:state,
+            country:country,
+            pincode:values.pincode,
+            marital_status:marital_status,
+            occupation:occupation=='Others'?values.occupation:occupation,
+            income_group:income_group,
+            education:education,
+            residential_status:residential_address,
+            navigation:navigation,
        })
      }
    }
@@ -158,19 +165,42 @@ const RegisterPage=({route})=>{
          
        })
    }
-
+const manageVerification=async()=>{
+   const user_id=await AsyncStorage.getItem(Storage.user_id)
+   try {
+      console.log('this.ssdlfks;k',user.email);
+      const data = new FormData();
+      data.append('email',user.email)
+      data.append('user_id',user_id)
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',    
+        },
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/sendemail',         
+      });
+      if (response.data.status==200) { 
+         console.log('this is userresponse narendra pal ram  pratap pal this is not a value in the your village to do a',response);
+       Toast.show('An email has been send to your registered email,Please check and verify',Toast.LONG)
+      } 
+    } catch (error) {
+    
+    }
+}
          return(
             <Formik
             initialValues={{ 
-               name:user.name==0||null?'':user.name,
-               father:user.father_spouse_name==0||null?'':user.father_spouse_name,
-               mother:user.mother_maiden_name==0||null?'':user.mother_maiden_name,
-               email:user.email==0||null?'':user.email,
-               pan:user.pan==0||null?'':user.pan,
-               addressLine1:user.address1==0||null?'':user.address1,
-               addressLine2:user.address2==0||null?'':user.address2,
-               mobile:user.mobile==0||null?'':user.mobile,
-               pincode:user.pincode==0||null?'':user.pincode,
+               name:user.name==0||user.name==null?'':user.name,
+               father:user.father_spouse_name==0||user.father_spouse_name==null?'':user.father_spouse_name,
+               mother:user.mother_maiden_name==0||user.mother_maiden_name==null?'':user.mother_maiden_name,
+               email:user.email==0||user.email==null?'':user.email,
+               pan:user.pan==0||user.pan==null?'':user.pan,
+               addressLine1:user.address1==0||user.address1==null?'':user.address1,
+               addressLine2:user.address2==0||user.address2==null?'':user.address2,
+               mobile:user.mobile==0||user.mobile==null?'':user.mobile,
+               pincode:user.pincode==0||user.pincode==null?'':user.pincode,
                occupation:''
             }}
             onSubmit={values => validateUser(values)}
@@ -195,7 +225,7 @@ const RegisterPage=({route})=>{
                   <Text style={{color:colors.textColor,fontSize:16,fontFamily:'Montserrat-SemiBold'}}>Personal Details:</Text>
                     <View style={styles.row}>
                     <Text style={styles.better}>Name</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                        {/* <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/> */}
                     </View>
                    
@@ -217,7 +247,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Father/Spouse Name</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                    
                       <View style={styles.drop}>
@@ -237,7 +267,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Mother Maiden Name</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -258,7 +288,7 @@ const RegisterPage=({route})=>{
                         <View style={{width:'47%'}}>
                         <View style={styles.row}>
                         <Text style={styles.better}>Gender</Text>
-                        <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                        {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                           </View>
                             <View style={styles.drop}>
                                <RNPickerSelect
@@ -268,7 +298,7 @@ const RegisterPage=({route})=>{
                                          inputAndroid: { color: colors.textColor,height:40,width:'100%' },
                                          placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                                          }}
-                                         value={gender==null||0?'':gender}
+                                         value={gender==null||gender==0?'':gender}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Gender", value: 0 }}
                                          Icon={()=>
@@ -282,7 +312,7 @@ const RegisterPage=({route})=>{
                         <View style={{width:'47%',}}>
                         <View style={styles.row}>
                         <Text style={styles.better}>Date of Birth</Text>
-                        <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                        {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                             <TouchableOpacity onPress={()=>setOpen(true)} style={styles.dropCal}>
                               <View style={{width:'80%'}}>
@@ -300,7 +330,8 @@ const RegisterPage=({route})=>{
                               onCancel={() => {
                                 setOpen(false)
                               }}
-                              textColor={colors.textColor}                              
+                              textColor={colors.textColor} 
+                              maximumDate={new Date()}                          
                               />
                                {/* <DatePicker
                                   //  style={{width: '100%',}}
@@ -332,15 +363,15 @@ const RegisterPage=({route})=>{
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
                                     source={require('../../../assets/Image/down.png')}/>
                                     </TouchableOpacity>
-                            </TouchableOpacity>
+                                   </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.row}>
                     <Text style={styles.better}>E-mail</Text>
 
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
-                      <View style={styles.drop}>
+                    <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
                         <TextInput
                         style={styles.input}
                         placeholder='example@gmail.com'
@@ -350,19 +381,25 @@ const RegisterPage=({route})=>{
                         onBlur={handleBlur('email')}
                         editable={false}
                         returnKeyType='done'
-                        
                         />
+                       {user.email_status==1?<Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>:null}
+                     
                     </View>
                     <View style={styles.error}>
                      {(errors.email && touched.email) &&
                         <Text style={styles.warn}>{errors.email}</Text>
                         }
                      </View>
+                    {user.email_status==0? <TouchableOpacity
+                     onPress={()=>manageVerification()}
+                     style={{alignItems:'center',justifyContent:'center',width:40,borderBottomWidth:1,borderColor:colors.bc}}>
+                        <Text style={{color:colors.bc}}>Verify</Text>
+                     </TouchableOpacity>:null}
                      <View style={styles.row}>
                      <Text style={styles.better}>Mobile</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                   
                     </View>
-                      <View style={styles.drop}>
+                    <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
                         <TextInput
                         style={styles.input}
                         placeholder='Please enter mobile number'
@@ -374,6 +411,7 @@ const RegisterPage=({route})=>{
                         editable={false}   
                         returnKeyType='done'                   
                         />
+                         <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>
                     </View>
                     <View style={styles.error}>
                      {(errors.mobile && touched.mobile) &&
@@ -382,9 +420,9 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>PAN</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
-                      <View style={styles.drop}>
+                    <View style={[styles.drop,]}>
                         <TextInput
                         style={styles.input}
                         placeholder='Please enter pan number'
@@ -394,6 +432,7 @@ const RegisterPage=({route})=>{
                         onBlur={handleBlur('pan')} 
                         returnKeyType='done'                       
                         />
+                   
                     </View>
                     <View style={styles.error}>
                      {(errors.pan && touched.pan) &&
@@ -403,7 +442,7 @@ const RegisterPage=({route})=>{
                      <View style={styles.row}>
                 
                      <Text style={styles.better}>Address Line1</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -430,7 +469,7 @@ const RegisterPage=({route})=>{
                         }}>Additional Details:</Text>
                          <View style={styles.row}>
                          <Text style={styles.better}>Address Line2</Text>
-                         <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                         {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -450,7 +489,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Pincode</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -474,7 +513,7 @@ const RegisterPage=({route})=>{
 
                     
                        <Text style={styles.better}>Occupation</Text>
-                       <Text style={{marginTop:10,color:colors.red}}>*</Text>   
+                       {/* <Text style={{marginTop:10,color:colors.red}}>*</Text>    */}
                     </View>
 
                       <View style={styles.drop}>
@@ -485,7 +524,7 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={occupation==null||0?'':occupation}
+                        value={occupation==null||occupation==0?'':occupation}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Occupation", value: 0 }}
                         Icon={()=>
@@ -514,7 +553,7 @@ const RegisterPage=({route})=>{
                     
                      <View style={styles.row}>
                      <Text style={styles.better}>Country</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -524,9 +563,9 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={country==null||0?'':country}
+                        value={country==null||country==0?'':country}
                         useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select Country", value: 0 }}
+                        placeholder={{ label: "Select Country", value:0}}
                         Icon={()=>
                            <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
@@ -541,7 +580,7 @@ const RegisterPage=({route})=>{
 
                      <View style={styles.row}>
                      <Text style={styles.better}>State</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -551,7 +590,7 @@ const RegisterPage=({route})=>{
                            inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                            placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                            }}
-                           value={state==null||0?'':state}
+                           value={state==null||state==0?'':state}
                            useNativeAndroidPickerStyle={false}
                            placeholder={{ label: "Select State", value: 0 }}
                            Icon={()=>
@@ -569,7 +608,7 @@ const RegisterPage=({route})=>{
 
                   
                      <Text style={styles.better}>City</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -579,9 +618,9 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={city==null||0?'':city}
+                        value={city==null||city==0?'':city}
                         useNativeAndroidPickerStyle={false}
-                        placeholder={{label: "Select City", value:'' }}
+                        placeholder={{label: "Select City", value:0 }}
                         Icon={()=>
                         <Image 
                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
@@ -596,7 +635,7 @@ const RegisterPage=({route})=>{
                      <View style={styles.row}>
                    
                      <Text style={styles.better}>Income Group</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -606,7 +645,7 @@ const RegisterPage=({route})=>{
                                          inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                                          placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                                          }}
-                                         value={income_group==0||null?'':income_group}
+                                         value={income_group==0||income_group==null?'':income_group}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Income Group", value: 0 }}
                                          Icon={()=>
@@ -622,7 +661,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Education</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                   
                       <View style={styles.drop}>
@@ -633,7 +672,7 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={education==0||null?'':education}
+                        value={education==0||education==null?'':education}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Education", value: 0 }}
                         Icon={()=>
@@ -649,7 +688,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Marital Status</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
               
                       <View style={styles.drop}>
@@ -660,7 +699,7 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={marital_status==0||null?'':marital_status}
+                        value={marital_status==0||marital_status==null?'':marital_status}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Marital Status", value: 0 }}
                         Icon={()=>
@@ -676,7 +715,7 @@ const RegisterPage=({route})=>{
                      </View>
                      <View style={styles.row}>
                      <Text style={styles.better}>Residential Status</Text>
-                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                     
                       <View style={styles.drop}>
@@ -687,7 +726,7 @@ const RegisterPage=({route})=>{
                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
-                        value={residential_address==0||null?'':residential_address}
+                        value={residential_address==0||residential_address==null?'':residential_address}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Residential Status", value: 0 }}
                         Icon={()=>

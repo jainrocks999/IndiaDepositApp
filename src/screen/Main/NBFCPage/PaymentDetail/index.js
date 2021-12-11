@@ -1,37 +1,75 @@
 import React,{useEffect, useState}from 'react';
-import { View,Text,ScrollView,BackHandler, Image} from 'react-native';
+import { View,Text,ScrollView,BackHandler,TextInput,Image,TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import colors from '../../../../component/colors';
 import StatusBar from '../../../../component/StatusBar';
 import Header from '../../../../component/header';
-import { FlatList } from 'react-native';
-import Loader from '../../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
-import AsyncStorage from "@react-native-community/async-storage";
-import Storage from '../../../../component/AsyncStorage';
-import { RadioButton } from 'react-native-paper';
 import CustomButton from '../../../../component/button1';
-const Payment=()=>{
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import  DatePicker  from "react-native-date-picker";
+
+
+
+const loginValidationSchema=yup.object().shape({
+    transaction_id:yup.string().required('Please enter transaction ID'),
+    transaction_amount:yup.string().required('Please enter amount')
+})
+const Payment=({route})=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
-    const isFetching=useSelector(state=>state.isFetching)
+    const [loader,setLoader]=useState(false)
     const [checked,setChecked]=useState(false)
     const [checked1,setChecked1]=useState(false)
-
+    const [transaction_date,set_transaction_date]=useState('')
+    const [open,setOpen]=useState(false)
+    const [date, setDate] = useState(new Date())
+    const value1= date.toISOString().split('T')[0]  
+    const [yyyy ,mm ,dd]=value1.split('-')
+    const value=`${dd}-${mm}-${yyyy}`
     
 useEffect(async()=>{    
     const backAction = () => {
         navigation.goBack()
         return true;
-      };
-    
+    };
       const backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         backAction
       );
       return () => backHandler.remove();
 },[])
+
+const validateUser=async(values)=>{
+  try{
+    setIsFetching(true)
+    const data = new FormData();
+    data.append('transaction_id',values.transaction_id)
+    data.append('transaction_amount',values.transaction_amount)
+    data.append('transaction_date',value)
+    data.append('my_fixed_deposit_id',route.params.my_fixed_deposit_id)
+   
+  const response =await axios({
+    method: 'POST',
+    data,
+    headers: {
+      'content-type': 'multipart/form-data',
+      Accept: 'multipart/form-data',
+    },
+    url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addtransactiondetail',
+  });
+  if (response.status==200) {
+    setIsFetching(false)
+    navigation.navigate('PaymentDetail1')
+  }else{
+    isFetching(false)
+  }
+} catch (error) {
+  setIsFetching(false)
+}
+}
 
 const manageCheck=()=>{
     setChecked(true)
@@ -41,87 +79,106 @@ const manageCheck1=()=>{
    setChecked(false)
    setChecked1(true)
 }
-    return(
+return(
+    <Formik
+        initialValues={{transaction_id:'',transaction_amount:'' }}
+        onSubmit={values => validateUser(values)}
+        validateOnMount={true}
+        validationSchema={loginValidationSchema}
+      >
+        {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (
         <View style={styles.container}>
            <Header
             source={require('../../../../assets/Image/arrow2.png')}
            title={'PAYMENT DETAIL'}
            onPress={()=>navigation.goBack()}
            />
-             <View style={{paddingHorizontal:15,paddingVertical:10}}>
-               <Text style={{
-                   fontSize:17,
-                   fontFamily:'Montserrat-Semibold',
-                   color:colors.textColor,fontWeight:'700'
-                   }}>Select Payment Mode</Text>
-               <View style={[styles.card,{marginTop:10}]}>
-                  <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
-                        value={checked}
-                        status={ checked === true ? 'checked' : 'unchecked' }
-                        onPress={() =>manageCheck()}
-                        color={colors.bc}/>
-                        <View>
-                    <Text style={{
-                        marginLeft:10,
-                        fontWeight:'500',
-                        fontFamily:'Montserrat-SemiBold',
-                        color:colors.textColor,
-                        fontSize:16
-                        }}>{'Net Banking'}</Text>
-                        </View>
-                   </View>
-                   <Text style={{fontSize:12,marginLeft:48,fontFamily:'Montserrat-Regular',color:colors.textColor}}>Instant Payment</Text>
+             <ScrollView style={{paddingHorizontal:15,paddingVertical:10}}>
+                 <View style={styles.card}>
+                   <Text style={
+                       {fontSize:16,
+                        fontFamily:'Montserrat-SemiBold'}}>Account Detail :</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginTop:5}}>{`Account Number : ${'21010000000000'}`}</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginTop:5}}>{`IFSC Code : ${'BARB0RANIGA'}`}</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginTop:5}}>{`Transaction ID : ${'BHIM1234UNJUR'}`}</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginTop:5}}>{`Transaction Date : ${'07-12-2021'}`}</Text>
+                   <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginTop:5}}>{`Transaction Amount : ${'10000'}`}</Text>
+                   <View style={{marginTop:15}}>
+                     <Text style={{fontSize:14,fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>Transaction ID</Text>
+                     <View style={[styles.drop]}>
+                         <TextInput 
+                         style={{height:40}} 
+                         placeholder='Please enter transaction ID'
+                         onChangeText={handleChange('transaction_id')}
+                         onBlur={handleBlur('transaction_id')}
+                         value={values.transaction_id}
+                         />
+                     </View>
+                </View>
+                <View style={styles.error}>
+               {(errors.transaction_id && touched.transaction_id) &&
+                 <Text style={styles.warn}>{errors.transaction_id}</Text>
+                 }
                </View>
-             {checked?  <View style={{paddingVertical:20,paddingHorizontal:10}}>
-                   <Text style={{color:colors.bc,fontSize:16,fontFamily:'Montserrat-Regular'}}>{'+ Add supported bank account'}</Text>
-                   <Text style={{color:colors.textColor,fontSize:12,fontFamily:'Montserrat-Regular'}}>{'*Max limit may very depending upon th account type and bank'}</Text>
-               </View>:<View style={{height:20}}/>}
-               <View style={[styles.card,{marginTop:0}]}>
-                  <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
-                        value={checked1}
-                        status={ checked1 === true ? 'checked' : 'unchecked' }
-                        onPress={() =>manageCheck1()}
-                        color={colors.bc}/>
-                        <View>
-                    <Text style={{
-                        marginLeft:10,
-                        fontWeight:'500',
-                        fontFamily:'Montserrat-SemiBold',
-                        color:colors.textColor,
-                        fontSize:16
-                        }}>{'NEFT/RTGS'}</Text>
-                        </View>
-                   </View>
-                   <Text style={{
-                       fontSize:12,
-                       marginLeft:48,
-                       fontFamily:'Montserrat-Regular',
-                       color:colors.textColor
-                       }}>Requires adding a beneficiary and making the payment</Text>
+
+
+               <View style={{marginTop:15}}>
+                     <Text style={{fontSize:14,fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>Transaction Amount</Text>
+                     <View style={[styles.drop]}>
+                         <TextInput 
+                         style={{height:40}} 
+                         placeholder='Please enter transaction amount'
+                         onChangeText={handleChange('transaction_amount')}
+                         onBlur={handleBlur('transaction_amount')}
+                        value={values.transaction_amount}
+                         />
+                     </View>
+                </View>
+                <View style={styles.error}>
+               {(errors.transaction_amount && touched.transaction_amount) &&
+                 <Text style={styles.warn}>{errors.transaction_amount}</Text>
+                 }
                </View>
-               {checked1?  <View style={{paddingVertical:20,paddingHorizontal:10}}>
-                   <Text style={{color:colors.bc,fontSize:16,fontFamily:'Montserrat-Regular'}}>{'+ Add supported bank account'}</Text>
-                   <Text style={{color:colors.textColor,fontSize:12,fontFamily:'Montserrat-Regular'}}>{'*Max limit may very depending upon th account type and bank'}</Text>
-               </View>:<View style={{height:20}}/>}
-             </View>
-             <View style={{bottom:20,position:'absolute',left:0,right:0,borderTopWidth:2,paddingVertical:10}}>
-             <View style={{paddingHorizontal:20,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                 <Text style={{fontFamily:'Montserrat-SemiBold',fontSize:14,color:colors.textColor}}>Investment Amount</Text>
-                 <View style={{flexDirection:'row',alignItems:'center'}}>
-                     <Image style={{height:20,width:14}} source={require('../../../../assets/Image/rupay.png')}/>
-                     <Text style={{marginLeft:2}}>{'10,000'}</Text>
+               <View style={{marginTop:15}}>
+                     <Text style={{fontSize:14,fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>Transaction Date</Text>
+                     <TouchableOpacity onPress={()=>setOpen(true)} style={[styles.drop1]}>
+                    <Text>{value}</Text>
+                     <DatePicker 
+                        date={date}
+                        modal
+                        mode={'date'}
+                        open={open}
+                        style={{alignItems:'center'}}
+                        onConfirm={(date) => {
+                        setOpen(false)
+                        setDate(date)
+                        }}
+                        onCancel={() => {
+                            setOpen(false)
+                        }}
+                        textColor={colors.textColor} 
+                        maximumDate={new Date()}   
+                        // minimumDate={new Date()}                       
+                        />  
+                          <TouchableOpacity onPress={()=>setOpen(true)}>
+                            <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
+                            source={require('../../../../assets/Image/down.png')}/>
+                          </TouchableOpacity>
+                     </TouchableOpacity>
+                    </View>
                  </View>
-             </View>
+             </ScrollView>
+             <View style={{bottom:20,position:'absolute',left:0,right:0,paddingVertical:10}}>
              <View style={{paddingHorizontal:15,marginTop:20}}>
               <CustomButton 
-              onPress={()=>navigation.navigate('PaymentDetail1')}
-              title={'Continue'}/>
+              onPress={()=>handleSubmit()}
+              title={'SUBMIT'}/>
              </View>
              </View>
            <StatusBar/>
        </View>
+       )}
+</Formik>
     )
 }
 export default Payment;

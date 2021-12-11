@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput, Platform} from 'react-native';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform,BackHandler} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
@@ -68,6 +68,19 @@ const RegisterPage=()=>{
     const ref3=useRef(null)
     const ref4=useRef(null)
   
+    useEffect(() => {
+      const backAction = () => {
+        BackHandler.exitApp();
+        return true;
+      };
+  
+      const backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        backAction
+      );
+  
+      return () => backHandler.remove();
+    }, []);
 
 
     const validateUser=async(name,email,mobile,pin,referal)=>{
@@ -202,6 +215,7 @@ const handleClick1=()=>{
                       source={require('../../../assets/Image/msg.png')}/>
                      <TextInput 
                       ref={ref}
+                      caretHidden={false}
                       onFocus={()=>setEBorder(true)}
                       style={styles.input1}
                       placeholder='example@domain.com'

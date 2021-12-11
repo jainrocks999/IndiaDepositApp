@@ -81,7 +81,7 @@ export default StyleSheet.create({
     },
     view3:{
         backgroundColor:colors.bc,
-        paddingHorizontal:12,
+        paddingHorizontal:6,
         paddingVertical:2,
         alignItems:'center',
         justifyContent:'center'
@@ -95,7 +95,7 @@ export default StyleSheet.create({
         justifyContent:'center'
     },
     view5:{
-        marginTop:15
+        marginTop:10
     },
     text:{
         color:colors.bc,
@@ -117,7 +117,7 @@ export default StyleSheet.create({
     },
     text4:{
         color:colors.white,
-        fontSize:fontSize.twelve,
+        fontSize:11,
         fontFamily:'Montserrat-Regular'
     },
     text5:{

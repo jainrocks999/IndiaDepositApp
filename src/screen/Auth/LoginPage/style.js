@@ -119,10 +119,6 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
-        // alignItems:'center',
-        // justifyContent:'center',
-        paddingHorizontal:Platform.OS=='android'? 12:0,
-        borderWidth:1
     },
     view1:
     {
@@ -162,6 +158,24 @@ export default StyleSheet.create({
         color:colors.textColor,
         marginLeft:Platform.OS=='android'?0:10
     },
-     
+    underlineStyleBase: {
+        width: 50,
+        height: 50,
+        // borderWidth: 1,
+        // borderColor:colors.bc,
+        borderRadius:10,
+        color:colors.textColor,
+        backgroundColor:colors.white,
+        shadowColor:colors.black,
+        shadowOpacity:0.25,
+        shadowRadius:4,
+        shadowOffset:{height:2,width:0},
+        elevation:2,
+        // borderRadius:10,
+      },
+    
+      underlineStyleHighLighted: {
+        borderColor: colors.bc
+      },
    
 })

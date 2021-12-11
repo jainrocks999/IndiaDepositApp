@@ -26,7 +26,7 @@ const FDList=({route})=>{
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
         const [day, setDay] = useState(route.params.days)
-        const [month, setMonth] = useState(route.params.month)
+        const [month, setMonth] = useState(JSON.stringify(route.params.month))
         const [year,setYear] = useState(route.params.year)
         const [amount,setAmount] = useState(route.params.amount)
         const [pincode,setPincode]=useState(!isNaN(route.params.location)?route.params.location:'')
@@ -34,7 +34,8 @@ const FDList=({route})=>{
         const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
         const [sort,setSort]=useState('Alphabetical')
         const [asc,setAsc]=useState('')
-        const period=((year*365+month*30+day)/365).toFixed(2)
+        const period=((parseFloat(year)*365+parseFloat(month)*30+parseFloat(day))/365).toFixed(2)
+        const re = /^[0-9\b]+$/;
 
 useEffect(()=>{
   const backAction = () => {
@@ -51,14 +52,17 @@ useEffect(()=>{
 },[])
 
 const manageList=(item)=>{
-  const value=((year*365+month*30+day)/365).toFixed(2)
+  const value=((parseInt(year)*365+parseInt(month)*30+parseInt(day))/365)
+  console.log('this is jlkjklgflkfjlsdgfkldjgklfsdgjsdfl',item);
   dispatch({
     type: 'FD_Detail_Request',
     url: 'fddetail',
     fixed_deposit_id:item.fixed_deposit_id,
     principal_amount:amount,
     rate:item.rate,
-    year:JSON.stringify(value),
+    year:year,
+    month:month,
+    days:day,
     navigation:navigation
   })
 }
@@ -96,7 +100,7 @@ if(year==0 && month==0 && day==0){
      type: 'FD_Search_Request',
      url: 'fdlist1',
      year:year,
-     month:month,
+     month:parseInt(month),
      days:day,
      amount:amount,
      location:pincode==''?address:pincode,
@@ -146,6 +150,11 @@ else{
     user_id,
     value_id1:selectedData[0],
     value_id2:selectedData[1],
+    period:period,
+    amount:amount,
+    year:year,
+    month:month,
+    days:day,
     navigation
   })
   // setSelectedData([])
@@ -268,7 +277,7 @@ const renderItem=(item)=>{
 
                      <View style={{alignItems:'center'}}>
                        <Text style={styles.same}>
-                         {(amount* Math.pow((1 + (item.rate/ (1 * 100))), (1 * period))).toFixed(2)}
+                         {(amount* Math.pow((1 + (item.rate/ (100))), (period))).toFixed(0)}
                          </Text>
                        <Image
                          style={styles.image}
@@ -339,7 +348,7 @@ const renderItem=(item)=>{
                                       }}
                                       value={year}
                                       useNativeAndroidPickerStyle={false}
-                                      placeholder={{ label: "YY", value: null }}
+                                      placeholder={{ label: "YY", value: 0 }}
                                       Icon={()=><Image 
                                       style={styles.image4} 
                                       source={require('../../../assets/Image/down.png')}/>}
@@ -358,7 +367,7 @@ const renderItem=(item)=>{
                                           }}
                                           value={month}
                                           useNativeAndroidPickerStyle={false}
-                                          placeholder={{ label: "MM", value: null }}
+                                          placeholder={{ label: "MM", value: 0 }}
                                           Icon={()=><Image 
                                           style={styles.image4} 
                                           source={require('../../../assets/Image/down.png')}/>}
@@ -377,7 +386,7 @@ const renderItem=(item)=>{
                                            }}
                                            value={day}
                                            useNativeAndroidPickerStyle={false}
-                                           placeholder={{ label: "Days", value: null }}
+                                           placeholder={{ label: "Days", value: 0 }}
                                            Icon={()=><Image 
                                            style={styles.image4} 
                                            source={require('../../../assets/Image/down.png')}/>}
@@ -399,7 +408,12 @@ const renderItem=(item)=>{
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
                                  value={amount}
-                                 onChangeText={(val)=>setAmount(val)}
+                                 onChangeText={(val)=>{
+                                   if (re.test(val)||val=='') {
+                                     setAmount(val)
+                                      }
+                                    }
+                                  }
                                  returnKeyType='done'
                               />
                            </View>
@@ -434,7 +448,11 @@ const renderItem=(item)=>{
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={pincode}
-                              onChangeText={(val)=>setPincode(val)}
+                              onChangeText={(val)=>{
+                                if (re.test(val)||val=='') {
+                                  setPincode(val)
+                                }
+                              }}
                               keyboardType='number-pad'
                               maxLength={6}
                               returnKeyType='done'
@@ -666,7 +684,7 @@ const days=[
 const Month=[
   {label:'00',value:'0'},
   { label: '01', value: '1' },
-  { label: '02', value: '2 ' },
+  { label: '02', value: '2' },
   { label: '03', value: '3' },
   { label: '04', value: '4' },
   { label: '05', value: '5' },
@@ -694,6 +712,10 @@ const item = [ {
   id: 10,
 },
 {
+  name: 'Senior Citizen',
+  id: 15,
+},
+{
   name: 'Tax Saving',
   id: 17,
 },
@@ -701,8 +723,5 @@ const item = [ {
   name: 'NRI',
   id: 13,
 },
-{
-  name: 'Senior Citizen',
-  id: 15,
-},
+
 ];

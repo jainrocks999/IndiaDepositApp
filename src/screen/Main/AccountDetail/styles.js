@@ -48,15 +48,16 @@ export default StyleSheet.create({
      },
     item:
     {
-        fontSize:fontSize.twelve,
+        fontSize:fontSize.ten,
         fontFamily:'Montserrat-Regular',
-        color:colors.textColor
+        color:colors.heading,
+        // width:'100%'
     },
     item1:
     {
-        fontSize:fontSize.eleven,
+        fontSize:9,
         fontFamily:'Montserrat-Regular',
-        color:colors.heading
+        color:colors.textColor
     },
     card:
     {
@@ -129,7 +130,8 @@ export default StyleSheet.create({
     },
     undercard:
     {
-        alignItems:'center'
+        alignItems:'center',
+        width:'33%'
     },
     second:
     {

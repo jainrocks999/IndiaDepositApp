@@ -3,14 +3,12 @@ import { View,Text,Image,Alert ,TouchableOpacity,TextInput,BackHandler} from 're
 import CustomButton from '../../../component/button1';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
-import Toast from 'react-native-simple-toast';
 import StatusBar from '../../../component/StatusBar';
 import { useDispatch,useSelector } from 'react-redux';
 import Loader from '../../../component/loader';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import CheckBox from "@react-native-community/checkbox";
-import OTPTextInput  from 'react-native-otp-textinput';
 import colors from '../../../component/colors';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import DeviceInfo from 'react-native-device-info';
@@ -38,10 +36,10 @@ const Login=()=>{
    
     useEffect(() => {
       const backAction = () => {
-        navigation.push('Register')
+        // navigation.goBack()
+        BackHandler.exitApp()
         return true;
       };
-  
       const backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         backAction
@@ -177,26 +175,60 @@ const renderError=(values,errors,touched)=>{
                <Text style={styles.text1}>Enter Your Pin</Text>
              
                 <View style={{width:'100%',marginTop:6}}>
-               <OtpInputs
+               {/* <OtpInputs
                 ref={next}
                  handleChange={handleChange('pin')}
                  onBlur={handleBlur('pin')}
                  numberOfInputs={4}
                  keyboardType={"numeric"} secureTextEntry ={visible}
                  style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
-                 inputContainerStyles={[styles.otp,{borderColor:focus1&&values.pin? colors.bc:'#fff'}]}
-                 inputStyles={{fontSize:fontSize.sixteen,color:colors.textColor,marginLeft:4}}
+                 inputContainerStyles={[styles.otp]}
+                 inputStyles={{
+                   fontSize:fontSize.sixteen,
+                   color:colors.textColor,
+                  //  marginLeft:4,
+                   width:50,
+                  //  borderWidth:values.pin?1:0,
+                   alignContent:'center',
+                   alignItems:'center',
+                   justifyContent:'center',
+                   textAlign:'center',
+                   borderRadius:10
+                  }}
+                  focusStyles={{borderWidth:2}}
                  returnKeyType='go'
                  onSubmitEditing={()=>handleSubmit()}
-                 onFocus={()=>setFocus1(true)}
-              
-              />
+                 onFocus={()=>setFocus1(true)}/> */}
+                 <OtpInputs
+                      ref={next}
+                      handleChange={handleChange('pin')}
+                    // onBlur={handleBlur('pin')}
+                      numberOfInputs={4}
+                      keyboardType={"numeric"}
+                      secureTextEntry ={visible}
+                      style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
+                      inputContainerStyles={[styles.otp,{borderWidth:0}]}
+                      focusStyles={{borderWidth:1,borderColor:colors.bc}}
+                      inputStyles={{
+                        fontSize:fontSize.sixteen,
+                        color:colors.textColor,
+                        width:50,
+                        alignContent:'center',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        textAlign:'center',
+                        borderRadius:10,
+                        borderWidth:0
+                       }}
+                      returnKeyType='go'
+                      onSubmitEditing={()=>handleSubmit()}
+                    />
                     <View style={styles.error}>
                     {(errors.pin && touched.pin) &&
-                      <Text style={styles.warn}>{errors.pin}</Text>
-                      }
+                      <Text style={styles.warn}>{errors.pin}</Text>}
                     </View>
               </View>
+              {/* {borderColor:focus1&&values.pin? colors.bc:'#fff'} */}
               </View>
               <View
                style={styles.view2}>

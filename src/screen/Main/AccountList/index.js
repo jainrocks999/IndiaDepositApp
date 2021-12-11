@@ -25,6 +25,7 @@ const SBAccountList=({route})=>{
         const dispatch=useDispatch()
         const selector=useSelector(state=>state.SBList)
         const [selectedData,setSelectedData]=useState([])
+        const [branch_types,set_branch_type]=useState([])
         const [visible,setVisible]=useState(false)
         const [type, setType] = useState(route.params.type1)
         const [balance,setBalance] = useState(route.params.balance)
@@ -33,7 +34,7 @@ const SBAccountList=({route})=>{
         const isFetching=useSelector((state)=>state.isFetching)
         const [selected,setSelected]=useState(route.params.type1)
         const [sort,setSort]=useState('Alphabetical')
-
+        const re = /^[0-9\b]+$/;
 
 useEffect(()=>{
   const backAction = () => {
@@ -49,12 +50,13 @@ useEffect(()=>{
   return () => backHandler.remove();
 },[])
 
-const manageList=(item)=>{
+const manageList=(item,branch_type)=>{
   dispatch({
     type: 'SB_Detail_Request',
     url: 'sbdetail',
-    saving_account_id:item,
-    navigation:navigation
+    saving_account_id:item,    
+    navigation:navigation,
+    branch_type:branch_type
   })
 }
 
@@ -99,22 +101,26 @@ const manageFilter=(val)=>{
   setSort(val)
   manageSearch()
 }
-const handleonPress=(id)=>{
+const handleonPress=(id,branch_type)=>{
   if(selectedData.length){
-    handleSelectionMultiple(id)
+    handleSelectionMultiple(id,branch_type)
   }else{
-    manageList(id)
+    manageList(id,branch_type)
   }
 }
 
-const handleSelectionMultiple = (id) => {
+const  handleSelectionMultiple = (id,branch_type) => {
   var selectedIds = [...selectedData] // clone state
-
-  if(selectedIds.includes(id))
+  var branch= [...branch_types]
+  if(selectedIds.includes(id)){
     selectedIds = selectedIds.filter(_id => _id !== id)
-  else 
+    branch=branch.filter(_branch=>_branch !== branch)
+  }else 
     selectedIds.push(id)
+    branch.push(branch_type)
     setSelectedData(selectedIds)
+    set_branch_type(branch)
+
 }
 
 const compareFD=async()=>{
@@ -136,6 +142,8 @@ const compareFD=async()=>{
       user_id,
       value_id1:selectedData[0],
       value_id2:selectedData[1],
+      branch_type1:branch_types[0],
+      branch_type2:branch_types[1],
       navigation
     })
     // setSelectedData([])
@@ -154,7 +162,6 @@ const getCurrentLocation=()=>{
          Geocoder.from(position.coords.latitude, position.coords.longitude)
              .then(json => {
               var addressComponent = json.results[0].formatted_address;
-              // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
               setAddress(addressComponent)
              })
              .catch(error => console.warn(error));
@@ -187,7 +194,6 @@ getCurrentLocation();
             Geocoder.from(position.coords.latitude, position.coords.longitude)
                 .then(json => {
                   var addressComponent = json.results[0].formatted_address;
-                  // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                   setAddress(addressComponent)
                 })
                 .catch(error => console.warn(error));
@@ -208,12 +214,44 @@ getCurrentLocation();
 
 }
 
+const renderAmount=(item)=>{
+  if(item.branch_type=='Metropolitan'){
+  return(
+    <View>
+      <Text style={styles.same}>{item.min_balance_metropolitan}</Text>
+    </View>
+  )
+  }
+  else if(item.branch_type=='Rural'){
+    return(
+      <View>
+        <Text style={styles.same}>{item.min_balance_rural}</Text>
+      </View>
+    )
+  }
+  else if(item.branch_type=='Semiurban'){
+    return(
+      <View>
+        <Text style={styles.same}>{item.min_balance_semiurban}</Text>
+      </View>
+    )
+  }
+  else if(item.branch_type=='Urban'){
+    return(
+      <View>
+        <Text style={styles.same}>{item.min_balance_urban}</Text>
+      </View>
+    )
+  }
+}
+
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
                 <TouchableOpacity 
-                    onLongPress={(val)=>handleSelectionMultiple(item.saving_account_id)}
-                    onPress={()=>handleonPress(item.saving_account_id)}
+                    onLongPress={(val)=>handleSelectionMultiple(item.saving_account_id,item.branch_type)}
+                    onPress={()=>handleonPress(item.saving_account_id,item.branch_type)}
+
                     style={[styles.card,{
                       backgroundColor:selectedData.includes(item.saving_account_id) ? '#c9c9f0' :'#fff',
                       padding:13,
@@ -235,27 +273,28 @@ const renderItem=(item)=>{
                          <Text  style={styles.same}>{'Interest\n Rate'}</Text>
                      </View>
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text>
+                       {renderAmount(item)}
+                     {/* <Text style={styles.same}>{item.non_maitenance_penalty_rural}</Text> */}
                      <Image
                          style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/penalty.png')}/>
-                        <Text  style={styles.same}>{'Non Maintenance\nPenalty'}</Text>
+                        <Text  style={styles.same}>{'MAB'}</Text>
 
                      </View>
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.debit_card_amc_charges1}</Text>
+                     <Text style={styles.same}>{item.atm_points}</Text>
                      <Image 
                         style={styles.image} 
                        resizeMode='contain' source={require('../../../assets/Image/debit.png')}/>
-                      <Text  style={styles.same}>{'Debit Card\nAMC'}</Text>
+                      <Text  style={styles.same}>{'ATM Points	'}</Text>
 
                      </View>
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.offers==null?'No':item.offers}</Text>
+                     <Text style={styles.same}>{item.interest_calculation_frequency==null?0:item.interest_calculation_frequency}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/offer.png')}/>
-                       <Text  style={[styles.same]}>{'Life Style\nOffer'}</Text>
+                       <Text  style={[styles.same]}>{'Interest Frequency'}</Text>
 
                      </View>
                    </View>
@@ -308,8 +347,12 @@ const renderItem=(item)=>{
                                  style={{paddingBottom:-10,width:'100%',marginTop:Platform.OS=='android'?-10:0}}
                                  placeholderTextColor={colors.heading1}
                                  keyboardType='number-pad'
-                                 defaultValue={balance}
-                                 onChangeText={(val)=>setBalance(val)}
+                                 value={balance}
+                                 onChangeText={(val)=>{
+                                   if (re.test(val)||val=='') {
+                                     setBalance(val)
+                                   }
+                                 }}
                                  returnKeyType='done'
                               />
                            </View>
@@ -344,7 +387,11 @@ const renderItem=(item)=>{
                               placeholder='Enter Pincode'
                               placeholderTextColor={colors.heading1}
                               value={location}
-                              onChangeText={(val)=>setLocation(val)}
+                              onChangeText={(val)=>{
+                               if (re.test(val)||val=='') {
+                                setLocation(val)
+                               }
+                              }}
                               keyboardType='number-pad'
                               maxLength={6}
                               returnKeyType='done'
@@ -353,8 +400,6 @@ const renderItem=(item)=>{
 
                        <View style={{marginTop:26}}>
                            <Text style={{fontSize:14,fontFamily:'Montserrat-Regular',}}>Type of SB A/C</Text>
-                           
-
                               <MultiSelect     
                                 items={item}
                                 uniqueKey="name"
@@ -371,11 +416,8 @@ const renderItem=(item)=>{
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}
                                 displayKey="name"
-                                
-                                // searchInputStyle={{ color: '#CCC' }}
                                 submitButtonColor={colors.bc}
                                 submitButtonText="Submit"
-                                // searchInputStyle={}
                                 textInputProps={{ editable: false,autoFocus:false }}
                                 searchInputPlaceholderText=""
                                 searchIcon={false}
@@ -412,7 +454,7 @@ const renderItem=(item)=>{
                     
                       <View style={{flexDirection:'row',alignItems:'center',width:'40%'}}>
                       <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
-                      {`Minimum balance : `}</Text>
+                      {`Min balance : `}</Text>
                       <Image style={{width:12,height:18}} source={require('../../../assets/Image/rupay.png')}/>
                       <Text style={{fontFamily:'Montserrat-Regular',color:colors.bc,fontSize:13}}>
                       {`${route.params.balance}`}
@@ -525,10 +567,11 @@ const renderItem=(item)=>{
 export default SBAccountList;
 const SBType=[
   { label: 'Regular', value: 'Regular' },
-  { label: 'Female', value: 'Female' },
-  { label: 'Defense', value: 'Defense' },
-  { label: 'Zero Balance', value: 'Zero Balance' },
   { label: 'Senior Citizen', value: 'Senior Citizen' },
+  { label: 'Female', value: 'Female' },
+  // { label: 'Defense', value: 'Defense' },
+  { label: 'Zero Balance', value: 'Zero Balance' },
+ 
 ]
 const Sorting=[
   { label: 'Popular', value: 'popular' },
@@ -542,19 +585,19 @@ const item = [ {
   id: 10,
 },
 {
-  name: 'Zero Balance',
-  id: 17,
+  name: 'Senior Citizen',
+  id: 15,
 },
 {
   name: 'Female',
   id: 13,
 },
+// {
+//   name: 'Defence',
+//   id: 14,
+// },
 {
-  name: 'Defense',
-  id: 14,
-},
-{
-  name: 'Senior Citizen',
-  id: 15,
+  name: 'Zero Balance',
+  id: 17,
 },
 ];

@@ -64,6 +64,7 @@ import MyFD from '../screen/Main/MyFD';
 import MyFD2 from '../screen/Main/MyFD2';
 import PaymentDetail from '../screen/Main/NBFCPage/PaymentDetail';
 import PaymentDetail1 from '../screen/Main/NBFCPage/PaymentDetail1';
+import MyFDDetailPage from '../screen/Main/NBFCPage/MyFDDetailPage';
 
 
 
@@ -143,7 +144,6 @@ function Navigate() {
         <Stack.Screen name="BankHoliday" component={BankHoliday} options={horizontalAnimation}/>
         <Stack.Screen name="MyFD" component={MyFD} options={horizontalAnimation}/>
         <Stack.Screen name="MyFD2" component={MyFD2} options={horizontalAnimation}/>
-
         <Stack.Screen name="FD_FORM" component={FD_FORM}/>
         <Stack.Screen name="UserSelection" component={UserSelection}/>
         <Stack.Screen name="SelectPlan" component={SelectPlan}/>
@@ -153,7 +153,7 @@ function Navigate() {
         <Stack.Screen name="NomineeUserInfo" component={NomineeUserInfo}/>
         <Stack.Screen name="PaymentDetail" component={PaymentDetail}/>
         <Stack.Screen name="PaymentDetail1" component={PaymentDetail1}/>
-
+        <Stack.Screen name="MyFDDetailPage" component={MyFDDetailPage}/>
 
       </Stack.Navigator>
     </NavigationContainer>

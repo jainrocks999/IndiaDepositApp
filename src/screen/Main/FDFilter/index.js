@@ -24,6 +24,7 @@ const FDFilter=({route})=>{
     const [isEnabled6, setIsEnabled6] = useState(false);
     const [isEnabled7, setIsEnabled7] = useState(false);
     const [isEnabled8, setIsEnabled8] = useState(false);
+    const [gender,setGender]=useState([])
     const [selected,setSelected]=useState([])
     const [toggleCheckBox,setToggleCheckBox]=useState(false)
     const [toggleCheckBox1,setToggleCheckBox1]=useState(false)
@@ -53,19 +54,21 @@ useEffect(()=>{
 
     const manageCheck=()=>{
          setToggleCheckBox(true)
-         setToggleCheckBox1(false)
-         setToggleCheckBox2(false)
+        //  setToggleCheckBox1(false)
+        //  setToggleCheckBox2(false)
+        //  setGender()
     }
     const manageCheck1=()=>{
-        setToggleCheckBox(false)
+        // setToggleCheckBox(false)
         setToggleCheckBox1(true)
-        setToggleCheckBox2(false)
+        // setToggleCheckBox2(false)
     }
     const manageCheck2=()=>{
-        setToggleCheckBox(false)
-         setToggleCheckBox1(false)
+        // setToggleCheckBox(false)
+        //  setToggleCheckBox1(false)
          setToggleCheckBox2(true)
     }
+    console.log('this is gender value',toggleCheckBox,toggleCheckBox1,toggleCheckBox2);
     const manageClear=()=>{
         setIsEnabled1(false)
         setIsEnabled2(false)
@@ -84,34 +87,29 @@ useEffect(()=>{
     console.log('this is testing',data,selected);
 
     const applyFilter=()=>{
-        if(toggleCheckBox==false&&toggleCheckBox1==false&&toggleCheckBox2==false){
-         Toast.show('Please select gender')
-        }
-        else{
       dispatch({
             type: 'FD_Search_Request',
             url: 'fdlist1',
             year:data.year,
-            month:data.month,
+            month:parseInt(data.month),
             days:data.days,
             amount:data.amount,
             location:data.location,
             type1:data.type1,
             order_on:data.order_on,
             order_to:data.order_to,
-            bank_id:selected[0],
+            bank_id:selected,
             interest_rate:value1,
             nationalized:isEnabled1==true?1:0,
             sb_account_required:isEnabled2==true?1:0,
             offer:isEnabled3==true?1:0,
             insurance:isEnabled4==true?1:0,
-            gender:toggleCheckBox==true?'1':toggleCheckBox1==true?'2':toggleCheckBox2==true?'3':'0',
+            // gender:toggleCheckBox==true?'1':toggleCheckBox1==true?'2':toggleCheckBox2==true?'3':'0',
             interest_payout:isEnabled6==true?1:0,
             premature_penalty:isEnabled7==true?1:0,
             loan:isEnabled8==true?1:0,
             navigation:navigation
           })
-        }
     }
     console.log('thisis fkadjfdkjf',value1,isEnabled1,isEnabled2,isEnabled6,penalty,loan1);
     return(
@@ -136,7 +134,7 @@ useEffect(()=>{
             <View style={{paddingHorizontal:20,marginTop:20,marginBottom:30}}>
               <Text style={styles.heading}>Bank</Text>
               <View style={{width:'100%',marginTop:5}}>
-                          <MultiSelect     
+                          <MultiSelect   
                                 items={selector}
                                 uniqueKey="value"
                                 onSelectedItemsChange={(val)=>setSelected(val)}
@@ -147,7 +145,7 @@ useEffect(()=>{
                                 tagTextColor={'#fff'}
                                 selectText={selected.length>0?'':"Select Bank"}
                                 // selectedItems
-                                single={true}
+                                single={false}
                                 searchInputPlaceholderText="Select Bank"
                                 onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
@@ -226,7 +224,7 @@ useEffect(()=>{
                     value={isEnabled4}
                 />
                 </View>
-                <View style={styles.container}>
+                {/* <View style={styles.container}>
                     <Text style={styles.heading}>Gender</Text>
                     <Switch
                     trackColor={{ false: "grey", true: colors.bc }}
@@ -235,8 +233,8 @@ useEffect(()=>{
                     onValueChange={()=>setIsEnabled5(previousState => !previousState)}
                     value={isEnabled5}
                 />
-                </View>
-                 {isEnabled5? <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:'90%',marginTop:20}}>
+                </View> */}
+                 {/* {isEnabled5? <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:'90%',marginTop:20}}>
                      <View style={{flexDirection:'row',alignItems:'center'}}>
                         <CheckBox
                             disabled={false}
@@ -266,7 +264,7 @@ useEffect(()=>{
                         <Text style={{fontSize:13}}>Transgender</Text>
                      </View>
                      
-                 </View>:<View/>}
+                 </View>:<View/>} */}
                 <View style={styles.container}>
                     <Text style={styles.heading}>Interest Payout</Text>
                     <Switch

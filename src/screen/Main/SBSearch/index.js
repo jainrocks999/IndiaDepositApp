@@ -26,6 +26,8 @@ const SBAccount=({route})=>{
     const [address,setAddress]=useState('')
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
+    const re = /^[0-9\b]+$/;
+
     const manageSearch=async()=>{ 
       if(balance==''){
          Toast.show('Please enter minimum balance')
@@ -165,7 +167,11 @@ const SBAccount=({route})=>{
                                        placeholderTextColor={colors.heading1}
                                        keyboardType='number-pad'
                                        value={balance}
-                                       onChangeText={(val)=>setBalance(val)}
+                                       onChangeText={(val)=>{
+                                         if (re.test(val)||val=='') {
+                                          setBalance(val)
+                                         }
+                                       }}
                                        returnKeyType='done'
                                   />
 
@@ -203,7 +209,11 @@ const SBAccount=({route})=>{
                                        placeholderTextColor={colors.heading1}
                                        keyboardType='number-pad'
                                        value={location}
-                                       onChangeText={(val)=>setLocation(val)}
+                                       onChangeText={(val)=>{
+                                         if (re.test(val)||val=='') {
+                                          setLocation(val)
+                                         }
+                                       }}
                                        maxLength={6}
                                        returnKeyType='done'
                                     />

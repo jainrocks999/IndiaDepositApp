@@ -10,15 +10,18 @@ import PieChart from 'react-native-pie-chart';
 
 const SIP=()=>{
     const navigation=useNavigation()
-    const [interest,setInterest]=useState(1)
+    const [interest,setInterest]=useState('')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('500')
+    // const [intCalAmount,setIntCalAmount]=useState()
+    // const [maturityValue,setMaturityValue]=use
   let investmentAmount=totalInvestment*time*12
   let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
   (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
   let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
  const [len,setLen]=useState(5)
  console.log(investmentAmount,interestAmount,maturityAmount);
+
   const principalOnchange=(val)=>{
     if(val>100000){
       setTotalInvestment(JSON.stringify(100000))
@@ -32,22 +35,38 @@ const SIP=()=>{
       }
     }
   }
-  const rateOnchange=(val)=>{
-    if(val>15){
-      setInterest(JSON.stringify(15))
+  const rateOnchange=(value)=>{
+  //   if(val>15){
+  //     setInterest(JSON.stringify(15))
+  //   }
+  //   else{
+  //     if(isNaN(val)){}
+  //     else{
+  //       let value=parseFloat(val).toFixed(2)
+  //       setInterest(value)
+  //       if(val<10){
+  //       setLen(4)}
+  //       else{
+  //         setLen(5)
+  //       }
+  //     }
+  //  }
+  if(value>15){
+    setInterest(parseFloat(15).toString())
+  }
+  else{
+    if(isNaN(value)){
     }
     else{
-      if(isNaN(val)){}
-      else{
-        let value=parseFloat(val).toFixed(2)
-        setInterest(value)
-        if(val<10){
-        setLen(4)}
-        else{
-          setLen(5)
-        }
-      }
-   }
+    setInterest(value)
+    if(value<10){
+      setLen(4)
+    }
+    else{
+      setLen(5)
+    }
+    }  
+  }
   }
   const rateOnchange1=(val)=>{
     if(!isNaN(val)){
@@ -109,8 +128,9 @@ const SIP=()=>{
                     <View style={styles.view3}>
                       <View>
                     <TextInput 
-                    onChangeText={(val)=>rateOnchange(val==''?1:val)}
-                    defaultValue={interest}
+
+                    onChangeText={(val)=>rateOnchange(val==''?0:val)}
+                    value={interest}
                     style={{borderBottomWidth:0,}}
                     keyboardType='number-pad'
                     maxLength={len}
@@ -146,7 +166,7 @@ const SIP=()=>{
                         />
                         <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
                         </View>
-                        <Text style={{marginLeft:2,marginTop:5,fontSize:12,color:colors.textColor}}>{'Year'}</Text>
+                        <Text style={{marginLeft:2,marginTop:5,fontSize:13,color:colors.textColor,fontFamily:'Montserrat-Regular'}}>{'Year'}</Text>
                     </View>
                 </View>
                    <Slider
@@ -158,30 +178,26 @@ const SIP=()=>{
                         thumbTintColor={colors.bc}
                         minimumTrackTintColor={colors.bc}
                         />
-                <View style={{flexDirection:'row',width:'100%'}}>
-                  <View style={{width:'50%'}}> 
+                <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between'}}>
+                  <View > 
                   <View style={styles.view1}>
-                    <View > 
+                    <View style={{alignItems:'center'}}> 
                         <Text style={styles.text}>Total Investment</Text>
-                        <View style={{marginLeft:30}}>
-                        <Text style={styles.font}>{investmentAmount==0||''?6000:isNaN(investmentAmount)?6000:investmentAmount}</Text>
-                        </View>
+                        {/* <View style={{marginLeft:30}}> */}
+                        <Text style={styles.font}>{`₹ ${investmentAmount==0||''?6000:isNaN(investmentAmount)?6000:investmentAmount}`}</Text>
+                        {/* </View> */}
                     </View>
-                    <View style={{marginTop:10}}>
+                    <View style={{marginTop:10,alignItems:'center'}}>
                         <Text style={styles.font}>Total Interest</Text>
-                        <View style={{marginLeft:30}}>
-                        <Text style={styles.font}>{interestAmount==0||''?0:isNaN(interestAmount)?0:interestAmount}</Text>
-                        </View>
+                        <Text style={styles.font}>{`₹ ${interestAmount==0||''?0:isNaN(interestAmount)?0:interestAmount}`}</Text>
                     </View>
                 </View>
-                <View style={{marginTop:10}}>
+                <View style={{marginTop:10,alignItems:'center'}}>
                   <Text style={styles.font}>{'Maturity Value'}</Text>
-                  <View style={{marginLeft:30}}>
-                        <Text style={styles.text}>{`${maturityAmount==0||''?6000:isNaN(maturityAmount)?6000:maturityAmount}`}</Text> 
+                        <Text style={styles.text}>{`₹ ${maturityAmount==0||''?6000:isNaN(maturityAmount)?6000:maturityAmount}`}</Text> 
                   </View>
                   </View>
-                  </View>
-                  <View style={{width:'50%'}}>
+                  <View>
                   <View style={{alignItems:'center',marginTop:20,width:'100%'}}>
                  
                 <PieChart

@@ -11,6 +11,8 @@ import {connect} from 'react-redux';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import OtpInputs from 'react-native-otp-inputs';
+
 class OtpVarification extends React.Component{
     constructor(props) {
         super(props);
@@ -387,7 +389,9 @@ class OtpVarification extends React.Component{
     }
    }  
     render(){
-      console.log('this is attemp data',this.props.attempt);
+      console.log('this is otp',this.state.otp);
+      console.log('this is otp data',this.state.otpData);
+
         return(
             <View style={styles.container}>
              
@@ -405,7 +409,30 @@ class OtpVarification extends React.Component{
                <View style={styles.main}>
                <View style={styles.otpView}>
                 <Text style={styles.enter}>Enter OTP</Text>
-               <OTPTextInput
+                <OtpInputs
+                      handleChange={(code)=>this.setState({otp:code})}
+                      numberOfInputs={4}
+                      keyboardType={"numeric"}
+                      // secureTextEntry ={visible}
+                      style={{justifyContent:'space-between',
+                      alignItems:'center',flexDirection:'row',width:'100%',marginTop:8}}
+                       inputContainerStyles={[styles.otp,{borderWidth:0}]}
+                      focusStyles={{borderWidth:1,borderColor:colors.bc}}
+                      inputStyles={{
+                        fontSize:16,
+                        color:colors.textColor,
+                        width:50,
+                        alignContent:'center',
+                        alignItems:'center',
+                        justifyContent:'center',
+                        textAlign:'center',
+                        borderRadius:10,
+                        borderWidth:0
+                       }}
+                    //  returnKeyType='go'
+                    //   onSubmitEditing={()=>handleSubmit()}
+                    />
+               {/* <OTPTextInput
                   containerStyle={styles.input}
                   handleTextChange={(code)=>this.setState({otp:code})}
                   inputCount={4}
@@ -413,7 +440,7 @@ class OtpVarification extends React.Component{
                   offTintColor={colors.bc}
                   tintColor={colors.bc}
                   
-                  />
+                  /> */}
                  {this.manageAttempt()}
                 </View>          
                  <View style={styles.button}>

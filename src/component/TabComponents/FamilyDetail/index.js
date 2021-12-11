@@ -62,7 +62,7 @@ const FamilyDetails=()=>{
     const renderModal=(item)=>{
       Alert.alert(
         "CONFIRM",
-        "Are you sure you want to delete Family Member?",
+        "Are you sure you want to delete Family Member details?",
         [
           {
             text: "Cancel",
@@ -89,8 +89,12 @@ const FamilyDetails=()=>{
                           actions={[()=>editPost(item),()=>renderModal(item)]}
                           />
                      </View>
+                   
                      <View style={{marginTop:-6}}>
-                     <View style={[styles.row]}>
+                     <View style={styles.row}>
+                         <Text style={styles.same}>{`Relationship : ${item.relation}`}</Text>
+                     </View>
+                     {/* <View style={[styles.row]}>
                          <Text style={styles.same}>{`Email : ${item.email}`}</Text>
                      </View>
                      <View style={styles.row}>
@@ -108,9 +112,7 @@ const FamilyDetails=()=>{
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Address Line2: ${item.address2}`}</Text>
                      </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Relation : ${item.relation}`}</Text>
-                     </View>
+                    
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Father Spouse Name : ${item.father_spouse_name}`}</Text>
                      </View>
@@ -143,7 +145,7 @@ const FamilyDetails=()=>{
                      </View>
                      <View style={styles.row}>
                          <Text style={styles.same}>{`Marital Status : ${item.marital_status}`}</Text>
-                     </View>
+                     </View> */}
                      </View>
                     
                    </View>

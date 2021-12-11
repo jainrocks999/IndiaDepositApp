@@ -154,7 +154,7 @@ export default StyleSheet.create({
     },
     header:
     {
-        marginTop:30,
+        marginTop:10,
         paddingHorizontal:20
     },
     image:

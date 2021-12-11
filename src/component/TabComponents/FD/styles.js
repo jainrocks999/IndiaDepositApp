@@ -40,12 +40,12 @@ export default StyleSheet.create({
        justifyContent:'space-between',
        alignItems:'center'
     },
-   main1:{
-       flexDirection:'row',
-       justifyContent:'space-between',
-       marginTop:20,
-       paddingHorizontal:20
-    },
+//    main1:{
+//        flexDirection:'row',
+//        justifyContent:'space-between',
+//        marginTop:20,
+//        paddingHorizontal:20
+//     },
     total:{
         fontSize:fontSize.thirteen,
         color:colors.textColor,

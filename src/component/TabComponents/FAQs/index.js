@@ -14,7 +14,7 @@ import {
   TouchableOpacity,
   Platform,
   Image
-} from 'react-native';
+} from 'react-native'
 
 const ExpandableComponent = ({item, onClickFunction}) => {
   const [layoutHeight, setLayoutHeight] = useState(0);
@@ -55,9 +55,6 @@ const ExpandableComponent = ({item, onClickFunction}) => {
           overflow: 'hidden',
           paddingHorizontal:10
         }}>
-            {/* <Text style={styles.text}>
-             {item.answer.answer}
-            </Text> */}
              <HTMLView
         value={item.answer.answer}
       />

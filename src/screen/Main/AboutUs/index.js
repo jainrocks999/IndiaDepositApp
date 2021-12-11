@@ -1,5 +1,5 @@
 import React,{useEffect, useState}from 'react';
-import { View,BackHandler,ScrollView} from 'react-native';
+import { View,BackHandler,ScrollView, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -15,6 +15,7 @@ const Contact=()=>{
   
    
 useEffect(()=>{
+  console.log('fksdl;fkdfkll;sdfkl;sdkf;saldkl;sdafksdl ypogrnd');
   dispatch({
     type: 'About_Us_Request',
     url: 'getpagecontent',

@@ -49,15 +49,15 @@ export default StyleSheet.create({
     },
     item:
     {
-        fontSize:fontSize.twelve,
+        fontSize:9,
         fontFamily:'Montserrat-Regular',
-        color:colors.textColor
+        color:colors.heading
     },
     item1:
     {
-        fontSize:fontSize.eleven,
+        fontSize:9,
         fontFamily:'Montserrat-Regular',
-        color:colors.heading
+        color:colors.textColor
     },
     view1:
     {
@@ -82,7 +82,8 @@ export default StyleSheet.create({
     },
     view2:
     {
-        alignItems:'center'
+        alignItems:'center',
+        width:'33%'
     },
     tds:
     {
@@ -164,7 +165,7 @@ export default StyleSheet.create({
     },
     btCont:
     {
-        width:'48%',height:45,
+        height:45,
         borderRadius:20,
         backgroundColor:colors.bc,
         alignItems:'center',
@@ -180,6 +181,6 @@ export default StyleSheet.create({
     },
     view4:{
         backgroundColor:colors.white,
-        marginTop:13
+        marginTop:0
     },
 })

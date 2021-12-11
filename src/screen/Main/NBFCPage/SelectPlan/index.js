@@ -7,14 +7,19 @@ import StatusBar from '../../../../component/StatusBar';
 import styles from './styles';
 import { useDispatch ,useSelector} from 'react-redux';
 import Loader from '../../../../component/loader';
+import Storage from '../../../../component/AsyncStorage';
+import AsyncStorage from "@react-native-community/async-storage";
+
 const BankCalu=({route})=>{
     const navigation = useNavigation()
     const [selectedItems, setSelectedItems] = useState([]);
     const [amount,setAmount]=useState(route.params.amount)
     const isFetching=useSelector(state=>state.isFetching)
     const dispatch=useDispatch()
-console.log('this is selected items',selectedItems[0]);
-const validateUser=()=>{
+    const re = /^[0-9\b]+$/;
+
+const validateUser=async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
   dispatch({
     type: 'Create_FD_Request',
     url: 'addmyfd',
@@ -36,6 +41,7 @@ const validateUser=()=>{
     occupation:'',
     annual_income:'',
     fd_user_id:'',
+    user_id:user_id,
     cheque_copy:'',
     address_proof:'',
     pan_card:'',
@@ -47,8 +53,6 @@ const validateUser=()=>{
     navigation:navigation
 })
 }
-
-
     const ListItem = ({item, selected, onPress,}) => (
         <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:85}}>
             <View  style={styles.touch1}>
@@ -110,11 +114,15 @@ return(
              <View style={{width:'100%',marginTop:0}}>
              <TextInput 
                 placeholder=' Enter your deposit amount'
-                defaultValue={amount}
+                value={amount}
                 placeholderTextColor={colors.heading1}
                 keyboardType='number-pad'
                 style={{color:colors.textColor,width:'90%'}}
-                onChangeText={(val)=>setAmount(val)}
+                onChangeText={(val)=>{
+                  if (re.test(val)||val=='') {
+                    setAmount(val)
+                  }
+                }}
               />
                </View>  
                

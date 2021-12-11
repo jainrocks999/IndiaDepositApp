@@ -20,14 +20,22 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Loader from '../../../../component/loader';
 
 const loginValidationSchema=yup.object().shape({
-    name:yup.string().max(40).required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
-    address1:yup.string().required('Please enter your address1').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address1"),
-    address2:yup.string().required('Please enter your address2').matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
-    pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`).required('Please enter your pincode')
+    name:yup.string().max(40).required('Please enter your name')
+    .matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
+    address1:yup.string()
+    //.required('Please enter your address1')
+    .matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address1"),
+    address2:yup.string()
+    //.required('Please enter your address2')
+    .matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
+    pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`)
+    //.required('Please enter your pincode')
     .matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid pincode"),
-    relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
-    guardian:yup.string().required('Please Enter your guardian name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian name"),
-    guardian_relationship:yup.string().required('Please enter your guardian relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian relationship"),
+    // relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
+    guardian:yup.string().
+    //.required('Please Enter your guardian name').
+    matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian name"),
+    // guardian_relationship:yup.string().required('Please enter your guardian relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian relationship"),
   })
   
 const BankDetail=({route})=>{
@@ -35,13 +43,14 @@ const BankDetail=({route})=>{
         const dispatch=useDispatch()
         const [city,setCity]=useState('')
         const [state,setState]=useState('')
-        const [country,setCountry]=useState('')
+        const [country,setCountry]=useState()
+        const [relation,setRelation]=useState()
+        const [Grelation,setGRelation]=useState()
         const [dob,setDob]=useState('')
         const selector=useSelector(state=>state.CityList)
         const selector1=useSelector(state=>state.StateList)
         const CountryList=useSelector(state=>state.CountryList)
         const isFetching=useSelector(state=>state.isFetching)
-        const [manageStateValue,setManageStateValue]=useState([])
         const [open,setOpen]=useState(false)
         const [date, setDate] = useState(new Date())
 
@@ -51,18 +60,19 @@ const BankDetail=({route})=>{
 
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-        if(country==''){
-          Toast.show('Please Select Country Name')
+        if(relation==''||relation==null||relation==0){
+          Toast.show('Please Select Relationship')
         }
-        else if(state==''){
-            Toast.show('Please Select State Name')
-        }
-        else if(city==''){
-            Toast.show('Please Select City Name')
-        }
-        else if(!value){
-            Toast.show('Please Select Date Birth')
-        }else{
+        // else if(state==''){
+        //     Toast.show('Please Select State Name')
+        // }
+        // else if(city==''){
+        //     Toast.show('Please Select City Name')
+        // }
+        // else if(!value){
+        //     Toast.show('Please Select Date Birth')
+        // }
+        else{
         dispatch({
             type: 'Add_Nominee_Request',
             url: 'addnominee',
@@ -74,9 +84,9 @@ const addUser=async(values)=>{
             state:state,
             city:city,
             dob:value,
-            relationship:values.relationship,
+            relationship:relation,
             guardian:values.guardian,
-            guardian_relationship:values.guardian_relationship,
+            guardian_relationship:Grelation,
             pincode:values.pincode,
             navigation:navigation
           })
@@ -103,7 +113,15 @@ const addUser=async(values)=>{
      }
     return(
         <Formik
-        initialValues={{name:'',address1:'',address2:'',pincode:'',relationship:'',guardian:'',guardian_relationship:''}}
+        initialValues={{
+          name:'',
+          address1:'',
+          address2:'',
+          pincode:'',
+          // relationship:'',
+          guardian:'',
+          // guardian_relationship:''
+        }}
         onSubmit={values => addUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -125,7 +143,7 @@ const addUser=async(values)=>{
                 <View style={styles.card}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                 <Text style={styles.better}>Name</Text>
-                <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -144,7 +162,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Address Line1</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -163,7 +181,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Address Line2</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -182,7 +200,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -195,7 +213,7 @@ const addUser=async(values)=>{
                            }}
                             value={country}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ }}
+                            placeholder={{ label: "Please select country", value: '' }}
 
                         />                                  
                     </View>
@@ -205,7 +223,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>State</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -217,7 +235,7 @@ const addUser=async(values)=>{
                             }}
                             value={state}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Please select state", value: '' }}
                         />   
                     </View>
                     <View style={styles.error}>
@@ -226,7 +244,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>City</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
@@ -238,7 +256,7 @@ const addUser=async(values)=>{
                             }}
                             value={city}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Please select city", value: '' }}
                         />   
                     </View>
                     <View style={styles.error}>
@@ -247,7 +265,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Date of Birth</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <TouchableOpacity onPress={()=>setOpen(true)} style={styles.drop}>
                       <Text style={{color:colors.textColor}}>{value}</Text>
@@ -264,7 +282,8 @@ const addUser=async(values)=>{
                               onCancel={() => {
                                 setOpen(false)
                               }}
-                              textColor={colors.textColor}                              
+                              textColor={colors.textColor}       
+                              maximumDate={new Date()}                       
                               />
                       {/* <DatePicker
                         style={{width: '99%'}}
@@ -298,27 +317,28 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Relationship</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Please enter your relationship'
-                            placeholderTextColor={colors.heading1}
-                            value={values.relationship}
-                            onChangeText={handleChange('relationship')}
-                            onBlur={handleBlur('relationship')}
-                            maxLength={11}
-                            returnKeyType='done'
-                        />
+                      <RNPickerSelect
+                        onValueChange={(val)=>setRelation(val)}
+                        items={Relation}
+                        style={{ 
+                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={relation==0||relation==null?'':relation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Please select relationship", value: 0 }}  
+                        />                    
                     </View>
                     <View style={styles.error}>
-                        {(errors.relationship && touched.relationship) &&
-                        <Text style={styles.warn}>{errors.relationship}</Text>}
+                        {/* {(errors.relationship && touched.relationship) &&
+                        <Text style={styles.warn}>{errors.relationship}</Text>} */}
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -338,19 +358,20 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian Relationship</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Please enter your guardian relationship'
-                            placeholderTextColor={colors.heading1}
-                            value={values.guardian_relationship}
-                            onChangeText={handleChange('guardian_relationship')}
-                            onBlur={handleBlur('guardian_relationship')}
-                            maxLength={11}
-                            returnKeyType='done'
-                        />
+                      <RNPickerSelect
+                        onValueChange={(val)=>setGRelation(val)}
+                        items={Relation}
+                        style={{ 
+                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={Grelation==0||Grelation==null?'':Grelation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Please select guardian relationship", value: 0 }}  
+                        />         
                     </View>
                     <View style={styles.error}>
                         {(errors.guardian_relationship && touched.guardian_relationship) &&
@@ -358,7 +379,7 @@ const addUser=async(values)=>{
                     </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Pincode</Text>
-                    <Text style={{marginTop:10,color:colors.red}}>*</Text>
+                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                    
                       <View style={styles.drop}>
@@ -396,3 +417,14 @@ const addUser=async(values)=>{
     )
 }
 export default BankDetail;
+const Relation=[
+  { label: 'Father', value: 'Father' },
+  { label: 'Mother', value: 'Mother' },
+  { label: 'Sister', value: 'Sister'},
+  { label: 'Brother', value: 'Brother'},
+ 
+  { label: 'Spouse',value:'Spouse'},
+  { label: 'Daughter',value:'Daughter'},
+  { label: 'Other', value: 'Other'},
+
+]
