@@ -70,24 +70,21 @@ useEffect(async()=>{
     } catch (error) {
      throw error;
     }
-    // dispatch({
-    //     type: 'Notification_Request',
-    //     url: 'getnotification',
-    //     user_id:user_id,
-    // })
-    const backAction = () => {
-        // RootNavigation.replace('Main')
-        navigation.goBack()
-        return true;
-      };
-    
-      const backHandler = BackHandler.addEventListener(
-        "hardwareBackPress",
-        backAction
-      );
-    
-      return () => backHandler.remove();
+   
 },[])
+
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+  };
+}, []);
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    navigation.navigate('Main')
+  return true;
+  }
+}
 const deletePost=async(item)=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   try {

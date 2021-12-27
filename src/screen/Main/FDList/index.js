@@ -17,7 +17,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
-Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
+Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -25,6 +25,7 @@ const FDList=({route})=>{
         const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
+        const [loader,setLoader]=useState(false)
         const [day, setDay] = useState(route.params.days)
         const [month, setMonth] = useState(JSON.stringify(route.params.month))
         const [year,setYear] = useState(route.params.year)
@@ -34,6 +35,8 @@ const FDList=({route})=>{
         const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
         const [sort,setSort]=useState('Alphabetical')
         const [asc,setAsc]=useState('')
+        const [lat,setLang]=useState('')
+        const [long,setLong]=useState('')
         const period=((parseFloat(year)*365+parseFloat(month)*30+parseFloat(day))/365).toFixed(2)
         const re = /^[0-9\b]+$/;
 
@@ -51,18 +54,20 @@ useEffect(()=>{
   return () => backHandler.remove();
 },[])
 
-const manageList=(item)=>{
+const manageList=async(item)=>{
   const value=((parseInt(year)*365+parseInt(month)*30+parseInt(day))/365)
-  console.log('this is jlkjklgflkfjlsdgfkldjgklfsdgjsdfl',item);
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
   dispatch({
     type: 'FD_Detail_Request',
     url: 'fddetail',
+    user_id,
     fixed_deposit_id:item.fixed_deposit_id,
     principal_amount:amount,
     rate:item.rate,
     year:year,
     month:month,
     days:day,
+    pincode:pincode,
     navigation:navigation
   })
 }
@@ -117,7 +122,10 @@ if(year==0 && month==0 && day==0){
      order_on:sort,
      order_to:sort=='alphabet'?'ASC':'DESC',
      navigation:navigation,
-     data:'FdList'
+     data:'FdList',
+     b_lat:lat,
+     b_long:long,
+     b_type:1,
    })
    console.log('its working now');
 
@@ -186,20 +194,28 @@ const openDialog=()=>{
   // setSelected([])
 }
 const getCurrentLocation=()=>{
+  setLoader(true)
   Geolocation.requestAuthorization();
   Geolocation.getCurrentPosition(
      (position) => {
-        console.log('your are here',position.coords);
          Geocoder.from(position.coords.latitude, position.coords.longitude)
              .then(json => {
               var addressComponent = json.results[0].formatted_address;
-              // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
               setAddress(addressComponent)
+              setLoader(false)
              })
-             .catch(error => console.warn(error));
+             .catch(error => {
+              setLoader(false)
+              Toast.show('Something went wrong')
+                console.warn(error)});
+
+             setLang(position.coords.latitude)
+             setLong(position.coords.longitude)
+            
      },
      (error) => {
           console.log(error.code, error.message);
+          setLoader(false)
       },
      { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
  );
@@ -221,18 +237,25 @@ getCurrentLocation();
      },
    );
    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+     setLoader(true)
      Geolocation.getCurrentPosition(
         (position) => {
             Geocoder.from(position.coords.latitude, position.coords.longitude)
                 .then(json => {
                   var addressComponent = json.results[0].formatted_address;
-                  // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                   setAddress(addressComponent)
+                  setLoader(false)
                 })
-                .catch(error => console.warn(error));
+                .catch(error => {
+                  Toast.show(error.origin.error_message)
+                  setLoader(false)
+                  console.warn(error)});
+                setLang(position.coords.latitude)
+                setLong(position.coords.longitude)
         },
         (error) => {
              console.log(error.code, error.message);
+             setLoader(false)
          },
         { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
     );
@@ -321,6 +344,7 @@ const renderItem=(item)=>{
            </View>
         </View>   
                   {isFetching?<Loader/>:null}
+                  {loader?<Loader/>:null}
                        <Dialog
                           dialogStyle={{width:'94%'}}
                           visible={visible}
@@ -343,7 +367,7 @@ const renderItem=(item)=>{
                                       onValueChange={(val)=>setYear(val)}
                                       items={Years}
                                       style={{ 
-                                      inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                        inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                       placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                       }}
                                       value={year}
@@ -362,7 +386,7 @@ const renderItem=(item)=>{
                                           onValueChange={(val)=>setMonth(val)}
                                           items={Month}
                                           style={{ 
-                                          inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                           placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                           }}
                                           value={month}
@@ -381,7 +405,7 @@ const renderItem=(item)=>{
                                            onValueChange={(val)=>setDay(val)}
                                            items={days}
                                            style={{ 
-                                           inputAndroid: { color: colors.textColor,width:'100%',height:40 },
+                                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                            placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                            }}
                                            value={day}
@@ -560,7 +584,7 @@ const renderItem=(item)=>{
                   paddingHorizontal:20,
                    paddingVertical:10,
                    backgroundColor:'#fff',
-                   borderRadius:10
+                   borderRadius:6
                    }}>
                    <Text style={{fontSize:13,fontFamily:'Montserrat-Regular',color:colors.bc}}>Compare</Text>
                  </TouchableOpacity>
@@ -572,15 +596,16 @@ const renderItem=(item)=>{
                     paddingHorizontal:6,
                     paddingVertical:Platform.OS=='android'?0:8,
                      backgroundColor:'#fff',
-                     borderRadius:10,
+                     borderRadius:6,
                      flexDirection:'row',
                      alignItems:'center',
+                     height:38
                    }}>
                       <RNPickerSelect
                           onValueChange={(val)=>handleSorting(val)}
                           items={Sorting}
                           style={{ 
-                          inputAndroid: { color: colors.bc,height:36,marginTop:2,fontFamily:'Montserrat-Regular'},
+                            inputAndroid: { color: colors.bc,width:'100%',fontSize:14,marginBottom:-1, },
                           inputIOS:{color:colors.bc},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
                           }}

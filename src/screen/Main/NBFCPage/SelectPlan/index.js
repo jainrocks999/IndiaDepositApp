@@ -17,14 +17,15 @@ const BankCalu=({route})=>{
     const isFetching=useSelector(state=>state.isFetching)
     const dispatch=useDispatch()
     const re = /^[0-9\b]+$/;
+    const value=(amount* Math.pow((1 + (selectedItems[0] / (1 * 100))), (1 * selectedItems[1]))).toFixed(0)
+    const value1=(amount* Math.pow((1 + (selectedItems[0] / (1 * 100))), (1 * selectedItems[1]))-amount).toFixed(0)
 
-const validateUser=async()=>{
+    const validateUser=async()=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   dispatch({
     type: 'Create_FD_Request',
     url: 'addmyfd',
     formtype:'selectplan',
-    deposit_option:'annual',
     amount:amount,
     tenure:selectedItems[0],
     name:'',
@@ -36,7 +37,7 @@ const validateUser=async()=>{
     mother_name:'',
     father_name:'',
     marital_status:'',
-    my_fixed_deposit_id:'',
+    my_fixed_deposit_id:route.params.my_fixed_eposit_id,
     spouse_name:'',
     occupation:'',
     annual_income:'',
@@ -50,26 +51,35 @@ const validateUser=async()=>{
     relationship:'',
     dob:'',
     nominee_address:'',
+    maturity_amount:value,
+    maturity_interest:value1,
+    bank_name:route.params.name,
+    bank_logo:route.params.image,
+    type1:route.params.type,
+    interest_rate:selectedItems[1],
     navigation:navigation
 })
+AsyncStorage.setItem('fd_user_id','')
+AsyncStorage.setItem('fd_user_id1','')
+AsyncStorage.setItem('fd_user_id2','')
 }
+
     const ListItem = ({item, selected, onPress,}) => (
         <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:85}}>
             <View  style={styles.touch1}>
-                 <TouchableOpacity
-                //  disabled={selectedItems.length>0?true:false} 
+                 <TouchableOpacity 
                  onPress={onPress}
                  style={styles.imageView}>
-                    <Text style={[styles.text,{color:colors.textColor}]}>{item.name}</Text>
-                    <Text style={[styles.text,{color:colors.textColor}]}>{item.name1}</Text>
+                    <Text style={[styles.text,{color:colors.textColor}]}>{`${item.duration} Year`}</Text>
+                    <Text style={[styles.text,{color:colors.textColor}]}>{`${item.rate}% p.a`}</Text>
                  </TouchableOpacity>
                  {selected && <View style={styles.enable}>
                     <TouchableOpacity
                       onPress={onPress}
                       style={styles.touch1}>
                      <View>
-                       <Text style={[styles.text,{color:colors.white}]}>{item.name}</Text>
-                       <Text style={[styles.text,{color:colors.white}]}>{item.name1}</Text>
+                       <Text style={[styles.text,{color:colors.white}]}>{`${item.duration} Year`}</Text>
+                       <Text style={[styles.text,{color:colors.white}]}>{`${item.rate}% p.a`}</Text>
                      </View>
                    </TouchableOpacity>
                </View>
@@ -79,21 +89,18 @@ const validateUser=async()=>{
    
    );
 
-   const getSelected = contact => selectedItems.includes(contact.data);
+   const getSelected = contact => selectedItems.includes(contact.fixed_deposit_id);
    const selectItems = item => {
-     if (selectedItems.includes(item.data)) {
+     if (selectedItems.includes(item.fixed_deposit_id)) {
        return setSelectedItems([]);
      }
-     setSelectedItems([item.data,item.intrest]);
+     setSelectedItems([item.duration,item.rate,item.fixed_deposit_id]);
    };
 
    const handleOnPress = contact => {
       selectItems(contact)
-  };
+  }
 
-const value=(amount* Math.pow((1 + (selectedItems[0] / (1 * 100))), (1 * selectedItems[1]))).toFixed(0)
-const value1=(amount* Math.pow((1 + (selectedItems[0] / (1 * 100))), (1 * selectedItems[1]))-amount).toFixed(0)
- 
 return(
   <View style={styles.container1}>
      <View style={styles.container}>
@@ -103,7 +110,7 @@ return(
             />
           </TouchableOpacity>
           <Text style={{color:colors.white,fontSize:18,fontFamily:'Montserrat-SemiBold',}}>{'SELECT PLAN'}</Text>
-         <View style={{width:'20%'}}/>
+         <View style={{width:'10%'}}/>
     </View>
     {isFetching?<Loader/>:null}
     <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
@@ -124,9 +131,7 @@ return(
                   }
                 }}
               />
-               </View>  
-               
-                   
+           </View>   
            </View>
            <View style={{
                  borderBottomWidth:1.5,borderColor:colors.bc,width:'100%',marginHorizontal:10,marginTop:-10}}/>
@@ -135,7 +140,7 @@ return(
   
                <View style={{borderWidth:1,borderRadius:6,height:40,marginTop:10,paddingHorizontal:10}}>
                   <TextInput style={{width:'90%'}}
-                       value={selectedItems[0]?`${selectedItems[0]} Years`:''}
+                       value={selectedItems[0]?`${selectedItems[0]} Year`:''}
                        placeholderTextColor={colors.heading1}
                        onChangeText={selectedItems[0]}
                        style={{color:colors.textColor,width:'90%'}}
@@ -148,30 +153,27 @@ return(
                    style={{ flexDirection:'row',justifyContent:'space-between',}}>
                        <FlatList
                          style={{ width: '100%' }}
-                         data={data}
+                         data={route.params.data}
                          numColumns={3}
                          extraData={selectItems[0]}
-                         keyExtractor={(item, index) => item.id}
+                         keyExtractor={(item, index) => item.fixed_deposit_id}
                           renderItem={({item})=>(
                           <ListItem
                           onPress={() => handleOnPress(item)}
                           selected={getSelected(item)}
-                          item={item}
-                        
-                          />
+                          item={item}/>
                            )}
                         />
-                  </View >
+                  </View>
                 </View>
                 <View style={styles.mContainer}>
                   <View style={{alignItems:'center'}}>
-                    <Text style={styles.amount}>{'Maturity amount:'}</Text>
-                    <Text style={styles.maturity}>{value=='NaN'?0:value}</Text>
+                    <Text style={styles.maturity}>{'Maturity Amount:'}</Text>
+                    <Text style={styles.amount}>{value=='NaN'?0:value}</Text>
                   </View>
-
                   <View style={{alignItems:'center'}}>
-                    <Text style={styles.amount}>{'Intrest Amount:'}</Text>
-                    <Text style={styles.maturity}>{value1=='NaN'?0:value1}</Text>
+                    <Text style={styles.maturity}>{'Interest Amount:'}</Text>
+                    <Text style={styles.amount}>{value1=='NaN'?0:value1}</Text>
                   </View>
                 </View>
                 <View style={{marginTop:20}}>
@@ -188,10 +190,9 @@ return(
                       }}>
                       <Text style={{color:colors.white}}>{'CONTINUE'}</Text>
                     </TouchableOpacity>   
-                
                 </View>
-        </View> 
-   </ScrollView>
+           </View> 
+        </ScrollView>
      <StatusBar/>       
   </View>
 )

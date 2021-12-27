@@ -9,7 +9,6 @@ export default StyleSheet.create({
         backgroundColor:'#DDDDDD',
         justifyContent:'center',
         alignItems:'center',
-        // paddingTop:Platform.OS=='android'?0:40
     },
     title:
     {
@@ -31,7 +30,6 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize:fontSize.twelve,
         color:colors.textColor,
-        // width:'45%'
     },
     card:
     {
@@ -41,7 +39,6 @@ export default StyleSheet.create({
         elevation:5,
         borderRadius:6,
         backgroundColor:colors.white,
-        //height:150,
         alignItems:'center',
         width:'48%',
         paddingVertical:10,
@@ -101,9 +98,6 @@ export default StyleSheet.create({
     },
     view2:
     {
-        // alignItems:'center',
-        // justifyContent:'center',
-        // flex:1
     },
     df:
     {

@@ -32,7 +32,12 @@ initialstate = {
   ResendData:'',
   ResenData:'',
   Data:'',
-  MYFDList:[]
+  MYFDList:[],
+  MYFDetail:'',
+  NBFCList:[],
+  NBFCDetail:[],
+  NBFCCompareDetail:[],
+  NBFCNameList:[]
 };
 // Resend_Otp_Success
 export default (state = initialstate, action) => {
@@ -365,9 +370,45 @@ export default (state = initialstate, action) => {
   case 'MYFD_List_Request':
     return { ...state, isFetching: true };
   case 'MYFD_List_Success':
-    return { ...state, isFetching: false,MYFDList: action.payload};
+    return { ...state, isFetching: false,MYFDList:action.payload};
   case 'MYFD_List_Error':
+    return { ...state, isFetching: false };
+
+  case 'MYFD_Detail_Request':
+    return { ...state, isFetching: true };
+  case 'MYFD_Detail_Success':
+    return { ...state, isFetching: false,MYFDetail:action.payload};
+  case 'MYFD_Detail_Error':
+     return { ...state, isFetching: false };
+
+  case 'NBFC_Search_Request':
+    return { ...state, isFetching: true };
+  case 'NBFC_Search_Success':
+    return { ...state, isFetching: false, NBFCList: action.payload };
+  case 'NBFC_Search_Error':
+    return { ...state, isFetching: false };
+
+  case 'NBFC_Detail_Request':
+    return { ...state, isFetching: true };
+  case 'NBFC_Detail_Success':
+    return { ...state, isFetching: false, NBFCDetail: action.payload };
+  case 'NBFC_Detail_Error':
   return { ...state, isFetching: false };
+
+  case 'NBFC_Compare_Request':
+    return { ...state, isFetching: true };
+  case 'NBFC_Compare_Success':
+    return { ...state, isFetching: false, NBFCCompareDetail: action.payload };
+  case 'NBFC_Compare_Error':
+  return { ...state, isFetching: false };
+   
+  case 'NBFC_Name_Request':
+    return { ...state, isFetching: true };
+  case 'NBFC_Name_Success':
+    return { ...state, isFetching: false, NBFCNameList: action.payload };
+  case 'NBFC_Name_Error':
+  return { ...state, isFetching: false };
+
 
     default:
       return state;

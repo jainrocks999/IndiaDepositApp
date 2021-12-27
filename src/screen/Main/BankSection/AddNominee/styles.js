@@ -20,14 +20,21 @@ export default StyleSheet.create({
     },
     drop:{
         marginTop:8 ,
+        // borderWidth:1,
+        // height:40,
+        // borderColor:colors.textColor,
+        // borderRadius:6,
+        // paddingHorizontal:5,
+        // justifyContent:'center',
+        // width:'100%',
+        // paddingHorizontal:10,
         borderWidth:1,
         height:40,
-        borderColor:colors.textColor,
         borderRadius:6,
-        paddingHorizontal:5,
-        justifyContent:'center',
-        width:'100%',
         paddingHorizontal:10,
+        borderColor:colors.black,
+        justifyContent:'center',
+        marginTop:2
        
     },
     input:{

@@ -10,6 +10,8 @@ import CustomButton from '../../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import  DatePicker  from "react-native-date-picker";
+import axios from "axios";
+import Loader from '../../../../component/loader';
 
 
 
@@ -17,7 +19,7 @@ const loginValidationSchema=yup.object().shape({
     transaction_id:yup.string().required('Please enter transaction ID'),
     transaction_amount:yup.string().required('Please enter amount')
 })
-const Payment=({route})=>{
+const Payment=({route})=>{ 
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const [loader,setLoader]=useState(false)
@@ -29,6 +31,7 @@ const Payment=({route})=>{
     const value1= date.toISOString().split('T')[0]  
     const [yyyy ,mm ,dd]=value1.split('-')
     const value=`${dd}-${mm}-${yyyy}`
+    console.log('sfasfjkldjfklfkalsdjlkdjfd',route.params);
     
 useEffect(async()=>{    
     const backAction = () => {
@@ -43,14 +46,15 @@ useEffect(async()=>{
 },[])
 
 const validateUser=async(values)=>{
+  console.log('this is values',values);
   try{
-    setIsFetching(true)
+    setLoader(true)
     const data = new FormData();
     data.append('transaction_id',values.transaction_id)
     data.append('transaction_amount',values.transaction_amount)
     data.append('transaction_date',value)
     data.append('my_fixed_deposit_id',route.params.my_fixed_deposit_id)
-   
+    data.append('mode_of_payment','offline')
   const response =await axios({
     method: 'POST',
     data,
@@ -60,14 +64,20 @@ const validateUser=async(values)=>{
     },
     url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addtransactiondetail',
   });
-  if (response.status==200) {
-    setIsFetching(false)
-    navigation.navigate('PaymentDetail1')
+  console.log('this is user respose',response.data);
+  if (response.data.status==200) {
+    setLoader(false)
+    navigation.navigate('PaymentDetail1',{
+      id:values.transaction_id,
+      amount:values.transaction_amount,
+      date:value
+    })
   }else{
-    isFetching(false)
+    setLoader(false)
   }
 } catch (error) {
-  setIsFetching(false)
+  console.log('hi rrordsk',error);
+  setLoader(false)
 }
 }
 
@@ -81,7 +91,7 @@ const manageCheck1=()=>{
 }
 return(
     <Formik
-        initialValues={{transaction_id:'',transaction_amount:'' }}
+        initialValues={{transaction_id:'',transaction_amount:route.params.amount }}
         onSubmit={values => validateUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -93,6 +103,7 @@ return(
            title={'PAYMENT DETAIL'}
            onPress={()=>navigation.goBack()}
            />
+           {loader?<Loader/>:null}
              <ScrollView style={{paddingHorizontal:15,paddingVertical:10}}>
                  <View style={styles.card}>
                    <Text style={
@@ -126,11 +137,13 @@ return(
                      <Text style={{fontSize:14,fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>Transaction Amount</Text>
                      <View style={[styles.drop]}>
                          <TextInput 
-                         style={{height:40}} 
+                         style={{height:40,color:colors.textColor}} 
                          placeholder='Please enter transaction amount'
                          onChangeText={handleChange('transaction_amount')}
                          onBlur={handleBlur('transaction_amount')}
-                        value={values.transaction_amount}
+                         value={values.transaction_amount}
+                         keyboardType='number-pad'
+                        editable={false}
                          />
                      </View>
                 </View>

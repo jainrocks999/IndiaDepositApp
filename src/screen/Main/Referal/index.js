@@ -38,21 +38,23 @@ useEffect(async()=>{
         }
       } catch (error) {
        throw error;
-        
       }
-      const backAction = () => {
-        navigation.navigate('Main')
-        return true;
-      };
-    
-      const backHandler = BackHandler.addEventListener(
-        "hardwareBackPress",
-        backAction
-      );
-    
-      return () => backHandler.remove();
-
 },[])
+
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+  };
+}, []);
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    navigation.navigate('Main')
+  return true;
+  }
+}
+
+
 const share=async()=>{
     await Share.share({
       message:

@@ -30,11 +30,13 @@ useEffect(async()=>{
     dispatch({
         type: 'Country_List_Request',
         url: 'countrylist',
+        user_id
       })
 
     dispatch({
         type: 'State_List_Request',
         url: 'statelist',
+        user_id
       })
 },[])
 
@@ -49,6 +51,7 @@ const deletePost=async(item)=>{
       try {
         const data = new FormData();
         data.append('user_nominee_id',item.user_nominee_id)
+        data.append('user_id',user_id)
         const response = await axios({
           method: 'POST',
           data,

@@ -1,26 +1,52 @@
-import React,{useState,useCallback}from 'react';
+import React,{useState,useEffect}from 'react';
 import { View,Text,Image,ScrollView, TextInput} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import ProgressBar from 'react-native-progress/Bar';
 import colors from '../../colors';
-import fontsize from '../../../component/fontSize';
 import Slider  from "react-native-slider";
 import PieChart from 'react-native-pie-chart';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../AsyncStorage';
 
 const SIP=()=>{
     const navigation=useNavigation()
-    const [interest,setInterest]=useState('')
+    const [interest,setInterest]=useState('1')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('500')
-    // const [intCalAmount,setIntCalAmount]=useState()
-    // const [maturityValue,setMaturityValue]=use
+   
   let investmentAmount=totalInvestment*time*12
   let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
   (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
   let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
  const [len,setLen]=useState(5)
  console.log(investmentAmount,interestAmount,maturityAmount);
+
+
+ useEffect(async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  try {
+    const data = new FormData();
+    data.append('calculator_name','sip')
+    data.append('user_id',user_id)
+    const response = await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/calculator',
+    });
+    if (response.data.status==200) {
+      setFilteredDataSource(response.data.data.blogpost)
+      setMasterDataSource(response.data.data.blogpost)
+    } 
+  } catch (error) {
+   throw error;
+  }
+},[])
+
 
   const principalOnchange=(val)=>{
     if(val>100000){
@@ -36,21 +62,6 @@ const SIP=()=>{
     }
   }
   const rateOnchange=(value)=>{
-  //   if(val>15){
-  //     setInterest(JSON.stringify(15))
-  //   }
-  //   else{
-  //     if(isNaN(val)){}
-  //     else{
-  //       let value=parseFloat(val).toFixed(2)
-  //       setInterest(value)
-  //       if(val<10){
-  //       setLen(4)}
-  //       else{
-  //         setLen(5)
-  //       }
-  //     }
-  //  }
   if(value>15){
     setInterest(parseFloat(15).toString())
   }
@@ -153,7 +164,7 @@ const SIP=()=>{
                 <View style={styles.view}>
                     <Text 
                     style={styles.text}>
-                        Time Period</Text>
+                        Tenure</Text>
                     <View style={styles.view}>
                        <View>
                         <TextInput 

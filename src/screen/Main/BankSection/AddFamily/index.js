@@ -1,5 +1,5 @@
-import React,{useState,useRef} from 'react';
-import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform} from 'react-native';
+import React,{useState,useRef,useEffect} from 'react';
+import { View,Text,Image,ScrollView ,TouchableOpacity,TextInput,Platform,BackHandler} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../../component/StatusBar';
@@ -38,7 +38,7 @@ const loginValidationSchema=yup.object().shape({
    //.required('Please enter address line1'),
    addressLine2:yup.string(),
    // .required('Please enter address line2'),
-   pincode:yup.string(),
+   // pincode:yup.string(),
    // .required('Please enter pincode'),
    occupation:yup.string()
  })
@@ -60,6 +60,7 @@ const RegisterPage=({route})=>{
     const [marital_status,setMarital_status]=useState('')
     const [residential_address,setResidential_address]=useState()
     const [occupation,setOccupation]=useState('') 
+    const [pincode,setPincode]=useState('')
     const [open,setOpen]=useState(false)
     const [date, setDate] = useState(new Date())
 
@@ -71,6 +72,21 @@ const RegisterPage=({route})=>{
     const selector2=useSelector(state=>state.CityList)
     const selector3=useSelector(state=>state.CountryList)
 
+
+    useEffect(() => {
+      BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+      return () => {
+        BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+      };
+    }, []);
+    const handleBackButtonClick=() =>{
+      if(navigation.isFocused()){
+        navigation.navigate('Profile')
+      return true;
+      }
+    }
+
+   
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       if(gender==0||gender==''||gender==null){
@@ -112,7 +128,6 @@ const RegisterPage=({route})=>{
       // }
      
       else{
-         console.log('constry dfsakfl;sd',country,city,state);
       dispatch({
       type: 'Add_Family_Request',
       url: 'createfamily',
@@ -131,33 +146,82 @@ const RegisterPage=({route})=>{
       city:city,
       relation:relation,
       state:state,
-      pincode:values.pincode,
+      pincode:pincode,
       country:country,
       marital_status:marital_status,
       occupation:occupation=='Others'?values.occupation:occupation,
       income_group:income_group,
       education:education,
-      residential_status:residential_address
+      residential_status:residential_address,
        })
      }
    }
    const manageState=async(val)=>{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
          setState(val)
          dispatch({
             type: 'City_List_Request',
             url: 'citybyid',
             state_id:val,
-            
+            user_id
           })
       }
    const manageCountry=async(val)=>{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
          setCountry(val)
          dispatch({
             type: 'State_List_Request',
             url: 'statebyid',
             country_id:val,
+            user_id
           })
       }
+
+
+
+      const manageCityState=async(val)=>{
+         if(val.length==6){
+           console.log(val);
+           setPincode(val)
+           try {
+            const data = new FormData();
+            data.append('location',val)
+            const response = await axios({
+              method: 'POST',
+              data,
+              headers: {
+                'content-type': 'multipart/form-data',
+                Accept: 'multipart/form-data',
+              },
+              url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+            });
+           
+            if (response.data.status==200) {
+              console.log('this is response value',response.data);
+              dispatch({
+                type: 'State_List_Request',
+                url: 'statebyid',
+                country_id:response.data.country.value,
+              })
+        
+              dispatch({
+                type: 'City_List_Request',
+                url: 'citybyid',
+                state_id:response.data.state.value,
+              })
+              setCity(response.data.city.value)
+              setState(response.data.state.value)
+              setCountry(JSON.stringify(response.data.country.value))
+            } 
+          } catch (error) {
+           throw error;
+          }
+         }
+         else{
+          setPincode(val)
+         }
+       
+       }
          return(
             <Formik
             initialValues={{ 
@@ -170,7 +234,7 @@ const RegisterPage=({route})=>{
                addressLine2:'',
                mobile:'',
                occupation:'',
-               pincode:'',
+               
             }}
             onSubmit={values => validateUser(values)}
             validateOnMount={true}
@@ -181,7 +245,7 @@ const RegisterPage=({route})=>{
                   <Header
                      source={require('../../../../assets/Image/arrow2.png')}
                      title='ADD FAMILY MEMBER'
-                     onPress={()=>navigation.goBack()}
+                     onPress={()=>navigation.navigate('Profile')}
                   />
                { isFetching?<Loader/>:null}
                   <ScrollView style={styles.scroll}>
@@ -249,7 +313,7 @@ const RegisterPage=({route})=>{
                                          onValueChange={(val)=>setGender(val)}
                                          items={data}
                                          style={{ 
-                                         inputAndroid: { color: colors.textColor,height:40,width:'100%' },
+                                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                          placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                                          }}
                                          value={gender==null||0?'':gender}
@@ -284,31 +348,6 @@ const RegisterPage=({route})=>{
                               textColor={colors.textColor}   
                               maximumDate={new Date()}                           
                               />
-                               {/* <DatePicker
-                                  //  style={{width: '100%',}}
-                                     date={dob=='0'||null?'':dob}
-                                     mode="date"
-                                     placeholder="Date Of Birth"
-                                     format="DD-MM-YYYY"
-                                     maxDate={new Date()}
-                                     confirmBtnText="Confirm"
-                                     cancelBtnText="Cancel"
-                                     customStyles={{
-                                     placeholderText:{color:'grey'},
-                                     dateIcon: {
-                                      width:0,
-                                      height:0,
-                                       },
-                                     dateInput: {
-                                      marginLeft:-40,
-                                      borderWidth:0,
-                                       },
-                                      dateText:{
-                                        color:colors.textColor
-                                        }
-                                      }}
-                                      onDateChange={(date)=> setDob(date)}                                   
-                                  />  */}
                                   </View>
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
                                     source={require('../../../../assets/Image/down.png')}/>
@@ -319,6 +358,7 @@ const RegisterPage=({route})=>{
                     <Text style={styles.better}>E-mail</Text>
                     <View style={styles.drop}>
                     <TextInput
+                        caretHidden={false}
                         style={styles.input}
                         placeholder='example@gmail.com'
                         placeholderTextColor={colors.heading1}
@@ -367,7 +407,8 @@ const RegisterPage=({route})=>{
                         defaultValue={values.pan}
                         onChangeText={handleChange('pan')}
                         onBlur={handleBlur('pan')} 
-                        returnKeyType='done'                       
+                        returnKeyType='done'    
+                        autoCapitalize='characters'                   
                         />
                     </View>
                     <View style={styles.error}>
@@ -392,13 +433,6 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.addressLine1}</Text>
                         }
                      </View>
-
-                     <Text style={{
-                        color:colors.textColor,
-                        fontSize:16,
-                        fontFamily:'Montserrat-SemiBold',
-                        marginTop:10
-                        }}>Additional Details:</Text>
                    <Text style={styles.better}>Address Line2</Text>
                       <View style={styles.drop}>
                         <TextInput
@@ -421,18 +455,130 @@ const RegisterPage=({route})=>{
                         style={styles.input}
                         placeholder='Please enter pincode'
                         placeholderTextColor={colors.heading1}
-                        defaultValue={values.pincode}
-                        onChangeText={handleChange('pincode')}
-                        onBlur={handleBlur('pincode')}
+                        value={pincode}
+                        onChangeText={(val)=>manageCityState(val)}
                         keyboardType={'number-pad'} 
                         maxLength={6}   
                         returnKeyType='done'                    
                         />
                     </View>
                     <View style={styles.error}>
-                     {(errors.pincode && touched.pincode) &&
-                        <Text style={styles.warn}>{errors.pincode}</Text>
-                        }
+                    
+                     </View>
+                    
+                    
+
+                     <Text style={styles.better}>Country</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                        onValueChange={(val)=>manageCountry(val)}
+                        items={selector3}
+                        style={{ 
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={country==null||country==0?'':country}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select Country", value:'' }}
+                        Icon={()=>
+                           <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                     />                                    
+                    </View>
+                    <View style={styles.error}>
+                     {/* {(errors.email && touched.email) &&
+                        <Text style={styles.warn}>{errors.email}</Text>
+                        } */}
+                     </View>
+
+                     <Text style={styles.better}>State</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                           onValueChange={(val)=>manageState(val)}
+                           items={selector1}
+                           style={{ 
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                           placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                           }}
+                           value={state==null||0?'':state}
+                           useNativeAndroidPickerStyle={false}
+                           placeholder={{ label: "Select State", value: '' }}
+                           Icon={()=>
+                           <Image 
+                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                     />                                
+                    </View>
+                    <View style={styles.error}>
+                     {/* {(errors.email && touched.email) &&
+                        <Text style={styles.warn}>{errors.email}</Text>
+                        } */}
+                     </View>
+                     <Text style={styles.better}>City</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                        onValueChange={(val)=>setCity(val)}
+                        items={selector2}
+                        style={{ 
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={city==null||0?'':city}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{label: "Select City", value:''}}
+                        Icon={()=>
+                        <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                  />                            
+                    </View>
+                    <View style={styles.error}>
+                     {/* {(errors.email && touched.email) &&
+                        <Text style={styles.warn}>{errors.email}</Text>
+                        } */}
+                     </View>
+
+                     <Text style={styles.better}>Relationship</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                        onValueChange={(val)=>setRelation(val)}
+                        items={Relation}
+                        style={{ 
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        }}
+                        value={relation==0||null?'':relation}
+                        useNativeAndroidPickerStyle={false}
+                        placeholder={{ label: "Select Relationship", value: 0 }}
+                        Icon={()=>
+                        <Image 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        source={require('../../../../assets/Image/down.png')}/>}   
+                  />                      
+                    </View>
+                    <Text style={styles.better}>Income Group</Text>
+                      <View style={styles.drop}>
+                      <RNPickerSelect
+                                         onValueChange={(val)=>setIncome_group(val)}
+                                         items={Incom_Group}
+                                         style={{ 
+                                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
+                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                                         }}
+                                         value={income_group==0||null?'':income_group}
+                                         useNativeAndroidPickerStyle={false}
+                                         placeholder={{ label: "Select Income Group", value: 0 }}
+                                         Icon={()=>
+                                          <Image 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                                        source={require('../../../../assets/Image/down.png')}/>}   
+                                   />
+                    </View>
+                    <View style={styles.error}>
+                     {/* {(errors.email && touched.email) &&
+                        <Text style={styles.warn}>{errors.email}</Text>
+                        } */}
                      </View>
                      <Text style={styles.better}>Occupation</Text>
                       <View style={styles.drop}>
@@ -440,7 +586,7 @@ const RegisterPage=({route})=>{
                         onValueChange={(val)=>setOccupation(val)}
                         items={Occupation}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={occupation==null||0?'':occupation}
@@ -467,120 +613,6 @@ const RegisterPage=({route})=>{
                         </View>:null
                         }
                     
-                    
-
-                     <Text style={styles.better}>Country</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                        onValueChange={(val)=>manageCountry(val)}
-                        items={selector3}
-                        style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                        }}
-                        value={country==null||country==0?'':country}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select Country", value: 0 }}
-                        Icon={()=>
-                           <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../../assets/Image/down.png')}/>}   
-                     />                                    
-                    </View>
-                    <View style={styles.error}>
-                     {/* {(errors.email && touched.email) &&
-                        <Text style={styles.warn}>{errors.email}</Text>
-                        } */}
-                     </View>
-
-                     <Text style={styles.better}>State</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                           onValueChange={(val)=>manageState(val)}
-                           items={selector1}
-                           style={{ 
-                           inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                           placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                           }}
-                           value={state==null||0?'':state}
-                           useNativeAndroidPickerStyle={false}
-                           placeholder={{ label: "Select State", value: 0 }}
-                           Icon={()=>
-                           <Image 
-                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../../assets/Image/down.png')}/>}   
-                     />                                
-                    </View>
-                    <View style={styles.error}>
-                     {/* {(errors.email && touched.email) &&
-                        <Text style={styles.warn}>{errors.email}</Text>
-                        } */}
-                     </View>
-                     <Text style={styles.better}>City</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                        onValueChange={(val)=>setCity(val)}
-                        items={selector2}
-                        style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                        }}
-                        value={city==null||0?'':city}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{label: "Select City", value:0 }}
-                        Icon={()=>
-                        <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../../assets/Image/down.png')}/>}   
-                  />                            
-                    </View>
-                    <View style={styles.error}>
-                     {/* {(errors.email && touched.email) &&
-                        <Text style={styles.warn}>{errors.email}</Text>
-                        } */}
-                     </View>
-
-                     <Text style={styles.better}>Relationship</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                        onValueChange={(val)=>setRelation(val)}
-                        items={Relation}
-                        style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                        }}
-                        value={relation==0||null?'':relation}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Select Relationship", value: 0 }}
-                        Icon={()=>
-                        <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                        source={require('../../../../assets/Image/down.png')}/>}   
-                  />                      
-                    </View>
-                    <Text style={styles.better}>Income Group</Text>
-                      <View style={styles.drop}>
-                      <RNPickerSelect
-                                         onValueChange={(val)=>setIncome_group(val)}
-                                         items={Incom_Group}
-                                         style={{ 
-                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
-                                         value={income_group==0||null?'':income_group}
-                                         useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select Income Group", value: 0 }}
-                                         Icon={()=>
-                                          <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
-                                        source={require('../../../../assets/Image/down.png')}/>}   
-                                   />
-                    </View>
-                    <View style={styles.error}>
-                     {/* {(errors.email && touched.email) &&
-                        <Text style={styles.warn}>{errors.email}</Text>
-                        } */}
-                     </View>
 
                      <Text style={styles.better}>Education</Text>
                       <View style={styles.drop}>
@@ -588,7 +620,7 @@ const RegisterPage=({route})=>{
                         onValueChange={(val)=>setEducation(val)}
                         items={Education}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={education==0||null?'':education}
@@ -612,7 +644,7 @@ const RegisterPage=({route})=>{
                         onValueChange={(val)=>setMarital_status(val)}
                         items={Marital_Status}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={marital_status==0||null?'':marital_status}
@@ -636,7 +668,7 @@ const RegisterPage=({route})=>{
                         onValueChange={(val)=>setResidential_address(val)}
                         items={Residential_Status}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={residential_address==0||null?'':residential_address}
@@ -673,9 +705,9 @@ const RegisterPage=({route})=>{
 }
 export default RegisterPage;
 const data=[
-   { label: 'Male', value: 'Male' },
-   { label: 'Female', value: 'Female' },
-   { label: 'Others', value: 'Others'}
+   { label: 'Male', value: '1' },
+   { label: 'Female', value: '2' },
+   { label: 'Others', value: '3'}
 ]
 const Relation=[
    { label: 'Father', value: 'Father' },
@@ -718,7 +750,6 @@ const Incom_Group=[
 
 ]
 const Occupation=[
-   { label: 'Occupation', value: 'Occupation' },
    { label: 'Salaried', value: 'Salaried' },
    { label: 'Self-employed', value: 'Self-employed'},
    { label: 'Retired',value:'Retired'},

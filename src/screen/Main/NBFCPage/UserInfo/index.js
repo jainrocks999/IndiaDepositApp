@@ -11,15 +11,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../../component/AsyncStorage';
 import { useSelector,useDispatch } from 'react-redux';
 import Loader from '../../../../component/loader';
+import { DataTable } from 'react-native-paper';
 const RegisterPage=({route})=>{
     const navigation=useNavigation('')
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
     const data=route.params.data
     const my_fixed_deposit_id=route.params.my_fixed_deposit_id
-
+    console.log('this is uder narendra pal f;adk',data);
    const validateUser=async()=>{
-    AsyncStorage.setItem('my_fixed_deposit_id',my_fixed_deposit_id)
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       dispatch({
         type: 'Create_FD_Request',
@@ -29,20 +29,36 @@ const RegisterPage=({route})=>{
         amount:'',
         tenure:'',
         name:data.name,
-        mobile_number:data.mobile,
-        email:data.email,
-        address_communication:data.address1,
-        address_permanent:data.address2,
-        qualifications:data.education,
-        mother_name:data.mother_maiden_name,
-        father_name:data.father_spouse_name,
-        marital_status:data.marital_status,
-        my_fixed_deposit_id:my_fixed_deposit_id,
-        spouse_name:'',
-        occupation:data.occupation,
-        annual_income:data.income_group,
+      //   mobile_number:data.mobile,
+      //   email:data.email,
+      //   address_communication:data.address1,
+      //   address_permanent:data.address2,
+      //   qualifications:data.education,
+      //   mother_name:data.mother_maiden_name,
+      //   father_name:data.father_spouse_name,
+      //   marital_status:data.marital_status,
+      //   my_fixed_deposit_id:my_fixed_deposit_id,
+      //   spouse_name:'',
+      //   occupation:data.occupation,
+      //   annual_income:data.income_group,
+      name:data.name==0||data.name=='undefined'?0:data.name,
+      mobile_number:data.mobile==0||data.mobile=='undefined'?0:data.mobile,
+      email:data.email==0||data.email=='undefined'?0:data.email,
+      address_communication:data.address1==0||data.address1=='undefined'?0:data.address1,
+      address_permanent:data.address2==0||data.address2=='undefined'?0:data.address2,
+      qualifications:data.education==0||data.education=='undefined'?0:data.education,
+      mother_name:data.mother_maiden_name==0||data.mother_maiden_name=='undefined'?0:data.mother_maiden_name,
+      father_name:data.father_spouse_name==0||data.father_spouse_name=='undefined'?0:data.father_spouse_name,
+      marital_status:data.marital_status==0||data.marital_status=='undefined'?0:data.marital_status,
+      my_fixed_deposit_id:my_fixed_deposit_id,
+      spouse_name:'',
+      occupation:data.occupation==0||data.occupation=='undefined'?0:data.occupation,
+      annual_income:data.income_group==0||data.income_group=='undefined'?0:data.income_group,
         fd_user_id:user_id,
         user_id:user_id,
+        user_dob:data.dob,
+        pan:data.pan,
+        user_relation:data.relation,
         cheque_copy:'',
         address_proof:'',
         pan_card:'',
@@ -51,6 +67,7 @@ const RegisterPage=({route})=>{
         relationship:'',
         dob:'',
         nominee_address:'',
+        secondaryUserData:route.params.secondaryData,
         navigation:navigation
     })
    }
@@ -58,7 +75,7 @@ const RegisterPage=({route})=>{
                <View style={styles.container}>
                   <Header
                      source={require('../../../../assets/Image/arrow2.png')}
-                     title='USER INFO'
+                     title='PRIMARY USER INFO'
                      onPress={()=>navigation.goBack()}
                   />
                   {isFetching?<Loader/>:null}
@@ -75,7 +92,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.name}
+                             value={data.name==0?'':data.name}
                              editable={false}
                            />
                        </View>
@@ -86,7 +103,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.father_spouse_name}
+                             value={data.father_spouse_name==0||data.father_spouse_name=='undefined'?'':data.father_spouse_name}
                              editable={false}
                            />
                        </View>
@@ -96,7 +113,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.mother_maiden_name}
+                             value={data.mother_maiden_name==0||data.mother_maiden_name=='undefined'?'':data.mother_maiden_name}
                              editable={false}
                            />
                        </View>
@@ -106,7 +123,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.gender}
+                             value={data.gender==1?'Male':data.gender==2?'Female':data.gender==3?'Others':''}
                              editable={false}
                            />
                        </View>
@@ -146,7 +163,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.pan}
+                             value={data.pan==0||data.pan=='undefined'?'':data.pan}
                              editable={false}
                            />
                        </View>
@@ -156,7 +173,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.address1}
+                             value={data.address1==0||data.address1=='undefined'?'':data.address1}
                              editable={false}
                            />
                        </View>
@@ -166,7 +183,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.address2}
+                             value={data.address2==0||data.address2=='undefined'?'':data.address2}
                              editable={false}
                            />
                        </View>
@@ -176,7 +193,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.pincode}
+                             value={data.pincode==0||data.pincode=='undefined'?'':data.pincode}
                              editable={false}
                            />
                        </View>
@@ -186,7 +203,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.occupation}
+                             value={data.occupation==0||data.occupation=='undefined'?'':data.occupation}
                              editable={false}
                            />
                        </View>
@@ -196,7 +213,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.country_name}
+                             value={data.country_name==0||data.country_name=='undefined'?'':data.country_name}
                              editable={false}
                            />
                        </View>
@@ -206,7 +223,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.state_name}
+                             value={data.state_name==0||data.state_name=='undefined'?'':data.state_name}
                              editable={false}
                            />
                        </View>
@@ -216,7 +233,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.city_name}
+                             value={data.city_name==0||data.city_name=='undefined'?'':data.city_name}
                              editable={false}
                            />
                        </View>
@@ -226,7 +243,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.relation}
+                             value={data.relation==0||data.relation=='undefined'?'':data.relation}
                              editable={false}
                            />
                        </View>
@@ -236,7 +253,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.income_group}
+                             value={data.income_group==0||data.income_group=='undefined'?'':data.income_group}
                              editable={false}
                            />
                        </View>
@@ -246,7 +263,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.education}
+                             value={data.education==0||data.education=='undefined'?'':data.education}
                              editable={false}
                            />
                        </View>
@@ -256,7 +273,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.marital_status}
+                             value={data.marital_status==0||data.marital_status=='undefined'?'':data.marital_status}
                              editable={false}
                            />
                        </View>
@@ -266,7 +283,7 @@ const RegisterPage=({route})=>{
                        <View style={styles.drop}>
                             <TextInput
                              style={styles.input}
-                             value={data.residential_status}
+                             value={data.residential_status==0||data.residential_status=='undefined'?'':data.residential_status}
                              editable={false}
                            />
                        </View>

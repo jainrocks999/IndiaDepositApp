@@ -40,13 +40,6 @@ const ProfileScreen=()=>{
   const [image,setImage]=useState('')
   const [key,setKey]=useState(1)
 
-  const handleBackButtonClick=() =>{
-    if(navigation.isFocused()){
-      RootNavigation.push('Main')
-    return true;
-  }
-   
-  }
   useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
 
@@ -61,14 +54,19 @@ const ProfileScreen=()=>{
      setImage(image)
      setName(name)
     setEmail(email)
-   
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      handleBackButtonClick,
-    );
-    return () => backHandler.remove()
   },[])
-  
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+    };
+  }, []);
+  const handleBackButtonClick=() =>{
+    if(navigation.isFocused()){
+      navigation.navigate('Main')
+    return true;
+    }
+  }
   const [routes] = React.useState([
     { key: 'first', title: 'PERSONAL\nDETAILS' },
     { key: 'second', title: 'BANK\nDETAILS' },
@@ -145,8 +143,7 @@ const save=async(images)=>{
      multiple: true
    }).then(images => {
      let source = { uri: images[0].path };
-    
-     console.log('this is images kresponse calie', );
+     console.log('this is images kresponse calie',images[0] );
     setphotos(source)
    save(images)
    });

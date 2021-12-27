@@ -5,18 +5,22 @@ import styles from './styles';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import HTMLView from 'react-native-htmlview';
-
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 
 const Security=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
     const selector=useSelector(state=>state.Security)
     const isFetching=useSelector(state=>state.isFetching)
-useEffect(()=>{
+useEffect(async()=>{
+     const user_id=await AsyncStorage.getItem(Storage.user_id)
         dispatch({
           type: 'Security_Request',
           url: 'getpagecontent',
           key:'security',
+          user_id
+
     })
 },[])
 

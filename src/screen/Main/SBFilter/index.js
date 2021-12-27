@@ -7,6 +7,8 @@ import MultiSelect from 'react-native-multiple-select';
 import { useSelector ,useDispatch} from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Loader from '../../../component/loader';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 
 const FDFilter=({route})=>{
     const navigation=useNavigation()
@@ -51,14 +53,15 @@ const manageFilter=()=>{
     setValue1('')
     setValue2('')
 }
-console.log('hi narendra here',value,value1,);
-const applyFilter=()=>{
+const applyFilter=async()=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
     dispatch({
         type: 'SB_Search_Request',
         url: 'sblist1',
         min_bal:data.balance,
         location:data.location,
         type1:data.type1,
+        user_id,
           bank_id:selected,
           interest_rate:value2,
           nationalized:isEnabled1==true?1:0,

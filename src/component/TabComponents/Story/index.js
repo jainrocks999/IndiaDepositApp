@@ -5,6 +5,8 @@ import { useDispatch ,useSelector} from "react-redux";
 import styles from './styles';
 import colors from '../../../component/colors';
 import axios from 'axios';
+import AsyncStorage from "@react-native-community/async-storage";
+import Storage from '../../../component/AsyncStorage';
 const Blog=()=>{
     const navigation=useNavigation()
     const dispatch=useDispatch()
@@ -21,9 +23,11 @@ const Blog=()=>{
         //     url: 'getpost',
         //     post_category_id:2
         // })
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
         try {
           const data = new FormData();
           data.append('post_category_id',2)
+          data.append('user_id',user_id)
           const response = await axios({
             method: 'POST',
             data,

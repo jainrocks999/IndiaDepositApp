@@ -48,7 +48,7 @@ const FamilyDetails=()=>{
             });
             console.log('this is response value',response);
             if (response.data.status==200|| response.data.status==400) {
-                // Toast.show(response.data.messages)
+            
                 dispatch({
                     type: 'Family_List_Request',
                     url: 'getfamilylist',
@@ -76,7 +76,7 @@ const FamilyDetails=()=>{
     const renderItem=(item)=>{
         return(
             <View style={styles.cont}>
-
+                 {item.relation==null?<View style={{height:0}}/>:
                   <View 
                       style={styles.card}>
                      <View style={styles.row1}>
@@ -92,64 +92,11 @@ const FamilyDetails=()=>{
                    
                      <View style={{marginTop:-6}}>
                      <View style={styles.row}>
-                         <Text style={styles.same}>{`Relationship : ${item.relation}`}</Text>
+                         <Text style={styles.same}>{`Relationship : ${item.relation==null||item.relation==''||item.relation==0?'':item.relation}`}</Text>
                      </View>
-                     {/* <View style={[styles.row]}>
-                         <Text style={styles.same}>{`Email : ${item.email}`}</Text>
                      </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Mobile : ${item.mobile}`}</Text>
                      </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Gender : ${item.gender}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Date of Birth : ${item.dob}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Address Line1 : ${item.address1}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Address Line2: ${item.address2}`}</Text>
-                     </View>
-                    
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Father Spouse Name : ${item.father_spouse_name}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Mother Maiden Name : ${item.mother_maiden_name}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`City : ${item.city_name}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`State : ${item.state_name}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Country : ${item.country_name}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Pincode : ${item.pincode}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Residential Status : ${item.residential_status}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Income Group : ${item.income_group}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Education : ${item.education}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Occupation : ${item.occupation}`}</Text>
-                     </View>
-                     <View style={styles.row}>
-                         <Text style={styles.same}>{`Marital Status : ${item.marital_status}`}</Text>
-                     </View> */}
-                     </View>
-                    
-                   </View>
-                  
+                 }  
             </View>
         )
   }
@@ -157,7 +104,7 @@ const FamilyDetails=()=>{
     return(
         <View style={{flex:1}}>
         {isFetching?<Loader/>:null}
-        <ScrollView style={{flex:1}}>
+        <ScrollView >
               <View style={styles.list}>
                 <FlatList
                 showsHorizontalScrollIndicator={false}

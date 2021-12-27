@@ -33,6 +33,7 @@ const BankDetails=()=>{
         dispatch({
             type: 'Bank_Detail_Request',
             url: 'bankdetaillist',
+            user_id
         })
     },[])
 
@@ -90,13 +91,11 @@ const BankDetails=()=>{
 
                   <View 
                       style={styles.card}>
-                    {/* {item.bank_logo?  */}
                     <View style={styles.cardView}>
                         <Image
                          resizeMode='contain'
                          style={{height:20,width:70}} 
                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
-                        {/* <Text style={styles.title}>{item.name}</Text> */}
                        <View style={{width:'20%',alignItems:'flex-end'}}>
                        </View>
                        <OptionsMenu
@@ -107,8 +106,6 @@ const BankDetails=()=>{
                           actions={[()=>editPost(item),()=>renderModal(item)]}
                           />
                      </View>
-                     {/* :<View/>} */}
-                    
                      <View style={[styles.row,{marginTop:item.bank_logo?5:0}]}>
                          <Text style={styles.same}>{`Account No : XXXXXXXXXX${item.account_number.substr(-4)}`}</Text>
                      </View>
@@ -118,23 +115,6 @@ const BankDetails=()=>{
                      <View style={[styles.row,{marginTop:5}]}>
                          <Text style={styles.same}>{`Account Type : ${item.account_type}`}</Text>
                      </View>
-                     {/* <View style={[styles.row,{marginTop:10,justifyContent:'flex-start'}]}>
-                     <TouchableOpacity
-                     onPress={()=>renderModal(item)
-                         }
-                     style={styles.button}>
-                          <Text style={styles.text}>
-                              DELETE
-                          </Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                          onPress={()=>editPost(item)}
-                           style={[styles.button,{marginLeft:10}]}>
-                          <Text style={styles.text}>
-                              EDIT
-                          </Text>
-                          </TouchableOpacity>
-                     </View> */}
                    </View>
                   
             </View>

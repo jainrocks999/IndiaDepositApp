@@ -8,44 +8,44 @@ import BottomTab from '../../../component/StoreButtomTab';
 import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import HTMLView from 'react-native-htmlview';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
+
 const Trending=()=>{
      const navigation=useNavigation()
      const dispatch=useDispatch()
      const selector=useSelector(state=>state.Trending)
      const isFetching=useSelector(state=>state.isFetching)
-     useEffect(()=>
-     {
+useEffect(async()=>{
+       const user_id=await AsyncStorage.getItem(Storage.user_id)
         dispatch({
           type: 'Trending_Request',
           url: 'getpagecontent',
           key:'trending',
+          user_id
     })
-    const backAction = () => {
-      if(navigation.isFocused)
-      navigation.navigate('Main')
-      return true;
-    };
-  
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-  
-    return () => backHandler.remove();
 },[])
+
+useEffect(() => {
+  BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+  return () => {
+    BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+  };
+}, []);
+const handleBackButtonClick=() =>{
+  if(navigation.isFocused()){
+    navigation.navigate('Main')
+  return true;
+  }
+}
 const showContent=()=>{
     if (selector.length>0) {
       return (
         <View>
-      {/* <Text style={styles.normal}>
-              {selector[0].value}
-      </Text> */}
        <HTMLView
-        value={selector[0].value}
-      />
+        value={selector[0].value}/>
       </View>
       )
-   
     } else {
       return<View></View>
     }
@@ -59,6 +59,7 @@ const showContent=()=>{
             // source1={require('../../../assets/Image/notification.png')}
             // onPress1={()=>navigation.navigate('Notification')}
             /> 
+              {isFetching?<Loader/>:null}
              {/* <ScrollView
               contentContainerStyle={{flex:1}}
               style={{backgroundColor:'#E5E5E5'}}>

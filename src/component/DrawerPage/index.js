@@ -61,14 +61,17 @@ const DrawerContent=({props})=> {
             type: 'Contact_Detail_Request',
             url: 'getpagecontent',
             key:'contact',
+            user_id,
         })
         dispatch({
             type: 'Get_Faq_Request',
             url: 'getfaq',
+            user_id,
         })
         dispatch({
             type: 'Country_List_Request',
             url: 'countrylist',
+            user_id,
           })    
         // dispatch({
         //     type: 'State_List_Request',
@@ -298,13 +301,16 @@ const DrawerContent=({props})=> {
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
-                    onPress={()=>{navigation.navigate('MyFD')}}
+                    onPress={()=>{
+                        navigation.navigate('MyFD')
+                        navigation.dispatch(DrawerActions.closeDrawer())
+                    }}
                     style={[styles.drawer]}>
                          <View style={styles.row}>
                             <View style={styles.view1}>
                             <View style={styles.iconView}>
-                                <Image style={styles.imageicon} 
-                                source={require('../../assets/Image/noti.png')}/>
+                                <Image style={{height:24,width:24,marginLeft:4,marginRight:4}} 
+                                source={require('../../assets/Image/ing.png')}/>
                             </View>
                             <Text style={styles.text}>{`My FD's`}</Text>
                             </View>
@@ -448,6 +454,12 @@ const DrawerContent=({props})=> {
                     </View>
                     </View>  
                 </TouchableOpacity>
+                <View
+                   >
+                    <View style={{height:40,alignItems:'center',justifyContent:'center'}}>
+                     <Text style={{color:colors.bc}}>VERSION : 0.1</Text>
+                    </View>  
+                </View>
                 </View>
             </View>
         </DrawerContentScrollView>
