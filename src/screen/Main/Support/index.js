@@ -18,6 +18,7 @@ import fontSize from '../../../component/fontSize';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../component/loader';
 
+
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`).required('Please enter your Name ').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
@@ -28,24 +29,24 @@ const loginValidationSchema=yup.object().shape({
 
 const Supports=({route})=>{
 
-useEffect(()=>{
-  const backAction = () => {
-    navigation.navigate('Main')
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+    };
+  }, []);
+  const handleBackButtonClick=() =>{
+    if(navigation.isFocused()){
+      navigation.navigate('Main')
     return true;
-  };
-
-  const backHandler = BackHandler.addEventListener(
-    "hardwareBackPress",
-    backAction
-  );
-
-  return () => backHandler.remove();
-},[])
+    }
+  }
 
   const SecondRoute = () => {
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
-
+    const selector=useSelector((state)=>state.UserData)
+     console.log('this is user data',selector);
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       dispatch({
@@ -64,10 +65,11 @@ useEffect(()=>{
       return(
         <Formik
         initialValues={{ 
-          name: '',
-          email:'',
-          mobile:'',
-          subject:'',message:''}}
+          name: selector[0].name,
+          email:selector[0].email,
+          mobile:selector[0].mobile,
+          subject:'',
+          message:''}}
         onSubmit={values => validateUser(values)}
         validateOnMount={true}
         validationSchema={loginValidationSchema}
@@ -92,7 +94,7 @@ useEffect(()=>{
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}
                             value={values.name}
-                            // editable={false}
+                            editable={false}
                           />
                       </View>
                       <View style={styles.error}>
@@ -109,7 +111,7 @@ useEffect(()=>{
                            onChangeText={handleChange('email')}
                            onBlur={handleBlur('email')}
                            value={values.email}
-                          //  editable={false}
+                           editable={false}
                           />
                       </View>
                       <View style={styles.error}>
@@ -127,7 +129,7 @@ useEffect(()=>{
                           onChangeText={handleChange('mobile')}
                           onBlur={handleBlur('mobile')}
                           value={values.mobile}
-                          // editable={false}
+                          editable={false}
                           />
                       </View>
                       <View style={styles.error}>

@@ -18,7 +18,7 @@ export default StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         flex:1,
-        marginBottom:40,
+        marginBottom:100,
         marginTop:20,
         // flexDirection:'row'
     },
@@ -50,8 +50,6 @@ export default StyleSheet.create({
     },
    View:
     {
-        // flexDirection:'row',
-        // justifyContent:'space-between',
         marginTop:7,
         paddingHorizontal:5,
         width:'90%'
@@ -89,5 +87,64 @@ export default StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
         width:'100%'
-    }
+    },
+    button1:{
+        width:'100%',
+        height:50,
+        borderRadius:30,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    cross:{
+        borderRadius:30,
+        height:30,width:30,
+        justifyContent:'center',
+        alignItems:'center'
+
+    },
+    x:{
+        color:colors.bc,
+        fontFamily:'Montserrat-Regular',
+        fontSize:20,
+        marginBottom:5,
+    },
+    better:{
+        color:colors.textColor,
+        marginTop:13,
+        fontSize:fontSize.twelve,
+        fontFamily:'Montserrat-SemiBold'
+    },
+    drop:{
+        marginTop:5 ,
+        // borderWidth:1,
+        // height:40,
+        // borderColor:colors.textColor,
+        // borderRadius:6,
+        // paddingHorizontal:5,
+        // justifyContent:'center',
+        // width:'100%',
+        // paddingHorizontal:10,
+        // alignContent:'center'
+        borderWidth:1,
+        height:40,
+        borderRadius:6,
+        paddingHorizontal:10,
+        borderColor:colors.black,
+        justifyContent:'center',
+        marginTop:2
+       
+    }, 
+    dropCal:{
+        marginTop:5 ,
+        borderWidth:1,
+        height:40,
+        borderColor:colors.textColor,
+        borderRadius:6,
+        paddingHorizontal:5,
+        alignItems:'center',
+        justifyContent:'space-between',
+        width:'100%',
+        paddingHorizontal:10,
+        flexDirection:'row'
+    }, 
 })

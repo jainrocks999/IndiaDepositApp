@@ -19,7 +19,6 @@ import DatePicker from 'react-native-date-picker';
 import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Loader from "../../../../component/loader";
-import { PushNotificationScheduledLocalObject } from "react-native-push-notification";
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().max(40).required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
@@ -29,10 +28,7 @@ const loginValidationSchema=yup.object().shape({
   address2:yup.string()
  // .required('Please enter your address2').
   .matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
-  pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`)
-  //.required('Please enter your pincode')
-  .matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid pincode"),
- // relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
+  
   guardian:yup.string()
   //.required('Please Enter your guardian name').
   .matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid guardian name"),
@@ -43,9 +39,9 @@ const BankDetail=({route})=>{
         const navigation=useNavigation()
         const data=route.params
         const dispatch=useDispatch()
-        const [city,setCity]=useState(data.item.city)
-        const [state,setState]=useState(data.item.state)
-        const [country,setCountry]=useState()
+        const [city,setCity]=useState(data.item.city_id)
+        const [state,setState]=useState(data.item.state_id)
+        const [country,setCountry]=useState(data.item.country_id)
         const [dob,setDob]=useState(data.item.dob)
         const [relation,setRelation]=useState(data.item.relationship)
         const [Grelation,setGRelation]=useState(data.item.guardian_relationship)
@@ -54,31 +50,50 @@ const BankDetail=({route})=>{
         const CountryList=useSelector(state=>state.CountryList)
         const isFetching=useSelector(state=>state.isFetching)
         const [manageStateValue,setManageStateValue]=useState([])
+        const [pincode,setPincode]=useState(data.item.pincode)
         const [open,setOpen]=useState(false)
-        const [date, setDate] = useState(new Date())
+        const [dd1,mm1,yyyy1]=data.item.dob.split('-')
+        const [date, setDate] = useState(new Date(`${yyyy1}-${mm1}-${dd1}`))
+
+        const [date1, setDate1] = useState(new Date())
+        const value2= date1.toISOString().split('T')[0]  
+        const [yyyy2 ,mm2 ,dd2]=value2.split('-')
 
         const value1= date.toISOString().split('T')[0]  
         const [yyyy ,mm ,dd]=value1.split('-')
         const value=`${dd}-${mm}-${yyyy}`
-useEffect(()=>{
-  const backHandler = BackHandler.addEventListener(
-    'hardwareBackPress',
-    handleBackButtonClick,
-  );
-  return () => backHandler.remove()
+        
+
+        const eligibleDate=yyyy2-yyyy
+        console.log('this isiuser elegible date',eligibleDate);
+      useEffect(()=>{
+
+        dispatch({
+          type: 'State_List_Request',
+          url: 'statebyid',
+          country_id:country,
+        })
+
+        dispatch({
+          type: 'City_List_Request',
+          url: 'citybyid',
+          state_id:state,
+        })
 },[])
 
-const handleBackButtonClick=() =>{
-  if(navigation.isFocused()){
-    Root.push('Profile')
-  return true;
-}
- 
-}
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+    };
+  }, []);
+  const handleBackButtonClick=() =>{
+    if(navigation.isFocused()){
+      navigation.navigate('Profile')
+    return true;
+    }
+  }
 
-
-
-console.log('this user dtails',relation);
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
         if(relation==''||relation==null||relation==0||relation=='undefined'){
@@ -109,33 +124,64 @@ const addUser=async(values)=>{
             relationship:relation,
             guardian:values.guardian,
             guardian_relationship:Grelation,
-            pincode:values.pincode,
+            pincode:pincode,
             navigation:navigation
           })
         }
       }
 const manageState=async(val)=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
     setState(val)
     dispatch({
       type: 'City_List_Request',
       url: 'citybyid',
       state_id:val,
-      
+      user_id
     })
      }
-     const Country=[
-      {label:'India',value:'101'},
-    ]
-
     const manageCountry=async(val)=>{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
       setCountry(val)
       dispatch({
          type: 'State_List_Request',
          url: 'statebyid',
          country_id:val,
-         
+         user_id
        })
    }
+
+
+   const manageCityState=async(val)=>{
+    if(val.length==6){
+      console.log(val);
+      setPincode(val)
+      try {
+       const data = new FormData();
+       data.append('location',val)
+       const response = await axios({
+         method: 'POST',
+         data,
+         headers: {
+           'content-type': 'multipart/form-data',
+           Accept: 'multipart/form-data',
+         },
+         url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+       });
+      
+       if (response.data.status==200) {
+         setCity(response.data.city.value)
+         setState(response.data.state.value)
+         setCountry(JSON.stringify(response.data.country.value))
+       } 
+     } catch (error) {
+      throw error;
+     }
+    }
+    else{
+     setPincode(val)
+    }
+  
+  }
 
     return(
         <Formik
@@ -144,7 +190,7 @@ const manageState=async(val)=>{
           name:data.item.name,
           address1:data.item.address1,
           address2:data.item.address2,
-          pincode:data.item.pincode,
+          // pincode:data.item.pincode,
           // relationship:,
           guardian:data.item.guardian,
           // guardian_relationship:
@@ -225,6 +271,26 @@ const manageState=async(val)=>{
                         {(errors.address2 && touched.address2) &&
                         <Text style={styles.warn}>{errors.address2}</Text>}
                     </View>
+
+
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Pincode</Text>
+                    </View>
+                      <View style={styles.drop}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Pleae enter your pincode'
+                            placeholderTextColor={colors.heading1}
+                            value={pincode}
+                            onChangeText={(val)=>manageCityState(val)}
+                            maxLength={6}
+                            keyboardType='number-pad'
+                            returnKeyType='done'
+                        />
+                    </View>
+                    <View style={styles.error}>
+                    </View>
+
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
@@ -234,12 +300,12 @@ const manageState=async(val)=>{
                             onValueChange={(val)=>manageCountry(val)}
                             items={CountryList}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={country}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Please select country", value: 0 }}
+                            placeholder={{ label: "Please select country", value: '' }}
                         />                                  
                     </View>
                     <View style={styles.error}>
@@ -254,12 +320,12 @@ const manageState=async(val)=>{
                             onValueChange={(val)=>manageState(val)}
                             items={selector1}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={state}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Please select state", value: 0 }}
+                            placeholder={{ label: "Please select state", value: '' }}
                         />   
                     </View>
                     <View style={styles.error}>
@@ -274,12 +340,12 @@ const manageState=async(val)=>{
                             onValueChange={(val)=>setCity(val)}
                             items={selector}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={city}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Please select city", value: 0 }}
+                            placeholder={{ label: "Please select city", value: '' }}
                         />   
                     </View>
                     <View style={styles.error}>
@@ -344,7 +410,7 @@ const manageState=async(val)=>{
                         onValueChange={(val)=>setRelation(val)}
                         items={Relation}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={relation==0||relation==null?'':relation}
@@ -356,9 +422,10 @@ const manageState=async(val)=>{
                         {(errors.relationship && touched.relationship) &&
                         <Text style={styles.warn}>{errors.relationship}</Text>}
                     </View>
+
+                    {eligibleDate<=18 ?<View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -376,16 +443,17 @@ const manageState=async(val)=>{
                         {(errors.guardian && touched.guardian) &&
                         <Text style={styles.warn}>{errors.guardian}</Text>}
                     </View>
+                    </View>:<View/>}
+                    {eligibleDate<=18? <View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian relationship</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setGRelation(val)}
                         items={Relation}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={Grelation==0||Grelation==null?'':Grelation}
@@ -393,32 +461,12 @@ const manageState=async(val)=>{
                         placeholder={{ label: "Please select guardian relationship", value: 0 }}  
                         /> 
                     </View>
+                    </View>:<View/>}
                     <View style={styles.error}>
                         {(errors.guardian_relationship && touched.guardian_relationship) &&
                         <Text style={styles.warn}>{errors.guardian_relationship}</Text>}
                     </View>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Pincode</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
-                    </View>
-                   
-                      <View style={styles.drop}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Pleae enter your pincode'
-                            placeholderTextColor={colors.heading1}
-                            defaultValue={values.pincode}
-                            onChangeText={handleChange('pincode')}
-                            onBlur={handleBlur('pincode')}
-                            maxLength={6}
-                            keyboardType='number-pad'
-                            returnKeyType='done'
-                        />
-                    </View>
-                    <View style={styles.error}>
-                        {(errors.pincode && touched.pincode) &&
-                        <Text style={styles.warn}>{errors.pincode}</Text>}
-                    </View>
+                  
                     <View style={{marginTop:20}}>
                     <CustomButton
                     title='UPDATE'

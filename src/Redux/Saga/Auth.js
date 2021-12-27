@@ -322,7 +322,9 @@ function* logout(action) {
 function* aboutus(action) {
     try{
       const data = new FormData();
-        data.append('key',action.key)
+       
+      data.append('key',action.key)
+      data.append('user_id',action.user_id)
           const response =yield call(Api.fetchDataByPOST, action.url, data);
               if (response.status==200) {
                 yield put({
@@ -346,6 +348,7 @@ function* contacts(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -368,6 +371,7 @@ function* faq(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -390,6 +394,7 @@ function* privacy(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -413,6 +418,7 @@ function* security(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -435,6 +441,7 @@ function* TermAndCondition(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -457,6 +464,7 @@ function* trending(action) {
   try{
     const data = new FormData();
       data.append('key',action.key)
+      data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
@@ -554,6 +562,7 @@ function* contact(action) {
               yield put({
                 type: 'Contact_Us_Success',
               });       
+              // action.navigation.navigate('Contact')
               Toast.show(response.messages);
             } else {
               yield put({
@@ -761,7 +770,7 @@ function* AddFamily(action) {
               yield put({
                 type: 'Add_Family_Error',
               });
-              Toast.show(response.messages);
+              Toast.show(response.Message);
             }
           }
   catch(error){
@@ -822,7 +831,9 @@ function* EditFamily(action) {
 
 function* getFaq(action) {
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+    const data = new FormData();
+     data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'Get_Faq_Success',
@@ -844,6 +855,7 @@ function* getBlog(action) {
   try{
     const data = new FormData();
     data.append('post_category_id',action.post_category_id)
+    data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
@@ -890,6 +902,7 @@ function* getStory(action) {
   try{
     const data = new FormData();
     data.append('post_category_id',action.post_category_id)
+    data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
@@ -1028,6 +1041,7 @@ function* deleteBank(action) {
   try{
     const data = new FormData();
     data.append('user_bank_id',action.user_bank_id)
+    data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
@@ -1053,7 +1067,9 @@ function* deleteBank(action) {
 
 function* getBankName(action) {
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+    const data=new FormData()
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'Bank_Name_Success',
@@ -1156,7 +1172,9 @@ function* editNominee(action) {
 
 function* countryList(action) {
   try{
-        const response =yield call(Api.fetchDataByPOST, action.url);
+    const data=new FormData()
+    data.append('user_id',action.user_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'Country_List_Success',
@@ -1179,6 +1197,7 @@ function* stateList(action) {
   try{
         const data = new FormData();
         data.append('country_id',action.country_id)
+        data.append('user_id',action.user_id)
           const response =yield call(Api.fetchDataByPOST, action.url,data);
           console.log('this is user response',response);
           // Alert.alert('hi',response)
@@ -1204,6 +1223,7 @@ function* cityList(action) {
   try{
     const data = new FormData();
           data.append('state_id',action.state_id)
+          data.append('user_id',action.user_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
@@ -1226,9 +1246,9 @@ function* cityList(action) {
 
 function* Search(action) {
   try{
-
     console.log('this is action',action);
           const data = new FormData();
+            data.append('user_id',action.user_id)
             data.append('year',action.year)
             data.append('month',action.month)
             data.append('days',action.days)
@@ -1247,12 +1267,17 @@ function* Search(action) {
             data.append('loan',action.loan)
             data.append('order_on',action.order_on)
             data.append('order_to',action.order_to)
+            data.append('b_lat',action.b_lat)
+            data.append('b_long',action.b_long)
+            // Modification Type
+            data.append('btype',action.b_type)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             if (response.status==200) {
               yield put({
                 type: 'FD_Search_Success',
                 payload: response.data,
               });  
+              if(response.data){
                action.navigation.navigate('FDList',{
                  amount:action.amount,
                  days:action.days,
@@ -1262,7 +1287,8 @@ function* Search(action) {
                  type1:action.type1,
                  order_on:action.order_on,
                  order_to:action.order_to
-               })     
+               })  
+              }   
             } else {
               if(action.data=='FdList'){
                 yield put({
@@ -1297,6 +1323,7 @@ function* Search(action) {
 function* FDDetail(action) {
   try{
     const data=new FormData()
+    data.append('user_id',action.user_id)
     data.append('fixed_deposit_id',action.fixed_deposit_id)
     data.append('principal_amount',action.principal_amount)
     data.append('rate',action.rate)
@@ -1315,7 +1342,8 @@ function* FDDetail(action) {
                 amount:action.principal_amount,
                 year:action.year,
                 month:action.month,
-                days:action.days
+                days:action.days,
+                pincode:action.pincode
               })
             } else {
               yield put({
@@ -1333,6 +1361,7 @@ function* FDDetail(action) {
 function* SBDetail(action) {
   try{
     const data=new FormData()
+    data.append('user_id',action.user_id)
     data.append('saving_account_id',action.saving_account_id)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
@@ -1341,7 +1370,8 @@ function* SBDetail(action) {
                 payload: response.data,
               });  
               action.navigation.navigate('AccountDetail',{
-                branch_type:action.branch_type
+                branch_type:action.branch_type,
+                pincode:action.pincode
               })
             } else {
               yield put({
@@ -1359,6 +1389,7 @@ function* SBDetail(action) {
 function* SBSearch(action) {
   try{
     const data = new FormData();
+    data.append('user_id',action.user_id)
       data.append('min_bal',action.min_bal)
       data.append('location',action.location)
       data.append('type1',JSON.stringify(action.type1))
@@ -1372,6 +1403,8 @@ function* SBSearch(action) {
       data.append('debit_card_amc',action.debit_card_amc)
       data.append('order_on',action.order_on)
       data.append('order_to',action.order_to)
+      data.append('b_lat',action.b_lat)
+      data.append('b_long',action.b_long)
             const response =yield call(Api.fetchDataByPOST, action.url, data);
             console.log('this is response value',response);
             if (response.status==200) {
@@ -1421,6 +1454,7 @@ function* SBSearch(action) {
 function* FDCompare(action) {
   try{
     const data = new FormData();
+      data.append('user_id',action.user_id)
       data.append('value_id1',action.value_id1)
       data.append('value_id2',action.value_id2)
       data.append('user_id',action.user_id)
@@ -1460,6 +1494,7 @@ function* SBCompare(action) {
  
   try{
     const data = new FormData();
+    data.append('user_id',action.user_id)
       data.append('value_id1',action.value_id1)
       data.append('value_id2',action.value_id2)
 
@@ -1473,7 +1508,8 @@ function* SBCompare(action) {
               });  
                action.navigation.navigate('CompareSBAccount',{
                  branch_type1:action.branch_type1,
-                 branch_type2:action.branch_type2
+                 branch_type2:action.branch_type2,
+                 location:action.location
                })
             } else {
               yield put({
@@ -1688,11 +1724,13 @@ function* FamilyList(action) {
               yield put({
                 type: 'Family_List_Success',
                 payload: response.data,
-              });       
+              });    
+              // Toast.show(response.messages)   
             } else {
               yield put({
                 type: 'Family_List_Error',
               });
+              // Toast.show(response.messages)
             }
           }
   catch(error){
@@ -1728,11 +1766,24 @@ function* createFD(action) {
     data.append('pan_card',action.pan_card)
     data.append('user_photo',action.user_photo)
     data.append('nominee_name',action.nominee_name)
+    data.append('signature_copy',action.signature_copy)
+    data.append('user_relation',action.user_relation)
     data.append('relationship',action.relationship)
-    data.append('dob',action.user_id)
+    data.append('user_dob',action.user_dob)
+    data.append('pan',action.pan)
+    data.append('dob',action.dob)
     data.append('nominee_address',action.nominee_address)
 
-    const response =yield call(Api.fetchDataByPOST, action.url,data);
+    data.append('maturity_amount',action.maturity_amount)
+    data.append('maturity_interest',action.maturity_interest)
+    data.append('bank_name',action.bank_name)
+    data.append('bank_logo',action.bank_logo)
+    data.append('type',action.type1)
+    data.append('interest_rate',action.interest_rate)
+    data.append('fd_joint_applicants_id',action.fd_joint_applicants_id)
+
+         const response =yield call(Api.fetchDataByPOST, action.url,data);
+         console.log('this is user response value dsfjdklfjdkfj jkljkl jdklfjklfj',response);
             if (response.status==200) {
               yield put({
                 type: 'Create_FD_Success',
@@ -1743,16 +1794,63 @@ function* createFD(action) {
                 action.navigation.navigate('UserSelection',{
                   my_fixed_deposit_id:response.my_fixed_deposit_id
                 })
-                }else if(action.formtype=='userinfo'){
-                     action.navigation.navigate('UploadDocument')
-                }else if(action.formtype=='dcoument'){
-                      action.navigation.navigate('Nominee')
+                }
+                else if(action.formtype=='userinfo'){
+                   if(action.secondaryUserData.length>0){
+                    action.navigation.navigate('SecondaryUserInfo',{
+                      my_fixed_deposit_id:action.my_fixed_deposit_id,
+                      data:action.secondaryUserData,
+                    })
+                    AsyncStorage.setItem('fd_user_id',JSON.stringify(response.my_fd_user))
+                   }
+                   else{
+                    action.navigation.navigate('UploadDocument',{my_fixed_deposit_id:action.my_fixed_deposit_id})
+                    AsyncStorage.setItem('fd_user_id',JSON.stringify(response.my_fd_user))
+                  }
+                }
+                else if(action.formtype=='secondaryuser'){
+
+                  if(action.secondarySecondData){
+                  if(action.secondarySecondData.length>1){
+                    if(action.type1=='final'){
+                       action.navigation.navigate('UploadDocument',{my_fixed_deposit_id:action.my_fixed_deposit_id})
+                      AsyncStorage.setItem('fd_user_id2',JSON.stringify(response.my_fd_user))
+                    }else{
+                    action.navigation.navigate('SecondaryUserTwo',{
+                      my_fixed_deposit_id:action.my_fixed_deposit_id,
+                      data:action.secondarySecondData,
+                    })
+                    AsyncStorage.setItem('fd_user_id1',JSON.stringify(response.my_fd_user))
+                  }
+                   }
+                   else{
+                     if(action.type1=='final'){
+                      action.navigation.navigate('UploadDocument',{my_fixed_deposit_id:action.my_fixed_deposit_id})
+                      AsyncStorage.setItem('fd_user_id2',JSON.stringify(response.my_fd_user))
+                     }
+                     else{
+                      action.navigation.navigate('UploadDocument',{my_fixed_deposit_id:action.my_fixed_deposit_id})
+                      AsyncStorage.setItem('fd_user_id1',JSON.stringify(response.my_fd_user))
+                     }
+                   }
+                  }
+                  else{
+                    AsyncStorage.setItem('fd_user_id2',JSON.stringify(response.my_fd_user))
+                   
+                    action.navigation.navigate('UploadDocument',{my_fixed_deposit_id:action.my_fixed_deposit_id})
+                  }
+                }
+                else if(action.formtype=='dcoument'){
+                      action.navigation.navigate('Nominee',)
                 }else if(action.formtype=='nomineedetail'){
-                  console.log('this is user fixed deposit id',response);
-                      // action.navigation.navigate('PaymentDetail',{my_fixed_deposit_id:response.my_fixed_deposit_id})
+                    action.navigation.navigate('PaymentInfo',{
+                      my_fixed_deposit_id:response.my_fixed_deposit_id,
+                      amount:response.amount
+                    })
                 }
               }
             } else {
+              Toast.show(response.messages)
               yield put({
                 type: 'Create_FD_Error',
               });
@@ -1769,11 +1867,12 @@ function* myFDList(action) {
   try{
     const data = new FormData();
     data.append('user_id',action.user_id)
+    data.append('fd_status',action.fd_status)
         const response =yield call(Api.fetchDataByPOST, action.url,data);
             if (response.status==200) {
               yield put({
                 type: 'MYFD_List_Success',
-                payload: response.data,
+                payload: response.userdata,
               });       
             } else {
               yield put({
@@ -1788,6 +1887,209 @@ function* myFDList(action) {
     }
 }
 
+function* myFdDetail(action) {
+  try{
+    const data = new FormData();
+    data.append('my_fixed_deposit_id',action.my_fixed_deposit_id)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'MYFD_Detail_Success',
+                payload: response.data,
+              });      
+               if(action&&action.navigation){
+                 action.navigation.navigate('MyFDDetailPage')
+               }
+            } else {
+              yield put({
+                type: 'MYFD_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'MYFD_Detail_Error',
+          });
+    }
+}
+// nbfc flow
+function* NBFCSearch(action) {
+  try{
+          const data = new FormData();
+            data.append('user_id',action.user_id)
+            data.append('year',action.year)
+            data.append('month',action.month)
+            data.append('days',action.days)
+            data.append('amount',action.amount)
+            data.append('location',action.location)
+            data.append('type1',JSON.stringify(action.type1))
+            data.append('bank_id',JSON.stringify(action.bank_id))
+            data.append('interest_rate',action.interest_rate)
+            data.append('nationalized',action.nationalized)
+            data.append('sb_account_required',action.sb_account_required)
+            data.append('offer',action.offer)
+            data.append('insurance',action.insurance)
+            data.append('gender',action.gender)
+            data.append('interest_payout',action.interest_payout)
+            data.append('premature_penalty',action.premature_penalty)
+            data.append('loan',action.loan)
+            data.append('order_on',action.order_on)
+            data.append('order_to',action.order_to)
+            data.append('btype',action.btype)
+            data.append('b_lat',action.b_lat)
+            data.append('b_long',action.b_long)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            console.log('this uskgflgk',response.data);
+            if (response.status==200) {
+              yield put({
+                type: 'NBFC_Search_Success',
+                payload: response.data,
+              });  
+               action.navigation.navigate('NBFCList',{
+                 amount:action.amount,
+                 days:action.days,
+                 year:action.year,
+                 month:action.month,
+                 location:action.location,
+                 type1:action.type1,
+                 order_on:action.order_on,
+                 order_to:action.order_to
+               })     
+            } else {
+              if(action.data=='FdList'){
+                yield put({
+                  type: 'NBFC_Search_Success',
+                  payload: response.data,
+                });  
+                 action.navigation.navigate('NBFCList',{
+                   amount:action.amount,
+                   days:action.days,
+                   year:action.year,
+                   month:action.month,
+                   location:action.location,
+                   type1:action.type1,
+                   order_on:action.order_on,
+                   order_to:action.order_to
+                 })
+              }
+              else{
+                yield put({
+                  type: 'NBFC_Search_Error',
+                });
+              }
+              Toast.show(response.messages)
+             
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'NBFC_Search_Error',
+          });
+    }
+}
+
+
+function* NBFCDetail(action) {
+  try{
+    const data=new FormData()
+    data.append('user_id',action.user_id)
+    data.append('fixed_deposit_id',action.fixed_deposit_id)
+    data.append('principal_amount',action.principal_amount)
+    data.append('rate',action.rate)
+    data.append('year',action.year)
+    data.append('month',action.month)
+    data.append('days',action.days)
+
+    const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'NBFC_Detail_Success',
+                payload: response.data,
+              });  
+              action.navigation.navigate('NBFCAccountDetail',{
+                tenure:action.year,
+                amount:action.principal_amount,
+                year:action.year,
+                month:action.month,
+                days:action.days,
+                pincode:action.pincode
+              })
+            } else {
+              yield put({
+                type: 'NBFC_Detail_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'NBFC_Detail_Error',
+          });
+    }
+}
+
+function* NBFCCompare(action) {
+  try{
+    const data = new FormData();
+      data.append('user_id',action.user_id)
+      data.append('value_id1',action.value_id1)
+      data.append('value_id2',action.value_id2)
+      data.append('user_id',action.user_id)
+      data.append('year',action.year)
+      data.append('days',action.days)
+      data.append('month',action.month)
+
+            const response =yield call(Api.fetchDataByPOST, action.url, data);
+            if (response.status==200) {
+              yield put({
+                type: 'NBFC_Compare_Success',
+                payload: response,
+
+              });  
+             action.navigation.navigate('NBFCCompare',{
+               period:action.period,
+               amount:action.amount,
+               year:action.year,
+               month:action.month,
+               days:action.days
+             })
+            } else {
+              yield put({
+                type: 'NBFC_Compare_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'NBFC_Compare_Error',
+          });
+    }
+}
+
+
+function* getNBFCName(action) {
+  try{
+    const data=new FormData()
+    data.append('user_id',action.user_id)
+    data.append('btype',2)
+        const response =yield call(Api.fetchDataByPOST, action.url,data);
+            if (response.status==200) {
+              yield put({
+                type: 'NBFC_Name_Success',
+                payload: response.data,
+              });       
+            } else {
+              yield put({
+                type: 'NBFC_Name_Error',
+              });
+            }
+          }
+  catch(error){
+      yield put({
+            type: 'NBFC_Name_Error',
+          });
+    }
+}
 
 
 export default function* authSaga() {
@@ -1842,4 +2144,10 @@ export default function* authSaga() {
   yield takeEvery('Family_List_Request',FamilyList)
   yield takeEvery('Create_FD_Request',createFD) 
   yield takeEvery('MYFD_List_Request',myFDList)
+  yield takeEvery('MYFD_Detail_Request',myFdDetail)
+
+  yield takeEvery('NBFC_Search_Request',NBFCSearch)
+  yield takeEvery('NBFC_Detail_Request',NBFCDetail)
+  yield takeEvery('NBFC_Compare_Request',NBFCCompare)
+  yield takeEvery('NBFC_Name_Request',getNBFCName)
 }

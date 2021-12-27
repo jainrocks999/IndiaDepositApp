@@ -12,25 +12,41 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import CustomButton from '../../../../component/button1';
 import Loader from '../../../../component/loader';
+import Dialog, { DialogContent } from 'react-native-popup-dialog';
 
-const Upload=()=>{
+
+const Upload=({route})=>{
 const [pan,setPan]=useState('')
 const [addressProof,setAddressProof]=useState('')
 const [bankDetails,setBankDetails]=useState('')
 const [photo,setPhoto]=useState('')
 const [signature,setSignature]=useState('')
+const [visible,setVisible]=useState(false)
+
+const [panType,setPanType]=useState('')
+const [addressProofType,setAddressProofType]=useState('')
+const [bankDetailsType,setBankDetailsType]=useState('')
+const [photoType,setPhotoType]=useState('')
+const [signatureType,setSignatureType]=useState('')
+
+const [panName,setPanName]=useState('')
+const [addressName,setAddressProofName]=useState('')
+const [bankDetailsName,setBankDetailsName]=useState('')
+const [photoName,setPhotoName]=useState('')
+const [signatureName,setSignatureName]=useState('')
+
 const navigation =useNavigation()
 const dispatch=useDispatch()
 const [isFetching,setIsFetching]=useState(false)
+console.log('this is user data',route.params);
 const uploadPan=async()=>{
     try {
         const res = await DocumentPicker.pickMultiple({
-          type: [DocumentPicker.types.images],
+          type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
         })
         setPan(res[0].uri)
-        console.log(
-         'hidksjfadkajsfkljdsafklajdlkajfdkljf', res
-        )
+        setPanType(res[0].type)
+        setPanName(res[0].name)
       } catch (err) {
         if (DocumentPicker.isCancel(err)) {
         } else {
@@ -41,12 +57,12 @@ const uploadPan=async()=>{
 const uploadBankDetails=async()=>{
   try {
       const res = await DocumentPicker.pickMultiple({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
       })
       setBankDetails(res[0].uri)
-      console.log(
-        res[0].uri
-      )
+      setBankDetailsType(res[0].type)
+      setBankDetailsName(res[0].name)
+      console.log('this is user image',res[0]);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -57,12 +73,12 @@ const uploadBankDetails=async()=>{
 const uploadAddressProof=async()=>{
   try {
       const res = await DocumentPicker.pickMultiple({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
       })
-      setAddressProof(res[0].uri)
-      console.log(
-        res[0].uri
-      )
+       setAddressProof(res[0].uri)
+       setAddressProofType(res[0].type)
+       setAddressProofName(res[0].name)
+       console.log('this is user image',res[0]);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -73,12 +89,11 @@ const uploadAddressProof=async()=>{
 const uploadPhoto=async()=>{
   try {
       const res = await DocumentPicker.pickMultiple({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
       })
       setPhoto(res[0].uri)
-      console.log(
-        res[0].uri
-      )
+      setPhotoType(res[0].type)
+      setPhotoName(res[0].name)
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -89,12 +104,11 @@ const uploadPhoto=async()=>{
 const uploadSignature=async()=>{
   try {
       const res = await DocumentPicker.pickMultiple({
-        type: [DocumentPicker.types.images],
+        type: [DocumentPicker.types.pdf,DocumentPicker.types.images],
       })
       setSignature(res[0].uri)
-      console.log(
-        res[0].uri
-      )
+      setSignatureType(res[0].type)
+      setSignatureName(res[0].name)
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -105,10 +119,14 @@ const uploadSignature=async()=>{
 
 const validateUser=async()=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
+  const fd_user_id=await AsyncStorage.getItem('fd_user_id')
+  const fd_user_id1=await AsyncStorage.getItem('fd_user_id1')
+  const fd_user_id2=await AsyncStorage.getItem('fd_user_id2')
+  console.log('this is user id number',fd_user_id,fd_user_id1,fd_user_id2);
   try{
     setIsFetching(true)
     const data = new FormData();
-    data.append('formtype','')
+    data.append('formtype','dcoument')
     data.append('deposit_option','')
     data.append('amount','')
     data.append('tenure','')
@@ -121,30 +139,38 @@ const validateUser=async()=>{
     data.append('mother_name','')
     data.append('father_name','')
     data.append('marital_status','')
-    data.append('my_fixed_deposit_id','')
+    data.append('my_fixed_deposit_id',route.params.my_fixed_deposit_id)
     data.append('spouse_name','')
     data.append('occupation','')
     data.append('annual_income','')
-    data.append('fd_user_id',user_id)
+    data.append('fd_user_id',fd_user_id)
+    data.append('fd_joint_applicants_id','')
     data.append('cheque_copy',{
       uri:bankDetails,
-      name:'bank detail',
-      type:'image/png'
+      name:bankDetailsName.substring(bankDetailsName.lastIndexOf('/') + 1),
+      type:bankDetailsType
     })
+
     data.append('address_proof',{
       uri:addressProof,
-      name:'address proof',
-      type:'image/png'
+      name:addressName.substring(addressName.lastIndexOf('/') + 1),
+      type:addressProofType
+      // type:'image/png'
     })
     data.append('pan_card',{
       uri:pan,
-      name:'pan card',
-      type:'image/png'
+      name:panName.substring(panName.lastIndexOf('/') + 1),
+      type:panType
     })
     data.append('user_photo',{
       uri:photo,
-      name:photo,
-      type:'image/png'
+      name:photoName.substring(photoName.lastIndexOf('/') + 1),
+      type:photoType
+    })
+    data.append('signature_copy',{
+      uri:signature,
+      name:signatureName.substring(signatureName.lastIndexOf('/') + 1),
+      type:signatureType
     })
     data.append('nominee_name','')
     data.append('relationship','')
@@ -160,15 +186,30 @@ const validateUser=async()=>{
     url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addmyfd',
   });
   if (response.status==200) {
+    AsyncStorage.setItem('fd_user_id','')
     setIsFetching(false)
-    navigation.navigate('Nominee')
+    if(fd_user_id1==''||fd_user_id1==null){
+      navigation.navigate('Nominee',{
+        my_fixed_deposit_id:route.params.my_fixed_deposit_id
+      })
+    }
+    else{
+      navigation.navigate('DocumentUploadForFirstUser',{
+        my_fixed_deposit_id:route.params.my_fixed_deposit_id
+      })
+    }
+   
   }else{
     isFetching(false)
   }
 } catch (error) {
   setIsFetching(false)
+  console.log('this use id',error);
 }
 }
+
+console.log('this user detail usr data',signature,signatureName,signatureType);
+
     return(
         <View style={{flex:1,backgroundColor:colors.card}}>
         <Header
@@ -178,9 +219,41 @@ const validateUser=async()=>{
        />
        {isFetching?<Loader/>:null}
        <ScrollView>
+                    <Dialog
+                          dialogStyle={{width:300,height:170,paddingHorizontal:10}}
+                          visible={visible}>
+                         <DialogContent >
+                         <View>
+                        <View style={styles.modalView}>
+                           <TouchableOpacity onPress={()=>openCamera()} style={styles.buton}>
+                               <Image style={styles.img1} source={require('../../../../assets/Image/camera1.png')}/>
+                               <Text style={styles.came}>Camera</Text>
+                           </TouchableOpacity>
+                           <TouchableOpacity onPress={()=>openGallery()} style={styles.buton}>
+                           <Image style={styles.img1} source={require('../../../../assets/Image/gallery.png')}/>
+                               <Text style={styles.came}>Gallery</Text>
+                           </TouchableOpacity>
+                        </View>
+                        </View>
+                        <View style={{marginTop:30,alignItems:'flex-end'}}>
+                        <Text onPress={()=> setVisible(false)} style={{color:'red'}}>CANCEL</Text>
+                        </View>
+                      </DialogContent>
+                      </Dialog>
+                      <View style={{
+                        alignItems:'center',
+                        justifyContent:'center',
+                        width:'100%',marginTop:10}}>
+                        <Text style={{fontSize:15,fontFamily:'Montserrat-SemiBold'}}>Upload documents for Primary user</Text>
+                      </View>
        <View style={styles.main}>
+       
            <View style={styles.container}>
-               {addressProof?<Image style={styles.image} source={{uri:addressProof}}/>:
+               {addressProof?addressProofType=="image/jpeg"?
+               <Image style={styles.image} source={{uri:addressProof}}/>: <View style={{justifyContent:'center',alignItems:'center'}}>
+               <Image style={{height:60,width:44}} source={require('../../../../assets/Image/pdf3.png')}/>
+               <Text style={{marginTop:4,fontSize:12,color:colors.textColor}}>{addressName}</Text></View>
+               :
                <View style={styles.row}>
                  <Text style={styles.place}>Aadhar Card</Text>
                  <Text style={styles.place}>Passport</Text>
@@ -194,7 +267,12 @@ const validateUser=async()=>{
               <Text style={styles.title}>UPLOAD ADDRESS PROOF</Text>
           </TouchableOpacity>
           <View style={styles.container}>
-         {pan?<Image style={styles.image} source={{uri:pan}}/>:
+         {pan?panType=='image/jpeg'?<Image style={styles.image} source={{uri:pan}}/>:
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+          <Image style={{height:60,width:44}} source={require('../../../../assets/Image/pdf3.png')}/>
+          <Text style={{marginTop:4,fontSize:12,color:colors.textColor}}>{panName}</Text></View>
+          :
+         
          <View>
          <Text style={styles.place}>{'Pan Card'}</Text>
          </View>
@@ -205,7 +283,11 @@ const validateUser=async()=>{
               <Text style={styles.title}>UPLOAD PAN</Text>
           </TouchableOpacity>
           <View style={styles.container}>
-          {bankDetails?<Image style={styles.image} source={{uri:bankDetails}}/>:
+          {bankDetails?bankDetailsType=='image/jpeg'?<Image style={styles.image} source={{uri:bankDetails}}/>:
+           <View style={{justifyContent:'center',alignItems:'center'}}>
+           <Image style={{height:60,width:44}} source={require('../../../../assets/Image/pdf3.png')}/>
+           <Text style={{marginTop:4,fontSize:12,color:colors.textColor}}>{bankDetailsName}</Text></View>
+          :
            <View style={styles.row}>
            <Text style={styles.place}>{'Cancelled cheque'}</Text>
            <Text style={styles.place}>{'Bank Pass Book'}</Text>
@@ -219,7 +301,11 @@ const validateUser=async()=>{
           </TouchableOpacity>
 
           <View style={styles.container}>
-          {photo?<Image style={styles.image} source={{uri:photo}}/>:
+          {photo?photoType=='image/jpeg'?<Image style={styles.image} source={{uri:photo}}/>:
+           <View style={{justifyContent:'center',alignItems:'center'}}>
+           <Image style={{height:60,width:44}} source={require('../../../../assets/Image/pdf3.png')}/>
+           <Text style={{marginTop:4,fontSize:12,color:colors.textColor}}>{photoName}</Text></View>
+          :
            <View style={styles.row}>
            <Text style={styles.place}>{'Photo'}</Text>
            </View>
@@ -231,7 +317,11 @@ const validateUser=async()=>{
           </TouchableOpacity>
 
           <View style={styles.container}>
-          {signature?<Image style={styles.image} source={{uri:signature}}/>:
+          {signature?signatureType=='image/jpeg'? <Image style={styles.image} source={{uri:signature}}/>:
+          <View style={{justifyContent:'center',alignItems:'center'}}>
+          <Image style={{height:60,width:44}} source={require('../../../../assets/Image/pdf3.png')}/>
+          <Text style={{marginTop:4,fontSize:12,color:colors.textColor}}>{signatureName}</Text></View>
+          :
            <View style={styles.row}>
            <Text style={styles.place}>{'Signature Copy'}</Text>
            </View>}

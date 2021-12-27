@@ -23,20 +23,18 @@ const Knowledge=()=>{
    
   ]);
 
-  useEffect(()=>{
-    const backAction = () => {
-      if(navigation.isFocused)
-      navigation.navigate('Main')
-      return true;
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
     };
-  
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-  
-    return () => backHandler.remove();
-  },[])
+  }, []);
+  const handleBackButtonClick=() =>{
+    if(navigation.isFocused()){
+      navigation.navigate('Main')
+    return true;
+    }
+  }
     return(
         <View style={styles.container}>
               <Header

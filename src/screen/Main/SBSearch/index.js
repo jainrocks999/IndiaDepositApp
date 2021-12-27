@@ -15,8 +15,10 @@ import Loader from '../../../component/loader';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
 
-Geocoder.init("AIzaSyA35XEKU8dm09Ah43YbEXu0upMj7HprJ3A");
+Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 
 const SBAccount=({route})=>{
    
@@ -24,11 +26,16 @@ const SBAccount=({route})=>{
     const [balance,setBalance]=useState('')
     const [location,setLocation]=useState('')
     const [address,setAddress]=useState('')
+    const [lat,setLang]=useState('')
+    const [long,setLong]=useState('')
     const dispatch=useDispatch()
+    const [loader,setLoader]=useState(false)
     const isFetching=useSelector((state)=>state.isFetching)
     const re = /^[0-9\b]+$/;
 
     const manageSearch=async()=>{ 
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+
       if(balance==''){
          Toast.show('Please enter minimum balance')
       }
@@ -42,6 +49,7 @@ const SBAccount=({route})=>{
       dispatch({
          type: 'SB_Search_Request',
          url: 'sblist1',
+         user_id,
          min_bal:balance,
          location:location==''?address:location,
          type1:route.params.type1,
@@ -57,6 +65,8 @@ const SBAccount=({route})=>{
          private:'',
          order_on:'',
          order_to:'',
+         b_lat:lat,
+         b_long:long,
          navigation:navigation
        })
     }
@@ -78,6 +88,7 @@ const SBAccount=({route})=>{
 
 
    const getCurrentLocation=()=>{
+    setLoader(true)
       Geolocation.requestAuthorization();
       Geolocation.getCurrentPosition(
          (position) => {
@@ -86,13 +97,20 @@ const SBAccount=({route})=>{
                   var addressComponent = json.results[0].formatted_address;
                   // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                   setAddress(addressComponent)
+                  setLoader(false)
                  })
-                 .catch(error => console.warn(error));
+                 .catch(error => {
+                  Toast.show('Something went wrong')
+                   setLoader(false)
+                   console.warn(error)});
+                 setLang(position.coords.latitude)
+                 setLong(position.coords.longitude)
          },
          (error) => {
-              console.log(error.code, error.message);
+              console.log('bghhjhj',error.code, error.message);
+              setLoader(false)
           },
-         { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+         { enableHighAccuracy: true ,forceLocationManager:false}
      );
     }
   const getAddress=async()=>{
@@ -112,6 +130,7 @@ const SBAccount=({route})=>{
          },
        );
        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        setLoader(true)
          Geolocation.getCurrentPosition(
             (position) => {
                 Geocoder.from(position.coords.latitude, position.coords.longitude)
@@ -119,19 +138,26 @@ const SBAccount=({route})=>{
                      var addressComponent = json.results[0].formatted_address;
                     //  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                      setAddress(addressComponent)
+                     setLoader(false)
                     })
-                    .catch(error => console.warn(error));
+                    .catch(error => {console.warn(error)
+                      Toast.show(error.origin.error_message)
+                      setLoader(false)
+                    });
             },
             (error) => {
-                 console.log(error.code, error.message);
+              console.log('bghhjhj',error.code, error.message);
+                 setLoader(false)
              },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+            {  enableHighAccuracy: true, timeout: 20000, maximumAge: 10000,forceLocationManager:false}
         );
       
        } else {
          console.log('Location permission denied');
+         setLoader(false)
        }
      } catch (err) {
+      setLoader(false)
        console.warn(err);
      }
     }
@@ -146,6 +172,7 @@ const SBAccount=({route})=>{
                   />
                   <ScrollView style={styles.scroll}>
                      {isFetching?<Loader/>:null}
+                     {loader?<Loader/>:null}
                   <KeyboardAwareScrollView
                      extraScrollHeight={10}
                      enableOnAndroid={true} 

@@ -81,8 +81,13 @@ export default StyleSheet.create({
     input:
     {
         marginTop:-8,
+        // borderWidth:1,
         height:40,
+        borderRadius:6,
+        // paddingHorizontal:10,
+        borderColor:colors.black,
         justifyContent:'center',
+        marginTop:2
       
     },
     input1:

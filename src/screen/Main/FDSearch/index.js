@@ -16,6 +16,8 @@ import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Geolocation from 'react-native-geolocation-service';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from "../../../component/AsyncStorage";
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
@@ -27,6 +29,9 @@ const Contact=({route})=>{
     const [amount,setAmount] = useState('')
     const [pincode,setPincode]=useState('')
     const [address,setAddress]=useState('')
+    const [lat,setLang]=useState('')
+    const [long,setLong]=useState('')
+    const [loader,setLoader]=useState(false)
     const dispatch=useDispatch()
     const isFetching=useSelector((state)=>state.isFetching)
     const re = /^[0-9\b]+$/;
@@ -47,6 +52,7 @@ useEffect(()=>{
 },[])
 
    const manageSearch=async()=>{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
       if(year==0 && month==0 && day==0){
          Toast.show('Tenure should be more than 7 days')
       }
@@ -69,6 +75,7 @@ useEffect(()=>{
       dispatch({
          type: 'FD_Search_Request',
          url: 'fdlist1',
+         user_id,
          year:year,
          month:parseInt(month),
          days:day,
@@ -86,26 +93,36 @@ useEffect(()=>{
          loan:'',
          order_on:'',
          order_to:'',
+         b_lat:lat,
+         b_long:long,
+         b_type:1,
          navigation:navigation
        })
     }
    }
    const getCurrentLocation=()=>{
+      setLoader(true)
       Geolocation.requestAuthorization();
       Geolocation.getCurrentPosition(
          (position) => {
              Geocoder.from(position.coords.latitude, position.coords.longitude)
                  .then(json => {
-                     //  var addressComponent = json.results[2].address_components;
                       var addressComponent = json.results[0].formatted_address;
-
-                        // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                         setAddress(addressComponent)
+                        setLoader(false)
                  })
-                 .catch(error => console.warn(error));
+                 .catch(error => {
+                  setLoader(false)
+                  Toast.show(error)
+                    console.warn(error)});
+                 setLang(position.coords.latitude)
+                 setLong(position.coords.longitude)
+                
          },
          (error) => {
+            // Toast.show(error.message)
               console.log(error.code, error.message);
+              setLoader(false)
           },
          { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
      );
@@ -127,28 +144,39 @@ useEffect(()=>{
          },
        );
        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+         setLoader(true)
          Geolocation.getCurrentPosition(
             (position) => {
                 Geocoder.from(position.coords.latitude, position.coords.longitude)
                     .then(json => {
-                       console.log(json.results);
                         var addressComponent = json.results[0].formatted_address;
-                        // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
                         setAddress(addressComponent)
+                        setLoader(false)
                     })
-                    .catch(error => console.warn(error));
+                    .catch(error => {
+                     setLoader(false)
+                     Toast.show(error.origin.error_message)
+                       console.warn(error)});
+                     
+                    setLang(position.coords.latitude)
+                    setLong(position.coords.longitude)
+                  //   setLoader(false)
+                    console.log('this us fjdkslfjklsfjklsdjfdslkf',position.coords.latitude, position.coords.longitude);
             },
             (error) => {
                  console.log(error.code, error.message);
+                 setLoader(false)
              },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
+            {  enableHighAccuracy: true, timeout: 20000 ,forceLocationManager:false}
         );
       
        } else {
          console.log('Location permission denied');
+         setLoader(false)
        }
      } catch (err) {
        console.warn(err);
+       setLoader(false)
      }
     }
 
@@ -162,6 +190,7 @@ useEffect(()=>{
               />
              <ScrollView style={styles.scroll}>
              {isFetching?<Loader/>:null}
+             {loader?<Loader/>:null}
              <KeyboardAwareScrollView
                extraScrollHeight={10}
                enableOnAndroid={true} 
@@ -187,7 +216,7 @@ useEffect(()=>{
                                       onValueChange={(val)=>setYear(val)}
                                       items={Years}
                                       style={{ 
-                                      inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                       inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                       placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                       }}
                                       value={year}
@@ -206,7 +235,7 @@ useEffect(()=>{
                                           onValueChange={(val)=>setMonth(val)}
                                           items={Month}
                                           style={{ 
-                                          inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                             inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                           placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                           }}
                                           value={month}
@@ -225,7 +254,7 @@ useEffect(()=>{
                                            onValueChange={(val)=>setDay(val)}
                                            items={days}
                                            style={{ 
-                                           inputAndroid: { color: color.textColor,width:'100%',height:40 },
+                                             inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                            placeholder:{color:'#333333',fontSize:fontSize.twelve}
                                            }}
                                            value={day}
@@ -379,3 +408,16 @@ const Years=[
    { label: '05', value: '5' },
    
 ]
+
+
+
+
+
+
+
+
+// {"code": 4,
+//  "message": "Error from the server while geocoding. The received datas are in the error's 'origin' field. Check it for more informations.", 
+//  "origin": {"error_message": "You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started",
+//   "results": [],
+//    "status": "REQUEST_DENIED"}}

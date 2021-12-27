@@ -12,7 +12,6 @@ const BankCalu=({route})=>{
     const[demo1,setDemo1]=useState(' + ₹25,000');
     console.log("selectitem ",selectedItems[0]);
     const data1 = route.params;
- console.log("........",data1);
     const ListItem = ({item, selected, onPress,}) => (
         <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:85,marginTop:-5}}>
             <View  style={styles.touch1}>
@@ -67,7 +66,6 @@ return(
           </TouchableOpacity>
        <Image  resizeMode='contain'
            style={{height:30,width:80,marginTop:-8,}}
-         // source={ require('../../../assets/Image/senior_citizen-w.png')}
               source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.image}`}}
          />
          <Text style={styles.text3}>{data1.type} </Text>  

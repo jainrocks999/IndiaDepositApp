@@ -161,4 +161,29 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     },
+    btCont:
+    {
+        height:45,
+        borderRadius:20,
+        backgroundColor:colors.bc,
+        alignItems:'center',
+        justifyContent:'center',
+        paddingHorizontal:6
+    },
+    text3:
+    {
+        color:colors.white,
+        fontFamily:'Montserrat-Regular',
+        fontSize:13
+    },
+    button:
+    {
+        flexDirection:'row',
+        justifyContent:'space-between',
+        paddingHorizontal:20,
+        bottom:15,
+        position:'absolute',
+        left:0,
+        right:0,
+    },
 })

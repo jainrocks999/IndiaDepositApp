@@ -1,4 +1,4 @@
-import React,{useState,useCallback}from 'react';
+import React,{useState,useCallback, useEffect}from 'react';
 import { View,Text,Image,ScrollView, TextInput,Platform} from 'react-native';
 import styles from './styles';
 import colors from '../../colors';
@@ -6,17 +6,46 @@ import fontsize from '../../../component/fontSize';
 import Slider  from "react-native-slider";
 import PieChart from 'react-native-pie-chart';
 import RNPickerSelect from 'react-native-picker-select';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../AsyncStorage';
+
+
 let maturityAmount=0
-let interestAmount=0
+let interestAmount=0                     
 const FD=()=>{
     const [interest,setInterest]=useState('1')
     const [time,setTime]=useState('1')
     const [totalInvestment,setTotalInvestment]=useState('1000')
     const [period,setPeriod]=useState('1')
-    const [f,setf]=useState('1')
-    const [a,setA]=useState('12')
+    const [f,setf]=useState('1')        
     const [len,setLen]=useState(5)
     const investmentAmount=totalInvestment
+
+useEffect(async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  try {
+    const data = new FormData();
+    data.append('calculator_name','fd')
+    data.append('user_id',user_id)
+    const response = await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/calculator',
+    });
+    if (response.data.status==200) {
+      setFilteredDataSource(response.data.data.blogpost)
+      setMasterDataSource(response.data.data.blogpost)
+    } 
+  } catch (error) {
+   throw error;
+  }
+},[])
+
 if (f==0) {
   interestAmount=((totalInvestment*interest*(time/period))/100).toFixed(0)
   let data=interestAmount
@@ -30,7 +59,7 @@ if (f==0) {
 }
   let effective=(interestAmount/totalInvestment/time*100).toFixed(2)
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
-  let payout=((totalInvestment*Math.pow((1+interest/12/100),a))-totalInvestment).toFixed(2);
+  // let payout=((totalInvestment*Math.pow((1+interest/12/100),a))-totalInvestment).toFixed(2);
 
   const principalOnchange=(val)=>{
     if(val>100000){
@@ -131,7 +160,7 @@ if (f==0) {
                         minimumTrackTintColor={colors.bc}
                         />
                 <View style={styles.main}>
-                    <Text style={styles.total}>Number of Period</Text>
+                    <Text style={styles.total}>Tenure</Text>
                     <View style={styles.main}>
                        <View style={{marginTop:-10}}>
                         <TextInput 

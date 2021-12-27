@@ -16,7 +16,7 @@ const RegisterPage=({route})=>{
     const data=route.params.data
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
-    console.log('this is data',data);
+    console.log('this is data',route.params.my_fixed_deposit_id);
 
 
     const validateUser=async()=>{
@@ -38,7 +38,7 @@ const RegisterPage=({route})=>{
         mother_name:'',
         father_name:'',
         marital_status:'',
-        my_fixed_deposit_id:'',
+        my_fixed_deposit_id:route.params.my_fixed_deposit_id,
         spouse_name:'',
         occupation:'',
         annual_income:'',

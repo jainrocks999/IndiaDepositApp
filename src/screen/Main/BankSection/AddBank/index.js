@@ -1,5 +1,5 @@
-import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView,Image} from 'react-native';
+import React,{useRef,useState,useEffect} from "react";
+import {View,Text,TextInput,ScrollView,Image,BackHandler} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -38,6 +38,20 @@ const BankDetail=()=>{
         const selector=useSelector(state=>state.BankNameList)
         const [bank_name,set_bank_name]=useState('')
         const [account_type,set_account_type]=useState('')
+
+        useEffect(() => {
+          BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+          return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+          };
+        }, []);
+        const handleBackButtonClick=() =>{
+          if(navigation.isFocused()){
+            navigation.navigate('Profile')
+          return true;
+          }
+        }
+
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
        if(bank_name==''){
@@ -83,22 +97,6 @@ const addUser=async(values)=>{
                 keyboardShouldPersistTaps='handled'
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
-                  {/* <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Text style={styles.better}>Name</Text>
-                  <Text style={{marginTop:10,color:colors.red}}>*</Text>
-                    </View>
-           
-                      <View style={styles.drop}>
-                        <TextInput
-                        style={styles.input}
-                        placeholder='Please enter your name'
-                        placeholderTextColor={colors.heading1}
-                        value={values.name}
-                        onChangeText={handleChange('name')}
-                        onBlur={handleBlur('name')}
-                        returnKeyType='done'
-                        />
-        </View>*/}
                     <View style={styles.error}>
                         {(errors.name && touched.name) &&
                         <Text style={styles.warn}>{errors.name}</Text>}
@@ -113,7 +111,7 @@ const addUser=async(values)=>{
                              onValueChange={(val)=>set_bank_name(val)}
                             items={selector}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={bank_name}
@@ -157,7 +155,7 @@ const addUser=async(values)=>{
                             onValueChange={(val)=>set_account_type(val)}
                             items={data}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={account_type}
@@ -182,6 +180,7 @@ const addUser=async(values)=>{
                             value={values.ifsc_code}
                             onChangeText={handleChange('ifsc_code')}
                             onBlur={handleBlur('ifsc_code')}
+                            autoCapitalize={'characters'}
                             maxLength={11}
                             returnKeyType='done'
                         />

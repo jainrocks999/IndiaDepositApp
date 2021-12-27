@@ -8,15 +8,15 @@ import { useDispatch,useSelector } from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import axios from "axios";
 import colors from '../../../component/colors';
+import AsyncStorage from "@react-native-community/async-storage";
+import Storage from '../../../component/AsyncStorage';
+import StatusBar from '../../../component/StatusBar';
 
 const FDDetail=({route})=>{
 const navigation=useNavigation()
 const dispatch=useDispatch()
 const selector=useSelector(state=>state.FDDetail)
 const details=selector[0]
-
-const [yyyy ,mm ,dd]=details.date_of_maturity.split('-')
-const value=`${dd}-${mm}-${yyyy}`
 const period=((parseFloat(route.params.year)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
 useEffect(()=>{
      const backAction = () => {
@@ -27,10 +27,8 @@ useEffect(()=>{
           "hardwareBackPress",
           backAction
         );
-      
         return () => backHandler.remove();
 },[])
-console.log('this .dslkffgglgkgklflkflkdld',details.type,details.bank_id);
 const manageForm=async()=>{
      try {
           const data = new FormData();
@@ -57,13 +55,47 @@ const manageForm=async()=>{
                 id:details.fixed_deposit_id,
                 from:'fixeddeposit',
                 response:response.data.data,
-                type:'common'
+                type:'common',
+                bank_id:details.bank_id,
+                pincode:route.params.pincode
                })
-          } 
+             } 
         } catch (error) {
          throw error;
         }
 }
+
+
+const createFD=async()=>{
+const user_id=await AsyncStorage.getItem(Storage.user_id)
+     try {
+          const data = new FormData();
+          data.append('bank_id',details.bank_id)
+          data.append('user_id',user_id)
+          const response = await axios({
+            method: 'POST',
+            data,
+            headers: {
+              'content-type': 'multipart/form-data',
+              Accept: 'multipart/form-data',
+            },
+            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnbfc',
+          });
+          if (response.data.status==200) {
+               navigation.navigate('SelectPlan',{
+                    image:selector[0].bank_logo,
+                    name:details.bankname,
+                    amount:route.params.amount,
+                    type:details.type,
+                    data:response.data.data
+               })
+             } 
+        } catch (error) {
+         throw error;
+        }
+    
+}
+
     return(
         <View style={styles.container1}>
                        <Header
@@ -110,9 +142,6 @@ const manageForm=async()=>{
                         <View style={styles.container}>
                                 <View style={styles.view2}>
                                      <Text style={styles.item}>{`${route.params.year>0?`${route.params.year}y`:''}${route.params.month>0?` ${route.params.month}m`:''}${route.params.days>0?` ${route.params.days}d`:''}`}</Text>
-                                        {/* ${route.params.year}y, 
-                                     ${route.params.month}m, 
-                                     ${route.params.days}d */}
                                      <Text style={styles.item1}>{`Tenure`}</Text>
                                 </View>
                                 <View style={styles.view2}>
@@ -125,34 +154,10 @@ const manageForm=async()=>{
                                 </View>
                         </View>
                  </View>
-                  {/* first row */}
+                
                   <View style={styles.line}></View>
                    <View style={styles.view4}>
-                          {/* <View style={styles.container}>
-                                  <View style={[styles.view2]}>
-                                       <Text style={styles.item}>{`${details.premature_withdrawals==0?'No':details.premature_withdrawals==1?
-                                       `${details.premature_withdrawal_rate>details.rate?details.rate:details.premature_withdrawal_rate}%`:null}`}</Text>
-                                       <View style={{width:'100%'}}>
-                                       <Text style={[styles.item1,{textAlign:'center'}]}>{`Premature Withdrawal Rate`}</Text>
-                                       <Text style={[styles.item,{textAlign:'center'}]}>{details.premature_withdrawals==1?`${details.premature_withdrawal_rate}% below intrest rate at the time of FD contract or Rate of intrest as per tenure which ever is lower`:''}</Text>
-
-                                       </View>
-                                 </View>
-                                 <View style={styles.view2}> 
-                                     <Text style={styles.item}>{details.pan_required==0?'No':details.pan_required==1?'Yes':''}</Text>
-                                     <Text style={styles.item1}>{`Pan Requirement`}
-                                     </Text>
-                                     <Text style={[styles.item,{textAlign:'center'}]}>{details.pan_required==1?'Mandatory above Deposit of RS 500000/-':''}</Text>
-                                 </View>
-                                 <View style={styles.view2}>
-                                      <Text style={styles.item}>{details.loan==0?'No':'Yes'}</Text>
-                                     <Text style={styles.item1}>{`Loan Rate`}</Text>
-                                     <Text style={[styles.item,{textAlign:'center'}]}>{details.loan==1?`${details.load_lending_rate}% above interest rate at the time of FD contract`:''}</Text>
-
-                                  </View>
-                                
-                          </View>
-                          <View style={styles.line}></View> */}
+                        
                           <View style={styles.container}>
                               
                                   <View style={styles.view2}>
@@ -245,7 +250,7 @@ const manageForm=async()=>{
                     <View style={styles.top}> 
                      <Text style={styles.tds}>Premature Withdrawal Rate :</Text>
                      <Text style={{fontSize:14,color:colors.textColor}}>{`${details.premature_withdrawals==0?'No':details.premature_withdrawals==1?
-                                       `Yes - ${details.premature_withdrawal_rate}% below intrest rate at the time of FD contract or Rate of intrest as per tenure which ever is lower`:null}`}</Text>
+                                       `Yes - ${details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`:null}`}</Text>
                      {/* <Text>{details.premature_withdrawals==0?'No':details.premature_withdrawals?'Yes':''}</Text> */}
                          </View>}
 
@@ -257,8 +262,9 @@ const manageForm=async()=>{
                         
                   
          </ScrollView>
+         <View style={{backgroundColor:'#fff',width:'100%',height:75}}>
          <View style={styles.button}>
-            {details.fd_from=='setu'? 
+            {/* {details.fd_from=='setu'? 
                         <TouchableOpacity 
                          onPress={()=>navigation.navigate('FDView',{
                               amount:details.principal_amount,
@@ -269,22 +275,19 @@ const manageForm=async()=>{
                          </TouchableOpacity>
                          :details.fd_from=='nbfc'?
                          <TouchableOpacity 
-                         onPress={()=>navigation.navigate('SelectPlan',{
-                              image:selector[0].bank_logo,
-                              name:details.bankname,
-                              amount:route.params.amount
-                         })}
+                         onPress={()=>createFD()}
                          style={[styles.btCont,{width:'48%'}]}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         :null}
+                         :null} */}
                          <TouchableOpacity
                          onPress={()=>manageForm()}
-                         style={[styles.btCont,{width:details.fd_from=='nbfc'||details.fd_from=='setu'?'48%':'96%'}]}>
+                         style={[styles.btCont,{width:details.fd_from=='nbfc'||details.fd_from=='setu'?'96%':'96%'}]}>
                            <Text style={styles.text3}>DOWNLOAD FORM</Text>
                          </TouchableOpacity>
                      </View>
-        
+                     <StatusBar/>
+           </View>
      </View>
        
     )

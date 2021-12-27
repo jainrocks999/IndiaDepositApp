@@ -32,7 +32,6 @@ const FDFilter=({route})=>{
     const [value1,setValue1]=useState('0')
     const [penalty,setPenalty]=useState('')
     const [loan1,setLoan]=useState('')
-console.log('selcted ',selected);
 
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
@@ -42,8 +41,7 @@ useEffect(()=>{
     const backAction = () => {
         navigation.goBack()
         return true;
-      };
-    
+      }
       const backHandler = BackHandler.addEventListener(
         "hardwareBackPress",
         backAction
@@ -52,22 +50,7 @@ useEffect(()=>{
       return () => backHandler.remove();
 },[])
 
-    const manageCheck=()=>{
-         setToggleCheckBox(true)
-        //  setToggleCheckBox1(false)
-        //  setToggleCheckBox2(false)
-        //  setGender()
-    }
-    const manageCheck1=()=>{
-        // setToggleCheckBox(false)
-        setToggleCheckBox1(true)
-        // setToggleCheckBox2(false)
-    }
-    const manageCheck2=()=>{
-        // setToggleCheckBox(false)
-        //  setToggleCheckBox1(false)
-         setToggleCheckBox2(true)
-    }
+   
     console.log('this is gender value',toggleCheckBox,toggleCheckBox1,toggleCheckBox2);
     const manageClear=()=>{
         setIsEnabled1(false)
@@ -224,47 +207,6 @@ useEffect(()=>{
                     value={isEnabled4}
                 />
                 </View>
-                {/* <View style={styles.container}>
-                    <Text style={styles.heading}>Gender</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled5(previousState => !previousState)}
-                    value={isEnabled5}
-                />
-                </View> */}
-                 {/* {isEnabled5? <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between',width:'90%',marginTop:20}}>
-                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <CheckBox
-                            disabled={false}
-                            value={toggleCheckBox}
-                            onValueChange={()=>manageCheck()}
-                            tintColors={{ true: '#5A4392', false: 'grey' }}
-                        />
-                        <Text style={{fontSize:13}}>Male</Text>
-                     </View>
-                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <CheckBox
-                            disabled={false}
-                            value={toggleCheckBox1}
-                            onValueChange={() =>manageCheck1()}
-                            tintColors={{ true: '#5A4392', false: 'grey' }}
-                            
-                        />
-                        <Text style={{fontSize:13}}>Female</Text>
-                     </View>
-                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                        <CheckBox
-                            disabled={false}
-                            value={toggleCheckBox2}
-                            onValueChange={() => manageCheck2()}
-                            tintColors={{ true: '#5A4392', false: 'grey' }}
-                        />
-                        <Text style={{fontSize:13}}>Transgender</Text>
-                     </View>
-                     
-                 </View>:<View/>} */}
                 <View style={styles.container}>
                     <Text style={styles.heading}>Interest Payout</Text>
                     <Switch
@@ -293,21 +235,7 @@ useEffect(()=>{
                     onChangeText={(val)=>setPenalty(val)}
                     value={penalty}
                     />
-                               {/* <RNPickerSelect
-                                         onValueChange={(val)=>setPenalty(val)}
-                                         items={penaltys}
-                                         style={{ 
-                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
-                                         value={penalty}
-                                         useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select", value: null }}
-                                         Icon={()=>
-                                          <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
-                                        source={require('../../../assets/Image/down.png')}/>}   
-                                   /> */}
+                
                 </View>:<View/>}
                 <View style={[styles.container1]}>
                     <Text style={styles.heading}>Loan</Text>
@@ -320,19 +248,12 @@ useEffect(()=>{
                 />
                 </View>
                 {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
-                    {/* <TextInput
-                    placeholder='Enter Here'
-                    onChangeText={(val)=>setLoan(val)}
-                    value={loan}
-                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
-                    returnKeyType='done'
-                    
-                    /> */}
+                   
                                <RNPickerSelect
                                          onValueChange={(val)=>setLoan(val)}
                                          items={loan}
                                          style={{ 
-                                         inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                          placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                                          }}
                                          value={loan1}

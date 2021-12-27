@@ -157,11 +157,10 @@ export default StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         paddingHorizontal:20,
-        // paddingVertical:20,
-        bottom:20,
+        bottom:15,
         position:'absolute',
         left:0,
-        right:0
+        right:0,
     },
     btCont:
     {

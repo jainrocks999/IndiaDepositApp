@@ -1,5 +1,5 @@
-import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView,TouchableOpacity} from 'react-native';
+import React,{useEffect, useRef,useState} from "react";
+import {View,Text,TextInput,ScrollView,TouchableOpacity,BackHandler} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -13,7 +13,7 @@ import Storage from '../../../../component/AsyncStorage';
 import CustomButton from '../../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import * as Root from '../../../../navigator/rootNavigation';
+import axios from 'axios';
 // import DatePicker from 'react-native-datepicker'
 import DatePicker from 'react-native-date-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -28,9 +28,9 @@ const loginValidationSchema=yup.object().shape({
     address2:yup.string()
     //.required('Please enter your address2')
     .matches( /^[^,*+.!-\/:-@\[-`{-~]+$/,"Please enter valid address2"),
-    pincode:yup.string().min(6,({min})=>`Pincode must be at least 6 digits`)
+    
     //.required('Please enter your pincode')
-    .matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid pincode"),
+  
     // relationship:yup.string().required('Please enter your relationship').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid relationship"),
     guardian:yup.string().
     //.required('Please Enter your guardian name').
@@ -43,7 +43,7 @@ const BankDetail=({route})=>{
         const dispatch=useDispatch()
         const [city,setCity]=useState('')
         const [state,setState]=useState('')
-        const [country,setCountry]=useState()
+        const [country,setCountry]=useState('')
         const [relation,setRelation]=useState()
         const [Grelation,setGRelation]=useState()
         const [dob,setDob]=useState('')
@@ -52,13 +52,34 @@ const BankDetail=({route})=>{
         const CountryList=useSelector(state=>state.CountryList)
         const isFetching=useSelector(state=>state.isFetching)
         const [open,setOpen]=useState(false)
+        const [pincode,setPincode]=useState('')
         const [date, setDate] = useState(new Date())
 
+        const [date1, setDate1] = useState(new Date())
+        const value2= date1.toISOString().split('T')[0]  
+        const [yyyy2 ,mm2 ,dd2]=value2.split('-')
+       
         const value1= date.toISOString().split('T')[0]  
         const [yyyy ,mm ,dd]=value1.split('-')
         const value=`${dd}-${mm}-${yyyy}`
+        console.log('this user dob year',yyyy);
 
-const addUser=async(values)=>{
+        const eligibleDate=yyyy2-yyyy
+        console.log('this isiuser elegible date',eligibleDate);
+        useEffect(() => {
+          BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+          return () => {
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+          };
+        }, []);
+        const handleBackButtonClick=() =>{
+          if(navigation.isFocused()){
+            navigation.navigate('Profile')
+          return true;
+          }
+        }
+
+    const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
         if(relation==''||relation==null||relation==0){
           Toast.show('Please Select Relationship')
@@ -87,37 +108,84 @@ const addUser=async(values)=>{
             relationship:relation,
             guardian:values.guardian,
             guardian_relationship:Grelation,
-            pincode:values.pincode,
+            pincode:pincode,
             navigation:navigation
           })
         }
       }
 
       const manageState=async(val)=>{
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
         setState(val)
         dispatch({
           type: 'City_List_Request',
           url: 'citybyid',
           state_id:val,
-          
+          user_id
         })
       }
       const manageCountry=async(val)=>{
-        setCountry(val)
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
+        setCountry(val) 
         dispatch({
            type: 'State_List_Request',
            url: 'statebyid',
            country_id:val,
-           
+           user_id
          })
      }
+
+     const manageCityState=async(val)=>{
+       if(val.length==6){
+         console.log(val);
+         setPincode(val)
+         try {
+          const data = new FormData();
+          data.append('location',val)
+          const response = await axios({
+            method: 'POST',
+            data,
+            headers: {
+              'content-type': 'multipart/form-data',
+              Accept: 'multipart/form-data',
+            },
+            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+          });
+         
+          if (response.data.status==200) {
+            console.log('this is response value',response.data);
+            dispatch({
+              type: 'State_List_Request',
+              url: 'statebyid',
+              country_id:response.data.country.value,
+            })
+      
+            dispatch({
+              type: 'City_List_Request',
+              url: 'citybyid',
+              state_id:response.data.state.value,
+            })
+            setCity(response.data.city.value)
+            setState(response.data.state.value)
+            setCountry(JSON.stringify(response.data.country.value))
+          } 
+        } catch (error) {
+         throw error;
+        }
+       }
+       else{
+        setPincode(val)
+       }
+     
+     }
+
     return(
         <Formik
         initialValues={{
           name:'',
           address1:'',
           address2:'',
-          pincode:'',
+          //pincode:'',
           // relationship:'',
           guardian:'',
           // guardian_relationship:''
@@ -131,7 +199,7 @@ const addUser=async(values)=>{
             <Header
                     title={'ADD NOMINEE   '}
                     source={require('../../../../assets/Image/arrow2.png')}
-                    onPress={()=>navigation.goBack()}
+                    onPress={()=>navigation.navigate('Profile')}
                    /> 
              <ScrollView style={styles.main}>
                {isFetching?<Loader/>:null}
@@ -198,6 +266,25 @@ const addUser=async(values)=>{
                         {(errors.address2 && touched.address2) &&
                         <Text style={styles.warn}>{errors.address2}</Text>}
                     </View>
+
+                    <View style={{flexDirection:'row',alignItems:'center'}}>
+                    <Text style={styles.better}>Pincode</Text>
+                    </View>
+                      <View style={styles.drop}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Please enter your pincode'
+                            placeholderTextColor={colors.heading1}
+                            value={pincode}
+                            onChangeText={(val)=>manageCityState(val)}
+                            maxLength={6}
+                            keyboardType='number-pad'
+                            returnKeyType='done'
+                        />
+                    </View>
+                    <View style={styles.error}>
+                       
+                    </View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Country</Text>
                     {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
@@ -208,7 +295,7 @@ const addUser=async(values)=>{
                             items={CountryList}
                             //style={{ inputAndroid: { color: 'black' } }}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                            }}
                             value={country}
@@ -230,7 +317,7 @@ const addUser=async(values)=>{
                             onValueChange={(val)=>manageState(val)}
                             items={selector1}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={state}
@@ -251,7 +338,7 @@ const addUser=async(values)=>{
                             onValueChange={(val)=>setCity(val)}
                             items={selector}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                              inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={city}
@@ -324,7 +411,7 @@ const addUser=async(values)=>{
                         onValueChange={(val)=>setRelation(val)}
                         items={Relation}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={relation==0||relation==null?'':relation}
@@ -336,9 +423,10 @@ const addUser=async(values)=>{
                         {/* {(errors.relationship && touched.relationship) &&
                         <Text style={styles.warn}>{errors.relationship}</Text>} */}
                     </View>
+                    {eligibleDate<=18?
+                  <View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                         <TextInput
@@ -356,16 +444,18 @@ const addUser=async(values)=>{
                         {(errors.guardian && touched.guardian) &&
                         <Text style={styles.warn}>{errors.guardian}</Text>}
                     </View>
+                    </View>:<View/>}
+
+                    {eligibleDate<=18?<View>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
                     <Text style={styles.better}>Guardian Relationship</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                       <View style={styles.drop}>
                       <RNPickerSelect
                         onValueChange={(val)=>setGRelation(val)}
                         items={Relation}
                         style={{ 
-                        inputAndroid: { color: colors.textColor,height:35,width:'100%' },
+                          inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
                         }}
                         value={Grelation==0||Grelation==null?'':Grelation}
@@ -373,32 +463,12 @@ const addUser=async(values)=>{
                         placeholder={{ label: "Please select guardian relationship", value: 0 }}  
                         />         
                     </View>
+                    </View>:<View/>}
                     <View style={styles.error}>
                         {(errors.guardian_relationship && touched.guardian_relationship) &&
                         <Text style={styles.warn}>{errors.guardian_relationship}</Text>}
                     </View>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Pincode</Text>
-                    {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
-                    </View>
-                   
-                      <View style={styles.drop}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Please enter your pincode'
-                            placeholderTextColor={colors.heading1}
-                            value={values.pincode}
-                            onChangeText={handleChange('pincode')}
-                            onBlur={handleBlur('pincode')}
-                            maxLength={6}
-                            keyboardType='number-pad'
-                            returnKeyType='done'
-                        />
-                    </View>
-                    <View style={styles.error}>
-                        {(errors.pincode && touched.pincode) &&
-                        <Text style={styles.warn}>{errors.pincode}</Text>}
-                    </View>
+                 
                     <View style={{marginTop:20}}>
                     <CustomButton
                     title='ADD'

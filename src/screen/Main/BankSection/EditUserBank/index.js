@@ -1,5 +1,5 @@
-import React,{useRef,useState} from "react";
-import {View,Text,TextInput,ScrollView,Image} from 'react-native';
+import React,{useRef,useState,useEffect} from "react";
+import {View,Text,TextInput,ScrollView,Image,BackHandler} from 'react-native';
 import Header from '../../../../component/compareHeader';
 import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -38,7 +38,19 @@ const BankDetail=({route})=>{
         const [bank_name,set_bank_name]=useState(data.item.bank_id)
         const [account_type,set_account_type]=useState(data.item.account_type)
         const selector=useSelector(state=>state.BankNameList)
-        console.log('this is route value',data);
+
+        useEffect(() => {
+            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+            return () => {
+              BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            };
+          }, []);
+          const handleBackButtonClick=() =>{
+            if(navigation.isFocused()){
+              navigation.navigate('Profile')
+            return true;
+            }
+          }
        
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -95,7 +107,7 @@ const addUser=async(values)=>{
                              //onValueChange={handleChange('bank_name')}
                             items={selector}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                                inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={bank_name}
@@ -139,7 +151,7 @@ const addUser=async(values)=>{
                            // onValueChange={handleChange('account_type')}
                             items={data2}
                             style={{ 
-                            inputAndroid: { color: colors.textColor,width:'100%',height:35 },
+                                inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
                             }}
                             value={account_type}

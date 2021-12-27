@@ -65,8 +65,21 @@ import MyFD2 from '../screen/Main/MyFD2';
 import PaymentDetail from '../screen/Main/NBFCPage/PaymentDetail';
 import PaymentDetail1 from '../screen/Main/NBFCPage/PaymentDetail1';
 import MyFDDetailPage from '../screen/Main/NBFCPage/MyFDDetailPage';
-
-
+import SecondaryUser from "../screen/Main/NBFCPage/SecondaryUser";
+import SecondaryUserInfo from "../screen/Main/NBFCPage/SecondaryUserInfo";
+import SecondaryUserTwo from "../screen/Main/NBFCPage/SecondaryUserTwo";
+import Redeem from '../screen/Main/NBFCPage/RedeemFD';
+import BankDetailsScreen from '../screen/Main/NBFCPage/BankDetailsScreen';
+import DocumentUploadForFirstUser from '../screen/Main/NBFCPage/DocumentUploadForFirstUser';
+import DocumentUploadForSecondUser from '../screen/Main/NBFCPage/DocumentUploadForSecondUser';
+import PaymentInfo from '../screen/Main/NBFCPage/PaymentInfo';
+import PaymentMode from "../screen/Main/NBFCPage/PaymentMode";
+import SubmitRedeemRequest from '../screen/Main/NBFCPage/SubmitRedeemRequest';
+import NBFCSearch from '../screen/Main/NBFCSearch';
+import NBFCList from '../screen/Main/NBFCList';
+import NBFCAccountDetail from "../screen/Main/NBFCAccountDetail";
+import NBFCCompare from '../screen/Main/NBFCCompare';
+import NBFCFilter from '../screen/Main/NBFCFilter';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -154,7 +167,21 @@ function Navigate() {
         <Stack.Screen name="PaymentDetail" component={PaymentDetail}/>
         <Stack.Screen name="PaymentDetail1" component={PaymentDetail1}/>
         <Stack.Screen name="MyFDDetailPage" component={MyFDDetailPage}/>
-
+        <Stack.Screen name="SecondaryUser" component={SecondaryUser}/>
+        <Stack.Screen name="SecondaryUserTwo" component={SecondaryUserTwo}/>
+        <Stack.Screen name="SecondaryUserInfo" component={SecondaryUserInfo}/>
+        <Stack.Screen name="Redeem" component={Redeem}  />
+        <Stack.Screen name="BankDetailScrn" component={BankDetailsScreen}/>
+        <Stack.Screen name="DocumentUploadForFirstUser" component={DocumentUploadForFirstUser}/>
+        <Stack.Screen name="DocumentUploadForSecondUser" component={DocumentUploadForSecondUser}/>
+        <Stack.Screen name="PaymentInfo" component={PaymentInfo}/>
+        <Stack.Screen name="PaymentMode" component={PaymentMode}/>
+        <Stack.Screen name="SubmitRedeemRequest" component={SubmitRedeemRequest}/>
+        <Stack.Screen name="NBFCSearch" component={NBFCSearch}/>
+        <Stack.Screen name="NBFCList" component={NBFCList}/>
+        <Stack.Screen name="NBFCAccountDetail" component={NBFCAccountDetail}/>
+        <Stack.Screen name="NBFCCompare" component={NBFCCompare}/>
+        <Stack.Screen name="NBFCFilter" component={NBFCFilter}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -95,7 +95,7 @@ const Profile=()=>{
                         <View style={styles.view1}>
                             <Text style={styles.better}>Gender</Text>
                             <View style={styles.drop}>
-                            <Text style={styles.better1}>{`${value.gender==0||value.gender==null||value.gender=='undefined'?'':value.gender}`}</Text>
+                            <Text style={styles.better1}>{`${value.gender==0||value.gender==null||value.gender=='undefined'?'':value.gender==1?'Male':value.gender==2?'Female':value.gender==3?'Others':''}`}</Text>
                             </View>
                         </View>
                         {/* } */}

@@ -36,10 +36,12 @@ useEffect(async()=>{
     dispatch({
         type: 'Bank_Name_Request',
         url: 'bankdetaillist',
+        user_id
       })
     dispatch({
         type: 'Bank_Detail_Request',
         url: 'bankdetaillist',
+        user_id
     })
 },[])
 
