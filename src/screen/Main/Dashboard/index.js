@@ -15,6 +15,7 @@ import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from "react-native-modal";
 import axios from "axios";
 import Loader from '../../../component/loader';
+import BankDetail from "../BankSection/AddBank";
 let backPress=0
 let arrayOfOneFD=[]
 const dashboard=()=>{
@@ -62,7 +63,6 @@ const dashboard=()=>{
         );
         return () => backHandler.remove()   
     },[])
-  
     const handleBackButtonClick=() =>{
       if(navigation.isFocused()){
       if(backPress>0){

@@ -38,6 +38,7 @@ const BankDetail=()=>{
         const selector=useSelector(state=>state.BankNameList)
         const [bank_name,set_bank_name]=useState('')
         const [account_type,set_account_type]=useState('')
+        console.log('dstststrefgfsggfighfg',selector);
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
        if(bank_name==''){
@@ -155,7 +156,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>set_account_type(val)}
-                            items={data}
+                            items={selector}
                             style={{ 
                             inputAndroid: { color: colors.textColor,width:'100%',height:35 },
                             placeholder:{color:colors.heading}

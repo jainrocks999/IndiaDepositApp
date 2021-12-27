@@ -207,7 +207,7 @@ const renderError=(values,errors,touched)=>{
                       keyboardType={"numeric"}
                       secureTextEntry ={visible}
                       style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',width:'100%'}}
-                      inputContainerStyles={[styles.otp,{borderWidth:0}]}
+                      inputContainerStyles={[styles.otp,{borderWidth:0,alignItems:'center',justifyContent:'center'}]}
                       focusStyles={{borderWidth:1,borderColor:colors.bc}}
                       inputStyles={{
                         fontSize:fontSize.sixteen,
