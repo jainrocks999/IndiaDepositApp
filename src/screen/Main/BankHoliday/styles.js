@@ -115,4 +115,24 @@ export default StyleSheet.create({
     color: colors.white,
     fontFamily: 'Montserrat-Regular',
   },
+  index:{
+    width: '100%',
+    height: 40,
+    backgroundColor: colors.bc,
+    marginTop: 5,
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  onclick:{
+    width: '100%',
+    height: 40,
+    backgroundColor: colors.bc,
+    marginTop: 5,
+    justifyContent: 'space-between',
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  }
 });

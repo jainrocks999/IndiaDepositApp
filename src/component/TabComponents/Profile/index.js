@@ -256,7 +256,7 @@ const Profile=()=>{
                       <View>
                         <Text style={styles.better}>Marital Status</Text>
                           <View style={styles.drop}>
-                          <Text style={styles.better1}>{value.marital_status==0||null?'':value.marital_status}</Text>
+                          <Text style={styles.better1}>{value.marital_status==0|| value.marital_status==null?'':value.marital_status==1?'Married':value.marital_status==2?'Unmarried':''}</Text>
                         </View>
                       </View>
                       {/* } */}

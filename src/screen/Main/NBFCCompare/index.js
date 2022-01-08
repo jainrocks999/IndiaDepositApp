@@ -53,6 +53,7 @@ useEffect(()=>{
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`}}/> 
                          <View style={{marginTop:30}}>
                                 <TouchableOpacity 
+                                  delayPressIn={0}
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'INVEST NOW'}</Text>
                                </TouchableOpacity>
@@ -65,6 +66,7 @@ useEffect(()=>{
                       source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`}}/> 
                          <View style={{marginTop:30}}>
                                 <TouchableOpacity 
+                                  delayPressIn={0}
                                   style={styles.button}>
                                  <Text style={styles.invest}>{'INVEST NOW'}</Text>
                                </TouchableOpacity>

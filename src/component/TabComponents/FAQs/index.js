@@ -30,6 +30,7 @@ const ExpandableComponent = ({item, onClickFunction}) => {
     <View >
       
       <TouchableOpacity
+        delayPressIn={0}
         activeOpacity={0.8}
         onPress={onClickFunction}
         style={{

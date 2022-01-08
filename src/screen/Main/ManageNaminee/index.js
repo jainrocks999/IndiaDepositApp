@@ -78,11 +78,12 @@ const RegisterPage=()=>{
                             <View style={styles.con}>
                                   <View style={styles.row}>
                                        <TouchableOpacity
+                                         delayPressIn={0}
                                           onPress={()=>setVisible(true)}
                                           style={styles.button1}>
                                           <Text style={styles.buttonText}>Add Nominee</Text>
                                        </TouchableOpacity>
-                                       <TouchableOpacity style={styles.button1}>
+                                       <TouchableOpacity delayPressIn={0} style={styles.button1}>
                                          <Text style={styles.buttonText}>Delete Nominee</Text>
                                        </TouchableOpacity>
                                   </View>

@@ -28,7 +28,7 @@ export default StyleSheet.create({
     },
     value:
     {
-        fontFamily:'Montserrat-Regular',
+        fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.twelve,
         color:colors.textColor
     },

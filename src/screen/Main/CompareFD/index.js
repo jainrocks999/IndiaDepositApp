@@ -55,7 +55,7 @@ const FDList = ({route}) => {
             }}
           />
           <View style={{marginTop: 30}}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity delayPressIn={0} style={styles.button}>
               <Text style={styles.invest}>{'INVEST NOW'}</Text>
             </TouchableOpacity>
           </View>
@@ -69,7 +69,7 @@ const FDList = ({route}) => {
             }}
           />
           <View style={{marginTop: 30}}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity delayPressIn={0} style={styles.button}>
               <Text style={styles.invest}>{'INVEST NOW'}</Text>
             </TouchableOpacity>
           </View>

@@ -108,12 +108,12 @@ const FDCalculator=()=>{
                               </View>
                           </View>
                              <View style={styles.buttonContainer}>
-                                  <TouchableOpacity 
+                                  <TouchableOpacity delayPressIn={0}
                                      // onPress={()=>navigation.navigate('Update')}
                                      style={styles.button}>
                                      <Text style={styles.cal}>CALCULATE</Text>
                                   </TouchableOpacity>
-                                  <TouchableOpacity style={ styles.button}>
+                                  <TouchableOpacity delayPressIn={0} style={ styles.button}>
                                       <Text style={styles.cal}>RESET</Text>
                                   </TouchableOpacity>
 

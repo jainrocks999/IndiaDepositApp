@@ -49,8 +49,8 @@ export default StyleSheet.create({
     item:
     {
         fontSize:fontSize.ten,
-        fontFamily:'Montserrat-Regular',
-        color:colors.heading,
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor,
         // width:'100%'
     },
     item1:

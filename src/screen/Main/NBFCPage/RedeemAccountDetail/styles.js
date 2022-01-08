@@ -16,8 +16,7 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         paddingHorizontal:15,
         paddingVertical:10,
-        // flexDirection:'row',
-        alignItems:'center',
+        flexDirection:'row',alignItems:'center',
         justifyContent:'space-between'
     },
     list:
@@ -50,8 +49,8 @@ export default StyleSheet.create({
     {
         flexDirection:'row',
         justifyContent:'space-between',
-        paddingVertical:13,
-        paddingHorizontal:12
+        paddingVertical:1,
+        paddingHorizontal:4
     },
     view2:
     {
@@ -123,14 +122,6 @@ export default StyleSheet.create({
     },
     drop:{
         marginTop:8 ,
-        // borderWidth:1,
-        // height:40,
-        // borderColor:colors.textColor,
-        // borderRadius:6,
-        // paddingHorizontal:5,
-        // justifyContent:'center',
-        // width:'100%',
-        // paddingHorizontal:10,
         borderWidth:1,
         height:40,
         borderRadius:6,
@@ -150,4 +141,6 @@ export default StyleSheet.create({
         height:40
 
     },
+    textColor:{fontSize:15,fontFamily:'Montserrat-SemiBold',color:colors.textColor},
+    pad:{width:'100%',alignItems:'center',paddingVertical:10}
 })

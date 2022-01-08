@@ -61,7 +61,7 @@ export default StyleSheet.create({
        
     }, 
     dropCal:{
-        marginTop:5 ,
+        marginTop:2 ,
         borderWidth:1,
         height:40,
         borderColor:colors.textColor,

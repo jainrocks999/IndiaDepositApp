@@ -50,8 +50,8 @@ export default StyleSheet.create({
     item:
     {
         fontSize:9,
-        fontFamily:'Montserrat-Regular',
-        color:colors.heading
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor
     },
     item1:
     {

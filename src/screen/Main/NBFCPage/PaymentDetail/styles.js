@@ -97,4 +97,39 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems:'center'
     }, 
+    border:{ 
+        height:100,
+        width:'50%',
+        
+        borderStyle:'dashed',
+        borderRadius:10,
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    button:{
+        paddingHorizontal:5,
+        backgroundColor:colors.bc,
+        borderRadius:6,
+        paddingVertical:2,
+        alignItems:'center',justifyContent:'center'
+    },
+    upload:{
+        fontFamily:'Montserrat-Regular',
+        color:'#fff',
+        fontSize:12
+    },
+    or:{
+        fontFamily:'Montserrat-SemiBold',
+        marginTop:15,
+        marginBottom:10
+    },
+    option:{
+        fontSize:10,
+        fontFamily:'Montserrat-Regular'
+    },
+    image:{
+        resizeMode:'contain',
+        height:90,
+        width:200
+    },
 })

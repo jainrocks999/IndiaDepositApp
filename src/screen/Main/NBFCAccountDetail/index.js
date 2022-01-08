@@ -194,8 +194,8 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                                 </View>
                                 :
                                  <View style={[styles.view2,{marginRight:0}]}>
-                                       <Text style={styles.item}>{parseInt(details.loanamount)>parseInt(details.tds_limit)?'Yes':'No'}</Text>
-                                       <Text style={styles.item1}>{`TDS`}</Text>
+                                       <Text style={styles.item}>{details.fi_rating}</Text>
+                                       <Text style={styles.item1}>{`FI Rating`}</Text>
                                        {/* <Text style={styles.item1}>{details.loanamount}</Text>
                                        <Text style={styles.item1}>{details.tds_limit}</Text> */}
                                   </View>
@@ -260,6 +260,14 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     <View style={styles.top}> 
                      <Text style={styles.tds}>Loan Rate :</Text>
                      <Text style={{fontSize:14,color:colors.textColor}}>{details.loan==1?`Yes - ${details.load_lending_rate}% above interest rate at the time of FD contract`:details.loan==0?'No':''}</Text></View>}
+                   
+                     { details.tds_limit==null||details.loanamount==''?<View/>:
+                     <View style={styles.top}> 
+                     <Text style={styles.tds}>TDS :</Text>
+                     <Text style={{fontSize:14,color:colors.textColor}}>{parseInt(details.loanamount)>parseInt(details.tds_limit)?'Yes':'No'}</Text></View>}
+                       
+
+                     
                          <View style={{marginBottom:80}}></View>
                         
                   
@@ -279,6 +287,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                         
                          :null} */}
                           <TouchableOpacity 
+                          delayPressIn={0}
                          onPress={()=>createFD()}
                          style={[styles.btCont,{width:'96%'}]}>
                            <Text style={styles.text3}>CREATE FD</Text>

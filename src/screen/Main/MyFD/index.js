@@ -20,8 +20,9 @@ const Notification=()=>{
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
     const fdData=useSelector(state=>state.MYFDList)
+    const selector=useSelector((state)=>state.NBFCNameList)
     const [sort,setSort]=useState('')
-    console.log('narenrar pal here for help',fdData);
+    const [bank_name,set_bank_name]=useState('')
 useEffect(async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     dispatch({
@@ -30,6 +31,11 @@ useEffect(async()=>{
         user_id,
         fd_status:''
     })
+    dispatch({
+        type: 'NBFC_Name_Request',
+        url: 'bankdetaillist',
+        user_id
+      })
 },[])
 
 useEffect(() => {
@@ -52,7 +58,20 @@ const sorting=async(val)=>{
         type: 'MYFD_List_Request',
         url: 'dropfd',
         user_id,
-        fd_status:val
+        fd_status:val,
+    })
+}
+
+const sorting1=async(val)=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    set_bank_name(val)
+    dispatch({
+        type: 'MYFD_List_Request',
+        url: 'dropfd',
+        user_id,
+        fd_status:'',
+        bank_name:val
+
     })
 }
 const openDetailPage=(id)=>{
@@ -83,11 +102,14 @@ const handleClick=async(item)=>{
                       },
                       url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/myjointuserid',
                     });
-                    console.log('this user resposens',response);
                     if (response.data) {
                         AsyncStorage.setItem('fd_user_id',response.data.array[0])
                         AsyncStorage.setItem('fd_user_id1',response.data.array[1])
                         AsyncStorage.setItem('fd_user_id2',response.data.array[2])
+
+                        AsyncStorage.setItem('primary_user_name',response.data.array2[0])
+                        AsyncStorage.setItem('secondary_user_name1',response.data.array2[1])
+                        AsyncStorage.setItem('secondary_user_name2',response.data.array2[2])
                         navigation.navigate('UploadDocument',{my_fixed_deposit_id:item.my_fixed_deposit_id})
                     } 
                     else{
@@ -99,7 +121,7 @@ const handleClick=async(item)=>{
             }else if(item.fdtype=='dcoument'){
                   navigation.navigate('Nominee',{my_fixed_deposit_id:item.my_fixed_deposit_id})
             }else if(item.fdtype=='nomineedetail'){
-                 navigation.navigate('PaymentInfo',{
+                 navigation.navigate('RedeemAccountDetail',{
                      my_fixed_deposit_id:item.my_fixed_deposit_id,
                      amount:item.amount
                     })
@@ -118,7 +140,119 @@ const handleClick=async(item)=>{
         openDetailPage(item.my_fixed_deposit_id)
     }
 }
-
+const fd_status=(item)=>{
+    if(item.fd_status==0){
+        if(item.document_status==0){
+            return(
+            <Text style={styles.status}>
+                Documents not uploaded
+            </Text>
+            )
+        }
+        else if(item.payment_status==0){
+            return(
+                <Text style={styles.status}>
+                    Payment not done
+                </Text>
+            )
+        }
+        else{
+            return(
+                <Text style={styles.status}>
+                    Draft
+                </Text>
+            )
+        }
+    }
+    else if(item.fd_status==2){
+        if(item.doc_verification_status==2){
+            return(
+            <Text style={styles.status}>
+                Document verified
+            </Text>
+            )
+        }
+        else if(item.payment_status==2 && item.doc_verification_status==1 && item.redeem_status==2){
+            return(
+                <Text style={styles.status}>
+                    Redeemed
+                </Text>
+                )
+        }
+        else if(item.payment_status==2){
+            return(
+                <Text style={styles.status}>
+                    Fund Transfer initiated
+                </Text>
+                )
+        }
+        else if(item.payment_status==2 && item.doc_verification_status==1 && item.redeem_status==2){
+            return(
+                <Text style={styles.status}>
+                    Redeemed
+                </Text>
+                )
+        }
+        else if(item.redeem_status==2){
+            return(
+                <Text style={styles.status}>
+                    Redeemed
+                </Text>
+                )
+        }
+        else{
+            return(
+                <Text style={styles.status}>
+                    Redeemed
+                </Text>
+                )
+        }
+    }
+    else if(item.fd_status==3){
+        if(item.document_status==1){
+            return(
+            <Text style={styles.status}>
+                Document verified
+            </Text>
+            )
+        }
+        else if(item.payment_status==2){
+            return(
+                <Text style={styles.status}>
+                    Payment verified
+                </Text>
+                )
+        }
+        else if(item.payment_status==2 && item.document_status==1 ){
+            return(
+                <Text style={styles.status}>
+                   Generation in process
+                </Text>
+                )
+        }
+        else{
+            return(
+                <Text style={styles.status}>
+                  In-Process
+                </Text>
+                )
+        }
+    }
+    else if(item.fd_status==1){
+            return(
+            <Text style={styles.status}>
+                Active
+            </Text>
+            )
+    }
+    else if(item.fd_status==4){
+        return(
+        <Text style={styles.status}>
+            Redeem Req
+        </Text>
+        )
+}
+}
 const showContent=()=>{
     if (fdData.length>0) {
         return(
@@ -129,100 +263,77 @@ const showContent=()=>{
               renderItem={({item})=>
               <View>
                <View style={styles.view1}>
-                   <TouchableOpacity 
+                   <TouchableOpacity delayPressIn={0} 
                    onPress={()=>handleClick(item)}
                    style={styles.card}>
                        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
                      {item.bank_logo? 
                       <Image
                       resizeMode='contain'
-                      style={{height:20,width:70}}
+                      style={{height:20,width:70,marginLeft:15}}
                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
                      
                      :<Image 
-                        style={{width:'40%',height:47}} 
+                        style={{width:'40%',height:47,marginLeft:15}} 
                         resizeMode='contain'
                         source={require('../../../assets/Image/indiaIcon.png')}/>}
-                        <TouchableOpacity style={{
+                        <TouchableOpacity delayPressIn={0} 
+                        style={{
                            paddingHorizontal:8,
-                           borderRadius:6,
                            alignItems:'center',
                            justifyContent:'center',
+                           backgroundColor:colors.bc,
+                           paddingVertical:2,
+                           borderBottomLeftRadius:10,
+                           borderTopLeftRadius:10
                            }}>
-                           <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.bc}}>
+                               {/* {fd_status(item)} */}
+                           <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.white}}>
                              {item.fd_status==0?'Draft':item.fd_status==1?'Active':item.fd_status==4?'Redeem Req':item.fd_status==3?'In-Process':item.fd_status==2?'Redeemed':''}
                                </Text>  
                        </TouchableOpacity>
                        </View>
-                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,}}>
+                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,paddingHorizontal:15}}>
 
                             <View style={{alignItems:'center'}}>
                             <Text style={styles.same1}>{`${item.my_fixed_deposit_id}`}</Text>
-                            {/* <Image 
-                            style={styles.image}
-                            resizeMode='contain' source={require('../../../assets/Image/interest.png')}/> */}
+                           
                                 <Text  style={styles.same}>{'Reference\nNo'}</Text>
                             </View>
 
                             <View style={{alignItems:'center'}}>
                             <Text style={styles.same1}>
-                                {item.username}
+                                {item.interest_rate}
                                 </Text>
-                            {/* <Image
-                                style={styles.image}
-                            resizeMode='contain' source={require('../../../assets/Image/maturity.png')}/> */}
-                            <Text  style={styles.same}>{'Account\nHolder Name'}</Text>
+                           
+                            <Text  style={styles.same}>{'Interest Rate'}</Text>
                             </View>
 
                            {item.fd_status==2?
                            <View style={{alignItems:'center'}}>
                            <Text style={styles.same1}>{item.redeemed_amount?item.redeemed_amount:item.maturity_amount}</Text>
-                           {/* <Image 
-                           style={styles.image} 
-                           resizeMode='contain' source={require('../../../assets/Image/loan.png')}/> */}
+                           
                            <Text  style={styles.same}>{'Redeemed\nAmount'}</Text>
                                </View>
                            : <View style={{alignItems:'center'}}>
                             <Text style={styles.same1}>{item.maturity_amount}</Text>
-                            {/* <Image 
-                            style={styles.image} 
-                            resizeMode='contain' source={require('../../../assets/Image/loan.png')}/> */}
+                          
                             <Text  style={styles.same}>{'Maturity\nAmount'}</Text>
                                 </View>  }
 
                            {item.fd_status==2? <View style={{alignItems:'center'}}>
                             <Text style={styles.same1}>{item.redemption_date?item.redemption_date:item.date_of_maturity}</Text>
-                            {/* <Image 
-                            style={styles.image}
-                            resizeMode='contain' source={require('../../../assets/Image/premature.png')}/> */}
+                           
                             <Text  style={[styles.same]}>{'Redeemed\nDate'}</Text>
                             </View>:
                             <View style={{alignItems:'center'}}>
                             <Text style={styles.same1}>{item.date_of_maturity}</Text>
-                            {/* <Image 
-                            style={styles.image}
-                            resizeMode='contain' source={require('../../../assets/Image/premature.png')}/> */}
+                           
                             <Text  style={[styles.same]}>{'Maturity\nDate'}</Text>
                             </View>
                         }
                             </View>
-                       {/* <View style={styles.view2}>
-                       <Text style={styles.text1}>{`Reference No : ${item.my_fixed_deposit_id}`}</Text>
-                       <TouchableOpacity style={{
-                           paddingHorizontal:8,
-                           borderRadius:6,
-                           alignItems:'center',
-                           justifyContent:'center',
-                           }}>
-                           <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.bc}}>
-                             {item.fd_status==0?'Draft':item.fd_status==1?'Active':item.fd_status==4?'Redeem Req':item.fd_status==3?'In-Process':item.fd_status==2?'Redeemed':''}
-                               </Text>  
-   
-                       </TouchableOpacity>
-                       </View>
-                       <Text style={styles.text1}>{`Account Holder Name : ${item.username}`}</Text>
-                       <Text style={styles.text1}>{`Maturity Amount : ${item.maturity_amount}`}</Text> 
-                       <Text style={styles.text1}>{`Maturity Date : ${item.date_of_maturity}`}</Text> */}
+                      
                    </TouchableOpacity>
                </View>
               </View>
@@ -244,15 +355,57 @@ const showContent=()=>{
            />
              {isFetching?<Loader/>:null} 
            <View style={{flex:1,paddingHorizontal:15,}}>
+               <View style={{flexDirection:'row',justifyContent:'space-between',width:'100%'}}>
+                   <View style={{width:'48%'}}>
+                       <Text style={{fontFamily:'Montserrat-SemiBold',marginTop:10,color:colors.textColor,fontSize:13}}>Financial Institute</Text>
             <View style={{
-                paddingHorizontal:20,
-                paddingVertical:2, 
-                marginVertical:10,
+                paddingHorizontal:10,
+                marginVertical:5,
                 borderRadius:6,
-                borderColor:colors.textColor,
+                borderColor:colors.bc,
                 backgroundColor:'white',
-                justifyContent:'center'
+                justifyContent:'center',
+                borderWidth:1,
+                height:40,
+                width:'100%'
                 }}>
+                   
+            <RNPickerSelect
+                onValueChange={(val)=>sorting1(val)}
+                items={selector}
+                style={{ 
+                    inputAndroid: { color: colors.textColor,width:'90%',fontSize:14,marginBottom:-1 },
+                    inputIOS:{color:colors.bc},
+                placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
+                }}
+                value={bank_name}
+                useNativeAndroidPickerStyle={false}
+                placeholder={{ label: 'Filter Here', value: '' }}
+                Icon={()=>
+                    <Image 
+                    style={{
+                        width:25,height:9,
+                        marginTop:Platform.OS=='android'?14:4
+                    }} 
+                 source={require('../../../assets/Image/down.png')}/>}   
+             />             
+            </View>
+            </View>
+
+            <View style={{width:'48%'}}>
+            <Text style={{fontFamily:'Montserrat-SemiBold',marginTop:10,color:colors.textColor,fontSize:13}}>FD Type</Text>
+            <View style={{
+                paddingHorizontal:10,
+                marginVertical:5,
+                borderRadius:6,
+                borderColor:colors.bc,
+                backgroundColor:'white',
+                justifyContent:'center',
+                borderWidth:1,
+                height:40,
+                width:'100%'
+                }}>
+                   
             <RNPickerSelect
                 onValueChange={(val)=>sorting(val)}
                 items={Sorting}
@@ -263,18 +416,21 @@ const showContent=()=>{
                 }}
                 value={sort}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{ label: 'Please Filter Here', value: '' }}
+                placeholder={{ label: 'Filter Here', value: '' }}
                 Icon={()=>
                     <Image 
                     style={{
                         width:25,height:9,
                         alignSelf:'center',justifyContent:'center',
-                        marginTop:Platform.OS=='android'?11:4
+                        marginTop:Platform.OS=='android'?14:4
                     }} 
                  source={require('../../../assets/Image/down.png')}/>}   
              />             
             </View>
-             <View>  
+            </View>
+           
+            </View>
+             <View style={{marginTop:5}}>  
                 {fdData.length>0? showContent():null}
              </View>
              </View>

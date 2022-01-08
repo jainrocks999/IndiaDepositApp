@@ -2,14 +2,19 @@ import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../../component/fontSize';
 export default StyleSheet.create({
+    same1:
+    {
+        fontSize:fontSize.ten,
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor,
+        textAlign:'center'  
+    },
     same:
     {
         fontSize:fontSize.ten,
         fontFamily:'Montserrat-Regular',
         color:colors.textColor,
-        textAlign:'center'
-       
-       
+        textAlign:'center'  
     },
     title:
     {

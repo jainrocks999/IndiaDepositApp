@@ -46,12 +46,9 @@ export default StyleSheet.create({
     container:
     {
         paddingHorizontal:10,
-        //paddingVertical:5
     },
    View:
     {
-        // flexDirection:'row',
-        // justifyContent:'space-between',
         marginTop:7,
         paddingHorizontal:5,
         width:'90%'
@@ -60,7 +57,6 @@ export default StyleSheet.create({
     {
         alignItems:'center',
         justifyContent:'center',
-        // flex:1
     },
     button:{
         backgroundColor:colors.bc,
@@ -91,7 +87,6 @@ export default StyleSheet.create({
         width:'100%'
     },
     cross:{
-        // backgroundColor:colors.bc,
         borderRadius:30,
         height:30,width:30,
         justifyContent:'center',
@@ -103,7 +98,6 @@ export default StyleSheet.create({
         fontFamily:'Montserrat-Regular',
         fontSize:20,
         marginBottom:5,
-        // marginLeft:25
     },
     better:{
         color:colors.textColor,
@@ -113,15 +107,6 @@ export default StyleSheet.create({
     },
     drop:{
         marginTop:5 ,
-        // borderWidth:1,
-        // height:40,
-        // borderColor:colors.textColor,
-        // borderRadius:6,
-        // paddingHorizontal:5,
-        // justifyContent:'center',
-        // width:'100%',
-        // paddingHorizontal:10,
-        // alignContent:'center'
         borderWidth:1,
         height:40,
         borderRadius:6,
@@ -144,4 +129,9 @@ export default StyleSheet.create({
         paddingHorizontal:10,
         flexDirection:'row'
     }, 
+    header:{
+        fontFamily:'Montserrat-SemiBold',
+        fontSize:15,
+        color:colors.textColor
+    }
 })

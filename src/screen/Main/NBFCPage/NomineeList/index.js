@@ -41,7 +41,7 @@ const MyFDDetail = ({route}) => {
   const CountryList = useSelector(state => state.CountryList);
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [country, setCountry] = useState();
+  const [country, setCountry] = useState('');
   const [relation, setRelation] = useState();
   const [Grelation, setGRelation] = useState();
   const [open, setOpen] = useState(false);
@@ -158,6 +158,54 @@ const MyFDDetail = ({route}) => {
       }
     }
   };
+
+
+  const manageCityState=async(val)=>{
+    if(val.length==6){
+      console.log(val);
+      setPincode(val)
+      try {
+       const data = new FormData();
+       data.append('location',val)
+       const response = await axios({
+         method: 'POST',
+         data,
+         headers: {
+           'content-type': 'multipart/form-data',
+           Accept: 'multipart/form-data',
+         },
+         url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+       });
+      
+       if (response.data.status==200) {
+         console.log('this is response value',response.data);
+         dispatch({
+           type: 'State_List_Request',
+           url: 'statebyid',
+           country_id:response.data.country.value,
+         })
+   
+         dispatch({
+           type: 'City_List_Request',
+           url: 'citybyid',
+           state_id:response.data.state.value,
+         })
+         setCity(response.data.city.value)
+         setState(response.data.state.value)
+         setCountry(JSON.stringify(response.data.country.value))
+       } 
+     } catch (error) {
+      throw error;
+     }
+    }
+    else{
+     setPincode(val)
+    }
+  
+  }
+
+
+
   const renderItem = item => {
     return (
       <View
@@ -225,6 +273,7 @@ const MyFDDetail = ({route}) => {
         </View>
         <View style={styles.Button}>
           <TouchableOpacity
+          delayPressIn={0}
             onPress={() => {
               if (selector.length > 5) {
                 Toast.show('You can add maximum 6 members in nominee list!');
@@ -247,7 +296,7 @@ const MyFDDetail = ({route}) => {
           flex: 1,
           paddingHorizontal: 20,
         }}>
-        <TouchableOpacity
+       {data? <TouchableOpacity delayPressIn={0}
           disabled={data ? false : true}
           onPress={() =>
             navigation.navigate('NomineeUserInfo', {
@@ -264,6 +313,22 @@ const MyFDDetail = ({route}) => {
             justifyContent: 'center',
           }}>
           <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
+        </TouchableOpacity>:<View/>}
+        <TouchableOpacity delayPressIn={0}
+          onPress={()=>navigation.navigate('RedeemAccountDetail',{
+            my_fixed_deposit_id: route.params.my_fixed_deposit_id,
+            amount:route.params.amount
+          })}
+          style={{
+            width: '100%',
+            backgroundColor: colors.bc,
+            height: 50,
+            borderRadius: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop:10
+          }}>
+          <Text style={{color: colors.white}}>{'SKIP  & CONTINUE'}</Text>
         </TouchableOpacity>
       </View>
       <Dialog
@@ -277,7 +342,7 @@ const MyFDDetail = ({route}) => {
         containerStyle={{marginTop: 20}}
         onHardwareBackPress={() => setShowModal1(false)}>
         <View style={{alignSelf: 'flex-end'}}>
-          <TouchableOpacity
+          <TouchableOpacity delayPressIn={0}
             onPress={() => setShowModal1(false)}
             style={styles.cross}>
             <Text style={styles.x}>x</Text>
@@ -323,7 +388,22 @@ const MyFDDetail = ({route}) => {
                 returnKeyType="done"
               />
             </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={styles.better}>Pincode</Text>
+            </View>
 
+            <View style={styles.drop}>
+              <TextInput
+                style={styles.input}
+                placeholder="Please enter your pincode"
+                placeholderTextColor={colors.heading1}
+                value={pincode}
+                onChangeText={val => manageCityState(val)}
+                maxLength={6}
+                keyboardType="number-pad"
+                returnKeyType="done"
+              />
+            </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={styles.better}>Country</Text>
             </View>
@@ -393,7 +473,7 @@ const MyFDDetail = ({route}) => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={styles.better}>Date of Birth</Text>
             </View>
-            <TouchableOpacity onPress={() => setOpen(true)} style={styles.drop}>
+            <TouchableOpacity delayPressIn={0} onPress={() => setOpen(true)} style={styles.drop}>
               <Text style={{color: colors.textColor}}>{value}</Text>
               <DatePicker
                 date={date}
@@ -484,24 +564,6 @@ const MyFDDetail = ({route}) => {
                 }}
               />
             </View>
-
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={styles.better}>Pincode</Text>
-            </View>
-
-            <View style={styles.drop}>
-              <TextInput
-                style={styles.input}
-                placeholder="Please enter your pincode"
-                placeholderTextColor={colors.heading1}
-                value={pincode}
-                onChangeText={val => setPincode(val)}
-                maxLength={6}
-                keyboardType="number-pad"
-                returnKeyType="done"
-              />
-            </View>
-
             <View style={{marginTop: 20}}>
               <CustomButton title="ADD" onPress={() => manageNominee()} />
             </View>

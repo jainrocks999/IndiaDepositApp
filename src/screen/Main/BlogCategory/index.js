@@ -28,7 +28,7 @@ const BlogCategory = ({route}) => {
   return (
     <View style={styles.container}>
       <View style={styles.main5}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity delayPressIn={0} onPress={() => navigation.goBack()}>
           <Image
             style={{height: 32, width: 32, tintColor: colors.white}}
             source={require('../../../assets/Image/arrow2.png')}

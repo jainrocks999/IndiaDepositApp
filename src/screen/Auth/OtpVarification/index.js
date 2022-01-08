@@ -333,6 +333,7 @@ class OtpVarification extends React.Component {
           contentContainerStyle={{flex: 1}}>
           <View style={styles.imageContainer}>
             <TouchableOpacity
+              delayPressIn={0}
               onPress={() => this.props.navigation.push(this.state.type)}>
               <Image
                 style={{width: 32, height: 24}}
@@ -395,6 +396,7 @@ class OtpVarification extends React.Component {
                     ]}>
                     <Text style={styles.your}>{`Didn’t Receive the OTP?`}</Text>
                     <TouchableOpacity
+                      delayPressIn={0}
                       disabled={this.state.counter > 0 ? true : false}
                       onPress={() => this.otpResend()}>
                       <Text

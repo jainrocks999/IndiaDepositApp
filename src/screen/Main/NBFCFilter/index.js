@@ -59,7 +59,7 @@ useEffect(async()=>{
 },[])
 
    
-    console.log('this is gender value',toggleCheckBox,toggleCheckBox1,toggleCheckBox2);
+  
     const manageClear=()=>{
         setIsEnabled1(false)
         setIsEnabled2(false)
@@ -76,31 +76,44 @@ useEffect(async()=>{
         setToggleCheckBox2(false)
     }
 
-    const applyFilter=()=>{
+    const applyFilter=async()=>{
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
+        if(isEnabled7==true&&penalty==''){
+            Toast.show('Please enter premature penalty rate')
+         }
+         else if(isEnabled8==true&& loan1==''){
+             Toast.show('Please enter loan rate')
+         }
+         else{
       dispatch({
             type: 'NBFC_Search_Request',
             url: 'fdlist1',
-            year:data.year,
-            month:parseInt(data.month),
-            days:data.days,
-            amount:data.amount,
-            location:data.location,
-            type1:data.type1,
-            order_on:data.order_on,
-            order_to:data.order_to,
-            bank_id:selected,
-            interest_rate:value1,
-            nationalized:isEnabled1==true?1:0,
-            sb_account_required:isEnabled2==true?1:0,
-            offer:isEnabled3==true?1:0,
-            insurance:isEnabled4==true?1:0,
-            // gender:toggleCheckBox==true?'1':toggleCheckBox1==true?'2':toggleCheckBox2==true?'3':'0',
-            interest_payout:isEnabled6==true?1:0,
-            premature_penalty:isEnabled7==true?1:0,
-            loan:isEnabled8==true?1:0,
-            btype:2,
-            navigation:navigation
+                user_id:user_id,
+                year:data.year,
+                month:parseInt(data.month),
+                days:data.days,
+                amount:data.amount,
+                location:data.location,
+                type1:data.type1,
+                bank_id:selected,
+                interest_rate:value1,
+                nationalized:'',
+                sb_account_required:'',
+                offer:'',
+                gender:'',
+                interest_payout:'',
+                premature_penalty:isEnabled7==true?1:0,
+                loan:isEnabled8==true?1:0,
+                order_on:'',
+                order_to:'',
+                premature_withdrawal_rate:penalty,
+                load_lending_rate:loan1,
+                btype:2,
+                b_lat:'',
+                b_long:'',
+                navigation:navigation
           })
+        }
         }
     return(
         <View style={{flex:1,
@@ -121,7 +134,7 @@ useEffect(async()=>{
             <ScrollView style={{marginBottom:0}}>
             {isFetching?<Loader/>:null}
             <View style={{paddingHorizontal:20,marginTop:20,marginBottom:30}}>
-              <Text style={styles.heading}>NBFC Name</Text>
+              <Text style={styles.heading}>Financial Institution</Text>
               <View style={{width:'100%',marginTop:5}}>
                           <MultiSelect   
                                 items={selector}
@@ -240,6 +253,7 @@ useEffect(async()=>{
                     style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
                     onChangeText={(val)=>setPenalty(val)}
                     value={penalty}
+                    keyboardType='number-pad'
                     />
                 
                 </View>:<View/>}
@@ -251,25 +265,19 @@ useEffect(async()=>{
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={()=>setIsEnabled8(previousState => !previousState)}
                     value={isEnabled8}
+            
                 />
                 </View>
                 {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
                    
-                               <RNPickerSelect
-                                         onValueChange={(val)=>setLoan(val)}
-                                         items={loan}
-                                         style={{ 
-                                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
-                                         value={loan1}
-                                         useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select", value: null }}
-                                         Icon={()=>
-                                          <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
-                                        source={require('../../../assets/Image/down.png')}/>}   
-                                   />
+                <TextInput
+                    placeholder='Enter Here'
+                    returnKeyType='done'
+                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
+                    onChangeText={(val)=>setLoan(val)}
+                    value={loan1}
+                    keyboardType='number-pad'
+                    />
                 </View>:<View/>}
                 
             </View>
@@ -286,7 +294,7 @@ useEffect(async()=>{
                 <View style={{
                     alignItems:'center',justifyContent:'center',width:'49%'
                 }}>
-                <TouchableOpacity onPress={()=>navigation.goBack()}>
+                <TouchableOpacity delayPressIn={0} onPress={()=>navigation.goBack()}>
                    <Text style={{color:colors.bc,fontFamily:'Montserrat-Bold'}}>CLOSE</Text>
                 </TouchableOpacity>
                 </View>
@@ -294,7 +302,7 @@ useEffect(async()=>{
                 <View style={{
                     alignItems:'center',justifyContent:'center',width:'49%'
                 }}>
-                <TouchableOpacity>
+                <TouchableOpacity delayPressIn={0}>
                 <Text onPress={()=>applyFilter()} style={{color:colors.bc,fontFamily:'Montserrat-Bold'}}>APPLY</Text>
                 </TouchableOpacity>
                 </View>

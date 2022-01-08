@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {useSelector, useDispatch} from 'react-redux';
@@ -76,7 +70,7 @@ const Blog = () => {
 
   return (
     <View style={styles.container}>
-      {isFetching?<Loader/>:null}
+      {isFetching ? <Loader /> : null}
       <View
         style={{
           width: '100%',
@@ -113,6 +107,7 @@ const Blog = () => {
         </View>
         {search ? (
           <TouchableOpacity
+            delayPressIn={0}
             onPress={() => handleSearch()}
             style={{
               backgroundColor: colors.bc,

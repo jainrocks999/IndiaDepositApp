@@ -13,7 +13,7 @@ export default StyleSheet.create({
     },
     title:
     {
-        fontFamily:'Montserrat-Medium',
+        fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.fourteen,
         color:colors.bc
     },
@@ -28,7 +28,7 @@ export default StyleSheet.create({
     },
     value:
     {
-        fontFamily:'Montserrat-Regular',
+        fontFamily:'Montserrat-SemiBold',
         fontSize:fontSize.twelve,
         color:colors.textColor,
         // width:'45%'

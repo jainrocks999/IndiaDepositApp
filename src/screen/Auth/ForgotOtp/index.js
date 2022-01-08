@@ -379,6 +379,7 @@ class OtpVarification extends React.Component {
         <KeyboardAwareScrollView>
           <View style={styles.imageContainer}>
             <TouchableOpacity
+              delayPressIn={0}
               onPress={() => this.props.navigation.navigate('Forget')}>
               <Image
                 style={{width: 32, height: 24}}
@@ -439,6 +440,7 @@ class OtpVarification extends React.Component {
                     ]}>
                     <Text style={styles.your}>{`Didn’t Receive the OTP?`}</Text>
                     <TouchableOpacity
+                      delayPressIn={0}
                       disabled={
                         this.state.counter > 0 || this.state.count == 2
                           ? true

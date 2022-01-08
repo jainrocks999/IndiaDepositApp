@@ -18,8 +18,8 @@ const Knowledge=()=>{
   const navigation=useNavigation()
   const [index, setIndex] = useState(0);
   const [routes] = React.useState([
-    { key: 'first', title: 'BLOG' },
-    { key: 'second', title: 'STORY' },
+    { key: 'first', title: 'Inshorts' },
+    { key: 'second', title: 'Blog' },
    
   ]);
 

@@ -12,7 +12,7 @@ export default StyleSheet.create({
     {
         flex:1,
         paddingHorizontal:15,
-        paddingVertical:30
+        paddingVertical:15
     },
     view:
     {

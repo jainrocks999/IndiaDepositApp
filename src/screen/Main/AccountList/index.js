@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,6 @@ import {
   BackHandler,
   PermissionsAndroid,
 } from 'react-native';
-import Header from '../../../component/compareHeader';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -36,15 +35,12 @@ const SBAccountList = ({route}) => {
   const [selectedData, setSelectedData] = useState([]);
   const [branch_types, set_branch_type] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [type, setType] = useState(route.params.type1);
   const [balance, setBalance] = useState(route.params.balance);
   const [location, setLocation] = useState(
     !isNaN(route.params.location) ? route.params.location : '',
   );
   const [address, setAddress] = useState(
     isNaN(route.params.location) ? route.params.location : '',
-  );
-  console.log('this is user location',location
   );
   const isFetching = useSelector(state => state.isFetching);
   const [selected, setSelected] = useState(route.params.type1);
@@ -76,7 +72,7 @@ const SBAccountList = ({route}) => {
       saving_account_id: item,
       navigation: navigation,
       branch_type: branch_type,
-      pincode:location,
+      pincode: location,
       user_id,
     });
   };
@@ -115,7 +111,6 @@ const SBAccountList = ({route}) => {
         data: 'AccountList',
       });
       setVisible(false);
-      //  setSelected([])
     }
   };
 
@@ -163,12 +158,10 @@ const SBAccountList = ({route}) => {
         location: location,
         navigation,
       });
-      // setSelectedData([])
     }
   };
   const openDialog = () => {
     setVisible(true);
-    // setSelected([])
   };
 
   const getCurrentLocation = () => {
@@ -176,7 +169,6 @@ const SBAccountList = ({route}) => {
     Geolocation.requestAuthorization();
     Geolocation.getCurrentPosition(
       position => {
-        console.log('your are here', position.coords);
         Geocoder.from(position.coords.latitude, position.coords.longitude)
           .then(json => {
             var addressComponent = json.results[0].formatted_address;
@@ -262,25 +254,25 @@ const SBAccountList = ({route}) => {
     if (item.branch_type == 'Metropolitan') {
       return (
         <View>
-          <Text style={styles.same}>{item.min_balance_metropolitan}</Text>
+          <Text style={styles.same1}>{item.min_balance_metropolitan}</Text>
         </View>
       );
     } else if (item.branch_type == 'Rural') {
       return (
         <View>
-          <Text style={styles.same}>{item.min_balance_rural}</Text>
+          <Text style={styles.same1}>{item.min_balance_rural}</Text>
         </View>
       );
     } else if (item.branch_type == 'Semiurban') {
       return (
         <View>
-          <Text style={styles.same}>{item.min_balance_semiurban}</Text>
+          <Text style={styles.same1}>{item.min_balance_semiurban}</Text>
         </View>
       );
     } else if (item.branch_type == 'Urban') {
       return (
         <View>
-          <Text style={styles.same}>{item.min_balance_urban}</Text>
+          <Text style={styles.same1}>{item.min_balance_urban}</Text>
         </View>
       );
     }
@@ -290,6 +282,7 @@ const SBAccountList = ({route}) => {
     return (
       <View style={styles.cont}>
         <TouchableOpacity
+          delayPressIn={0}
           onLongPress={val =>
             handleSelectionMultiple(item.saving_account_id, item.branch_type)
           }
@@ -323,7 +316,7 @@ const SBAccountList = ({route}) => {
               marginTop: 7,
             }}>
             <View style={{alignItems: 'center'}}>
-              <Text style={styles.same}>{`${item.rate}%`}</Text>
+              <Text style={styles.same1}>{`${item.rate}%`}</Text>
               <Image
                 style={styles.image}
                 resizeMode="contain"
@@ -342,7 +335,7 @@ const SBAccountList = ({route}) => {
               <Text style={styles.same}>{'MAB'}</Text>
             </View>
             <View style={{alignItems: 'center'}}>
-              <Text style={styles.same}>{item.atm_points}</Text>
+              <Text style={styles.same1}>{item.atm_points}</Text>
               <Image
                 style={styles.image}
                 resizeMode="contain"
@@ -351,7 +344,7 @@ const SBAccountList = ({route}) => {
               <Text style={styles.same}>{'ATM Points'}</Text>
             </View>
             <View style={{alignItems: 'center'}}>
-              <Text style={styles.same}>
+              <Text style={styles.same1}>
                 {item.interest_calculation_frequency == null
                   ? 0
                   : item.interest_calculation_frequency}
@@ -372,7 +365,9 @@ const SBAccountList = ({route}) => {
     <View style={{flex: 1, backgroundColor: colors.card}}>
       <View>
         <View style={styles.mains}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          <TouchableOpacity
+            delayPressIn={0}
+            onPress={() => navigation.goBack()}>
             <Image
               style={{height: 35, width: 35, tintColor: colors.white}}
               source={require('../../../assets/Image/arrow2.png')}
@@ -461,7 +456,9 @@ const SBAccountList = ({route}) => {
                   justifyContent: 'space-between',
                 }}>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <TouchableOpacity onPress={() => getAddress()}>
+                  <TouchableOpacity
+                    delayPressIn={0}
+                    onPress={() => getAddress()}>
                     <Image
                       style={{width: 24, height: 24}}
                       source={require('../../../assets/Image/search.png')}
@@ -485,6 +482,7 @@ const SBAccountList = ({route}) => {
                 </View>
                 {address ? (
                   <TouchableOpacity
+                    delayPressIn={0}
                     onPress={() => setAddress('')}
                     style={{
                       backgroundColor: colors.bc,
@@ -577,6 +575,7 @@ const SBAccountList = ({route}) => {
 
       <View style={styles.list}>
         <TouchableOpacity
+          delayPressIn={0}
           onPress={() => openDialog()}
           style={{width: '100%', paddingHorizontal: 10, paddingVertical: 6}}>
           <View
@@ -624,7 +623,7 @@ const SBAccountList = ({route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                width: '40%',
+                width: '45%',
               }}>
               <Text
                 numberOfLines={1}
@@ -655,6 +654,7 @@ const SBAccountList = ({route}) => {
             paddingBottom: 5,
           }}>
           <TouchableOpacity
+            delayPressIn={0}
             onPress={() => compareFD()}
             style={{
               paddingHorizontal: 20,
@@ -688,6 +688,7 @@ const SBAccountList = ({route}) => {
             </Text>
           </View>
           <TouchableOpacity
+            delayPressIn={0}
             style={{
               paddingHorizontal: 6,
               paddingVertical: Platform.OS == 'android' ? 0 : 8,
@@ -726,6 +727,7 @@ const SBAccountList = ({route}) => {
             />
           </TouchableOpacity>
           <TouchableOpacity
+            delayPressIn={0}
             onPress={() =>
               navigation.navigate('SBFilter', {
                 data: route.params,

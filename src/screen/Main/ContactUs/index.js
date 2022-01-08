@@ -126,6 +126,7 @@ const Contact = ({route}) => {
                 <View style={[styles.view, {marginTop: 15}]}>
                   <Text style={styles.num}>{detail.mobile}</Text>
                   <TouchableOpacity
+                    delayPressIn={0}
                     onPress={() => Linking.openURL(`tel:${detail.mobile}`)}
                     style={styles.button}>
                     <Image
@@ -138,6 +139,7 @@ const Contact = ({route}) => {
                 <View style={[styles.view, {marginTop: 12}]}>
                   <Text style={styles.num}>{detail.mobile2}</Text>
                   <TouchableOpacity
+                    delayPressIn={0}
                     onPress={() => Linking.openURL(`tel:${detail.mobile2}`)}
                     style={styles.button}>
                     <Image
@@ -154,6 +156,7 @@ const Contact = ({route}) => {
                 <View style={styles.bottom}>
                   <View style={styles.view1}>
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => Linking.openURL(link[0])}
                       style={styles.view2}>
                       <View style={styles.fb}>
@@ -171,6 +174,7 @@ const Contact = ({route}) => {
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => Linking.openURL(link[3])}
                       style={styles.view2}>
                       <View style={styles.fb}>
@@ -190,6 +194,7 @@ const Contact = ({route}) => {
                   </View>
                   <View style={[styles.view1, {marginTop: 20}]}>
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => Linking.openURL(link[1])}
                       style={styles.view2}>
                       <View style={styles.fb}>
@@ -207,6 +212,7 @@ const Contact = ({route}) => {
                       </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => Linking.openURL(link[2])}
                       style={styles.view2}>
                       <View style={styles.fb}>

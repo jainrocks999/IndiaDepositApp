@@ -33,12 +33,14 @@ const Introduction = ({route}) => {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
+            delayPressIn={0}
             onPress={() => navigation.navigate('Login')}
             style={styles.button}>
             <Text style={styles.text}>SIGN IN</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
+            delayPressIn={0}
             onPress={() => navigation.navigate('Register')}
             style={styles.button}>
             <Text style={styles.text}>REGISTER</Text>

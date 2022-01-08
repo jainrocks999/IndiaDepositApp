@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, BackHandler, ScrollView, Alert} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, BackHandler, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';

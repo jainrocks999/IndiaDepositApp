@@ -75,7 +75,6 @@ const dashboard = () => {
   }, []);
 
   const handleBackButtonClick = () => {
-    console.log('this is workign');
     if (navigation.isFocused()) {
       if (backPress > 0) {
         BackHandler.exitApp();
@@ -138,7 +137,6 @@ const dashboard = () => {
     });
     setSelectedItems2([]);
   };
-
   const ListItem = ({item, selected, onPress, onLongPress}) => (
     <View
       style={{
@@ -148,7 +146,7 @@ const dashboard = () => {
         height: 100,
       }}>
       <View style={[styles.touch1]}>
-        <TouchableOpacity
+        <TouchableOpacity delayPressIn={0}
           onPress={() => setModalVisible(true)}
           style={{width: '90%', alignItems: 'flex-end'}}>
           <Image
@@ -156,7 +154,7 @@ const dashboard = () => {
             source={require('../../../assets/Image/information.png')}
           />
         </TouchableOpacity>
-        <TouchableOpacity
+        <TouchableOpacity delayPressIn={0}
           style={{alignItems: 'center'}}
           onPress={onPress}
           onLongPress={onLongPress}>
@@ -197,6 +195,7 @@ const dashboard = () => {
   const deSelectItems = () => setSelectedItems([]);
   const selectItems = item => {
     setSelectedItems1([]);
+    setSelectedItems2([])
     if (selectedItems.includes(item.name)) {
       const newListItems = selectedItems.filter(
         listItem => listItem !== item.name,
@@ -211,6 +210,7 @@ const dashboard = () => {
   const deSelectItems1 = () => setSelectedItems1([]);
   const selectItems1 = item => {
     setSelectedItems([]);
+    setSelectedItems2([])
     if (selectedItems1.includes(item.name)) {
       const newListItems = selectedItems1.filter(
         listItem => listItem !== item.name,
@@ -262,7 +262,7 @@ const dashboard = () => {
             <View style={styles.view1}>
               <Text style={styles.text2}>{'NBFC Fixed Deposit'}</Text>
               {selectedItems2.length > 0 ? (
-                <TouchableOpacity
+                <TouchableOpacity delayPressIn={0}
                   onPress={() => manageSearch2()}
                   style={styles.button}>
                   <Text style={styles.search}>SEARCH</Text>
@@ -301,7 +301,7 @@ const dashboard = () => {
             <View style={styles.view1}>
               <Text style={styles.text2}>{'Bank Fixed Deposit'}</Text>
               {selectedItems.length > 0 ? (
-                <TouchableOpacity
+                <TouchableOpacity delayPressIn={0}
                   onPress={() => manageSearch()}
                   style={styles.button}>
                   <Text style={styles.search}>SEARCH</Text>
@@ -339,7 +339,7 @@ const dashboard = () => {
             <View style={styles.view1}>
               <Text style={styles.text2}>{'Savings Bank Account'}</Text>
               {selectedItems1.length > 0 ? (
-                <TouchableOpacity
+                <TouchableOpacity delayPressIn={0}
                   onPress={() => manageSearch1()}
                   style={styles.button}>
                   <Text style={styles.search}>SEARCH</Text>
@@ -375,7 +375,7 @@ const dashboard = () => {
       <View style={{paddingHorizontal: 15}}>
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
-            <TouchableOpacity style={styles.ModelmsgView}>
+            <TouchableOpacity delayPressIn={0} style={styles.ModelmsgView}>
               <Text style={styles.modaltext}>
                 {
                   'Lorem ipsum, or lipsum as it is sometimes known,is dummy text used in laying out print.'
@@ -383,7 +383,7 @@ const dashboard = () => {
               </Text>
             </TouchableOpacity>
             <View style={styles.modal2}>
-              <TouchableOpacity
+              <TouchableOpacity delayPressIn={0}
                 style={styles.popup}
                 onPress={() => setModalVisible(false)}>
                 <Text style={styles.ModelBtntext}>OK</Text>
@@ -477,7 +477,7 @@ const data1 = [
 ];
 const data2 = [
   {
-    name: 'Regular',
+    name: "Regular",
     image: require('../../../assets/Image/regular-fd-b.png'),
     image1: require('../../../assets/Image/regular-fd-w.png'),
     id: 1,
@@ -493,21 +493,21 @@ const data2 = [
     height: 35,
     width: 35,
   },
-  {
-    name: 'Tax Saving',
-    image: require('../../../assets/Image/tax-fd-b.png'),
-    image1: require('../../../assets/Image/tax-fd-w.png'),
-    id: 2,
-    height: 35,
-    width: 35,
-  },
+  // {
+  //   name: 'Tax Saving',
+  //   image: require('../../../assets/Image/tax-fd-b.png'),
+  //   image1: require('../../../assets/Image/tax-fd-w.png'),
+  //   id: 2,
+  //   height: 35,
+  //   width: 35,
+  // },
 
-  {
-    name: 'NRI',
-    image: require('../../../assets/Image/globe.png'),
-    image1: require('../../../assets/Image/globe-white.png'),
-    id: 3,
-    height: 37,
-    width: 45,
-  },
+  // {
+  //   name: 'NRI',
+  //   image: require('../../../assets/Image/globe.png'),
+  //   image1: require('../../../assets/Image/globe-white.png'),
+  //   id: 3,
+  //   height: 37,
+  //   width: 45,
+  // },
 ];

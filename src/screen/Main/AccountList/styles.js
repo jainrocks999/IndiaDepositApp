@@ -8,6 +8,12 @@ export default StyleSheet.create({
     color: colors.textColor,
     textAlign: 'center',
   },
+  same1: {
+    fontSize: fontSize.ten,
+    fontFamily: 'Montserrat-SemiBold',
+    color: colors.textColor,
+    textAlign: 'center',
+  },
   title: {
     fontSize: fontSize.fourteen,
     fontFamily: 'Montserrat-Medium',

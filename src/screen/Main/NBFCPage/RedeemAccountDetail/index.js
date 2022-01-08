@@ -1,20 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Linking,
-} from 'react-native';
+import {View, Text, Image, TouchableOpacity, TextInput} from 'react-native';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import colors from '../../../../component/colors';
 import Header from '../../../../component/header';
+import CustomButton from '../../../../component/button1';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './styles';
-import CustomButton from '../../../../component/button1';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../../component/AsyncStorage';
 import {CheckBox} from 'react-native-elements';
@@ -23,7 +15,6 @@ import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
-
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -31,20 +22,25 @@ const MyFDDetail = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const [ids, setIds] = useState([]);
   const [data, setData] = useState('');
+
+  const [ids2, setIds2] = useState([]);
+  const [data2, setData2] = useState('');
+
   const selector1 = useSelector(state => state.BankNameList);
   const [bank_name, set_bank_name] = useState('');
   const [account_type, set_account_type] = useState('');
   const [account_number, set_account_number] = useState('');
   const [ifsc_code, set_ifsc_code] = useState('');
   const [showModal1, setShowModal1] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-    // dispatch({
-    //   type: 'Bank_List_Request',
-    //   url: 'userbanklist',
-    //   user_id,
-    // });
+    dispatch({
+      type: 'Bank_List_Request',
+      url: 'userbanklist',
+      user_id,
+    });
   }, []);
 
   const isChecked = itemId => {
@@ -55,11 +51,97 @@ const MyFDDetail = ({route}) => {
   const toggleChecked = (itemId, item) => {
     if (ids.includes(itemId)) {
       setIds([]);
+      setData('');
+    } else {
+      setIds(itemId);
+      setData(item);
     }
-    setIds(itemId);
-    setData(item);
   };
 
+  const isChecked1 = itemId => {
+    const isThere = ids2.includes(itemId);
+    return isThere;
+  };
+
+  const toggleChecked1 = (itemId, item) => {
+    if (ids2.includes(itemId)) {
+      setIds2([]);
+      setData2('');
+    } else {
+      setIds2(itemId);
+      setData2(item);
+    }
+  };
+
+  const addBank = async () => {
+    const user_id = await AsyncStorage.getItem(Storage.user_id);
+
+    if (bank_name == '' || bank_name == null || bank_name == 0) {
+      Toast.show('Please select financial institution');
+    } else if (account_number == '' || account_number == null) {
+      Toast.show('Please enter account number');
+    } else if (
+      account_type == '' ||
+      account_type == null ||
+      account_type == 0
+    ) {
+      Toast.show('Please select account type');
+    } else if (ifsc_code == '') {
+      Toast.show('Please enter valid ifsc code');
+    } else {
+      try {
+        const data = new FormData();
+        data.append('user_id', user_id);
+        data.append('bank_id', bank_name);
+        data.append('account_number', account_number);
+        data.append('account_type', account_type);
+        data.append('ifsc_code', ifsc_code);
+        data.append('other1', 'test');
+        data.append('other2', 'test');
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/adduserbank',
+        });
+        console.log('this user resposens', response);
+        if (response.data.status == 200) {
+          setShowModal1(false);
+          dispatch({
+            type: 'Bank_List_Request',
+            url: 'userbanklist',
+            user_id,
+          });
+          Toast.show('Bank add successful');
+        } else {
+          Toast.show(response.data.messages);
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
+  };
+  const manageCheck = () => {
+    if (checked) {
+      navigation.navigate('PaymentInfo', {
+        my_fixed_deposit_id: route.params.my_fixed_deposit_id,
+        data: data,
+        redemDetails: data,
+      });
+    } else if(data2) {
+      navigation.navigate('PaymentInfo', {
+        my_fixed_deposit_id: route.params.my_fixed_deposit_id,
+        data: data,
+        redemDetails: data2,
+      });
+    }
+    else{
+      Toast.show('Please confirm account details for redemption')
+    }
+  };
   const renderItem = item => {
     return (
       <View style={styles.cont}>
@@ -110,123 +192,130 @@ const MyFDDetail = ({route}) => {
     );
   };
 
-  // const addBank = async () => {
-  //   const user_id = await AsyncStorage.getItem(Storage.user_id);
+  const renderItem1 = item => {
+    return (
+      <View style={styles.cont}>
+        <View style={styles.card}>
+          <View>
+            <View style={styles.cardView}>
+              <Image
+                resizeMode="contain"
+                style={{height: 20, width: 70}}
+                source={{
+                  uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                }}
+              />
+              <View style={{width: '20%', alignItems: 'flex-end'}}></View>
+            </View>
+            <View style={[styles.row, {marginTop: item.bank_logo ? 5 : 0}]}>
+              <Text
+                style={
+                  styles.same
+                }>{`Account No : XXXXXXXXXX${item.account_number.substr(
+                -4,
+              )}`}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text
+                style={[
+                  styles.same,
+                  {marginTop: 5},
+                ]}>{`IFSC Code : ${item.ifsc_code}`}</Text>
+            </View>
+            <View style={[styles.row, {marginTop: 5}]}>
+              <Text
+                style={
+                  styles.same
+                }>{`Account Type : ${item.account_type}`}</Text>
+            </View>
+          </View>
+          <CheckBox
+            center
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            checkedColor={colors.bc}
+            checked={isChecked1(item.user_bank_id)}
+            onPress={() => toggleChecked1(item.user_bank_id, item)}
+          />
+        </View>
+      </View>
+    );
+  };
 
-  //   if (bank_name == '' || bank_name == null || bank_name == 0) {
-  //     Toast.show('Please select bank name');
-  //   } else if (account_number == '' || account_number == null) {
-  //     Toast.show('Please enter account number');
-  //   } else if (
-  //     account_type == '' ||
-  //     account_type == null ||
-  //     account_type == 0
-  //   ) {
-  //     Toast.show('Please select account type');
-  //   } else if (ifsc_code == '') {
-  //     Toast.show('Please enter valid ifsc code');
-  //   } else {
-  //     try {
-  //       const data = new FormData();
-  //       data.append('user_id', user_id);
-  //       data.append('bank_id', bank_name);
-  //       data.append('account_number', account_number);
-  //       data.append('account_type', account_type);
-  //       data.append('ifsc_code', ifsc_code);
-  //       data.append('other1', 'test');
-  //       data.append('other2', 'test');
-  //       const response = await axios({
-  //         method: 'POST',
-  //         data,
-  //         headers: {
-  //           'content-type': 'multipart/form-data',
-  //           Accept: 'multipart/form-data',
-  //         },
-  //         url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/adduserbank',
-  //       });
-  //       console.log('this user resposens', response);
-  //       if (response.data.status == 200) {
-  //         setShowModal1(false);
-  //         dispatch({
-  //           type: 'Bank_List_Request',
-  //           url: 'userbanklist',
-  //           user_id,
-  //         });
-  //         Toast.show('Bank add successful');
-  //       } else {
-  //         Toast.show(response.data.messages);
-  //       }
-  //     } catch (error) {
-  //       throw error;
-  //     }
-  //   }
-  // };
-console.log('this is narenra here',);
   return (
     <View style={styles.container}>
       <Header
-        title={'PAYMENT MODE'}
+        title={'BANK DETAILS'}
         source={require('../../../../assets/Image/arrow2.png')}
         onPress={() => navigation.goBack()}
       />
       {isFetching ? <Loader /> : null}
-      <View style={{paddingHorizontal: 15, flex: 1, justifyContent: 'center'}}>
-        <View style={[styles.card, {paddingVertical: 30}]}>
-         {route.params.onlinepaymenturl? <CustomButton 
-          onPress={()=>Linking.openURL(route.params.onlinepaymenturl)}
-          title="COMPLETE PAYMENT" />:<View/>}
-
-          <View style={{marginTop: 10}} />
-          <CustomButton
-            title="UPLOAD PAYMENT DETAILS"
-            onPress={() =>
-              navigation.navigate('PaymentDetail', {
-                amount: route.params.amount,
-                my_fixed_deposit_id: route.params.my_fixed_deposit_id,
-              })
-            }
-          />
+      <View>
+        <View style={styles.view4}>
+          <View
+            style={[styles.container1, {width: '90%', alignItems: 'center'}]}>
+            <CheckBox
+              center
+              checkedColor={colors.bc}
+              checked={checked}
+              onPress={() => (checked ? setChecked(false) : setChecked(true))}
+            />
+            <Text style={{width: '85%', fontFamily: 'Montserrat-SemiBold'}}>
+              Use same account details for FD Redemption
+            </Text>
+          </View>
         </View>
-        {/* <View style={{paddingHorizontal: 15, paddingVertical: 10}}>
-          <Text
-            style={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-              color: colors.textColor,
-            }}>
-            {' '}
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used
-            in laying out print, graphic or web designs. The passage is
-            attributed to an unknown typesetter book.
-          </Text>
-        </View> */}
         <View>
-          {/* <FlatList
-            data={selector}
-            renderItem={({item}) => renderItem(item)}
-            style={{width: '100%', marginBottom: 10, marginTop: 5}}
-          /> */}
-          {/* <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: 20,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                set_bank_name('');
-                set_ifsc_code('');
-                set_account_number('');
-                set_account_type('');
-                setShowModal1(true);
-              }}
-              style={styles.Touch}>
-              <Text style={{fontSize: 14, color: colors.white}}>
-                + ADD BANK
+          <ScrollView>
+            <View style={styles.pad}>
+              <Text style={styles.textColor}>
+                {'Bank account use while payment'}
               </Text>
-            </TouchableOpacity>
-            <View style={{marginBottom: 200}} />
-          </View> */}
+            </View>
+            <FlatList
+              data={selector}
+              renderItem={({item}) => renderItem(item)}
+              style={{width: '100%', marginBottom: 10}}
+            />
+            {checked ? (
+              <View />
+            ) : (
+              <View>
+                <View style={styles.pad}>
+                  <Text style={styles.textColor}>
+                    {'Bank account use while redemption '}
+                  </Text>
+                </View>
+                <FlatList
+                  data={selector}
+                  renderItem={({item}) => renderItem1(item)}
+                  style={{width: '100%', marginBottom: 10, marginTop: 5}}
+                />
+              </View>
+            )}
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 20,
+              }}>
+              <TouchableOpacity
+                delayPressIn={0}
+                onPress={() => {
+                  set_bank_name('');
+                  set_ifsc_code('');
+                  set_account_number('');
+                  set_account_type('');
+                  setShowModal1(true);
+                }}
+                style={styles.Touch}>
+                <Text style={{fontSize: 14, color: colors.white}}>
+                  + ADD BANK
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{marginBottom: 400}}></View>
+          </ScrollView>
         </View>
       </View>
       <View
@@ -238,7 +327,24 @@ console.log('this is narenra here',);
           backgroundColor: '#fff',
           paddingHorizontal: 20,
           paddingVertical: 10,
-        }}></View>
+        }}>
+        <View style={{paddingVertical: 10}}>
+          <TouchableOpacity
+            delayPressIn={0}
+            disabled={data ? false : true}
+            onPress={() => manageCheck()}
+            style={{
+              width: '100%',
+              backgroundColor: data ? colors.bc : 'grey',
+              height: 50,
+              borderRadius: 30,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
       <Dialog
         dialogStyle={{
           width: '98%',

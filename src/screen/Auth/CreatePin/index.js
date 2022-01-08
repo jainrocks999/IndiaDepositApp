@@ -50,6 +50,7 @@ const ChangePassword = ({route}) => {
   const showVisible = () => {
     return (
       <TouchableOpacity
+        delayPressIn={0}
         onPress={() => (visible ? setVisible(false) : setVisible(true))}>
         {!visible ? (
           <Image
@@ -68,6 +69,7 @@ const ChangePassword = ({route}) => {
   const showVisible1 = () => {
     return (
       <TouchableOpacity
+        delayPressIn={0}
         onPress={() => (visible1 ? setVisible1(false) : setVisible1(true))}>
         {!visible1 ? (
           <Image
@@ -125,7 +127,9 @@ const ChangePassword = ({route}) => {
 
           <ScrollView>
             <View style={styles.imageContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+              <TouchableOpacity
+                delayPressIn={0}
+                onPress={() => navigation.navigate('Login')}>
                 <Image
                   style={{width: 32, height: 24}}
                   source={require('../../../assets/Image/arrowBack.png')}

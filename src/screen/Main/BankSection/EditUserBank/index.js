@@ -97,7 +97,7 @@ const addUser=async(values)=>{
                 contentContainerStyle={{flex:1}}>
                 <View style={styles.card}>
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Bank Name</Text>
+                    <Text style={styles.better}>Financial Institution</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                      

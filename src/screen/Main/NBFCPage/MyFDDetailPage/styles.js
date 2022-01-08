@@ -64,7 +64,7 @@ export default StyleSheet.create({
     },
     item1:
     {
-        fontSize:15,
+        fontSize:11,
         fontFamily:'Montserrat-SemiBold',
         color:colors.textColor
     },
@@ -77,5 +77,7 @@ export default StyleSheet.create({
         borderWidth:1,
         borderColor:'#C7BEBE'
     },
+    status:{fontFamily:'Montserrat-SemiBold',fontSize:12,color:colors.textColor}
+
 })
 

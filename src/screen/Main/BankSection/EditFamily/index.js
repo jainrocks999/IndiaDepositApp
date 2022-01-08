@@ -65,7 +65,8 @@ const RegisterPage=({route})=>{
     const [pincode,setPincode]=useState(user.pincode)
     const [open,setOpen]=useState(false)
     const [dd1,mm1,yyyy1]=user.dob.split('-')
-    const [date, setDate] = useState(new Date(`${yyyy1}-${mm1}-${dd1}`))
+    const [date, setDate] = useState(user.dob==0||user.dob==''||user.dob==null?new Date():new Date(`${yyyy1}-${mm1}-${dd1}`))
+
 
 
     const value1= date.toISOString().split('T')[0]  
@@ -318,7 +319,7 @@ const RegisterPage=({route})=>{
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                                          placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                                          }}
-                                         value={gender==null||0?'':gender}
+                                         value={gender==null||gender==0?'':gender}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Gender", value: 0 }}
                                          Icon={()=>
@@ -331,7 +332,7 @@ const RegisterPage=({route})=>{
                        
                         <View style={{width:'47%',}}>
                             <Text style={styles.better}>Date of Birth</Text>
-                            <TouchableOpacity onPress={()=>setOpen(true)} style={styles.dropCal}>
+                            <TouchableOpacity delayPressIn={0} onPress={()=>setOpen(true)} style={styles.dropCal}>
                               <View style={{width:'80%',marginLeft:0}}>
                               <Text style={{color:colors.textColor}}>{value}</Text>
                               <DatePicker 
@@ -473,7 +474,7 @@ const RegisterPage=({route})=>{
                         style={styles.input}
                         placeholder='Please enter pincode'
                         placeholderTextColor={colors.heading1}
-                        defaultValue={pincode}
+                        value={pincode==0||pincode==null?'':pincode}
                         onChangeText={(val)=>manageCityState(val)}
                         keyboardType={'number-pad'} 
                         maxLength={6}     
@@ -494,14 +495,14 @@ const RegisterPage=({route})=>{
                         items={selector3}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={country==null||0?'':country}
+                        value={country==null|| country==0?'':country}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Country", value: 0 }}
                         Icon={()=>
                            <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                         source={require('../../../../assets/Image/down.png')}/>}   
                      />                                    
                     </View>
@@ -518,14 +519,14 @@ const RegisterPage=({route})=>{
                            items={selector1}
                            style={{ 
                               inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                           placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                           placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                            }}
-                           value={state==null||0?'':state}
+                           value={state==null||state== 0?'':state}
                            useNativeAndroidPickerStyle={false}
                            placeholder={{ label: "Select State", value: 0 }}
                            Icon={()=>
                            <Image 
-                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                           style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                         source={require('../../../../assets/Image/down.png')}/>}   
                      />                                
                     </View>
@@ -541,14 +542,14 @@ const RegisterPage=({route})=>{
                         items={selector2}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={city==null||0?'':city}
+                        value={city==null||city== 0?'':city}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{label: "Select City", value:0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                         source={require('../../../../assets/Image/down.png')}/>}   
                   />                            
                     </View>
@@ -565,14 +566,14 @@ const RegisterPage=({route})=>{
                                          items={Relation}
                                          style={{ 
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                                         placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                                          }}
-                                         value={relation==0||null?'':relation}
+                                         value={relation==0||relation== null?'':relation}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Relationship", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                                         source={require('../../../../assets/Image/down.png')}/>}   
                                    />
                     </View>
@@ -584,14 +585,14 @@ const RegisterPage=({route})=>{
                                          items={Incom_Group}
                                          style={{ 
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                                         placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                                          }}
-                                         value={income_group==0||null?'':income_group}
+                                         value={income_group==0||income_group== null?'':income_group}
                                          useNativeAndroidPickerStyle={false}
                                          placeholder={{ label: "Select Income Group", value: 0 }}
                                          Icon={()=>
                                           <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                                         style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                                         source={require('../../../../assets/Image/down.png')}/>}   
                                    />
                     </View>
@@ -607,14 +608,14 @@ const RegisterPage=({route})=>{
                         items={Occupation}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={occupation==null||0?'':occupation}
+                        value={occupation==null||occupation== 0?'':occupation}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Occupation", value: 0 }}
                         Icon={()=>
                            <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                         source={require('../../../../assets/Image/down.png')}/>}   
                      />   
                        
@@ -640,14 +641,14 @@ const RegisterPage=({route})=>{
                         items={Education}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={education==0||null?'':education}
+                        value={education==0||education== null?'':education}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Education", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                      source={require('../../../../assets/Image/down.png')}/>}   
                   />                             
                     </View>
@@ -664,14 +665,14 @@ const RegisterPage=({route})=>{
                         items={Marital_Status}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={marital_status==0||null?'':marital_status}
+                        value={marital_status==null?'':marital_status}
                         useNativeAndroidPickerStyle={false}
-                        placeholder={{ label: "Marital Status", value: 0 }}
+                        placeholder={{ label: "Marital Status", value: '' }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                         source={require('../../../../assets/Image/down.png')}/>}   
                   />                               
                     </View>
@@ -688,14 +689,14 @@ const RegisterPage=({route})=>{
                         items={Residential_Status}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
+                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
                         }}
-                        value={residential_address==0||null?'':residential_address}
+                        value={residential_address==0||residential_address== null?'':residential_address}
                         useNativeAndroidPickerStyle={false}
                         placeholder={{ label: "Select Residential Status", value: 0 }}
                         Icon={()=>
                         <Image 
-                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?11:4}} 
+                        style={{marginLeft:12,width:25,height:9,marginTop:Platform.OS=='android'?14:4}} 
                      source={require('../../../../assets/Image/down.png')}/>}   
                   />                          
                     </View>
@@ -733,8 +734,8 @@ const Residential_Status=[
   
 ] 
 const Marital_Status=[
-   { label: 'Married', value: 'Married' },
-   { label: 'Unmarried', value: 'Unmarried' },
+   { label: 'Married', value: '1' },
+   { label: 'Unmarried', value: '0' },
 ]
 
 const Relation=[

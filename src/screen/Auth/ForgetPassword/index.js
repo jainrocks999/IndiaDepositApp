@@ -87,7 +87,9 @@ const ForgetPassword = () => {
           {isFetching ? <Loader /> : null}
           <KeyboardAwareScrollView>
             <View style={styles.imageContainer}>
-              <TouchableOpacity onPress={() => navigation.push('Login')}>
+              <TouchableOpacity
+                delayPressIn={0}
+                onPress={() => navigation.push('Login')}>
                 <Image
                   style={{width: 32, height: 24}}
                   source={require('../../../assets/Image/arrowBack.png')}

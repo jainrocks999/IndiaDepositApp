@@ -200,10 +200,7 @@ useEffect(()=>{
                 <View style={styles.main}>
                   < View style={styles.view}>
                       <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
-                        Lorem ipsum, or lipsum as it is sometimes known,
-                        is dummy text used in laying out print, graphic or
-                        web designs. The passage is attributed to an
-                        unknown typesetter book.
+                      We are trying to show you exact information available in public domain but may differ from actual
                      </Text>
                      <View  style={{marginTop:29}}>
                         <Text style={[styles.text1,{fontWeight:'700'}]}>Tenure</Text>
@@ -299,14 +296,17 @@ useEffect(()=>{
                           </View>
                           <View style={styles.view5}>
                              <View style={{flexDirection:'row',alignItems:'center'}}>
-                             <TouchableOpacity onPress={()=>getAddress()}>
+                             <TouchableOpacity delayPressIn={0}
+                              onPress={()=>getAddress()}>
                                 <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
                               </TouchableOpacity>
                               {address? <Text style={[styles.text1,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
                                 <Text onPress={()=>getAddress()} style={[styles.text1,{marginLeft:10}]}>Current Location</Text>}
                                 </View>
                                 {address?
-                              <TouchableOpacity
+                              <TouchableOpacity 
+                              
+                              delayPressIn={0}
                               onPress={()=>setAddress('')}
                               style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
                               <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>

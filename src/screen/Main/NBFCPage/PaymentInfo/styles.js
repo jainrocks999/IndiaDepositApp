@@ -18,12 +18,18 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         paddingVertical:15,
         marginHorizontal:15,
-        // justifyContent:'center',
-        // alignItems:'center',
         marginVertical:2,
         marginTop:13,
-        flexDirection:'row'
-
     },
+    font:{
+        fontFamily:'Montserrat-Normal',
+        fontSize:14,
+        color:colors.textColor
+    },
+    font16:{
+        fontFamily:'Montserrat-Bold',
+        fontSize:14,
+        color:colors.textColor
+    }
    
 })

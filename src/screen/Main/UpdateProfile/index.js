@@ -90,13 +90,15 @@ const RegisterPage = ({route}) => {
   );
   const [open, setOpen] = useState(false);
   const [dd1, mm1, yyyy1] = user.dob.split('-');
-  const [date, setDate] = useState(new Date(`${yyyy1}-${mm1}-${dd1}`));
+  const [date, setDate] = useState(
+    user.dob == 0 ? new Date() : new Date(`${yyyy1}-${mm1}-${dd1}`),
+  );
+  console.log('this is user dob');
   const selector1 = useSelector(state => state.StateList);
   const selector2 = useSelector(state => state.CityList);
   const value1 = date.toISOString().split('T')[0];
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
-  console.log('this is selected state adfjdklfjdflk', state, city, country);
 
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -127,7 +129,7 @@ const RegisterPage = ({route}) => {
       state_id: state,
     });
   }, []);
-  console.log('this is user number', selector1);
+
   const validateUser = async values => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
     if (gender == 0 || gender == '' || gender == null) {
@@ -435,6 +437,7 @@ const RegisterPage = ({route}) => {
                       {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                     </View>
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => setOpen(true)}
                       style={styles.dropCal}>
                       <View style={{width: '80%'}}>
@@ -482,7 +485,9 @@ const RegisterPage = ({route}) => {
                                       onDateChange={(date)=> setDob(date)}                                   
                                   />  */}
                       </View>
-                      <TouchableOpacity onPress={() => setOpen(true)}>
+                      <TouchableOpacity
+                        delayPressIn={0}
+                        onPress={() => setOpen(true)}>
                         <Image
                           style={{
                             marginLeft: 0,
@@ -527,6 +532,7 @@ const RegisterPage = ({route}) => {
                     />
                   ) : user.email_status == 0 ? (
                     <TouchableOpacity
+                      delayPressIn={0}
                       onPress={() => manageVerification()}
                       style={{
                         alignItems: 'center',
@@ -682,7 +688,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -695,7 +701,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -721,7 +727,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -734,7 +740,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -759,7 +765,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -772,7 +778,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -802,7 +808,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -819,7 +825,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -849,7 +855,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -864,7 +870,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -906,7 +912,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -919,7 +925,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -950,7 +956,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -967,7 +973,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -998,7 +1004,7 @@ const RegisterPage = ({route}) => {
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 35,
+                        height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -1015,7 +1021,7 @@ const RegisterPage = ({route}) => {
                           marginLeft: 12,
                           width: 25,
                           height: 9,
-                          marginTop: Platform.OS == 'android' ? 11 : 4,
+                          marginTop: Platform.OS == 'android' ? 14 : 4,
                         }}
                         source={require('../../../assets/Image/down.png')}
                       />
@@ -1048,8 +1054,8 @@ const Residential_Status = [
   {label: 'Foreign Resident', value: 'Foreign Resident'},
 ];
 const Marital_Status = [
-  {label: 'Married', value: 'Married'},
-  {label: 'Unmarried', value: 'Unmarried'},
+  {label: 'Married', value: '1'},
+  {label: 'Unmarried', value: '2'},
 ];
 const Education = [
   {label: 'Senior Secondary (Class X)', value: 'Senior Secondary (Class X)'},
@@ -1072,7 +1078,6 @@ const Incom_Group = [
   {label: '>1500000', value: '>1500000'},
 ];
 
-const Country = [{label: 'India', value: 'India'}];
 const Occupation = [
   {label: 'Salaried', value: 'Salaried'},
   {label: 'Self-employed', value: 'Self-employed'},

@@ -9,7 +9,14 @@ import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../AsyncStorage';
+import {Picker} from '@react-native-picker/picker';
 
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 let maturityAmount=0
 let interestAmount=0                     
@@ -21,6 +28,8 @@ const FD=()=>{
     const [f,setf]=useState('1')        
     const [len,setLen]=useState(5)
     const investmentAmount=totalInvestment
+    const [selectedLanguage, setSelectedLanguage] = useState();
+
 
 useEffect(async()=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -195,23 +204,21 @@ if (f==0) {
                           width:0,
                           fontSize:0,
                           marginRight:10,
-                          // borderWidth:1
+                          height:40
                         },
                         placeholder:{color:colors.heading1,
-                          // height:35,
                           alignSelf:'center'
                         }
                       }}
                         value={period==null||0?'':period}
-                        useNativeAndroidPickerStyle={false}
+                        fixAndroidTouchableBug={true}
+					            	useNativeAndroidPickerStyle={false}
                         placeholder={{ }}
                         Icon={()=>
                           <Image 
-                         style={{marginRight:-2,width:25,height:9, marginTop:Platform.OS=='android'? 20:4}} 
+                         style={{marginRight:2,width:25,height:9, marginTop:Platform.OS=='android'? 16:4}} 
                         source={require('../../../assets/Image/down.png')}/>} 
-                        
                         />    
-                       
                         </View>
                     </View>
                 </View>
@@ -253,18 +260,20 @@ if (f==0) {
                         <RNPickerSelect
                         onValueChange={(val)=>setf(val)}
                         items={Data1}
+                        onOpen={()=>console.log('hidfdsfj j')}
                         style={{ 
                         inputAndroid: { 
                           color: colors.textColor,
                           fontFamily:'Montserrat-Regular',
-                          width:30,
-                          fontSize:0
-
+                          width:0,
+                          fontSize:0,
+                          height:40
                         },
                         placeholder:{color:colors.heading1,alignSelf:'center'}
                         }}
                         value={f==null||f==0?'':f}
-                        useNativeAndroidPickerStyle={false}
+                        fixAndroidTouchableBug={true}
+					            	useNativeAndroidPickerStyle={false}
                         placeholder={{ }}
                         Icon={()=>
                           <Image 

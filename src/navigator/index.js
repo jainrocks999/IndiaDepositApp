@@ -80,6 +80,7 @@ import NBFCList from '../screen/Main/NBFCList';
 import NBFCAccountDetail from "../screen/Main/NBFCAccountDetail";
 import NBFCCompare from '../screen/Main/NBFCCompare';
 import NBFCFilter from '../screen/Main/NBFCFilter';
+import RedeemAccountDetail from '../screen/Main/NBFCPage/RedeemAccountDetail';
 
 const Stack = createStackNavigator();
 function Navigate() {
@@ -182,6 +183,7 @@ function Navigate() {
         <Stack.Screen name="NBFCAccountDetail" component={NBFCAccountDetail}/>
         <Stack.Screen name="NBFCCompare" component={NBFCCompare}/>
         <Stack.Screen name="NBFCFilter" component={NBFCFilter}/>
+        <Stack.Screen name="RedeemAccountDetail" component={RedeemAccountDetail}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

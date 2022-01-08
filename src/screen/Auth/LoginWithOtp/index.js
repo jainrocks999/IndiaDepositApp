@@ -98,6 +98,7 @@ const Login = () => {
             </View>
             <View style={styles.main}>
               <TouchableOpacity
+                delayPressIn={0}
                 onPress={() => navigation.navigate('Login')}
                 style={styles.bottom}>
                 <Text style={[styles.account, {textAlign: 'center'}]}>
@@ -139,6 +140,7 @@ const Login = () => {
                 <CustomButton onPress={() => handleSubmit()} title="GET OTP" />
               </View>
               <TouchableOpacity
+                delayPressIn={0}
                 onPress={() => navigation.push('Login')}
                 style={styles.bottom}>
                 <Text style={styles.account1}>Login With Pin</Text>

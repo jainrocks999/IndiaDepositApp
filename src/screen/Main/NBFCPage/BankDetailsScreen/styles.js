@@ -92,7 +92,7 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         paddingHorizontal:15,
         paddingVertical:10,
-        marginBottom:50
+        marginBottom:10
     },
     error:
     {
@@ -132,7 +132,18 @@ export default StyleSheet.create({
         marginVertical:2,
         marginTop:13
     },
-   button:{
-       paddingVertical:30,
-       marginBottom:10},
+   buttons:{
+       marginTop:30,
+       marginBottom:10
+    },
+    font:{
+        fontFamily:'Montserrat-Normal',
+        fontSize:14,
+        color:colors.textColor
+    },
+    font16:{
+        fontFamily:'Montserrat-Bold',
+        fontSize:14,
+        color:colors.textColor
+    }
 })

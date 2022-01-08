@@ -11,10 +11,19 @@ export default StyleSheet.create({
        
        
     },
+    same1:
+    {
+        fontSize:fontSize.ten,
+        fontFamily:'Montserrat-SemiBold',
+        color:colors.textColor,
+        textAlign:'center'
+       
+       
+    },
     title:
     {
         fontSize:fontSize.fourteen,
-        fontFamily:'Montserrat-Medium',
+        fontFamily:'Montserrat-SemiBold',
         color:colors.bc
     },
     cardView:

@@ -12,6 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import Loader from '../../../component/loader';
 import Toast from 'react-native-simple-toast';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from "../../../component/AsyncStorage";
 
 const FDFilter=({route})=>{
     const dispatch=useDispatch()
@@ -32,11 +34,11 @@ const FDFilter=({route})=>{
     const [value1,setValue1]=useState('0')
     const [penalty,setPenalty]=useState('')
     const [loan1,setLoan]=useState('')
-
+    const [test,setTest]=useState(['Regular', 'Senior Citizen'])
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
     const data=route.params.data
-
+console.log('this is user id',data);
 useEffect(()=>{
     const backAction = () => {
         navigation.goBack()
@@ -67,32 +69,67 @@ useEffect(()=>{
         setToggleCheckBox1(false)
         setToggleCheckBox2(false)
     }
-    console.log('this is testing',data,selected);
-
-    const applyFilter=()=>{
+    const applyFilter=async()=>{
+        const user_id=await AsyncStorage.getItem(Storage.user_id)
+        if(isEnabled7==true&&penalty==''){
+           Toast.show('Please enter premature penalty rate')
+        }
+        else if(isEnabled8==true&& loan1==''){
+            Toast.show('Please enter loan rate')
+        }
+        else{
       dispatch({
+        // type: 'FD_Search_Request',
+        // url: 'fdlist1',
+        // user_id,
+        // year:0,
+        // month:0,
+        // days:30,
+        // amount:10000,
+        // location:data.location,
+        // type1:data.type1,
+        // bank_id:'',
+        // interest_rate:'',
+        // nationalized:'',
+        // sb_account_required:'',
+        // offer:'',
+        // gender:'',
+        // interest_payout:'',
+        // premature_penalty:'',
+        // loan:'',
+        // order_on:'',
+        // order_to:'',
+        // b_lat:'',
+        // b_long:'',
+        // b_type:1,
+        // navigation:navigation
             type: 'FD_Search_Request',
             url: 'fdlist1',
+            user_id,
             year:data.year,
             month:parseInt(data.month),
             days:data.days,
             amount:data.amount,
             location:data.location,
             type1:data.type1,
-            order_on:data.order_on,
-            order_to:data.order_to,
             bank_id:selected,
             interest_rate:value1,
             nationalized:isEnabled1==true?1:0,
             sb_account_required:isEnabled2==true?1:0,
             offer:isEnabled3==true?1:0,
-            insurance:isEnabled4==true?1:0,
-            // gender:toggleCheckBox==true?'1':toggleCheckBox1==true?'2':toggleCheckBox2==true?'3':'0',
             interest_payout:isEnabled6==true?1:0,
             premature_penalty:isEnabled7==true?1:0,
             loan:isEnabled8==true?1:0,
+            order_on:data.order_on,
+            order_to:data.order_to,
+            premature_withdrawal_rate:penalty,
+            load_lending_rate:loan1,
+            b_lat:'',
+            b_long:'',
+            b_type:1,
             navigation:navigation
           })
+        }
     }
     console.log('thisis fkadjfdkjf',value1,isEnabled1,isEnabled2,isEnabled6,penalty,loan1);
     return(
@@ -234,6 +271,7 @@ useEffect(()=>{
                     style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
                     onChangeText={(val)=>setPenalty(val)}
                     value={penalty}
+                    keyboardType={'number-pad'}
                     />
                 
                 </View>:<View/>}
@@ -248,8 +286,15 @@ useEffect(()=>{
                 />
                 </View>
                 {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
-                   
-                               <RNPickerSelect
+                <TextInput
+                    placeholder='Enter Here'
+                    returnKeyType='done'
+                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
+                    onChangeText={(val)=>setLoan(val)}
+                    value={loan1}
+                    keyboardType={'number-pad'}
+                    />
+                               {/* <RNPickerSelect
                                          onValueChange={(val)=>setLoan(val)}
                                          items={loan}
                                          style={{ 
@@ -263,7 +308,7 @@ useEffect(()=>{
                                           <Image 
                                          style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
-                                   />
+                                   /> */}
                 </View>:<View/>}
                 
             </View>
@@ -280,7 +325,7 @@ useEffect(()=>{
                 <View style={{
                     alignItems:'center',justifyContent:'center',width:'49%'
                 }}>
-                <TouchableOpacity onPress={()=>navigation.goBack()}>
+                <TouchableOpacity delayPressIn={0} onPress={()=>navigation.goBack()}>
                    <Text style={{color:colors.bc,fontFamily:'Montserrat-Bold'}}>CLOSE</Text>
                 </TouchableOpacity>
                 </View>
@@ -288,7 +333,7 @@ useEffect(()=>{
                 <View style={{
                     alignItems:'center',justifyContent:'center',width:'49%'
                 }}>
-                <TouchableOpacity>
+                <TouchableOpacity delayPressIn={0}>
                 <Text onPress={()=>applyFilter()} style={{color:colors.bc,fontFamily:'Montserrat-Bold'}}>APPLY</Text>
                 </TouchableOpacity>
                 </View>

@@ -128,6 +128,7 @@ const RegisterPage = () => {
   const showVisible = () => {
     return (
       <TouchableOpacity
+        delayPressIn={0}
         onPressIn={() => setVisible(false)}
         onPressOut={() => setVisible(true)}>
         {!visible ? (
@@ -147,6 +148,7 @@ const RegisterPage = () => {
   const showVisible1 = () => {
     return (
       <TouchableOpacity
+        delayPressIn={0}
         onPressIn={() => setVisible1(false)}
         onPressOut={() => setVisible1(true)}>
         {!visible1 ? (
@@ -340,7 +342,9 @@ const RegisterPage = () => {
                         }}
                         onClose={() => setShow(false)}
                       />
-                      <TouchableOpacity onPress={() => setShow(true)}>
+                      <TouchableOpacity
+                        delayPressIn={0}
+                        onPress={() => setShow(true)}>
                         <Image
                           style={{width: 10, height: 20, marginTop: 4}}
                           source={require('../../../assets/Image/down.png')}
@@ -553,6 +557,7 @@ const RegisterPage = () => {
             <DialogContent>
               <View style={{alignSelf: 'flex-end', padding: -20}}>
                 <TouchableOpacity
+                  delayPressIn={0}
                   onPress={() => setShowModal(false)}
                   style={styles.cross}>
                   <Text style={styles.x}>x</Text>
@@ -582,6 +587,7 @@ const RegisterPage = () => {
             <DialogContent>
               <View style={{alignSelf: 'flex-end'}}>
                 <TouchableOpacity
+                  delayPressIn={0}
                   onPress={() => setShowModal1(false)}
                   style={styles.cross}>
                   <Text style={styles.x}>x</Text>

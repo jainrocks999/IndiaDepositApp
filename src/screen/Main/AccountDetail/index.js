@@ -1,18 +1,24 @@
 import React, {useEffect} from 'react';
-import {View, Text, Image, ScrollView, BackHandler,TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  BackHandler,
+  TouchableOpacity,
+} from 'react-native';
 import Header from '../../../component/compareHeader';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import StatusBar from '../../../component/StatusBar';
 import {useSelector} from 'react-redux';
 import HTMLView from 'react-native-htmlview';
-import axios from "axios";
+import axios from 'axios';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
   const selector = useSelector(state => state.SBDetail);
   const details = selector[0];
-  console.log('this i fkf  narendra here ',route.params);
   useEffect(() => {
     const backAction = () => {
       navigation.goBack();
@@ -54,44 +60,47 @@ const FDList = ({route}) => {
     }
   };
 
-
-  const manageForm=async()=>{
+  const manageForm = async () => {
     try {
-         const data = new FormData();
-         data.append('form_type',
-         details.type=='Regular'?'fdRegular':
-         details.type=='Senior Citizen'?'FDSenior Citizen':
-         details.type=='Female'?'SBFemale':
-         details.type=='Zero Balance'?'SBZeroBalance':''
-         )
-         data.append('bank_id',details.bank_id)
-         data.append('from_for','savingaccount')
+      const data = new FormData();
+      data.append(
+        'form_type',
+        details.type == 'Regular'
+          ? 'fdRegular'
+          : details.type == 'Senior Citizen'
+          ? 'FDSenior Citizen'
+          : details.type == 'Female'
+          ? 'SBFemale'
+          : details.type == 'Zero Balance'
+          ? 'SBZeroBalance'
+          : '',
+      );
+      data.append('bank_id', details.bank_id);
+      data.append('from_for', 'savingaccount');
 
-         const response = await axios({
-           method: 'POST',
-           data,
-           headers: {
-             'content-type': 'multipart/form-data',
-             Accept: 'multipart/form-data',
-           },
-           url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
-         });
-         if (response.data.status==200) {
-          navigation.navigate('FD_FORM', {
-            id: details.saving_account_id,
-            from: 'saving_account_id',
-            response: response.data.data,
-            type: 'common',
-            bank_id: details.bank_id,
-            pincode: route.params.pincode,
-          });
-            } 
-       } catch (error) {
-        throw error;
-       }
-}
-
-
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+      });
+      if (response.data.status == 200) {
+        navigation.navigate('FD_FORM', {
+          id: details.saving_account_id,
+          from: 'saving_account_id',
+          response: response.data.data,
+          type: 'common',
+          bank_id: details.bank_id,
+          pincode: route.params.pincode,
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
 
   return (
     <View style={styles.container1}>
@@ -217,7 +226,7 @@ const FDList = ({route}) => {
                 {details.locker_facility == 0 ? 'No' : 'Yes'}
               </Text>
               <Text style={styles.item1}>{`Locker Facility`}</Text>
-              <Text style={[styles.item, {textAlign: 'center'}]}>
+              <Text style={[styles.item1, {textAlign: 'center'}]}>
                 {'subject to availiblity at branch'}
               </Text>
             </View>
@@ -232,7 +241,7 @@ const FDList = ({route}) => {
                   styles.item1,
                   {textAlign: 'center'},
                 ]}>{`Cash Transaction Limit ATM`}</Text>
-              <Text style={[styles.item, {textAlign: 'center'}]}>
+              <Text style={[styles.item1, {textAlign: 'center'}]}>
                 {'subject to ATM at branch'}
               </Text>
             </View>
@@ -241,7 +250,7 @@ const FDList = ({route}) => {
                 {details.pan_required == 0 ? 'No' : 'Yes'}
               </Text>
               <Text style={styles.item1}>{`Pan Card Required`}</Text>
-              <Text style={[styles.item, {textAlign: 'center'}]}>
+              <Text style={[styles.item1, {textAlign: 'center'}]}>
                 {
                   'If you don’t have PAN card then you will need to fill Form 16'
                 }
@@ -347,22 +356,22 @@ const FDList = ({route}) => {
               />
             </View>
           </View>
-        )} 
-         
+        )}
+
         <View style={{height: 30}}></View>
       </ScrollView>
-      <View style={{backgroundColor:'#fff',width:'100%',height:75}}>
-         <View style={styles.button}>
-        <TouchableOpacity
-        disabled={false}
-        onPress={()=>manageForm()}
-        style={[styles.btCont,{width:'96%'}]}>
-          <Text style={styles.text3}>DOWNLOAD FORM</Text>
-        </TouchableOpacity>
+      <View style={{backgroundColor: '#fff', width: '100%', height: 75}}>
+        <View style={styles.button}>
+          <TouchableOpacity
+            delayPressIn={0}
+            disabled={false}
+            onPress={() => manageForm()}
+            style={[styles.btCont, {width: '96%'}]}>
+            <Text style={styles.text3}>DOWNLOAD FORM</Text>
+          </TouchableOpacity>
         </View>
-        </View>
+      </View>
       <StatusBar />
-
     </View>
   );
 };

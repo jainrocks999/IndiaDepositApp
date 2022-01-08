@@ -28,7 +28,6 @@ const Holiday = () => {
   const [listDataSource, setListDataSource] = useState([]);
   const [listDataSource1, setListDataSource1] = useState([]);
   const [multiSelect, setMultiSelect] = useState(false);
-  const [expand, setExpand] = useState(false);
   const [boolean, setBoolean] = useState(false);
   const [loader, setLoader] = useState(false);
   const re = /^[0-9\b]+$/;
@@ -67,7 +66,7 @@ const Holiday = () => {
 
   const renderSearch = async () => {
     if (bank_name == '' || bank_name == null || bank_name == 0) {
-      Toast.show('Please select bank name');
+      Toast.show('Please select financial institution');
     } else if (pincode == '') {
       Toast.show('Please enter pincode');
     } else {
@@ -134,18 +133,10 @@ const Holiday = () => {
     return (
       <View>
         <TouchableOpacity
+          delayPressIn={0}
           activeOpacity={0.9}
           onPress={onClickFunction}
-          style={{
-            width: '100%',
-            height: 40,
-            backgroundColor: colors.bc,
-            marginTop: 5,
-            justifyContent: 'space-between',
-            paddingHorizontal: 15,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
+          style={styles.index}>
           <Text style={styles.headerText}>{item.branch_name}</Text>
           {item.isExpanded ? (
             <Image
@@ -171,7 +162,7 @@ const Holiday = () => {
             <Text
               style={
                 styles.item2
-              }>{`Bank Name : ${item.branchdetail.bankname}`}</Text>
+              }>{`Financial Institution : ${item.branchdetail.bankname}`}</Text>
           </View>
           <View style={styles.border1}></View>
           <View style={styles.container}>
@@ -205,18 +196,10 @@ const Holiday = () => {
       <View>
         {item.details.length > 0 ? (
           <TouchableOpacity
+            delayPressIn={0}
             activeOpacity={0.8}
             onPress={onClickFunction}
-            style={{
-              width: '100%',
-              height: 40,
-              backgroundColor: colors.bc,
-              marginTop: 5,
-              justifyContent: 'space-between',
-              paddingHorizontal: 15,
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
+            style={styles.onclick}>
             <Text style={styles.headerText}>{item.month}</Text>
             {item.isExpand ? (
               <Image
@@ -288,7 +271,9 @@ const Holiday = () => {
           ]}>
           <View style={styles.Textview1}>
             <View style={{marginTop: 0}}>
-              <Text style={{fontFamily: 'Montserrat-SemiBold'}}>Bank Name</Text>
+              <Text style={{fontFamily: 'Montserrat-SemiBold'}}>
+                Financial Institution
+              </Text>
               <View style={[styles.input, {marginTop: 2}]}>
                 <RNPickerSelect
                   onValueChange={val => set_bank_name(val)}
@@ -327,6 +312,7 @@ const Holiday = () => {
           </View>
           <View style={[styles.Textview1, {alignItems: 'center'}]}>
             <TouchableOpacity
+              delayPressIn={0}
               onPress={() => renderSearch()}
               style={styles.button}>
               <Text style={styles.search}>SEARCH</Text>

@@ -57,7 +57,7 @@ export default StyleSheet.create({
         elevation:3,
         borderRadius:10,
         backgroundColor:colors.white,
-        paddingHorizontal:15,
+        // paddingHorizontal:15,
         paddingVertical:10
     },
     same:
@@ -71,12 +71,13 @@ export default StyleSheet.create({
     },
     same1:
     {
-        fontSize:fontSize.thirteen,
-        fontFamily:'Montserrat-Bold',
+        fontSize:fontSize.ten,
+        fontFamily:'Montserrat-SemiBold',
         color:colors.textColor,
-        textAlign:'center'
+        textAlign:'center',marginBottom:5
        
        
     },
     image:{width:25,height:25},
+    status:{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.white}
 })

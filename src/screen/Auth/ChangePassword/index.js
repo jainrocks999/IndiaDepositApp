@@ -65,7 +65,7 @@ const ChangePassword = () => {
 
   const showVisible = () => {
     return (
-      <TouchableOpacity
+      <TouchableOpacity delayPressIn={0}
         onPress={() => (visible ? setVisible(false) : setVisible(true))}>
         {!visible ? (
           <Image
@@ -83,7 +83,7 @@ const ChangePassword = () => {
   };
   const showVisible1 = () => {
     return (
-      <TouchableOpacity
+      <TouchableOpacity delayPressIn={0}
         onPress={() => (visible1 ? setVisible1(false) : setVisible1(true))}>
         {!visible1 ? (
           <Image
@@ -102,7 +102,7 @@ const ChangePassword = () => {
 
   const showVisible2 = () => {
     return (
-      <TouchableOpacity
+      <TouchableOpacity delayPressIn={0}
         onPress={() => (visible2 ? setVisible2(false) : setVisible2(true))}>
         {!visible2 ? (
           <Image

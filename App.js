@@ -71,16 +71,19 @@ const App = () => {
     requestPermissions: false,
   });
 
-  const getCrashlyticsDetail = () => {
+  const getCrashlyticsDetail = async() => {
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    const name=await AsyncStorage.getItem(Storage.name)
+
     try {
-      crashlytics().setUserId('1')
-      crashlytics().setAttribute('username', 'userId value')
-      crashlytics().setAttributes({
-        role: 'admin',
-        followers: '13',
-        email: 'narendrap.forebearpro@gmail.com',
-        username: 'narendra pal'
-      })
+      crashlytics().setUserId(user_id)
+      crashlytics().setAttribute('username', name)
+      // crashlytics().setAttributes({
+      //   role: 'admin',
+      //   followers: '13',
+      //   email: 'narendrap.forebearpro@gmail.com',
+      //   username: 'narendra pal'
+      // })
     } catch (err) {
       crashlytics().recordError(err)
     }

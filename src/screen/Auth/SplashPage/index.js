@@ -93,7 +93,6 @@ const Splash = () => {
         Toast.show('Please check your network');
       }
       throw error;
-      console.log('narendr hrere ', error);
     }
   };
   const initial = async (image_url, intro_speech, name, KeepmeLogin) => {
@@ -132,7 +131,7 @@ const Splash = () => {
           <View style={styles.view1}>
             <Text style={styles.text1}>Update</Text>
           </View>
-          <TouchableOpacity style={styles.ModelmsgView}>
+          <TouchableOpacity delayPressIn={0}  style={styles.ModelmsgView}>
             <Text style={styles.ModelMsgText}>
               {
                 'A newer version of this app is available for download. Please update it from PlayStore!'
@@ -141,7 +140,7 @@ const Splash = () => {
           </TouchableOpacity>
 
           <View style={styles.view5}>
-            <TouchableOpacity style={styles.popup} onPress={() => openUrl()}>
+            <TouchableOpacity delayPressIn={0} style={styles.popup} onPress={() => openUrl()}>
               <Text style={styles.ModelBtntext}>Download Now</Text>
             </TouchableOpacity>
           </View>

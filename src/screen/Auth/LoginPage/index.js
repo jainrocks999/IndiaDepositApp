@@ -246,6 +246,7 @@ const Login = () => {
                   </Text>
                 </View>
                 <TouchableOpacity
+                  delayPressIn={0}
                   onPress={() => navigation.push('LoginWithOtp')}
                   style={styles.bottom}>
                   <Text style={styles.account1}>Login With OTP</Text>

@@ -55,7 +55,7 @@ const BankDetail=()=>{
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
        if(bank_name==''){
-         Toast.show('Please select Bank Name')
+         Toast.show('Please select financial institution')
        }
        else if(account_type==''){
          Toast.show('Please select Account Type')
@@ -102,7 +102,7 @@ const addUser=async(values)=>{
                         <Text style={styles.warn}>{errors.name}</Text>}
                     </View> 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Bank Name</Text>
+                    <Text style={styles.better}>Financial Institution</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                   

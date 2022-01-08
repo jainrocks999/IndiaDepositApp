@@ -16,6 +16,7 @@ const BankCalu=({route})=>{
         <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:85,marginTop:-5}}>
             <View  style={styles.touch1}>
                  <TouchableOpacity
+                 delayPressIn={0}
                  disabled={selectedItems.length>0?true:false} 
                  onPress={onPress}
                  style={styles.imageView}>
@@ -24,6 +25,7 @@ const BankCalu=({route})=>{
                  </TouchableOpacity>
                  {selected && <View style={styles.enable}>
                     <TouchableOpacity
+                    delayPressIn={0}
                       onPress={onPress}
                       style={styles.touch1}>
                      <View>
@@ -59,7 +61,7 @@ const BankCalu=({route})=>{
 return(
   <View style={styles.container1}>
      <View style={styles.container}>
-          <TouchableOpacity  onPress={()=>navigation.goBack()}>
+          <TouchableOpacity delayPressIn={0} onPress={()=>navigation.goBack()}>
             <Image  style={styles.img}
               source={require('../../../assets/Image/arrow2.png')}
             />
@@ -85,11 +87,11 @@ return(
                       
            </View>
              <View style={{flexDirection:'row',marginLeft:10}}>
-                 <TouchableOpacity style={styles.touch2}>
+                 <TouchableOpacity delayPressIn={0} style={styles.touch2}>
                 
                     <Text style={styles.tt}>{demo}</Text>
                  </TouchableOpacity>
-                 <TouchableOpacity style={[styles.touch2,{marginLeft:5}]}>
+                 <TouchableOpacity delayPressIn={0} style={[styles.touch2,{marginLeft:5}]}>
                    <Text style={styles.tt}>{demo1}</Text>
                  </TouchableOpacity>
              </View> 

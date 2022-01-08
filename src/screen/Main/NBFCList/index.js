@@ -261,7 +261,7 @@ getCurrentLocation();
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
-                <TouchableOpacity 
+                <TouchableOpacity delayPressIn={0}
                     onLongPress={(val)=>handleSelectionMultiple(item.fixed_deposit_id)}
                     onPress={()=>handleonPress(item)}
                     style={[styles.card,
@@ -281,7 +281,7 @@ const renderItem=(item)=>{
                    <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,}}>
 
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{`${item.rate}%`}</Text>
+                     <Text style={styles.same1}>{`${item.rate}%`}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/interest.png')}/>
@@ -289,7 +289,7 @@ const renderItem=(item)=>{
                      </View>
 
                      <View style={{alignItems:'center'}}>
-                       <Text style={styles.same}>
+                       <Text style={styles.same1}>
                          {(amount* Math.pow((1 + (item.rate/ (100))), (period))).toFixed(0)}
                          </Text>
                        <Image
@@ -299,14 +299,14 @@ const renderItem=(item)=>{
                      </View>
 
                      <View style={{alignItems:'center'}}>
-                       <Text style={styles.same}>{item.loan==0?'No':'Yes'}</Text>
+                       <Text style={styles.same1}>{item.loan==0?'No':'Yes'}</Text>
                        <Image 
                         style={styles.image} 
                        resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
                      <Text  style={styles.same}>{'Loan'}</Text>
                          </View>  
                      <View style={{alignItems:'center'}}>
-                     <Text style={styles.same}>{item.premature_withdrawals==0?'No':'Yes'}</Text>
+                     <Text style={styles.same1}>{item.premature_withdrawals==0?'No':'Yes'}</Text>
                      <Image 
                         style={styles.image}
                         resizeMode='contain' source={require('../../../assets/Image/premature.png')}/>
@@ -324,7 +324,7 @@ const renderItem=(item)=>{
         }}>
            <View>
             <View style={styles.mains}>
-            <TouchableOpacity onPress={()=>navigation.goBack()}>
+            <TouchableOpacity delayPressIn={0} onPress={()=>navigation.goBack()}>
             <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Image/arrow2.png')}/>
             </TouchableOpacity>
             <View style={styles.views}>
@@ -524,7 +524,7 @@ const renderItem=(item)=>{
                       </Dialog>
               <View style={styles.list}>
               
-                <TouchableOpacity
+                <TouchableOpacity delayPressIn={0}
                 onPress={()=>openDialog()}
                 style={{width:'100%',paddingHorizontal:10,paddingVertical:6}}>
                   <View style={[styles.card,{
@@ -567,7 +567,7 @@ const renderItem=(item)=>{
                    paddingTop:5,
                    paddingBottom:5
                    }}>
-                 <TouchableOpacity
+                 <TouchableOpacity delayPressIn={0}
                   onPress={()=>compareFD()}
                  style={{
                   paddingHorizontal:20,
@@ -581,7 +581,9 @@ const renderItem=(item)=>{
                    <Image source={require('../../../assets/Image/filter.png')}/>
                    <Text style={{fontFamily:'Montserrat-Regular',fontSize:13,marginLeft:3}}>Sort By</Text>
                  </View>
-                 <TouchableOpacity style={{
+                 <TouchableOpacity 
+                 delayPressIn={0}
+                 style={{
                     paddingHorizontal:6,
                     paddingVertical:Platform.OS=='android'?0:8,
                      backgroundColor:'#fff',
@@ -606,7 +608,8 @@ const renderItem=(item)=>{
                    resizeMethod='resize' 
                    source={require('../../../assets/Image/down.png')}/>
                  </TouchableOpacity>
-                 <TouchableOpacity 
+                 <TouchableOpacity  
+                 delayPressIn={0}
                  onPress={()=>navigation.navigate('NBFCFilter',{
                    data:route.params
                  })}
@@ -729,13 +732,13 @@ const item = [ {
   name: 'Senior Citizen',
   id: 15,
 },
-{
-  name: 'Tax Saving',
-  id: 17,
-},
-{
-  name: 'NRI',
-  id: 13,
-},
+// {
+//   name: 'Tax Saving',
+//   id: 17,
+// },
+// {
+//   name: 'NRI',
+//   id: 13,
+// },
 
 ];

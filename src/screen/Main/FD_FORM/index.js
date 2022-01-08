@@ -25,6 +25,7 @@ const fd_form = ({route}) => {
   const [ApiResponse, setApiResponse] = useState(undefined);
   const [multiSelect, setMultiSelect] = useState(false);
   const [listDataSource1, setListDataSource1] = useState([]);
+  console.log('thisi is user ersponse',listDataSource1);
   useEffect(async () => {
     renderSearch();
   }, []);
@@ -55,7 +56,7 @@ const fd_form = ({route}) => {
 
     try {
       const data = new FormData();
-      data.append('location', 110001);
+      data.append('location', route.params.pincode);
       const response = await axios({
         method: 'POST',
         data,
@@ -67,6 +68,7 @@ const fd_form = ({route}) => {
       });
       if (response) {
         setListDataSource1(response.data.data);
+        console.log('this is user response data',response.data);
       }
     } catch (error) {}
   };
@@ -156,7 +158,7 @@ const fd_form = ({route}) => {
     return (
       <View>
         {item.details.length > 0 ? (
-          <TouchableOpacity
+          <TouchableOpacity delayPressIn={0}
             activeOpacity={0.8}
             onPress={onClickFunction}
             style={{
@@ -253,7 +255,7 @@ const fd_form = ({route}) => {
                         <Text
                           style={
                             styles.item2
-                          }>{`Bank Name : ${ApiResponse.branchdetail.bankname}`}</Text>
+                          }>{`Financial Institution : ${ApiResponse.branchdetail.bankname}`}</Text>
                       </View>
                       <View style={styles.border1}></View>
                       <View style={styles.container1}>
@@ -285,7 +287,7 @@ const fd_form = ({route}) => {
           </View>
         ) : (
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{flex: 1, justifyContent: 'center', alignItems: 'center',paddingBottom:20}}>
             <Text
               style={{
                 fontFamily: 'Montserrat-Regular',
@@ -298,10 +300,10 @@ const fd_form = ({route}) => {
           <Text
             style={[
               styles.item3,
-              {paddingVertical: 10},
+              {paddingVertical: 10,marginTop: 10},
             ]}>{`Bank Holidays`}</Text>
-          <View style={{alignItems: 'center', marginTop: 10}}></View>
-          {listDataSource1.length > 0 ? (
+          <View style={{alignItems: 'center', marginTop: 5}}></View>
+          {/* {listDataSource1.length > 0 ? (
             listDataSource1.map((item, key) => (
               <HolidayComponent
                 onClickFunction={() => {
@@ -318,7 +320,7 @@ const fd_form = ({route}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}></View>
-          )}
+          )} */}
         </View>
       </ScrollView>
     </View>

@@ -190,6 +190,7 @@ const FDList = ({route}) => {
           {/* <Text style={styles.title1}>{data1.name}</Text>  */}
           <View style={{marginTop: 30}}>
             <TouchableOpacity
+              delayPressIn={0}
               onPress={() => download(data1)}
               style={styles.button}>
               <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
@@ -212,6 +213,7 @@ const FDList = ({route}) => {
           {/* <Text style={styles.title1}>{data2.name}</Text>  */}
           <View style={{marginTop: 30}}>
             <TouchableOpacity
+              delayPressIn={0}
               onPress={() => download1(data2)}
               style={styles.button}>
               <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
