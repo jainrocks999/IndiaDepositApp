@@ -153,7 +153,7 @@ const addUser=async(values)=>{
                       <View style={styles.drop}>
                       <RNPickerSelect
                             onValueChange={(val)=>set_account_type(val)}
-                            items={data}
+                            items={selector}
                             style={{ 
                               inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
                             placeholder:{color:colors.heading}
