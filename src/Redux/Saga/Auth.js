@@ -6,7 +6,7 @@ import Storage from '../../component/AsyncStorage';
 
 //Login
 function* doLogin(action) {
-  console.log('this is action', action.keep);
+  console.log('this is action', action.pin,action.mobile);
   try {
     const data = new FormData();
     if (action.email) {
@@ -400,6 +400,7 @@ function* privacy(action) {
       });
     }
   } catch (error) {
+    console.log('th narendra ',error);
     yield put({
       type: 'Privacy_Error',
     });
@@ -572,6 +573,7 @@ function* changepassword(action) {
       yield put({
         type: 'Change_Password_Success',
       });
+      action.navigation.navigate('Profile')
       Toast.show(response.messages);
     } else {
       yield put({
@@ -1196,6 +1198,7 @@ function* cityList(action) {
 }
 
 function* Search(action) {
+  console.log('this is actio data',action);
   try {
     const data = new FormData();
     data.append('user_id', action.user_id);
@@ -1210,8 +1213,6 @@ function* Search(action) {
     data.append('nationalized', action.nationalized);
     data.append('sb_account_required', action.sb_account_required);
     data.append('offer', action.offer);
-    // data.append('insurance',action.insurance)
-    // data.append('gender',action.gender)
     data.append('interest_payout', action.interest_payout);
     data.append('premature_penalty', action.premature_penalty);
     data.append('loan', action.loan);
@@ -1221,11 +1222,11 @@ function* Search(action) {
     data.append('b_long', action.b_long);
     // Modification Type
     data.append('btype', action.b_type);
-    data.append('premature_withdrawal_rate', action.premature_withdrawal_rate);
-    data.append('load_lending_rate', action.load_lending_rate);
+    // data.append('premature_withdrawal_rate', action.premature_withdrawal_rate);
+    // data.append('load_lending_rate', action.load_lending_rate);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is user response', response);
+    console.log('this is user response-----------------------------------------------------------------------------------------', response);
     if (response.status == 200) {
       yield put({
         type: 'FD_Search_Success',
@@ -1241,6 +1242,17 @@ function* Search(action) {
           type1: action.type1,
           order_on: action.order_on,
           order_to: action.order_to,
+          bank_id:action.bank_id,
+          interest_rate:action.interest_rate,
+          nationalized:action.nationalized,
+          sb_account_required:action.sb_account_required,
+          offer:action.offer,
+          interest_payout:action.interest_payout,
+          premature_penalty:action.premature_penalty,
+          loan:action.loan,
+          b_lat:action.b_lat,
+          b_long:action.b_long
+
         });
       } else if (action.filter == 'true') {
         action.navigation.navigate('FDList', {
@@ -1252,6 +1264,16 @@ function* Search(action) {
           type1: action.type1,
           order_on: action.order_on,
           order_to: action.order_to,
+          bank_id:action.bank_id,
+          interest_rate:action.interest_rate,
+          nationalized:action.nationalized,
+          sb_account_required:action.sb_account_required,
+          offer:action.offer,
+          interest_payout:action.interest_payout,
+          premature_penalty:action.premature_penalty,
+          loan:action.loan,
+          b_lat:action.b_lat,
+          b_long:action.b_long
         });
       }
     } else {
@@ -1269,6 +1291,16 @@ function* Search(action) {
           type1: action.type1,
           order_on: action.order_on,
           order_to: action.order_to,
+          bank_id:action.bank_id,
+          interest_rate:action.interest_rate,
+          nationalized:action.nationalized,
+          sb_account_required:action.sb_account_required,
+          offer:action.offer,
+          interest_payout:action.interest_payout,
+          premature_penalty:action.premature_penalty,
+          loan:action.loan,
+          b_lat:action.b_lat,
+          b_long:action.b_long
         });
       } else {
         yield put({
@@ -1359,6 +1391,7 @@ function* SBSearch(action) {
     data.append('nationalized', action.nationalized);
     data.append('offer', action.offer);
     data.append('insurance', action.insurance);
+    data.append('account_type',action.account_type)
     data.append('account_sub_type', action.account_sub_type);
     data.append('non_maintenance_penalty', action.non_maintenance_penalty);
     data.append('debit_card_amc', action.debit_card_amc);
@@ -1377,8 +1410,19 @@ function* SBSearch(action) {
         balance: action.min_bal,
         location: action.location,
         type1: action.type1,
-        order_on: action.order_on,
-        order_to: action.order_to,
+        bank_id:action.bank_id,
+        interest_rate:action.interest_rate,
+        nationalized:action.nationalized,
+        offer:action.offer,
+        insurance:action.insurance,
+        account_type:action.account_type,
+        account_sub_type:action.account_sub_type,
+        non_maintenance_penalty:action.non_maintenance_penalty,
+        debit_card_amc:action.debit_card_amc,
+        order_on:action.order_on,
+        order_to:action.order_to,
+        b_lat:action.b_lat,
+        b_long:action.b_long,
       });
     } else {
       if (action.data == 'AccountList') {
@@ -1388,10 +1432,21 @@ function* SBSearch(action) {
         });
         action.navigation.navigate('AccountList', {
           balance: action.min_bal,
-          location: action.location,
-          type1: action.type1,
-          order_on: action.order_on,
-          order_to: action.order_to,
+        location: action.location,
+        type1: action.type1,
+        bank_id:action.bank_id,
+        interest_rate:action.interest_rate,
+        nationalized:action.nationalized,
+        offer:action.offer,
+        insurance:action.insurance,
+        account_type:action.account_type,
+        account_sub_type:action.account_sub_type,
+        non_maintenance_penalty:action.non_maintenance_penalty,
+        debit_card_amc:action.debit_card_amc,
+        order_on:action.order_on,
+        order_to:action.order_to,
+        b_lat:action.b_lat,
+        b_long:action.b_long,
         });
       } else {
         yield put({
@@ -1899,25 +1954,14 @@ function* NBFCSearch(action) {
     data.append('month', action.month);
     data.append('days', action.days);
     data.append('amount', action.amount);
-    data.append('location', action.location);
     data.append('type1', JSON.stringify(action.type1));
     data.append('bank_id', JSON.stringify(action.bank_id));
     data.append('interest_rate', action.interest_rate);
-    data.append('nationalized', action.nationalized);
-    data.append('sb_account_required', action.sb_account_required);
-    data.append('offer', action.offer);
-    // data.append('insurance', action.insurance);
-    data.append('gender', action.gender);
-    data.append('interest_payout', action.interest_payout);
     data.append('premature_penalty', action.premature_penalty);
     data.append('loan', action.loan);
     data.append('order_on', action.order_on);
     data.append('order_to', action.order_to);
     data.append('btype', action.btype);
-    data.append('b_lat', action.b_lat);
-    data.append('b_long', action.b_long);
-    data.append('premature_withdrawal_rate', action.premature_withdrawal_rate);
-    data.append('load_lending_rate', action.load_lending_rate);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
     console.log('this uskgflgk', response.data);
@@ -1931,10 +1975,13 @@ function* NBFCSearch(action) {
         days: action.days,
         year: action.year,
         month: action.month,
-        location: action.location,
         type1: action.type1,
         order_on: action.order_on,
         order_to: action.order_to,
+        bank_id:action.bank_id,
+        interest_rate:action.interest_rate,
+        premature_penalty:action.premature_penalty,
+        loan:action.loan
       });
     } else {
       if (action.data == 'FdList') {

@@ -10,7 +10,7 @@ import Loader from '../../../component/loader';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
-import { RadioButton } from 'react-native-paper';
+// import { RadioButton } from 'react-native-paper';
 import CustomButton from '../../../component/button1';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -84,11 +84,11 @@ const manageCheck1=()=>{
                    }}>Enter Bank Details</Text>
                <View style={[styles.card,{marginTop:10,flexDirection:'row',justifyContent:'space-between'}]}>
                   <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
+                    {/* <RadioButton
                         value={checked}
                         status={ checked === true ? 'checked' : 'unchecked' }
                         onPress={() =>manageCheck()}
-                        color={colors.bc}/>
+                        color={colors.bc}/> */}
                         <View>
                     <Text style={{
                         marginLeft:10,
@@ -100,11 +100,11 @@ const manageCheck1=()=>{
                         </View>
                    </View>
                    <View style={{flexDirection:'row',alignItems:'center',}}>
-                    <RadioButton
+                    {/* <RadioButton
                         value={checked1}
                         status={ checked1 === true ? 'checked' : 'unchecked' }
                         onPress={() =>manageCheck1()}
-                        color={colors.bc}/>
+                        color={colors.bc}/> */}
                         <View>
                     <Text style={{
                         marginLeft:10,

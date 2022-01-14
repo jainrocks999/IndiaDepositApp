@@ -140,7 +140,7 @@ const MyFDDetail = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addnominee',
+          url: 'https://indiadeposit.in/admin/public/apis/addnominee',
         });
         if (response.data.status == 200) {
           setShowModal1(false);
@@ -174,7 +174,7 @@ const MyFDDetail = ({route}) => {
            'content-type': 'multipart/form-data',
            Accept: 'multipart/form-data',
          },
-         url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+         url: 'https://indiadeposit.in/admin/public/apis/getpincodefilter',
        });
       
        if (response.data.status==200) {

@@ -1,25 +1,20 @@
 import React,{useEffect} from "react";
-import {View,Text,FlatList,Image,ScrollView, TouchableOpacity, BackHandler, } from 'react-native';
+import {View,Text,Image,ScrollView, TouchableOpacity, BackHandler, } from 'react-native';
 import Header from '../../../component/header';
-import colors from '../../../component/colors';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
-import Button from '../../../component/button1';
 import StatusBar from "../../../component/StatusBar";
 import { useSelector } from "react-redux"
+import Constants from '../../../component/Constants';
 
 const FDList=({route})=>{
 const navigation=useNavigation()
 const selector=useSelector((state)=>state.NBFCCompareDetail)
-console.log('this is compare derrails',selector)
 const data1=selector.datavalue1[0]
 const data2=selector.datavalue2[0]
 
-console.log('thfkjrwfklv cjvklj jhfdsahsdld     dkl',route.params);
-
 const [yyyy ,mm ,dd]=data1.date_of_maturity.split('-')
 const value=`${dd}-${mm}-${yyyy}`
-
 const [yyyy1 ,mm1 ,dd1]=data2.date_of_maturity.split('-')
 const value1=`${dd1}-${mm1}-${yyyy1}`
 
@@ -50,7 +45,7 @@ useEffect(()=>{
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
-                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`}}/> 
+                      source={{uri:`${Constants.imageUrl}${data1.bank_logo}`}}/> 
                          <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   delayPressIn={0}
@@ -63,7 +58,7 @@ useEffect(()=>{
                           <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
-                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`}}/> 
+                      source={{uri:`${Constants.imageUrl}${data2.bank_logo}`}}/> 
                          <View style={{marginTop:30}}>
                                 <TouchableOpacity 
                                   delayPressIn={0}

@@ -49,7 +49,7 @@ const dashboard = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getprofilepic',
+        url: 'https://indiadeposit.in/admin/public/apis/getprofilepic',
       });
       if (response.data.status == 200) {
         AsyncStorage.setItem(Storage.image, response.data.profile_pic);
@@ -285,7 +285,7 @@ const dashboard = () => {
                 )}
               />
             </Pressable>
-            {selectedItems.length == 0 ? (
+            {selectedItems2.length == 0 ? (
               <View style={styles.buttomview}>
                 <Text style={styles.Text1}>
                   {'*Tap & Hold to make multiple selection'}

@@ -34,7 +34,7 @@ const backAction = () => {
             /> 
 {/* https://demo.webshowcase-india.com/indiadeposit/public/apis/fdsdk?user_id=10&amount=10000&tenure=365 */}
           <WebView source={{ 
-              uri: `https://demo.webshowcase-india.com/indiadeposit/public/apis/fdsdk?user_id=${user_id}&amount=${route.params.amount}&tenure=${route.params.tenure*365}`
+              uri: `https://indiadeposit.in/admin/public/apis/fdsdk?user_id=${user_id}&amount=${route.params.amount}&tenure=${route.params.tenure*365}`
               }} />
         </View>
     )

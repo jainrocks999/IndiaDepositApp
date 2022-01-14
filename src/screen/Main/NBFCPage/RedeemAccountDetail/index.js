@@ -15,6 +15,8 @@ import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
+import Constants from '../../../../component/Constants';
+
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -105,7 +107,7 @@ const MyFDDetail = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/adduserbank',
+          url: 'https://indiadeposit.in/admin/public/apis/adduserbank',
         });
         console.log('this user resposens', response);
         if (response.data.status == 200) {
@@ -152,7 +154,7 @@ const MyFDDetail = ({route}) => {
                 resizeMode="contain"
                 style={{height: 20, width: 70}}
                 source={{
-                  uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                  uri: `${Constants.imageUrl}${item.bank_logo}`,
                 }}
               />
               <View style={{width: '20%', alignItems: 'flex-end'}}></View>
@@ -202,7 +204,7 @@ const MyFDDetail = ({route}) => {
                 resizeMode="contain"
                 style={{height: 20, width: 70}}
                 source={{
-                  uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                  uri: `${Constants.imageUrl}${item.bank_logo}`,
                 }}
               />
               <View style={{width: '20%', alignItems: 'flex-end'}}></View>

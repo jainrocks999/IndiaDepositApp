@@ -26,6 +26,7 @@ import Storage from '../../../component/AsyncStorage';
 import MultiSelect from 'react-native-multiple-select';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
+import Constants from '../../../component/Constants';
 Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 const SBAccountList = ({route}) => {
@@ -93,16 +94,16 @@ const SBAccountList = ({route}) => {
         location: location == '' ? address : location,
         type1: selected,
         user_id,
-        bank_id: '',
-        interest_rate: '',
-        nationalized: '',
-        offer: '',
-        insurance: '',
-        account_type: '',
-        account_sub_type: '',
-        non_maintenance_penalty: '',
-        debit_card_amc: '',
-        private: '',
+        bank_id: route.params.bank_id,
+        interest_rate: route.params.interest_rate,
+        nationalized: route.params.nationalized,
+        offer: route.params.offer,
+        insurance: route.params.insurance,
+        account_type: route.params.account_type,
+        account_sub_type: route.params.account_sub_type,
+        non_maintenance_penalty: route.params.non_maintenance_penalty,
+        debit_card_amc: route.params.debit_card_amc,
+        private: route.params.private,
         order_on: sort,
         b_lat: lat,
         b_long: long,
@@ -303,7 +304,7 @@ const SBAccountList = ({route}) => {
               resizeMode="contain"
               style={{height: 20, width: 70}}
               source={{
-                uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                uri: `${Constants.imageUrl}${item.bank_logo}`,
               }}
             />
             <Text style={styles.title}>{item.type}</Text>

@@ -9,7 +9,7 @@ import RNPickerSelect from "react-native-picker-select";
 import colors from '../../../component/colors';
 import Header from '../../../component/header';
 import CheckBox from '@react-native-community/checkbox';
-import { RadioButton } from 'react-native-paper';
+// import { RadioButton } from 'react-native-paper';
 import fontSize from '../../../component/fontSize';
 const data=[
 { label: 'Jan', value: 'Jan'},
@@ -88,12 +88,12 @@ const FDCalculator=()=>{
                               <Text style={styles.same}>Senior Citizen?  </Text> 
                              <View style={styles.view1}>
                                   <View style={styles.view2}>
-                                        <RadioButton
+                                        {/* <RadioButton
                                            value={checked}
                                            status={ checked === true ? 'checked' : 'unchecked' }
                                            onPress={() =>!checked?setChecked(true) :setChecked(false)}
                                            color={'#777777'}
-                                         />
+                                         /> */}
                                          <Text style={styles.text1}>Yes</Text>
                                      </View>
                                         {/* <View style={{flexDirection:'row',alignItems:'center',marginLeft:10}}>

@@ -1,6 +1,5 @@
 import React,{useRef,useEffect,useState} from "react";
-import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler, PermissionsAndroid, Alert} from 'react-native';
-import Header from '../../../component/compareHeader';
+import {View,Text,FlatList,Image,TouchableOpacity,TextInput, Platform,BackHandler,} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from "../../../component/StatusBar";
@@ -15,15 +14,14 @@ import Loader from '../../../component/loader';
 import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
-import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
+import Constants from '../../../component/Constants';
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
        
         const selector=useSelector(state=>state.NBFCList)
-        console.log('this is selector data',selector);
         const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
@@ -32,15 +30,16 @@ const FDList=({route})=>{
         const [year,setYear] = useState(route.params.year)
         const [amount,setAmount] = useState(route.params.amount)
         const [pincode,setPincode]=useState(!isNaN(route.params.location)?route.params.location:'')
+        const [bank_id,setBank_id]=useState(route.params.bank_id)
+        const [interest_rate,setInterest_rate]=useState(route.params.interest_rate)
+        const [premature_penalty,setPremature_penalty]=useState(route.params.premature_penalty)
+        const [loan,setLoan]=useState(route.params.loan)
         const [selected,setSelected]=useState(route.params.type1)
-        const [address,setAddress]=useState(isNaN(route.params.location)?route.params.location:'')
         const [sort,setSort]=useState('Alphabetical')
         const [asc,setAsc]=useState('')
-        const [lat,setLang]=useState('')
-        const [long,setLong]=useState('')
         const period=((parseFloat(year)*365+parseFloat(month)*30+parseFloat(day))/365).toFixed(2)
         const re = /^[0-9\b]+$/;
-
+console.log('this is route .params',route.params);
 useEffect(()=>{
   const backAction = () => {
     navigation.goBack()
@@ -109,29 +108,18 @@ if(year==0 && month==0 && day==0){
      month:parseInt(month),
      days:day,
      amount:amount,
-     location:'',
      type1:selected,
-     bank_id:'',
-     interest_rate:'',
-     nationalized:'',
-     sb_account_required:'',
-     offer:'',
-     gender:'',
-     interest_payout:'',
-     premature_penalty:'',
-     loan:'',
+     bank_id:route.params.bank_id,
+     interest_rate:route.params.interest_rate,
+     premature_penalty:route.params.premature_penalty,
+     loan:route.params.loan,
      order_on:sort,
      order_to:sort=='alphabet'?'ASC':'DESC',
      navigation:navigation,
      data:'FdList',
      btype:2,
-     b_lat:lat,
-     b_long:long,
    })
-   console.log('its working now');
-
    setVisible(false)
-  //  setSelected([])
 }
 }
 
@@ -194,70 +182,7 @@ const openDialog=()=>{
   setVisible(true)
   // setSelected([])
 }
-const getCurrentLocation=()=>{
-  Geolocation.requestAuthorization();
-  Geolocation.getCurrentPosition(
-     (position) => {
-        console.log('your are here',position.coords);
-         Geocoder.from(position.coords.latitude, position.coords.longitude)
-             .then(json => {
-              var addressComponent = json.results[0].formatted_address;
-              // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-              setAddress(addressComponent)
-             })
-             .catch(error => console.warn(error));
-             setLang(position.coords.latitude)
-             setLong(position.coords.longitude)
-     },
-     (error) => {
-          console.log(error.code, error.message);
-      },
-     { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
- );
-}
-const getAddress=async()=>{
-if(Platform.OS === 'ios'){
-getCurrentLocation();
-}else{
-  try {
-   const granted = await PermissionsAndroid.request(
-     PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-     {
-       title: 'Device current location permission',
-       message:
-         'Allow app to get your current location',
-       buttonNeutral: 'Ask Me Later',
-       buttonNegative: 'Cancel',
-       buttonPositive: 'OK',
-     },
-   );
-   if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-     Geolocation.getCurrentPosition(
-        (position) => {
-            Geocoder.from(position.coords.latitude, position.coords.longitude)
-                .then(json => {
-                  var addressComponent = json.results[0].formatted_address;
-                  
-                  setAddress(addressComponent)
-                })
-                .catch(error => console.warn(error));
-                setLang(position.coords.latitude)
-                setLong(position.coords.longitude)
-        },
-        (error) => {
-             console.log(error.code, error.message);
-         },
-        { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
-    );
-  
-   } else {
-     console.log('Location permission denied');
-   }
- } catch (err) {
-   console.warn(err);
- }
-}
-}
+
 const renderItem=(item)=>{
       return(
           <View style={styles.cont}>
@@ -274,7 +199,7 @@ const renderItem=(item)=>{
                       <Image
                        resizeMode='contain'
                        style={{height:20,width:70}}
-                      source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
+                      source={{uri:`${Constants.imageUrl}${item.bank_logo}`}}/>
                       <Text style={styles.title}>{item.type}</Text>
                      <View style={{width:'20%'}}></View>
                    </View>
@@ -639,7 +564,7 @@ const renderItem=(item)=>{
                    style={{
                    fontSize:15,
                    fontFamily:'Montserrat-Regular'
-                   }}>We don't have any bank listed on this pincode try another nearest pincode</Text>
+                   }}>We don't have any Financial Institute listed on this pincode tenure and amount</Text>
                  </View>
                    }
                  

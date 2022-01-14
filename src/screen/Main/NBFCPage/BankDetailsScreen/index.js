@@ -20,6 +20,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import Loader from '../../../../component/loader';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
+import Constants from '../../../../component/Constants';
 
 const RegisterPage = ({route}) => {
   const navigation = useNavigation();
@@ -28,8 +29,9 @@ const RegisterPage = ({route}) => {
   const data = route.params.data;
   const [loader, setLoader] = useState(false);
   const my_fixed_deposit_id = route.params.my_fixed_deposit_id;
+  // console.log('this is route details',route.params);
 
-console.log('this is narendra herer',route.params);
+// console.log('this is narendra herer',route.params);
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
     try {
@@ -50,8 +52,9 @@ console.log('this is narendra herer',route.params);
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/fdrequestforredeem',
+        url: 'https://indiadeposit.in/admin/public/apis/fdrequestforredeem',
       });
+      console.log('this is api response',response);
       if (response.data.status == 200) {
         setLoader(false);
         Toast.show(response.data.messages);
@@ -76,7 +79,7 @@ console.log('this is narendra herer',route.params);
           resizeMode="contain"
           style={{height: 20, width: 70}}
           source={{
-            uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${route.params.data.bank_logo}`,
+            uri: `${Constants.imageUrl}${route.params.data.bank_logo}`,
           }}
         />
         <View style={{width: '20%', alignItems: 'flex-end'}}></View>

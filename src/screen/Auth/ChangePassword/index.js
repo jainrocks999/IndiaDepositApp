@@ -126,6 +126,7 @@ const ChangePassword = () => {
       user_id,
       password: values.oldPassword,
       newpassword: values.newPassword,
+      navigation:navigation
     });
   };
   return (

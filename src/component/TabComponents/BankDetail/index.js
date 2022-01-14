@@ -20,6 +20,7 @@ import * as Root from '../../../navigator/rootNavigation';
 import colors from '../../colors';
 import Modal from 'react-native-modal';
 import OptionsMenu from 'react-native-option-menu';
+import Constants from '../../../component/Constants';
 
 const BankDetails = () => {
   const navigation = useNavigation();
@@ -62,7 +63,7 @@ const BankDetails = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deleteuserbank',
+        url: 'https://indiadeposit.in/admin/public/apis/deleteuserbank',
       });
       console.log('this is response value', response);
       if (response.data.status == 200) {
@@ -96,7 +97,7 @@ const BankDetails = () => {
               resizeMode="contain"
               style={{height: 20, width: 70}}
               source={{
-                uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                uri: `${Constants.imageUrl}${item.bank_logo}`,
               }}
             />
             <View style={{width: '20%', alignItems: 'flex-end'}}></View>

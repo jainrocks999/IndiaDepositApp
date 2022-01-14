@@ -13,6 +13,7 @@ import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
+import Constants from '../../../component/Constants';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
@@ -112,7 +113,7 @@ const FDList = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+        url: 'https://indiadeposit.in/admin/public/apis/getform',
       });
       if (response.data.status == 200) {
         navigation.navigate('FD_FORM', {
@@ -154,7 +155,7 @@ const FDList = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+        url: 'https://indiadeposit.in/admin/public/apis/getform',
       });
       if (response.data.status == 200) {
         navigation.navigate('FD_FORM', {
@@ -184,7 +185,7 @@ const FDList = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 70}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`,
+              uri: `${Constants.imageUrl}${data1.bank_logo}`,
             }}
           />
           {/* <Text style={styles.title1}>{data1.name}</Text>  */}
@@ -207,7 +208,7 @@ const FDList = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 70}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`,
+              uri: `${Constants.imageUrl}${data2.bank_logo}`,
             }}
           />
           {/* <Text style={styles.title1}>{data2.name}</Text>  */}

@@ -36,11 +36,9 @@ const SIP=()=>{
         'content-type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/calculator',
+      url: 'https://indiadeposit.in/admin/public/apis/calculator',
     });
     if (response.data.status==200) {
-      setFilteredDataSource(response.data.data.blogpost)
-      setMasterDataSource(response.data.data.blogpost)
     } 
   } catch (error) {
    throw error;

@@ -34,11 +34,9 @@ const Splash = () => {
     //  initial()
   }, []);
 
-  const appVersion = async url => {
+  const appVersion = async ()=> {
     const id = await AsyncStorage.getItem(Storage.user_id);
-    console.log('this is id', user_id);
     const user_id = id == null ? '' : id;
-    console.log('this isi user id', user_id);
     const name = await AsyncStorage.getItem(Storage.name);
     const KeepmeLogin = await AsyncStorage.getItem('KeepmeLogin');
     try {
@@ -51,8 +49,10 @@ const Splash = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/version',
+        url: 'https://indiadeposit.in/admin/public/apis/version',
+      
       });
+      console.log('this is user response',response);
       if (Platform.OS == 'android') {
         if (response.data.android_version > 1) {
           setModalVisible(true);
@@ -89,6 +89,7 @@ const Splash = () => {
         }
       }
     } catch (error) {
+      console.log('this is error ',error);
       if (error.message == 'Network Error') {
         Toast.show('Please check your network');
       }

@@ -197,7 +197,7 @@ const RegisterPage=({route})=>{
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/updatefamily',
+        url: 'https://indiadeposit.in/admin/public/apis/updatefamily',
       });
       console.log('thisi si uer response ',response.data);
     } catch (error) {
@@ -220,7 +220,7 @@ const RegisterPage=({route})=>{
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+          url: 'https://indiadeposit.in/admin/public/apis/getpincodefilter',
         });
 
         if (response.data.status == 200) {

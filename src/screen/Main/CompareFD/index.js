@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import {useSelector} from 'react-redux';
+import Constants from '../../../component/Constants';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
@@ -51,7 +52,7 @@ const FDList = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 70}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.bank_logo}`,
+              uri: `${Constants.imageUrl}${data1.bank_logo}`,
             }}
           />
           <View style={{marginTop: 30}}>
@@ -65,7 +66,7 @@ const FDList = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 70}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data2.bank_logo}`,
+              uri: `${Constants.imageUrl}${data2.bank_logo}`,
             }}
           />
           <View style={{marginTop: 30}}>

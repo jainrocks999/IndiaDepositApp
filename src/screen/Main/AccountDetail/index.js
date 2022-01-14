@@ -14,6 +14,7 @@ import StatusBar from '../../../component/StatusBar';
 import {useSelector} from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import axios from 'axios';
+import Constants from '../../../component/Constants';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
@@ -85,7 +86,7 @@ const FDList = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+        url: 'https://indiadeposit.in/admin/public/apis/getform',
       });
       if (response.data.status == 200) {
         navigation.navigate('FD_FORM', {
@@ -115,7 +116,7 @@ const FDList = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 80}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`,
+              uri: `${Constants.imageUrl}${selector[0].bank_logo}`,
             }}
           />
           <Text

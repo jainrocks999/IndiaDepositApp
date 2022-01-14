@@ -5,6 +5,8 @@ import colors from '../../../component/colors';
 import { FlatList } from "react-native-gesture-handler";
 import StatusBar from '../../../component/StatusBar';
 import styles from './styles';
+import Constants from '../../../component/Constants';
+
 const BankCalu=({route})=>{
     const navigation = useNavigation()
     const [selectedItems, setSelectedItems] = useState([]);
@@ -68,7 +70,7 @@ return(
           </TouchableOpacity>
        <Image  resizeMode='contain'
            style={{height:30,width:80,marginTop:-8,}}
-              source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data1.image}`}}
+              source={{uri:`${Constants.imageUrl}${data1.image}`}}
          />
          <Text style={styles.text3}>{data1.type} </Text>  
     </View>

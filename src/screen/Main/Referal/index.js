@@ -37,7 +37,7 @@ const Refferal = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getrefferalcode',
+        url: 'https://indiadeposit.in/admin/public/apis/getrefferalcode',
       });
 
       if (response.data.status == 200) {

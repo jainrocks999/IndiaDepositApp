@@ -74,7 +74,7 @@ const Payment = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addtransactiondetail',
+          url: 'https://indiadeposit.in/admin/public/apis/addtransactiondetail',
         });
         console.log('this is user respose', response.data);
         if (response.data.status == 200) {
@@ -108,7 +108,7 @@ const Payment = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addtransactiondetail',
+          url: 'https://indiadeposit.in/admin/public/apis/addtransactiondetail',
         });
         console.log('this is user respose', response.data);
         if (response.data.status == 200) {
@@ -171,26 +171,10 @@ const Payment = ({route}) => {
           {loader ? <Loader /> : null}
           <ScrollView style={{paddingHorizontal: 15, paddingVertical: 10}}>
             <View style={styles.card}>
-              <Text style={{fontSize: 16, fontFamily: 'Montserrat-SemiBold'}}>
-                Account Detail :
-              </Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Regular',
-                  fontSize: 13,
-                  marginTop: 5,
-                }}>{`Account Number : ${'21010000000000'}`}</Text>
-              <Text
-                style={{
-                  fontFamily: 'Montserrat-Regular',
-                  fontSize: 13,
-                  marginTop: 5,
-                }}>{`IFSC Code : ${'BARB0RANIGA'}`}</Text>
-
-              <View style={{marginTop: 15}}>
+              <View>
                 <View
                   style={{
-                    marginTop: 15,
+                    marginTop: 5,
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}></View>

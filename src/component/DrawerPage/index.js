@@ -6,10 +6,11 @@ import {
   Platform,
   BackHandler,
   Alert,
+  Text
 } from 'react-native';
 import {DrawerContentScrollView} from '@react-navigation/drawer';
 import {useNavigation, DrawerActions} from '@react-navigation/native';
-import {Text} from 'react-native-paper';
+// import {} from 'react-native-paper';
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import colors from '../colors';

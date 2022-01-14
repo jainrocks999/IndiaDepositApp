@@ -1,22 +1,13 @@
-import React,{useState,useCallback, useEffect}from 'react';
+import React,{useState, useEffect}from 'react';
 import { View,Text,Image,ScrollView, TextInput,Platform} from 'react-native';
 import styles from './styles';
 import colors from '../../colors';
-import fontsize from '../../../component/fontSize';
 import Slider  from "react-native-slider";
 import PieChart from 'react-native-pie-chart';
 import RNPickerSelect from 'react-native-picker-select';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../AsyncStorage';
-import {Picker} from '@react-native-picker/picker';
-
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from 'react-native-popup-menu';
 
 let maturityAmount=0
 let interestAmount=0                     
@@ -44,11 +35,9 @@ useEffect(async()=>{
         'content-type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/calculator',
+      url: 'https://indiadeposit.in/admin/public/apis/calculator',
     });
     if (response.data.status==200) {
-      setFilteredDataSource(response.data.data.blogpost)
-      setMasterDataSource(response.data.data.blogpost)
     } 
   } catch (error) {
    throw error;
@@ -62,11 +51,12 @@ if (f==0) {
   maturityAmount=(parseInt(data)+parseInt(data1)).toFixed(0)
 } else {
   // maturityAmount= parseInt(totalInvestment*Math.pow(1+(interest/(100*f)),(time*(f/period)))).toFixed(0)
- let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(time*f))).toFixed(2)
+ let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(time*f/period))).toFixed(2)
   interestAmount=parseFloat((maturityAmount1-totalInvestment)*(f==1?12:f==3?4:f==6?2:1)).toFixed(2)
   maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))
 }
-  let effective=(interestAmount/totalInvestment/time*100).toFixed(2)
+  // let effective=(interestAmount/totalInvestment/time*100).toFixed(2)
+  let effective=(interestAmount*period/time/10).toFixed(2)
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
   // let payout=((totalInvestment*Math.pow((1+interest/12/100),a))-totalInvestment).toFixed(2);
 

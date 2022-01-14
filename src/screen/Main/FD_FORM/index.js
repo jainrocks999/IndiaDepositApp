@@ -42,7 +42,7 @@ const fd_form = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getbranchbypincode',
+        url: 'https://indiadeposit.in/admin/public/apis/getbranchbypincode',
       });
       console.log('FD Form response ::;', response.data.data[0]);
       setApiResponse(response.data.data[0]);
@@ -64,7 +64,7 @@ const fd_form = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/bankholiday',
+        url: 'https://indiadeposit.in/admin/public/apis/bankholiday',
       });
       if (response) {
         setListDataSource1(response.data.data);
@@ -303,7 +303,7 @@ const fd_form = ({route}) => {
               {paddingVertical: 10,marginTop: 10},
             ]}>{`Bank Holidays`}</Text>
           <View style={{alignItems: 'center', marginTop: 5}}></View>
-          {/* {listDataSource1.length > 0 ? (
+          {listDataSource1.length > 0 ? (
             listDataSource1.map((item, key) => (
               <HolidayComponent
                 onClickFunction={() => {
@@ -320,7 +320,7 @@ const fd_form = ({route}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}></View>
-          )} */}
+          )}
         </View>
       </ScrollView>
     </View>

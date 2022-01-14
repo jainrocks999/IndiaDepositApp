@@ -170,15 +170,45 @@ const RegisterPage = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/editprofile',
+          url: 'https://indiadeposit.in/admin/public/apis/editprofile',
         });
-        console.log('thisi si uer response ',response.data);
       } catch (error) {
         throw error;
       }
-   
     }
   };
+
+  const manageCityState = async val => {
+    if (val.length == 6) {
+      console.log(val);
+      setPincode(val);
+      try {
+        const data = new FormData();
+        data.append('location', val);
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://indiadeposit.in/admin/public/apis/getpincodefilter',
+        });
+
+        if (response.data.status == 200) {
+          setCity(response.data.city.value);
+          setState(response.data.state.value);
+          setCountry(JSON.stringify(response.data.country.value));
+        }
+      } catch (error) {
+        throw error;
+      }
+    } else {
+      setPincode(val);
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <Header
@@ -337,7 +367,7 @@ const RegisterPage = ({route}) => {
               <TextInput
                 style={styles.input}
                 value={pincode == 0 || pincode == 'undefined' ? '' : pincode}
-                onChangeText={val => setPincode(val)}
+                onChangeText={val => manageCityState(val)}
                 editable={true}
               />
             </View>

@@ -50,7 +50,7 @@ const Nominee = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/delete',
+        url: 'https://indiadeposit.in/admin/public/apis/delete',
       });
       console.log('this is response value', response);
       if (response.data.status == 200) {

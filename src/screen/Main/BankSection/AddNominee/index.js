@@ -165,7 +165,7 @@ const BankDetail = ({route}) => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getpincodefilter',
+          url: 'https://indiadeposit.in/admin/public/apis/getpincodefilter',
         });
 
         if (response.data.status == 200) {

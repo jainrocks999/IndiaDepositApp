@@ -71,7 +71,7 @@ const Notification = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',
+        url: 'https://indiadeposit.in/admin/public/apis/getnotification',
       });
       if (response.data.status == 200) {
         console.log('this is narendra', response.data.data);
@@ -111,7 +111,7 @@ const Notification = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deletenotification',
+        url: 'https://indiadeposit.in/admin/public/apis/deletenotification',
       });
       if (response.data.status == 200) {
         try {
@@ -124,7 +124,7 @@ const Notification = () => {
               'content-type': 'multipart/form-data',
               Accept: 'multipart/form-data',
             },
-            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnotification',
+            url: 'https://indiadeposit.in/admin/public/apis/getnotification',
           });
           if (response.data.status) {
             setLoader(false);

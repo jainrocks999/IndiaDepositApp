@@ -34,11 +34,10 @@ const FDFilter=({route})=>{
     const [value1,setValue1]=useState('0')
     const [penalty,setPenalty]=useState('')
     const [loan1,setLoan]=useState('')
-    const [test,setTest]=useState(['Regular', 'Senior Citizen'])
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
     const data=route.params.data
-console.log('this is user id',data);
+console.log('this is user id',route.params);
 useEffect(()=>{
     const backAction = () => {
         navigation.goBack()
@@ -71,13 +70,13 @@ useEffect(()=>{
     }
     const applyFilter=async()=>{
         const user_id=await AsyncStorage.getItem(Storage.user_id)
-        if(isEnabled7==true&&penalty==''){
-           Toast.show('Please enter premature penalty rate')
-        }
-        else if(isEnabled8==true&& loan1==''){
-            Toast.show('Please enter loan rate')
-        }
-        else{
+        // if(isEnabled7==true&&penalty==''){
+        //    Toast.show('Please enter premature penalty rate')
+        // }
+        // else if(isEnabled8==true&& loan1==''){
+        //     Toast.show('Please enter loan rate')
+        // }
+        // else{
       dispatch({
         // type: 'FD_Search_Request',
         // url: 'fdlist1',
@@ -113,23 +112,25 @@ useEffect(()=>{
             location:data.location,
             type1:data.type1,
             bank_id:selected,
-            interest_rate:value1,
-            nationalized:isEnabled1==true?1:0,
-            sb_account_required:isEnabled2==true?1:0,
-            offer:isEnabled3==true?1:0,
-            interest_payout:isEnabled6==true?1:0,
-            premature_penalty:isEnabled7==true?1:0,
-            loan:isEnabled8==true?1:0,
+            interest_rate:parseFloat(value1).toFixed(1),
+            nationalized:isEnabled1==true?1:'',
+            sb_account_required:isEnabled2==true?1:'',
+            offer:isEnabled3==true?1:'',
+            interest_payout:isEnabled6==true?1:'',
+            premature_penalty:isEnabled7==true?1:'',
+            loan:isEnabled8==true?1:'',
+            // loan:1,
             order_on:data.order_on,
             order_to:data.order_to,
-            premature_withdrawal_rate:penalty,
-            load_lending_rate:loan1,
-            b_lat:'',
-            b_long:'',
+            // premature_withdrawal_rate:penalty,
+            // load_lending_rate:loan1,
+            b_lat:data.b_lat,
+            b_long:data.b_long,
             b_type:1,
+            filter:'true',
             navigation:navigation
           })
-        }
+        // }
     }
     console.log('thisis fkadjfdkjf',value1,isEnabled1,isEnabled2,isEnabled6,penalty,loan1);
     return(
@@ -264,7 +265,7 @@ useEffect(()=>{
                     value={isEnabled7}
                 />
                 </View>
-                {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
+                {/* {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
                     <TextInput
                     placeholder='Enter Here'
                     returnKeyType='done'
@@ -274,7 +275,7 @@ useEffect(()=>{
                     keyboardType={'number-pad'}
                     />
                 
-                </View>:<View/>}
+                </View>:<View/>} */}
                 <View style={[styles.container1]}>
                     <Text style={styles.heading}>Loan</Text>
                     <Switch
@@ -285,7 +286,7 @@ useEffect(()=>{
                     value={isEnabled8}
                 />
                 </View>
-                {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
+                {/* {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
                 <TextInput
                     placeholder='Enter Here'
                     returnKeyType='done'
@@ -293,7 +294,7 @@ useEffect(()=>{
                     onChangeText={(val)=>setLoan(val)}
                     value={loan1}
                     keyboardType={'number-pad'}
-                    />
+                    /> */}
                                {/* <RNPickerSelect
                                          onValueChange={(val)=>setLoan(val)}
                                          items={loan}
@@ -309,7 +310,7 @@ useEffect(()=>{
                                          style={{marginLeft:12,width:25,height:9,marginTop:11}} 
                                         source={require('../../../assets/Image/down.png')}/>}   
                                    /> */}
-                </View>:<View/>}
+                {/* </View>:<View/>} */}
                 
             </View>
 

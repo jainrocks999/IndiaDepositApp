@@ -1,17 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text,Image} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import colors from '../../../../component/colors';
 import Header from '../../../../component/header';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import styles from './styles';
 import CustomButton from '../../../../component/button1';
+import Constants from '../../../../component/Constants';
 
 const MyFDDetail = () => {
   const navigation = useNavigation();
   const selector = useSelector(state => state.MYFDetail);
-  console.log('narendra pal here is presenting',selector);
   const date = selector[0].create_date;
 
   const [dd1, mm1, yyyy1] = selector[0].create_date.split('/');
@@ -162,7 +161,7 @@ const MyFDDetail = () => {
           resizeMode="contain"
           style={{height: 20, width: 80}}
           source={{
-            uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`,
+            uri: `${Constants.imageUrl}${selector[0].bank_logo}`,
           }}
         />
         {/* {selector[0].fd_status==2?<View/>: 

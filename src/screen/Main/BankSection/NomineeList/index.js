@@ -1,10 +1,8 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, { useEffect} from 'react';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import Header from '../../../../component/compareHeader';
-import colors from '../../../../component/colors';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
-import BottomTab from '../../../../component/StoreButtomTab';
 import StatusBar from '../../../../component/StatusBar';
 import {useSelector, useDispatch} from 'react-redux';
 import Storage from '../../../../component/AsyncStorage';
@@ -12,6 +10,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../../../component/loader';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
+import Constants from '../../../../component/Constants';
 
 const BankDetail = () => {
   const navigation = useNavigation();
@@ -58,7 +57,7 @@ const BankDetail = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/delete',
+        url: 'https://indiadeposit.in/admin/public/apis/delete',
       });
       console.log('this is response value', response);
       if (response.data.status == 200) {
@@ -85,7 +84,7 @@ const BankDetail = () => {
               resizeMode="contain"
               style={{height: 20, width: 70}}
               source={{
-                uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                uri: `${Constants.imageUrl}${item.bank_logo}`,
               }}
             />
             <Text style={styles.title}>{item.name}</Text>

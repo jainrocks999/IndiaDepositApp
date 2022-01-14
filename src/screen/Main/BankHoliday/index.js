@@ -56,7 +56,7 @@ const Holiday = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/bankholiday',
+        url: 'https://indiadeposit.in/admin/public/apis/bankholiday',
       });
       if (response) {
         setListDataSource1(response.data.data);
@@ -83,7 +83,7 @@ const Holiday = () => {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getbranchbypincode',
+          url: 'https://indiadeposit.in/admin/public/apis/getbranchbypincode',
         });
         if (response) {
           setLoader(false);

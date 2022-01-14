@@ -14,6 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
+import Constants from '../../../component/Constants';
 
 const Notification=()=>{
     const navigation=useNavigation()
@@ -100,13 +101,12 @@ const handleClick=async(item)=>{
                         'content-type': 'multipart/form-data',
                         Accept: 'multipart/form-data',
                       },
-                      url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/myjointuserid',
+                      url: 'https://indiadeposit.in/admin/public/apis/myjointuserid',
                     });
                     if (response.data) {
                         AsyncStorage.setItem('fd_user_id',response.data.array[0])
                         AsyncStorage.setItem('fd_user_id1',response.data.array[1])
                         AsyncStorage.setItem('fd_user_id2',response.data.array[2])
-
                         AsyncStorage.setItem('primary_user_name',response.data.array2[0])
                         AsyncStorage.setItem('secondary_user_name1',response.data.array2[1])
                         AsyncStorage.setItem('secondary_user_name2',response.data.array2[2])
@@ -126,6 +126,16 @@ const handleClick=async(item)=>{
                      amount:item.amount
                     })
             }
+            else if(item.fdtype=='bankdetail'){
+                navigation.navigate('PaymentMode',{
+                    my_fixed_deposit_id:item.my_fixed_deposit_id,
+                    amount:item.amount,
+                    onlinepaymenturl:item.onlinepaymenturl,
+                    accountnumber:item.accountnumber,
+                    bankifsc:item.bankifsc,
+                    beneficiaryname:item.beneficiaryname
+                   })
+           }
     }
     else if(item.fd_status==1){
        openDetailPage(item.my_fixed_deposit_id)
@@ -206,7 +216,7 @@ const fd_status=(item)=>{
                     Redeemed
                 </Text>
                 )
-        }
+          }
     }
     else if(item.fd_status==3){
         if(item.document_status==1){
@@ -271,7 +281,7 @@ const showContent=()=>{
                       <Image
                       resizeMode='contain'
                       style={{height:20,width:70,marginLeft:15}}
-                     source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`}}/>
+                     source={{uri:`${Constants.imageUrl}${item.bank_logo}`}}/>
                      
                      :<Image 
                         style={{width:'40%',height:47,marginLeft:15}} 

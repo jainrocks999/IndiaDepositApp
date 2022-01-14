@@ -40,6 +40,7 @@ class UserSelection extends React.Component {
       relation: '',
       date: new Date(),
       open: false,
+      checked:true
     };
   }
   isChecked = itemId => {
@@ -107,7 +108,7 @@ class UserSelection extends React.Component {
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/createfamily',
+          url: 'https://indiadeposit.in/admin/public/apis/createfamily',
         });
         if (response.data.status == 200) {
           this.setState({showModal1: false});
@@ -125,6 +126,15 @@ class UserSelection extends React.Component {
       }
     }
   };
+
+  manageUser=()=>{
+    if(this.state.checked){
+      this.setState({checked:false})
+    }
+    else{
+      this.setState({checked:true})
+    }
+  }
 
   renderItem = item => {
     if (this.state.loggedinUser == item.name) {
@@ -150,13 +160,21 @@ class UserSelection extends React.Component {
             </View>
             {/* {this.toggleChecked(item.user_id, item)} */}
             <View>
-              <CheckBox
+              {/* <CheckBox
                 center
                 checkedIcon="dot-circle-o"
                 uncheckedIcon="circle-o"
                 checkedColor={colors.bc}
                 checked={this.isChecked(item.user_id)}
                 onPress={() => this.toggleChecked(item.user_id, item)}
+              /> */}
+              <CheckBox 
+              center
+              checkedIcon="dot-circle-o"
+              uncheckedIcon="circle-o"
+              checkedColor={colors.bc}
+              checked={this.state.checked}
+              onPress={()=>this.manageUser()}
               />
             </View>
           </View>
@@ -169,6 +187,7 @@ class UserSelection extends React.Component {
     const value1 = this.state.date.toISOString().split('T')[0];
     const [yyyy, mm, dd] = value1.split('-');
     value = `${dd}-${mm}-${yyyy}`;
+    console.log('this is primart user data',this.props.List[0]);
     return (
       <View style={{flex: 1, backgroundColor: colors.card}}>
         <Header
@@ -197,16 +216,16 @@ class UserSelection extends React.Component {
           }}>
           <TouchableOpacity
             delayPressIn={0}
-            disabled={this.state.data ? false : true}
+            disabled={this.state.checked ? false : true}
             onPress={() =>
               this.props.navigation.navigate('SecondaryUser', {
-                data: this.state.data,
+                data: this.props.List[0],
                 my_fixed_deposit_id: this.state.my_fixed_deposit_id,
               })
             }
             style={[
               styles.button1,
-              {backgroundColor: this.state.data ? colors.bc : 'grey'},
+              {backgroundColor: this.state.checked ? colors.bc : 'grey'},
             ]}>
             <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
           </TouchableOpacity>

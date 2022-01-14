@@ -94,7 +94,7 @@ const ProfileScreen = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/uploadfile',
+        url: 'https://indiadeposit.in/admin/public/apis/uploadfile',
       });
       AsyncStorage.setItem(Storage.image, response.data.profile_pic);
     } catch (error) {
@@ -132,7 +132,7 @@ const ProfileScreen = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/uploadfile',
+        url: 'https://indiadeposit.in/admin/public/apis/uploadfile',
       });
       AsyncStorage.setItem(Storage.image, response.data.profile_pic);
     } catch (error) {

@@ -11,6 +11,7 @@ import colors from '../../../component/colors';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import StatusBar from '../../../component/StatusBar';
+import Constants from '../../../component/Constants';
 
 const FDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -59,7 +60,7 @@ const FDDetail = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+        url: 'https://indiadeposit.in/admin/public/apis/getform',
       });
       if (response.data.status == 200) {
         navigation.navigate('FD_FORM', {
@@ -89,7 +90,7 @@ const FDDetail = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnbfc',
+        url: 'https://indiadeposit.in/admin/public/apis/getnbfc',
       });
       if (response.data.status == 200) {
         navigation.navigate('SelectPlan', {
@@ -118,7 +119,7 @@ const FDDetail = ({route}) => {
             resizeMode="contain"
             style={{height: 20, width: 80}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`,
+              uri: `${Constants.imageUrl}${selector[0].bank_logo}`,
             }}
           />
           <Text style={styles.text}>{details.type}</Text>
@@ -235,7 +236,7 @@ const FDDetail = ({route}) => {
               </View>
             ) : (
               <View style={[styles.view2, {marginRight: 0}]}>
-                <Text style={styles.item}>{details.fi_rating}</Text>
+                <Text style={styles.item}>{details.rating}</Text>
                 <Text style={styles.item1}>{`FI Rating`}</Text>
                 {/* <Text style={styles.item1}>{details.loanamount}</Text>
                                        <Text style={styles.item1}>{details.tds_limit}</Text> */}

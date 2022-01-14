@@ -17,8 +17,8 @@ export default StyleSheet.create({
         paddingHorizontal:15,
         paddingVertical:10,
         // flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between'
+        // alignItems:'center',
+        // justifyContent:'space-between'
     },
     list:
     {

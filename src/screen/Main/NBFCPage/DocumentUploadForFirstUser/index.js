@@ -248,7 +248,7 @@ const Upload = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/addmyfd',
+        url: 'https://indiadeposit.in/admin/public/apis/addmyfd',
       });
       console.log('this use id', response.data);
       if (response.data.status == 200) {
@@ -314,7 +314,7 @@ const Upload = ({route}) => {
         <View style={styles.main}>
           <View style={styles.container}>
             {addressProof ? (
-              addressProofType == 'image/jpeg' ? (
+              addressProofType == 'image/jpeg'||'image/png' ? (
                 <Image style={styles.image} source={{uri: addressProof}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -373,7 +373,7 @@ const Upload = ({route}) => {
           )}
           <View style={styles.container}>
             {pan ? (
-              panType == 'image/jpeg' ? (
+              panType == 'image/jpeg'||'image/png' ? (
                 <Image style={styles.image} source={{uri: pan}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -427,7 +427,7 @@ const Upload = ({route}) => {
           )}
           <View style={styles.container}>
             {bankDetails ? (
-              bankDetailsType == 'image/jpeg' ? (
+              bankDetailsType == 'image/jpeg'||'image/png' ? (
                 <Image style={styles.image} source={{uri: bankDetails}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -482,7 +482,7 @@ const Upload = ({route}) => {
 
           <View style={styles.container}>
             {photo ? (
-              photoType == 'image/jpeg' ? (
+              photoType == 'image/jpeg'||'image/png' ? (
                 <Image style={styles.image} source={{uri: photo}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -535,7 +535,7 @@ const Upload = ({route}) => {
 
           <View style={styles.container}>
             {signature ? (
-              signatureType == 'image/jpeg' ? (
+              signatureType == 'image/jpeg'||'image/png' ? (
                 <Image style={styles.image} source={{uri: signature}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>

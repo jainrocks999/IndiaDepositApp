@@ -16,7 +16,7 @@ import fontSize from '../../fontSize';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../AsyncStorage';
 import axios from 'axios';
-import * as Root from '../../../navigator/rootNavigation';
+import * as Root from '../../../navigator/rootNavigation'
 import colors from '../../colors';
 import Toast from 'react-native-simple-toast';
 import OptionsMenu from 'react-native-option-menu';
@@ -51,7 +51,7 @@ const FamilyDetails = () => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/deletefamily',
+        url: 'https://indiadeposit.in/admin/public/apis/deletefamily',
       });
       console.log('this is response value', response);
       if (response.data.status == 200 || response.data.status == 400) {
@@ -82,10 +82,10 @@ const FamilyDetails = () => {
   const renderItem = item => {
     return (
       <View style={styles.cont}>
-        {item.relation == null ? (
-          <View style={{height: 0}} />
+        {item.relation == null ||item.relation==''||item.relation==0 ? (
+          <View  />
         ) : (
-          <View style={styles.card}>
+          <View style={[styles.card]}>
             <View style={styles.row1}>
               <Text style={styles.same}>{`Name : ${item.name}`}</Text>
               <OptionsMenu

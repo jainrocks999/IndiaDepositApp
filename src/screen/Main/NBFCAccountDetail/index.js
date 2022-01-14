@@ -4,19 +4,18 @@ import Header from '../../../component/compareHeader';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native'
 import { TouchableOpacity } from "react-native";
-import { useDispatch,useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import axios from "axios";
 import colors from '../../../component/colors';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
+import Constants from '../../../component/Constants';
 
 const FDDetail=({route})=>{
 const navigation=useNavigation()
-const dispatch=useDispatch()
 const selector=useSelector(state=>state.NBFCDetail)
 const details=selector[0]
-console.log('this is slecte detaf;gldfs;gl',details);
 const period=((parseFloat(route.params.year)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
 useEffect(()=>{
      const backAction = () => {
@@ -48,7 +47,7 @@ const manageForm=async()=>{
               'content-type': 'multipart/form-data',
               Accept: 'multipart/form-data',
             },
-            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getform',
+            url: 'https://indiadeposit.in/admin/public/apis/getform',
           });
           if (response.data.status==200) {
                navigation.navigate('FD_FORM',{
@@ -80,7 +79,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
               'content-type': 'multipart/form-data',
               Accept: 'multipart/form-data',
             },
-            url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/getnbfc',
+            url: 'https://indiadeposit.in/admin/public/apis/getnbfc',
           });
           if (response.data.status==200) {
             
@@ -89,7 +88,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     name:details.bankname,
                     amount:route.params.amount,
                     type:details.type,
-                    data:response.data.data
+                    data:response.data.data,
                })
              } 
         } catch (error) {
@@ -109,7 +108,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                      <View style={styles.list}>
                          <Image  resizeMode='contain'
                        style={{height:20,width:80}}
-                         source={{uri:`https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${selector[0].bank_logo}`}}/>
+                         source={{uri:`${Constants.imageUrl}${selector[0].bank_logo}`}}/>
                          <Text style={styles.text}>{details.type}</Text>
                          {/* <Text style={styles.text1}>Fixed Deposit</Text> */}
 
@@ -194,7 +193,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                                 </View>
                                 :
                                  <View style={[styles.view2,{marginRight:0}]}>
-                                       <Text style={styles.item}>{details.fi_rating}</Text>
+                                       <Text style={styles.item}>{details.rating}</Text>
                                        <Text style={styles.item1}>{`FI Rating`}</Text>
                                        {/* <Text style={styles.item1}>{details.loanamount}</Text>
                                        <Text style={styles.item1}>{details.tds_limit}</Text> */}

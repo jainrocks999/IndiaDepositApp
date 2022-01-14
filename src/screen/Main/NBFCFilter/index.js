@@ -38,6 +38,7 @@ const FDFilter=({route})=>{
     const selector=useSelector((state)=>state.NBFCNameList)
     const isFetching=useSelector((state)=>state.isFetching)
     const data=route.params.data
+    console.log('this is route .pans',route.params);
 
 useEffect(async()=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
@@ -78,16 +79,16 @@ useEffect(async()=>{
 
     const applyFilter=async()=>{
         const user_id=await AsyncStorage.getItem(Storage.user_id)
-        if(isEnabled7==true&&penalty==''){
-            Toast.show('Please enter premature penalty rate')
-         }
-         else if(isEnabled8==true&& loan1==''){
-             Toast.show('Please enter loan rate')
-         }
-         else{
+        // if(isEnabled7==true&&penalty==''){
+        //     Toast.show('Please enter premature penalty rate')
+        //  }
+        //  else if(isEnabled8==true&& loan1==''){
+        //      Toast.show('Please enter loan rate')
+        //  }
+        //  else{
       dispatch({
             type: 'NBFC_Search_Request',
-            url: 'fdlist1',
+                url: 'fdlist1',
                 user_id:user_id,
                 year:data.year,
                 month:parseInt(data.month),
@@ -96,24 +97,15 @@ useEffect(async()=>{
                 location:data.location,
                 type1:data.type1,
                 bank_id:selected,
-                interest_rate:value1,
-                nationalized:'',
-                sb_account_required:'',
-                offer:'',
-                gender:'',
-                interest_payout:'',
-                premature_penalty:isEnabled7==true?1:0,
-                loan:isEnabled8==true?1:0,
-                order_on:'',
-                order_to:'',
-                premature_withdrawal_rate:penalty,
-                load_lending_rate:loan1,
+                interest_rate:parseFloat(value1).toFixed(1),
+                premature_penalty:isEnabled7==true?1:'',
+                loan:isEnabled8==true?1:'',
+                order_on:data.order_on,
+                order_to:data.order_to,
                 btype:2,
-                b_lat:'',
-                b_long:'',
                 navigation:navigation
           })
-        }
+        // }
         }
     return(
         <View style={{flex:1,
@@ -246,7 +238,7 @@ useEffect(async()=>{
                     value={isEnabled7}
                 />
                 </View>
-                {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
+                {/* {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
                     <TextInput
                     placeholder='Enter Here'
                     returnKeyType='done'
@@ -256,7 +248,7 @@ useEffect(async()=>{
                     keyboardType='number-pad'
                     />
                 
-                </View>:<View/>}
+                </View>:<View/>} */}
                 <View style={[styles.container1]}>
                     <Text style={styles.heading}>Loan</Text>
                     <Switch
@@ -268,7 +260,7 @@ useEffect(async()=>{
             
                 />
                 </View>
-                {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
+                {/* {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
                    
                 <TextInput
                     placeholder='Enter Here'
@@ -278,7 +270,7 @@ useEffect(async()=>{
                     value={loan1}
                     keyboardType='number-pad'
                     />
-                </View>:<View/>}
+                </View>:<View/>} */}
                 
             </View>
 

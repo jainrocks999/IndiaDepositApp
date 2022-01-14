@@ -87,7 +87,6 @@ useEffect(()=>{
          nationalized:'',
          sb_account_required:'',
          offer:'',
-         gender:'',
          interest_payout:'',
          premature_penalty:'',
          loan:'',

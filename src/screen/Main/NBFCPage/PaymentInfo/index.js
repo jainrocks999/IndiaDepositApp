@@ -12,6 +12,7 @@ import Loader from '../../../../component/loader';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../../component/AsyncStorage';
+import Constants from '../../../../component/Constants';
 
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -31,7 +32,7 @@ const MyFDDetail = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/myjointuserdetail',
+        url: 'https://indiadeposit.in/admin/public/apis/myjointuserdetail',
       });
       if (response.data.status == 200) {
         setLoader(false);
@@ -59,7 +60,7 @@ console.log('thisi sdata',data);
         data.append('paymentbankid',route.params.data.bank_id);
         data.append('additional_info','');
         data.append('account_name','');
-       
+        data.append('onlinepaymenturl',route.params.data.onlinepaymenturl);
         data.append('user_bank_id',route.params.data.user_bank_id);
         
         const response = await axios({
@@ -69,14 +70,18 @@ console.log('thisi sdata',data);
             'content-type': 'multipart/form-data',
             Accept: 'multipart/form-data',
           },
-          url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/onlinepaymenturl',
+          url: 'https://indiadeposit.in/admin/public/apis/onlinepaymenturl',
         });
         if (response.data.status == 200) {
           setLoader(false);
+          console.log('this is user response data',response.data);
           navigation.navigate('PaymentMode', {
             my_fixed_deposit_id: route.params.my_fixed_deposit_id,
             amount: data4.primaryuser[0].amount,
-            onlinepaymenturl:response.data.onlinepaymenturl
+            onlinepaymenturl:response.data.onlinepaymenturl,
+            accountnumber:response.data.accountnumber,
+            bankifsc:response.data.bankifsc,
+            beneficiaryname:response.data.beneficiaryname
           });
         }
         else {
@@ -86,8 +91,6 @@ console.log('thisi sdata',data);
         console.log(error);
         setLoader(false);
       }
-      
-
     } else {
       Toast.show('Please verify above user');
     }
@@ -110,7 +113,7 @@ console.log('thisi sdata',data);
             resizeMode="contain"
             style={{height: 30, width: 80}}
             source={{
-              uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${data.primaryuser[0].bank_logo}`,
+              uri: `${Constants.imageUrl}${data.primaryuser[0].bank_logo}`,
             }}
           />
           <Text
@@ -182,7 +185,7 @@ console.log('thisi sdata',data);
                 </View>
               </View>
   {/* Investments details */}
-  <View style={{borderWidth:.5,borderColor:colors.bc,marginTop:15}}/>
+            <View style={{borderWidth:.5,borderColor:colors.bc,marginTop:15}}/>
               <View style={{marginTop: 15}}>
                 <Text style={styles.font}>INVESTMENT DETAILS</Text>
                 <View style={{flexDirection: 'row', marginTop: 10}}>

@@ -21,6 +21,9 @@ import {CheckBox} from 'react-native-elements';
 import Loader from '../../../../component/loader';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import RNPickerSelect from 'react-native-picker-select';
+import Clipboard from '@react-native-clipboard/clipboard';
+import Constants from '../../../../component/Constants';
+
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
 
@@ -60,6 +63,20 @@ const MyFDDetail = ({route}) => {
     setData(item);
   };
 
+  const copyToClipboard = () => {
+    Clipboard.setString(route.params.beneficiaryname);
+    Toast.show('copied to clipboard');
+  };
+
+  const copyToClipboard1 = () => {
+    Clipboard.setString(route.params.accountnumber);
+    Toast.show('copied to clipboard');
+  };
+
+  const copyToClipboard2 = () => {
+    Clipboard.setString(route.params.bankifsc);
+    Toast.show('copied to clipboard');
+  };
   const renderItem = item => {
     return (
       <View style={styles.cont}>
@@ -70,7 +87,7 @@ const MyFDDetail = ({route}) => {
                 resizeMode="contain"
                 style={{height: 20, width: 70}}
                 source={{
-                  uri: `https://demo.webshowcase-india.com/indiadeposit/writable/uploads/bank/${item.bank_logo}`,
+                  uri: `${Constants.imageUrl}${item.bank_logo}`,
                 }}
               />
               <View style={{width: '20%', alignItems: 'flex-end'}}></View>
@@ -161,7 +178,7 @@ const MyFDDetail = ({route}) => {
   //     }
   //   }
   // };
-console.log('this is narenra here',);
+  console.log('this is narenra here');
   return (
     <View style={styles.container}>
       <Header
@@ -170,11 +187,76 @@ console.log('this is narenra here',);
         onPress={() => navigation.goBack()}
       />
       {isFetching ? <Loader /> : null}
-      <View style={{paddingHorizontal: 15, flex: 1, justifyContent: 'center'}}>
-        <View style={[styles.card, {paddingVertical: 30}]}>
-         {route.params.onlinepaymenturl? <CustomButton 
-          onPress={()=>Linking.openURL(route.params.onlinepaymenturl)}
-          title="COMPLETE PAYMENT" />:<View/>}
+      <View style={{paddingHorizontal: 15, flex: 1}}>
+        <View style={[styles.card, {paddingVertical: 30, marginVertical: 20}]}>
+          <Text style={{fontSize: 16, fontFamily: 'Montserrat-SemiBold'}}>
+            Account Detail
+          </Text>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Regular',
+              fontSize: 13,
+              marginTop: 8,
+            }}>
+            Beneficiary Name
+          </Text>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+            <Text 
+              style={{
+                fontFamily: 'Montserrat-SemiBold',
+                color: colors.textColor,
+              }}>
+              {route.params.beneficiaryname}
+            </Text>
+            <Text onPress={() => copyToClipboard()} style={{color:colors.bc}}>Copy</Text>
+          </View>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Regular',
+              fontSize: 13,
+              marginTop: 8,
+            }}>
+            Account Number
+          </Text>
+          
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+            <Text
+              style={{
+                fontFamily: 'Montserrat-SemiBold',
+                color: colors.textColor,
+              }}>
+              {route.params.accountnumber}
+            </Text>
+            <Text onPress={() => copyToClipboard1()} style={{color:colors.bc}}>Copy</Text>
+
+          </View>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Regular',
+              fontSize: 13,
+              marginTop: 8,
+            }}>
+            IFSC Code
+          </Text>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+            <Text
+              style={{
+                fontFamily: 'Montserrat-SemiBold',
+                color: colors.textColor,
+              }}>
+              {route.params.bankifsc}
+            </Text>
+            <Text onPress={() => copyToClipboard2()} style={{color:colors.bc}}>Copy</Text>
+
+          </View>
+          {route.params.onlinepaymenturl ? (
+            <CustomButton
+              onPress={() => Linking.openURL(route.params.onlinepaymenturl)}
+              title="COMPLETE PAYMENT"
+            />
+          ) : (
+            <View />
+          )}
 
           <View style={{marginTop: 10}} />
           <CustomButton
