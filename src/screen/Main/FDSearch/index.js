@@ -199,7 +199,7 @@ useEffect(()=>{
                 <View style={styles.main}>
                   < View style={styles.view}>
                       <Text style={[styles.text1,{fontSize:fontSize.thirteen}]}>
-                      We are trying to show you exact information available in public domain but may differ from actual
+                      Choose an FD which suits your requirements the best. Customize everything you need right from tenure and amount to the features you expect. 
                      </Text>
                      <View  style={{marginTop:29}}>
                         <Text style={[styles.text1,{fontWeight:'700'}]}>Tenure</Text>

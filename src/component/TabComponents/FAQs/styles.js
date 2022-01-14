@@ -17,7 +17,7 @@ export default StyleSheet.create({
       fontSize: 14,
       fontWeight: '600',
       color:colors.white,
-      fontFamily:'Montserrat-Regular'
+      fontFamily:'Montserrat-Regular',width:'95%'
     },
     separator: {
       height: 0.5,

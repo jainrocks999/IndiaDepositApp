@@ -172,12 +172,13 @@ export default StyleSheet.create({
 },
 modal: {
     width: 320,
-    height:172,
+    // height:172,
     borderRadius: 10,
     flexDirection: 'column',
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor:colors.white,
+    paddingVertical:20
   },
   modal1:{
       width: '100%',
@@ -189,8 +190,6 @@ modal: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         width: '100%',
-        bottom:20,
-        position:'absolute'
         },
     modaltext:{
         color: colors.textColor,

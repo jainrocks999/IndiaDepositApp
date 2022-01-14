@@ -35,13 +35,14 @@ const ExpandableComponent = ({item, onClickFunction}) => {
         onPress={onClickFunction}
         style={{
             width:'100%',
-            height:40,
+            // height:40,
             backgroundColor:colors.bc,
             marginTop:5,
             justifyContent:'space-between',
             paddingHorizontal:15,
             flexDirection:'row',
-            alignItems:'center'
+            alignItems:'center',
+            paddingVertical:10
             }}>
         <Text style={styles.headerText}>
           {item.question}

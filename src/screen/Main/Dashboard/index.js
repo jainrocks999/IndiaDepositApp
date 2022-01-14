@@ -34,6 +34,8 @@ const dashboard = () => {
   const [selectedItems2, setSelectedItems2] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const isFetching = useSelector(state => state.isFetching);
+  const [title,setTitle]=useState('')
+  const [title1,setTitle1]=useState('')
   const dispatch = useDispatch();
 
   useEffect(async () => {
@@ -137,6 +139,11 @@ const dashboard = () => {
     });
     setSelectedItems2([]);
   };
+  const manageInformation=(item)=>{
+    setModalVisible(true)
+    setTitle(item.data)
+    setTitle1(item.data1)
+  }
   const ListItem = ({item, selected, onPress, onLongPress}) => (
     <View
       style={{
@@ -147,7 +154,7 @@ const dashboard = () => {
       }}>
       <View style={[styles.touch1]}>
         <TouchableOpacity delayPressIn={0}
-          onPress={() => setModalVisible(true)}
+          onPress={() => manageInformation(item)}
           style={{width: '90%', alignItems: 'flex-end'}}>
           <Image
             style={{width: 14, height: 14}}
@@ -377,14 +384,21 @@ const dashboard = () => {
           <View style={styles.modal}>
             <TouchableOpacity delayPressIn={0} style={styles.ModelmsgView}>
               <Text style={styles.modaltext}>
-                {
-                  'Lorem ipsum, or lipsum as it is sometimes known,is dummy text used in laying out print.'
-                }
+                {title}
+              </Text>
+              <Text style={styles.modaltext}>
+                {title1}
               </Text>
             </TouchableOpacity>
             <View style={styles.modal2}>
               <TouchableOpacity delayPressIn={0}
-                style={styles.popup}
+                style={{
+                  backgroundColor:colors.bc,
+                  marginTop:20,
+                  paddingHorizontal:15,
+                  paddingVertical:5,
+                  borderRadius:10
+                }}
                 onPress={() => setModalVisible(false)}>
                 <Text style={styles.ModelBtntext}>OK</Text>
               </TouchableOpacity>
@@ -406,6 +420,11 @@ const data = [
     id: 1,
     height: 35,
     width: 35,
+    data:`Regular fixed deposit for Indian citizens. Apply if you are`,
+    data1:`
+•	 Between the age of 18 to 65 years 
+•	 Are an Indian citizen
+•	 Hold a regular savings account with any financial institution`,
   },
 
   {
@@ -415,7 +434,11 @@ const data = [
     id: 4,
     height: 35,
     width: 35,
-  },
+    data:`Earn higher on your life savings. Apply if you are`,
+    data1:`
+•	 Above the age of 60 years
+•	 Are an Indian citizen 
+•	 Want to protect your life savings from inflation`,  },
   {
     name: 'Tax Saving',
     image: require('../../../assets/Image/tax-fd-b.png'),
@@ -423,7 +446,11 @@ const data = [
     id: 2,
     height: 35,
     width: 35,
-  },
+    data:`The favourite tax saving instrument for thousands, apply if you want to `,
+    data1:`
+•	Protect your savings from income tax
+•	Earnings deductible under section 80C of Income Tax Act 
+•	Arrives with a fixed lock-in period`,  },
 
   {
     name: 'NRI',
@@ -432,7 +459,11 @@ const data = [
     id: 3,
     height: 37,
     width: 45,
-  },
+    data:`A one-stop favourite among non-residential Indians, apply if you are`,
+    data1:`
+•	Currently residing outside India, but you are an Indian citizen 
+•	Between the age bracket of 18 to 60 years 
+•	Hold a savings account with any Indian financial institution`,  },
 ];
 
 const data1 = [
@@ -443,6 +474,11 @@ const data1 = [
     id: 5,
     height: 35,
     width: 35,
+    data:`Your best friend for saving your hard-earned money, apply if you are`,
+    data1:`
+•	Between the age of 18 to 60 years
+•	Are an Indian citizen
+•	Have full KYC documentation`,
   },
   {
     name: 'Senior Citizen',
@@ -451,6 +487,11 @@ const data1 = [
     id: 9,
     height: 35,
     width: 35,
+    data:`Orchestrated for the young at heart, apply if you are `,
+    data1:`
+•	Above the age of 60 years
+•	Are an Indian citizen with full KYC documentation 
+•	Want to enjoy higher returns than a standard savings account `,
   },
 
   {
@@ -460,6 +501,11 @@ const data1 = [
     id: 6,
     height: 35,
     width: 35,
+    data:`Specially designed for women professionals, apply if you are`,
+    data1:`
+•	Between the age of 18 to 60 years 
+•	Are an Indian citizen with full KYC documentation 
+•	Want to enjoy higher returns as compared to a regular savings account`,
   },
   {
     name: 'Zero Balance',
@@ -468,6 +514,11 @@ const data1 = [
     id: 8,
     height: 35,
     width: 35,
+    data:`A savings account with no MAB charges, apply if you are`,
+    data1:`
+•	Between the age of 18 to 60 years 
+•	Are an Indian citizen with full KYC documentation 
+•	Want to enjoy steady returns with no additional cost `,
   },
 
   // {name:'Defence',
@@ -483,6 +534,11 @@ const data2 = [
     id: 1,
     height: 35,
     width: 35,
+    data:`Regular fixed deposit for Indian citizens. Apply if you are`,
+    data1:`
+•	 Between the age of 18 to 65 years 
+•	 Are an Indian citizen
+•	 Hold a regular savings account with any financial institution`,
   },
 
   {
@@ -492,22 +548,10 @@ const data2 = [
     id: 4,
     height: 35,
     width: 35,
+    data:`Earn higher on your life savings. Apply if you are`,
+    data1:`
+•	Above the age of 60 years
+•	Are an Indian citizen 
+•	Want to protect your life savings from inflation`,
   },
-  // {
-  //   name: 'Tax Saving',
-  //   image: require('../../../assets/Image/tax-fd-b.png'),
-  //   image1: require('../../../assets/Image/tax-fd-w.png'),
-  //   id: 2,
-  //   height: 35,
-  //   width: 35,
-  // },
-
-  // {
-  //   name: 'NRI',
-  //   image: require('../../../assets/Image/globe.png'),
-  //   image1: require('../../../assets/Image/globe-white.png'),
-  //   id: 3,
-  //   height: 37,
-  //   width: 45,
-  // },
-];
+  ];

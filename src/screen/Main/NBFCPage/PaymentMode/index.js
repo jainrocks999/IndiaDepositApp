@@ -188,15 +188,18 @@ const MyFDDetail = ({route}) => {
       />
       {isFetching ? <Loader /> : null}
       <View style={{paddingHorizontal: 15, flex: 1}}>
-        <View style={[styles.card, {paddingVertical: 30, marginVertical: 20}]}>
-          <Text style={{fontSize: 16, fontFamily: 'Montserrat-SemiBold'}}>
+        <View style={[styles.card, {paddingBottom: 30,paddingTop:20, marginVertical: 20}]}>
+          <Text style={{fontSize:13,fontFamily:'Montserrat-Regular'}}>{`Kindly make the payment directly to ${route.params.beneficiaryname}. Company's bank details are mentioned below`} </Text>
+          <Text style={{marginTop:5,fontFamily:'Montserrat-Regular',fontSize:13}}>{`Note: NEFT/RTGS are the only acceptable mode of payment.Amy other payment,including IMPS,will not be accepted.The same has been emailed you`} </Text>
+
+          {/* <Text style={{fontSize: 16, fontFamily: 'Montserrat-SemiBold'}}>
             Account Detail
-          </Text>
+          </Text> */}
           <Text
             style={{
               fontFamily: 'Montserrat-Regular',
               fontSize: 13,
-              marginTop: 8,
+              marginTop: 10,
             }}>
             Beneficiary Name
           </Text>

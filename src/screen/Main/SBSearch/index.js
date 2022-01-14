@@ -187,8 +187,7 @@ const SBAccount = ({route}) => {
           <View style={styles.main}>
             <View style={styles.view}>
               <Text style={styles.text1}>
-                We are trying to show you exact information available in public
-                domain but may differ from actual
+              Choose a savings instrument that meets your exact life goals. Customize everything right from minimum balance requirement to the interest rate you want to earn. 
               </Text>
               <View style={styles.view}>
                 <Text style={[styles.text2, {fontWeight: '700'}]}>

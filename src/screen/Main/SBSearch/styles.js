@@ -31,7 +31,7 @@ export default StyleSheet.create({
     },
     view:
     {
-        marginTop:20
+        marginTop:10
     },
     view1:
     {
