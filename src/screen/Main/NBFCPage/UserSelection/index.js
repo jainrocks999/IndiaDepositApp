@@ -32,6 +32,8 @@ class UserSelection extends React.Component {
       my_fixed_deposit_id: this.props.route.params.my_fixed_deposit_id,
       showModal1: false,
       loggedinUser: '',
+      loggedinUserEmail:'',
+      loggedinUserMobile:'',
       name: '',
       email: '',
       mobile: '',
@@ -57,7 +59,11 @@ class UserSelection extends React.Component {
   };
   componentDidMount = async () => {
     const name = await AsyncStorage.getItem(Storage.name);
+    const mobile=await AsyncStorage.getItem(Storage.mobile)
+    const email=await AsyncStorage.getItem(Storage.email)
     this.setState({loggedinUser: name});
+    this.setState({loggedinUserEmail: email});
+    this.setState({loggedinUserMobile: mobile});
   };
 
   manageFamily = async () => {
@@ -137,7 +143,8 @@ class UserSelection extends React.Component {
   }
 
   renderItem = item => {
-    if (this.state.loggedinUser == item.name) {
+    console.log('this is item',item);
+    if (this.state.loggedinUser == item.name &&item.email==this.state.loggedinUserEmail&& item.mobile==this.state.loggedinUserMobile) {
       return (
         <View style={[styles.card, {marginTop: 10}]}>
           <View style={styles.container1}>

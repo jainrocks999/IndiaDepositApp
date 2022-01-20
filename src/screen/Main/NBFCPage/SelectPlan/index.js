@@ -27,15 +27,17 @@ const BankCalu = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
-  const value = (
-    amount * Math.pow(1 + selectedItems[1] / 100, 1 * selectedItems[0])
-  ).toFixed(0);
-  const value1 = (
-    amount * Math.pow(1 + selectedItems[1] / 100, 1 * selectedItems[0]) -
-    amount
-  ).toFixed(0);
+  
+  let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
 
-  console.log('this is selected item data date', selectedItems);
+  const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
+  // const value = (
+  //   amount * Math.pow(1 + selectedItems[1] / 100*frequency, selectedItems[0])
+  // ).toFixed(0);
+  console.log('this is selected items',selectedItems[0],selectedItems[1]);
+  const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
+
+  // const value1 = (amount * Math.pow(1 + selectedItems[1] / 100*frequency, selectedItems[0]) - amount).toFixed(0);
 
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -86,7 +88,7 @@ const BankCalu = ({route}) => {
     const rate = (
       Math.pow(1 + item.rate / 100 / frequency, frequency) - 1
     ).toFixed(3);
-    const effective_rate = (rate * 100).toFixed(2);
+    const effective_rate = (rate * 100).toFixed(2)
 
     if (frequency == '') {
       return (
@@ -122,7 +124,7 @@ const BankCalu = ({route}) => {
                   <View>
                     <Text
                       style={[
-                        styles.text,
+                         styles.text,
                         {color: colors.white},
                       ]}>{`${item.duration} Year`}</Text>
                     <Text
@@ -218,7 +220,16 @@ const BankCalu = ({route}) => {
   };
   const renderMethod = () => {
     const data = ((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(1);
-
+    // if(frequency==''){
+    //   return (
+    //     <View style={{alignItems: 'center'}}>
+    //       <Text style={styles.maturity}>{'Payment per year'}</Text>
+    //       <Text style={styles.amount}>
+    //         {((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(1)}
+    //       </Text>
+    //     </View>
+    //   );
+    // }
     if (frequency == 12) {
       return (
         <View style={{alignItems: 'center'}}>
@@ -423,9 +434,13 @@ const BankCalu = ({route}) => {
               <View style={styles.mContainer}>
                 <View style={{alignItems: 'center'}}>
                   <Text style={styles.maturity}>{'Total Interest'}</Text>
-                  <Text style={styles.amount}>
+                  {frequency==''?
+                    <Text style={styles.amount}>
+                    {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(2)}
+                    </Text>                  
+                    :<Text style={styles.amount}>
                     {value1 == 'NaN' || value1 == 'undefined' ? 0 : value1}
-                  </Text>
+                  </Text>}
                 </View>
               </View>
             </View>

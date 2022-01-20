@@ -50,15 +50,12 @@ if (f==0) {
   let data1=totalInvestment
   maturityAmount=(parseInt(data)+parseInt(data1)).toFixed(0)
 } else {
-  // maturityAmount= parseInt(totalInvestment*Math.pow(1+(interest/(100*f)),(time*(f/period)))).toFixed(0)
- let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(time*f/period))).toFixed(2)
-  interestAmount=parseFloat((maturityAmount1-totalInvestment)*(f==1?12:f==3?4:f==6?2:1)).toFixed(2)
+ let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(f))).toFixed(2)
+  interestAmount=parseFloat((maturityAmount1-totalInvestment)*(1*time*(f==12?1:f==6?2:f==3?4:12)/period)).toFixed(2)
   maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))
 }
-  // let effective=(interestAmount/totalInvestment/time*100).toFixed(2)
   let effective=(interestAmount*period/time/10).toFixed(2)
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
-  // let payout=((totalInvestment*Math.pow((1+interest/12/100),a))-totalInvestment).toFixed(2);
 
   const principalOnchange=(val)=>{
     if(val>100000){

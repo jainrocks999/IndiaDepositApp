@@ -45,12 +45,12 @@ const Upload = ({route}) => {
 
   const uploadPan = async () => {
     try {
-      const res = await DocumentPicker.pickMultiple({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setPan(res[0].uri);
-      setPanType(res[0].type);
-      setPanName(res[0].name);
+      setPan(res.uri);
+      setPanType(res.type);
+      setPanName(res.name);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -60,13 +60,13 @@ const Upload = ({route}) => {
   };
   const uploadBankDetails = async () => {
     try {
-      const res = await DocumentPicker.pickMultiple({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setBankDetails(res[0].uri);
-      setBankDetailsType(res[0].type);
-      setBankDetailsName(res[0].name);
-      console.log('this is user image', res[0]);
+      console.log('this is reponse',res);
+      setBankDetails(res.uri);
+      setBankDetailsType(res.type);
+      setBankDetailsName(res.name);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -76,13 +76,14 @@ const Upload = ({route}) => {
   };
   const uploadAddressProof = async () => {
     try {
-      const res = await DocumentPicker.pickMultiple({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setAddressProof(res[0].uri);
-      setAddressProofType(res[0].type);
-      setAddressProofName(res[0].name);
-      console.log('this is user image', res[0]);
+      setAddressProof(res.uri);
+      setAddressProofType(res.type);
+      setAddressProofName(res.name);
+      console.log('this is user response',res);
+
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -92,12 +93,12 @@ const Upload = ({route}) => {
   };
   const uploadPhoto = async () => {
     try {
-      const res = await DocumentPicker.pickMultiple({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setPhoto(res[0].uri);
-      setPhotoType(res[0].type);
-      setPhotoName(res[0].name);
+      setPhoto(res.uri);
+      setPhotoType(res.type);
+      setPhotoName(res.name);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -107,12 +108,12 @@ const Upload = ({route}) => {
   };
   const uploadSignature = async () => {
     try {
-      const res = await DocumentPicker.pickMultiple({
+      const res = await DocumentPicker.pickSingle({
         type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setSignature(res[0].uri);
-      setSignatureType(res[0].type);
-      setSignatureName(res[0].name);
+      setSignature(res.uri);
+      setSignatureType(res.type);
+      setSignatureName(res.name);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -298,7 +299,7 @@ const Upload = ({route}) => {
         <View style={styles.main}>
           <View style={styles.container}>
             {addressProof ? (
-              addressProofType == 'image/jpeg'||'image/png' ? (
+              addressProofType == 'image/jpeg'|| addressProofType=='image/png' ? (
                 <Image style={styles.image} source={{uri: addressProof}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -356,7 +357,7 @@ const Upload = ({route}) => {
           )}
           <View style={styles.container}>
             {pan ? (
-              panType == 'image/jpeg'||'image/png' ? (
+              panType == 'image/jpeg'|| panType=='image/png' ? (
                 <Image style={styles.image} source={{uri: pan}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -415,7 +416,7 @@ const Upload = ({route}) => {
           )}
           <View style={styles.container}>
             {bankDetails ? (
-              bankDetailsType == 'image/jpeg'||'image/png' ? (
+              bankDetailsType == 'image/jpeg'|| bankDetailsType=='image/png' ? (
                 <Image style={styles.image} source={{uri: bankDetails}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -478,7 +479,7 @@ const Upload = ({route}) => {
 
           <View style={styles.container}>
             {photo ? (
-              photoType == 'image/jpeg'||'image/png' ? (
+              photoType == 'image/jpeg'|| photoType=='image/png' ? (
                 <Image style={styles.image} source={{uri: photo}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -539,7 +540,7 @@ const Upload = ({route}) => {
 
           <View style={styles.container}>
             {signature ? (
-              signatureType == 'image/jpeg'||'image/png' ? (
+              signatureType == 'image/jpeg'|| signatureType=='image/png' ? (
                 <Image style={styles.image} source={{uri: signature}} />
               ) : (
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>

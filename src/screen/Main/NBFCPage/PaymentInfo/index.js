@@ -20,6 +20,7 @@ const MyFDDetail = ({route}) => {
   const [data, setData] = useState('');
   const [data4,setData4]=useState('')
   const [loader, setLoader] = useState(false);
+  console.log(route.params);
   useEffect(async () => {
     try {
       setLoader(true);
@@ -159,12 +160,14 @@ console.log('thisi sdata',data);
              <View style={{marginTop: 15}}>
                 <Text style={styles.font}>BANK DETAILS</Text>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <View style={{width: '45%'}}>
-                    <Text style={styles.font}>Account Number</Text>
-                    <Text style={styles.font16}>
-                      {route.params.redemDetails.account_number}
-                    </Text>
+                <View style={{width: '45%'}}>
+                    <Text style={styles.font}>Bank Name</Text>
+                    <Text
+                      style={
+                        styles.font16
+                      }>{`${route.params.redemDetails.bankname}`}</Text>
                   </View>
+                 
                   <View style={{width: '45%', marginLeft: 35}}>
                     <Text style={styles.font}>IFSC Code</Text>
                     <Text
@@ -174,7 +177,13 @@ console.log('thisi sdata',data);
                   </View>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <View style={{width: '45%'}}>
+                <View style={{width: '45%'}}>
+                    <Text style={styles.font}>Account Number</Text>
+                    <Text style={styles.font16}>
+                      {route.params.redemDetails.account_number}
+                    </Text>
+                  </View>
+                  <View style={{width: '45%',marginLeft: 35}}>
                     <Text style={styles.font}>Account Type</Text>
                     <Text
                       style={
@@ -231,11 +240,10 @@ console.log('thisi sdata',data);
              <View style={{marginTop: 15}}>
                 <Text style={[styles.font]}>PAYMENTS BY</Text>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <View style={{width: '45%'}}>
-                    <Text style={styles.font}>Account Number</Text>
-                    <Text style={styles.font16}>
-                      {route.params.data.account_number}
-                    </Text>
+                <View style={{width: '45%'}}>
+                    <Text style={styles.font}>Bank Name</Text>
+                    <Text
+                      style={styles.font16}>{`${route.params.data.bankname}`}</Text>
                   </View>
                   <View style={{width: '45%', marginLeft: 35}}>
                     <Text style={styles.font}>IFSC Code</Text>
@@ -246,7 +254,15 @@ console.log('thisi sdata',data);
                   </View>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
-                  <View style={{width: '45%'}}>
+                <View style={{width: '45%'}}>
+                    <Text style={styles.font}>Account Number</Text>
+                    <Text style={styles.font16}>
+                      {route.params.data.account_number}
+                    </Text>
+                  </View>
+               
+                 
+                  <View style={{width: '45%',marginLeft: 35}}>
                     <Text style={styles.font}>Account Type</Text>
                     <Text
                       style={

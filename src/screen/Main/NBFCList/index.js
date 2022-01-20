@@ -184,6 +184,7 @@ const openDialog=()=>{
 }
 
 const renderItem=(item)=>{
+  console.log('this is item',item);
       return(
           <View style={styles.cont}>
                 <TouchableOpacity delayPressIn={0}
