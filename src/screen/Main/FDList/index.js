@@ -106,15 +106,6 @@ console.log('this is route data',route.params);
     } else if (pincode != '' && address != '') {
       Toast.show('Please confirm pincode or current location');
     }
-    // else if(sort=='popular'){
-    //   setAsc('DESC')
-    // }
-    // else if(sort=='interest_rate'){
-    //   setAsc('DESC')
-    // }
-    // else if(sort=='alphabet'){
-    //   setAsc('ASC')
-    // }
     else {
       dispatch({
         type: 'FD_Search_Request',
@@ -133,8 +124,10 @@ console.log('this is route data',route.params);
         interest_payout: route.params.interest_payout,
         premature_penalty: route.params.premature_penalty,
         loan: route.params.loan,
+        credit_rating:route.params.credit_rating,
+        bank_type:route.params.bank_type,
         order_on: sort,
-        order_to: sort == 'alphabet' ? 'ASC' : 'DESC',
+        order_to:sort=='interest_rate'||sort=='mab'?'DESC':'ASC',
         navigation: navigation,
         data: 'FdList',
         b_lat: lat,
@@ -173,6 +166,7 @@ console.log('this is route data',route.params);
         year: year,
         month: month,
         days: day,
+        pincode:pincode,
         navigation,
       });
       // setSelectedData([])
@@ -561,7 +555,7 @@ console.log('this is route data',route.params);
                   Location
                 </Text>
               </View>
-              <View
+              {/* <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -616,15 +610,15 @@ console.log('this is route data',route.params);
                     </Text>
                   </TouchableOpacity>
                 ) : null}
-              </View>
+              </View> */}
             </View>
-            <View style={styles.view6}>
+            {/* <View style={styles.view6}>
               <Text
                 style={{fontWeight: '700', fontFamily: 'Montserrat-Regular'}}>
                 OR
               </Text>
-            </View>
-            <View style={styles.view7}>
+            </View> */}
+            <View style={[styles.view7,{marginTop:0}]}>
               <TextInput
                 style={{
                   borderBottomWidth: 1.5,
@@ -803,9 +797,10 @@ console.log('this is route data',route.params);
               paddingVertical: Platform.OS == 'android' ? 0 : 8,
               backgroundColor: '#fff',
               borderRadius: 6,
-              flexDirection: 'row',
-              alignItems: 'center',
+              // flexDirection: 'row',
+              // alignItems: 'center',
               height: 38,
+              width:'33%'
             }}>
             <RNPickerSelect
               onValueChange={val => handleSorting(val)}
@@ -828,12 +823,18 @@ console.log('this is route data',route.params);
               value={sort}
               useNativeAndroidPickerStyle={false}
               placeholder={{}}
+              Icon={() => (
+                <Image
+                  style={styles.image4}
+                  source={require('../../../assets/Image/down.png')}
+                />
+              )}
             />
-            <Image
+            {/* <Image
               style={{width: 20, height: 16, marginLeft: 5}}
               resizeMethod="resize"
               source={require('../../../assets/Image/down.png')}
-            />
+            /> */}
           </TouchableOpacity>
           <TouchableOpacity
             delayPressIn={0}
@@ -893,9 +894,11 @@ const SBType = [
   {label: 'Senior Citizen', value: 'Senior Citizen'},
 ];
 const Sorting = [
-  {label: 'Popular', value: 'popular'},
-  {label: 'Alphabetical', value: 'alphabet'},
   {label: 'Interest Rate', value: 'interest_rate'},
+  // {label: 'Minimum investment', value: 'mab'},
+  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Name', value: 'alphabet'},
+  {label:'Online', value:'online'}
 ];
 const days = [
   {label: '00', value: '0'},

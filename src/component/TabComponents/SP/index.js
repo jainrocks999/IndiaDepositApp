@@ -1,5 +1,5 @@
 import React,{useState,useEffect}from 'react';
-import { View,Text,Image,ScrollView, TextInput} from 'react-native';
+import { View,Text,Image,ScrollView, TextInput,Platform} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import colors from '../../colors';
@@ -8,93 +8,92 @@ import PieChart from 'react-native-pie-chart';
 import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../AsyncStorage';
-
 const SIP=()=>{
-    const navigation=useNavigation()
-    const [interest,setInterest]=useState('1')
-    const [time,setTime]=useState('1')
-    const [totalInvestment,setTotalInvestment]=useState('500')
-   
-  let investmentAmount=totalInvestment*time*12
-  let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
-  (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
-  let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
- const [len,setLen]=useState(5)
- console.log(investmentAmount,interestAmount,maturityAmount);
+  const navigation=useNavigation()
+  const [interest,setInterest]=useState('1')
+  const [time,setTime]=useState('1')
+  const [totalInvestment,setTotalInvestment]=useState('500')
+ 
+let investmentAmount=totalInvestment*time*12
+let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]*
+(1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
+let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
+const [len,setLen]=useState(5)
+console.log(investmentAmount,interestAmount,maturityAmount);
 
 
- useEffect(async()=>{
-  const user_id=await AsyncStorage.getItem(Storage.user_id)
-  try {
-    const data = new FormData();
-    data.append('calculator_name','sip')
-    data.append('user_id',user_id)
-    const response = await axios({
-      method: 'POST',
-      data,
-      headers: {
-        'content-type': 'multipart/form-data',
-        Accept: 'multipart/form-data',
-      },
-      url: 'https://indiadeposit.in/admin/public/apis/calculator',
-    });
-    if (response.data.status==200) {
-    } 
-  } catch (error) {
-   throw error;
-  }
+useEffect(async()=>{
+const user_id=await AsyncStorage.getItem(Storage.user_id)
+try {
+  const data = new FormData();
+  data.append('calculator_name','sip')
+  data.append('user_id',user_id)
+  const response = await axios({
+    method: 'POST',
+    data,
+    headers: {
+      'content-type': 'multipart/form-data',
+      Accept: 'multipart/form-data',
+    },
+    url: 'https://indiadeposit.in/admin/public/apis/calculator',
+  });
+  if (response.data.status==200) {
+  } 
+} catch (error) {
+ throw error;
+}
 },[])
 
 
-  const principalOnchange=(val)=>{
-    if(val>100000){
-      setTotalInvestment(JSON.stringify(100000))
-    }
-    else{
-      if(isNaN(val)){
-
-      }
-      else{
-      setTotalInvestment(val)
-      }
-    }
-  }
-  const rateOnchange=(value)=>{
-  if(value>15){
-    setInterest(parseFloat(15).toString())
+const principalOnchange=(val)=>{
+  if(val>100000){
+    setTotalInvestment(JSON.stringify(100000))
   }
   else{
-    if(isNaN(value)){
+    if(isNaN(val)){
+
     }
     else{
-    setInterest(value)
-    if(value<10){
-      setLen(4)
-    }
-    else{
-      setLen(5)
-    }
-    }  
-  }
-  }
-  const rateOnchange1=(val)=>{
-    if(!isNaN(val)){
-      const float = parseFloat(val)
-      setInterest(float.toFixed(2))
+    setTotalInvestment(val)
     }
   }
-  const timeOnchange=(val)=>{
-    if(val>25){
-      setTime(JSON.stringify(25))
-    }
-    else{
-      if(isNaN(val)){
-        
-      }else{
-      setTime(val)
-      }
+}
+const rateOnchange=(value)=>{
+if(value>15){
+  setInterest(parseFloat(15).toString())
+}
+else{
+  if(isNaN(value)){
+  }
+  else{
+  setInterest(value)
+  if(value<10){
+    setLen(4)
+  }
+  else{
+    setLen(5)
+  }
+  }  
+}
+}
+const rateOnchange1=(val)=>{
+  if(!isNaN(val)){
+    const float = parseFloat(val)
+    setInterest(float.toFixed(2))
+  }
+}
+const timeOnchange=(val)=>{
+  if(val>25){
+    setTime(JSON.stringify(25))
+  }
+  else{
+    if(isNaN(val)){
+      
+    }else{
+    setTime(val)
     }
   }
+}
   return(
         <View style={styles.container}>
              <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
@@ -108,13 +107,13 @@ const SIP=()=>{
                         <View>
                         <TextInput 
                         defaultValue={totalInvestment}
-                        style={{borderBottomWidth:0,}}
+                        style={{borderBottomWidth:0, marginTop: Platform.OS =='android'? 0:10}}
                         keyboardType='number-pad'
                         onChangeText={(val)=>principalOnchange(val)}
                         maxLength={6}
                         returnKeyType='done'
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop: Platform.OS == 'android'? -8:3,borderColor:colors.bc}}/>
                         </View>
 
                     </View>
@@ -140,14 +139,14 @@ const SIP=()=>{
 
                     onChangeText={(val)=>rateOnchange(val==''?0:val)}
                     value={interest}
-                    style={{borderBottomWidth:0,}}
+                    style={{borderBottomWidth:0,marginTop:Platform.OS == 'android'?0:10}}
                     keyboardType='number-pad'
                     maxLength={len}
                     returnKeyType='done'
                     />
-                   <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                   <View style={{borderBottomWidth:1,marginTop: Platform.OS == 'android'? -8:3,borderColor:colors.bc}}/>
                     </View>
-                    <Text style={{marginLeft:2,marginTop:8}}>{'%'}</Text>
+                    <Text style={{marginLeft:Platform.OS == 'android'? 2: 3,marginTop: Platform.OS == 'android'? 8:8,}}>{'%'}</Text>
                     </View>
                 </View>
                 <Slider
@@ -167,15 +166,15 @@ const SIP=()=>{
                        <View>
                         <TextInput 
                         onChangeText={(val)=>timeOnchange(val)}
-                        style={{borderBottomWidth:0,}}
+                        style={{borderBottomWidth:0,marginTop:Platform.OS=='android'?0:10 }}
                         defaultValue={time}
                         keyboardType='number-pad'
                         maxLength={2}
                         returnKeyType='done'
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop: Platform.OS == 'android'? -8:3,borderColor:colors.bc}}/>
                         </View>
-                        <Text style={{marginLeft:2,marginTop:5,fontSize:13,color:colors.textColor,fontFamily:'Montserrat-Regular'}}>{'Year'}</Text>
+                        <Text style={{marginLeft:Platform.OS=='android'?2:3,marginTop: Platform.OS == 'android'? 5:5,fontSize:13,color:colors.textColor,fontFamily:'Montserrat-Regular'}}>{'Year'}</Text>
                     </View>
                 </View>
                    <Slider
@@ -192,9 +191,7 @@ const SIP=()=>{
                   <View style={styles.view1}>
                     <View style={{alignItems:'center'}}> 
                         <Text style={styles.text}>Total Investment</Text>
-                        {/* <View style={{marginLeft:30}}> */}
                         <Text style={styles.font}>{`₹ ${investmentAmount==0||''?6000:isNaN(investmentAmount)?6000:investmentAmount}`}</Text>
-                        {/* </View> */}
                     </View>
                     <View style={{marginTop:10,alignItems:'center'}}>
                         <Text style={styles.font}>Total Interest</Text>

@@ -134,7 +134,7 @@ export default StyleSheet.create({
         height:40,
         borderRadius:6,
         paddingHorizontal:10,
-        borderColor:colors.black,
+        borderColor:colors.textColor,
         justifyContent:'center',
         marginTop:2
     },

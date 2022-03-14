@@ -511,6 +511,8 @@ const RegisterPage = () => {
                       value={toggleCheckBox}
                       onValueChange={newValue => setToggleCheckBox(newValue)}
                       tintColors={{true: '#5A4392', false: '#5A4392'}}
+                      onTintColor='#5A4392'
+                      onCheckColor='#5A4392'
                     />
                     <Text style={styles.agree}>
                       {'I agree with '}

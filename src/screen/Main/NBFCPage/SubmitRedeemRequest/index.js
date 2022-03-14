@@ -36,7 +36,7 @@ const Confirmation=({route})=>{
                  Your request for FD redemption has been submitted!
                  </Text>
                  </View>
-                 <Text style={{fontSize:16,fontFamily:'Montserrat-Normal',marginTop:20,textAlign:'center'}}>
+                 <Text style={{fontSize:16,fontFamily:'Montserrat-Regular',marginTop:20,textAlign:'center'}}>
                  Kindly allow us to verify the same. We will inform you once your payment has been confirmed.
                  </Text>
                  <View style={{marginBottom:40}}/>

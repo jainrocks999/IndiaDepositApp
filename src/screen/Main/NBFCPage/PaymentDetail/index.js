@@ -130,12 +130,12 @@ const Payment = ({route}) => {
 
   const uploadImage = async () => {
     try {
-      const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.images],
+      const res = await DocumentPicker.pickMultiple({
+        type: [DocumentPicker.types.pdf, DocumentPicker.types.images],
       });
-      setImage(res.uri);
-      setImageType(res.type);
-      setImageName(res.name);
+      setImage(res[0].uri);
+      setImageType(res[0].type);
+      setImageName(res[0].name);
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {

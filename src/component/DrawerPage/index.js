@@ -70,16 +70,8 @@ const DrawerContent = ({props}) => {
       key: 'contact',
       user_id,
     });
-    dispatch({
-      type: 'Get_Faq_Request',
-      url: 'getfaq',
-      user_id,
-    });
-    dispatch({
-      type: 'Country_List_Request',
-      url: 'countrylist',
-      user_id,
-    });
+    
+   
     // dispatch({
     //     type: 'State_List_Request',
     //     url: 'statelist',

@@ -372,6 +372,7 @@ class OtpVarification extends React.Component {
                   textAlign: 'center',
                   borderRadius: 10,
                   borderWidth: 0,
+                  height:Platform.OS == 'ios' ?50:50
                 }}
               />
               {this.renderCount()}

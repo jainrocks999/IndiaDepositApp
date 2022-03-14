@@ -90,14 +90,15 @@ export default StyleSheet.create({
     },
     bottom:
     {
-        // height:60,
+      //  height: Platform.OS = 'ios' ? 60 : '',
         borderWidth:1,
         borderRadius:6,
         borderColor:colors.textColor,
         paddingHorizontal:10,
         alignItems:'flex-start',
         justifyContent:'flex-start',
-        flex:1
+        flex:1,
+        paddingVertical:10
     },
     input:
     {
@@ -111,19 +112,37 @@ export default StyleSheet.create({
     bordrView:{ 
         marginTop:5 ,
         borderWidth:1,
-        // height:40,
+        //height: Platform.OS = 'ios' ? 40 : '',
         borderColor:colors.textColor,
         borderRadius:6,
         paddingHorizontal:5,
         justifyContent:'center',
         width:'100%',
         paddingHorizontal:10,
-        // paddingVertical:-10
+         paddingVertical:10
     },
     same:{
         marginTop:7,
         flexDirection:'row',
         alignItems:'center'
     },
-    font:{width:8,height:8,borderRadius:4,backgroundColor:colors.bc}
+    font:{width:8,height:8,borderRadius:4,backgroundColor:colors.bc},
+    inputs:{
+        borderWidth:1,
+        borderRadius:6,
+        borderColor:colors.textColor,
+        paddingHorizontal:14,
+        alignItems:'flex-start',
+        justifyContent:'center',
+        flex:1,
+        paddingVertical:Platform.OS=='android'?0: 10  
+    },
+    button1:{
+        width:'100%',
+        height:50,
+        borderRadius:30,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    
 })

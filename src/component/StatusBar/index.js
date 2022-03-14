@@ -4,6 +4,6 @@ import colors from "../colors";
 
 export default (Status) => {
   return <StatusBar 
-  barStyle="default" 
+  barStyle="light-content" 
   backgroundColor={colors.bc} />;
 };

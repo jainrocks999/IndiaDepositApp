@@ -79,11 +79,11 @@ const RegisterPage=({route})=>{
         country_id:country,
       })
 
-      dispatch({
-        type: 'City_List_Request',
-        url: 'citybyid',
-        state_id:state,
-      })
+      // dispatch({
+      //   type: 'City_List_Request',
+      //   url: 'citybyid',
+      //   state_id:state,
+      // })
     },[])
 
     useEffect(() => {
@@ -172,8 +172,7 @@ const RegisterPage=({route})=>{
       setState(val)
       dispatch({
          type: 'City_List_Request',
-         url: 'citybyid',
-         state_id:val,
+         url: 'citylist',
          user_id
        })
      
@@ -317,7 +316,15 @@ const RegisterPage=({route})=>{
                                          items={data}
                                          style={{ 
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                                          inputIOS:{
+                                             color: colors.textColor,
+                                             width: '100%',
+                                             fontSize: 14,
+                                             marginBottom: -1,
+                                           },
+                                         placeholder:{color:colors.heading1,width:'100%',
+                                         //height:40,
+                                         alignSelf:'center'}
                                          }}
                                          value={gender==null||gender==0?'':gender}
                                          useNativeAndroidPickerStyle={false}
@@ -495,7 +502,15 @@ const RegisterPage=({route})=>{
                         items={selector3}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                        placeholder:{color:colors.heading1,width:'100%',
+                        //height:40,
+                        alignSelf:'center'}
                         }}
                         value={country==null|| country==0?'':country}
                         useNativeAndroidPickerStyle={false}
@@ -519,7 +534,15 @@ const RegisterPage=({route})=>{
                            items={selector1}
                            style={{ 
                               inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                           placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                              inputIOS:{
+                                 color: colors.textColor,
+                                 width: '100%',
+                                 fontSize: 14,
+                                 marginBottom: -1,
+                               },
+                           placeholder:{color:colors.heading1,width:'100%',
+                           //height:40,
+                           alignSelf:'center'}
                            }}
                            value={state==null||state== 0?'':state}
                            useNativeAndroidPickerStyle={false}
@@ -542,7 +565,15 @@ const RegisterPage=({route})=>{
                         items={selector2}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                        placeholder:{color:colors.heading1,width:'100%',
+                        //height:40,
+                        alignSelf:'center'}
                         }}
                         value={city==null||city== 0?'':city}
                         useNativeAndroidPickerStyle={false}
@@ -566,7 +597,15 @@ const RegisterPage=({route})=>{
                                          items={Relation}
                                          style={{ 
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                                          inputIOS:{
+                                             color: colors.textColor,
+                                             width: '100%',
+                                             fontSize: 14,
+                                             marginBottom: -1,
+                                           },
+                                         placeholder:{color:colors.heading1,width:'100%',
+                                         //height:40,
+                                         alignSelf:'center'}
                                          }}
                                          value={relation==0||relation== null?'':relation}
                                          useNativeAndroidPickerStyle={false}
@@ -585,7 +624,15 @@ const RegisterPage=({route})=>{
                                          items={Incom_Group}
                                          style={{ 
                                           inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                                         inputIOS:{
+                                          color: colors.textColor,
+                                          width: '100%',
+                                          fontSize: 14,
+                                          marginBottom: -1,
+                                        },
+                                          placeholder:{color:colors.heading1,width:'100%',
+                                        // height:40,
+                                         alignSelf:'center'}
                                          }}
                                          value={income_group==0||income_group== null?'':income_group}
                                          useNativeAndroidPickerStyle={false}
@@ -608,7 +655,15 @@ const RegisterPage=({route})=>{
                         items={Occupation}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                           placeholder:{color:colors.heading1,width:'100%',
+                       // height:40,
+                        alignSelf:'center'}
                         }}
                         value={occupation==null||occupation== 0?'':occupation}
                         useNativeAndroidPickerStyle={false}
@@ -641,7 +696,15 @@ const RegisterPage=({route})=>{
                         items={Education}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                        placeholder:{color:colors.heading1,width:'100%',
+                        //height:40,
+                        alignSelf:'center'}
                         }}
                         value={education==0||education== null?'':education}
                         useNativeAndroidPickerStyle={false}
@@ -665,7 +728,15 @@ const RegisterPage=({route})=>{
                         items={Marital_Status}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                        placeholder:{color:colors.heading1,width:'100%',
+                       // height:40,
+                        alignSelf:'center'}
                         }}
                         value={marital_status==null?'':marital_status}
                         useNativeAndroidPickerStyle={false}
@@ -689,7 +760,15 @@ const RegisterPage=({route})=>{
                         items={Residential_Status}
                         style={{ 
                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                        placeholder:{color:colors.heading1,width:'100%',height:40,alignSelf:'center'}
+                           inputIOS:{
+                              color: colors.textColor,
+                              width: '100%',
+                              fontSize: 14,
+                              marginBottom: -1,
+                            },
+                           placeholder:{color:colors.heading1,width:'100%',
+                    // height:40,
+                        alignSelf:'center'}
                         }}
                         value={residential_address==0||residential_address== null?'':residential_address}
                         useNativeAndroidPickerStyle={false}

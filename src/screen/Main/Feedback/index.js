@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, ScrollView, BackHandler} from 'react-native';
+import {View, Text, Image, ScrollView, BackHandler, Platform,TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
@@ -18,11 +18,11 @@ const Contact = () => {
   const navigation = useNavigation();
   const [value, setValue] = useState('');
   const [value1, setValue1] = useState('');
-  const [rating1, setRatting1] = useState('');
-  const [rating2, setRatting2] = useState('');
-  const [rating3, setRatting3] = useState('');
-  const [rating4, setRatting4] = useState('');
-  const [rating5, setRatting5] = useState('');
+  const [rating1, setRatting1] = useState(0);
+  const [rating2, setRatting2] = useState(0);
+  const [rating3, setRatting3] = useState(0);
+  const [rating4, setRatting4] = useState(0);
+  const [rating5, setRatting5] = useState(0);
   const [msg1, setMsg1] = useState('');
   const [msg2, setMsg2] = useState('');
   const [msg3, setMsg3] = useState('');
@@ -86,6 +86,7 @@ const Contact = () => {
         source={require('../../../assets/Image/arrow2.png')}
         onPress={() => navigation.navigate('Main')}
       />
+      {isFetching ? <Loader /> : null}
       <ScrollView>
         <KeyboardAwareScrollView
           extraScrollHeight={0}
@@ -93,7 +94,6 @@ const Contact = () => {
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{flex: 1}}>
           <View style={styles.view1}>
-            {isFetching ? <Loader /> : null}
             <View style={styles.main}>
               <Text style={[styles.how, {marginTop: 15}]}>
                 How would you rate your experience with India Deposit app?
@@ -115,9 +115,11 @@ const Contact = () => {
                 />
               </View>
               {rating1 != '' && rating1 < 3 ? (
-                <View style={styles.bordrView}>
+                <View style={[styles.bordrView,styles.inputs]}>
                   <TextInput
-                    style={{color: colors.textColor, marginVertical: -6}}
+                    style={{
+                       color: colors.textColor,
+                      }}
                     onChangeText={val => setMsg1(val)}
                     placeholder="Any Suggestion/Feedback"
                     multiline
@@ -143,9 +145,11 @@ const Contact = () => {
                 />
               </View>
               {rating2 != '' && rating2 < 3 ? (
-                <View style={styles.bordrView}>
+                <View style={[styles.bordrView,styles.inputs]}>
                   <TextInput
-                    style={{color: colors.textColor, marginVertical: -6}}
+                    style={{
+                      color: colors.textColor, 
+                    }}
                     onChangeText={val => setMsg2(val)}
                     placeholder="Any Suggestion/Feedback"
                     multiline
@@ -171,9 +175,11 @@ const Contact = () => {
                 />
               </View>
               {rating3 != '' && rating3 < 3 ? (
-                <View style={styles.bordrView}>
+                <View style={[styles.bordrView,styles.inputs]}>
                   <TextInput
-                    style={{color: colors.textColor, marginVertical: -6}}
+                    style={{
+                       color: colors.textColor,
+                      }}
                     onChangeText={val => setMsg3(val)}
                     placeholder="Any Suggestion/Feedback"
                     multiline
@@ -199,9 +205,10 @@ const Contact = () => {
                 />
               </View>
               {rating4 != '' && rating4 < 3 ? (
-                <View style={styles.bordrView}>
+                <View style={[styles.bordrView,styles.inputs]}>
                   <TextInput
-                    style={{color: colors.textColor, marginVertical: -6}}
+                    style={{color: colors.textColor, 
+                    }}
                     onChangeText={val => setMsg4(val)}
                     placeholder="Any Suggestion/Feedback"
                     multiline
@@ -227,9 +234,10 @@ const Contact = () => {
                 />
               </View>
               {rating5 != '' && rating5 < 3 ? (
-                <View style={styles.bordrView}>
+                <View style={[styles.bordrView,styles.inputs]}>
                   <TextInput
-                    style={{color: colors.textColor, marginVertical: -6}}
+                    style={{color: colors.textColor, 
+                    }}
                     onChangeText={val => setMsg5(val)}
                     placeholder="Any Suggestion/Feedback"
                     multiline
@@ -242,7 +250,7 @@ const Contact = () => {
                 In case you have other suggestions / feedback, please provide
               </Text>
               <View style={styles.view2}>
-                <View style={styles.bottom}>
+                <View style={styles.inputs}>
                   <TextInput
                     onChangeText={val => setMessage(val)}
                     multiline={true}
@@ -255,7 +263,26 @@ const Contact = () => {
                   />
                 </View>
                 <View style={styles.bottomView}>
-                  <CustomButton onPress={() => validateUser()} title="SUBMIT" />
+                <TouchableOpacity
+                  delayPressIn={0}
+                  disabled={
+                    rating1 && rating2 && rating3 && rating4 && rating5
+                      ? false
+                      : true
+                  }
+                  onPress={() => validateUser()}
+                  style={[
+                    styles.button1,
+                    {
+                      backgroundColor:
+                        rating1 && rating2 && rating3 && rating4 && rating5
+                          ? colors.bc
+                          : 'grey',
+                    },
+                  ]}>
+                  <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
+                </TouchableOpacity>
+                  {/* <CustomButton onPress={() => validateUser()} title="SUBMIT" /> */}
                 </View>
               </View>
             </View>

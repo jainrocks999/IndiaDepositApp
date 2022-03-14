@@ -9,6 +9,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../AsyncStorage';
 
+
 let maturityAmount=0
 let interestAmount=0                     
 const FD=()=>{
@@ -109,14 +110,15 @@ if (f==0) {
                     <View style={styles.main}>
                         <Image style={styles.img} source={require('../../../assets/Image/rupay.png')}/>
                         <View>
-                        <TextInput 
+                        <TextInput
+                        style={{marginTop:Platform.OS=='android'?0:10}} 
                         value={totalInvestment}
                         keyboardType='number-pad'
                         onChangeText={(val)=>principalOnchange(val)}
                         maxLength={10}
                         returnKeyType='done'
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-8:3,borderColor:colors.bc}}/>
                         </View>
                     </View>
                    
@@ -141,9 +143,9 @@ if (f==0) {
                         maxLength={len}
                         returnKeyType='done'
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-8,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-8:3,borderColor:colors.bc}}/>
                         </View>
-                    <Text style={{marginLeft:2,marginTop:7}}>{'%'}</Text>
+                    <Text style={{marginLeft:2,marginTop:Platform.OS=='android'?7:1}}>{'%'}</Text>
                     </View>
                 </View>
                 <Slider
@@ -158,16 +160,16 @@ if (f==0) {
                 <View style={styles.main}>
                     <Text style={styles.total}>Tenure</Text>
                     <View style={styles.main}>
-                       <View style={{marginTop:-10}}>
+                       <View style={{marginTop:Platform.OS=='android'?-10:-10,marginRight:Platform.OS=='android'?0:3}}>
                         <TextInput 
                         onChangeText={(val)=>timeOnchange(val)}
-                        style={{borderBottomWidth:0,}}
+                        style={{borderBottomWidth:0,marginTop:Platform.OS=='android'?0:13}}
                         value={time==''?0:time}
                         keyboardType='number-pad'
                         maxLength={2}
                         returnKeyType='done'
                         />
-                        <View style={{borderBottomWidth:1,marginTop:-12,borderColor:colors.bc}}/>
+                        <View style={{borderBottomWidth:1,marginTop:Platform.OS=='android'?-12:2,borderColor:colors.bc}}/>
                         </View>
                         <View style={{
                           flexDirection:'row',
@@ -175,7 +177,7 @@ if (f==0) {
                           justifyContent:'space-between',
                           // width:'40%'
                           }}>
-                          <Text style={{marginRight:10,color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>{
+                          <Text style={{marginRight:Platform.OS == 'android'?10:10,color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>{
                             period==365?'Days':
                             period==12?'Months':
                             period==1?'Years':''
@@ -193,6 +195,14 @@ if (f==0) {
                           marginRight:10,
                           height:40
                         },
+                       inputIOS: { 
+                          color: colors.textColor,
+                          fontFamily:'Montserrat-Regular',
+                          width:0,
+                          fontSize:0,
+                          marginRight:10,
+                          height:40
+                        },
                         placeholder:{color:colors.heading1,
                           alignSelf:'center'
                         }
@@ -203,7 +213,7 @@ if (f==0) {
                         placeholder={{ }}
                         Icon={()=>
                           <Image 
-                         style={{marginRight:2,width:25,height:9, marginTop:Platform.OS=='android'? 16:4}} 
+                         style={{marginRight:Platform.OS=='android'?2:-6,width:25,height:9, marginTop:Platform.OS=='android'? 16:16}} 
                         source={require('../../../assets/Image/down.png')}/>} 
                         />    
                         </View>
@@ -224,12 +234,10 @@ if (f==0) {
                     <Text style={styles.total}>{'Payout Frequency'}</Text>
 
                     <View style={{
-                      // borderWidth:1,
                       height:40,
                       borderColor:colors.textColor,
                       borderRadius:6,
                       paddingHorizontal:15,
-                      // width:'44%',
                       paddingHorizontal:10,
                       alignItems:'center',
                       flexDirection:'row',
@@ -256,6 +264,14 @@ if (f==0) {
                           fontSize:0,
                           height:40
                         },
+                        inputIOS:{ 
+                          color: colors.textColor,
+                          fontFamily:'Montserrat-Regular',
+                          width:0,
+                          fontSize:0,
+                          marginRight:8,
+                          height:40,
+                        },
                         placeholder:{color:colors.heading1,alignSelf:'center'}
                         }}
                         value={f==null||f==0?'':f}
@@ -264,7 +280,7 @@ if (f==0) {
                         placeholder={{ }}
                         Icon={()=>
                           <Image 
-                         style={{marginRight:-8,width:25,height:9, marginTop:Platform.OS=='android'? 16:4}} 
+                         style={{marginRight:Platform.OS=='android'?-8:-9,width:25,height:9, marginTop:Platform.OS=='android'? 16:16}} 
                         source={require('../../../assets/Image/down.png')}/>} 
                         />    
                 </View>
@@ -292,7 +308,6 @@ if (f==0) {
                   </View>
                     <PieChart
                   widthAndHeight={140}
-                  // series={[100,100]}
                   series={[parseInt(interestAmount==0||''||isNaN(interestAmount)?0:interestAmount),parseInt(investmentAmount==0||''||isNaN(investmentAmount)?1010:investmentAmount)
                    ]}
                   sliceColor={['#AC4BE0','#FA5E8E']}
@@ -301,67 +316,6 @@ if (f==0) {
                   coverFill={'#FFF'}
                 />
                 </View>
-                {/* <View style={[styles.main1,{alignItems:'center',justifyContent:'center'}]}>
-               
-                   
-                </View> */}
-                {/* <View style={{justifyContent:'space-between',
-                alignItems:'center',flexDirection:'row',marginTop:15}}> 
-                    <Text style={styles.total}>{'Payout'}</Text>
-
-                    <View style={{
-                      borderWidth:1,
-                      height:40,
-                      borderColor:colors.textColor,
-                      borderRadius:6,
-                      // width:'44%',
-                      paddingHorizontal:15,
-                      alignItems:'center',
-                      flexDirection:'row',
-                      justifyContent:'space-between'
-                    }}>
-                      <Text style={{color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13,marginRight:10}}>
-                      {a==12?'Yearly':
-                        a==6?'Half-Yearly':
-                        a==3?'Quarterly':
-                        a==1?'Monthly':''
-                        }
-                      </Text>
-                        <RNPickerSelect
-                        onValueChange={(val)=>setA(val)}
-                        items={Data2}
-                        style={{ 
-                        inputAndroid: { 
-                          color: colors.textColor,
-                          fontFamily:'Montserrat-Regular',
-                          width:0,
-                          fontSize:0
-                        },
-                        placeholder:{color:colors.heading1,alignSelf:'center'}
-                        }}
-                        value={a==null||0?'':a}
-                        useNativeAndroidPickerStyle={false}
-                        placeholder={{ }}
-                        Icon={()=>
-                          <Image 
-                         style={{marginRight:-10,width:25,height:9, marginTop:Platform.OS=='android'? 14:4}} 
-                        source={require('../../../assets/Image/down.png')}/>} 
-                        />    
-                    
-                </View>
-               </View>// */}
-               {/* <View style={{justifyContent:'space-between',alignItems:'center',flexDirection:'row',marginTop:10}}> 
-                    <Text style={styles.total}>{'Amount'}</Text>
-
-                    <View style={{
-                       width:'30%',
-                      paddingHorizontal:10,
-                      alignItems:'center',
-                      justifyContent:'center'
-                    }}>
-                    <Text style={styles.total}>{isNaN(payout)?0:payout}</Text>    
-                </View>
-               </View> */}
 
                 <View style={{alignItems:'center',marginBottom:0,marginTop:20}}>
                   <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',width:'100%',marginBottom:0}}>

@@ -81,10 +81,10 @@ console.log('thisi is user route from add min',route.params);
         interest_rate: '',
         premature_penalty: '',
         loan: '',
-        order_on: '',
-        order_to: '',
+        credit_rating:'',
+        order_on: 'interest_rate',
+        order_to: 'DESC',
         btype:2,
-        
         navigation: navigation,
       });
     }
@@ -325,7 +325,8 @@ console.log('thisi is user route from add min',route.params);
                       setAmount(val);
                     }
                   }}
-                  returnKeyType="done"
+                  returnKeyType="go"
+                  onSubmitEditing={()=>manageSearch()}
                 />
               </View>
               <View

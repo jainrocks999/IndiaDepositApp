@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import colors from '../../../component/colors';
 import fontSize from '../../fontSize';
 export default StyleSheet.create({
@@ -32,7 +32,7 @@ export default StyleSheet.create({
     img:{
         width:20,
         height:22,
-        marginTop:7
+        marginTop:Platform.OS == 'android'?7:7
     },
     
    main:{
@@ -49,7 +49,8 @@ export default StyleSheet.create({
     total:{
         fontSize:fontSize.thirteen,
         color:colors.textColor,
-        fontFamily:'Montserrat-Regular'
+        fontFamily:'Montserrat-Regular',
+        marginTop:Platform.OS=='android'?0:3
     }, 
    input:{
        flexDirection:'row',

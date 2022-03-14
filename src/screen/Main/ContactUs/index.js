@@ -165,13 +165,15 @@ const Contact = ({route}) => {
                           source={require('../../../assets/Image/icon-facebook.png')}
                         />
                       </View>
+                      <View style={{ marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                       <Text
                         style={[
                           styles.text1,
-                          {borderBottomWidth: 1, alignSelf: 'flex-start'},
+                          //{borderBottomWidth: 1, alignSelf: 'flex-start'},
                         ]}>
                         Facebook
                       </Text>
+                      </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       delayPressIn={0}
@@ -183,13 +185,15 @@ const Contact = ({route}) => {
                           source={require('../../../assets/Image/icon-linkdine.png')}
                         />
                       </View>
+                      <View style={{ marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                       <Text
                         style={[
                           styles.text1,
-                          {borderBottomWidth: 1, alignSelf: 'flex-start'},
+                         // {borderBottomWidth: 1, alignSelf: 'flex-start'},
                         ]}>
                         Linkedin
                       </Text>
+                      </View>
                     </TouchableOpacity>
                   </View>
                   <View style={[styles.view1, {marginTop: 20}]}>
@@ -203,13 +207,15 @@ const Contact = ({route}) => {
                           source={require('../../../assets/Image/icon-twitter.png')}
                         />
                       </View>
+                      <View style={{ marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                       <Text
                         style={[
                           styles.text1,
-                          {borderBottomWidth: 1, alignSelf: 'flex-start'},
+                          //{borderBottomWidth: 1, alignSelf: 'flex-start'},
                         ]}>
                         Twitter
                       </Text>
+                      </View>
                     </TouchableOpacity>
                     <TouchableOpacity
                       delayPressIn={0}
@@ -221,13 +227,15 @@ const Contact = ({route}) => {
                           source={require('../../../assets/Image/icon-instagram.png')}
                         />
                       </View>
+                      <View style={{ marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                       <Text
                         style={[
                           styles.text1,
-                          {borderBottomWidth: 1, alignSelf: 'flex-start'},
+                          //{borderBottomWidth: 1, alignSelf: 'flex-start'},
                         ]}>
                         Instagram
                       </Text>
+                      </View>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -235,12 +243,12 @@ const Contact = ({route}) => {
               <View style={styles.line}></View>
               <View style={styles.main}>
                 <Text style={styles.toll}>WRITE US ON EMAIL</Text>
-                <View style={{marginTop: 18}}>
+                <View style={{ borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                   <Text
                     onPress={() => Linking.openURL(`mailto:${detail.email}`)}
                     style={[
                       styles.india,
-                      {borderBottomWidth: 1, alignSelf: 'flex-start'},
+                     // {borderBottomWidth: 1, alignSelf: 'flex-start'},
                     ]}>
                     {detail.email}
                   </Text>

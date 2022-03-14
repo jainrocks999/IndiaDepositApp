@@ -135,10 +135,9 @@ const BankDetail = ({route}) => {
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
-      user_id,
-    });
+      url: 'citylist',
+      user_id
+    })
   };
   const manageCountry = async val => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -176,11 +175,11 @@ const BankDetail = ({route}) => {
             country_id: response.data.country.value,
           });
 
-          dispatch({
-            type: 'City_List_Request',
-            url: 'citybyid',
-            state_id: response.data.state.value,
-          });
+          // dispatch({
+          //   type: 'City_List_Request',
+          //   url: 'citybyid',
+          //   state_id: response.data.state.value,
+          // });
           setCity(response.data.city.value);
           setState(response.data.state.value);
           setCountry(JSON.stringify(response.data.country.value));

@@ -11,17 +11,21 @@ import Header from '../../../component/header';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import Constants from '../../../component/Constants';
+import AsyncStorage from '@react-native-community/async-storage';
+import Storage from '../../../component/AsyncStorage';
+import Loader from '../../../component/loader';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
+  const dispatch=useDispatch()
   const selector = useSelector(state => state.FDCompareDetail);
+  const isFetching=useSelector(state=>state.isFetching)
   const data1 = selector.datavalue1[0];
   const data2 = selector.datavalue2[0];
   const [yyyy, mm, dd] = data1.date_of_maturity.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
-
   const [yyyy1, mm1, dd1] = data2.date_of_maturity.split('-');
   const value1 = `${dd1}-${mm1}-${yyyy1}`;
 
@@ -30,14 +34,47 @@ const FDList = ({route}) => {
       navigation.goBack();
       return true;
     };
-
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       backAction,
     );
-
     return () => backHandler.remove();
   }, []);
+
+const manageInvest=async()=>{
+  const user_id = await AsyncStorage.getItem(Storage.user_id);
+    dispatch({
+      type: 'FD_Detail_Request',
+      url: 'fddetail',
+      user_id,
+      fixed_deposit_id: data1.fixed_deposit_id,
+      principal_amount: route.params.amount,
+      rate: data1.rate,
+      year: route.params.year,
+      month: route.params.month,
+      days: route.params.days,
+      pincode: route.params.pincode,
+      navigation: navigation,
+    });
+}
+
+const manageInvest1=async()=>{
+  const user_id = await AsyncStorage.getItem(Storage.user_id);
+    dispatch({
+      type: 'FD_Detail_Request',
+      url: 'fddetail',
+      user_id,
+      fixed_deposit_id: data2.fixed_deposit_id,
+      principal_amount: route.params.amount,
+      rate: data2.rate,
+      year: route.params.year,
+      month: route.params.month,
+      days: route.params.days,
+      pincode: route.params.pincode,
+      navigation: navigation,
+    });
+}
+
 
   return (
     <View style={{flex: 1}}>
@@ -46,6 +83,7 @@ const FDList = ({route}) => {
         source={require('../../../assets/Image/arrow2.png')}
         onPress={() => navigation.goBack()}
       />
+      {isFetching?<Loader/>:null}
       <View style={styles.View}>
         <View style={styles.card}>
           <Image
@@ -56,7 +94,9 @@ const FDList = ({route}) => {
             }}
           />
           <View style={{marginTop: 30}}>
-            <TouchableOpacity delayPressIn={0} style={styles.button}>
+            <TouchableOpacity 
+            onPress={()=>manageInvest()}
+            delayPressIn={0} style={styles.button}>
               <Text style={styles.invest}>{'INVEST NOW'}</Text>
             </TouchableOpacity>
           </View>
@@ -70,7 +110,9 @@ const FDList = ({route}) => {
             }}
           />
           <View style={{marginTop: 30}}>
-            <TouchableOpacity delayPressIn={0} style={styles.button}>
+            <TouchableOpacity 
+            onPress={()=>manageInvest1()}
+            delayPressIn={0} style={styles.button}>
               <Text style={styles.invest}>{'INVEST NOW'}</Text>
             </TouchableOpacity>
           </View>

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, Image, Text, TouchableOpacity, Alert} from 'react-native';
+import React, {Fragment, useEffect, useState} from 'react';
+import {View, Image, Text, TouchableOpacity, Alert, SafeAreaView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
@@ -9,6 +9,7 @@ import Modal from 'react-native-modal';
 import {useDispatch} from 'react-redux';
 import StatusBar from '../../../component/StatusBar';
 import Toast from 'react-native-simple-toast';
+import colors from '../../../component/colors';
 let value;
 const Splash = () => {
   const navigation = useNavigation();
@@ -82,9 +83,9 @@ const Splash = () => {
           if (response.data.useractive == 0) {
             AsyncStorage.setItem(Storage.user_id, '');
             AsyncStorage.setItem(Storage.name, '');
-            initial(response.data.img_url, response.data.intro_speech, name);
+            initial(response.data.img_url, response.data.intro_speech, name,KeepmeLogin);
           } else {
-            initial(response.data.img_url, response.data.intro_speech, name);
+            initial(response.data.img_url, response.data.intro_speech, name,KeepmeLogin);
           }
         }
       }
@@ -126,6 +127,9 @@ const Splash = () => {
     }
   };
   return (
+    <Fragment>
+      <SafeAreaView style={{flex:0,backgroundColor:colors.bc}}/>
+    <SafeAreaView style={{flex:1,backgroundColor:colors.bc}}>
     <View style={styles.container}>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modal}>
@@ -180,6 +184,8 @@ const Splash = () => {
       </View>
       <StatusBar />
     </View>
+    </SafeAreaView>
+    </Fragment>
   );
 };
 export default Splash;

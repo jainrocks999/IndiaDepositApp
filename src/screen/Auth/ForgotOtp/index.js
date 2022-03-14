@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import {View, Text, Image, ScrollView, Platform} from 'react-native';
 import CustomButton from '../../../component/button1';
 import styles from './styles';
 import Toast from 'react-native-simple-toast';
@@ -417,6 +417,7 @@ class OtpVarification extends React.Component {
                   textAlign: 'center',
                   borderRadius: 10,
                   borderWidth: 0,
+                  height:Platform.OS == 'android' ?50:50
                 }}
               />
               {this.manageAttempt()}

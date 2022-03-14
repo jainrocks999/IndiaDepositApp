@@ -79,6 +79,7 @@ const ProfileScreen = () => {
   const save1 = async image => {
     setKey(key + 1);
     const user_id = await AsyncStorage.getItem(Storage.user_id);
+    console.log('sadsffdfddf',image);
     try {
       const data = new FormData();
       data.append('user_id', user_id);
@@ -96,6 +97,7 @@ const ProfileScreen = () => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/uploadfile',
       });
+      console.log('imfsfsfsfsffsf',response);
       AsyncStorage.setItem(Storage.image, response.data.profile_pic);
     } catch (error) {
       console.log(error);
@@ -117,6 +119,7 @@ const ProfileScreen = () => {
   const save = async images => {
     setKey(key + 1);
     const user_id = await AsyncStorage.getItem(Storage.user_id);
+    console.log('sadsffdfddf',images);
     try {
       const data = new FormData();
       data.append('user_id', user_id);
@@ -135,6 +138,7 @@ const ProfileScreen = () => {
         url: 'https://indiadeposit.in/admin/public/apis/uploadfile',
       });
       AsyncStorage.setItem(Storage.image, response.data.profile_pic);
+      console.log('ddsdsfsdfds',response);
     } catch (error) {
       console.log(error);
     }

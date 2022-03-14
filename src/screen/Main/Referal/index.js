@@ -83,7 +83,7 @@ const Refferal = () => {
         onPress={() => navigation.goBack()}
       />
       <View style={styles.pfile}>
-        <Image source={require('../../../assets/Image/Invite-fd.png')} />
+        <Image source={require('../../../assets/Image/Rs-final.png')} />
       </View>
       <ScrollView style={{paddingHorizontal: 15, paddingVertical: 5}}>
         <View style={styles.card}>

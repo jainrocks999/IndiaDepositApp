@@ -82,7 +82,7 @@ const FamilyDetails = () => {
   const renderItem = item => {
     return (
       <View style={styles.cont}>
-        {item.relation == null ||item.relation==''||item.relation==0 ? (
+        {item.relation == null ||item.relation==''||item.relation==0||item.parent_id==0 ? (
           <View  />
         ) : (
           <View style={[styles.card]}>

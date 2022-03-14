@@ -11,7 +11,7 @@ container:{
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:30
+    marginTop:15
 },
 container1:{
     flexDirection:'row',

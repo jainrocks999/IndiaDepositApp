@@ -6,7 +6,6 @@ export default StyleSheet.create({
     {
     flex: 1,
     backgroundColor:colors.card,
-    //paddingTop:Platform.OS=='android'?0:40
     },
     imageContainer:
     {
@@ -65,7 +64,7 @@ export default StyleSheet.create({
     },
    
     text1:{
-        marginLeft:10,
+       // marginLeft:10,
         color:colors.textColor,
         fontFamily:'Montserrat-Regular',
         fontSize:fontSize.thirteen

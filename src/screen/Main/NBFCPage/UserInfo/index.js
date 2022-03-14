@@ -5,9 +5,7 @@ import {
   Image,
   ScrollView,
   TextInput,
-  Platform,
-  BackHandler,
-  ToastAndroid,
+  TouchableOpacity
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -23,6 +21,8 @@ import Loader from '../../../../component/loader';
 import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
+import DatePicker from 'react-native-date-picker';
+
 
 const RegisterPage = ({route}) => {
   const navigation = useNavigation('');
@@ -32,7 +32,6 @@ const RegisterPage = ({route}) => {
   const selector1 = useSelector(state => state.StateList);
   const selector2 = useSelector(state => state.CityList);
   const data1 = route.params.data;
-  console.log('thisis primary user data',data1);
   const my_fixed_deposit_id = route.params.my_fixed_deposit_id;
   const [address1, setAddress1] = useState(data1.address1);
   const [address2, setAddress2] = useState(data1.address2);
@@ -47,10 +46,19 @@ const RegisterPage = ({route}) => {
   const [country, setCountry] = useState(data1.country);
   const [state, setState] = useState(data1.state);
   const [city, setCity] = useState(data1.city);
+  const [open,setOpen]=useState(false)
   const [residential_status, set_residential_status] = useState(
     data1.residential_status,
   );
-  const [gender,setGender]=useState(data1.gender)
+  const [gender, setGender] = useState(data1.gender);
+  const [name,setName]=useState(data1.name)
+  const [dd1, mm1, yyyy1] = data1.dob.split('-');
+  const [dob,setDob]=useState(
+    data1.dob == 0 ? new Date() : new Date(`${yyyy1}-${mm1}-${dd1}`),
+  );
+  const value1 = dob.toISOString().split('T')[0];
+  const [yyyy, mm, dd] = value1.split('-');
+  const value = `${dd}-${mm}-${yyyy}`;
 
   useEffect(async () => {
     dispatch({
@@ -59,19 +67,20 @@ const RegisterPage = ({route}) => {
       country_id: country,
     });
 
-    dispatch({
-      type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: state,
-    });
+    // dispatch({
+    //   type: 'City_List_Request',
+    //   url: 'citybyid',
+    //   state_id: state,
+    // });
   }, []);
 
   const manageState = async val => {
+    const user_id = await AsyncStorage.getItem(Storage.user_id);
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
+      url: 'citylist',
+      user_id,
     });
   };
   const manageCountry = async val => {
@@ -85,7 +94,9 @@ const RegisterPage = ({route}) => {
 
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-    if (father_name == '' || father_name == 0) {
+    if(name==''||name==0||name==null){
+      Toast.show('Please enter name')
+    }else if (father_name == '' || father_name == 0) {
       Toast.show('Please enter father/spouse name');
     } else if (mother_name == '' || mother_name == 0) {
       Toast.show('Please enter mother maiden name');
@@ -109,9 +120,9 @@ const RegisterPage = ({route}) => {
         deposit_option: '',
         amount: '',
         tenure: '',
-        name: data1.name == 0 || data1.name == 'undefined' ? 0 : data1.name,
+        name: name == 0 || name == 'undefined' ? 0 : name,
         mobile_number:
-        data1.mobile == 0 || data1.mobile == 'undefined' ? 0 : data1.mobile,
+          data1.mobile == 0 || data1.mobile == 'undefined' ? 0 : data1.mobile,
         email: data1.email == 0 || data1.email == 'undefined' ? 0 : data1.email,
         address_communication: address1,
         address_permanent: address2,
@@ -125,7 +136,7 @@ const RegisterPage = ({route}) => {
         annual_income: income_group,
         fd_user_id: user_id,
         user_id: user_id,
-        user_dob: data1.dob,
+        user_dob: value,
         pan: pan,
         user_relation: data1.relation,
         cheque_copy: '',
@@ -141,28 +152,28 @@ const RegisterPage = ({route}) => {
       });
 
       try {
-        const data= new FormData()
+        const data = new FormData();
         data.append('user_id', user_id);
-        data.append('name', data1.name);
+        data.append('name', name);
         data.append('email', data1.email);
-        data.append('dob', data1.dob);
-        data.append('gender',gender);
-        data.append('father_spouse_name',father_name);
-        data.append('mother_maiden_name',father_name);
+        data.append('dob',value);
+        data.append('gender', gender);
+        data.append('father_spouse_name', father_name);
+        data.append('mother_maiden_name', father_name);
         data.append('pan', pan);
         data.append('mobile', data1.mobile);
-        data.append('address1',address1);
-        data.append('address2',address2);
-        data.append('occupation',occupation);
+        data.append('address1', address1);
+        data.append('address2', address2);
+        data.append('occupation', occupation);
         data.append('pincode', pincode);
         data.append('country', country);
         data.append('state', state);
-        data.append('city',city);
-        data.append('income_group',income_group);
-        data.append('education',education);
-        data.append('marital_status',marital_status);
-        data.append('residential_status',residential_status);
-  
+        data.append('city', city);
+        data.append('income_group', income_group);
+        data.append('education', education);
+        data.append('marital_status', marital_status);
+        data.append('residential_status', residential_status);
+
         const response = await axios({
           method: 'POST',
           data,
@@ -172,6 +183,11 @@ const RegisterPage = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/editprofile',
         });
+        if(response.data.data){
+          AsyncStorage.setItem(Storage.name,response.data.data[0].name);
+          console.log('this is response',response.data.messages);
+
+        }
       } catch (error) {
         throw error;
       }
@@ -208,7 +224,6 @@ const RegisterPage = ({route}) => {
     }
   };
 
-
   return (
     <View style={styles.container}>
       <Header
@@ -226,58 +241,86 @@ const RegisterPage = ({route}) => {
           <View style={styles.main}>
             <View style={styles.row}>
               <Text style={styles.better}>Name</Text>
+         <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
               <TextInput
                 style={styles.input}
-                value={data1.name == 0 ? '' : data1.name}
-                editable={false}
+                value={name == 0 ? '' : name}
+                placeholder='Please enter name'
+                editable={true}
+                onChangeText={(val)=>setName(val)}
               />
             </View>
 
             <View style={styles.row}>
-                          <Text style={styles.better}>Gender</Text>
-                       </View>
-                       <View style={styles.drop}>
-                       <RNPickerSelect
-                    onValueChange={val => setGender(val)}
-                    items={Gender}
-                    style={{
-                      inputAndroid: {
-                        color: colors.textColor,
-                        width: '100%',
-                        fontSize: 14,
-                        marginBottom: -1,
-                      },
-                      placeholder: {
-                        color: colors.heading1,
-                        width: '100%',
-                        height: 35,
-                        alignSelf: 'center',
-                      },
-                    }}
-                    value={
-                       gender == null||gender==0
-                        ? ''
-                        : gender
-                    }
-                    useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Please select gender', value:0 }}
-                   
-                  />
-                       </View>
+              <Text style={styles.better}>Gender</Text>
+            </View>
+            <View style={styles.drop}>
+              <RNPickerSelect
+                onValueChange={val => setGender(val)}
+                items={Gender}
+                style={{
+                  inputAndroid: {
+                    color: colors.textColor,
+                    width: '100%',
+                    fontSize: 14,
+                    marginBottom: -1,
+                  },
+                  placeholder: {
+                    color: colors.heading1,
+                    width: '100%',
+                    height: 35,
+                    alignSelf: 'center',
+                  },
+                }}
+                value={gender == null || gender == 0 ? '' : gender}
+                useNativeAndroidPickerStyle={false}
+                placeholder={{label: 'Please select gender', value: 0}}
+              />
+            </View>
             <View style={styles.row}>
               <Text style={styles.better}>Date of Birth</Text>
             </View>
-            <View style={styles.drop}>
+            <TouchableOpacity
+            delayPressIn={0}
+            onPress={() => setOpen(true)}
+            style={styles.dropCal}>
+            <View style={{width: '80%', marginLeft: 0}}>
+              <Text style={{color: colors.textColor}}>{value}</Text>
+              <DatePicker
+                date={dob}
+                modal
+                mode={'date'}
+                open={open}
+                style={{alignItems: 'center'}}
+                onConfirm={date => {
+                  setOpen(false)
+                   setDob(date)   
+                }}
+                onCancel={() => {
+                  setOpen(false)
+                }}
+                textColor={colors.textColor}
+                maximumDate={new Date()}
+              />
+            </View>
+            {/* <Image
+              style={{marginLeft: 0, width: 25, height: 9, marginTop: 0}}
+              source={require('../../../../assets/Image/down.png')}
+            /> */}
+          </TouchableOpacity>
+            {/* <View style={styles.drop}>
               <TextInput
                 style={styles.input}
                 value={data1.dob}
                 editable={false}
               />
-            </View>
+            </View> */}
             <View style={styles.row}>
               <Text style={styles.better}>Email</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -288,6 +331,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Mobile</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -298,6 +343,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Father/Spouse Name</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -312,6 +359,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Mother Maiden Name</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -330,7 +379,7 @@ const RegisterPage = ({route}) => {
             <View style={styles.drop}>
               <TextInput
                 style={styles.input}
-                value={pan == 0 ||pan == 'undefined' ? '' : pan}
+                value={pan == 0 || pan == 'undefined' ? '' : pan}
                 onChangeText={val => setPan(val)}
                 placeholder="Please enter pan number"
                 editable={true}
@@ -338,6 +387,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Address Line1</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -350,6 +401,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Address Line2</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -372,7 +425,10 @@ const RegisterPage = ({route}) => {
               />
             </View>
             <View style={styles.row}>
+
               <Text style={styles.better}>Occupation</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <RNPickerSelect
@@ -478,6 +534,8 @@ const RegisterPage = ({route}) => {
 
             <View style={styles.row}>
               <Text style={styles.better}>Income Group</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <RNPickerSelect
@@ -506,6 +564,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Education</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <RNPickerSelect
@@ -532,6 +592,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Marital Status</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <RNPickerSelect

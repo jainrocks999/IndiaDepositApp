@@ -20,27 +20,29 @@ import AsyncStorage from '@react-native-community/async-storage';
 import RNPickerSelect from 'react-native-picker-select';
 
 const BankCalu = ({route}) => {
+  console.log('this is route .',route.params.fixed_deposit_id);
   const navigation = useNavigation();
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([route.params.period,route.params.rate]);
   const [amount, setAmount] = useState(route.params.amount);
   const [frequency, setfrequency] = useState('');
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
-  
+  console.log('this is route.params',selectedItems,route.params.fd_from);
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
-
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
-  // const value = (
-  //   amount * Math.pow(1 + selectedItems[1] / 100*frequency, selectedItems[0])
-  // ).toFixed(0);
-  console.log('this is selected items',selectedItems[0],selectedItems[1]);
   const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
-
-  // const value1 = (amount * Math.pow(1 + selectedItems[1] / 100*frequency, selectedItems[0]) - amount).toFixed(0);
 
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
+
+    if(selectItems[3]?selectItems[3]:route.params.fd_from=='setu'){
+      navigation.navigate('FDView',{
+        amount:amount,
+        tenure:route.params.period
+   })
+    }
+    else if(selectItems[3]?selectItems[3]:route.params.fd_from=='semi_online'){
     dispatch({
       type: 'Create_FD_Request',
       url: 'addmyfd',
@@ -57,7 +59,7 @@ const BankCalu = ({route}) => {
       mother_name: '',
       father_name: '',
       marital_status: '',
-      my_fixed_deposit_id: route.params.my_fixed_eposit_id,
+      my_fixed_deposit_id: selectedItems[2]?selectItems[2]:route.params.fixed_deposit_id,
       spouse_name: '',
       occupation: '',
       annual_income: '',
@@ -79,18 +81,15 @@ const BankCalu = ({route}) => {
       interest_rate: selectedItems[1],
       navigation: navigation,
     });
+  }
     AsyncStorage.setItem('fd_user_id', '');
     AsyncStorage.setItem('fd_user_id1', '');
     AsyncStorage.setItem('fd_user_id2', '');
   };
 
-  const ListItem = ({item, selected, onPress}) => {
-    const rate = (
-      Math.pow(1 + item.rate / 100 / frequency, frequency) - 1
-    ).toFixed(3);
-    const effective_rate = (rate * 100).toFixed(2)
 
-    if (frequency == '') {
+  const ListItem = ({item, selected, onPress}) => {
+       if (frequency == '') {
       return (
         <View
           style={{
@@ -198,7 +197,7 @@ const BankCalu = ({route}) => {
       if (selectedItems.includes(item.fixed_deposit_id)) {
         return setSelectedItems([]);
       }
-      setSelectedItems([item.duration, item.rate, item.fixed_deposit_id]);
+      setSelectedItems([item.duration, item.rate, item.fixed_deposit_id,item.fd_from]);
     } else {
       if (selectedItems.includes(item.fixed_deposit_id)) {
         return setSelectedItems([]);
@@ -220,17 +219,7 @@ const BankCalu = ({route}) => {
   };
   const renderMethod = () => {
     const data = ((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(1);
-    // if(frequency==''){
-    //   return (
-    //     <View style={{alignItems: 'center'}}>
-    //       <Text style={styles.maturity}>{'Payment per year'}</Text>
-    //       <Text style={styles.amount}>
-    //         {((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(1)}
-    //       </Text>
-    //     </View>
-    //   );
-    // }
-    if (frequency == 12) {
+        if (frequency == 12) {
       return (
         <View style={{alignItems: 'center'}}>
           <Text style={styles.maturity}>{'Payment per year'}</Text>
@@ -471,43 +460,7 @@ const BankCalu = ({route}) => {
   );
 };
 export default BankCalu;
-const data = [
-  {
-    name: '5 Years',
-    name1: '6.4%p.a.',
-    id: 5,
-    data: '5',
-    intrest: '6.4',
-  },
-  {
-    name: '4 Years',
-    id: 4,
-    name1: '6.0%p.a.',
-    data: '4',
-    intrest: '6',
-  },
-  {
-    name: '3 Years',
-    id: 3,
-    name1: '5.9%p.a.',
-    data: '3',
-    intrest: '5.9',
-  },
-  {
-    name: '2 Years',
-    id: 2,
-    name1: '5.4%p.a.',
-    data: '2',
-    intrest: '5.4',
-  },
-  {
-    name: '1 Years',
-    id: 1,
-    name1: '4.9%p.a.',
-    data: '1',
-    intrest: '4.9',
-  },
-];
+
 const Data = [
   {label: 'At Maturity', value: ''},
   {label: 'Yearly', value: '12'},

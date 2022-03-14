@@ -87,8 +87,8 @@ export default StyleSheet.create({
         width:'100%'
     },
     cross:{
-        borderRadius:30,
-        height:30,width:30,
+        borderRadius:50,
+        height:50,width:50,
         justifyContent:'center',
         alignItems:'center'
 

@@ -79,10 +79,9 @@ const MyFDDetail = ({route}) => {
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
-      user_id,
-    });
+      url: 'citylist',
+      user_id
+    })
   };
   const manageCountry = async val => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);

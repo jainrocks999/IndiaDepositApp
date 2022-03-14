@@ -36,7 +36,10 @@ const SBAccountList = ({route}) => {
   const [selectedData, setSelectedData] = useState([]);
   const [branch_types, set_branch_type] = useState([]);
   const [visible, setVisible] = useState(false);
-  const [balance, setBalance] = useState(route.params.balance);
+  const [balance, setBalance] = useState(
+    route.params.type1.length==1&&route.params.type1[0]=='Zero Balance'?'0':route.params.balance
+    // route.params.balance
+    );
   const [location, setLocation] = useState(
     !isNaN(route.params.location) ? route.params.location : '',
   );
@@ -104,10 +107,15 @@ const SBAccountList = ({route}) => {
         non_maintenance_penalty: route.params.non_maintenance_penalty,
         debit_card_amc: route.params.debit_card_amc,
         private: route.params.private,
+        bank_type:route.params.bank_type,
+        atm_points:route.params.atm_points,
+        credit_rating:route.params.credit_rating,
         order_on: sort,
+
         b_lat: lat,
         b_long: long,
-        order_to: sort == 'alphabet' ? 'ASC' : 'DESC',
+        // order_to:sort=='alphabet'||'credit_rating'?'ASC':'DESC',
+        order_to:sort=='interest_rate'||sort=='mab'?'DESC':'ASC',
         navigation: navigation,
         data: 'AccountList',
       });
@@ -434,6 +442,7 @@ const SBAccountList = ({route}) => {
                     }
                   }}
                   returnKeyType="done"
+                  editable={route.params.type1.length==1&&route.params.type1[0]=='Zero Balance'?false:true}
                 />
               </View>
               <View
@@ -449,7 +458,7 @@ const SBAccountList = ({route}) => {
                   Location
                 </Text>
               </View>
-              <View
+              {/* <View
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -504,15 +513,15 @@ const SBAccountList = ({route}) => {
                     </Text>
                   </TouchableOpacity>
                 ) : null}
-              </View>
-            </View>
-            <View style={styles.view6}>
+                    </View>*/}
+            </View> 
+            {/* <View style={styles.view6}>
               <Text
                 style={{fontWeight: '700', fontFamily: 'Montserrat-Regular'}}>
                 OR
               </Text>
-            </View>
-            <View style={styles.view7}>
+            </View> */}
+            <View style={[styles.view7,{marginTop:0}]}>
               <TextInput
                 style={{
                   borderBottomWidth: 1.5,
@@ -596,7 +605,7 @@ const SBAccountList = ({route}) => {
               style={{
                 flexDirection: 'row',
                 alignItems: 'center',
-                width: '40%',
+                width: '45%',
               }}>
               <Text
                 style={{
@@ -624,7 +633,7 @@ const SBAccountList = ({route}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                width: '45%',
+                width: '48%',
               }}>
               <Text
                 numberOfLines={1}
@@ -695,9 +704,10 @@ const SBAccountList = ({route}) => {
               paddingVertical: Platform.OS == 'android' ? 0 : 8,
               backgroundColor: '#fff',
               borderRadius: 6,
-              flexDirection: 'row',
-              alignItems: 'center',
+              // flexDirection: 'row',
+              // alignItems: 'center',
               height: 38,
+              width:'33%'
             }}>
             <RNPickerSelect
               onValueChange={val => manageFilter(val)}
@@ -720,12 +730,18 @@ const SBAccountList = ({route}) => {
               value={sort}
               useNativeAndroidPickerStyle={false}
               placeholder={{}}
+              Icon={() => (
+                <Image
+                  style={styles.image4}
+                  source={require('../../../assets/Image/down.png')}
+                />
+              )}
             />
-            <Image
+            {/* <Image
               style={{width: 20, height: 16, marginLeft: 5}}
               resizeMethod="resize"
               source={require('../../../assets/Image/down.png')}
-            />
+            /> */}
           </TouchableOpacity>
           <TouchableOpacity
             delayPressIn={0}
@@ -780,9 +796,10 @@ const SBAccountList = ({route}) => {
 };
 export default SBAccountList;
 const Sorting = [
-  {label: 'Popular', value: 'popular'},
-  {label: 'Alphabetical', value: 'alphabet'},
   {label: 'Interest Rate', value: 'interest_rate'},
+  // {label: 'MAB', value: 'mab'},
+  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Name', value: 'alphabet'},
 ];
 const item = [
   {

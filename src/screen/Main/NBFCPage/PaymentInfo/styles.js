@@ -22,7 +22,7 @@ export default StyleSheet.create({
         marginTop:13,
     },
     font:{
-        fontFamily:'Montserrat-Normal',
+        fontFamily:'Montserrat-Regular',
         fontSize:14,
         color:colors.textColor
     },

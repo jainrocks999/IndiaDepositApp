@@ -14,6 +14,7 @@ import Loader from '../../../component/loader';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
+import fontSize from '../../../component/fontSize';
 
 const FDFilter=({route})=>{
     const dispatch=useDispatch()
@@ -37,7 +38,13 @@ const FDFilter=({route})=>{
     const selector=useSelector((state)=>state.BankNameList)
     const isFetching=useSelector((state)=>state.isFetching)
     const data=route.params.data
-console.log('this is user id',route.params);
+    const [len,setLen]=useState(5)
+    const [bankType,setBankType]=useState([])
+    const [creditRating,setCreditRating]=useState([])
+    const [loan,setLoans]=useState('')
+    const [premature,setPremature]=useState('')
+    const [clear,setClear]=useState(false)
+
 useEffect(()=>{
     const backAction = () => {
         navigation.goBack()
@@ -50,10 +57,8 @@ useEffect(()=>{
     
       return () => backHandler.remove();
 },[])
-
-   
-    console.log('this is gender value',toggleCheckBox,toggleCheckBox1,toggleCheckBox2);
     const manageClear=()=>{
+        setClear(true)
         setIsEnabled1(false)
         setIsEnabled2(false)
         setIsEnabled3(false)
@@ -64,44 +69,17 @@ useEffect(()=>{
         setIsEnabled8(false)
         setValue1('')
         setSelected([])
+        setCreditRating([])
+        setBankType([])
         setToggleCheckBox(false)
         setToggleCheckBox1(false)
         setToggleCheckBox2(false)
+        setLoans('')
+        setPremature('')
     }
     const applyFilter=async()=>{
-        const user_id=await AsyncStorage.getItem(Storage.user_id)
-        // if(isEnabled7==true&&penalty==''){
-        //    Toast.show('Please enter premature penalty rate')
-        // }
-        // else if(isEnabled8==true&& loan1==''){
-        //     Toast.show('Please enter loan rate')
-        // }
-        // else{
+      const user_id=await AsyncStorage.getItem(Storage.user_id)
       dispatch({
-        // type: 'FD_Search_Request',
-        // url: 'fdlist1',
-        // user_id,
-        // year:0,
-        // month:0,
-        // days:30,
-        // amount:10000,
-        // location:data.location,
-        // type1:data.type1,
-        // bank_id:'',
-        // interest_rate:'',
-        // nationalized:'',
-        // sb_account_required:'',
-        // offer:'',
-        // gender:'',
-        // interest_payout:'',
-        // premature_penalty:'',
-        // loan:'',
-        // order_on:'',
-        // order_to:'',
-        // b_lat:'',
-        // b_long:'',
-        // b_type:1,
-        // navigation:navigation
             type: 'FD_Search_Request',
             url: 'fdlist1',
             user_id,
@@ -117,22 +95,38 @@ useEffect(()=>{
             sb_account_required:isEnabled2==true?1:'',
             offer:isEnabled3==true?1:'',
             interest_payout:isEnabled6==true?1:'',
-            premature_penalty:isEnabled7==true?1:'',
-            loan:isEnabled8==true?1:'',
-            // loan:1,
+            premature_penalty:premature,
+            loan:loan,
             order_on:data.order_on,
             order_to:data.order_to,
-            // premature_withdrawal_rate:penalty,
-            // load_lending_rate:loan1,
             b_lat:data.b_lat,
             b_long:data.b_long,
             b_type:1,
             filter:'true',
+            credit_rating:creditRating,
+            bank_type:bankType,
             navigation:navigation
           })
         // }
     }
-    console.log('thisis fkadjfdkjf',value1,isEnabled1,isEnabled2,isEnabled6,penalty,loan1);
+    const rateOnchange=(value)=>{
+        if(value>10){
+          setValue1(parseFloat(10).toString())
+        }
+        else{
+          if(isNaN(value)){
+          }
+          else{
+            setValue1(value)
+          if(value<10){
+            setLen(4)
+          }
+          else{
+            setLen(5)
+          }
+          }  
+        }
+      }
     return(
         <View style={{flex:1,
        // paddingTop:Platform.OS=='android'?0:40
@@ -153,7 +147,7 @@ useEffect(()=>{
             <ScrollView style={{marginBottom:0}}>
             {isFetching?<Loader/>:null}
             <View style={{paddingHorizontal:20,marginTop:20,marginBottom:30}}>
-              <Text style={styles.heading}>Bank</Text>
+              <Text style={styles.heading}>Bank Name</Text>
               <View style={{width:'100%',marginTop:5}}>
                           <MultiSelect   
                                 items={selector}
@@ -164,8 +158,7 @@ useEffect(()=>{
                                 tagBorderColor={colors.bc}
                                 tagRemoveIconColor={'#fff'}
                                 tagTextColor={'#fff'}
-                                selectText={selected.length>0?'':"Select Bank"}
-                                // selectedItems
+                                selectText={selected.length>0?'':"Select Bank Name"}
                                 single={false}
                                 searchInputPlaceholderText="Select Bank"
                                 onChangeInput={ (text)=> console.log(text)}
@@ -192,9 +185,96 @@ useEffect(()=>{
                                 tagContainerStyle={{backgroundColor:colors.bc}}
                               />
               </View>
-              <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:30}}> 
+              <Text style={[styles.heading,{marginTop:5}]}>Credit Rating</Text>
+              <View style={{width:'100%',marginTop:5}}>
+                          <MultiSelect   
+                                items={Credit}
+                                uniqueKey="value"
+                                onSelectedItemsChange={(val)=>setCreditRating(val)}
+                                selectedItems={creditRating}
+                                searchIcon={false}
+                                tagBorderColor={colors.bc}
+                                tagRemoveIconColor={'#fff'}
+                                tagTextColor={'#fff'}
+                                selectText={creditRating.length>0?'':"Select Credit Rating"}
+                                // selectedItems
+                                single={false}
+                                searchInputPlaceholderText="Select Credit Rating"
+                                onChangeInput={ (text)=> console.log(text)}
+                                selectedItemTextColor={colors.bc}
+                                selectedItemIconColor={colors.bc}
+                                itemTextColor={colors.textColor}
+                                displayKey="label"
+                                submitButtonColor={colors.bc}
+                                submitButtonText="Submit"
+                                textInputProps={{ editable: false,autoFocus:false }}
+                                searchInputPlaceholderText=""
+                                searchIcon={false}
+                                styleDropdownMenu={{
+                                    width:'100%',
+                                    borderBottomWidth:1.5,
+                                    borderColor:colors.bc,
+                                    height:55,
+                                    alignSelf:'center',
+                                    flexDirection:'row',
+                                    backgroundColor:'#fff',
+                                    paddingHorizontal:12
+                                  }}
+                                tagContainerStyle={{backgroundColor:colors.bc}}
+                              />
+              </View>
+              <Text style={[styles.heading,{marginTop:5}]}>Bank Type</Text>
+              <View style={{width:'100%',marginTop:5}}>
+                          <MultiSelect   
+                                items={BankType}
+                                uniqueKey="value"
+                                onSelectedItemsChange={(val)=>setBankType(val)}
+                                selectedItems={bankType}
+                                searchIcon={false}
+                                tagBorderColor={colors.bc}
+                                tagRemoveIconColor={'#fff'}
+                                tagTextColor={'#fff'}
+                                selectText={bankType.length>0?'':"Select Bank Type"}
+                                single={false}
+                                searchInputPlaceholderText="Select Bank"
+                                onChangeInput={ (text)=> console.log(text)}
+                                selectedItemTextColor={colors.bc}
+                                selectedItemIconColor={colors.bc}
+                                itemTextColor={colors.textColor}
+                                displayKey="label"
+                                submitButtonColor={colors.bc}
+                                submitButtonText="Submit"
+                                textInputProps={{ editable: false,autoFocus:false }}
+                                searchInputPlaceholderText=""
+                                searchIcon={false}
+                                styleDropdownMenu={{
+                                    width:'100%',
+                                    borderBottomWidth:1.5,
+                                    borderColor:colors.bc,
+                                    height:55,
+                                    alignSelf:'center',
+                                    flexDirection:'row',
+                                    backgroundColor:'#fff',
+                                    paddingHorizontal:12
+                                 
+                                  }}
+                                tagContainerStyle={{backgroundColor:colors.bc}}
+                              />
+              </View>
+              <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:5,alignItems:'center'}}> 
                   <Text style={styles.heading}>Interest Rate Slider</Text>
-                  <Text>{`${parseFloat(value1).toFixed(1)} %`}</Text>
+                  {/* <Text>{`${parseFloat(value1).toFixed(1)=='NaN'?0:parseFloat(value1).toFixed(1)} %`}</Text> */}
+                <View style={{flexDirection:'row',alignItems:'center'}}>
+                  <TextInput
+                  value={value1}
+                  onChangeText={(val)=>rateOnchange(val)}
+                  maxLength={len}
+                  style={{color:colors.textColor}}
+                  underlineColorAndroid={colors.textColor}
+                  keyboardType='number-pad'
+                  />
+                  <Text>{`%`}</Text>
+                  </View>
               </View>
                 <Slider
                     minimumValue={0}
@@ -203,59 +283,60 @@ useEffect(()=>{
                     value={parseInt(value1==''?0:value1)}
                     thumbTintColor={colors.bc}
                     minimumTrackTintColor={colors.bc}
-                    onValueChange={(value) =>setValue1(JSON.stringify(value))} 
+                    // onValueChange={(value) =>setValue1(JSON.stringify(value))} 
+                    onValueChange={(val)=>setValue1(parseFloat(JSON.stringify(val)).toFixed(2))}
+
                 />
-                <View style={styles.container}>
-                    <Text style={styles.heading}>Nationalized</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled1(previousState => !previousState)}
-                    value={isEnabled1}
-                />
+
+
+                    <View style={{marginTop:5}}>
+                    <Text style={styles.heading}>Premature Penalty</Text>
+                <View style={{borderWidth:1,borderColor:colors.textColor,borderRadius:8,height:40,paddingHorizontal:10,marginTop:5}}>
+                 <RNPickerSelect
+                          onValueChange={(val)=>setPremature(val)}
+                          items={Premature}
+                          style={{ 
+                            inputAndroid: { color: colors.bc,width:'100%',fontSize:14,marginBottom:-1 },
+                            inputIOS:{color:colors.bc},
+                          placeholder:{color:colors.textColor,fontSize:fontSize.fourteen,marginTop:2,fontFamily:'Montserrat-Regular'},
+                          }}
+                          value={premature}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{label:'Please select premature penalty',value:''}}
+                          Icon={()=><Image 
+                                          style={[{marginTop:Platform.OS=='android'? 14:6,
+                                          marginRight:-2,
+                                          height:10,
+                                          width:20,},{marginLeft:10}]} 
+                                          source={require('../../../assets/Image/down.png')}/>}
+                      />
+                    </View>
                 </View>
-                <View style={styles.container}>
-                    <Text style={styles.heading}>SB account required</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled2(previousState => !previousState)}
-                    value={isEnabled2}
-                />
+                <View style={{marginTop:9}}>
+                    <Text style={styles.heading}>Loan</Text>
+                <View style={{borderWidth:1,borderColor:colors.textColor,borderRadius:8,height:40,paddingHorizontal:10,marginTop:5}}>
+                 <RNPickerSelect
+                          onValueChange={(val)=>setLoans(val)}
+                          items={Loan}
+                          style={{ 
+                            inputAndroid: { color: colors.bc,width:'100%',fontSize:14,marginBottom:-1 },
+                            inputIOS:{color:colors.bc},
+                          placeholder:{color:colors.textColor,fontSize:fontSize.fourteen,marginTop:2,fontFamily:'Montserrat-Regular'},
+                          }}
+                          value={loan}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{label:'Please select premature penalty',value:''}}
+                          Icon={()=><Image 
+                                          style={[{marginTop:Platform.OS=='android'? 14:6,
+                                          marginRight:-2,
+                                          height:10,
+                                          width:20,},{marginLeft:10}]} 
+                                          source={require('../../../assets/Image/down.png')}/>}
+                      />
+                    </View>
                 </View>
-                <View style={styles.container}>
-                    <Text style={styles.heading}>Offer</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled3(previousState => !previousState)}
-                    value={isEnabled3}
-                />
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.heading}>Insurance</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled4(previousState => !previousState)}
-                    value={isEnabled4}
-                />
-                </View>
-                <View style={styles.container}>
-                    <Text style={styles.heading}>Interest Payout</Text>
-                    <Switch
-                    trackColor={{ false: "grey", true: colors.bc }}
-                    thumbColor={'#fff'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={()=>setIsEnabled6(previousState => !previousState)}
-                    value={isEnabled6}
-                />
-                </View>
-                <View style={styles.container}>
+         
+                {/* <View style={styles.container}>
                     <Text style={styles.heading}>Premature Penalty</Text>
                     <Switch
                     trackColor={{ false: "grey", true: colors.bc }}
@@ -265,18 +346,7 @@ useEffect(()=>{
                     value={isEnabled7}
                 />
                 </View>
-                {/* {isEnabled7?<View style={[styles.drop,{marginTop:15}]}>
-                    <TextInput
-                    placeholder='Enter Here'
-                    returnKeyType='done'
-                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
-                    onChangeText={(val)=>setPenalty(val)}
-                    value={penalty}
-                    keyboardType={'number-pad'}
-                    />
-                
-                </View>:<View/>} */}
-                <View style={[styles.container1]}>
+                  <View style={[styles.container1]}>
                     <Text style={styles.heading}>Loan</Text>
                     <Switch
                     trackColor={{ false: "grey", true: colors.bc }}
@@ -285,32 +355,7 @@ useEffect(()=>{
                     onValueChange={()=>setIsEnabled8(previousState => !previousState)}
                     value={isEnabled8}
                 />
-                </View>
-                {/* {isEnabled8 ?<View style={[styles.drop,{marginTop:15,marginBottom:10}]}>
-                <TextInput
-                    placeholder='Enter Here'
-                    returnKeyType='done'
-                    style={{fontFamily:'Montserrat-Regular',color:colors.textColor,width:'95%'}}
-                    onChangeText={(val)=>setLoan(val)}
-                    value={loan1}
-                    keyboardType={'number-pad'}
-                    /> */}
-                               {/* <RNPickerSelect
-                                         onValueChange={(val)=>setLoan(val)}
-                                         items={loan}
-                                         style={{ 
-                                            inputAndroid: { color: colors.textColor,width:'100%',fontSize:14,marginBottom:-1 },
-                                         placeholder:{color:colors.heading1,width:'100%',height:35,alignSelf:'center'}
-                                         }}
-                                         value={loan1}
-                                         useNativeAndroidPickerStyle={false}
-                                         placeholder={{ label: "Select", value: null }}
-                                         Icon={()=>
-                                          <Image 
-                                         style={{marginLeft:12,width:25,height:9,marginTop:11}} 
-                                        source={require('../../../assets/Image/down.png')}/>}   
-                                   /> */}
-                {/* </View>:<View/>} */}
+                </View> */}
                 
             </View>
 
@@ -343,26 +388,27 @@ useEffect(()=>{
     )
 }
 export default FDFilter;
-const penaltys=[
-    { label: '10%', value: '10%' },
-    { label: '15%', value: '15%' },
-    { label: '20%', value: '20%'}]
-const loan=[
-    { label: '10%', value: '10%' },
-    { label: '15%', value: '15%' },
-    { label: '20%', value: '20%'}]
+const Credit=[
+    { label: 'AAA', value: 'AAA' },
+    { label: 'AA', value: 'AA' },
+    { label: 'A', value: 'A'},
+    { label: 'BBB', value: 'BBB'},
+    { label: 'BB', value: 'BB'},
+    { label: 'B', value: 'B'},
+    { label: 'C', value: 'C'},
+    { label: 'D', value: 'D'},
+  ]
 
-    const item = [ {
-        name: 'SBI',
-        id: 10,
-      },
-      {
-        name: 'Union Bank',
-        id: 17,
-      },
-      {
-        name: 'HDFC',
-        id: 13,
-      },
-      
-      ];
+const BankType=[
+    { label: 'Private', value: '1' },
+    { label: 'Public', value: '2' },
+]
+const Loan=[
+  {label: 'Yes', value:'1'},
+  {label: 'No', value:'0'}
+]
+const Premature=[
+{label: 'Yes', value:'1'},
+{label: 'No', value:'0'}
+]
+

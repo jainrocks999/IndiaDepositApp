@@ -11,15 +11,21 @@ import Header from '../../../component/header';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
-import {useSelector} from 'react-redux';
+import {useSelector,useDispatch} from 'react-redux';
 import axios from 'axios';
 import Constants from '../../../component/Constants';
+import Storage from '../../../component/AsyncStorage';
+import AsyncStorage from '@react-native-community/async-storage';
+import Loader from '../../../component/loader';
+
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
+  const dispatch=useDispatch()
   const selector = useSelector(state => state.SBCompareDetail);
   const data1 = selector.datavalue1[0];
   const data2 = selector.datavalue2[0];
+  const isFetching=useSelector(state=>state.isFetching)
 
   useEffect(() => {
     const backAction = () => {
@@ -33,6 +39,31 @@ const FDList = ({route}) => {
 
     return () => backHandler.remove();
   }, []);
+const openAccount=async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  dispatch({
+    type: 'SB_Detail_Request',
+    url: 'sbdetail',
+    saving_account_id: route.params.value_id1,
+    navigation: navigation,
+    branch_type: route.params.branch_type1,
+    pincode: route.params.location,
+    user_id,
+  });
+}
+
+const openAccount1=async()=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  dispatch({
+    type: 'SB_Detail_Request',
+    url: 'sbdetail',
+    saving_account_id: route.params.value_id2,
+    navigation: navigation,
+    branch_type: route.params.branch_type2,
+    pincode: route.params.location,
+    user_id,
+  });
+}
 
   const renderMab1 = () => {
     if (route.params.branch_type1 == 'Metropolitan') {
@@ -88,89 +119,7 @@ const FDList = ({route}) => {
         </View>
       );
     }
-  };
-  const download1 = async item => {
-    try {
-      const data = new FormData();
-      data.append(
-        'form_type',
-        item.type == 'Regular'
-          ? 'fdRegular'
-          : item.type == 'Senior Citizen'
-          ? 'FDSenior Citizen'
-          : item.type == 'Female'
-          ? 'SBFemale'
-          : item.type == 'Zero Balance'
-          ? 'SBZeroBalance'
-          : '',
-      );
-      data.append('bank_id', item.bank_id);
-      data.append('from_for', 'savingaccount');
-      const response = await axios({
-        method: 'POST',
-        data,
-        headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'multipart/form-data',
-        },
-        url: 'https://indiadeposit.in/admin/public/apis/getform',
-      });
-      if (response.data.status == 200) {
-        navigation.navigate('FD_FORM', {
-          id: item.saving_account_id,
-          from: 'saving_account_id',
-          response: response.data.data,
-          type: 'common',
-          bank_id: item.bank_id,
-          pincode: route.params.location,
-        });
-      }
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const download = async item => {
-    console.log('this idfjslifjdklfjdsklfjd', item);
-    try {
-      const data = new FormData();
-      data.append(
-        'form_type',
-        item.type == 'Regular'
-          ? 'fdRegular'
-          : item.type == 'Senior Citizen'
-          ? 'FDSenior Citizen'
-          : item.type == 'Female'
-          ? 'SBFemale'
-          : item.type == 'Zero Balance'
-          ? 'SBZeroBalance'
-          : '',
-      );
-      data.append('bank_id', item.bank_id);
-      data.append('from_for', 'savingaccount');
-      const response = await axios({
-        method: 'POST',
-        data,
-        headers: {
-          'content-type': 'multipart/form-data',
-          Accept: 'multipart/form-data',
-        },
-        url: 'https://indiadeposit.in/admin/public/apis/getform',
-      });
-      if (response.data.status == 200) {
-        navigation.navigate('FD_FORM', {
-          id: item.saving_account_id,
-          from: 'saving_account_id',
-          response: response.data.data,
-          type: 'common',
-          bank_id: item.bank_id,
-          pincode: route.params.location,
-        });
-      }
-    } catch (error) {
-      throw error;
-    }
-  };
+  }
 
   return (
     <View style={{flex: 1}}>
@@ -179,6 +128,7 @@ const FDList = ({route}) => {
         source={require('../../../assets/Image/arrow2.png')}
         onPress={() => navigation.goBack()}
       />
+      {isFetching?<Loader/>:null}
       <View style={styles.View}>
         <View style={styles.card}>
           <Image
@@ -192,7 +142,7 @@ const FDList = ({route}) => {
           <View style={{marginTop: 30}}>
             <TouchableOpacity
               delayPressIn={0}
-              onPress={() => download(data1)}
+              onPress={() => openAccount()}
               style={styles.button}>
               <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
             </TouchableOpacity>
@@ -215,7 +165,7 @@ const FDList = ({route}) => {
           <View style={{marginTop: 30}}>
             <TouchableOpacity
               delayPressIn={0}
-              onPress={() => download1(data2)}
+              onPress={() => openAccount1()}
               style={styles.button}>
               <Text style={styles.invest}>{'OPEN ACCOUNT'}</Text>
             </TouchableOpacity>

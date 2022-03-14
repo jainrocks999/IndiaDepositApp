@@ -89,7 +89,7 @@ export default StyleSheet.create({
     {
         color:colors.black,
     fontFamily:'Montserrat-Regular',
-    marginTop:10,
+   // marginTop:10,
     fontWeight:'700',
     fontSize:fontSize.fourteen
 },

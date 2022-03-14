@@ -34,7 +34,7 @@ const Confirmation=({route})=>{
                  <Text style={{fontSize:21,fontFamily:'Montserrat-Bold'}}>
                  Thank you for confirming your payment details!
                  </Text>
-                 <Text style={{fontSize:16,fontFamily:'Montserrat-Normal',marginTop:20}}>
+                 <Text style={{fontSize:16,fontFamily:'Montserrat-Regular',marginTop:20}}>
                  Kindly allow us to verify the same. We will inform you once your payment has been confirmed. You are not losing any interest in between. The interest will start accruing from the official date of receipt of payment.
                  </Text>
                  <View style={{marginBottom:40}}/>

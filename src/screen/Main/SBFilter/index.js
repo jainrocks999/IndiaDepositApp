@@ -7,6 +7,7 @@ import {
   Switch,
   ScrollView,
   BackHandler,
+  TextInput
 } from 'react-native';
 import colors from '../../../component/colors';
 import Slider from 'react-native-slider';
@@ -17,6 +18,9 @@ import {useNavigation} from '@react-navigation/native';
 import Loader from '../../../component/loader';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+import fontSize from '../../../component/fontSize';
+import RNPickerSelect from 'react-native-picker-select';
+
 
 const FDFilter = ({route}) => {
   const navigation = useNavigation();
@@ -28,13 +32,18 @@ const FDFilter = ({route}) => {
   const [isEnabled5, setIsEnabled5] = useState(false);
   const [isEnabled6, setIsEnabled6] = useState(false);
   const [selected, setSelected] = useState([]);
+  const [bankType,setBankType]=useState([])
+  const [creditRating,setCreditRating]=useState([])
+  const [atmPoints,setAtmPoints]=useState('')
   const [value, setValue] = useState('0');
   const selector = useSelector(state => state.BankNameList);
   const isFetching = useSelector(state => state.isFetching);
   const [value1, setValue1] = useState('0');
   const [value2, setValue2] = useState('0');
   const data = route.params.data;
-  console.log('this is data from render', route.params);
+  const [len,setLen]=useState(5)
+  const [clear,setClear]=useState(false)
+  const [insurance,setInsurance]=useState('')
 
   useEffect(() => {
     const backAction = () => {
@@ -50,6 +59,7 @@ const FDFilter = ({route}) => {
     return () => backHandler.remove();
   }, []);
   const manageFilter = () => {
+    setClear(true)
     setIsEnabled1(false);
     setIsEnabled2(false);
     setIsEnabled3(false);
@@ -57,9 +67,13 @@ const FDFilter = ({route}) => {
     setIsEnabled5(false);
     setIsEnabled6(false);
     setSelected([]);
+    setCreditRating([])
+    setBankType([])
+    setAtmPoints('')
     setValue('');
     setValue1('');
     setValue2('');
+    setInsurance('')
   };
   const applyFilter = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -74,7 +88,7 @@ const FDFilter = ({route}) => {
       interest_rate: parseFloat(value2).toFixed(1),
       nationalized: isEnabled1 == true ? 1 : '',
       offer: isEnabled3 == true ? 1 : '',
-      insurance: isEnabled4 == true ? 1 : '',
+      insurance: insurance,
       account_type: isEnabled5 == true ? 1 : '',
       account_sub_type: isEnabled6 == true ? 1 : '',
       non_maintenance_penalty: value,
@@ -82,11 +96,32 @@ const FDFilter = ({route}) => {
       private: isEnabled2 == true ? 1 : '',
       order_on: data.order_on,
       order_to: data.order_to,
+      credit_rating:creditRating,
+      bank_type:bankType,
+      atm_points:atmPoints,
       b_lat: '',
       b_long: '',
       navigation: navigation,
     });
   };
+  const rateOnchange=(value)=>{
+    if(value>10){
+      setValue1(parseFloat(10).toString())
+    }
+    else{
+      if(isNaN(value)){
+      }
+      else{
+        setValue2(value)
+      if(value<10){
+        setLen(4)
+      }
+      else{
+        setLen(5)
+      }
+      }  
+    }
+  }
   return (
     <View style={{flex: 1}}>
       {isFetching ? <Loader /> : null}
@@ -104,7 +139,7 @@ const FDFilter = ({route}) => {
       {/* <View> */}
       <ScrollView style={{marginBottom: 0}}>
         <View style={{paddingHorizontal: 20, marginTop: 20}}>
-          <Text style={styles.heading}>Bank</Text>
+          <Text style={styles.heading}>Bank Name</Text>
           <View style={{width: '100%', marginTop: 5}}>
             <MultiSelect
               items={selector}
@@ -141,14 +176,99 @@ const FDFilter = ({route}) => {
               tagContainerStyle={{backgroundColor: colors.bc}}
             />
           </View>
+          <Text style={[styles.heading,{marginTop:5}]}>Credit Rating</Text>
+          <View style={{width: '100%', marginTop: 5}}>
+            <MultiSelect
+              items={Credit}
+              single={false}
+              uniqueKey="value"
+              onSelectedItemsChange={val => setCreditRating(val)}
+              selectedItems={creditRating}
+              searchIcon={false}
+              tagBorderColor={colors.bc}
+              tagRemoveIconColor={'#fff'}
+              tagTextColor={'#fff'}
+              selectText={creditRating.length > 0 ? '' : 'Select Credit Rating'}
+              searchInputPlaceholderText="Select Credit Rating"
+              onChangeInput={text => console.log(text)}
+              selectedItemTextColor={colors.bc}
+              selectedItemIconColor={colors.bc}
+              itemTextColor={colors.textColor}
+              displayKey="label"
+              submitButtonColor={colors.bc}
+              submitButtonText="Submit"
+              textInputProps={{editable: false, autoFocus: false}}
+              searchInputPlaceholderText=""
+              searchIcon={false}
+              styleDropdownMenu={{
+                width: '100%',
+                borderBottomWidth: 1.5,
+                borderColor: colors.bc,
+                height: 55,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                backgroundColor: '#fff',
+                paddingHorizontal: 12,
+              }}
+              tagContainerStyle={{backgroundColor: colors.bc}}
+            />
+          </View><Text style={[styles.heading,{marginTop:5}]}>Bank Type</Text>
+          <View style={{width: '100%', marginTop: 5}}>
+            <MultiSelect
+              items={BankType}
+              single={false}
+              uniqueKey="value"
+              onSelectedItemsChange={val => setBankType(val)}
+              selectedItems={bankType}
+              searchIcon={false}
+              tagBorderColor={colors.bc}
+              tagRemoveIconColor={'#fff'}
+              tagTextColor={'#fff'}
+              selectText={bankType.length > 0 ? '' : 'Select Bank Type'}
+              searchInputPlaceholderText="Select Bank Type"
+              onChangeInput={text => console.log(text)}
+              selectedItemTextColor={colors.bc}
+              selectedItemIconColor={colors.bc}
+              itemTextColor={colors.textColor}
+              displayKey="label"
+              submitButtonColor={colors.bc}
+              submitButtonText="Submit"
+              textInputProps={{editable: false, autoFocus: false}}
+              searchInputPlaceholderText=""
+              searchIcon={false}
+              styleDropdownMenu={{
+                width: '100%',
+                borderBottomWidth: 1.5,
+                borderColor: colors.bc,
+                height: 55,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                backgroundColor: '#fff',
+                paddingHorizontal: 12,
+              }}
+              tagContainerStyle={{backgroundColor: colors.bc}}
+            />
+          </View>
           <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              marginTop: 15,
+              marginTop: 5,
+              alignItems:'center'
             }}>
             <Text style={styles.heading}>Interest Rate Slider</Text>
-            <Text>{`${parseFloat(value2).toFixed(1)}%`}</Text>
+            {/* <Text>{`${parseFloat(value2).toFixed(1)}%`}</Text> */}
+            <View style={{flexDirection:'row',alignItems:'center'}}>
+                  <TextInput
+                  value={value2}
+                  onChangeText={(val)=>rateOnchange(val)}
+                  maxLength={len}
+                  style={{color:colors.textColor}}
+                  underlineColorAndroid={colors.textColor}
+                  keyboardType='number-pad'
+                  />
+                  <Text>{`%`}</Text>
+                  </View>
           </View>
           <Slider
             minimumValue={0}
@@ -157,45 +277,37 @@ const FDFilter = ({route}) => {
             value={parseInt(value2 == '' ? 0 : value2)}
             thumbTintColor={colors.bc}
             minimumTrackTintColor={colors.bc}
-            onValueChange={value => setValue2(JSON.stringify(value))}
+            // onValueChange={value => setValue2(JSON.stringify(value))}
+            onValueChange={(val)=>setValue2(parseFloat(JSON.stringify(val)).toFixed(2))}
+
           />
-          <View style={styles.container}>
-            <Text style={styles.heading}>Nationalized</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled1(previousState => !previousState)
-              }
-              value={isEnabled1}
-            />
-          </View>
-          <View style={styles.container}>
-            <Text style={styles.heading}>Private/public</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled2(previousState => !previousState)
-              }
-              value={isEnabled2}
-            />
-          </View>
-          <View style={styles.container}>
-            <Text style={styles.heading}>Offer</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled3(previousState => !previousState)
-              }
-              value={isEnabled3}
-            />
-          </View>
-          <View style={styles.container}>
+
+
+              <View style={{marginTop:9}}>
+                    <Text style={styles.heading}>Insurance</Text>
+                <View style={{borderWidth:1,borderColor:colors.textColor,borderRadius:8,height:40,paddingHorizontal:10,marginTop:5}}>
+                 <RNPickerSelect
+                          onValueChange={(val)=>setInsurance(val)}
+                          items={Insurance}
+                          style={{ 
+                            inputAndroid: { color: colors.bc,width:'100%',fontSize:14,marginBottom:-1 },
+                            inputIOS:{color:colors.bc},
+                          placeholder:{color:colors.textColor,fontSize:fontSize.fourteen,marginTop:2,fontFamily:'Montserrat-Regular'},
+                          }}
+                          value={insurance}
+                          useNativeAndroidPickerStyle={false}
+                          placeholder={{label:'Please select insurance type',value:''}}
+                          Icon={()=><Image 
+                                          style={[{marginTop:Platform.OS=='android'? 14:6,
+                                          marginRight:-2,
+                                          height:10,
+                                          width:20,},{marginLeft:10}]} 
+                                          source={require('../../../assets/Image/down.png')}/>}
+                      />
+                    </View>
+                </View>
+         
+          {/* <View style={styles.container}>
             <Text style={styles.heading}>Insurance</Text>
             <Switch
               trackColor={{false: 'grey', true: colors.bc}}
@@ -206,8 +318,63 @@ const FDFilter = ({route}) => {
               }
               value={isEnabled4}
             />
+          </View> */}
+          <View style={{marginTop:10}}>
+            <Text style={styles.heading}>ATM Points</Text>
+            <View style={{
+                borderWidth:1,
+                borderColor:colors.textColor,
+                height:40,borderRadius:8,marginTop:5,
+                justifyContent:'center',
+                paddingHorizontal:10
+                }}>
+                <TextInput
+                placeholder='Please enter atm points'
+                style={{color:colors.textColor}}
+                value={atmPoints}
+                onChangeText={(val)=>setAtmPoints(val)}
+                keyboardType='number-pad'
+                />
+            </View>
           </View>
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
+            <Text style={styles.heading}>Nationalized</Text>
+            <Switch
+              trackColor={{false: 'grey', true: colors.bc}}
+              thumbColor={'#fff'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={() =>
+                setIsEnabled1(previousState => !previousState)
+              }
+              value={isEnabled1}
+            />
+          </View> */}
+          {/* <View style={styles.container}>
+            <Text style={styles.heading}>Private/public</Text>
+            <Switch
+              trackColor={{false: 'grey', true: colors.bc}}
+              thumbColor={'#fff'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={() =>
+                setIsEnabled2(previousState => !previousState)
+              }
+              value={isEnabled2}
+            />
+          </View> */}
+          {/* <View style={styles.container}>
+            <Text style={styles.heading}>Offer</Text>
+            <Switch
+              trackColor={{false: 'grey', true: colors.bc}}
+              thumbColor={'#fff'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={() =>
+                setIsEnabled3(previousState => !previousState)
+              }
+              value={isEnabled3}
+            />
+          </View> */}
+          
+          {/* <View style={styles.container}>
             <Text style={styles.heading}>Account Type</Text>
             <Switch
               trackColor={{false: 'grey', true: colors.bc}}
@@ -218,9 +385,9 @@ const FDFilter = ({route}) => {
               }
               value={isEnabled5}
             />
-          </View>
+          </View> */}
 
-          <View style={styles.container}>
+          {/* <View style={styles.container}>
             <Text style={styles.heading}>Account Sub Type</Text>
             <Switch
               trackColor={{false: 'grey', true: colors.bc}}
@@ -231,16 +398,15 @@ const FDFilter = ({route}) => {
               }
               value={isEnabled6}
             />
-          </View>
+          </View> */}
 
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
               marginTop: 30,
             }}>
             <Text style={styles.heading}>Non Maintenance Penalty</Text>
-            {/* <Text>{value}</Text> */}
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Image
                 style={{width: 12, height: 18}}
@@ -248,8 +414,8 @@ const FDFilter = ({route}) => {
               />
               <Text>{value}</Text>
             </View>
-          </View>
-          <Slider
+          </View> */}
+          {/* <Slider
             minimumValue={0}
             maximumValue={1000}
             step={10}
@@ -257,8 +423,8 @@ const FDFilter = ({route}) => {
             thumbTintColor={colors.bc}
             minimumTrackTintColor={colors.bc}
             onValueChange={value => setValue(JSON.stringify(value))}
-          />
-          <View
+          /> */}
+          {/* <View
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -282,7 +448,7 @@ const FDFilter = ({route}) => {
             thumbTintColor={colors.bc}
             minimumTrackTintColor={colors.bc}
             onValueChange={value => setValue1(JSON.stringify(value))}
-          />
+          /> */}
           <View style={{marginTop: 40}}></View>
         </View>
       </ScrollView>
@@ -330,28 +496,23 @@ const FDFilter = ({route}) => {
   );
 };
 export default FDFilter;
-const penalty = [
-  {label: '10%', value: '10%'},
-  {label: '15%', value: '15%'},
-  {label: '20%', value: '20%'},
-];
-const loan = [
-  {label: '10%', value: '10%'},
-  {label: '15%', value: '15%'},
-  {label: '20%', value: '20%'},
-];
+const Credit=[
+  { label: 'AAA', value: 'AAA' },
+  { label: 'AA', value: 'AA' },
+  { label: 'A', value: 'A'},
+  { label: 'BBB', value: 'BBB'},
+  { label: 'BB', value: 'BB'},
+  { label: 'B', value: 'B'},
+  { label: 'C', value: 'C'},
+  { label: 'D', value: 'D'},
+]
 
-const item = [
-  {
-    name: 'SBI',
-    id: 10,
-  },
-  {
-    name: 'Union Bank',
-    id: 17,
-  },
-  {
-    name: 'HDFC',
-    id: 13,
-  },
-];
+const BankType=[
+  { label: 'Private', value: '1' },
+  { label: 'Public', value: '2' },
+]
+const Insurance=[
+  {label: 'Yes', value:'1'},
+  {label: 'No', value:'0'}
+  ]
+  

@@ -269,8 +269,27 @@ const Upload = ({route}) => {
         title={'UPLOAD DOCUMENT'}
         onPress={() => navigation.goBack()}
       />
-      {isFetching ? <Loader /> : null}
-      <ScrollView>
+{isFetching ? 
+      <View style={{
+        flex: 1,
+        backgroundColor: 'rgba(248,249,249,0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: 999,
+        paddingHorizontal:20
+      }}>
+       <View style={{backgroundColor:'#fff',elevation:5,padding:20}}>
+       <Loader /> 
+      <Text style={{textAlign:'center',fontFamily:'Montserrat-Regular'}}>Please hold for sometime while your images are uploading!</Text>
+      </View>
+      </View>
+      : null}     
+       <ScrollView>
         {/* <View
           style={{
             alignItems: 'center',

@@ -24,13 +24,25 @@ PushNotification.createChannel(
 );
 
 const App = () => {
-  useEffect(() => {
+  useEffect(async() => {
     crashlytics().log('Analytics page just mounted')
     getCrashlyticsDetail()
     return () => {
       crashlytics().log('Analytics page just unmounted')
     }
   }, [])
+  const manageLogin=async()=>{
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    const KeepmeLogin = await AsyncStorage.getItem('KeepmeLogin');
+    if(user_id==null){
+      RootNavigation.push('Login')
+    }else if(user_id&&KeepmeLogin==1){
+      RootNavigation.push('Notification')
+    }
+    else if(user_id&&KeepmeLogin==0){
+      RootNavigation.push('Login')
+    }
+  }
   PushNotification.configure({
     onRegister: function (token) {
       console.log('TOKENs:', token.token);
@@ -44,13 +56,14 @@ const App = () => {
         message: notification.title,
       });
       if(notification.userInteraction===true && notification.foreground==false) {
-        RootNavigation.navigate('Splash')
+        console.log('this is a function calling1');
 
+        RootNavigation.navigate('Splash')
         AsyncStorage.setItem('value','1')
       }
       else{
         if (notification.userInteraction==true && notification.foreground==true) {
-          RootNavigation.push('Notification')
+          manageLogin()
         }
       }
       notification.finish(PushNotificationIOS.FetchResult.NoData);

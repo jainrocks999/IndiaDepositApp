@@ -132,7 +132,7 @@ const fd_form = ({route}) => {
     );
   };
   const dropDown = index => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     const array = [...listDataSource1];
     if (multiSelect) {
       array[index]['isExpanded'] = !array[index]['isExpanded'];

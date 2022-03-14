@@ -75,18 +75,39 @@ const RegisterPage = ({route}) => {
       />
       {loader ? <Loader /> : null}
       <View style={styles.cardView}>
-        <Image
+        {/* <Image
           resizeMode="contain"
           style={{height: 20, width: 70}}
           source={{
             uri: `${Constants.imageUrl}${route.params.data.bank_logo}`,
           }}
-        />
+        /> */}
+        <View style={{paddingHorizontal:15}}>
+        <View style={{alignItems:'flex-start'}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`• FDs getting organically matured will be credited to the account as per instruction provided during booking of FD.`}</Text>
+        </View>
+        <View style={{alignItems:'flex-start',marginTop:8}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`• FD can be pre-matured after serving locking period and agreed penalty.`}</Text>
+        </View>
+        <View style={{alignItems:'flex-start',marginTop:8}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`• You can redeem FD by visiting nearest branch carrying following documents of all holders :`}</Text>
+        </View>
+        <View style={{alignItems:'flex-start',marginTop:8}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`(i) FD original Bond `}</Text>
+        </View>
+        <View style={{alignItems:'flex-start',marginTop:8}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`(ii) Identity proof `}</Text>
+        </View>
+        <View style={{alignItems:'flex-start',marginTop:8}}>
+        <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`(iii) Address proof`}</Text>
+        </View>
+        </View>
+
         <View style={{width: '20%', alignItems: 'flex-end'}}></View>
       </View>
       {isFetching ? <Loader /> : null}
       <ScrollView style={styles.scroll}>
-        <KeyboardAwareScrollView
+        {/* <KeyboardAwareScrollView
           extraScrollHeight={10}
           enableOnAndroid={true}
           keyboardShouldPersistTaps="handled"
@@ -150,7 +171,15 @@ const RegisterPage = ({route}) => {
             <Text  style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>Use another account</Text>
             </TouchableOpacity>
           </View>
-        </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView> */}
+        <View style={{marginTop:15}}>
+        <CustomButton title="CONTINUE"
+        onPress={()=> validateUser()
+          // navigation.replace('SubmitRedeemRequest')
+        }
+        
+        />
+        </View>
       </ScrollView>
       <StatusBar />
     </View>

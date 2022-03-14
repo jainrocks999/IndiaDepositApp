@@ -40,6 +40,7 @@ const MyFDDetail = ({route}) => {
   const [account_number, set_account_number] = useState('');
   const [ifsc_code, set_ifsc_code] = useState('');
   const [showModal1, setShowModal1] = useState(false);
+  console.log('this is route.params data',route.params);
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -221,7 +222,6 @@ const MyFDDetail = ({route}) => {
             }}>
             Account Number
           </Text>
-          
           <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
             <Text
               style={{
@@ -260,7 +260,6 @@ const MyFDDetail = ({route}) => {
           ) : (
             <View />
           )}
-
           <View style={{marginTop: 10}} />
           <CustomButton
             title="UPLOAD PAYMENT DETAILS"

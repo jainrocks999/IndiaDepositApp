@@ -12,12 +12,15 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import StatusBar from '../../../component/StatusBar';
 import Constants from '../../../component/Constants';
+import Toast from "react-native-simple-toast";
 
 const FDDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selector = useSelector(state => state.FDDetail);
+
   const details = selector[0];
+  console.log('this is details',details);
   const period = (
     (parseFloat(route.params.year) * 365 +
       parseFloat(route.params.month) * 30 +
@@ -70,6 +73,7 @@ const FDDetail = ({route}) => {
           type: 'common',
           bank_id: details.bank_id,
           pincode: route.params.pincode,
+          
         });
       }
     } catch (error) {
@@ -82,7 +86,8 @@ const FDDetail = ({route}) => {
     try {
       const data = new FormData();
       data.append('bank_id', details.bank_id);
-      data.append('user_id', user_id);
+      data.append('type1',details.type)
+      data.append('fd_from',details.fd_from)
       const response = await axios({
         method: 'POST',
         data,
@@ -90,21 +95,35 @@ const FDDetail = ({route}) => {
           'content-type': 'multipart/form-data',
           Accept: 'multipart/form-data',
         },
-        url: 'https://indiadeposit.in/admin/public/apis/getnbfc',
+        url: 'https://indiadeposit.in/admin/public/apis/getfdfor',
       });
+      console.log('this is user reposakjfdkjf',response.data);
+      // Toast.show(response.data.messages)
       if (response.data.status == 200) {
-        navigation.navigate('SelectPlan', {
-          image: selector[0].bank_logo,
-          name: details.bankname,
-          amount: route.params.amount,
-          type: details.type,
-          data: response.data.data,
-        });
+        navigation.navigate('SelectPlan',{
+          image:selector[0].bank_logo,
+          name:details.bankname,
+          amount:route.params.amount,
+          type:details.type,
+          data:response.data.data,
+          rate:details.rate,
+          fixed_deposit_id:details.fixed_deposit_id,
+          fd_from:details.fd_from,
+          period:route.params.month==0&&route.params.days==0?route.params.year:period
+           })
+        // navigation.navigate('SelectPlan', {
+        //   image: selector[0].bank_logo,
+        //   name: details.bankname,
+        //   amount: route.params.amount,
+        //   type: details.type,
+        //   data: response.data.data,
+        // });
       }
     } catch (error) {
       throw error;
     }
   };
+  
 
   return (
     <View style={styles.container1}>
@@ -321,7 +340,7 @@ const FDDetail = ({route}) => {
               details.premature_withdrawals == 0
                 ? 'No'
                 : details.premature_withdrawals == 1
-                ? `Yes - ${details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`
+                ? `Yes - ${details.premature_withdrawal_rate==null?0:details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`
                 : null
             }`}</Text>
             {/* <Text>{details.premature_withdrawals==0?'No':details.premature_withdrawals?'Yes':''}</Text> */}
@@ -335,7 +354,7 @@ const FDDetail = ({route}) => {
             <Text style={styles.tds}>Loan Rate :</Text>
             <Text style={{fontSize: 14, color: colors.textColor}}>
               {details.loan == 1
-                ? `Yes - ${details.load_lending_rate}% above interest rate at the time of FD contract`
+                ? `Yes - ${details.load_lending_rate==null?0:details.load_lending_rate}% above interest rate at the time of FD contract`
                 : details.loan == 0
                 ? 'No'
                 : ''}
@@ -376,20 +395,28 @@ const FDDetail = ({route}) => {
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
                          :null} */}
-          <TouchableOpacity
-            delayPressIn={0}
-            onPress={() => manageForm()}
-            style={[
-              styles.btCont,
-              {
-                width:
-                  details.fd_from == 'nbfc' || details.fd_from == 'setu'
-                    ? '96%'
-                    : '96%',
-              },
-            ]}>
-            <Text style={styles.text3}>DOWNLOAD FORM</Text>
-          </TouchableOpacity>
+                         {details.fd_from=='offline'?
+                          <TouchableOpacity
+                          delayPressIn={0}
+                          onPress={() => manageForm()}
+                          style={[
+                            styles.btCont,
+                            {
+                              width:
+                                details.fd_from == 'nbfc' || details.fd_from == 'setu'
+                                  ? '96%'
+                                  : '96%',
+                            },
+                          ]}>
+                          <Text style={styles.text3}>DOWNLOAD FORM</Text>
+                        </TouchableOpacity>:
+                         <TouchableOpacity 
+                          delayPressIn={0}
+                         onPress={()=>createFD()}
+                         style={[styles.btCont,{width:'96%'}]}>
+                           <Text style={styles.text3}>CREATE FD</Text>
+                         </TouchableOpacity>
+         }
         </View>
         <StatusBar />
       </View>

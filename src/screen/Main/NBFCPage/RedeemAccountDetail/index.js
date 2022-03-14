@@ -269,11 +269,11 @@ const MyFDDetail = ({route}) => {
         </View>
         <View>
           <ScrollView>
-            <View style={styles.pad}>
+            {selector?<View style={styles.pad}>
               <Text style={styles.textColor}>
                 {'Bank account use while payment'}
               </Text>
-            </View>
+            </View>:null}
             <FlatList
               data={selector}
               renderItem={({item}) => renderItem(item)}
@@ -283,11 +283,11 @@ const MyFDDetail = ({route}) => {
               <View />
             ) : (
               <View>
-                <View style={styles.pad}>
+                {selector?<View style={styles.pad}>
                   <Text style={styles.textColor}>
                     {'Bank account use while redemption '}
                   </Text>
-                </View>
+                </View>:null}
                 <FlatList
                   data={selector}
                   renderItem={({item}) => renderItem1(item)}

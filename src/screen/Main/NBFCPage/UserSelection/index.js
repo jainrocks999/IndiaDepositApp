@@ -143,7 +143,6 @@ class UserSelection extends React.Component {
   }
 
   renderItem = item => {
-    console.log('this is item',item);
     if (this.state.loggedinUser == item.name &&item.email==this.state.loggedinUserEmail&& item.mobile==this.state.loggedinUserMobile) {
       return (
         <View style={[styles.card, {marginTop: 10}]}>

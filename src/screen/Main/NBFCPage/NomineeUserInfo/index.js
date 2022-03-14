@@ -27,7 +27,7 @@ import axios from 'axios';
 const RegisterPage = ({route}) => {
   const navigation = useNavigation('');
   const data = route.params.data;
-  console.log('this is user', data);
+  const data1=route.params.data
   const CountryList = useSelector(state => state.CountryList);
   const selector1 = useSelector(state => state.StateList);
   const selector2 = useSelector(state => state.CityList);
@@ -65,17 +65,19 @@ const RegisterPage = ({route}) => {
       country_id: country,
     });
 
-    dispatch({
-      type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: state,
-    });
+    // dispatch({
+    //   type: 'City_List_Request',
+    //   url: 'citybyid',
+    //   state_id: state,
+    // });
   }, []);
 
   const validateUser = async () => {
-    console.log('this is working');
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-    if (address1 == '' || address1 == 0) {
+    if(name==''||name==0){
+      Toast.show('Please enter name')
+    }
+    else if (address1 == '' || address1 == 0) {
       Toast.show('Please enter address line1');
     } else if (address2 == 0 || address2 == '') {
       Toast.show('Please enter address line2');
@@ -116,12 +118,39 @@ const RegisterPage = ({route}) => {
         nominee_address: `${address1},${address2}`,
         navigation: navigation,
       });
+      try {
+        const data= new FormData()
+        data.append('user_id', user_id);
+        data.append('user_nominee_id',data1.user_nominee_id);
+        data.append('name',name);
+        data.append('address1',address1);
+        data.append('address2',address2);
+        data.append('country', country);
+        data.append('state', state);
+        data.append('city', city);
+        data.append('dob', value);
+        data.append('guardian', guardian);
+        data.append('relationship', relation);
+        data.append('guardian_relationship', Grelation);
+        data.append('pincode',pincode);
+
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://indiadeposit.in/admin/public/apis/updatenominee',
+        });
+      } catch (error) {
+        throw error;
+      }
     }
   };
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
       setPincode(val);
       try {
         const data = new FormData();
@@ -143,11 +172,11 @@ const RegisterPage = ({route}) => {
             country_id: response.data.country.value,
           });
 
-          dispatch({
-            type: 'City_List_Request',
-            url: 'citybyid',
-            state_id: response.data.state.value,
-          });
+          // dispatch({
+          //   type: 'City_List_Request',
+          //   url: 'citybyid',
+          //   state_id: response.data.state.value,
+          // });
           setCity(response.data.city.value);
           setState(response.data.state.value);
           setCountry(JSON.stringify(response.data.country.value));
@@ -165,10 +194,9 @@ const RegisterPage = ({route}) => {
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
-      user_id,
-    });
+      url: 'citylist',
+      user_id
+    })
   };
   const manageCountry = async val => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -198,6 +226,7 @@ const RegisterPage = ({route}) => {
           <View style={styles.main}>
             <View style={styles.row}>
               <Text style={styles.better}>Name</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -211,6 +240,8 @@ const RegisterPage = ({route}) => {
 
             <View style={styles.row}>
               <Text style={styles.better}>Address Line1</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -223,6 +254,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Address Line2</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <TextInput
@@ -234,6 +267,8 @@ const RegisterPage = ({route}) => {
             </View>
             <View style={styles.row}>
               <Text style={styles.better}>Date of Birth</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <TouchableOpacity
               delayPressIn={0}
@@ -265,6 +300,8 @@ const RegisterPage = ({route}) => {
             </TouchableOpacity>
             <View style={styles.row}>
               <Text style={styles.better}>Relationship</Text>
+              <Text style={{marginTop:10,color:colors.red}}>*</Text>
+
             </View>
             <View style={styles.drop}>
               <RNPickerSelect

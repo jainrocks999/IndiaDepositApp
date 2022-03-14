@@ -34,9 +34,37 @@ const dashboard = () => {
   const [selectedItems2, setSelectedItems2] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const isFetching = useSelector(state => state.isFetching);
+  const [notification,setNotification]=useState('')
   const [title,setTitle]=useState('')
   const [title1,setTitle1]=useState('')
   const dispatch = useDispatch();
+console.log('this is notification',notification);
+
+  useEffect(async () => {
+    const user_id = await AsyncStorage.getItem(Storage.user_id);
+    try {
+      const data = new FormData();
+      data.append('user_id', user_id);
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://indiadeposit.in/admin/public/apis/getnotification',
+      });
+      console.log('this is narendra', response.data);
+      if (response.data.status == 200) {
+        console.log('this is narendra', response.data);
+        setNotification(response.data.view_status);
+        // setMasterDataSource(response.data.data);
+      }
+    } catch (error) {
+      throw error;
+    }
+  }, []);
+
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -67,6 +95,21 @@ const dashboard = () => {
     dispatch({
       type: 'Family_List_Request',
       url: 'getfamilylist',
+      user_id,
+    });
+    dispatch({
+      type: 'Country_List_Request',
+      url: 'countrylist',
+      user_id,
+    });
+    dispatch({
+      type: 'City_List_Request',
+      url: 'citylist',
+      user_id
+    })
+    dispatch({
+      type: 'Get_Faq_Request',
+      url: 'getfaq',
       user_id,
     });
     const backHandler = BackHandler.addEventListener(
@@ -243,15 +286,66 @@ const dashboard = () => {
     setSelectedItems2([...selectedItems2, item.name]);
   };
 
+const manageNotification=async()=>{
+  const user_id = await AsyncStorage.getItem(Storage.user_id);
+  try {
+    const data = new FormData();
+    data.append('user_id', user_id);
+    data.append('view_status',1)
+    const response = await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://indiadeposit.in/admin/public/apis/updatenotification',
+    });
+    if(response.data.status==200){
+      navigation.push('Notification')
+    }   
+  } catch (error) {
+    throw error;
+  }
+}
   return (
     <View style={{flex: 1, backgroundColor: colors.card}}>
-      <Header
+      <View>
+      <View style={{width: '100%',
+                  backgroundColor: colors.bc,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 16,
+                  flexDirection: 'row',
+                  paddingVertical: 10,}}>
+        <TouchableOpacity delayPressIn={0} onPress={() => navigation.toggleDrawer()}>
+          <Image
+            style={{height: 32, width: 32, tintColor: colors.white}}
+            source={require('../../../assets/Images/drawer.png')}
+          />
+        </TouchableOpacity>
+        <Text style={{
+          color: colors.white,
+          fontSize: 17,
+          fontFamily: 'Montserrat-Bold',
+          marginLeft: 10,}}>{'IndiaDeposit'} </Text>
+          <TouchableOpacity
+          style={{alignItems:'center',justifyContent:'center'}}
+          delayPressIn={0} onPress={() => manageNotification()}>
+        <View style={{alignItems:'center',justifyContent:'center',flex:1}}>
+          <Image style={{width: 25, height: 30,marginTop:notification==1?-14:0}} source={require('../../../assets/Image/notification.png')} />
+          {notification==1? <View style={{width:8,height:8,backgroundColor:'#FA5E8E',marginLeft:12,borderRadius:4,marginTop:-26}}></View>:null}  
+         </View>
+         </TouchableOpacity>
+      </View>
+    </View>
+      {/* <Header
         title={'IndiaDeposit'}
         source={require('../../../assets/Images/drawer.png')}
         onPress={() => navigation.toggleDrawer()}
         source1={require('../../../assets/Image/notification.png')}
         onPress1={() => navigation.navigate('Notification')}
-      />
+      /> */}
       {isFetching ? <Loader /> : null}
 
       <View style={styles.main}>
@@ -422,9 +516,9 @@ const data = [
     width: 35,
     data:`Regular fixed deposit for Indian citizens. Apply if you are`,
     data1:`
-•	 Between the age of 18 to 65 years 
-•	 Are an Indian citizen
-•	 Hold a regular savings account with any financial institution`,
+• Between the age of 18 to 65 years 
+• Are an Indian citizen
+• Hold a regular savings account with any financial institution`,
   },
 
   {
@@ -436,9 +530,9 @@ const data = [
     width: 35,
     data:`Earn higher on your life savings. Apply if you are`,
     data1:`
-•	 Above the age of 60 years
-•	 Are an Indian citizen 
-•	 Want to protect your life savings from inflation`,  },
+• Above the age of 60 years
+• Are an Indian citizen 
+• Want to protect your life savings from inflation`,  },
   {
     name: 'Tax Saving',
     image: require('../../../assets/Image/tax-fd-b.png'),
@@ -448,9 +542,9 @@ const data = [
     width: 35,
     data:`The favourite tax saving instrument for thousands, apply if you want to `,
     data1:`
-•	Protect your savings from income tax
-•	Earnings deductible under section 80C of Income Tax Act 
-•	Arrives with a fixed lock-in period`,  },
+• Protect your savings from income tax
+• Earnings deductible under section 80C of Income Tax Act 
+• Arrives with a fixed lock-in period`,  },
 
   {
     name: 'NRI',
@@ -461,9 +555,9 @@ const data = [
     width: 45,
     data:`A one-stop favourite among non-residential Indians, apply if you are`,
     data1:`
-•	Currently residing outside India, but you are an Indian citizen 
-•	Between the age bracket of 18 to 60 years 
-•	Hold a savings account with any Indian financial institution`,  },
+• Currently residing outside India, but you are an Indian citizen 
+• Between the age bracket of 18 to 60 years 
+• Hold a savings account with any Indian financial institution`,  },
 ];
 
 const data1 = [
@@ -476,9 +570,9 @@ const data1 = [
     width: 35,
     data:`Your best friend for saving your hard-earned money, apply if you are`,
     data1:`
-•	Between the age of 18 to 60 years
-•	Are an Indian citizen
-•	Have full KYC documentation`,
+• Between the age of 18 to 60 years
+• Are an Indian citizen
+• Have full KYC documentation`,
   },
   {
     name: 'Senior Citizen',
@@ -489,9 +583,9 @@ const data1 = [
     width: 35,
     data:`Orchestrated for the young at heart, apply if you are `,
     data1:`
-•	Above the age of 60 years
-•	Are an Indian citizen with full KYC documentation 
-•	Want to enjoy higher returns than a standard savings account `,
+• Above the age of 60 years
+• Are an Indian citizen with full KYC documentation 
+• Want to enjoy higher returns than a standard savings account `,
   },
 
   {
@@ -503,9 +597,9 @@ const data1 = [
     width: 35,
     data:`Specially designed for women professionals, apply if you are`,
     data1:`
-•	Between the age of 18 to 60 years 
-•	Are an Indian citizen with full KYC documentation 
-•	Want to enjoy higher returns as compared to a regular savings account`,
+• Between the age of 18 to 60 years 
+• Are an Indian citizen with full KYC documentation 
+• Want to enjoy higher returns as compared to a regular savings account`,
   },
   {
     name: 'Zero Balance',
@@ -516,9 +610,9 @@ const data1 = [
     width: 35,
     data:`A savings account with no MAB charges, apply if you are`,
     data1:`
-•	Between the age of 18 to 60 years 
-•	Are an Indian citizen with full KYC documentation 
-•	Want to enjoy steady returns with no additional cost `,
+• Between the age of 18 to 60 years 
+• Are an Indian citizen with full KYC documentation 
+• Want to enjoy steady returns with no additional cost `,
   },
 
   // {name:'Defence',
@@ -536,9 +630,9 @@ const data2 = [
     width: 35,
     data:`Regular fixed deposit for Indian citizens. Apply if you are`,
     data1:`
-•	 Between the age of 18 to 65 years 
-•	 Are an Indian citizen
-•	 Hold a regular savings account with any financial institution`,
+• Between the age of 18 to 65 years 
+• Are an Indian citizen
+• Hold a regular savings account with any financial institution`,
   },
 
   {
@@ -550,8 +644,8 @@ const data2 = [
     width: 35,
     data:`Earn higher on your life savings. Apply if you are`,
     data1:`
-•	Above the age of 60 years
-•	Are an Indian citizen 
-•	Want to protect your life savings from inflation`,
+• Above the age of 60 years
+• Are an Indian citizen 
+• Want to protect your life savings from inflation`,
   },
   ];

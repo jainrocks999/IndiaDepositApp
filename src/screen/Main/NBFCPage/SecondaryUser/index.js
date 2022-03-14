@@ -7,6 +7,7 @@ import {
   ScrollView,
   TextInput,
   Image,
+  Platform,
 } from 'react-native';
 import {useSelector, connect} from 'react-redux';
 import styles from './styles';
@@ -422,7 +423,7 @@ class SecondaryUser extends React.Component {
             paddingTop: 0,
           }}
           visible={this.state.showModal1}
-          containerStyle={{marginTop: 20}}
+          containerStyle={{marginTop:Platform.OS=='android'?20:90}}
           onHardwareBackPress={() => this.setState({showModal1: false})}>
           <View style={{alignSelf: 'flex-end'}}>
             <TouchableOpacity
@@ -480,10 +481,16 @@ class SecondaryUser extends React.Component {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -550,10 +557,16 @@ class SecondaryUser extends React.Component {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                       // height: 40,
                         alignSelf: 'center',
                       },
                     }}

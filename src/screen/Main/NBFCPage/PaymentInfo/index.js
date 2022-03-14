@@ -20,7 +20,7 @@ const MyFDDetail = ({route}) => {
   const [data, setData] = useState('');
   const [data4,setData4]=useState('')
   const [loader, setLoader] = useState(false);
-  console.log(route.params);
+  console.log('this is route data from your copy',route.params.my_fixed_deposit_id);
   useEffect(async () => {
     try {
       setLoader(true);
@@ -44,7 +44,6 @@ const MyFDDetail = ({route}) => {
       setLoader(false);
     }
   }, []);
-console.log('thisi sdata',data);
   const manageUser =async() => {
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     if (toggleCheckBox == true) {
@@ -75,7 +74,6 @@ console.log('thisi sdata',data);
         });
         if (response.data.status == 200) {
           setLoader(false);
-          console.log('this is user response data',response.data);
           navigation.navigate('PaymentMode', {
             my_fixed_deposit_id: route.params.my_fixed_deposit_id,
             amount: data4.primaryuser[0].amount,
@@ -119,11 +117,12 @@ console.log('thisi sdata',data);
           />
           <Text
             style={{
-              fontFamily: 'Monterrat-Bold',
+              fontFamily: 'Montserrat-Bold',
               fontSize: 18,
               color: colors.bc,
               fontWeight: '700',
               textAlign: 'center',
+              width:'90%'
             }}>
             {data.primaryuser[0].bank_name}
           </Text>
@@ -309,10 +308,12 @@ console.log('thisi sdata',data);
                   value={toggleCheckBox}
                   onValueChange={newValue => setToggleCheckBox(newValue)}
                   tintColors={{true: '#5A4392', false: '#5A4392'}}
+                  onTintColor='#5A4392'
+                  onCheckColor='#5A4392'
                 />
                 <Text
                   style={{
-                    fontFamily: 'Montserrat-Normal',
+                    fontFamily: 'Montserrat-Regular',
                     fontSize: 14,
                     color: colors.textColor,
                     marginLeft: 10,

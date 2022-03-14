@@ -119,6 +119,8 @@ export default StyleSheet.create({
         shadowOffset:{height:2,width:0},
         elevation:2,
         borderRadius:10,
+    alignItems:'center',
+    justifyContent:'center'
     },
     view1:
     {

@@ -53,9 +53,10 @@ export default StyleSheet.create({
         shadowRadius:8,
         shadowOffset:{height:2,width:0},
         elevation:5,
-        borderRadius:10,
+        borderRadius:0,
         backgroundColor:colors.white,
-        paddingHorizontal:15,
+        paddingHorizontal:10,
+        paddingVertical:10
     },
     button:{
         backgroundColor:colors.bc,

@@ -67,9 +67,9 @@ const FDList = ({route}) => {
       data.append(
         'form_type',
         details.type == 'Regular'
-          ? 'fdRegular'
+          ? 'SBRegular'
           : details.type == 'Senior Citizen'
-          ? 'FDSenior Citizen'
+          ? 'SBSenior Citizen'
           : details.type == 'Female'
           ? 'SBFemale'
           : details.type == 'Zero Balance'
@@ -138,7 +138,7 @@ const FDList = ({route}) => {
               <Text style={styles.item1}>{`MAB`}</Text>
             </View>
             <View style={styles.undercard}>
-              <Text style={styles.item}>{details.locker_facility}</Text>
+              <Text style={styles.item}>{details.atm_points}</Text>
               <Text style={styles.item1}>{`ATM Points`}</Text>
             </View>
           </View>

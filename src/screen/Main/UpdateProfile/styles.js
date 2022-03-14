@@ -5,7 +5,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.card,
-    paddingTop: Platform.OS == 'android' ? 0 : 40,
+    paddingTop: Platform.OS == 'android' ? 0 : 0,
   },
   card: {
     shadowColor: colors.black,

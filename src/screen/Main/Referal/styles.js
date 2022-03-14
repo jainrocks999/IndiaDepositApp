@@ -114,8 +114,8 @@ export default StyleSheet.create({
     line1:
     {
         width:'23%',
-        height:1,
-        backgroundColor:colors.black,
+        height:2,
+        backgroundColor:colors.bc,
     },
     round:
     {

@@ -1176,7 +1176,7 @@ function* stateList(action) {
 function* cityList(action) {
   try {
     const data = new FormData();
-    data.append('state_id', action.state_id);
+    //data.append('state_id', action.state_id);
     data.append('user_id', action.user_id);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
     if (response.status == 200) {
@@ -1198,7 +1198,6 @@ function* cityList(action) {
 }
 
 function* Search(action) {
-  console.log('this is actio data',action);
   try {
     const data = new FormData();
     data.append('user_id', action.user_id);
@@ -1220,13 +1219,11 @@ function* Search(action) {
     data.append('order_to', action.order_to);
     data.append('b_lat', action.b_lat);
     data.append('b_long', action.b_long);
-    // Modification Type
     data.append('btype', action.b_type);
-    // data.append('premature_withdrawal_rate', action.premature_withdrawal_rate);
-    // data.append('load_lending_rate', action.load_lending_rate);
+    data.append('bank_type',JSON.stringify(action.bank_type))
+    data.append('credit_rating',JSON.stringify(action.credit_rating))
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is user response-----------------------------------------------------------------------------------------', response);
     if (response.status == 200) {
       yield put({
         type: 'FD_Search_Success',
@@ -1249,6 +1246,8 @@ function* Search(action) {
           offer:action.offer,
           interest_payout:action.interest_payout,
           premature_penalty:action.premature_penalty,
+          credit_rating:action.credit_rating,
+          bank_type:action.bank_type,
           loan:action.loan,
           b_lat:action.b_lat,
           b_long:action.b_long
@@ -1395,6 +1394,9 @@ function* SBSearch(action) {
     data.append('account_sub_type', action.account_sub_type);
     data.append('non_maintenance_penalty', action.non_maintenance_penalty);
     data.append('debit_card_amc', action.debit_card_amc);
+    data.append('credit_rating',JSON.stringify(action.credit_rating))
+    data.append('bank_type',JSON.stringify(action.bank_type))
+    data.append('atm_points',action.atm_points)
     data.append('order_on', action.order_on);
     data.append('order_to', action.order_to);
     data.append('b_lat', action.b_lat);
@@ -1423,6 +1425,9 @@ function* SBSearch(action) {
         order_to:action.order_to,
         b_lat:action.b_lat,
         b_long:action.b_long,
+        credit_rating:action.credit_rating,
+        bank_type:action.bank_type,
+        atm_points:action.atm_points
       });
     } else {
       if (action.data == 'AccountList') {
@@ -1488,6 +1493,7 @@ function* FDCompare(action) {
         year: action.year,
         month: action.month,
         days: action.days,
+        pincode:action.pincode
       });
     } else {
       yield put({
@@ -1516,6 +1522,8 @@ function* SBCompare(action) {
         payload: response,
       });
       action.navigation.navigate('CompareSBAccount', {
+        value_id1:action.value_id1,
+        value_id2:action.value_id2,
         branch_type1: action.branch_type1,
         branch_type2: action.branch_type2,
         location: action.location,
@@ -1961,6 +1969,7 @@ function* NBFCSearch(action) {
     data.append('loan', action.loan);
     data.append('order_on', action.order_on);
     data.append('order_to', action.order_to);
+    data.append('credit_rating',JSON.stringify(action.credit_rating))
     data.append('btype', action.btype);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
@@ -1970,6 +1979,7 @@ function* NBFCSearch(action) {
         type: 'NBFC_Search_Success',
         payload: response.data,
       });
+      if(response.data){
       action.navigation.navigate('NBFCList', {
         amount: action.amount,
         days: action.days,
@@ -1981,8 +1991,13 @@ function* NBFCSearch(action) {
         bank_id:action.bank_id,
         interest_rate:action.interest_rate,
         premature_penalty:action.premature_penalty,
+        credit_rating:action.credit_rating,
         loan:action.loan
       });
+    }
+    else{
+      Toast.show(`We don't have any FD listed on this amount Please search with another amount`)
+    }
     } else {
       if (action.data == 'FdList') {
         yield put({
@@ -2037,6 +2052,7 @@ function* NBFCDetail(action) {
         month: action.month,
         days: action.days,
         pincode: action.pincode,
+        
       });
     } else {
       yield put({
@@ -2073,6 +2089,7 @@ function* NBFCCompare(action) {
         year: action.year,
         month: action.month,
         days: action.days,
+        pincode:action.pincode
       });
     } else {
       yield put({

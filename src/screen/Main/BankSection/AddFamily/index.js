@@ -175,10 +175,9 @@ const RegisterPage = ({route}) => {
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
-      user_id,
-    });
+      url: 'citylist',
+      user_id
+    })
   };
   const manageCountry = async val => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -216,11 +215,11 @@ const RegisterPage = ({route}) => {
             country_id: response.data.country.value,
           });
 
-          dispatch({
-            type: 'City_List_Request',
-            url: 'citybyid',
-            state_id: response.data.state.value,
-          });
+          // dispatch({
+          //   type: 'City_List_Request',
+          //   url: 'citybyid',
+          //   state_id: response.data.state.value,
+          // });
           setCity(response.data.city.value);
           setState(response.data.state.value);
           setCountry(JSON.stringify(response.data.country.value));
@@ -347,10 +346,16 @@ const RegisterPage = ({route}) => {
                             fontSize: 14,
                             marginBottom: -1,
                           },
+                          inputIOS:{
+                            color: colors.textColor,
+                            width: '100%',
+                            fontSize: 14,
+                            marginBottom: -1,
+                          },
                           placeholder: {
                             color: colors.heading1,
                             width: '100%',
-                            height: 40,
+                           // height: 40,
                             alignSelf: 'center',
                           },
                         }}
@@ -529,10 +534,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                       // height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -570,10 +581,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -610,10 +627,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -651,10 +674,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -686,10 +715,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                       // height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -730,10 +765,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                       // height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -782,10 +823,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                       // height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -823,10 +870,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}
@@ -864,10 +917,16 @@ const RegisterPage = ({route}) => {
                         fontSize: 14,
                         marginBottom: -1,
                       },
+                      inputIOS:{
+                        color: colors.textColor,
+                        width: '100%',
+                        fontSize: 14,
+                        marginBottom: -1,
+                      },
                       placeholder: {
                         color: colors.heading1,
                         width: '100%',
-                        height: 40,
+                        //height: 40,
                         alignSelf: 'center',
                       },
                     }}

@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text,Image} from 'react-native';
+import React,{useEffect} from 'react';
+import {View, Text,Image,BackHandler} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import Header from '../../../../component/header';
 import {useNavigation} from '@react-navigation/native';
@@ -22,6 +22,19 @@ const MyFDDetail = () => {
     selector[0].amount *
     Math.pow(1 + selector[0].interest_rate / (1 * 100), 1 * years)
   ).toFixed(2);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+    };
+  }, []);
+  const handleBackButtonClick=() =>{
+    if(navigation.isFocused()){
+      navigation.navigate('MyFD')
+    return true;
+    }
+  }
 
   const fd_status = item => {
     if (item.fd_status == 2) {
@@ -154,36 +167,16 @@ const MyFDDetail = () => {
       <Header
         title={'MY FD Detail'}
         source={require('../../../../assets/Image/arrow2.png')}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.navigate('MyFD')}
       />
       <View style={styles.list}>
         <Image
           resizeMode="contain"
           style={{height: 20, width: 80}}
           source={{
-            uri: `${Constants.imageUrl}${selector[0].bank_logo}`,
+            uri: `${Constants.imageUrl}${selector[0].bank_logo1}`,
           }}
         />
-        {/* {selector[0].fd_status==2?<View/>: 
-                       <View style={{alignItems
-                       :'center',justifyContent:'center',flexDirection:'row'}}>
-                        <Text style={{fontFamily:'Montserrat-Regular',fontSize:16,
-                         marginTop:10,
-                         color:colors.textColor,
-                         fontWeight:'600',
-                        
-                         textAlign:'center'
-                        
-                        }}>{`Current Balance`}</Text>
-                         <Text style={{fontFamily:'Montserrat-Bold',fontSize:16,
-                         marginTop:10,
-                         color:colors.textColor,
-                         fontWeight:'600',
-                         marginLeft:10,
-                         textAlign:'center'
-                        
-                        }}>{`${value}`}</Text>
-                           </View>} */}
       </View>
 
       <ScrollView>
@@ -304,13 +297,7 @@ const MyFDDetail = () => {
               }
               )
             }
-            // onPress={() =>
-            //   navigation.navigate('Redeem', {
-            //     name: selector[0].username,
-            //     maturity_date: selector[0].date_of_maturity,
-            //     my_fixed_deposit_id: selector[0].my_fixed_deposit_id,
-            //   })
-            // }
+           
           />
         </View>
       ) : (

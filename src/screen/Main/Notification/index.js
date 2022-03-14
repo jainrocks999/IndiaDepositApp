@@ -59,6 +59,28 @@ const Notification = () => {
     setFilteredDataSource(masterDataSource);
   };
 
+ useEffect(async()=>{
+  const user_id = await AsyncStorage.getItem(Storage.user_id);
+  try {
+    const data = new FormData();
+    data.append('user_id', user_id);
+    data.append('view_status',1)
+    const response = await axios({
+      method: 'POST',
+      data,
+      headers: {
+        'content-type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      url: 'https://indiadeposit.in/admin/public/apis/updatenotification',
+    });
+    console.log('this is narendra', response.data);
+   
+  } catch (error) {
+    throw error;
+  }
+ },[])
+
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
     try {
@@ -73,6 +95,7 @@ const Notification = () => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/getnotification',
       });
+      console.log('this is narendra', response.data);
       if (response.data.status == 200) {
         console.log('this is narendra', response.data.data);
         setFilteredDataSource(response.data.data);
@@ -81,6 +104,7 @@ const Notification = () => {
     } catch (error) {
       throw error;
     }
+   
   }, []);
 
   useEffect(() => {
@@ -94,7 +118,7 @@ const Notification = () => {
   }, []);
   const handleBackButtonClick = () => {
     if (navigation.isFocused()) {
-      navigation.navigate('Main');
+      navigation.push('Main');
       return true;
     }
   };
@@ -134,32 +158,55 @@ const Notification = () => {
         } catch (error) {
           setLoader(false);
         }
-        // setFilteredDataSource(response.data.data)
-        // setMasterDataSource(response.data.data)
       }
     } catch (error) {
       setLoader(false);
     }
   };
+
+const manageNotification=async(item)=>{
+  const user_id=await AsyncStorage.getItem(Storage.user_id)
+  if(item.my_fd_id){
+    try {
+      const data = new FormData();
+      data.append('user_id', user_id);
+      data.append('view_status',2)
+      data.append('notification_id',item.notification_id)
+
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://indiadeposit.in/admin/public/apis/updatenotification',
+      });
+      if(response.data){
+        dispatch({
+          type: 'MYFD_Detail_Request',
+          url: 'myfddetail',
+          my_fixed_deposit_id:item.my_fd_id,
+          navigation:navigation
+      })
+      }     
+    } catch (error) {
+      throw error;
+    }   
+ }
+}
   const showContent = () => {
     if (filteredDataSource) {
-      console.log('this is filter data source', filteredDataSource);
       return (
         <View>
           <FlatList
             showsVerticalScrollIndicator={false}
             data={filteredDataSource}
-            style={{marginBottom: 10}}
+            style={{marginBottom: 0}}
             renderItem={({item}) => (
-              <View>
-                {filteredDataSource[0].notification_id ==
-                item.notification_id ? (
-                  <View />
-                ) : (
-                  <View style={styles.line}></View>
-                )}
-                <View style={styles.view1}>
-                  <View>
+              <TouchableOpacity onPress={()=>manageNotification(item)}>
+              <View style={[styles.card,{backgroundColor:item.my_fd_id?item.view_status==1?'#c9c9f0':'#fff':'#fff'}]}>
+                <View style={{}}>
                     <View style={styles.view2}>
                       <Text style={styles.text1}>{item.title}</Text>
                       <Text
@@ -182,8 +229,44 @@ const Notification = () => {
                       {item.notification}
                     </Text>
                   </View>
-                </View>
               </View>
+              </TouchableOpacity>
+              // <TouchableOpacity 
+              // onPress={()=>manageNotification(item)}>
+              //   {filteredDataSource[0].notification_id ==
+              //   item.notification_id ? (
+              //     <View />
+              //   ) : (
+              //     <View style={styles.line}></View>
+              //   )}
+              //   <View style={{backgroundColor:item.my_fd_id?'#e4e7ed':'#fff'}}>
+              //   <View style={{paddingHorizontal:15,marginTop:15}}>
+              //     <View>
+              //       <View style={styles.view2}>
+              //         <Text style={styles.text1}>{item.title}</Text>
+              //         <Text
+              //           style={{
+              //             fontFamily: 'Montserrat-Regular',
+              //             fontSize: 11,
+              //             color: colors.textColor,
+              //           }}>
+              //           {item.created_date}
+              //         </Text>
+              //         <OptionsMenu
+              //           button={require('../../../assets/Image/menu3.png')}
+              //           buttonStyle={{width: 16, height: 18}}
+              //           destructiveIndex={1}
+              //           options={['Delete', 'Cancel']}
+              //           actions={[() => deletePost(item.notification_id)]}
+              //         />
+              //       </View>
+              //       <Text style={[styles.text3, {marginTop: 5}]}>
+              //         {item.notification}
+              //       </Text>
+              //     </View>
+              //   </View>
+              //   </View>
+              // </TouchableOpacity>
             )}
           />
         </View>
@@ -196,8 +279,9 @@ const Notification = () => {
       <Header
         source={require('../../../assets/Image/arrow2.png')}
         title={'NOTIFICATIONS'}
-        onPress={() => navigation.goBack()}
+        onPress={() => navigation.push('Main')}
       />
+            {isFetching?<Loader/>:null}
 
       <View style={{width: '100%', paddingHorizontal: 15, marginTop: 10}}>
         <View style={styles.container1}>
@@ -229,7 +313,16 @@ const Notification = () => {
 
       {filteredDataSource[0] ? (
         <View style={{flex: 1, paddingHorizontal: 15, paddingVertical: 10}}>
-          <View style={styles.card}>
+          <View style={{ shadowColor:colors.black,
+        shadowOpacity:0.25,
+        shadowRadius:8,
+        shadowOffset:{height:2,width:0},
+        elevation:5,
+        borderRadius:10,
+        backgroundColor:colors.white,
+        // paddingHorizontal:5,
+        // paddingVertical:5
+        }}>
             {loader ? <Loader /> : null}
             {showContent()}
           </View>

@@ -114,7 +114,8 @@ if(year==0 && month==0 && day==0){
      premature_penalty:route.params.premature_penalty,
      loan:route.params.loan,
      order_on:sort,
-     order_to:sort=='alphabet'?'ASC':'DESC',
+     credit_rating:route.params.credit_rating,
+     order_to:sort=='interest_rate'||sort=='mab'?'DESC':'ASC',
      navigation:navigation,
      data:'FdList',
      btype:2,
@@ -152,6 +153,7 @@ else{
     year:year,
     month:month,
     days:day,
+    pincode:pincode,
     navigation
   })
   // setSelectedData([])
@@ -184,7 +186,6 @@ const openDialog=()=>{
 }
 
 const renderItem=(item)=>{
-  console.log('this is item',item);
       return(
           <View style={styles.cont}>
                 <TouchableOpacity delayPressIn={0}
@@ -514,25 +515,29 @@ const renderItem=(item)=>{
                     paddingVertical:Platform.OS=='android'?0:8,
                      backgroundColor:'#fff',
                      borderRadius:6,
-                     flexDirection:'row',
-                     alignItems:'center',
-                     height:38
+                    //  flexDirection:'row',
+                    //  alignItems:'center',
+                     height:38,
+                     width:'33%'
                    }}>
                       <RNPickerSelect
                           onValueChange={(val)=>handleSorting(val)}
                           items={Sorting}
                           style={{ 
                             inputAndroid: { color: colors.bc,width:'100%',fontSize:14,marginBottom:-1 },
-                          inputIOS:{color:colors.bc},
+                            inputIOS:{color:colors.bc},
                           placeholder:{color:colors.bc,fontSize:fontSize.twelve,marginTop:2,fontFamily:'Montserrat-Regular'},
                           }}
                           value={sort}
                           useNativeAndroidPickerStyle={false}
                           placeholder={{}}
+                          Icon={()=><Image 
+                                          style={[styles.image4,{marginLeft:10}]} 
+                                          source={require('../../../assets/Image/down.png')}/>}
                       />   
-                   <Image style={{width:20,height:16,marginLeft:5}} 
+                   {/* <Image style={{width:20,height:16,marginLeft:5}} 
                    resizeMethod='resize' 
-                   source={require('../../../assets/Image/down.png')}/>
+                   source={require('../../../assets/Image/down.png')}/> */}
                  </TouchableOpacity>
                  <TouchableOpacity  
                  delayPressIn={0}
@@ -585,11 +590,14 @@ const SBType=[
   { label: 'Zero Balance', value: 'Zero Balance' },
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
-const Sorting=[
-  // { label: 'Popular', value: 'popular' },
-  { label: 'Alphabetical', value: 'alphabet' },
-  { label: 'Interest Rate', value: 'interest_rate' },
-]
+const Sorting = [
+  {label: 'Interest Rate', value: 'interest_rate'},
+  // {label: 'Minimum investment', value: 'mab'},
+  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Name', value: 'alphabet'},
+  {label:'Online', value:'online'}
+
+];
 const days=[
    {label:'00',value:'0'},
    { label: '01', value: '1'},

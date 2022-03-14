@@ -90,11 +90,11 @@ const BankDetail = ({route}) => {
       country_id: country,
     });
 
-    dispatch({
-      type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: state,
-    });
+    // dispatch({
+    //   type: 'City_List_Request',
+    //   url: 'citybyid',
+    //   state_id: state,
+    // });
   }, []);
 
   useEffect(() => {
@@ -158,10 +158,9 @@ const BankDetail = ({route}) => {
     setState(val);
     dispatch({
       type: 'City_List_Request',
-      url: 'citybyid',
-      state_id: val,
-      user_id,
-    });
+      url: 'citylist',
+      user_id
+    })
   };
   const manageCountry = async val => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);

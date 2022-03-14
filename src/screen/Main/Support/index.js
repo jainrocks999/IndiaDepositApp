@@ -7,7 +7,7 @@ import colors from '../../../component/colors';
 import { TabView, SceneMap,TabBar } from 'react-native-tab-view';
 import FAQs from '../../../component/TabComponents/FAQs';
 import Support from '../../../component/TabComponents/Support';
-import { View,Text,Image,ScrollView,TextInput,BackHandler} from 'react-native';
+import { View,Text,Image,ScrollView,TextInput,BackHandler, Platform} from 'react-native';
 import CustomButton from '../../../component/button1';
 import { useDispatch,useSelector } from "react-redux";
 import AsyncStorage from "@react-native-community/async-storage";
@@ -159,8 +159,8 @@ const Supports=({route})=>{
                         <View style={styles.drop1}>
                         <TextInput
                           multiline = {true}
-                          style={{color:colors.textColor}}
-                          placeholder=''
+                          style={{color:colors.textColor,marginTop:Platform.OS=='android'?0:-3}}
+                          placeholder='Message'
                           placeholderTextColor={colors.heading1}
                           onChangeText={handleChange('message')}
                           onBlur={handleBlur('message')}

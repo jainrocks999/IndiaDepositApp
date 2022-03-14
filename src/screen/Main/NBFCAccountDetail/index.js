@@ -17,6 +17,7 @@ const navigation=useNavigation()
 const selector=useSelector(state=>state.NBFCDetail)
 const details=selector[0]
 const period=((parseFloat(route.params.year)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
+console.log('time date',route.params.month,route.params.days,details);
 useEffect(()=>{
      const backAction = () => {
           navigation.goBack()
@@ -72,6 +73,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
           data.append('bank_id',details.bank_id)
           data.append('user_id',user_id)
           data.append('type1',details.type)
+          data.append('fd_from',details.fd_from)
           const response = await axios({
             method: 'POST',
             data,
@@ -89,6 +91,10 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     amount:route.params.amount,
                     type:details.type,
                     data:response.data.data,
+                    rate:details.rate,
+                    fixed_deposit_id:details.fixed_deposit_id,
+                    fd_from:details.fd_from,
+                    period:route.params.month==0&&route.params.days==0?route.params.year:period
                })
              } 
         } catch (error) {
@@ -131,8 +137,8 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                              </View>
                               <View style={styles.view2}>
                                    <View style={{flexDirection:'row'}}>
-                                    <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
-                                  <Text style={styles.item}>
+                                      <Image style={styles.rupay} source={require('../../../assets/Image/rupay.png')}/>
+                                   <Text style={styles.item}>
                                        {(details.principal_amount* Math.pow((1 + (details.rate/ (100))), (period))).toFixed(0)}
                                        </Text>
                                   </View>
@@ -251,14 +257,14 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     <View style={styles.top}> 
                      <Text style={styles.tds}>Premature Withdrawal Rate :</Text>
                      <Text style={{fontSize:14,color:colors.textColor}}>{`${details.premature_withdrawals==0?'No':details.premature_withdrawals==1?
-                                       `Yes - ${details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`:null}`}</Text>
+                                       `Yes - ${details.premature_withdrawal_rate==null?0:details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`:null}`}</Text>
                      {/* <Text>{details.premature_withdrawals==0?'No':details.premature_withdrawals?'Yes':''}</Text> */}
                          </View>}
 
                          { details.loan==null||details.loan==''?<View/>:
                     <View style={styles.top}> 
                      <Text style={styles.tds}>Loan Rate :</Text>
-                     <Text style={{fontSize:14,color:colors.textColor}}>{details.loan==1?`Yes - ${details.load_lending_rate}% above interest rate at the time of FD contract`:details.loan==0?'No':''}</Text></View>}
+                     <Text style={{fontSize:14,color:colors.textColor}}>{details.loan==1?`Yes - ${details.load_lending_rate==null?0:details.load_lending_rate}% above interest rate at the time of FD contract`:details.loan==0?'No':''}</Text></View>}
                    
                      { details.tds_limit==null||details.loanamount==''?<View/>:
                      <View style={styles.top}> 
@@ -285,17 +291,21 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                          :details.fd_from=='nbfc'?
                         
                          :null} */}
-                          <TouchableOpacity 
+                        {details.fd_from=='offline'?
+                        <TouchableOpacity
+                        onPress={()=>manageForm()}
+                        style={[styles.btCont,
+                        {width:details.fd_from=='nbfc'||details.fd_from=='setu'?'48%':'96%'}
+                        ]}>
+                          <Text style={styles.text3}>DOWNLOAD FORM</Text>
+                        </TouchableOpacity>:
+                        <TouchableOpacity 
                           delayPressIn={0}
                          onPress={()=>createFD()}
                          style={[styles.btCont,{width:'96%'}]}>
                            <Text style={styles.text3}>CREATE FD</Text>
                          </TouchableOpacity>
-                         {/* <TouchableOpacity
-                         onPress={()=>manageForm()}
-                         style={[styles.btCont,{width:details.fd_from=='nbfc'||details.fd_from=='setu'?'48%':'48%'}]}>
-                           <Text style={styles.text3}>DOWNLOAD FORM</Text>
-                         </TouchableOpacity> */}
+                         }
                      </View>
            </View>
      </View>

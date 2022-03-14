@@ -90,8 +90,10 @@ useEffect(()=>{
          interest_payout:'',
          premature_penalty:'',
          loan:'',
-         order_on:'',
-         order_to:'',
+         order_on:'interest_rate',
+         order_to:'DESC',
+         bank_type:'',
+         credit_rating:'',
          b_lat:lat,
          b_long:long,
          b_type:1,
@@ -293,7 +295,7 @@ useEffect(()=>{
                           <View style={styles.view4}>
                               <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
                           </View>
-                          <View style={styles.view5}>
+                          {/* <View style={styles.view5}>
                              <View style={{flexDirection:'row',alignItems:'center'}}>
                              <TouchableOpacity delayPressIn={0}
                               onPress={()=>getAddress()}>
@@ -310,12 +312,12 @@ useEffect(()=>{
                               style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
                               <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
                               </TouchableOpacity>:null}
-                          </View>
+                          </View> */}
                        </View>
-                       <View style={styles.view6}>
+                       {/* <View style={styles.view6}>
                              <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
-                       </View>
-                      <View style={styles.view7}>
+                       </View> */}
+                      <View style={[styles.view7]}>
                            <TextInput
                               style={{width:'90%'}}
                               placeholder='Enter Pincode'
@@ -327,7 +329,8 @@ useEffect(()=>{
                               }   
                               keyboardType='number-pad'
                               maxLength={6}
-                              returnKeyType='done'
+                              returnKeyType='go'
+                              onSubmitEditing={()=>manageSearch()}
                            />
                               <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'?-8:6}}/>
                        </View>

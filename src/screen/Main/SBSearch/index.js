@@ -29,7 +29,7 @@ Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 const SBAccount = ({route}) => {
   const navigation = useNavigation();
-  const [balance, setBalance] = useState('');
+  const [balance, setBalance] = useState(route.params.type1.length==1&&route.params.type1[0]=='Zero Balance'?'0':'');
   const [location, setLocation] = useState('');
   const [address, setAddress] = useState('');
   const [lat, setLang] = useState('');
@@ -38,7 +38,7 @@ const SBAccount = ({route}) => {
   const [loader, setLoader] = useState(false);
   const isFetching = useSelector(state => state.isFetching);
   const re = /^[0-9\b]+$/;
-
+  console.log('this is route.params sdaa',route.params.type1.length);
   const manageSearch = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
 
@@ -66,8 +66,11 @@ const SBAccount = ({route}) => {
         non_maintenance_penalty: '',
         debit_card_amc: '',
         private: '',
-        order_on: '',
-        order_to: '',
+        bank_type:'',
+        credit_rating:'',
+        atm_points:'',
+        order_on: 'interest_rate',
+        order_to: 'DESC',
         b_lat: lat,
         b_long: long,
         navigation: navigation,
@@ -191,7 +194,7 @@ const SBAccount = ({route}) => {
               </Text>
               <View style={styles.view}>
                 <Text style={[styles.text2, {fontWeight: '700'}]}>
-                  Minimum Balance{' '}
+                  Minimum Balance
                 </Text>
                 <View
                   style={{flexDirection: 'row', width: '100%', marginTop: 7}}>
@@ -210,6 +213,7 @@ const SBAccount = ({route}) => {
                       }
                     }}
                     returnKeyType="done"
+                    editable={route.params.type1.length==1&&route.params.type1[0]=='Zero Balance'?false:true}
                   />
                 </View>
                 <View
@@ -217,13 +221,13 @@ const SBAccount = ({route}) => {
                 />
               </View>
             </View>
-            <View style={styles.view}>
+            <View style={{marginTop:24}}>
               <View style={styles.view1}>
                 <Text style={[styles.text2, {fontWeight: '700'}]}>
                   Location
                 </Text>
               </View>
-              <View
+              {/* <View
                 style={{
                   marginTop: 10,
                   flexDirection: 'row',
@@ -272,12 +276,12 @@ const SBAccount = ({route}) => {
                     </Text>
                   </TouchableOpacity>
                 ) : null}
-              </View>
+              </View> */}
             </View>
-            <View style={[styles.view, {alignItems: 'center'}]}>
+            {/* <View style={[styles.view, {alignItems: 'center'}]}>
               <Text style={{fontWeight: '700'}}>OR </Text>
-            </View>
-            <View style={{marginTop: 5}}>
+            </View> */}
+            <View style={{marginTop: 0}}>
               <TextInput
                 style={styles.textinput1}
                 placeholder="Enter Pincode"
@@ -290,7 +294,8 @@ const SBAccount = ({route}) => {
                   }
                 }}
                 maxLength={6}
-                returnKeyType="done"
+                returnKeyType="go"
+                onSubmitEditing={()=>manageSearch()}
               />
             </View>
             <View style={styles.view2}>
