@@ -231,7 +231,7 @@ const Login = () => {
                   <Text
                     style={styles.text2}
                     onPress={() => navigation.push('Forget')}>
-                    Forgot pin?
+                    Forgot Pin?
                   </Text>
                 </View>
 

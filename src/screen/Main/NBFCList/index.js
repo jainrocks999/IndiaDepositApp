@@ -422,8 +422,6 @@ const renderItem=(item)=>{
                                 submitButtonText="Submit"
                                 textInputProps={{ editable: false,autoFocus:false, }}
                                 searchInputPlaceholderText=""
-                                searchIcon={false}
-                                
                                 styleDropdownMenu={{
                                   width:'100%',
                                   borderBottomWidth:1.5,
@@ -591,11 +589,11 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting = [
-  {label: 'Interest Rate', value: 'interest_rate'},
+  {label:'Online', value:'online'},
+  {label: 'Rate of Return', value: 'interest_rate'},
   // {label: 'Minimum investment', value: 'mab'},
-  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Credit Rating', value: 'credit_rating'},
   {label: 'Name', value: 'alphabet'},
-  {label:'Online', value:'online'}
 
 ];
 const days=[

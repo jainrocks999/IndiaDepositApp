@@ -348,17 +348,17 @@ const manageNotification=async()=>{
       /> */}
       {isFetching ? <Loader /> : null}
 
-      <View style={styles.main}>
+      {/* <View style={styles.main}>
         <Image
           resizeMethod="resize"
           source={require('../../../assets/Image/fixed-deposit.png')}
         />
-      </View>
+      </View> */}
 
       <ScrollView>
         {/* NBFC FLOW */}
 
-        <View style={styles.view}>
+        <View style={[styles.view,{marginTop:10}]}>
           <View style={styles.item}>
             <View style={styles.view1}>
               <Text style={styles.text2}>{'NBFC Fixed Deposit'}</Text>
@@ -477,7 +477,7 @@ const manageNotification=async()=>{
         <Modal isVisible={isModalVisible}>
           <View style={styles.modal}>
             <TouchableOpacity delayPressIn={0} style={styles.ModelmsgView}>
-              <Text style={styles.modaltext}>
+              <Text style={[styles.modaltext,{alignSelf:'flex-start'}]}>
                 {title}
               </Text>
               <Text style={styles.modaltext}>
@@ -501,7 +501,7 @@ const manageNotification=async()=>{
         </Modal>
       </View>
       <StatusBar />
-      {/* <BottomTab/> */}
+      <BottomTab/>
     </View>
   );
 };
@@ -528,7 +528,7 @@ const data = [
     id: 4,
     height: 35,
     width: 35,
-    data:`Earn higher on your life savings. Apply if you are`,
+    data:`Earn higher interests...`,
     data1:`
 • Above the age of 60 years
 • Are an Indian citizen 
@@ -642,7 +642,7 @@ const data2 = [
     id: 4,
     height: 35,
     width: 35,
-    data:`Earn higher on your life savings. Apply if you are`,
+    data:`Earn higher interests...`,
     data1:`
 • Above the age of 60 years
 • Are an Indian citizen 

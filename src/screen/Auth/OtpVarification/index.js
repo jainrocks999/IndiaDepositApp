@@ -190,7 +190,7 @@ class OtpVarification extends React.Component {
         } else {
           if (this.state.otp == '' || this.state.otp.length < 4) {
             console.log(this.state.otp.length);
-            Toast.show('Please Enter Otp');
+            Toast.show('Please enter otp');
           } else {
             this.setState({
               boolean: false,
@@ -219,12 +219,12 @@ class OtpVarification extends React.Component {
           this.props.navigation.replace('Main');
         } else {
           if (this.state.otp == '' || this.state.otp.length < 4) {
-            Toast.show('Please Enter Otp');
+            Toast.show('Please enter otp');
           } else {
             this.setState({
               boolean: false,
             });
-            Toast.show('Please Enter Correct Otp Code');
+            Toast.show('Please enter correct otp code');
             this.props.dispatch({
               type: 'Verify_Otp_Request',
               url: 'verifyotp',

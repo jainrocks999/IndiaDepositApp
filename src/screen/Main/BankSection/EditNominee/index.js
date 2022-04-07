@@ -262,13 +262,13 @@ const BankDetail = ({route}) => {
                   )}
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={styles.better}>Address Line1</Text>
+                  <Text style={styles.better}>Address Line 1</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Please enter your address line1"
+                    placeholder="Please enter your address"
                     placeholderTextColor={colors.heading1}
                     defaultValue={values.address1}
                     onChangeText={handleChange('address1')}
@@ -282,13 +282,13 @@ const BankDetail = ({route}) => {
                   )}
                 </View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={styles.better}>Address Line2</Text>
+                  <Text style={styles.better}>Address Line 2</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Please enter your address line2"
+                    placeholder=""
                     placeholderTextColor={colors.heading1}
                     defaultValue={values.address2}
                     onChangeText={handleChange('address2')}

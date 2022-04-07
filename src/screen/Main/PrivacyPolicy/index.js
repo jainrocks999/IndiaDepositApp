@@ -43,7 +43,7 @@ const Calculator = () => {
     <View style={styles.container}>
       <Header
         source={require('../../../assets/Image/arrow2.png')}
-        title={'POLICY'}
+        title={'OUR POLICIES'}
         onPress={() => navigation.navigate('Main')}
       />
       <ScrollView

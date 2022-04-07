@@ -26,18 +26,18 @@ const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
     .max(40, ({max}) => `Name must be only ${max} character`)
-    .required('Please enter your Name ')
+    .required('Please enter your name ')
     .matches(/^[^,*+.!0-9-\/:-@\[-`{-~]+$/, 'Please enter valid name'),
   email: yup
     .string()
-    .email('Please enter valid Email ')
-    .required('Please enter your Email '),
+    .email('Please enter valid email ')
+    .required('Please enter your email '),
   mobile: yup
     .string()
-    .min(10, ({}) => 'Mobile Number must be 10 digit number')
-    .required('Please enter your Mobile number')
-    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid Mobile Number'),
-  message: yup.string().required('Please enter Message / Report for Crash'),
+    .min(10, ({}) => 'Mobile number must be 10 digit number')
+    .required('Please enter your mobile number')
+    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid mobile number'),
+  message: yup.string().required('Please enter message / report for crash'),
 });
 
 const Contact = ({route}) => {
@@ -331,7 +331,7 @@ const Contact = ({route}) => {
                     <TextInput
                       ref={next3}
                       style={{color: colors.textColor, width: '94%'}}
-                      placeholder="Message / Report for Crash"
+                      placeholder="Message / report for crash"
                       placeholderTextColor={colors.heading1}
                       onChangeText={handleChange('message')}
                       onBlur={handleBlur('message')}

@@ -664,7 +664,6 @@ console.log('this is route data',route.params);
                 submitButtonText="Submit"
                 textInputProps={{editable: false, autoFocus: false}}
                 searchInputPlaceholderText=""
-                searchIcon={false}
                 styleDropdownMenu={{
                   width: '100%',
                   borderBottomWidth: 1.5,
@@ -874,8 +873,9 @@ console.log('this is route data',route.params);
                 fontSize: 15,
                 fontFamily: 'Montserrat-Regular',
               }}>
-              We don't have any bank listed on this pincode try another nearest
-              pincode
+                No banks found. Kindly change pincode
+              {/* We don't have any bank listed on this pincode try another nearest
+              pincode */}
             </Text>
           </View>
         )}
@@ -894,11 +894,12 @@ const SBType = [
   {label: 'Senior Citizen', value: 'Senior Citizen'},
 ];
 const Sorting = [
+  {label:'Online', value:'online'},
+
   {label: 'Interest Rate', value: 'interest_rate'},
   // {label: 'Minimum investment', value: 'mab'},
   {label: 'Credit rating', value: 'credit_rating'},
   {label: 'Name', value: 'alphabet'},
-  {label:'Online', value:'online'}
 ];
 const days = [
   {label: '00', value: '0'},

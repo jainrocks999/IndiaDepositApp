@@ -145,7 +145,7 @@ const Profile=()=>{
 
                     {/* {value.address1==0||null?<View/>: */}
                     <View>
-                    <Text style={styles.better}>Address Line1</Text>
+                    <Text style={styles.better}>Address Line 1</Text>
                       <View style={styles.drop}>
                       <Text style={styles.better1}>{value.address1==0||null?'':value.address1}</Text>
                     </View>
@@ -182,7 +182,7 @@ const Profile=()=>{
 
                       {/* {value.address2==0||null?<View/>: */}
                       <View>
-                        <Text style={styles.better}>Address Line2</Text>
+                        <Text style={styles.better}>Address Line 2</Text>
                           <View style={styles.drop}>
                           <Text style={styles.better1}>{`${value.address2==0||null?'':value.address2}`}</Text>
                         </View>
@@ -227,7 +227,7 @@ const Profile=()=>{
 
                       {/* {value.income_group==0||null ?<View/>: */}
                       <View>
-                        <Text style={styles.better}>Income Group</Text>
+                        <Text style={styles.better}>Monthly Income</Text>
                           <View style={styles.drop}>
                           <Text style={styles.better1}>{value.income_group==0||null?'':value.income_group}</Text>
                         </View>
@@ -236,7 +236,7 @@ const Profile=()=>{
 
                       {/* {value.education==0||null?<View/>: */}
                       <View>
-                        <Text style={styles.better}>Education</Text>
+                        <Text style={styles.better}>Highest Qualification</Text>
                           <View style={styles.drop}>
                           <Text style={styles.better1}>{value.education==0||null?'':value.education}</Text>
                         </View>

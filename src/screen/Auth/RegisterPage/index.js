@@ -32,21 +32,21 @@ const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
     .max(40, ({max}) => `Name must be only ${max} character`)
-    .required('Please enter your Full Name ')
-    .matches(/^[^,*+.!0-9-\/:-@\[-`{-~]+$/, 'Please enter valid Name'),
+    .required('Please enter your full name ')
+    .matches(/^[^,*+.!0-9-\/:-@\[-`{-~]+$/, 'Please enter valid name'),
   email: yup
     .string()
-    .email('Please enter valid Email ')
-    .required('Please enter your Email '),
+    .email('Please enter valid email ')
+    .required('Please enter your email '),
   mobile: yup
     .string()
-    .min(10, ({}) => 'Mobile Number must be 10 digit number')
-    .required('Please enter your Mobile number')
-    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid Mobile Number'),
+    .min(10, ({}) => 'Mobile number must be 10 digit number')
+    .required('Please enter your mobile number')
+    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid mobile number'),
   pin: yup
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)
-    .required('Please enter Pin'),
+    .required('Please enter pin'),
   confirmPin: yup
     .string()
     .when('pin', {
@@ -55,7 +55,7 @@ const loginValidationSchema = yup.object().shape({
         .string()
         .oneOf([yup.ref('pin')], 'Both pin need to be the same'),
     })
-    .required('Please confirm Pin'),
+    .required('Please confirm pin'),
   referal: yup.string(),
 });
 
@@ -108,7 +108,7 @@ const RegisterPage = () => {
     let token = await AsyncStorage.getItem(Storage.token);
     console.log('testing', device_type, token);
     if (toggleCheckBox == false) {
-      Toast.show('Please Confirm Terms and Condition');
+      Toast.show('Please accept terms & condition');
     } else {
       console.log('this is referal', referal);
       dispatch({
@@ -249,7 +249,7 @@ const RegisterPage = () => {
                       <TextInput
                         onFocus={() => setFBorder(true)}
                         style={[styles.input1]}
-                        placeholder="John Methew"
+                        placeholder="John methew"
                         placeholderTextColor={colors.heading1}
                         onChangeText={handleChange('name')}
                         onBlur={handleBlur('name')}

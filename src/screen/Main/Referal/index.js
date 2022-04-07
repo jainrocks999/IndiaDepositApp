@@ -93,7 +93,7 @@ const Refferal = () => {
               <Text
                 style={
                   styles.text1
-                }>{`Share your referral link and invite your\nfriends via SMS / Email Whatsapp.`}</Text>
+                }>{`Share your referral link and invite your\nfriends via SMS, Email or Whatsapp.`}</Text>
             </View>
           </View>
           <View style={styles.line}></View>
@@ -124,10 +124,10 @@ const Refferal = () => {
               paddingHorizontal: 0,
             }}>
             <Text style={styles.row}>
-              {'Invites your\nfriends to\nsign up'}
+              {'Invite your\nfriends to\nsign up'}
             </Text>
             <Text style={styles.row}>
-              {'Your friends\nget a product\nfrom us'}
+              {'Your friends\nstart investing'}
             </Text>
             <Text style={styles.row}>
               {'You and your\nfriends get\nrewarded'}

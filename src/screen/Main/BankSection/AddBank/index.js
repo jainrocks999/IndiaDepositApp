@@ -21,9 +21,9 @@ const loginValidationSchema=yup.object().shape({
     max(16,({min})=>`Account number must be maximum 16 digits`).
     min(11,({min})=>`Account number must be atleast 11 digits`)
     .required('Please enter your account number ').matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid account number"),
-    ifsc_code:yup.string().min(11,({min})=>`IFSC Code must be 11 digits`)
-    .required('Please enter IFSC Code')
-    .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid IFSC code"),
+    ifsc_code:yup.string().min(11,({min})=>`IFSC code must be 11 digits`)
+    .required('Please enter ifsc code')
+    .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid ifsc code"),
     // name:yup.string().required('Please enter your name').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
   })
 const data=[
@@ -102,7 +102,7 @@ const addUser=async(values)=>{
                         <Text style={styles.warn}>{errors.name}</Text>}
                     </View> 
                     <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <Text style={styles.better}>Financial Institution</Text>
+                    <Text style={styles.better}>Bank Name</Text>
                     <Text style={{marginTop:10,color:colors.red}}>*</Text>
                     </View>
                   
@@ -116,7 +116,7 @@ const addUser=async(values)=>{
                             }}
                             value={bank_name}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Select bank name", value: null }}
                         /> 
                     </View>
                     <View style={styles.error}>
@@ -160,7 +160,7 @@ const addUser=async(values)=>{
                             }}
                             value={account_type}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Select account type", value: null }}
                         />                                  
                     </View>
                     <View style={styles.error}>

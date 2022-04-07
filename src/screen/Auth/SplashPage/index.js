@@ -167,7 +167,7 @@ const Splash = () => {
         </View>
         <View style={styles.view2}>
           <View style={styles.view3}>
-            <Text style={styles.text2}>We secure your details</Text>
+            <Text style={styles.text2}>Your information is secured</Text>
           </View>
           {/* <Avatar height={200} width={100}/> */}
           <View style={styles.view4}>

@@ -219,7 +219,7 @@ const Payment = ({route}) => {
                 <View style={[styles.drop]}>
                   <TextInput
                     style={{height: 40}}
-                    placeholder="Please enter transaction ID"
+                    placeholder="Please enter transaction id"
                     onChangeText={handleChange('transaction_id')}
                     onBlur={handleBlur('transaction_id')}
                     value={values.transaction_id}

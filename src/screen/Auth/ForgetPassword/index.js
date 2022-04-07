@@ -21,11 +21,11 @@ import colors from '../../../component/colors';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const loginValidationSchema = yup.object().shape({
-  email: yup.string().email('Please enter valid Email '),
+  email: yup.string().email('Please enter valid email '),
   mobile: yup
     .string()
     .min(10, ({}) => 'Mobile Number must be 10 digit number')
-    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid Mobile Number'),
+    .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid mobile number'),
 });
 const ForgetPassword = () => {
   const navigation = useNavigation();
@@ -50,7 +50,7 @@ const ForgetPassword = () => {
   const validateUser = (email, mobile) => {
     console.log('hi', email, mobile);
     if (email && mobile) {
-      Toast.show('Please Enter Email or Mobile Number');
+      Toast.show('Please enter email or mobile number');
     } else if (email) {
       dispatch({
         type: 'Send_Otp_Request',
@@ -186,7 +186,7 @@ const ForgetPassword = () => {
                   title="RESET MY PIN"
                   onPress={() =>
                     values.email == '' && values.mobile == ''
-                      ? Toast.show('Please Enter Email or Mobile Number')
+                      ? Toast.show('Please enter email or mobile number')
                       : handleSubmit()
                   }
                 />

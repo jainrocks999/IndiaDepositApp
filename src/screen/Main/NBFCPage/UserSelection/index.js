@@ -264,7 +264,7 @@ class UserSelection extends React.Component {
                 <View style={styles.drop}>
                   <TextInput
                     style={{color: colors.textColor}}
-                    placeholder="Jhon Mathew"
+                    placeholder="Jhon mathew"
                     value={this.state.name}
                     onChangeText={val => this.setState({name: val})}
                     returnKeyType="done"
@@ -316,7 +316,7 @@ class UserSelection extends React.Component {
                       this.state.gender == null || 0 ? '' : this.state.gender
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Gender', value: 0}}
+                    placeholder={{label: 'Select gender', value: 0}}
                     Icon={() => (
                       <Image
                         style={{

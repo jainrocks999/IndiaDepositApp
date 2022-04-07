@@ -132,7 +132,7 @@ const timeOnchange=(val)=>{
                 <View style={styles.view}>
                     <Text 
                     style={styles.text}>
-                        Expected Return Rate</Text>
+                        Expected Rate of Return</Text>
                     <View style={styles.view3}>
                       <View>
                     <TextInput 

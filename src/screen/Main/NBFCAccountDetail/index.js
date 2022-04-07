@@ -11,13 +11,14 @@ import colors from '../../../component/colors';
 import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import Constants from '../../../component/Constants';
+import Toast from 'react-native-simple-toast';
 
 const FDDetail=({route})=>{
 const navigation=useNavigation()
 const selector=useSelector(state=>state.NBFCDetail)
 const details=selector[0]
 const period=((parseFloat(route.params.year)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
-console.log('time date',route.params.month,route.params.days,details);
+console.log('time date',details);
 useEffect(()=>{
      const backAction = () => {
           navigation.goBack()
@@ -83,7 +84,11 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
             },
             url: 'https://indiadeposit.in/admin/public/apis/getnbfc',
           });
-          if (response.data.status==200) {
+          console.log('response the data',response);
+          if(response.data.messages=='No data found'){
+             Toast.show('No data found')
+          }
+         else if (response.data.status==200) {
             
                navigation.navigate('SelectPlan',{
                     image:selector[0].bank_logo,
@@ -201,19 +206,35 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                                  <View style={[styles.view2,{marginRight:0}]}>
                                        <Text style={styles.item}>{details.rating}</Text>
                                        <Text style={styles.item1}>{`FI Rating`}</Text>
-                                       {/* <Text style={styles.item1}>{details.loanamount}</Text>
-                                       <Text style={styles.item1}>{details.tds_limit}</Text> */}
                                   </View>
                                   }
                                  <View/>
                                 
                           </View>
                      </View>
-                     
+                    
+                   {details.lockin_period? 
+                   <View>
+                   <View style={styles.line}></View>
+                    <View style={styles.view4}>
+                         <View style={styles.container}>
+                         <View style={styles.view2}>
+                         <Text style={styles.item}>
+                              {details.lockin_period == null ? '' : details.lockin_period}
+                         </Text>
+                         <Text
+                              style={[
+                              styles.item1,
+                              {textAlign: 'center'},
+                              ]}>{`Lockin Period`}</Text>
+                         </View>
+                       
+                         </View>
+                    </View></View>:null}
            
                     { details.tds_info==null||details.tds_info==''?<View/>:
                     <View style={styles.top}> 
-                     <Text style={styles.tds}>TDS applicable with info of 15 G option :</Text>
+                     <Text style={styles.tds}>Is TDS Applicable? :</Text>
                       <HTMLView
                               value={details.tds_info.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
@@ -222,7 +243,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     
                           { details.salient_feature==null||details.salient_feature==''?<View/>:
                           <View style={styles.top}>  
-                         <Text style={styles.tds}>{'Feature :'}</Text>
+                         <Text style={styles.tds}>{'Features :'}</Text>
                           <HTMLView
                               value={details.salient_feature.trim().replace(/\s+/g,' ')}
                               addLineBreaks={false}
@@ -249,13 +270,13 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
 
                { details.pan_required==null||details.pan_required==''?<View/>:
                     <View style={styles.top}> 
-                     <Text style={styles.tds}>Pan Requirement:</Text>
-                     <Text>{`${details.pan_required==0?'No':details.pan_required==1?'Yes - Mandatory above Deposit of RS 500000/-':''}`}</Text>
+                     <Text style={styles.tds}>Pan Required? :</Text>
+                     <Text>{`${details.pan_required==0?'No':details.pan_required==1?'Yes - Mandatory above Deposit of Rs to ₹500000/-':''}`}</Text>
                          </View>}
 
                          { details.premature_withdrawals==null||details.premature_withdrawals==''?<View/>:
                     <View style={styles.top}> 
-                     <Text style={styles.tds}>Premature Withdrawal Rate :</Text>
+                     <Text style={styles.tds}>Premature Withdrawal Available? :</Text>
                      <Text style={{fontSize:14,color:colors.textColor}}>{`${details.premature_withdrawals==0?'No':details.premature_withdrawals==1?
                                        `Yes - ${details.premature_withdrawal_rate==null?0:details.premature_withdrawal_rate}% below interest rate at the time of FD contract or Rate of interest as per tenure which ever is lower`:null}`}</Text>
                      {/* <Text>{details.premature_withdrawals==0?'No':details.premature_withdrawals?'Yes':''}</Text> */}

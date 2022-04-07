@@ -289,7 +289,7 @@ const Holiday = () => {
                   }}
                   value={bank_name}
                   useNativeAndroidPickerStyle={false}
-                  placeholder={{label: 'Please Select Bank', value: ''}}
+                  placeholder={{label: 'Please select bank', value: ''}}
                 />
               </View>
             </View>
@@ -297,7 +297,7 @@ const Holiday = () => {
               <Text style={{fontFamily: 'Montserrat-SemiBold'}}>Pincode</Text>
               <View style={[styles.input, {marginTop: 2}]}>
                 <TextInput
-                  placeholder="Please Enter Pincode"
+                  placeholder="Please enter pincode"
                   value={pincode}
                   keyboardType={'number-pad'}
                   maxLength={6}

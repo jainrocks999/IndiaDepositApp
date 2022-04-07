@@ -338,7 +338,7 @@ const DrawerContent = ({props}) => {
                   source={require('../../assets/Image/ing.png')}
                 />
               </View>
-              <Text style={styles.text}>{`My FD's`}</Text>
+              <Text style={styles.text}>{`My Investments`}</Text>
             </View>
             <Image
               style={styles.arrow}
@@ -358,7 +358,7 @@ const DrawerContent = ({props}) => {
                   source={require('../../assets/Image/noti.png')}
                 />
               </View>
-              <Text style={styles.text}>{'Notification'}</Text>
+              <Text style={styles.text}>{'Notifications'}</Text>
             </View>
             <Image
               style={styles.arrow}
@@ -399,7 +399,7 @@ const DrawerContent = ({props}) => {
                   source={require('../../assets/Image/bank-holiday.png')}
                 />
               </View>
-              <Text style={styles.text}>{'Bank Holiday'}</Text>
+              <Text style={styles.text}>{'Bank Holidays'}</Text>
             </View>
             <Image
               style={styles.arrow}
@@ -408,7 +408,7 @@ const DrawerContent = ({props}) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           delayPressIn={0}
           onPress={() => validateUser9()}
           style={[styles.drawer]}>
@@ -427,7 +427,7 @@ const DrawerContent = ({props}) => {
               source={require('../../assets/Image/arrowF.png')}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         <TouchableOpacity
           delayPressIn={0}
@@ -501,7 +501,7 @@ const DrawerContent = ({props}) => {
                     source={require('../../assets/Image/policy.png')}
                   />
                 </View>
-                <Text style={styles.text}>{'Policy'}</Text>
+                <Text style={styles.text}>{'Our Policies'}</Text>
               </View>
               <Image
                 style={styles.arrow}

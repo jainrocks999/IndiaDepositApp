@@ -26,11 +26,11 @@ const loginValidationSchema = yup.object().shape({
   oldPassword: yup
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)
-    .required('Please enter old Pin'),
+    .required('Please enter old pin'),
   newPassword: yup
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)
-    .required('Please enter new Pin'),
+    .required('Please enter new pin'),
   // .matches(
   //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
   //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
@@ -164,7 +164,7 @@ const ChangePassword = () => {
                   <TextInput
                     onFocus={() => setFocus(true)}
                     style={styles.input1}
-                    placeholder="Old Pin"
+                    placeholder="Old pin"
                     placeholderTextColor={colors.heading1}
                     onChangeText={handleChange('oldPassword')}
                     onBlur={handleBlur('oldPassword')}
@@ -196,7 +196,7 @@ const ChangePassword = () => {
                     ref={ref1}
                     onFocus={() => setFocus1(true)}
                     style={styles.input1}
-                    placeholder="New Pin"
+                    placeholder="New pin"
                     placeholderTextColor={colors.heading1}
                     onChangeText={handleChange('newPassword')}
                     onBlur={handleBlur('newPassword')}
@@ -228,7 +228,7 @@ const ChangePassword = () => {
                     ref={ref2}
                     onFocus={() => setFocus2(true)}
                     style={styles.input1}
-                    placeholder="Confirm Pin"
+                    placeholder="Confirm pin"
                     placeholderTextColor={colors.heading1}
                     onChangeText={handleChange('confirmPassword')}
                     onBlur={handleBlur('confirmPassword')}

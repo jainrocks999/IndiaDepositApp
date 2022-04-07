@@ -23,7 +23,7 @@ const loginValidationSchema = yup.object().shape({
   newPassword: yup
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)
-    .required('Please enter new Pin'),
+    .required('Please enter new pin'),
   confirmPassword: yup
     .string()
     .when('newPassword', {
@@ -155,7 +155,7 @@ const ChangePassword = ({route}) => {
                     ref={ref1}
                     onFocus={() => setFocus1(true)}
                     style={styles.input1}
-                    placeholder="New Pin"
+                    placeholder="New pin"
                     placeholderTextColor={colors.heading1}
                     onChangeText={handleChange('newPassword')}
                     onBlur={handleBlur('newPassword')}
@@ -187,7 +187,7 @@ const ChangePassword = ({route}) => {
                     ref={ref2}
                     onFocus={() => setFocus2(true)}
                     style={styles.input1}
-                    placeholder="Confirm New Pin"
+                    placeholder="Confirm new pin"
                     placeholderTextColor={colors.heading1}
                     onChangeText={handleChange('confirmPassword')}
                     onBlur={handleBlur('confirmPassword')}

@@ -15,10 +15,10 @@ import Dialog, { DialogContent } from 'react-native-popup-dialog';
 
 const loginValidationSchema=yup.object().shape({
   name:yup.string().required('Name is required'),
-  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[789]\d{9}$/,"Please Enter valid Mobile Number"),
+  mobile:yup.string().min(10).required('Mobile number is required').matches(/^[0]?[789]\d{9}$/,"Please enter valid mobile number"),
   dob:yup.string().required('Date of Birth is required'),
   address:yup.string().required('Address is required'),
-  relation:yup.string().required('Relationship with Depositor is required'),
+  relation:yup.string().required('Relationship with depositor is required'),
 })
 const RegisterPage=()=>{
     const navigation=useNavigation()
@@ -90,7 +90,7 @@ const RegisterPage=()=>{
                                   <View style={[styles.view1,{marginTop:16}]}>
                                        <TextInput 
                                          style={styles.input}
-                                         placeholder='Nominee Name'
+                                         placeholder='Nominee name'
                                          placeholderTextColor={colors.heading1}
                                          onChangeText={handleChange('name')}
                                          onBlur={handleBlur('name')}
@@ -107,7 +107,7 @@ const RegisterPage=()=>{
                                   <View style={[styles.view1,{marginTop:10}]}>
                                        <TextInput 
                                              style={styles.input}
-                                             placeholder='Mobile Number'
+                                             placeholder='Mobile number'
                                              placeholderTextColor={colors.heading1}
                                              onChangeText={handleChange('mobile')}
                                              onBlur={handleBlur('mobile')}
@@ -126,7 +126,7 @@ const RegisterPage=()=>{
                                       <DatePicker
                                             date={values.dob}
                                             mode="date"
-                                            placeholder="Date Of Birth"
+                                            placeholder="Date of birth"
                                             format="DD-MM-YYYY"
                                             maxDate={new Date}
                                             confirmBtnText="Confirm"
@@ -172,7 +172,7 @@ const RegisterPage=()=>{
                                  <View style={[styles.view1,{marginTop:10}]}>
                                     <TextInput 
                                          style={styles.input}
-                                         placeholder='Relationship with Depositor'
+                                         placeholder='Relationship with depositor'
                                          placeholderTextColor={colors.heading1}
                                          onChangeText={handleChange('relation')}
                                          onBlur={handleBlur('relation')}

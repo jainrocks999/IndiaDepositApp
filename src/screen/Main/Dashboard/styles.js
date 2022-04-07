@@ -211,8 +211,8 @@ modal: {
   },
   ModelmsgView: {
     width: '99%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     alignSelf: 'center',
     marginTop:10,paddingHorizontal:20
   },

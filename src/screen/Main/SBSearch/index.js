@@ -284,7 +284,7 @@ const SBAccount = ({route}) => {
             <View style={{marginTop: 0}}>
               <TextInput
                 style={styles.textinput1}
-                placeholder="Enter Pincode"
+                placeholder="Enter pincode"
                 placeholderTextColor={colors.heading1}
                 keyboardType="number-pad"
                 value={location}

@@ -31,28 +31,28 @@ const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
     .max(40, ({max}) => `Name must be maximum ${max} character`)
-    .required('Please enter your Full Name ')
-    .matches(/^[^.,*+!0-9-\/:-@\[-`{-~]+$/, 'Please enter valid Name'),
+    .required('Please enter your full name ')
+    .matches(/^[^.,*+!0-9-\/:-@\[-`{-~]+$/, 'Please enter valid name'),
   father: yup
     .string()
     .max(40, ({max}) => `Father name must be maximum ${max} character`)
-    .required('Please enter your Father/Spouse Name')
+    .required('Please enter your father/spouse name')
     .matches(
       /^[^!0-9-\/:-@\[-`{-~]+$/,
-      'Please enter valid Father/Spouse Name',
+      'Please enter valid father/spouse name',
     ),
   mother: yup
     .string()
     .max(40, ({max}) => `Mother name must be maximum ${max} character`)
-    .required('Please enter your Mother Maiden Name ')
+    .required('Please enter your mother maiden name ')
     .matches(
       /^[^!0-9-\/:-@\[-`{-~]+$/,
-      'Please enter valid Mother Maiden Name',
+      'Please enter valid mother maiden name',
     ),
   email: yup
     .string()
-    .email('Please enter valid Email ')
-    .required('Please enter your Email '),
+    .email('Please enter valid email ')
+    .required('Please enter your email '),
   pan: yup.string(''),
   // .required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
   mobile: yup.string(''),
@@ -329,7 +329,7 @@ const RegisterPage = ({route}) => {
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Jhon Mathew"
+                    placeholder="Jhon mathew"
                     value={values.name}
                     onChangeText={handleChange('name')}
                     onBlur={handleBlur('name')}
@@ -350,7 +350,7 @@ const RegisterPage = ({route}) => {
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Father/Spouse Name"
+                    placeholder="Father/spouse name"
                     value={values.father}
                     onChangeText={handleChange('father')}
                     onBlur={handleBlur('father')}
@@ -369,7 +369,7 @@ const RegisterPage = ({route}) => {
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Mother Maiden Name"
+                    placeholder="Mother maiden name"
                     defaultValue={values.mother}
                     onChangeText={handleChange('mother')}
                     onBlur={handleBlur('mother')}
@@ -418,7 +418,7 @@ const RegisterPage = ({route}) => {
                         }}
                         value={gender == null || gender == 0 ? '' : gender}
                         useNativeAndroidPickerStyle={false}
-                        placeholder={{label: 'Select Gender', value: 0}}
+                        placeholder={{label: 'Select gender', value: 0}}
                         Icon={() => (
                           <Image
                             style={{
@@ -609,13 +609,13 @@ const RegisterPage = ({route}) => {
                   )}
                 </View>
                 <View style={styles.row}>
-                  <Text style={styles.better}>Address Line1</Text>
+                  <Text style={styles.better}>Address Line 1</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Please enter address line1"
+                    placeholder="Please enter your address"
                     placeholderTextColor={colors.heading1}
                     defaultValue={values.addressLine1}
                     onChangeText={handleChange('addressLine1')}
@@ -636,13 +636,13 @@ const RegisterPage = ({route}) => {
                         marginTop:10
                         }}>Additional Details:</Text> */}
                 <View style={styles.row}>
-                  <Text style={styles.better}>Address Line2</Text>
+                  <Text style={styles.better}>Address Line 2</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Please enter address line2"
+                    placeholder=""
                     placeholderTextColor={colors.heading1}
                     defaultValue={values.addressLine2}
                     onChangeText={handleChange('addressLine2')}
@@ -703,7 +703,7 @@ const RegisterPage = ({route}) => {
                     }}
                     value={country == null || country == 0 ? '' : country}
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Country', value: ''}}
+                    placeholder={{label: 'Select country', value: ''}}
                     Icon={() => (
                       <Image
                         style={{
@@ -748,7 +748,7 @@ const RegisterPage = ({route}) => {
                     }}
                     value={state == null || state == 0 ? '' : state}
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select State', value: ''}}
+                    placeholder={{label: 'Select state', value: ''}}
                     Icon={() => (
                       <Image
                         style={{
@@ -792,7 +792,7 @@ const RegisterPage = ({route}) => {
                     }}
                     value={city == null || city == 0 ? '' : city}
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select City', value: ''}}
+                    placeholder={{label: 'Select city', value: ''}}
                     Icon={() => (
                       <Image
                         style={{
@@ -812,7 +812,7 @@ const RegisterPage = ({route}) => {
                         } */}
                 </View>
                 <View style={styles.row}>
-                  <Text style={styles.better}>Income Group</Text>
+                  <Text style={styles.better}>Monthly Income</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
@@ -845,7 +845,7 @@ const RegisterPage = ({route}) => {
                         : income_group
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Income Group', value: 0}}
+                    placeholder={{label: 'Select monthly income', value: 0}}
                     Icon={() => (
                       <Image
                         style={{
@@ -896,7 +896,7 @@ const RegisterPage = ({route}) => {
                       occupation == null || occupation == 0 ? '' : occupation
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Occupation', value: 0}}
+                    placeholder={{label: 'Select occupation', value: 0}}
                     Icon={() => (
                       <Image
                         style={{
@@ -914,7 +914,7 @@ const RegisterPage = ({route}) => {
                   <View style={styles.drop}>
                     <TextInput
                       style={styles.input}
-                      placeholder="Please Specify"
+                      placeholder="Please specify"
                       placeholderTextColor={colors.heading1}
                       defaultValue={values.occupation}
                       onChangeText={handleChange('occupation')}
@@ -927,7 +927,7 @@ const RegisterPage = ({route}) => {
 
                 <View style={styles.error}></View>
                 <View style={styles.row}>
-                  <Text style={styles.better}>Education</Text>
+                  <Text style={styles.better}>Highest Qualification</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
 
@@ -951,7 +951,7 @@ const RegisterPage = ({route}) => {
                     }}
                     value={education == 0 || education == null ? '' : education}
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Education', value: 0}}
+                    placeholder={{label: 'Select highest qualification', value: 0}}
                     Icon={() => (
                       <Image
                         style={{
@@ -1005,7 +1005,7 @@ const RegisterPage = ({route}) => {
                         : marital_status
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Marital Status', value: 0}}
+                    placeholder={{label: 'Marital status', value: 0}}
                     Icon={() => (
                       <Image
                         style={{
@@ -1059,7 +1059,7 @@ const RegisterPage = ({route}) => {
                         : residential_address
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Residential Status', value: 0}}
+                    placeholder={{label: 'Select residential status', value: 0}}
                     Icon={() => (
                       <Image
                         style={{

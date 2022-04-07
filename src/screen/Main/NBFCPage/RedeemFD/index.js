@@ -288,7 +288,7 @@ const MyFDDetail = ({route}) => {
                 }}
                 value={bank_name}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select Financial Institution', value: ''}}
+                placeholder={{label: 'Select financial institution', value: ''}}
               />
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -328,7 +328,7 @@ const MyFDDetail = ({route}) => {
                 }}
                 value={account_type}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select Account Type', value: ''}}
+                placeholder={{label: 'Select account type', value: ''}}
               />
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

@@ -35,7 +35,7 @@ const BankCalu = ({route}) => {
 
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-
+  console.log('this is working',selectedItems[3]);
     if(selectItems[3]?selectItems[3]:route.params.fd_from=='setu'){
       navigation.navigate('FDView',{
         amount:amount,
@@ -59,7 +59,7 @@ const BankCalu = ({route}) => {
       mother_name: '',
       father_name: '',
       marital_status: '',
-      my_fixed_deposit_id: selectedItems[2]?selectItems[2]:route.params.fixed_deposit_id,
+      my_fixed_deposit_id: '',
       spouse_name: '',
       occupation: '',
       annual_income: '',
@@ -345,7 +345,7 @@ const BankCalu = ({route}) => {
                 }}
                 value={frequency}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select Payout Frequency', value: 0}}
+                placeholder={{label: 'Select payout frequency', value: 0}}
                 Icon={() => (
                   <Image
                     style={{
@@ -371,7 +371,6 @@ const BankCalu = ({route}) => {
                 borderColor: colors.bc,
               }}>
               <TextInput
-                style={{width: '90%'}}
                 value={selectedItems[0] ? `${selectedItems[0]} Year` : ''}
                 placeholderTextColor={colors.heading1}
                 onChangeText={selectedItems[0]}

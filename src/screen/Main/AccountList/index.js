@@ -528,7 +528,7 @@ const SBAccountList = ({route}) => {
                   borderColor: '#3D4785',
                   paddingBottom: Platform.OS == 'android' ? 0 : 6,
                 }}
-                placeholder="Enter Pincode"
+                placeholder="Enter pincode"
                 placeholderTextColor={colors.heading1}
                 value={location}
                 onChangeText={val => {
@@ -565,8 +565,6 @@ const SBAccountList = ({route}) => {
                 submitButtonColor={colors.bc}
                 submitButtonText="Submit"
                 textInputProps={{editable: false, autoFocus: false}}
-                searchInputPlaceholderText=""
-                searchIcon={false}
                 styleDropdownMenu={{
                   width: '100%',
                   borderBottomWidth: 1.5,
@@ -783,8 +781,9 @@ const SBAccountList = ({route}) => {
                 fontSize: 15,
                 fontFamily: 'Montserrat-Regular',
               }}>
-              We don't have any bank listed on this pincode try another nearest
-              pincode
+                No banks found. Kindly change pincode
+              {/* We don't have any bank listed on this pincode try another nearest
+              pincode */}
             </Text>
           </View>
         )}

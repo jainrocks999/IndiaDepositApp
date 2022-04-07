@@ -44,6 +44,15 @@ class SecondaryUser extends React.Component {
       open: false,
     };
   }
+
+  async componentWillUnmount(){
+    const user_id=await AsyncStorage.getItem(Storage.user_id)
+    this.props.dispatch({
+      type: 'Family_List_Request',
+      url: 'getfamilylist',
+      user_id: user_id,
+    });
+  }
   // isChecked = itemId => {
   //   const isThere = this.state.ids.includes(itemId);
   //   return isThere;
@@ -440,7 +449,7 @@ class SecondaryUser extends React.Component {
                 <View style={styles.drop}>
                   <TextInput
                     style={{color: colors.textColor}}
-                    placeholder="Jhon Mathew"
+                    placeholder="Jhon mathew"
                     value={this.state.name}
                     onChangeText={val => this.setState({name: val})}
                     returnKeyType="done"
@@ -498,7 +507,7 @@ class SecondaryUser extends React.Component {
                       this.state.gender == null || 0 ? '' : this.state.gender
                     }
                     useNativeAndroidPickerStyle={false}
-                    placeholder={{label: 'Select Gender', value: 0}}
+                    placeholder={{label: 'Select gender', value: 0}}
                     Icon={() => (
                       <Image
                         style={{

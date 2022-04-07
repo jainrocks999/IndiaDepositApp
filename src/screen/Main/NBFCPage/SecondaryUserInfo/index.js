@@ -914,7 +914,7 @@ const RegisterPage = ({route}) => {
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
 
-
+console.log('this is data from relation',data1.relation);
 
   useEffect(async () => {
     dispatch({
@@ -960,15 +960,15 @@ const RegisterPage = ({route}) => {
     } else if (mother_name == '' || mother_name == 0) {
       Toast.show('Please enter mother maiden name');
     } else if (address1 == 0 || address1 == '') {
-      Toast.show('Please enter address line1');
+      Toast.show('Please enter address line 1');
     } else if (address2 == 0 || address2 == '') {
-      Toast.show('Please enter address line2');
+      Toast.show('Please enter address line 2');
     } else if (occupation == 0 || occupation == '') {
       Toast.show('Please select occupation');
     } else if (income_group == '' || income_group == 0) {
-      Toast.show('Please select income group');
+      Toast.show('Please select monthly income');
     } else if (education == '' || education == 0) {
-      Toast.show('Please select education');
+      Toast.show('Please select highest qualification');
     } else if (marital_status == '' || marital_status == 0) {
       Toast.show('Please select marital status');
     }else if (marital_status == 1 && spouse_name=='') {
@@ -1016,6 +1016,7 @@ const RegisterPage = ({route}) => {
         navigation: navigation,
       });
       try {
+        console.log('this is user relation ',relation);
         const data= new FormData()
         data.append('family_id',data1.user_id);
         data.append('name',name == 0 || name == 'undefined' ? 0 : name);
@@ -1049,11 +1050,17 @@ const RegisterPage = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/updatefamily',
         });
+        if(response.data.status==200){
+          dispatch({
+            type: 'Family_List_Request',
+            url: 'getfamilylist',
+            user_id: user_id,
+          });
+        }
         console.log('thisi si uer response ',response.data);
       } catch (error) {
         throw error;
       }
-      
     }
   };
 
@@ -1250,7 +1257,7 @@ const RegisterPage = ({route}) => {
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line1</Text>
+              <Text style={styles.better}>Address Line 1</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
@@ -1259,11 +1266,11 @@ const RegisterPage = ({route}) => {
                 value={address1 == 0 || address1 == null ? '' : address1}
                 onChangeText={val => setAddress1(val)}
                 editable={true}
-                placeholder="Please enter address line1"
+                placeholder="Please enter your address"
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line2</Text>
+              <Text style={styles.better}>Address Line 2</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
@@ -1272,7 +1279,7 @@ const RegisterPage = ({route}) => {
                 value={address2 == 0 || address2 == null ? '' : address2}
                 onChangeText={val => setAddress2(val)}
                 editable={true}
-                placeholder="please enter address line2"
+                placeholder=""
               />
             </View>
 
@@ -1397,7 +1404,7 @@ const RegisterPage = ({route}) => {
             </View>
 
             <View style={styles.row}>
-              <Text style={styles.better}>Income Group</Text>
+              <Text style={styles.better}>Monthly Income</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
@@ -1422,11 +1429,11 @@ const RegisterPage = ({route}) => {
                   income_group == 0 || income_group == null ? '' : income_group
                 }
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select income group', value: 0}}
+                placeholder={{label: 'Select monthly income', value: 0}}
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Education</Text>
+              <Text style={styles.better}>Highest Qualification</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -1450,7 +1457,7 @@ const RegisterPage = ({route}) => {
                 }}
                 value={education == 0 || education == null ? '' : education}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select education', value: 0}}
+                placeholder={{label: 'Select highest qualification', value: 0}}
               />
             </View>
             <View style={styles.row}>

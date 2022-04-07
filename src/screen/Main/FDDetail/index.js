@@ -257,20 +257,38 @@ const FDDetail = ({route}) => {
               <View style={[styles.view2, {marginRight: 0}]}>
                 <Text style={styles.item}>{details.rating}</Text>
                 <Text style={styles.item1}>{`FI Rating`}</Text>
-                {/* <Text style={styles.item1}>{details.loanamount}</Text>
-                                       <Text style={styles.item1}>{details.tds_limit}</Text> */}
               </View>
             )}
             <View />
           </View>
         </View>
 
+          
+                  {details.lockin_period? 
+                   <View>
+                   <View style={styles.line}></View>
+                    <View style={styles.view4}>
+                         <View style={styles.container}>
+                         <View style={styles.view2}>
+                         <Text style={styles.item}>
+                              {details.lockin_period == null ? '' : details.lockin_period}
+                         </Text>
+                         <Text
+                              style={[
+                              styles.item1,
+                              {textAlign: 'center'},
+                              ]}>{`Lockin Period`}</Text>
+                         </View>
+                       
+                         </View>
+                    </View></View>:null}
+
         {details.tds_info == null || details.tds_info == '' ? (
           <View />
         ) : (
           <View style={styles.top}>
             <Text style={styles.tds}>
-              TDS applicable with info of 15 G option :
+            Is TDS Applicable? :
             </Text>
             <HTMLView
               value={details.tds_info.trim().replace(/\s+/g, ' ')}
@@ -283,7 +301,7 @@ const FDDetail = ({route}) => {
           <View />
         ) : (
           <View style={styles.top}>
-            <Text style={styles.tds}>{'Feature :'}</Text>
+            <Text style={styles.tds}>{'Features :'}</Text>
             <HTMLView
               value={details.salient_feature.trim().replace(/\s+/g, ' ')}
               addLineBreaks={false}
@@ -319,12 +337,13 @@ const FDDetail = ({route}) => {
           <View />
         ) : (
           <View style={styles.top}>
-            <Text style={styles.tds}>Pan Requirement:</Text>
+            <Text style={styles.tds}>Pan Required? :</Text>
             <Text>{`${
               details.pan_required == 0
                 ? 'No'
                 : details.pan_required == 1
-                ? 'Yes - Mandatory above Deposit of RS 500000/-'
+                ? 
+                'Yes - Mandatory above Deposit of Rs to ₹500000/-'
                 : ''
             }`}</Text>
           </View>
@@ -335,7 +354,7 @@ const FDDetail = ({route}) => {
           <View />
         ) : (
           <View style={styles.top}>
-            <Text style={styles.tds}>Premature Withdrawal Rate :</Text>
+            <Text style={styles.tds}>Premature Withdrawal Available? :</Text>
             <Text style={{fontSize: 14, color: colors.textColor}}>{`${
               details.premature_withdrawals == 0
                 ? 'No'

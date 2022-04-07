@@ -121,7 +121,7 @@ const manageCheck1=()=>{
                     <View style={[styles.drop]}>
                         <TextInput 
                         style={{height:40}} 
-                        placeholder='Enter IFSC code'
+                        placeholder='Enter ifsc code'
                         onChangeText={handleChange('ifsc')}
                         onBlur={handleBlur('ifsc')}
                         value={values.ifsc}

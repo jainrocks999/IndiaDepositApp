@@ -59,7 +59,7 @@ const MyFDDetail = ({route}) => {
       url: 'nomineelist',
       user_id,
     });
-  }, []);
+  },[]);
 
   const isChecked = itemId => {
     const isThere = ids.includes(itemId);
@@ -98,9 +98,9 @@ const MyFDDetail = ({route}) => {
     if (name == '') {
       Toast.show('Please enter name');
     } else if (address1 == '') {
-      Toast.show('Please enter address line1');
+      Toast.show('Please enter address line 1');
     } else if (address2 == '') {
-      Toast.show('Please enter enter address line2');
+      Toast.show('Please enter enter address line 2');
     } else if (country == 0 || country == '' || country == null) {
       Toast.show('Please select country name');
     } else if (state == '' || state == null || state == 0) {
@@ -362,12 +362,12 @@ const MyFDDetail = ({route}) => {
               />
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={styles.better}>Address Line1</Text>
+              <Text style={styles.better}>Address Line 1</Text>
             </View>
             <View style={styles.drop}>
               <TextInput
                 style={styles.input}
-                placeholder="Please enter your address line1"
+                placeholder="Please enter your address"
                 value={address1}
                 onChangeText={val => setAddress1(val)}
                 returnKeyType="done"
@@ -375,12 +375,12 @@ const MyFDDetail = ({route}) => {
             </View>
 
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={styles.better}>Address Line2</Text>
+              <Text style={styles.better}>Address Line 2</Text>
             </View>
             <View style={styles.drop}>
               <TextInput
                 style={styles.input}
-                placeholder="Please enter your address line2"
+                placeholder=""
                 placeholderTextColor={colors.heading1}
                 value={address2}
                 onChangeText={val => setAddress2(val)}

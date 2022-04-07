@@ -42,7 +42,7 @@ const Security=()=>{
                             }}
                             value={value}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select Bank", value: '' }}
+                            placeholder={{ label: "Select bank", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
@@ -59,7 +59,7 @@ const Security=()=>{
                             }}
                             value={value1}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select State", value: '' }}
+                            placeholder={{ label: "Select state", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
@@ -76,7 +76,7 @@ const Security=()=>{
                             }}
                             value={value2}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select District", value: '' }}
+                            placeholder={{ label: "Select district", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}
@@ -93,7 +93,7 @@ const Security=()=>{
                             }}
                             value={value3}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select Branch", value: '' }}
+                            placeholder={{ label: "Select branch", value: '' }}
                             Icon={()=>
                             <Image style={{margin:12}} 
                             source={require('../../../assets/Image/down.png')}/>}

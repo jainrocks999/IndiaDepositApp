@@ -82,8 +82,8 @@ console.log('thisi is user route from add min',route.params);
         premature_penalty: '',
         loan: '',
         credit_rating:'',
-        order_on: 'interest_rate',
-        order_to: 'DESC',
+        order_on: '',
+        order_to: '',
         btype:2,
         navigation: navigation,
       });

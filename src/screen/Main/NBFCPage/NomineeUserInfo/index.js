@@ -78,9 +78,9 @@ const RegisterPage = ({route}) => {
       Toast.show('Please enter name')
     }
     else if (address1 == '' || address1 == 0) {
-      Toast.show('Please enter address line1');
+      Toast.show('Please enter address line 1');
     } else if (address2 == 0 || address2 == '') {
-      Toast.show('Please enter address line2');
+      Toast.show('Please enter address line 2');
     } else if (value == '' || value == 0) {
       Toast.show('Please enter date of birth');
     } else if (relation == '' || relation == 0) {
@@ -143,6 +143,13 @@ const RegisterPage = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/updatenominee',
         });
+        if(response.data.status==200){
+          dispatch({
+            type: 'Nominee_List_Request',
+            url: 'nomineelist',
+            user_id:user_id,
+          });
+        }
       } catch (error) {
         throw error;
       }
@@ -239,7 +246,7 @@ const RegisterPage = ({route}) => {
             </View>
 
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line1</Text>
+              <Text style={styles.better}>Address Line 1</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -248,12 +255,12 @@ const RegisterPage = ({route}) => {
                 style={styles.input}
                 value={address1}
                 onChangeText={val => setAddress1(val)}
-                placeholder="Please enter address line1"
+                placeholder="Please enter your address"
                 editable={true}
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line2</Text>
+              <Text style={styles.better}>Address Line 2</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -263,6 +270,7 @@ const RegisterPage = ({route}) => {
                 value={address2}
                 editable={true}
                 onChangeText={val => setAddress2(val)}
+                placeholder=""
               />
             </View>
             <View style={styles.row}>
@@ -323,7 +331,7 @@ const RegisterPage = ({route}) => {
                 }}
                 value={relation == 0 || null ? '' : relation}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select Relationship', value: 0}}
+                placeholder={{label: 'Select relationship', value: 0}}
               />
             </View>
             <View style={styles.row}>

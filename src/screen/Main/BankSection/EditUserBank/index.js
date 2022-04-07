@@ -21,8 +21,8 @@ const loginValidationSchema=yup.object().shape({
     min(11,({min})=>`Account number must be atleast 11 digits`)
     .required('Please enter your account number ').matches(/^[+-]?\d*(?:[.,]\d*)?$/,"Please enter valid account number"),
     ifsc_code:yup.string().min(11,({min})=>`IFSC code must be 11 digits`)
-    .required('Please enter IFSC Code')
-    .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid IFSC code"),
+    .required('Please enter ifsc code')
+    .matches(/^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/,"Please enter valid ifsc code"),
   })
 const data2=[
     { label: 'Saving Account', value: 'Saving Account'},
@@ -112,7 +112,7 @@ const addUser=async(values)=>{
                             }}
                             value={bank_name}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Select bank", value: null }}
                         /> 
                     </View>
                     <View style={styles.error}>
@@ -156,7 +156,7 @@ const addUser=async(values)=>{
                             }}
                             value={account_type}
                             useNativeAndroidPickerStyle={false}
-                            placeholder={{ label: "Select", value: null }}
+                            placeholder={{ label: "Select type", value: null }}
                         />                                  
                     </View>
                     <View style={styles.error}>

@@ -20,9 +20,9 @@ import Loader from '../../../component/loader';
 
 
 const loginValidationSchema=yup.object().shape({
-  name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`).required('Please enter your Name ').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
-  email:yup.string().email('Please enter valid Email ').required('Please enter your Email '),
-  mobile:yup.string().min(10,({})=>'Mobile Number must be 10 digit number').required('Please enter your Mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid Mobile Number"),
+  name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`).required('Please enter your name ').matches( /^[^,*+.!0-9-\/:-@\[-`{-~]+$/,"Please enter valid name"),
+  email:yup.string().email('Please enter valid email ').required('Please enter your email '),
+  mobile:yup.string().min(10,({})=>'Mobile number must be 10 digit number').required('Please enter your mobile number').matches(/^[0]?[6-9]\d{9}$/,"Please enter valid mobile number"),
   subject:yup.string().required('Please enter subject'),
   message:yup.string().required('Please enter message')
 })
@@ -89,7 +89,7 @@ const Supports=({route})=>{
                         <View style={styles.drop}>
                           <TextInput
                             style={{color:colors.textColor}}
-                            placeholder='Jhon Mathew'
+                            placeholder='Jhon mathew'
                             placeholderTextColor={colors.heading1}
                             onChangeText={handleChange('name')}
                             onBlur={handleBlur('name')}

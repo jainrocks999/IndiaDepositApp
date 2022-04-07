@@ -11,11 +11,11 @@ const BottomTab = () => {
       <View style={styles.container}>
         <View style={{width: 30}}>
           <Image
-            style={{height: 32, width: 32}}
+            style={{height: 32, width: 32,tintColor:'#5A4392'}}
             source={require('../../assets/Image/home.png')}
           />
         </View>
-        <Text style={[styles.text, {marginTop: 0}]}>{'HOME'}</Text>
+        <Text style={[styles.text, {marginTop: 0}]}>{'Home'}</Text>
       </View>
     );
   };
@@ -25,11 +25,11 @@ const BottomTab = () => {
       <View style={styles.container}>
         <View style={{width: 30}}>
           <Image
-            style={{height: 32, width: 32}}
-            source={require('../../assets/Image/holy.png')}
-          />
+                  style={{height: 20, width: 20, marginTop:2}}
+                  source={require('../../assets/Image/ing.png')}
+                />
         </View>
-        <Text style={styles.text}>{'BANK HOLIDAY'}</Text>
+        <Text style={[styles.text,{marginBottom:-4,marginTop:6,marginRight:5}]}>{'Our Policies'}</Text>
       </View>
     );
   };
@@ -37,12 +37,12 @@ const BottomTab = () => {
     return (
       <View style={styles.container}>
         <View style={{width: 30}}>
-          <Image
-            style={{height: 32, width: 32}}
-            source={require('../../assets/Image/knowledege_grey.png')}
-          />
+           <Image
+              style={{height: 32, width: 32}}
+              source={require('../../assets/Image/contact_us.png')}
+            />
         </View>
-        <Text style={styles.text}>{'KNOWLEDGE CE...'}</Text>
+        <Text style={styles.text}>{'Contact us'}</Text>
       </View>
     );
   };
@@ -50,12 +50,12 @@ const BottomTab = () => {
     return (
       <View style={styles.container}>
         <View style={{width: 30}}>
-          <Image
-            style={{height: 32, width: 32}}
-            source={require('../../assets/Image/trend.png')}
+           <Image
+            style={{height: 32, width: 32,tintColor:'#5A4392'}}
+            source={require('../../assets/Image/knowledege_grey.png')}
           />
         </View>
-        <Text style={styles.text}>{'TRENDING'}</Text>
+        <Text style={styles.text}>{'Knowledge Ce..'}</Text>
       </View>
     );
   };
@@ -74,7 +74,7 @@ const BottomTab = () => {
         delayPressIn={0}
         style={styles.bottomTabContainer}
         onPress={() => {
-          navigation.navigate('BankHoliday');
+          navigation.navigate('MyFD');
         }}>
         {renderBank()}
       </TouchableOpacity>
@@ -82,7 +82,7 @@ const BottomTab = () => {
       <TouchableOpacity
         delayPressIn={0}
         style={styles.bottomTabContainer}
-        onPress={() => navigation.navigate('KnowledgeCenter')}>
+        onPress={() => navigation.navigate('Contact')}>
         {renderKnowledge()}
       </TouchableOpacity>
 
@@ -90,7 +90,7 @@ const BottomTab = () => {
         delayPressIn={0}
         style={styles.bottomTabContainer}
         onPress={() => {
-          navigation.navigate('Trending');
+          navigation.navigate('KnowledgeCenter');
         }}>
         {renderTrending()}
       </TouchableOpacity>

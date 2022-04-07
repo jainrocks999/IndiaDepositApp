@@ -23,6 +23,7 @@ import * as RootNavigation from '../../../navigator/rootNavigation';
 import colors from '../../../component/colors';
 import axios from 'axios';
 import OptionsMenu from 'react-native-option-menu';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const Notification = () => {
   const navigation = useNavigation();
@@ -291,12 +292,11 @@ const manageNotification=async(item)=>{
               source={require('../../../assets/Image/search1.png')}
             />
             <TextInput
-              style={{marginLeft: 10}}
-              placeholder="Search Here"
+              placeholder="Search here"
               value={search}
               placeholderTextColor={colors.heading1}
               onChangeText={val => searchFilterFunction(val)}
-              style={{color: colors.textColor, width: '70%'}}
+              style={{color: colors.textColor, width: '70%',marginLeft: 10}}
               returnKeyType="done"
             />
           </View>
@@ -329,7 +329,9 @@ const manageNotification=async(item)=>{
         </View>
       ) : null}
       <StatusBar />
-      {/* <BottomTab/> */}
+      {/* <View style={{position:'absolute',bottom:0,left:0,right:0}}>
+      <BottomTab/>
+      </View> */}
     </View>
   );
 };

@@ -101,15 +101,15 @@ const RegisterPage = ({route}) => {
     } else if (mother_name == '' || mother_name == 0) {
       Toast.show('Please enter mother maiden name');
     } else if (address1 == 0 || address1 == '') {
-      Toast.show('Please enter address line1');
+      Toast.show('Please enter address line 1');
     } else if (address2 == 0 || address2 == '') {
-      Toast.show('Please enter address line2');
+      Toast.show('Please enter address line 2');
     } else if (occupation == 0 || occupation == '') {
       Toast.show('Please select occupation');
     } else if (income_group == '' || income_group == 0) {
-      Toast.show('Please select income group');
+      Toast.show('Please select monthly income');
     } else if (education == '' || education == 0) {
-      Toast.show('Please select education');
+      Toast.show('Please select highest qualification');
     } else if (marital_status == '' || marital_status == 0) {
       Toast.show('Please select marital status');
     } else {
@@ -386,7 +386,7 @@ const RegisterPage = ({route}) => {
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line1</Text>
+              <Text style={styles.better}>Address Line 1</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -396,11 +396,11 @@ const RegisterPage = ({route}) => {
                 value={address1 == 0 || address1 == null ? '' : address1}
                 onChangeText={val => setAddress1(val)}
                 editable={true}
-                placeholder="Please enter address line1"
+                placeholder="Please enter your address"
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Address Line2</Text>
+              <Text style={styles.better}>Address Line 2</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -410,7 +410,7 @@ const RegisterPage = ({route}) => {
                 value={address2 == 0 || address2 == null ? '' : address2}
                 onChangeText={val => setAddress2(val)}
                 editable={true}
-                placeholder="please enter address line2"
+                placeholder=""
               />
             </View>
             <View style={styles.row}>
@@ -533,7 +533,7 @@ const RegisterPage = ({route}) => {
             </View>
 
             <View style={styles.row}>
-              <Text style={styles.better}>Income Group</Text>
+              <Text style={styles.better}>Monthly Income</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -559,11 +559,11 @@ const RegisterPage = ({route}) => {
                   income_group == 0 || income_group == null ? '' : income_group
                 }
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select income group', value: 0}}
+                placeholder={{label: 'Select monthly income', value: 0}}
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Education</Text>
+              <Text style={styles.better}>Highest Qualification</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -587,7 +587,7 @@ const RegisterPage = ({route}) => {
                 }}
                 value={education == 0 || education == null ? '' : education}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{label: 'Select education', value: 0}}
+                placeholder={{label: 'Select Highest Qualification', value: 0}}
               />
             </View>
             <View style={styles.row}>

@@ -96,7 +96,8 @@ const Contact = () => {
           <View style={styles.view1}>
             <View style={styles.main}>
               <Text style={[styles.how, {marginTop: 15}]}>
-                How would you rate your experience with India Deposit app?
+                {/* How would you rate your experience with India Deposit app? */}
+                Rate your experience with IndiaDeposit
               </Text>
               <View style={styles.same}>
                 <View style={styles.font} />
@@ -121,7 +122,7 @@ const Contact = () => {
                        color: colors.textColor,
                       }}
                     onChangeText={val => setMsg1(val)}
-                    placeholder="Any Suggestion/Feedback"
+                    placeholder="Any suggestion/feedback"
                     multiline
                   />
                 </View>
@@ -151,7 +152,7 @@ const Contact = () => {
                       color: colors.textColor, 
                     }}
                     onChangeText={val => setMsg2(val)}
-                    placeholder="Any Suggestion/Feedback"
+                    placeholder="Any suggestion/feedback"
                     multiline
                   />
                 </View>
@@ -181,7 +182,7 @@ const Contact = () => {
                        color: colors.textColor,
                       }}
                     onChangeText={val => setMsg3(val)}
-                    placeholder="Any Suggestion/Feedback"
+                    placeholder="Any suggestion/feedback"
                     multiline
                   />
                 </View>
@@ -210,7 +211,7 @@ const Contact = () => {
                     style={{color: colors.textColor, 
                     }}
                     onChangeText={val => setMsg4(val)}
-                    placeholder="Any Suggestion/Feedback"
+                    placeholder="Any suggestion/feedback"
                     multiline
                   />
                 </View>
@@ -239,7 +240,7 @@ const Contact = () => {
                     style={{color: colors.textColor, 
                     }}
                     onChangeText={val => setMsg5(val)}
-                    placeholder="Any Suggestion/Feedback"
+                    placeholder="Any suggestion/feedback"
                     multiline
                   />
                 </View>
@@ -247,7 +248,7 @@ const Contact = () => {
                 <View />
               )}
               <Text style={styles.better}>
-                In case you have other suggestions / feedback, please provide
+                In case you have help us improve / feedback, please provide
               </Text>
               <View style={styles.view2}>
                 <View style={styles.inputs}>

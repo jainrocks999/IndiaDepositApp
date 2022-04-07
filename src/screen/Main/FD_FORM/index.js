@@ -292,7 +292,7 @@ const fd_form = ({route}) => {
               style={{
                 fontFamily: 'Montserrat-Regular',
                 fontSize: 15,
-              }}>{`We don't have any forms available for download.`}</Text>
+              }}>{`No forms available for download.`}</Text>
           </View>
         )}
 

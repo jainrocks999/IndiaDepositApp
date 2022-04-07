@@ -360,7 +360,7 @@ const showContent=()=>{
         <View style={styles.container}>
            <Header
             source={require('../../../assets/Image/arrow2.png')}
-           title={`My FD's`}
+           title={`My Investments`}
            onPress={()=>navigation.navigate('Main')}
            />
              {isFetching?<Loader/>:null} 
@@ -390,7 +390,7 @@ const showContent=()=>{
                 }}
                 value={bank_name}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{ label: 'Filter Here', value: '' }}
+                placeholder={{ label: 'Choose a filter', value: '' }}
                 Icon={()=>
                     <Image 
                     style={{
@@ -426,7 +426,7 @@ const showContent=()=>{
                 }}
                 value={sort}
                 useNativeAndroidPickerStyle={false}
-                placeholder={{ label: 'Filter Here', value: '' }}
+                placeholder={{ label: 'Choose a filter', value: '' }}
                 Icon={()=>
                     <Image 
                     style={{

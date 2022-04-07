@@ -78,7 +78,7 @@ const FDCalculator=()=>{
                                        placeholder:{fontSize:fontSize.twelve,color:colors.textColor} }}
                                        value={value}
                                        useNativeAndroidPickerStyle={false}
-                                       placeholder={{ label: "Month / Years", value: null }}
+                                       placeholder={{ label: "Month / years", value: null }}
                                         Icon={()=><Image style={styles.icon1} 
                                         source={require('../../../assets/Images/down.png')}/>}
                                     />

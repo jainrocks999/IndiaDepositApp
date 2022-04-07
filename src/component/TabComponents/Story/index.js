@@ -101,12 +101,11 @@ const Blog = () => {
             source={require('../../../assets/Image/search1.png')}
           />
           <TextInput
-            style={{marginLeft: 10}}
-            placeholder="Search Here"
+            placeholder="Search here"
             value={search}
             placeholderTextColor={colors.heading1}
             onChangeText={val => searchFilterFunction(val)}
-            style={{color: colors.textColor, width: '70%'}}
+            style={{color: colors.textColor, width: '70%',marginLeft: 10}}
             returnKeyType="done"
           />
         </View>
