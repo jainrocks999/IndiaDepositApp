@@ -25,7 +25,7 @@ import OtpInputs from 'react-native-otp-inputs';
 import fontSize from '../../../component/fontSize';
 
 const loginValidationSchema = yup.object().shape({
-  value: yup.string().required('Please enter your Email or Mobile number'),
+  value: yup.string().required('Please enter your email or mobile number'),
   pin: yup
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)

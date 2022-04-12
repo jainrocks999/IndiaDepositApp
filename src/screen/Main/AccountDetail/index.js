@@ -304,7 +304,7 @@ const FDList = ({route}) => {
           <View style={styles.top}>
             <View>
               <Text style={styles.tds}>
-                {'TDS applicable with info of 15 G option :'}
+                {'Is TDS Applicable? :'}
               </Text>
               <HTMLView
                 value={details.tds_info.trim().replace(/\s+/g, ' ')}
@@ -318,7 +318,7 @@ const FDList = ({route}) => {
         ) : (
           <View style={styles.top}>
             <View>
-              <Text style={styles.tds}>{'Salient feature :'}</Text>
+              <Text style={styles.tds}>{'Salient Features :'}</Text>
               <HTMLView
                 value={details.salient_feature.trim().replace(/\s+/g, ' ')}
                 addLineBreaks={false}

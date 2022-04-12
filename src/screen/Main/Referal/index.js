@@ -79,7 +79,7 @@ const Refferal = () => {
     <View style={styles.container}>
       <Header
         source={require('../../../assets/Image/arrow2.png')}
-        title={'Refer IndiaDeposit'}
+        title={'Tell Your Friends About Us'}
         onPress={() => navigation.goBack()}
       />
       <View style={styles.pfile}>

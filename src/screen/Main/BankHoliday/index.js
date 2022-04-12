@@ -350,7 +350,7 @@ const Holiday = () => {
                   fontFamily: 'Montserrat-Regular',
                   color: colors.textColor,
                   textAlign: 'center',
-                }}>{`We don't have any bank listed on this pincode try another nearest pincode`}</Text>
+                }}>{`No banks found. Kindly change pincode`}</Text>
             </View>
           ) : null}
         </View>

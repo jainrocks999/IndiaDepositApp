@@ -376,7 +376,7 @@ console.log('this is route data',route.params);
             />
           </TouchableOpacity>
           <View style={styles.views}>
-            <Text style={styles.texts}>{'FD LISTING'} </Text>
+            <Text style={styles.texts}>{'List of FDs'} </Text>
           </View>
           <View></View>
         </View>
@@ -799,7 +799,7 @@ console.log('this is route data',route.params);
               // flexDirection: 'row',
               // alignItems: 'center',
               height: 38,
-              width:'33%'
+              width:'36%'
             }}>
             <RNPickerSelect
               onValueChange={val => handleSorting(val)}
@@ -895,10 +895,8 @@ const SBType = [
 ];
 const Sorting = [
   {label:'Online', value:'online'},
-
-  {label: 'Interest Rate', value: 'interest_rate'},
-  // {label: 'Minimum investment', value: 'mab'},
-  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Rate of Return', value: 'interest_rate'},
+  {label: 'Credit Rating', value: 'credit_rating'},
   {label: 'Name', value: 'alphabet'},
 ];
 const days = [

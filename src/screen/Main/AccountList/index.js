@@ -383,7 +383,7 @@ const SBAccountList = ({route}) => {
             />
           </TouchableOpacity>
           <View style={styles.views}>
-            <Text style={styles.texts}>{'SB A/C LISTING'} </Text>
+            <Text style={styles.texts}>{'List of SB A/C'} </Text>
           </View>
           <View></View>
         </View>
@@ -705,7 +705,7 @@ const SBAccountList = ({route}) => {
               // flexDirection: 'row',
               // alignItems: 'center',
               height: 38,
-              width:'33%'
+              width:'36%'
             }}>
             <RNPickerSelect
               onValueChange={val => manageFilter(val)}
@@ -795,9 +795,8 @@ const SBAccountList = ({route}) => {
 };
 export default SBAccountList;
 const Sorting = [
-  {label: 'Interest Rate', value: 'interest_rate'},
-  // {label: 'MAB', value: 'mab'},
-  {label: 'Credit rating', value: 'credit_rating'},
+  {label: 'Rate of Return', value: 'interest_rate'},
+  {label: 'Credit Rating', value: 'credit_rating'},
   {label: 'Name', value: 'alphabet'},
 ];
 const item = [

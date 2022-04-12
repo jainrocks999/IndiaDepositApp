@@ -28,7 +28,7 @@ const BankCalu = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
-  console.log('this is route.params',selectedItems,route.params.fd_from);
+  console.log('this is route.params',selectedItems[1]);
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
   const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
@@ -157,11 +157,13 @@ const BankCalu = ({route}) => {
                   styles.text,
                   {color: colors.textColor},
                 ]}>{`${item.duration} Year`}</Text>
-              <Text style={[styles.text, {color: colors.textColor}]}>{`${(
-                (
-                  Math.pow(1 + item.rate / 100 / frequency, frequency) - 1
-                ).toFixed(3) * 100
-              ).toFixed(2)}% p.a`}</Text>
+              {/* {renderInterest(item)} */}
+                    <Text style={[styles.text, {color: colors.textColor}]}>{`${(
+                      (
+                        ((parseFloat((parseFloat(amount*Math.pow(1+(item.rate/(100*12)),(frequency))).toFixed(2)-amount)*(1*item.duration*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/item.duration/amount)*100
+                      )
+                    ).toFixed(2)}% p.a`}
+                    </Text>
             </TouchableOpacity>
             {selected && (
               <View style={styles.enable}>
@@ -175,11 +177,18 @@ const BankCalu = ({route}) => {
                         styles.text,
                         {color: colors.white},
                       ]}>{`${item.duration} Year`}</Text>
-                    <Text style={[styles.text, {color: colors.white}]}>{`${(
+                       {/* <Text style={[styles.text, {color: colors.textColor}]}>{`${(
+                (
+                  (value1 == 'NaN' || value1 == 'undefined' ? 0 : value1/item.duration/amount)*100
+                )
+            
+              ).toFixed(2)}% p.a`}</Text> */}
+              <Text style={[styles.text, {color: colors.white}]}>{`${(
                       (
-                        Math.pow(1 + item.rate / 100 / frequency, frequency) - 1
-                      ).toFixed(3) * 100
-                    ).toFixed(2)}% p.a`}</Text>
+                        ((parseFloat((parseFloat(amount*Math.pow(1+(item.rate/(100*12)),(frequency)))-amount)*(1*item.duration*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/item.duration/amount)*100
+                      )
+                    ).toFixed(2)}% p.a`}
+                    </Text>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -205,10 +214,8 @@ const BankCalu = ({route}) => {
       setSelectedItems([
         item.duration,
         (
-          (Math.pow(1 + item.rate / 100 / frequency, frequency) - 1).toFixed(
-            3,
-          ) * 100
-        ).toFixed(2),
+          ((parseFloat((parseFloat(amount*Math.pow(1+(item.rate/(100*12)),(frequency)))-amount)*(1*item.duration*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/item.duration/amount)*100
+      ).toFixed(2),
         item.fixed_deposit_id,
       ]);
     }
@@ -251,6 +258,7 @@ const BankCalu = ({route}) => {
       );
     }
   };
+
   return (
     <View style={styles.container1}>
       <View style={styles.container}>

@@ -55,7 +55,9 @@ if (f==0) {
   interestAmount=parseFloat((maturityAmount1-totalInvestment)*(1*time*(f==12?1:f==6?2:f==3?4:12)/period)).toFixed(2)
   maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))
 }
-  let effective=(interestAmount*period/time/10).toFixed(2)
+  // let effective=(interestAmount*period/time/10).toFixed(2)
+  let effective=(100*interestAmount/time/totalInvestment*period).toFixed(2)
+  console.log('this is interest amount guven by',interestAmount);
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
 
   const principalOnchange=(val)=>{
