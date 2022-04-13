@@ -15,6 +15,7 @@ import {useSelector} from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import axios from 'axios';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const FDList = ({route}) => {
   const navigation = useNavigation();
@@ -372,6 +373,7 @@ const FDList = ({route}) => {
           </TouchableOpacity>
         </View>
       </View>
+     
       <StatusBar />
     </View>
   );

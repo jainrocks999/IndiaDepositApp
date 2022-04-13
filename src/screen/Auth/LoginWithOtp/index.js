@@ -24,7 +24,7 @@ import Storage from '../../../component/AsyncStorage';
 const loginValidationSchema = yup.object().shape({
   mobile: yup
     .string()
-    .min(10, ({}) => 'Mobile number must be 10 digit number')
+    .min(10, ({}) => 'Please enter 10 digit mobile number')
     .required('Please enter your mobile number')
     .matches(/^[0]?[6-9]\d{9}$/, 'Please enter valid mobile number'),
 });

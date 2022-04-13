@@ -21,6 +21,7 @@ import axios from 'axios';
 import Loader from '../../../../component/loader';
 import DocumentPicker from 'react-native-document-picker';
 import Toast from 'react-native-simple-toast';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const loginValidationSchema = yup.object().shape({
   transaction_id: yup.string(),
@@ -319,6 +320,9 @@ const Payment = ({route}) => {
             </View>
           </View>
           <StatusBar />
+          {/* <View>
+        <BottomTab/>
+      </View> */}
         </View>
       )}
     </Formik>

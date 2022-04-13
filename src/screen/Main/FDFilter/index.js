@@ -169,8 +169,7 @@ useEffect(()=>{
                                 submitButtonColor={colors.bc}
                                 submitButtonText="Submit"
                                 textInputProps={{ editable: false,autoFocus:false }}
-                                searchInputPlaceholderText=""
-                                searchIcon={false}
+                
                                 styleDropdownMenu={{
                                     width:'100%',
                                     borderBottomWidth:1.5,
@@ -208,8 +207,7 @@ useEffect(()=>{
                                 submitButtonColor={colors.bc}
                                 submitButtonText="Submit"
                                 textInputProps={{ editable: false,autoFocus:false }}
-                                searchInputPlaceholderText=""
-                                searchIcon={false}
+                                
                                 styleDropdownMenu={{
                                     width:'100%',
                                     borderBottomWidth:1.5,
@@ -245,8 +243,8 @@ useEffect(()=>{
                                 submitButtonColor={colors.bc}
                                 submitButtonText="Submit"
                                 textInputProps={{ editable: false,autoFocus:false }}
-                                searchInputPlaceholderText=""
-                                searchIcon={false}
+                               
+                               
                                 styleDropdownMenu={{
                                     width:'100%',
                                     borderBottomWidth:1.5,

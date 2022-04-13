@@ -21,6 +21,7 @@ import DatePicker from 'react-native-date-picker';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 let value = '';
 class UserSelection extends React.Component {
@@ -214,7 +215,7 @@ class UserSelection extends React.Component {
         <View
           style={{
             position: 'absolute',
-            bottom: 20,
+            bottom: 70,
             left: 0,
             right: 0,
             flex: 1,
@@ -236,6 +237,9 @@ class UserSelection extends React.Component {
             <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
           </TouchableOpacity>
         </View>
+        <View>
+              <BottomTab/>
+            </View>
 
         {/* Blow for add family popup */}
 
@@ -410,9 +414,12 @@ class UserSelection extends React.Component {
                   />
                 </View>
               </View>
+             
             </ScrollView>
+            
           </DialogContent>
         </Dialog>
+      
       </View>
     );
   }

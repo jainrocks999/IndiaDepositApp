@@ -19,6 +19,7 @@ import * as RootNavigation from '../../../navigator/rootNavigation';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import Loader from '../../../component/loader';
+import BottomTab from "../../../component/StoreButtomTab";
 
 const renderScene = SceneMap({
   first: Profile,
@@ -262,6 +263,9 @@ const ProfileScreen = () => {
         </View>
       </ScrollView>
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

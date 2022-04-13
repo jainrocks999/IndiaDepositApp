@@ -27,6 +27,7 @@ import Loader from '../../../../component/loader';
 import axios from 'axios';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import BottomTab from "../../../../component/StoreButtomTab";
 
 const loginValidationSchema = yup.object().shape({
   name: yup
@@ -959,7 +960,9 @@ const RegisterPage = ({route}) => {
               </View>
             </KeyboardAwareScrollView>
           </ScrollView>
-
+          <View>
+        <BottomTab/>
+      </View>
           <StatusBar />
         </View>
       )}

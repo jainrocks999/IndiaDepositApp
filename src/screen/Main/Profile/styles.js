@@ -24,7 +24,9 @@ export default StyleSheet.create({
         // paddingVertical:20,
         marginTop:20,
         
-         height:'100%'
+         height:'94%',
+         borderBottomRightRadius:10,
+         borderBottomLeftRadius:10
     }, 
     view1:
     {

@@ -18,6 +18,7 @@ import Loader from '../../../../component/loader';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import RNPickerSelect from 'react-native-picker-select';
+import BottomTab from "../../../../component/StoreButtomTab";
 
 const BankCalu = ({route}) => {
   console.log('this is route .',route.params.fixed_deposit_id);
@@ -462,6 +463,9 @@ const BankCalu = ({route}) => {
           </View>
         </View>
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
       <StatusBar />
     </View>
   );

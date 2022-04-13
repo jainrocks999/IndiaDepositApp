@@ -16,6 +16,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
 import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
+
+
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 const FDList=({route})=>{
         const navigation=useNavigation()
@@ -575,7 +578,9 @@ const renderItem=(item)=>{
               </View>
          
           <StatusBar/>
-         
+          <View>
+        <BottomTab/>
+      </View>
        </View>
     )
 }
@@ -588,11 +593,12 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting = [
-  {label:'Online', value:'online'},
+  // {label:'Online', value:'online'},
+  {label: 'Name', value: 'alphabet'},
   {label: 'Rate of Return', value: 'interest_rate'},
   // {label: 'Minimum investment', value: 'mab'},
   {label: 'Credit Rating', value: 'credit_rating'},
-  {label: 'Name', value: 'alphabet'},
+ 
 
 ];
 const days=[

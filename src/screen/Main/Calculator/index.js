@@ -8,6 +8,7 @@ import colors from '../../../component/colors';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import FD from '../../../component/TabComponents/FD';
 import SIP from '../../../component/TabComponents/SP';
+import BottomTab from "../../../component/StoreButtomTab";
 
 const renderScene = SceneMap({
   first: SIP,
@@ -72,6 +73,9 @@ const Calculator = () => {
         />
       </View>
       <StatusBar />
+      <View style={{bottom:0,position:'absolute',left:0,right:0}}>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

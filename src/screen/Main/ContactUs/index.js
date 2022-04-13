@@ -22,6 +22,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
+import BottomTab from "../../../component/StoreButtomTab";
+
+
 const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
@@ -242,7 +245,7 @@ const Contact = ({route}) => {
               </View>
               <View style={styles.line}></View>
               <View style={styles.main}>
-                <Text style={styles.toll}>WRITE US ON EMAIL</Text>
+                <Text style={styles.toll}>Write to us</Text>
                 <View style={{ borderBottomWidth: 1, borderBottomColor: colors.bc, alignSelf: 'flex-start', }}>
                   <Text
                     onPress={() => Linking.openURL(`mailto:${detail.email}`)}
@@ -352,6 +355,9 @@ const Contact = ({route}) => {
             </View>
           </ScrollView>
           <StatusBar />
+          <View>
+        <BottomTab/>
+      </View>
         </View>
       )}
     </Formik>

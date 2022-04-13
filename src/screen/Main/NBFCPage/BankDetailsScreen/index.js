@@ -21,6 +21,7 @@ import Loader from '../../../../component/loader';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import Constants from '../../../../component/Constants';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const RegisterPage = ({route}) => {
   const navigation = useNavigation();
@@ -182,6 +183,9 @@ const RegisterPage = ({route}) => {
         </View>
       </ScrollView>
       <StatusBar />
+      {/* <View>
+        <BottomTab/>
+      </View> */}
     </View>
   );
 };

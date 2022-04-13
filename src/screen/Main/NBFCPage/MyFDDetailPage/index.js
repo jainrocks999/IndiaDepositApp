@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 import styles from './styles';
 import CustomButton from '../../../../component/button1';
 import Constants from '../../../../component/Constants';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const MyFDDetail = () => {
   const navigation = useNavigation();
@@ -332,6 +333,10 @@ const MyFDDetail = () => {
       ) : (
         <View />
       )}
+
+       {/* <View>
+        <BottomTab/>
+      </View> */}
     </View>
   );
 };

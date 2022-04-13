@@ -336,6 +336,7 @@ if (f==0) {
                 </View>
                 </View>
               </ScrollView>
+             
        </View>
     )
 }

@@ -15,6 +15,7 @@ import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import Constants from '../../../component/Constants';
+import BottomTab from "../../../component/StoreButtomTab";
 
 const Notification=()=>{
     const navigation=useNavigation()
@@ -266,7 +267,7 @@ const fd_status=(item)=>{
 const showContent=()=>{
     if (fdData.length>0) {
         return(
-            <SafeAreaView style={{marginBottom:60}}>
+            <SafeAreaView style={{marginBottom:80}}>
             <FlatList
               showsVerticalScrollIndicator={false}
               data={fdData}
@@ -287,7 +288,7 @@ const showContent=()=>{
                         style={{width:'40%',height:47,marginLeft:15}} 
                         resizeMode='contain'
                         source={require('../../../assets/Image/indiaIcon.png')}/>}
-                        <TouchableOpacity delayPressIn={0} 
+                       {item.fd_status? <TouchableOpacity delayPressIn={0} 
                         style={{
                            paddingHorizontal:8,
                            alignItems:'center',
@@ -297,11 +298,11 @@ const showContent=()=>{
                            borderBottomLeftRadius:10,
                            borderTopLeftRadius:10
                            }}>
-                               {/* {fd_status(item)} */}
                            <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.white}}>
+                              
                              {item.fd_status==0?'Draft':item.fd_status==1?'Active':item.fd_status==4?'Redeem Req':item.fd_status==3?'In-Process':item.fd_status==2?'Redeemed':''}
                                </Text>  
-                       </TouchableOpacity>
+                       </TouchableOpacity>:null}
                        </View>
                          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,paddingHorizontal:15}}>
 
@@ -444,6 +445,9 @@ const showContent=()=>{
                 {fdData.length>0? showContent():null}
              </View>
              </View>
+             <View>
+        <BottomTab/>
+      </View>
            <StatusBar/>
        </View>
     )

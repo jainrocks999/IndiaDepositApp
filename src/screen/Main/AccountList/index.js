@@ -27,6 +27,9 @@ import MultiSelect from 'react-native-multiple-select';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
+
+
 Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 const SBAccountList = ({route}) => {
@@ -790,14 +793,18 @@ const SBAccountList = ({route}) => {
       </View>
 
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };
 export default SBAccountList;
 const Sorting = [
+  {label: 'Name', value: 'alphabet'},
   {label: 'Rate of Return', value: 'interest_rate'},
   {label: 'Credit Rating', value: 'credit_rating'},
-  {label: 'Name', value: 'alphabet'},
+
 ];
 const item = [
   {

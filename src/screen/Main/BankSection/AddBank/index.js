@@ -15,6 +15,8 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import * as Root from '../../../../navigator/rootNavigation';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import BottomTab from '../../../../component/StoreButtomTab';
+
 
 const loginValidationSchema=yup.object().shape({
     account_number:yup.string().
@@ -201,7 +203,9 @@ const addUser=async(values)=>{
                 </KeyboardAwareScrollView>
            </ScrollView>
           <StatusBar/>
-         
+          <View>
+        <BottomTab/>
+      </View>
        </View>
         )}
         </Formik>

@@ -22,6 +22,8 @@ import DatePicker from 'react-native-date-picker';
 import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
+import BottomTab from '../../../../component/StoreButtomTab';
+
 let value = '';
 class SecondaryUser extends React.Component {
   constructor(props) {
@@ -379,7 +381,7 @@ class SecondaryUser extends React.Component {
         <View
           style={{
             position: 'absolute',
-            bottom: 20,
+            bottom: 70,
             left: 0,
             right: 0,
             flex: 1,
@@ -424,6 +426,9 @@ class SecondaryUser extends React.Component {
             </TouchableOpacity>
           )}
         </View>
+        <View>
+        <BottomTab/>
+      </View>
         <Dialog
           dialogStyle={{
             width: '98%',
@@ -612,6 +617,7 @@ class SecondaryUser extends React.Component {
             </ScrollView>
           </DialogContent>
         </Dialog>
+       
       </View>
     );
   }

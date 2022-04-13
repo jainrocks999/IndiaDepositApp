@@ -17,6 +17,7 @@ import * as yup from 'yup';
 import fontSize from '../../../component/fontSize';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../component/loader';
+import BottomTab from '../../../component/StoreButtomTab';
 
 
 const loginValidationSchema=yup.object().shape({
@@ -232,6 +233,9 @@ const Supports=({route})=>{
                        />
                   </View>
                   <StatusBar/>
+                  <View style={{position:'absolute',bottom:0,left:0,right:0}}>
+                    <BottomTab/>
+                  </View>
             </View>
           )
 }

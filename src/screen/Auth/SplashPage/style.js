@@ -73,10 +73,10 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   view4: {
-    flexDirection: 'row',
+  
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 80,
+    justifyContent: 'center',
+  
   },
   view5: {
     flexDirection: 'row',

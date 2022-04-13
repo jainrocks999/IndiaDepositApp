@@ -304,7 +304,7 @@ const SBAccount = ({route}) => {
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>
-      {/* <BottomTab/> */}
+      <BottomTab/>
       <StatusBar />
     </View>
   );

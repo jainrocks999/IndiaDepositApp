@@ -4,7 +4,9 @@ import fontSize from '../../fontSize';
 export default StyleSheet.create({
     container:{
         flex: 1,
-        backgroundColor:colors.white
+        backgroundColor:colors.white,
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10
     },
     card:{
         shadowColor:colors.black,

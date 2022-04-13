@@ -19,6 +19,7 @@ import Storage from '../../../component/AsyncStorage';
 import colors from '../../../component/colors';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-simple-toast';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const Refferal = () => {
   const navigation = useNavigation();
@@ -157,6 +158,9 @@ const Refferal = () => {
         </View>
       </ScrollView>
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

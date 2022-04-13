@@ -17,6 +17,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import RNFetchBlob from 'rn-fetch-blob';
 import Loader from '../../../component/loader';
 import {LayoutAnimation} from 'react-native';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const fd_form = ({route}) => {
   const navigation = useNavigation();
@@ -323,6 +324,9 @@ const fd_form = ({route}) => {
           )}
         </View>
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

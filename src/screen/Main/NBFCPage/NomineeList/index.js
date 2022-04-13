@@ -23,6 +23,7 @@ import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../../component/loader';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -289,7 +290,7 @@ const MyFDDetail = ({route}) => {
       <View
         style={{
           position: 'absolute',
-          bottom: 20,
+          bottom: 70,
           left: 0,
           right: 0,
           flex: 1,
@@ -570,6 +571,9 @@ const MyFDDetail = ({route}) => {
           </ScrollView>
         </DialogContent>
       </Dialog>
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };
