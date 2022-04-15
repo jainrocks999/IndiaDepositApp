@@ -273,8 +273,8 @@ const showContent=()=>{
               data={fdData}
               renderItem={({item})=>
               <View>
-               <View style={styles.view1}>
-                   <TouchableOpacity delayPressIn={0} 
+               {item.fd_status==5?<View/>:<View style={styles.view1}>
+                  <TouchableOpacity delayPressIn={0} 
                    onPress={()=>handleClick(item)}
                    style={styles.card}>
                        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
@@ -288,7 +288,7 @@ const showContent=()=>{
                         style={{width:'40%',height:47,marginLeft:15}} 
                         resizeMode='contain'
                         source={require('../../../assets/Image/indiaIcon.png')}/>}
-                       {item.fd_status? <TouchableOpacity delayPressIn={0} 
+                      <TouchableOpacity delayPressIn={0} 
                         style={{
                            paddingHorizontal:8,
                            alignItems:'center',
@@ -302,7 +302,7 @@ const showContent=()=>{
                               
                              {item.fd_status==0?'Draft':item.fd_status==1?'Active':item.fd_status==4?'Redeem Req':item.fd_status==3?'In-Process':item.fd_status==2?'Redeemed':''}
                                </Text>  
-                       </TouchableOpacity>:null}
+                       </TouchableOpacity>
                        </View>
                          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,paddingHorizontal:15}}>
 
@@ -346,7 +346,7 @@ const showContent=()=>{
                             </View>
                       
                    </TouchableOpacity>
-               </View>
+               </View>}
               </View>
               }
               /> 

@@ -19,7 +19,6 @@ import Storage from '../../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import RNPickerSelect from 'react-native-picker-select';
 import BottomTab from "../../../../component/StoreButtomTab";
-
 const BankCalu = ({route}) => {
   console.log('this is route .',route.params.fixed_deposit_id);
   const navigation = useNavigation();
@@ -423,9 +422,16 @@ const BankCalu = ({route}) => {
 
                 <View style={{alignItems: 'center'}}>
                   <Text style={styles.maturity}>{'Interest Rate'}</Text>
-                  <Text style={styles.amount}>{`${parseFloat(
+                 {frequency? <Text style={styles.amount}>
+                 {`${(
+                      (
+                        ((parseFloat((parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/selectedItems[0]/amount)*100
+                      )
+                    ).toFixed(2)}% p.a`}
+                 </Text>
+                  :<Text style={styles.amount}>{`${parseFloat(
                     selectedItems[1],
-                  ).toFixed(2)} % p.a`}</Text>
+                  ).toFixed(2)} % p.a`}</Text>}
                 </View>
               </View>
               <View style={styles.mContainer}>

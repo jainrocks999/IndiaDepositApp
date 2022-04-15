@@ -189,7 +189,6 @@ const Upload = ({route}) => {
     const fd_user_id = await AsyncStorage.getItem('fd_user_id');
     const fd_user_id1 = await AsyncStorage.getItem('fd_user_id1');
     const fd_user_id2 = await AsyncStorage.getItem('fd_user_id2');
-    console.log('this is user id number', fd_user_id, fd_user_id1, fd_user_id2,route.params);
     try {
       setIsFetching(true);
       const data = new FormData();
@@ -251,7 +250,7 @@ const Upload = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/addmyfd',
       });
-      console.log('this is response',response.data);
+      console.log('this is response of big size',response);
       if (response.data.status == 200) {
         AsyncStorage.setItem('fd_user_id', '');
         setIsFetching(false);
