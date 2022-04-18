@@ -13,6 +13,7 @@ import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../../component/AsyncStorage';
 import Constants from '../../../../component/Constants';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -342,6 +343,7 @@ const MyFDDetail = ({route}) => {
             onPress={() => manageUser()}
           />
         </View>
+        
       </View>
     );
   } else {

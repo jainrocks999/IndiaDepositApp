@@ -16,6 +16,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
 import Constants from '../../../../component/Constants';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -354,6 +355,9 @@ const MyFDDetail = ({route}) => {
           </ScrollView>
         </DialogContent>
       </Dialog>
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

@@ -14,6 +14,7 @@ import CustomButton from '../../../../component/button1';
 import Loader from '../../../../component/loader';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import ImagePicker from 'react-native-image-crop-picker';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const Upload = ({route}) => {
   const [pan, setPan] = useState('');
@@ -625,6 +626,9 @@ const Upload = ({route}) => {
           ]}>
           <Text style={{color: colors.white}}>{'SUBMIT'}</Text>
         </TouchableOpacity>
+      </View>
+      <View style={{bottom:0,left:0,position:'absolute',right:0}}>
+        <BottomTab/>
       </View>
     </View>
   );

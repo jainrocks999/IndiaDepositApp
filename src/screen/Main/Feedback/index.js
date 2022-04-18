@@ -13,6 +13,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
 import {useDispatch, useSelector} from 'react-redux';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const Contact = () => {
   const navigation = useNavigation();
@@ -248,7 +249,7 @@ const Contact = () => {
                 <View />
               )}
               <Text style={styles.better}>
-                In case you have help us improve / feedback, please provide
+                Help us become better
               </Text>
               <View style={styles.view2}>
                 <View style={styles.inputs}>
@@ -290,6 +291,9 @@ const Contact = () => {
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
       <StatusBar />
     </View>
   );

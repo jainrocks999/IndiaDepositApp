@@ -6,6 +6,7 @@ import { FlatList } from "react-native-gesture-handler";
 import StatusBar from '../../../component/StatusBar';
 import styles from './styles';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const BankCalu=({route})=>{
     const navigation = useNavigation()
@@ -83,7 +84,7 @@ return(
                 value={data1.principal}
                 placeholderTextColor={colors.heading1}
                 keyboardType='number-pad'
-                style={{color:colors.textColor,width:'80%'}}
+                // style={{color:colors.textColor,width:'80%'}}
               />
                <View style={{ marginHorizontal:5,marginLeft:5,borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android'?-8:6}}/>
                       
@@ -106,7 +107,7 @@ return(
                        value={selectedItems[0]}
                        placeholderTextColor={colors.heading1}
                        onChangeText={selectedItems[0]}
-                       style={{color:colors.textColor,width:'90%'}}
+                      //  style={{color:colors.textColor,width:'90%'}}
                    />
                 </View>
                  <Pressable onPress={deSelectItems}  
@@ -127,7 +128,10 @@ return(
                   </Pressable >
         </View> 
    </ScrollView>
-     <StatusBar/>       
+     <StatusBar/> 
+     <View>
+        <BottomTab/>
+      </View>      
   </View>
 )
 }

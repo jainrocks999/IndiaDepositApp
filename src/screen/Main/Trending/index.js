@@ -10,6 +10,7 @@ import { useDispatch,useSelector } from "react-redux";
 import HTMLView from 'react-native-htmlview';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
+// import BottomTab from "../../../component/StoreButtomTab";
 
 const Trending=()=>{
      const navigation=useNavigation()
@@ -72,7 +73,7 @@ const showContent=()=>{
              </ScrollView>
              <StatusBar/>
              <View style={styles.buttomview}>
-               {/* <BottomTab/> */}
+               <BottomTab/>
              </View>
         </View>
    )

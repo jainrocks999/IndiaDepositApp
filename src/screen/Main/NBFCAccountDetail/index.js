@@ -12,6 +12,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import Storage from '../../../component/AsyncStorage';
 import Constants from '../../../component/Constants';
 import Toast from 'react-native-simple-toast';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const FDDetail=({route})=>{
 const navigation=useNavigation()
@@ -329,6 +330,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                          }
                      </View>
            </View>
+           
      </View>
        
     )

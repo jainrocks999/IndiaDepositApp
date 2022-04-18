@@ -22,9 +22,11 @@ import RNPickerSelect from 'react-native-picker-select';
 import Toast from 'react-native-simple-toast';
 import axios from 'axios';
 import DatePicker from 'react-native-date-picker';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 
 const RegisterPage = ({route}) => {
+  console.log('this is user detail in this type',route.params.my_fixed_deposit_id);
   const navigation = useNavigation('');
   const dispatch = useDispatch();
   const isFetching = useSelector(state => state.isFetching);
@@ -659,6 +661,9 @@ const RegisterPage = ({route}) => {
           </View>
         </KeyboardAwareScrollView>
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
       <StatusBar />
     </View>
   );

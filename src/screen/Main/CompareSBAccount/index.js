@@ -17,6 +17,7 @@ import Constants from '../../../component/Constants';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import Loader from '../../../component/loader';
+import BottomTab from '../../../component/StoreButtomTab';
 
 
 const FDList = ({route}) => {
@@ -407,6 +408,9 @@ const openAccount1=async()=>{
         <View></View>
       </ScrollView>
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

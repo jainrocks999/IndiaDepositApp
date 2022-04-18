@@ -17,6 +17,7 @@ import Storage from '../../../../component/AsyncStorage';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import axios from 'axios';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const loginValidationSchema=yup.object().shape({
    name:yup.string().max(40,({max})=>`Name must be maximum ${max} character`)
@@ -793,7 +794,9 @@ const RegisterPage=({route})=>{
                     </View>
                     </KeyboardAwareScrollView>
                     </ScrollView>
-                  
+                    <View>
+                     <BottomTab/>
+                     </View>
                  <StatusBar/>
              </View>
                 )}

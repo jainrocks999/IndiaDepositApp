@@ -16,6 +16,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
 import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
+
+
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 const FDList=({route})=>{
         const navigation=useNavigation()
@@ -255,7 +258,7 @@ const renderItem=(item)=>{
             <Image style={{height:35,width:35,tintColor:colors.white}}  source={require('../../../assets/Image/arrow2.png')}/>
             </TouchableOpacity>
             <View style={styles.views}>
-            <Text style={styles.texts}>{'NBFC FD LISTING'} </Text>
+            <Text style={styles.texts}>{'List of NBFC FDs'} </Text>
             </View>
             <View></View>
            </View>
@@ -516,7 +519,7 @@ const renderItem=(item)=>{
                     //  flexDirection:'row',
                     //  alignItems:'center',
                      height:38,
-                     width:'33%'
+                     width:'36%'
                    }}>
                       <RNPickerSelect
                           onValueChange={(val)=>handleSorting(val)}
@@ -567,16 +570,17 @@ const renderItem=(item)=>{
                    <Text 
                    style={{
                    fontSize:15,
-                   fontFamily:'Montserrat-Regular'
-                   }}>We don't have any Financial Institute listed on this pincode tenure and amount</Text>
+                   fontFamily:'Montserrat-Regular',
+                   textAlign:'center'
+                   }}>No financial institute found. Kindly change pincode</Text>
                  </View>
                    }
-                 
-              
               </View>
          
           <StatusBar/>
-         
+          <View>
+        <BottomTab/>
+      </View>
        </View>
     )
 }
@@ -589,11 +593,12 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting = [
-  {label:'Online', value:'online'},
+  // {label:'Online', value:'online'},
+  {label: 'Name', value: 'alphabet'},
   {label: 'Rate of Return', value: 'interest_rate'},
   // {label: 'Minimum investment', value: 'mab'},
   {label: 'Credit Rating', value: 'credit_rating'},
-  {label: 'Name', value: 'alphabet'},
+ 
 
 ];
 const days=[

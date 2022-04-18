@@ -12,6 +12,7 @@ import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import Loader from '../../../../component/loader';
 import ImagePicker from 'react-native-image-crop-picker';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const Upload = ({route}) => {
   const [pan, setPan] = useState('');
@@ -605,6 +606,9 @@ const Upload = ({route}) => {
           ]}>
           <Text style={{color: colors.white}}>{'SUBMIT'}</Text>
         </TouchableOpacity>
+      </View>
+      <View>
+        <BottomTab/>
       </View>
     </View>
   );

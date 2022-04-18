@@ -19,7 +19,9 @@ export default StyleSheet.create({
         marginHorizontal:15,
         // paddingVertical:20,
         marginTop:20,
-        height:'100%'
+        height:'76%',
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10
     }, 
     title:{
       fontSize:fontSize.eleven,
@@ -28,7 +30,9 @@ export default StyleSheet.create({
     container1:{
         flex: 1,
         backgroundColor:colors.white,
-        padding:15
+        padding:15,
+        borderBottomRightRadius:10,
+        borderBottomLeftRadius:10
     },
     card1:{
         shadowColor:colors.black,

@@ -108,7 +108,7 @@ const RegisterPage = () => {
     let token = await AsyncStorage.getItem(Storage.token);
     console.log('testing', device_type, token);
     if (toggleCheckBox == false) {
-      Toast.show('Please accept terms & condition');
+      Toast.show('Please accept Terms & Conditions');
     } else {
       console.log('this is referal', referal);
       dispatch({

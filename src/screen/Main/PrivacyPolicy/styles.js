@@ -22,7 +22,9 @@ export default StyleSheet.create({
         backgroundColor:colors.white,
         marginHorizontal:15,
         marginTop:20,
-        height:'100%'
+        height:'94%',
+        marginBottom:450,
+        borderBottomLeftRadius:10,borderBottomRightRadius:10
     }, 
     main:
     {

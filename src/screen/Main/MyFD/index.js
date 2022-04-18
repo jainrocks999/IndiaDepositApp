@@ -15,6 +15,7 @@ import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from "axios";
 import Constants from '../../../component/Constants';
+import BottomTab from "../../../component/StoreButtomTab";
 
 const Notification=()=>{
     const navigation=useNavigation()
@@ -266,14 +267,14 @@ const fd_status=(item)=>{
 const showContent=()=>{
     if (fdData.length>0) {
         return(
-            <SafeAreaView style={{marginBottom:60}}>
+            <SafeAreaView style={{marginBottom:80}}>
             <FlatList
               showsVerticalScrollIndicator={false}
               data={fdData}
               renderItem={({item})=>
               <View>
-               <View style={styles.view1}>
-                   <TouchableOpacity delayPressIn={0} 
+               {item.fd_status==5?<View/>:<View style={styles.view1}>
+                  <TouchableOpacity delayPressIn={0} 
                    onPress={()=>handleClick(item)}
                    style={styles.card}>
                        <View style={{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}}>
@@ -287,7 +288,7 @@ const showContent=()=>{
                         style={{width:'40%',height:47,marginLeft:15}} 
                         resizeMode='contain'
                         source={require('../../../assets/Image/indiaIcon.png')}/>}
-                        <TouchableOpacity delayPressIn={0} 
+                      <TouchableOpacity delayPressIn={0} 
                         style={{
                            paddingHorizontal:8,
                            alignItems:'center',
@@ -297,8 +298,8 @@ const showContent=()=>{
                            borderBottomLeftRadius:10,
                            borderTopLeftRadius:10
                            }}>
-                               {/* {fd_status(item)} */}
                            <Text style={{fontFamily:'Montserrat-Regular',fontSize:12,color:colors.white}}>
+                              
                              {item.fd_status==0?'Draft':item.fd_status==1?'Active':item.fd_status==4?'Redeem Req':item.fd_status==3?'In-Process':item.fd_status==2?'Redeemed':''}
                                </Text>  
                        </TouchableOpacity>
@@ -345,7 +346,7 @@ const showContent=()=>{
                             </View>
                       
                    </TouchableOpacity>
-               </View>
+               </View>}
               </View>
               }
               /> 
@@ -444,6 +445,9 @@ const showContent=()=>{
                 {fdData.length>0? showContent():null}
              </View>
              </View>
+             <View>
+        <BottomTab/>
+      </View>
            <StatusBar/>
        </View>
     )

@@ -41,7 +41,7 @@ export default StyleSheet.create({
     },
     bottom:{
         position:'absolute',
-        bottom:20,
+        bottom:70,
         left:0,right:0,
         flex:1,
         paddingHorizontal:20

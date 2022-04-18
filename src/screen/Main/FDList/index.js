@@ -27,6 +27,8 @@ import MultiSelect from 'react-native-multiple-select';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
+import BottomTab from '../../../component/StoreButtomTab';
+
 Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 
@@ -376,7 +378,7 @@ console.log('this is route data',route.params);
             />
           </TouchableOpacity>
           <View style={styles.views}>
-            <Text style={styles.texts}>{'FD LISTING'} </Text>
+            <Text style={styles.texts}>{'List of FDs'} </Text>
           </View>
           <View></View>
         </View>
@@ -799,7 +801,7 @@ console.log('this is route data',route.params);
               // flexDirection: 'row',
               // alignItems: 'center',
               height: 38,
-              width:'33%'
+              width:'36%'
             }}>
             <RNPickerSelect
               onValueChange={val => handleSorting(val)}
@@ -882,6 +884,9 @@ console.log('this is route data',route.params);
       </View>
 
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };
@@ -894,12 +899,10 @@ const SBType = [
   {label: 'Senior Citizen', value: 'Senior Citizen'},
 ];
 const Sorting = [
-  {label:'Online', value:'online'},
-
-  {label: 'Interest Rate', value: 'interest_rate'},
-  // {label: 'Minimum investment', value: 'mab'},
-  {label: 'Credit rating', value: 'credit_rating'},
   {label: 'Name', value: 'alphabet'},
+  {label: 'Rate of Return', value: 'interest_rate'},
+  {label: 'Credit Rating', value: 'credit_rating'},
+  
 ];
 const days = [
   {label: '00', value: '0'},

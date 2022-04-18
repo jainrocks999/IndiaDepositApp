@@ -12,6 +12,7 @@ import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import Loader from '../../../../component/loader';
 import ImagePicker from 'react-native-image-crop-picker';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const Upload = ({route}) => {
   const [pan, setPan] = useState('');
@@ -188,7 +189,6 @@ const Upload = ({route}) => {
     const fd_user_id = await AsyncStorage.getItem('fd_user_id');
     const fd_user_id1 = await AsyncStorage.getItem('fd_user_id1');
     const fd_user_id2 = await AsyncStorage.getItem('fd_user_id2');
-    console.log('this is user id number', fd_user_id, fd_user_id1, fd_user_id2);
     try {
       setIsFetching(true);
       const data = new FormData();
@@ -250,6 +250,7 @@ const Upload = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/addmyfd',
       });
+      console.log('this is response of big size',response);
       if (response.data.status == 200) {
         AsyncStorage.setItem('fd_user_id', '');
         setIsFetching(false);
@@ -640,6 +641,9 @@ const Upload = ({route}) => {
           ]}>
           <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
         </TouchableOpacity>
+      </View>
+      <View>
+        <BottomTab/>
       </View>
     </View>
   );

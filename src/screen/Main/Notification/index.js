@@ -312,7 +312,7 @@ const manageNotification=async(item)=>{
       </View>
 
       {filteredDataSource[0] ? (
-        <View style={{flex: 1, paddingHorizontal: 15, paddingVertical: 10}}>
+        <View style={{paddingHorizontal: 15, paddingVertical: 10,height:'80%'}}>
           <View style={{ shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
@@ -329,9 +329,9 @@ const manageNotification=async(item)=>{
         </View>
       ) : null}
       <StatusBar />
-      {/* <View style={{position:'absolute',bottom:0,left:0,right:0}}>
+      <View style={{position:'absolute',bottom:0,left:0,right:0}}>
       <BottomTab/>
-      </View> */}
+      </View>
     </View>
   );
 };

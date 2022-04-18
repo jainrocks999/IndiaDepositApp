@@ -1,3 +1,18 @@
+# # Uncomment the next line to define a global platform for your project
+# # platform :ios, '9.0'
+
+# target 'IndiaDeposit' do
+#   # Comment the next line if you don't want to use dynamic frameworks
+#   use_frameworks!
+
+#   # Pods for IndiaDeposit
+
+#   target 'IndiaDepositTests' do
+#     inherit! :search_paths
+#     # Pods for testing
+#   end
+
+# end
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
@@ -14,8 +29,9 @@ target 'IndiaDeposit' do
   pod 'Firebase/Analytics'
   pod 'RNFBCrashlytics', :path => '../node_modules/@react-native-firebase/crashlytics'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
+  pod 'rn-fetch-blob',:path => '../node_modules/rn-fetch-blob'
   pod 'ReactNativeART', :path => '../node_modules/@react-native-community/art'
+  
 
   target 'IndiaDepositTests' do
     inherit! :complete

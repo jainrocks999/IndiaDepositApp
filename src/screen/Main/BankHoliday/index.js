@@ -19,6 +19,7 @@ import axios from 'axios';
 import Toast from 'react-native-simple-toast';
 import {LayoutAnimation} from 'react-native';
 import Loader from '../../../component/loader';
+import BottomTab from "../../../component/StoreButtomTab";
 
 const Holiday = () => {
   const navigation = useNavigation();
@@ -107,17 +108,17 @@ const Holiday = () => {
   };
 
   const dropDown = index => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    // LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     const array = [...listDataSource1];
-    if (multiSelect) {
-      array[index]['isExpanded'] = !array[index]['isExpanded'];
-    } else {
+    // if (multiSelect) {
+    //   array[index]['isExpanded'] = !array[index]['isExpanded'];
+    // } else {
       array.map((value, placeindex) =>
         placeindex === index
           ? (array[placeindex]['isExpand'] = !array[placeindex]['isExpand'])
           : (array[placeindex]['isExpand'] = false),
       );
-    }
+    // }
     setListDataSource1(array);
   };
 
@@ -320,7 +321,7 @@ const Holiday = () => {
             {listDataSource.length > 0 ? (
               <View>
                 <Text style={[styles.result, {marginBottom: 20}]}>
-                  Result of your search
+                  Your Search Result
                 </Text>
                 <Text style={styles.heading}>{`BRANCH DETAILS`}</Text>
               </View>
@@ -350,7 +351,7 @@ const Holiday = () => {
                   fontFamily: 'Montserrat-Regular',
                   color: colors.textColor,
                   textAlign: 'center',
-                }}>{`We don't have any bank listed on this pincode try another nearest pincode`}</Text>
+                }}>{`No banks found. Kindly change pincode`}</Text>
             </View>
           ) : null}
         </View>
@@ -380,6 +381,9 @@ const Holiday = () => {
         </View>
         <View></View>
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
       {/* <BottomTab/> */}
     </View>
   );

@@ -13,6 +13,7 @@ import Storage from '../../../component/AsyncStorage';
 import StatusBar from '../../../component/StatusBar';
 import Constants from '../../../component/Constants';
 import Toast from "react-native-simple-toast";
+import BottomTab from '../../../component/StoreButtomTab';
 
 const FDDetail = ({route}) => {
   const navigation = useNavigation();

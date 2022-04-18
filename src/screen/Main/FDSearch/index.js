@@ -18,6 +18,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Geolocation from 'react-native-geolocation-service';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
+import BottomTab from '../../../component/StoreButtomTab';
+
+
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
@@ -343,7 +346,7 @@ useEffect(()=>{
                      </View>
                      </KeyboardAwareScrollView>
             </ScrollView>
-                  {/* <BottomTab/> */}
+                  <BottomTab/>
                  <StatusBar/>
      </View>
     )

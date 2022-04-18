@@ -29,7 +29,7 @@ const BottomTab = () => {
                   source={require('../../assets/Image/ing.png')}
                 />
         </View>
-        <Text style={[styles.text,{marginBottom:-4,marginTop:6,marginRight:5}]}>{'Our Policies'}</Text>
+        <Text style={[styles.text,{marginBottom:-4,marginTop:6,marginRight:5}]}>{'My Investments'}</Text>
       </View>
     );
   };

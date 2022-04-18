@@ -9,6 +9,7 @@ import {TabView, SceneMap, TabBar, HScrollView} from 'react-native-tab-view';
 import Privacy from '../../../component/TabComponents/Privacy';
 import Security from '../../../component/TabComponents/Security';
 import TermAndCondition from '../../../component/TabComponents/TermAndCondition';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const renderScene = SceneMap({
   first: Privacy,
@@ -82,6 +83,9 @@ const Calculator = () => {
         </View>
         <StatusBar />
       </ScrollView>
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

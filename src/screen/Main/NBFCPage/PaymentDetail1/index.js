@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import Header from "../../../../component/header";
 import styles from './styles';
 import CustomButton from '../../../../component/button1';
+import BottomTab from '../../../../component/StoreButtomTab';
 const Confirmation=({route})=>{
   const navigation=useNavigation()
 
@@ -55,6 +56,9 @@ const Confirmation=({route})=>{
              </View>
              </View>
         </View>
+        {/* <View>
+        <BottomTab/>
+      </View> */}
     </View>
   )
 }

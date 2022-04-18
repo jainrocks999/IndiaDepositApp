@@ -171,10 +171,10 @@ const Splash = () => {
           </View>
           {/* <Avatar height={200} width={100}/> */}
           <View style={styles.view4}>
-            <Image
+            {/* <Image
               style={styles.img}
               source={require('../../../assets/Image/iso.png')}
-            />
+            /> */}
             <Image
               style={styles.img1}
               source={require('../../../assets/Image/ssl.png')}

@@ -25,6 +25,7 @@ import axios from 'axios';
 import DatePicker from 'react-native-date-picker';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../../component/loader';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const loginValidationSchema = yup.object().shape({
   name: yup
@@ -554,6 +555,9 @@ const BankDetail = ({route}) => {
             </KeyboardAwareScrollView>
           </ScrollView>
           <StatusBar />
+          <View>
+        <BottomTab/>
+      </View>
         </View>
       )}
     </Formik>

@@ -23,6 +23,7 @@ import Toast from 'react-native-simple-toast';
 import RNPickerSelect from 'react-native-picker-select';
 import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
+import BottomTab from '../../../../component/StoreButtomTab';
 
 const RegisterPage = ({route}) => {
   const navigation = useNavigation('');
@@ -473,6 +474,9 @@ const RegisterPage = ({route}) => {
         </KeyboardAwareScrollView>
       </ScrollView>
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

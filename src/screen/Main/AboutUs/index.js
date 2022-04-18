@@ -9,6 +9,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import HTMLView from 'react-native-htmlview';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
+import BottomTab from "../../../component/StoreButtomTab";
+
 const Contact = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -65,6 +67,9 @@ const Contact = () => {
         </View>
       </ScrollView>
       <StatusBar />
+      <View>
+        <BottomTab/>
+      </View>
     </View>
   );
 };

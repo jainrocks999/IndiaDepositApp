@@ -6,6 +6,7 @@ import StatusBar from '../../../component/StatusBar';
 import Header from '../../../component/header';
 import colors from '../../../component/colors';
 import HTMLView from 'react-native-htmlview';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const StoryCategory=({route})=>{
    const navigation=useNavigation()
@@ -80,6 +81,9 @@ useEffect(()=>{
        </View>
        </ScrollView>
       <StatusBar/>
+      <View>
+        <BottomTab/>
+      </View>
    </View>
     )
 }

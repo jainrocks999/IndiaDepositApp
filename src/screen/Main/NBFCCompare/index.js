@@ -9,6 +9,7 @@ import Constants from '../../../component/Constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import Loader from '../../../component/loader';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const FDList=({route})=>{
 const navigation=useNavigation()
@@ -245,6 +246,9 @@ const manageInvest=async()=>{
             </View>
             </ScrollView>
             <StatusBar/>
+            <View>
+        <BottomTab/>
+      </View>
         </View>
     )
 }

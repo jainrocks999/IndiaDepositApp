@@ -8,7 +8,7 @@ export default StyleSheet.create({
     // backgroundColor:'#E5E5E5'
     },
     main:{
-        marginBottom:50
+        marginBottom:100
     },
     card:{
         shadowColor:colors.black,

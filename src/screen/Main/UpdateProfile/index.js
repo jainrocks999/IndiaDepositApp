@@ -26,6 +26,7 @@ import * as yup from 'yup';
 import DatePicker from 'react-native-date-picker';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import axios from 'axios';
+import BottomTab from '../../../component/StoreButtomTab';
 
 const loginValidationSchema = yup.object().shape({
   name: yup
@@ -1083,6 +1084,9 @@ const RegisterPage = ({route}) => {
           </ScrollView>
 
           <StatusBar />
+          <View>
+        <BottomTab/>
+      </View>
         </View>
       )}
     </Formik>
