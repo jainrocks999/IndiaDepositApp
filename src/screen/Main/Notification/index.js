@@ -312,7 +312,7 @@ const manageNotification=async(item)=>{
       </View>
 
       {filteredDataSource[0] ? (
-        <View style={{paddingHorizontal: 15, paddingVertical: 10,height:'80%'}}>
+        <View style={{paddingHorizontal: 15, paddingVertical: 10,height:'74%'}}>
           <View style={{ shadowColor:colors.black,
         shadowOpacity:0.25,
         shadowRadius:8,
