@@ -194,12 +194,12 @@ class UserSelection extends React.Component {
     const value1 = this.state.date.toISOString().split('T')[0];
     const [yyyy, mm, dd] = value1.split('-');
     value = `${dd}-${mm}-${yyyy}`;
-    console.log('this is primart user data',this.props.List[0]);
+  
     return (
       <View style={{flex: 1, backgroundColor: colors.card}}>
         <Header
           source={require('../../../../assets/Image/arrow2.png')}
-          title={'PRIMARY USER'}
+          title={'PRIMARY ACCOUNT HOLDER'}
           onPress={() => this.props.navigation.goBack()}
         />
         <ScrollView style={styles.Scroll}>

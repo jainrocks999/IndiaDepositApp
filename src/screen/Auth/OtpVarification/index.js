@@ -12,6 +12,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import DeviceInfo from 'react-native-device-info';
 import OtpInputs from 'react-native-otp-inputs';
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 class OtpVarification extends React.Component {
   constructor(props) {
     super(props);
@@ -44,6 +46,17 @@ class OtpVarification extends React.Component {
   };
 
   async componentDidMount() {
+   
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+
     const number = await AsyncStorage.getItem('old_number');
     this.setState({old_number: number});
     this.backHandler = BackHandler.addEventListener(
@@ -189,7 +202,7 @@ class OtpVarification extends React.Component {
           });
         } else {
           if (this.state.otp == '' || this.state.otp.length < 4) {
-            console.log(this.state.otp.length);
+           
             Toast.show('Please enter otp');
           } else {
             this.setState({
@@ -323,7 +336,7 @@ class OtpVarification extends React.Component {
     }
   };
   render() {
-    console.log('this is otp data ', this.state.otpData);
+ 
     return (
       <View style={styles.container}>
         <KeyboardAwareScrollView

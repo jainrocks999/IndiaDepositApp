@@ -75,7 +75,7 @@ const RegisterPage = ({route}) => {
   const [pincode, setPincode] = useState('');
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState(new Date());
-  console.log('thisi user dsefdfkdlk ', marital_status);
+
   const value1 = date.toISOString().split('T')[0];
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
@@ -114,34 +114,7 @@ const RegisterPage = ({route}) => {
     ) {
       Toast.show('Please select relationship');
     }
-    // else if(occupation==0||''){
-    //    Toast.show('Please select occupation')
-    // }
-    // else if(occupation=='Others' && values.occupation==''){
-    //    Toast.show('Please specify occupation')
-    // }
-    // else if(country==0||''){
-    //    Toast.show('Please select country name')
-    // }
-    // else if(state==0||''){
-    //    Toast.show('Please select state name')
-    // }
-    // else if(city==0||''){
-    //    Toast.show('Please select city name')
-    // }
-
-    // else if(income_group==0||''){
-    //    Toast.show('Please select income group')
-    // }
-    // else if(education==0||''){
-    //    Toast.show('Please select education')
-    // }
-    // else if(marital_status==0||''){
-    //    Toast.show('Please select marital status')
-    // }
-    // else if(residential_address==0||''){
-    //    Toast.show('Please select residential status')
-    // }
+   
     else {
       dispatch({
         type: 'Add_Family_Request',
@@ -193,7 +166,7 @@ const RegisterPage = ({route}) => {
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
+    
       setPincode(val);
       try {
         const data = new FormData();
@@ -209,18 +182,12 @@ const RegisterPage = ({route}) => {
         });
 
         if (response.data.status == 200) {
-          console.log('this is response value', response.data);
+       
           dispatch({
             type: 'State_List_Request',
             url: 'statebyid',
             country_id: response.data.country.value,
           });
-
-          // dispatch({
-          //   type: 'City_List_Request',
-          //   url: 'citybyid',
-          //   state_id: response.data.state.value,
-          // });
           setCity(response.data.city.value);
           setState(response.data.state.value);
           setCountry(JSON.stringify(response.data.country.value));

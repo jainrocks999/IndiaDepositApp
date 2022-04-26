@@ -26,7 +26,7 @@ const Support=()=>{
   const [name1,setName1]=useState('')
   const [email1,setEmail1]=useState('')
   const [mobile1,setMobile1]=useState('')
-console.log('name email,mobile',name1,email1,mobile1);
+
   useEffect(async()=>{
     const name=await AsyncStorage.getItem(Storage.name)
     const email=await AsyncStorage.getItem(Storage.email)
@@ -40,7 +40,7 @@ console.log('name email,mobile',name1,email1,mobile1);
 
   const validateUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-    console.log('thisi is ',values);
+  
     dispatch({
       type: 'Support_Request',
       url: 'support',

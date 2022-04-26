@@ -13,7 +13,6 @@ const BankCalu=({route})=>{
     const [selectedItems, setSelectedItems] = useState([]);
     const [demo,setDemo]=useState(' - ₹25,000');
     const[demo1,setDemo1]=useState(' + ₹25,000');
-    console.log("selectitem ",selectedItems[0]);
     const data1 = route.params;
     const ListItem = ({item, selected, onPress,}) => (
         <View style={{width:'33.3%',alignItems:'center',justifyContent:'center',height:85,marginTop:-5}}>

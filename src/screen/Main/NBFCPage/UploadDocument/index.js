@@ -67,7 +67,7 @@ const Upload = ({route}) => {
       setBankDetails(res[0].uri);
       setBankDetailsType(res[0].type);
       setBankDetailsName(res[0].name);
-      console.log('this is user image', res[0]);
+    
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -83,7 +83,7 @@ const Upload = ({route}) => {
       setAddressProof(res[0].uri);
       setAddressProofType(res[0].type);
       setAddressProofName(res[0].name);
-      console.log('this is user image', res[0]);
+    
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
       } else {
@@ -250,7 +250,7 @@ const Upload = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/addmyfd',
       });
-      console.log('this is response of big size',response);
+    
       if (response.data.status == 200) {
         AsyncStorage.setItem('fd_user_id', '');
         setIsFetching(false);

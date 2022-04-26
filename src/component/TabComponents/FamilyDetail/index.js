@@ -25,7 +25,6 @@ const FamilyDetails = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selector = useSelector(state => state.FamilyList);
-  console.log('family list', selector);
   const isFetching = useSelector(state => state.isFetching);
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -53,7 +52,7 @@ const FamilyDetails = () => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/deletefamily',
       });
-      console.log('this is response value', response);
+
       if (response.data.status == 200 || response.data.status == 400) {
         dispatch({
           type: 'Family_List_Request',

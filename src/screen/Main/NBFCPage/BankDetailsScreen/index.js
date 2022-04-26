@@ -30,9 +30,7 @@ const RegisterPage = ({route}) => {
   const data = route.params.data;
   const [loader, setLoader] = useState(false);
   const my_fixed_deposit_id = route.params.my_fixed_deposit_id;
-  // console.log('this is route details',route.params);
 
-// console.log('this is narendra herer',route.params);
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
     try {
@@ -55,7 +53,7 @@ const RegisterPage = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/fdrequestforredeem',
       });
-      console.log('this is api response',response);
+   
       if (response.data.status == 200) {
         setLoader(false);
         Toast.show(response.data.messages);
@@ -76,13 +74,7 @@ const RegisterPage = ({route}) => {
       />
       {loader ? <Loader /> : null}
       <View style={styles.cardView}>
-        {/* <Image
-          resizeMode="contain"
-          style={{height: 20, width: 70}}
-          source={{
-            uri: `${Constants.imageUrl}${route.params.data.bank_logo}`,
-          }}
-        /> */}
+     
         <View style={{paddingHorizontal:15}}>
         <View style={{alignItems:'flex-start'}}>
         <Text style={{fontFamily:'Montserrat-SemiBold',color:colors.textColor}}>{`• FDs getting organically matured will be credited to the account as per instruction provided during booking of FD.`}</Text>
@@ -108,71 +100,7 @@ const RegisterPage = ({route}) => {
       </View>
       {isFetching ? <Loader /> : null}
       <ScrollView style={styles.scroll}>
-        {/* <KeyboardAwareScrollView
-          extraScrollHeight={10}
-          enableOnAndroid={true}
-          keyboardShouldPersistTaps="handled"
-          contentContainerStyle={{flex: 1}}>
-          <View style={styles.main}>
-          
-                    <View>
-              
-                <View style={{ marginTop: 10}}>
-                <View style={{width: '100%'}}>
-                    <Text style={styles.font}>Name</Text>
-                    <Text
-                      style={
-                        styles.font16
-                      }>{`${route.params.name}`}</Text>
-                  </View>
-                  <View style={{width: '100%',marginTop:10}}>
-                    <Text style={styles.font}>Account Number</Text>
-                    <Text style={styles.font16}>
-                      {data.account_number}
-                    </Text>
-                  </View>
-                  <View style={{width: '100%', marginTop:10}}>
-                    <Text style={styles.font}>IFSC Code</Text>
-                    <Text
-                      style={
-                        styles.font16
-                      }>{`${data.ifsc_code}`}</Text>
-                  </View>
-                  <View style={{width: '100%', marginTop:10}}>
-                    <Text style={styles.font}>Account Type</Text>
-                    <Text
-                      style={
-                        styles.font16
-                      }>{`${data.account_type}`}</Text>
-                  </View>
-                </View>
-                <View style={{marginTop: 10}}>
-                  <View style={{width: '100%'}}>
-                    <Text style={styles.font}>Financial Institution</Text>
-                    <Text
-                      style={
-                        styles.font16
-                      }>{`${data.bankname}`}</Text>
-                  </View>
-                 
-                </View>
-               
-              </View>
-           
-            <View style={styles.buttons}>
-              <CustomButton title="SUMBIT" onPress={() => validateUser()} />
-            </View>
-           
-          </View>
-          <View style={{alignItems:'center',paddingHorizontal:20,marginTop:20}}>
-          <TouchableOpacity onPress={()=>navigation.navigate('Redeem',{
-           my_fixed_deposit_id:my_fixed_deposit_id,
-           name:route.params.name
-          })} style={{paddingHorizontal:10,borderRadius:10,paddingVertical:4,backgroundColor:colors.bc}}>
-            <Text  style={{color:colors.white,fontFamily:'Montserrat-SemiBold'}}>Use another account</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAwareScrollView> */}
+      
         <View style={{marginTop:15}}>
         <CustomButton title="CONTINUE"
         onPress={()=> validateUser()
@@ -183,9 +111,7 @@ const RegisterPage = ({route}) => {
         </View>
       </ScrollView>
       <StatusBar />
-      {/* <View>
-        <BottomTab/>
-      </View> */}
+      
     </View>
   );
 };

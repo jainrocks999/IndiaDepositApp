@@ -18,6 +18,8 @@ import * as yup from 'yup';
 import colors from '../../../component/colors';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from '@react-native-community/netinfo';
+import { showMessage } from "react-native-flash-message";
 
 const loginValidationSchema = yup.object().shape({
   newPassword: yup
@@ -46,6 +48,19 @@ const ChangePassword = ({route}) => {
   const [focus2, setFocus2] = useState(false);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
+
+
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
 
   const showVisible = () => {
     return (

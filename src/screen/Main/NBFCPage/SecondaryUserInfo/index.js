@@ -29,7 +29,7 @@ const RegisterPage = ({route}) => {
   const dispatch = useDispatch();
   const isFetching = useSelector(state => state.isFetching);
   const data1 = route.params.data[0];
-  console.log('this is secondary user info from render data',data1);
+ 
   const CountryList = useSelector(state => state.CountryList);
   const selector1 = useSelector(state => state.StateList);
   const selector2 = useSelector(state => state.CityList);
@@ -65,7 +65,7 @@ const RegisterPage = ({route}) => {
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
 
-console.log('this is data from relation',data1.relation);
+
 
   useEffect(async () => {
     dispatch({
@@ -73,12 +73,6 @@ console.log('this is data from relation',data1.relation);
       url: 'statebyid',
       country_id: country,
     });
-
-    // dispatch({
-    //   type: 'City_List_Request',
-    //   url: 'citybyid',
-    //   state_id: state,
-    // });
   }, []);
 
   const manageState = async val => {
@@ -109,7 +103,7 @@ console.log('this is data from relation',data1.relation);
     else if (father_name == '' || father_name == 0) {
       Toast.show('Please enter father/spouse name');
     } else if (mother_name == '' || mother_name == 0) {
-      Toast.show('Please enter mother maiden name');
+      Toast.show("Please enter mother's maiden name");
     } else if (address1 == 0 || address1 == '') {
       Toast.show('Please enter address line 1');
     } else if (address2 == 0 || address2 == '') {
@@ -167,7 +161,7 @@ console.log('this is data from relation',data1.relation);
         navigation: navigation,
       });
       try {
-        console.log('this is user relation ',relation);
+      
         const data= new FormData()
         data.append('family_id',data1.user_id);
         data.append('name',name == 0 || name == 'undefined' ? 0 : name);
@@ -208,7 +202,7 @@ console.log('this is data from relation',data1.relation);
             user_id: user_id,
           });
         }
-        console.log('thisi si uer response ',response.data);
+      
       } catch (error) {
         throw error;
       }
@@ -217,7 +211,7 @@ console.log('this is data from relation',data1.relation);
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
+    
       setPincode(val);
       try {
         const data = new FormData();
@@ -245,11 +239,46 @@ console.log('this is data from relation',data1.relation);
     }
   };
 
+
+  const handlePan=async(val)=>{
+    if(val.length==10){
+      setPan(val)
+      console.log('this is pancard',val);
+      try {
+        const data = new FormData();
+        data.append('name',name);
+        data.append('pan',val)
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://indiadeposit.in/admin/public/apis/panverification',
+        });
+       if(response.data){
+         console.log('this is code',response.data);
+         Toast.show(`${response.data.message} ${response.data.code==undefined?'':response.data.code}`)
+       }
+      } catch (error) {
+        if (error.message == 'Network Error') {
+          Toast.show('Please check your network');
+        }
+        throw error;
+      }
+    }
+    else{
+      setPan(val)
+    }
+  }
+
+
   return (
     <View style={styles.container}>
       <Header
         source={require('../../../../assets/Image/arrow2.png')}
-        title="SECONDARY USER INFO"
+        title="JOINT HOLDER INFO"
         onPress={() => navigation.goBack()}
       />
       {isFetching ? <Loader /> : null}
@@ -381,7 +410,7 @@ console.log('this is data from relation',data1.relation);
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Mother Maiden Name</Text>
+              <Text style={styles.better}>Mother's Maiden Name</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
             </View>
             <View style={styles.drop}>
@@ -392,7 +421,7 @@ console.log('this is data from relation',data1.relation);
                 }
                 onChangeText={val => set_mother_name(val)}
                 editable={true}
-                placeholder="Please enter mother maiden name"
+                placeholder="Please enter mother's maiden name"
               />
             </View>
             <View style={styles.row}>
@@ -402,9 +431,10 @@ console.log('this is data from relation',data1.relation);
               <TextInput
                 style={styles.input}
                 value={pan == 0 || data1.pan == 'undefined' ? '' : pan}
-                onChangeText={val => setPan(val)}
+                onChangeText={val => handlePan(val)}
                 placeholder="Please enter pan number"
                 editable={true}
+                autoCapitalize='characters'
               />
             </View>
             <View style={styles.row}>

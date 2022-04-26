@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import RNPickerSelect from 'react-native-picker-select';
 import BottomTab from "../../../../component/StoreButtomTab";
 const BankCalu = ({route}) => {
-  console.log('this is route .',route.params.fixed_deposit_id);
+
   const navigation = useNavigation();
   const [selectedItems, setSelectedItems] = useState([route.params.period,route.params.rate]);
   const [amount, setAmount] = useState(route.params.amount);
@@ -28,14 +28,15 @@ const BankCalu = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
-  console.log('this is route.params',selectedItems[1]);
+ 
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
   const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
 
+  console.log('this is narendr here',route.params.lockin_period);
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-  console.log('this is working',selectedItems[3]);
+ 
     if(selectItems[3]?selectItems[3]:route.params.fd_from=='setu'){
       navigation.navigate('FDView',{
         amount:amount,
@@ -43,44 +44,102 @@ const BankCalu = ({route}) => {
    })
     }
     else if(selectItems[3]?selectItems[3]:route.params.fd_from=='semi_online'){
-    dispatch({
-      type: 'Create_FD_Request',
-      url: 'addmyfd',
-      formtype: 'selectplan',
-      amount: amount,
-      tenure: selectedItems[0],
-      interest_calculation_frequency: '',
-      name: '',
-      mobile_number: '',
-      email: '',
-      address_communication: '',
-      address_permanent: '',
-      qualifications: '',
-      mother_name: '',
-      father_name: '',
-      marital_status: '',
-      my_fixed_deposit_id: '',
-      spouse_name: '',
-      occupation: '',
-      annual_income: '',
-      fd_user_id: '',
-      user_id: user_id,
-      cheque_copy: '',
-      address_proof: '',
-      pan_card: '',
-      user_photo: '',
-      nominee_name: '',
-      relationship: '',
-      dob: '',
-      nominee_address: '',
-      maturity_amount: value,
-      maturity_interest: value1,
-      bank_name: route.params.name,
-      bank_logo: route.params.image,
-      type1: route.params.type,
-      interest_rate: selectedItems[1],
-      navigation: navigation,
-    });
+    if(frequency==''){
+      dispatch({
+        type: 'Create_FD_Request',
+        url: 'addmyfd',
+        formtype: 'selectplan',
+        amount: amount,
+        tenure: selectedItems[0],
+        interest_calculation_frequency:
+        frequency==''?'At Maturity':
+        frequency=='12'?'Yearly':
+        frequency=='6'?'Half-Yearly':
+        frequency=='3'?'Quarterly':
+        frequency=='1'?'Monthly'
+        :'',
+        name: '',
+        mobile_number: '',
+        email: '',
+        address_communication: '',
+        address_permanent: '',
+        qualifications: '',
+        mother_name: '',
+        father_name: '',
+        marital_status: '',
+        my_fixed_deposit_id: '',
+        spouse_name: '',
+        occupation: '',
+        annual_income: '',
+        fd_user_id: '',
+        user_id: user_id,
+        cheque_copy: '',
+        address_proof: '',
+        pan_card: '',
+        user_photo: '',
+        nominee_name: '',
+        relationship: '',
+        dob: '',
+        nominee_address: '',
+        maturity_amount: value,
+        maturity_interest: value1,
+        bank_name: route.params.name,
+        bank_logo: route.params.image,
+        type1: route.params.type,
+        interest_rate: selectedItems[1],
+        lockin_period:route.params.lockin_period,
+        navigation: navigation,
+      });
+    }
+    else{
+      dispatch({
+        type: 'Create_FD_Request',
+        url: 'addmyfd',
+        formtype: 'selectplan',
+        amount: amount,
+        tenure: selectedItems[0],
+        interest_calculation_frequency:
+        frequency==''?'At Maturity':
+        frequency=='12'?'Yearly':
+        frequency=='6'?'Half-Yearly':
+        frequency=='3'?'Quarterly':
+        frequency=='1'?'Monthly'
+        :'',
+        name: '',
+        mobile_number: '',
+        email: '',
+        address_communication: '',
+        address_permanent: '',
+        qualifications: '',
+        mother_name: '',
+        father_name: '',
+        marital_status: '',
+        my_fixed_deposit_id: '',
+        spouse_name: '',
+        occupation: '',
+        annual_income: '',
+        fd_user_id: '',
+        user_id: user_id,
+        cheque_copy: '',
+        address_proof: '',
+        pan_card: '',
+        user_photo: '',
+        nominee_name: '',
+        relationship: '',
+        dob: '',
+        nominee_address: '',
+        maturity_amount: value,
+        maturity_interest: value1,
+        bank_name: route.params.name,
+        bank_logo: route.params.image,
+        type1: route.params.type,
+        
+        interest_rate: (
+          ((parseFloat((parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/selectedItems[0]/amount)*100
+        ).toFixed(2),
+        navigation: navigation,
+      });
+    }
   }
     AsyncStorage.setItem('fd_user_id', '');
     AsyncStorage.setItem('fd_user_id1', '');
@@ -177,12 +236,6 @@ const BankCalu = ({route}) => {
                         styles.text,
                         {color: colors.white},
                       ]}>{`${item.duration} Year`}</Text>
-                       {/* <Text style={[styles.text, {color: colors.textColor}]}>{`${(
-                (
-                  (value1 == 'NaN' || value1 == 'undefined' ? 0 : value1/item.duration/amount)*100
-                )
-            
-              ).toFixed(2)}% p.a`}</Text> */}
               <Text style={[styles.text, {color: colors.white}]}>{`${(
                       (
                         ((parseFloat((parseFloat(amount*Math.pow(1+(item.rate/(100*12)),(frequency)))-amount)*(1*item.duration*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/item.duration/amount)*100

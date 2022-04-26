@@ -152,7 +152,7 @@ const SBAccountList = ({route}) => {
 
   const compareFD = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-    console.log('this is selected data', selectedData);
+  
     if (selectedData.length == 0) {
       Toast.show('Please select SB for Compare');
     } else if (selectedData.length == 1) {
@@ -196,7 +196,7 @@ const SBAccountList = ({route}) => {
         setLong(position.coords.longitude);
       },
       error => {
-        console.log(error.code, error.message);
+      
         setLoader(false);
       },
       {
@@ -241,7 +241,7 @@ const SBAccountList = ({route}) => {
               setLong(position.coords.longitude);
             },
             error => {
-              console.log(error.code, error.message);
+             
               setLoader(false);
             },
             {
@@ -252,7 +252,7 @@ const SBAccountList = ({route}) => {
             },
           );
         } else {
-          console.log('Location permission denied');
+      
           setLoader(false);
         }
       } catch (err) {

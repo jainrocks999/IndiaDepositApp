@@ -41,15 +41,11 @@ const MyFDDetail = ({route}) => {
   const [account_number, set_account_number] = useState('');
   const [ifsc_code, set_ifsc_code] = useState('');
   const [showModal1, setShowModal1] = useState(false);
-  console.log('this is route.params data',route.params);
+
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
-    // dispatch({
-    //   type: 'Bank_List_Request',
-    //   url: 'userbanklist',
-    //   user_id,
-    // });
+   
   }, []);
 
   const isChecked = itemId => {
@@ -128,59 +124,6 @@ const MyFDDetail = ({route}) => {
       </View>
     );
   };
-
-  // const addBank = async () => {
-  //   const user_id = await AsyncStorage.getItem(Storage.user_id);
-
-  //   if (bank_name == '' || bank_name == null || bank_name == 0) {
-  //     Toast.show('Please select bank name');
-  //   } else if (account_number == '' || account_number == null) {
-  //     Toast.show('Please enter account number');
-  //   } else if (
-  //     account_type == '' ||
-  //     account_type == null ||
-  //     account_type == 0
-  //   ) {
-  //     Toast.show('Please select account type');
-  //   } else if (ifsc_code == '') {
-  //     Toast.show('Please enter valid ifsc code');
-  //   } else {
-  //     try {
-  //       const data = new FormData();
-  //       data.append('user_id', user_id);
-  //       data.append('bank_id', bank_name);
-  //       data.append('account_number', account_number);
-  //       data.append('account_type', account_type);
-  //       data.append('ifsc_code', ifsc_code);
-  //       data.append('other1', 'test');
-  //       data.append('other2', 'test');
-  //       const response = await axios({
-  //         method: 'POST',
-  //         data,
-  //         headers: {
-  //           'content-type': 'multipart/form-data',
-  //           Accept: 'multipart/form-data',
-  //         },
-  //         url: 'https://demo.webshowcase-india.com/indiadeposit/public/apis/adduserbank',
-  //       });
-  //       console.log('this user resposens', response);
-  //       if (response.data.status == 200) {
-  //         setShowModal1(false);
-  //         dispatch({
-  //           type: 'Bank_List_Request',
-  //           url: 'userbanklist',
-  //           user_id,
-  //         });
-  //         Toast.show('Bank add successful');
-  //       } else {
-  //         Toast.show(response.data.messages);
-  //       }
-  //     } catch (error) {
-  //       throw error;
-  //     }
-  //   }
-  // };
-  console.log('this is narenra here');
   return (
     <View style={styles.container}>
       <Header
@@ -194,9 +137,7 @@ const MyFDDetail = ({route}) => {
           <Text style={{fontSize:13,fontFamily:'Montserrat-Regular'}}>{`Kindly make the payment directly to ${route.params.beneficiaryname}. Company's bank details are mentioned below`} </Text>
           <Text style={{marginTop:5,fontFamily:'Montserrat-Regular',fontSize:13}}>{`Note: NEFT/RTGS are the only acceptable mode of payment.Amy other payment,including IMPS,will not be accepted.The same has been emailed you`} </Text>
 
-          {/* <Text style={{fontSize: 16, fontFamily: 'Montserrat-SemiBold'}}>
-            Account Detail
-          </Text> */}
+       
           <Text
             style={{
               fontFamily: 'Montserrat-Regular',
@@ -272,46 +213,9 @@ const MyFDDetail = ({route}) => {
             }
           />
         </View>
-        {/* <View style={{paddingHorizontal: 15, paddingVertical: 10}}>
-          <Text
-            style={{
-              fontSize: 13,
-              fontFamily: 'Montserrat-Regular',
-              color: colors.textColor,
-            }}>
-            {' '}
-            Lorem ipsum, or lipsum as it is sometimes known, is dummy text used
-            in laying out print, graphic or web designs. The passage is
-            attributed to an unknown typesetter book.
-          </Text>
-        </View> */}
+       
         <View>
-          {/* <FlatList
-            data={selector}
-            renderItem={({item}) => renderItem(item)}
-            style={{width: '100%', marginBottom: 10, marginTop: 5}}
-          /> */}
-          {/* <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: 20,
-            }}>
-            <TouchableOpacity
-              onPress={() => {
-                set_bank_name('');
-                set_ifsc_code('');
-                set_account_number('');
-                set_account_type('');
-                setShowModal1(true);
-              }}
-              style={styles.Touch}>
-              <Text style={{fontSize: 14, color: colors.white}}>
-                + ADD BANK
-              </Text>
-            </TouchableOpacity>
-            <View style={{marginBottom: 200}} />
-          </View> */}
+        
         </View>
       </View>
       <View

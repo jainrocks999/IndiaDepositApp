@@ -20,7 +20,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
-
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 const loginValidationSchema = yup.object().shape({
   mobile: yup
     .string()
@@ -47,6 +48,19 @@ const Login = () => {
 
     return () => backHandler.remove();
   }, []);
+
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
+
 
   const showVisible = () => {
     return (

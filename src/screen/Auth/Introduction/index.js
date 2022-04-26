@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import StatusBar from '../../../component/StatusBar';
 import {useDispatch} from 'react-redux';
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 
 const Introduction = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const data = route.params;
-
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -26,6 +38,7 @@ const Introduction = ({route}) => {
           resizeMode="contain"
           source={{uri: data.image_url}}
         />
+
       </View>
       <View style={styles.main}>
         <View style={styles.lorem}>
@@ -52,3 +65,4 @@ const Introduction = ({route}) => {
   );
 };
 export default Introduction;
+

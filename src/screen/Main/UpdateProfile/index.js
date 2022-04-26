@@ -45,25 +45,18 @@ const loginValidationSchema = yup.object().shape({
   mother: yup
     .string()
     .max(40, ({max}) => `Mother name must be maximum ${max} character`)
-    .required('Please enter your mother maiden name ')
+    .required("Please enter your mother's maiden name" )
     .matches(
       /^[^!0-9-\/:-@\[-`{-~]+$/,
-      'Please enter valid mother maiden name',
+      "Please enter valid mother's maiden name",
     ),
   email: yup
     .string()
     .email('Please enter valid email ')
     .required('Please enter your email '),
-  pan: yup.string(''),
-  // .required('Please enter pan number').matches(/^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$/,'Please enter valid PAN'),
   mobile: yup.string(''),
-  // .required('Please enter mobile number'),
   addressLine1: yup.string(''),
-  // .required('Please enter address line1'),
   addressLine2: yup.string(''),
-  // .required('Please enter address line2'),
-  // pincode:yup.string(''),
-  // .required('Please enter pincode'),
   occupation: yup.string(''),
 });
 
@@ -94,7 +87,7 @@ const RegisterPage = ({route}) => {
   const [date, setDate] = useState(
     user.dob == 0 ? new Date() : new Date(`${yyyy1}-${mm1}-${dd1}`),
   );
-  console.log('this is user dob');
+  const [pancard,setPancard]=useState(user.pan == 0 || user.pan == null ? '' : user.pan)
   const selector1 = useSelector(state => state.StateList);
   const selector2 = useSelector(state => state.CityList);
   const value1 = date.toISOString().split('T')[0];
@@ -122,13 +115,7 @@ const RegisterPage = ({route}) => {
       type: 'State_List_Request',
       url: 'statebyid',
       country_id: country,
-    });
-
-    // dispatch({
-    //   type: 'City_List_Request',
-    //   url: 'citybyid',
-    //   state_id: state,
-    // });
+    })
   }, []);
 
   const validateUser = async values => {
@@ -138,33 +125,7 @@ const RegisterPage = ({route}) => {
     } else if (value == '') {
       Toast.show('Please select date of birth');
     }
-    // else if(occupation==0||''){
-    //    Toast.show('Please select occupation')
-    // }
-    // else if(occupation=='Others'&& values.occupation==''){
-    //       Toast.show('Please specify occupation')
-    // }
-    // else if(country==0||country==''){
-    //    Toast.show('Please select country name')
-    // }
-    // else if(state==0||state==''){
-    //    Toast.show('Please select state name')
-    // }
-    // else if(city==0||city==''){
-    //    Toast.show('Please select city name')
-    // }
-    // else if(income_group==0||''){
-    //    Toast.show('Please select income group')
-    // }
-    // else if(education==0||''){
-    //    Toast.show('Please select education')
-    // }
-    // else if(marital_status==0||''){
-    //    Toast.show('Please select marital status')
-    // }
-    // else if(residential_address==0||''){
-    //    Toast.show('Please select residential status')
-    // }
+   
     else {
       dispatch({
         type: 'Edit_Profile_Request',
@@ -176,7 +137,7 @@ const RegisterPage = ({route}) => {
         mother_maiden_name: values.mother,
         dob: value,
         gender: gender,
-        pan: values.pan,
+        pan: pancard,
         mobile: values.mobile,
         address1: values.addressLine1,
         address2: values.addressLine2,
@@ -237,7 +198,7 @@ const RegisterPage = ({route}) => {
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
+   
       setPincode(val);
       try {
         const data = new FormData();
@@ -265,6 +226,41 @@ const RegisterPage = ({route}) => {
     }
   };
 
+
+
+const handlePan=async(val,name)=>{
+  if(val.length==10){
+    setPancard(val)
+    console.log('this is pancard',val);
+    try {
+      const data = new FormData();
+      data.append('name',name);
+      data.append('pan',val)
+      const response = await axios({
+        method: 'POST',
+        data,
+        headers: {
+          'content-type': 'multipart/form-data',
+          Accept: 'multipart/form-data',
+        },
+        url: 'https://indiadeposit.in/admin/public/apis/panverification',
+      });
+     if(response.data){
+       console.log('this is code',response.data);
+       Toast.show(`${response.data.message} ${response.data.code==undefined?'':response.data.code}`)
+     }
+    } catch (error) {
+      if (error.message == 'Network Error') {
+        Toast.show('Please check your network');
+      }
+      throw error;
+    }
+  }
+  else{
+    setPancard(val)
+  }
+}
+
   return (
     <Formik
       initialValues={{
@@ -278,7 +274,6 @@ const RegisterPage = ({route}) => {
             ? ''
             : user.mother_maiden_name,
         email: user.email == 0 || user.email == null ? '' : user.email,
-        pan: user.pan == 0 || user.pan == null ? '' : user.pan,
         addressLine1:
           user.address1 == 0 || user.address1 == null ? '' : user.address1,
         addressLine2:
@@ -323,8 +318,6 @@ const RegisterPage = ({route}) => {
                 </Text>
                 <View style={styles.row}>
                   <Text style={styles.better}>Name</Text>
-                  {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
-                  {/* <Image style={styles.star} source={require('../../../assets/Image/star1.png')}/> */}
                 </View>
 
                 <View style={styles.drop}>
@@ -364,13 +357,13 @@ const RegisterPage = ({route}) => {
                   )}
                 </View>
                 <View style={styles.row}>
-                  <Text style={styles.better}>Mother Maiden Name</Text>
+                  <Text style={styles.better}>Mother's Maiden Name</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={styles.drop}>
                   <TextInput
                     style={styles.input}
-                    placeholder="Mother maiden name"
+                    placeholder="Mother's maiden name"
                     defaultValue={values.mother}
                     onChangeText={handleChange('mother')}
                     onBlur={handleBlur('mother')}
@@ -463,31 +456,7 @@ const RegisterPage = ({route}) => {
                           maximumDate={new Date()}
                           // locale={'fr'}
                         />
-                        {/* <DatePicker
-                                  //  style={{width: '100%',}}
-                                     date={dob=='0'||null?'':dob}
-                                     mode="date"
-                                     placeholder="Date Of Birth"
-                                     format="DD-MM-YYYY"
-                                     maxDate={new Date()}
-                                     confirmBtnText="Confirm"
-                                     cancelBtnText="Cancel"
-                                     customStyles={{
-                                     placeholderText:{color:'grey'},
-                                     dateIcon: {
-                                      width:0,
-                                      height:0,
-                                       },
-                                     dateInput: {
-                                      marginLeft:-40,
-                                      borderWidth:0,
-                                       },
-                                      dateText:{
-                                        color:colors.textColor
-                                        }
-                                      }}
-                                      onDateChange={(date)=> setDob(date)}                                   
-                                  />  */}
+                       
                       </View>
                       <TouchableOpacity
                         delayPressIn={0}
@@ -507,8 +476,6 @@ const RegisterPage = ({route}) => {
                 </View>
                 <View style={styles.row}>
                   <Text style={styles.better}>E-mail</Text>
-
-                  {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View
                   style={[
@@ -590,25 +557,19 @@ const RegisterPage = ({route}) => {
                 </View>
                 <View style={styles.row}>
                   <Text style={styles.better}>PAN</Text>
-                  {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}
                 </View>
                 <View style={[styles.drop]}>
                   <TextInput
                     style={styles.input}
                     placeholder="Please enter pan number"
                     placeholderTextColor={colors.heading1}
-                    value={values.pan}
-                    onChangeText={handleChange('pan')}
-                    onBlur={handleBlur('pan')}
+                    value={pancard}
+                    onChangeText={(val)=>handlePan(val,values.name)}
                     autoCapitalize="characters"
                     returnKeyType="done"
                   />
                 </View>
-                <View style={styles.error}>
-                  {errors.pan && touched.pan && (
-                    <Text style={styles.warn}>{errors.pan}</Text>
-                  )}
-                </View>
+                
                 <View style={styles.row}>
                   <Text style={styles.better}>Address Line 1</Text>
                   {/* <Text style={{marginTop:10,color:colors.red}}>*</Text> */}

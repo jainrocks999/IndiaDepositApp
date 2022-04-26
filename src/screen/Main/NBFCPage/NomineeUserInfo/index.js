@@ -68,8 +68,8 @@ const RegisterPage = ({route}) => {
 
     // dispatch({
     //   type: 'City_List_Request',
-    //   url: 'citybyid',
-    //   state_id: state,
+      // url: 'citybyid',
+      // state_id: state,
     // });
   }, []);
 

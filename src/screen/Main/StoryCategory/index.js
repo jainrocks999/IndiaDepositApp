@@ -49,15 +49,10 @@ useEffect(()=>{
             </View>:null}
             <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center', marginTop:10,}}>
                     <Text style={styles.text1}>{`Published on ${data.created_date}`}</Text>
-                    {/* <View style={styles.view3}>
-                          <Text style={styles.text4}>{data.catergory_name}</Text>
-                      </View>
-                      <View style={styles.view3}>
-                          <Text style={styles.text4}>{data.tag_name}</Text>
-                      </View> */}
+                   
             </View>
             <View style={{flexDirection:'row',alignItems:'center', marginTop:10,}}>
-                    {/* <Text style={styles.text1}>{`Published on ${data.created_date}`}</Text> */}
+                  
                       <View style={styles.view3}>
                           <Text style={styles.text4}>{data.catergory_name}</Text>
                       </View>

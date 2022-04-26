@@ -10,11 +10,15 @@ import {useDispatch} from 'react-redux';
 import StatusBar from '../../../component/StatusBar';
 import Toast from 'react-native-simple-toast';
 import colors from '../../../component/colors';
+import NetInfo from "@react-native-community/netinfo";
+import { showMessage, hideMessage } from "react-native-flash-message";
 let value;
 const Splash = () => {
   const navigation = useNavigation();
   const [isModalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
+
+  
   useEffect(async () => {
     value = await AsyncStorage.getItem('value');
     const id = await AsyncStorage.getItem(Storage.user_id);
@@ -31,9 +35,19 @@ const Splash = () => {
       key: 'term_condition',
       user_id: id,
     });
-    // appVersion()
-    //  initial()
   }, []);
+
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
 
   const appVersion = async ()=> {
     const id = await AsyncStorage.getItem(Storage.user_id);
@@ -53,7 +67,7 @@ const Splash = () => {
         url: 'https://indiadeposit.in/admin/public/apis/version',
       
       });
-      console.log('this is user response',response);
+  
       if (Platform.OS == 'android') {
         if (response.data.android_version > 1) {
           setModalVisible(true);
@@ -90,9 +104,9 @@ const Splash = () => {
         }
       }
     } catch (error) {
-      console.log('this is error ',error);
+    
       if (error.message == 'Network Error') {
-        Toast.show('Please check your network');
+        // Toast.show('Please check your network');
       }
       throw error;
     }

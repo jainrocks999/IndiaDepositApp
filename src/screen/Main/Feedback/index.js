@@ -249,7 +249,7 @@ const Contact = () => {
                 <View />
               )}
               <Text style={styles.better}>
-                Help us become better
+                Help us improve
               </Text>
               <View style={styles.view2}>
                 <View style={styles.inputs}>

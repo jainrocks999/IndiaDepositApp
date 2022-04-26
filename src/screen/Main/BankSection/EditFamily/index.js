@@ -111,33 +111,6 @@ const RegisterPage=({route})=>{
       else if(relation==0||relation==''||relation==null||relation=='undefined'){
          Toast.show('Please select relationship')
       }
-      // else if(occupation==0||''){
-      //    Toast.show('Please select occupation')
-      // }
-      // else if(occupation=='Others'&& values.occupation==''){
-      //    Toast.show('Please specify occupation')
-      // }
-      // else if(country==0||''){
-      //    Toast.show('Please select country name')
-      // }
-      // else if(state==0||''){
-      //    Toast.show('Please select state name')
-      // }
-      // else if(city==0||''){
-      //    Toast.show('Please select city name')
-      // }
-      // else if(income_group==0||''){
-      //    Toast.show('Please select income group')
-      // }
-      // else if(education==0||''){
-      //    Toast.show('Please select education')
-      // }
-      // else if(marital_status==0||''){
-      //    Toast.show('Please select marital status')
-      // }
-      // else if(residential_address==0||''){
-      //    Toast.show('Please select residential status')
-      // }
       else{
       dispatch({
       type: 'Edit_Family_Request',
@@ -194,7 +167,6 @@ const RegisterPage=({route})=>{
 
       const manageCityState=async(val)=>{
          if(val.length==6){
-           console.log(val);
            setPincode(val)
            try {
             const data = new FormData();
@@ -292,11 +264,11 @@ const RegisterPage=({route})=>{
                         <Text style={styles.warn}>{errors.father}</Text>
                         }
                      </View>
-                    <Text style={styles.better}>Mother Maiden Name</Text>
+                    <Text style={styles.better}>Mother's Maiden Name</Text>
                       <View style={styles.drop}>
                         <TextInput
                         style={styles.input}
-                        placeholder='Mother maiden name'
+                        placeholder="Mother's maiden name"
                         defaultValue={values.mother}
                         onChangeText={handleChange('mother')}
                         onBlur={handleBlur('mother')}
@@ -359,30 +331,7 @@ const RegisterPage=({route})=>{
                               textColor={colors.textColor}    
                               maximumDate={new Date()}                          
                               />
-                               {/* <DatePicker
-                                     date={dob=='0'||null?'':dob}
-                                     mode="date"
-                                     placeholder="Date Of Birth"
-                                     format="DD-MM-YYYY"
-                                     maxDate={new Date()}
-                                     confirmBtnText="Confirm"
-                                     cancelBtnText="Cancel"
-                                     customStyles={{
-                                     placeholderText:{color:'grey'},
-                                     dateIcon: {
-                                      width:0,
-                                      height:0,
-                                       },
-                                     dateInput: {
-                                      marginLeft:-40,
-                                      borderWidth:0,
-                                       },
-                                      dateText:{
-                                        color:colors.textColor
-                                        }
-                                      }}
-                                      onDateChange={(date)=> setDob(date)}                                   
-                                  />  */}
+                              
                                   </View>
                                   <Image style={{marginLeft:0,width:25,height:9,marginTop:0}} 
                                     source={require('../../../../assets/Image/down.png')}/>

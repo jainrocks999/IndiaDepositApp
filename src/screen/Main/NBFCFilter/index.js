@@ -42,9 +42,7 @@ const FDFilter=({route})=>{
     const data=route.params.data
     const [loan,setLoans]=useState('')
     const [premature,setPremature]=useState('')
-    console.log('this is route .pans',route.params);
     const [clear,setClear]=useState(false)
-console.log('this is loan and premature',loan,premature);
 useEffect(async()=>{
    const user_id=await AsyncStorage.getItem(Storage.user_id)
     dispatch({

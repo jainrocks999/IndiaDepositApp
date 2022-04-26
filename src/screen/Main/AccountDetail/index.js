@@ -305,7 +305,7 @@ const FDList = ({route}) => {
           <View style={styles.top}>
             <View>
               <Text style={styles.tds}>
-                {'Is TDS Applicable? :'}
+                {'Is TDS Applicable?'}
               </Text>
               <HTMLView
                 value={details.tds_info.trim().replace(/\s+/g, ' ')}

@@ -19,7 +19,8 @@ import fontSize from '../../../component/fontSize';
 import * as yup from 'yup';
 import colors from '../../../component/colors';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
+import {showMessage} from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 const loginValidationSchema = yup.object().shape({
   email: yup.string().email('Please enter valid email '),
   mobile: yup
@@ -46,9 +47,20 @@ const ForgetPassword = () => {
 
     return () => backHandler.remove();
   }, []);
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
 
   const validateUser = (email, mobile) => {
-    console.log('hi', email, mobile);
+   
     if (email && mobile) {
       Toast.show('Please enter email or mobile number');
     } else if (email) {

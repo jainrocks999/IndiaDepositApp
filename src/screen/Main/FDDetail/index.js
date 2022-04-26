@@ -19,9 +19,8 @@ const FDDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selector = useSelector(state => state.FDDetail);
-
+console.log('this isi user data',selector);
   const details = selector[0];
-  console.log('this is details',details);
   const period = (
     (parseFloat(route.params.year) * 365 +
       parseFloat(route.params.month) * 30 +
@@ -98,7 +97,6 @@ const FDDetail = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/getfdfor',
       });
-      console.log('this is user reposakjfdkjf',response.data);
       // Toast.show(response.data.messages)
       if (response.data.status == 200) {
         navigation.navigate('SelectPlan',{
@@ -193,9 +191,9 @@ const FDDetail = ({route}) => {
             </View>
             <View style={styles.view2}>
               <Text style={styles.item}>
-                {details.interest_payout == 0 ? 'No' : 'Yes'}
+                { `${details.lockin_period == null ? '' : details.lockin_period} days`}
               </Text>
-              <Text style={styles.item1}>{`Interest Payout`}</Text>
+              <Text style={styles.item1}>{`Lockin Period`}</Text>
             </View>
             <View style={styles.view2}>
               <Text style={styles.item}>{details.type}</Text>
@@ -265,31 +263,14 @@ const FDDetail = ({route}) => {
         </View>
 
           
-                  {details.lockin_period? 
-                   <View>
-                   <View style={styles.line}></View>
-                    <View style={styles.view4}>
-                         <View style={styles.container}>
-                         <View style={styles.view2}>
-                         <Text style={styles.item}>
-                              {details.lockin_period == null ? '' : details.lockin_period}
-                         </Text>
-                         <Text
-                              style={[
-                              styles.item1,
-                              {textAlign: 'center'},
-                              ]}>{`Lockin Period`}</Text>
-                         </View>
-                       
-                         </View>
-                    </View></View>:null}
+                
 
         {details.tds_info == null || details.tds_info == '' ? (
           <View />
         ) : (
           <View style={styles.top}>
             <Text style={styles.tds}>
-            Is TDS Applicable? :
+            Is TDS Applicable?
             </Text>
             <HTMLView
               value={details.tds_info.trim().replace(/\s+/g, ' ')}
@@ -338,7 +319,7 @@ const FDDetail = ({route}) => {
           <View />
         ) : (
           <View style={styles.top}>
-            <Text style={styles.tds}>Pan Required? :</Text>
+            <Text style={styles.tds}>Pan Required?</Text>
             <Text>{`${
               details.pan_required == 0
                 ? 'No'
@@ -355,7 +336,7 @@ const FDDetail = ({route}) => {
           <View />
         ) : (
           <View style={styles.top}>
-            <Text style={styles.tds}>Premature Withdrawal Available? :</Text>
+            <Text style={styles.tds}>Premature Withdrawal Available?</Text>
             <Text style={{fontSize: 14, color: colors.textColor}}>{`${
               details.premature_withdrawals == 0
                 ? 'No'
@@ -444,3 +425,5 @@ const FDDetail = ({route}) => {
   );
 };
 export default FDDetail;
+
+

@@ -88,23 +88,10 @@ const FDCalculator=()=>{
                               <Text style={styles.same}>Senior Citizen?  </Text> 
                              <View style={styles.view1}>
                                   <View style={styles.view2}>
-                                        {/* <RadioButton
-                                           value={checked}
-                                           status={ checked === true ? 'checked' : 'unchecked' }
-                                           onPress={() =>!checked?setChecked(true) :setChecked(false)}
-                                           color={'#777777'}
-                                         /> */}
+                                      
                                          <Text style={styles.text1}>Yes</Text>
                                      </View>
-                                        {/* <View style={{flexDirection:'row',alignItems:'center',marginLeft:10}}>
-                                                 <RadioButton
-                                                    value={checked1}
-                                                    status={ checked1 === true ? 'checked' : 'unchecked' }
-                                                    onPress={() =>checked?setChecked(false) && setChecked1(true):setChecked1(true)}
-                                                    color={'#777777'}
-                                                   />
-                                                   <Text style={{color:colors.textColor,fontSize:12}}>No</Text>
-                                               </View> */}
+                                       
                               </View>
                           </View>
                              <View style={styles.buttonContainer}>

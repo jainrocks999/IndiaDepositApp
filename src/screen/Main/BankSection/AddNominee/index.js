@@ -76,10 +76,9 @@ const BankDetail = ({route}) => {
   const value1 = date.toISOString().split('T')[0];
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
-  console.log('this user dob year', yyyy);
+ 
 
   const eligibleDate = yyyy2 - yyyy;
-  console.log('this isiuser elegible date', eligibleDate);
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
     return () => {
@@ -101,15 +100,6 @@ const BankDetail = ({route}) => {
     if (relation == '' || relation == null || relation == 0) {
       Toast.show('Please Select Relationship');
     }
-    // else if(state==''){
-    //     Toast.show('Please Select State Name')
-    // }
-    // else if(city==''){
-    //     Toast.show('Please Select City Name')
-    // }
-    // else if(!value){
-    //     Toast.show('Please Select Date Birth')
-    // }
     else {
       dispatch({
         type: 'Add_Nominee_Request',
@@ -153,7 +143,7 @@ const BankDetail = ({route}) => {
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
+    
       setPincode(val);
       try {
         const data = new FormData();
@@ -169,18 +159,12 @@ const BankDetail = ({route}) => {
         });
 
         if (response.data.status == 200) {
-          console.log('this is response value', response.data);
+     
           dispatch({
             type: 'State_List_Request',
             url: 'statebyid',
             country_id: response.data.country.value,
           });
-
-          // dispatch({
-          //   type: 'City_List_Request',
-          //   url: 'citybyid',
-          //   state_id: response.data.state.value,
-          // });
           setCity(response.data.city.value);
           setState(response.data.state.value);
           setCountry(JSON.stringify(response.data.country.value));
@@ -199,10 +183,7 @@ const BankDetail = ({route}) => {
         name: '',
         address1: '',
         address2: '',
-        //pincode:'',
-        // relationship:'',
         guardian: '',
-        // guardian_relationship:''
       }}
       onSubmit={values => addUser(values)}
       validateOnMount={true}
@@ -411,31 +392,7 @@ const BankDetail = ({route}) => {
                     textColor={colors.textColor}
                     maximumDate={new Date()}
                   />
-                  {/* <DatePicker
-                        style={{width: '99%'}}
-                            date={dob}
-                            mode="date"
-                            placeholder="Date Of Birth"
-                            format="DD-MM-YYYY"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            maxDate={new Date()}
-                            customStyles={{
-                                placeholderText:{marginLeft:0,color:colors.heading1},
-                               
-                            dateIcon: {
-                                width:0,
-                                height:0,
-                            },
-                            dateInput: {
-                                borderWidth:0,
-                                width:'100%',
-                                height:'100%',
-                                alignItems:'flex-start',
-                            }
-                            }}
-                            onDateChange={(date) => setDob(date)}
-                        /> */}
+                  
                 </TouchableOpacity>
                 <View style={styles.error}>
                   {/* {(errors.ifsc_code && touched.ifsc_code) &&

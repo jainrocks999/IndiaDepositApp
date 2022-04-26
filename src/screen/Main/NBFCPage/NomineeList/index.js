@@ -162,7 +162,7 @@ const MyFDDetail = ({route}) => {
 
   const manageCityState=async(val)=>{
     if(val.length==6){
-      console.log(val);
+
       setPincode(val)
       try {
        const data = new FormData();
@@ -178,7 +178,7 @@ const MyFDDetail = ({route}) => {
        });
       
        if (response.data.status==200) {
-         console.log('this is response value',response.data);
+         
          dispatch({
            type: 'State_List_Request',
            url: 'statebyid',
@@ -208,7 +208,8 @@ const MyFDDetail = ({route}) => {
 
   const renderItem = item => {
     return (
-      <View
+      <TouchableOpacity
+      onPress={()=>toggleChecked(item.user_nominee_id, item)}
         style={[
           {
             shadowColor: colors.black,
@@ -252,7 +253,7 @@ const MyFDDetail = ({route}) => {
             />
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   return (

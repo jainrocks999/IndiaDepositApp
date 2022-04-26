@@ -1,4 +1,4 @@
-package com.indiadeposit;
+package com.finobal.indiadeposit;
 
 import android.app.Application;
 import android.content.Context;

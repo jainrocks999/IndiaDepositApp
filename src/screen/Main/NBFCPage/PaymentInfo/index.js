@@ -21,7 +21,7 @@ const MyFDDetail = ({route}) => {
   const [data, setData] = useState('');
   const [data4,setData4]=useState('')
   const [loader, setLoader] = useState(false);
-  console.log('this is route data from your copy',route.params.my_fixed_deposit_id);
+console.log('this is data',data);
   useEffect(async () => {
     try {
       setLoader(true);
@@ -88,7 +88,7 @@ const MyFDDetail = ({route}) => {
           setLoader(false)
         }
       } catch (error) {
-        console.log(error);
+       
         setLoader(false);
       }
     } else {
@@ -230,6 +230,28 @@ const MyFDDetail = ({route}) => {
                       }}>
                       {
                         data.primaryuser[0].maturity_amount
+                      }
+                    </Text>
+                  </View>
+                </View>
+                <View style={{flexDirection: 'row', marginTop: 10}}>
+                  <View style={{width: '45%'}}>
+                    <Text style={styles.font}>Lockin Period</Text>
+                    <Text
+                      style={
+                        styles.font16
+                      }>{`${data.primaryuser[0].lockin_period==null?'NA':data.primaryuser[0].lockin_period} days`}</Text>
+                  </View>
+                  <View style={{width: '45%', marginLeft: 35}}>
+                    <Text style={styles.font}>Payout Frequency</Text>
+                    <Text
+                      style={{
+                        fontFamily: 'Montserrat-Bold',
+                        fontSize: 16,
+                        color: colors.textColor,
+                      }}>
+                      {
+                       data.primaryuser[0].interest_calculation_frequency
                       }
                     </Text>
                   </View>

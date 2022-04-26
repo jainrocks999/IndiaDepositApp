@@ -27,7 +27,8 @@ import Storage from '../../../component/AsyncStorage';
 import HTMLView from 'react-native-htmlview';
 import Dialog, {DialogContent} from 'react-native-popup-dialog';
 import CountryPicker from 'react-native-country-picker-modal';
-
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 const loginValidationSchema = yup.object().shape({
   name: yup
     .string()
@@ -103,14 +104,27 @@ const RegisterPage = () => {
     return () => backHandler.remove();
   }, []);
 
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
+
+
   const validateUser = async (name, email, mobile, pin, referal) => {
     const device_type = DeviceInfo.getSystemName();
     let token = await AsyncStorage.getItem(Storage.token);
-    console.log('testing', device_type, token);
+  
     if (toggleCheckBox == false) {
       Toast.show('Please accept Terms & Conditions');
     } else {
-      console.log('this is referal', referal);
+     
       dispatch({
         type: 'Send_RegOtp_Request',
         url: 'sendotp1',
@@ -335,7 +349,7 @@ const RegisterPage = () => {
                         withFlagButton={false}
                         withCallingCode
                         onSelect={country => {
-                          console.log('this is country', country);
+                         
                           const {cca2, callingCode} = country;
                           setcountryCode(cca2);
                           setcallingCode(callingCode[0]);

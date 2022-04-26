@@ -18,7 +18,7 @@ const Blog = () => {
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState(Blogs);
   const [masterDataSource, setMasterDataSource] = useState(Blogs);
-  console.log('this is narendra here', Blogs);
+  
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -37,7 +37,7 @@ const Blog = () => {
         url: 'https://indiadeposit.in/admin/public/apis/getpost',
       });
       if (response.data.status == 200) {
-        console.log('this is narendra', response.data.data);
+     
         setFilteredDataSource(response.data.data.blogpost);
         setMasterDataSource(response.data.data.blogpost);
       }

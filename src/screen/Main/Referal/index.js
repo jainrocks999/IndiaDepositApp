@@ -94,7 +94,7 @@ const Refferal = () => {
               <Text
                 style={
                   styles.text1
-                }>{`Share your referral link and invite your\nfriends via SMS, Email or Whatsapp.`}</Text>
+                }>{`Share your referral link and invite your\nfriends via SMS, Email or WhatsApp.`}</Text>
             </View>
           </View>
           <View style={styles.line}></View>

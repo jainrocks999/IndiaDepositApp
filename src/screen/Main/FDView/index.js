@@ -8,7 +8,6 @@ import { useNavigation } from '@react-navigation/native';
 const Web=({route})=>{
 const navigation=useNavigation()
 const [user_id,setuser_id]=useState()
-console.log('narendra here---------------------------------------------------------------------',user_id,route.params);
 useEffect(async()=>{
 
 const user_id=await AsyncStorage.getItem(Storage.user_id)

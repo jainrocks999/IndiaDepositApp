@@ -26,7 +26,7 @@ import BottomTab from '../../../../component/StoreButtomTab';
 
 
 const RegisterPage = ({route}) => {
-  console.log('this is user detail in this type',route.params.my_fixed_deposit_id);
+
   const navigation = useNavigation('');
   const dispatch = useDispatch();
   const isFetching = useSelector(state => state.isFetching);
@@ -101,7 +101,7 @@ const RegisterPage = ({route}) => {
     }else if (father_name == '' || father_name == 0) {
       Toast.show('Please enter father/spouse name');
     } else if (mother_name == '' || mother_name == 0) {
-      Toast.show('Please enter mother maiden name');
+      Toast.show("Please enter mother's maiden name");
     } else if (address1 == 0 || address1 == '') {
       Toast.show('Please enter address line 1');
     } else if (address2 == 0 || address2 == '') {
@@ -187,8 +187,7 @@ const RegisterPage = ({route}) => {
         });
         if(response.data.data){
           AsyncStorage.setItem(Storage.name,response.data.data[0].name);
-          console.log('this is response',response.data.messages);
-
+       
         }
       } catch (error) {
         throw error;
@@ -198,7 +197,7 @@ const RegisterPage = ({route}) => {
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
+
       setPincode(val);
       try {
         const data = new FormData();
@@ -225,6 +224,41 @@ const RegisterPage = ({route}) => {
       setPincode(val);
     }
   };
+
+  const handlePan=async(val)=>{
+    if(val.length==10){
+      setPan(val)
+      console.log('this is pancard',val);
+      try {
+        const data = new FormData();
+        data.append('name',name);
+        data.append('pan',val)
+        const response = await axios({
+          method: 'POST',
+          data,
+          headers: {
+            'content-type': 'multipart/form-data',
+            Accept: 'multipart/form-data',
+          },
+          url: 'https://indiadeposit.in/admin/public/apis/panverification',
+        });
+       if(response.data){
+         console.log('this is code',response.data);
+         Toast.show(`${response.data.message} ${response.data.code==undefined?'':response.data.code}`)
+       }
+      } catch (error) {
+        if (error.message == 'Network Error') {
+          Toast.show('Please check your network');
+        }
+        throw error;
+      }
+    }
+    else{
+      setPan(val)
+    }
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -360,7 +394,7 @@ const RegisterPage = ({route}) => {
               />
             </View>
             <View style={styles.row}>
-              <Text style={styles.better}>Mother Maiden Name</Text>
+              <Text style={styles.better}>Mother's Maiden Name</Text>
               <Text style={{marginTop:10,color:colors.red}}>*</Text>
 
             </View>
@@ -372,7 +406,7 @@ const RegisterPage = ({route}) => {
                 }
                 onChangeText={val => set_mother_name(val)}
                 editable={true}
-                placeholder="Please enter mother maiden name"
+                placeholder="Please enter mother's maiden name"
               />
             </View>
             <View style={styles.row}>
@@ -382,9 +416,10 @@ const RegisterPage = ({route}) => {
               <TextInput
                 style={styles.input}
                 value={pan == 0 || pan == 'undefined' ? '' : pan}
-                onChangeText={val => setPan(val)}
+                onChangeText={val => handlePan(val)}
                 placeholder="Please enter pan number"
                 editable={true}
+                autoCapitalize="characters"
               />
             </View>
             <View style={styles.row}>

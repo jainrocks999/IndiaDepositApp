@@ -1,4 +1,4 @@
-package com.indiadeposit;
+package com.finobal.indiadeposit;
 
 import com.facebook.react.ReactActivity;
 

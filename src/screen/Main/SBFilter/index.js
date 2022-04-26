@@ -307,18 +307,7 @@ const FDFilter = ({route}) => {
                     </View>
                 </View>
          
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Insurance</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled4(previousState => !previousState)
-              }
-              value={isEnabled4}
-            />
-          </View> */}
+       
           <View style={{marginTop:10}}>
             <Text style={styles.heading}>ATM Points</Text>
             <View style={{
@@ -337,118 +326,7 @@ const FDFilter = ({route}) => {
                 />
             </View>
           </View>
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Nationalized</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled1(previousState => !previousState)
-              }
-              value={isEnabled1}
-            />
-          </View> */}
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Private/public</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled2(previousState => !previousState)
-              }
-              value={isEnabled2}
-            />
-          </View> */}
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Offer</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled3(previousState => !previousState)
-              }
-              value={isEnabled3}
-            />
-          </View> */}
           
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Account Type</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled5(previousState => !previousState)
-              }
-              value={isEnabled5}
-            />
-          </View> */}
-
-          {/* <View style={styles.container}>
-            <Text style={styles.heading}>Account Sub Type</Text>
-            <Switch
-              trackColor={{false: 'grey', true: colors.bc}}
-              thumbColor={'#fff'}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={() =>
-                setIsEnabled6(previousState => !previousState)
-              }
-              value={isEnabled6}
-            />
-          </View> */}
-
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 30,
-            }}>
-            <Text style={styles.heading}>Non Maintenance Penalty</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                style={{width: 12, height: 18}}
-                source={require('../../../assets/Image/rupay.png')}
-              />
-              <Text>{value}</Text>
-            </View>
-          </View> */}
-          {/* <Slider
-            minimumValue={0}
-            maximumValue={1000}
-            step={10}
-            value={parseInt(value == '' ? 0 : value)}
-            thumbTintColor={colors.bc}
-            minimumTrackTintColor={colors.bc}
-            onValueChange={value => setValue(JSON.stringify(value))}
-          /> */}
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginTop: 30,
-              alignItems: 'center',
-            }}>
-            <Text style={styles.heading}>Debit Card AMC</Text>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                style={{width: 12, height: 18}}
-                source={require('../../../assets/Image/rupay.png')}
-              />
-              <Text>{value1}</Text>
-            </View>
-          </View>
-          <Slider
-            minimumValue={0}
-            maximumValue={1000}
-            step={10}
-            value={parseInt(value1 == '' ? 0 : value1)}
-            thumbTintColor={colors.bc}
-            minimumTrackTintColor={colors.bc}
-            onValueChange={value => setValue1(JSON.stringify(value))}
-          /> */}
           <View style={{marginTop: 40}}></View>
         </View>
       </ScrollView>

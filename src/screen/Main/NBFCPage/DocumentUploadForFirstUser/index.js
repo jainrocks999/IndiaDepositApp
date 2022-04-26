@@ -250,7 +250,7 @@ const Upload = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/addmyfd',
       });
-      console.log('this use id', response.data);
+ 
       if (response.data.status == 200) {
         AsyncStorage.setItem('fd_user_id', '');
         setIsFetching(false);
@@ -265,15 +265,13 @@ const Upload = ({route}) => {
             my_fixed_deposit_id: route.params.my_fixed_deposit_id,
           });
         }
-        // navigation.navigate('Nominee',{
-        //   my_fixed_deposit_id:route.params.my_fixed_deposit_id
-        // })
+      
       } else {
         isFetching(false);
       }
     } catch (error) {
       setIsFetching(false);
-      console.log('this use id', error);
+     
     }
   };
   return (

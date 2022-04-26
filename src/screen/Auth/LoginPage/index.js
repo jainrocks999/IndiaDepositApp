@@ -23,6 +23,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
 import OtpInputs from 'react-native-otp-inputs';
 import fontSize from '../../../component/fontSize';
+import NetInfo from '@react-native-community/netinfo';
+import Toast from 'react-native-simple-toast';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 const loginValidationSchema = yup.object().shape({
   value: yup.string().required('Please enter your email or mobile number'),
@@ -31,6 +34,9 @@ const loginValidationSchema = yup.object().shape({
     .min(4, ({min}) => `Pin must be 4 digits`)
     .required('Please enter your Pin'),
 });
+
+
+
 const Login = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -39,8 +45,19 @@ const Login = () => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [focus, setFocus] = useState(false);
   const next = useRef(null);
-
+  
   useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  
+   
     const backAction = () => {
       BackHandler.exitApp();
       return true;
@@ -49,8 +66,9 @@ const Login = () => {
       'hardwareBackPress',
       backAction,
     );
-
+    
     return () => backHandler.remove();
+    
   }, []);
 
   const validateUser = async values => {

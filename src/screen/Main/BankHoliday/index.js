@@ -75,7 +75,7 @@ const Holiday = () => {
         const data = new FormData();
         data.append('location', pincode);
         data.append('bank_id', bank_name);
-        console.log('this isworign');
+       
         setLoader(true);
         const response = await axios({
           method: 'POST',
@@ -90,7 +90,7 @@ const Holiday = () => {
           setLoader(false);
           setBoolean(true);
           setListDataSource(response.data.data);
-          console.log('thislkf;asdl;fk;kfl;dsafkdl;fkds;', response.data.data);
+        
         }
       } catch (error) {
         setLoader(false);
@@ -321,7 +321,7 @@ const Holiday = () => {
             {listDataSource.length > 0 ? (
               <View>
                 <Text style={[styles.result, {marginBottom: 20}]}>
-                  Your Search Result
+                  Your Search Results
                 </Text>
                 <Text style={styles.heading}>{`BRANCH DETAILS`}</Text>
               </View>

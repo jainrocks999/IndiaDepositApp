@@ -84,7 +84,7 @@ const Profile=()=>{
                     </View>}
 
                     {/* {value.mother_maiden_name==0||null?<View/>:<View> */}
-                    <Text style={styles.better}>Mother Maiden Name</Text>
+                    <Text style={styles.better}>Mother's Maiden Name</Text>
                       <View style={styles.drop}>
                       <Text style={styles.better1}>{`${value.mother_maiden_name==0||null?'':value.mother_maiden_name}`}</Text>
                     </View>

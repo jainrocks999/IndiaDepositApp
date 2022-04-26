@@ -10,6 +10,8 @@ import {connect} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-community/async-storage';
 import OtpInputs from 'react-native-otp-inputs';
+import NetInfo from "@react-native-community/netinfo";
+import {showMessage} from "react-native-flash-message";
 
 class OtpVarification extends React.Component {
   constructor(props) {
@@ -31,6 +33,17 @@ class OtpVarification extends React.Component {
     };
   }
   async componentDidMount() {
+    
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+
     const {counter} = this.state;
     let timer = setInterval(this.tick, 1000);
     this.setState({timer});
@@ -68,11 +81,7 @@ class OtpVarification extends React.Component {
   otpResend = async () => {
     AsyncStorage.setItem('old_mobile', this.state.mobile);
     AsyncStorage.setItem('old_email', this.state.email);
-    console.log(
-      'this is attempt bool',
-      this.state.attemptbool,
-      this.state.boolean,
-    );
+  
 
     if (this.state.attemptbool == undefined) {
       if (this.state.boolean == true) {
@@ -205,7 +214,7 @@ class OtpVarification extends React.Component {
           });
           Toast.show('Please enter correct otp code');
           if (this.state.email) {
-            console.log('this. is working');
+           
             this.props.dispatch({
               type: 'Verifyf_Otp_Request',
               url: 'verifyotp',
@@ -371,8 +380,7 @@ class OtpVarification extends React.Component {
     }
   };
   render() {
-    console.log('this is otp', this.state.otp);
-    console.log('this is otp data', this.state.otpData);
+  
 
     return (
       <View style={styles.container}>

@@ -20,7 +20,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
 import BottomTab from '../../../component/StoreButtomTab';
 
-
 Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
@@ -124,8 +123,7 @@ useEffect(()=>{
                 
          },
          (error) => {
-            // Toast.show(error.message)
-              console.log(error.code, error.message);
+          
               setLoader(false)
           },
          { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
@@ -164,18 +162,16 @@ useEffect(()=>{
                      
                     setLang(position.coords.latitude)
                     setLong(position.coords.longitude)
-                  //   setLoader(false)
-                    console.log('this us fjdkslfjklsfjklsdjfdslkf',position.coords.latitude, position.coords.longitude);
-            },
+                 },
             (error) => {
-                 console.log(error.code, error.message);
+                
                  setLoader(false)
              },
             {  enableHighAccuracy: true, timeout: 20000 ,forceLocationManager:false}
         );
       
        } else {
-         console.log('Location permission denied');
+       
          setLoader(false)
        }
      } catch (err) {
@@ -296,30 +292,11 @@ useEffect(()=>{
                       </View>
                       <View style={{marginTop:24}}>
                           <View style={styles.view4}>
-                              <Text style={[styles.text1,{fontWeight:'700'}]}>Location</Text>
+                              <Text style={[styles.text1,{fontWeight:'700'}]}>Pincode</Text>
                           </View>
-                          {/* <View style={styles.view5}>
-                             <View style={{flexDirection:'row',alignItems:'center'}}>
-                             <TouchableOpacity delayPressIn={0}
-                              onPress={()=>getAddress()}>
-                                <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
-                              </TouchableOpacity>
-                              {address? <Text style={[styles.text1,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
-                                <Text onPress={()=>getAddress()} style={[styles.text1,{marginLeft:10}]}>Current Location</Text>}
-                                </View>
-                                {address?
-                              <TouchableOpacity 
-                              
-                              delayPressIn={0}
-                              onPress={()=>setAddress('')}
-                              style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
-                              <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
-                              </TouchableOpacity>:null}
-                          </View> */}
+                          
                        </View>
-                       {/* <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
-                       </View> */}
+                     
                       <View style={[styles.view7]}>
                            <TextInput
                               style={{width:'90%'}}
@@ -332,7 +309,7 @@ useEffect(()=>{
                               }   
                               keyboardType='number-pad'
                               maxLength={6}
-                              returnKeyType='go'
+                              returnKeyType='search'
                               onSubmitEditing={()=>manageSearch()}
                            />
                               <View style={{ borderBottomWidth:1.5,borderColor:'#3D4785',marginTop:Platform.OS=='android'?-8:6}}/>

@@ -37,43 +37,7 @@ const RegisterPage=()=>{
                    onPress={()=>navigation.goBack()}
                  />
                  <ScrollView>
-                     {/* <Dialog
-                       dialogStyle={{width:'95%',height:248}}
-                       visible={visible}
-                       onTouchOutside={() => {
-                       setVisible(false)
-                       }}
-                       >
-                       <DialogContent>
-                       <View style={styles.modalView}>
-                       <View style={{width:'112%',height:40,backgroundColor:colors.bc,
-                        flexDirection:'row',alignItems:'center',justifyContent:'space-between',
-                        paddingHorizontal:20
-                        }}>
-                       <View></View>
-                       <Text style={{color:colors.white}}>Get the latest version</Text>
-                       <View style={{width:20,height:20,borderRadius:10,borderColor:colors.white,borderWidth:1,
-                        alignItems:'center',justifyContent:'center'
-                       }}>
-                       <Text style={{color:colors.white,marginTop:-5}}>x</Text>
-                       </View>
-                       </View>
-                      <View style={{paddingVertical:20,width:'100%'}}>
-                         <Text>
-                          You are using an old version of the app. Enjoy our
-                          latest update where we have fixed some bugs,
-                          introduced some new service and improved our
-                          app to provide a seamless banking experience. It
-                          will take only a few moments.
-                         </Text>
-                       <View style={{width:'100%',flexDirection:'row',justifyContent:'space-between'}}>
-                        <TouchableOpacity style={{width:'48%',height:40,backgroundColor:colors.bc,borderRadius:30}}></TouchableOpacity>
-                        <TouchableOpacity ></TouchableOpacity>
-                       </View>
-                      </View>
-                     </View>
-                      </DialogContent>
-                     </Dialog> */}
+                  
                       <View style={styles.main}>
                             <View style={styles.con}>
                                   <View style={styles.row}>

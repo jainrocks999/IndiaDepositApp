@@ -83,7 +83,6 @@ const BankDetail = ({route}) => {
   const value = `${dd}-${mm}-${yyyy}`;
 
   const eligibleDate = yyyy2 - yyyy;
-  console.log('this isiuser elegible date', eligibleDate);
   useEffect(() => {
     dispatch({
       type: 'State_List_Request',
@@ -176,7 +175,6 @@ const BankDetail = ({route}) => {
 
   const manageCityState = async val => {
     if (val.length == 6) {
-      console.log(val);
       setPincode(val);
       try {
         const data = new FormData();
@@ -414,30 +412,7 @@ const BankDetail = ({route}) => {
                     textColor={colors.textColor}
                     maximumDate={new Date()}
                   />
-                  {/* <DatePicker
-                        style={{width: '99%'}}
-                            date={dob=='0000-00-00'?'':dob}
-                            mode="date"
-                            placeholder="Date Of Birth"
-                            format="DD-MM-YYYY"
-                            confirmBtnText="Confirm"
-                            cancelBtnText="Cancel"
-                            maxDate={new Date()}
-                            customStyles={{
-                                placeholderText:{marginLeft:0,color:colors.heading1},
-                            dateIcon: {
-                                width:0,
-                                height:0,
-                            },
-                            dateInput: {
-                                borderWidth:0,
-                                width:'100%',
-                                height:'100%',
-                                alignItems:'flex-start',
-                            }
-                            }}
-                            onDateChange={(date) => setDob(date)}
-                        /> */}
+                
                 </TouchableOpacity>
                 <View style={styles.error}></View>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>

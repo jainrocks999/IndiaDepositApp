@@ -55,64 +55,7 @@ class SecondaryUser extends React.Component {
       user_id: user_id,
     });
   }
-  // isChecked = itemId => {
-  //   const isThere = this.state.ids.includes(itemId);
-  //   return isThere;
-  // };
-
-  // isChecked1 = itemId => {
-  //   const isThere = this.state.ids.includes(itemId);
-  //   return isThere;
-  // };
-
-  // toggleChecked = (itemId, item) => {
-  //   const ids = [...this.state.ids, itemId];
-  //   const data = [...this.state.data, item];
-  //   if (this.isChecked(itemId)) {
-  //     this.setState({
-  //       ...this.state,
-  //       ids: this.state.ids.filter(id => id !== itemId),
-  //     });
-  //     this.setState({
-  //       data: this.state.data.filter(id => id.user_id !== itemId),
-  //     });
-  //   } else {
-  //     if (this.state.data.length > 1) {
-  //       Toast.show('Only two user can select');
-  //     } else {
-  //       this.setState({
-  //         ...this.state,
-  //         ids,
-  //       });
-  //       this.setState({data: [...this.state.data, item]});
-  //     }
-  //   }
-  // };
-
-  // toggleChecked1 = (itemId, item) => {
-  //   const ids = [...this.state.ids, itemId];
-  //   const data = [...this.state.data, item];
-  //   if (this.isChecked(itemId)) {
-  //     this.setState({
-  //       ...this.state,
-  //       ids: this.state.ids.filter(id => id !== itemId),
-  //     });
-  //     this.setState({
-  //       data: this.state.data.filter(id => id.user_id !== itemId),
-  //     });
-  //   } else {
-  //     if (this.state.data.length > 1) {
-  //       Toast.show('Only two user can select');
-  //     } else {
-  //       this.setState({
-  //         ...this.state,
-  //         ids,
-  //       });
-  //       this.setState({data: [...this.state.data, item]});
-  //     }
-  //   }
-  // };
-
+ 
   isChecked = itemId => {
     const isThere = this.state.ids.includes(itemId);
     return isThere;
@@ -120,7 +63,7 @@ class SecondaryUser extends React.Component {
 
   toggleChecked = (itemId, item) => {
     if (this.state.ids.includes(itemId)) {
-      console.log('thisi s iworking prperly');
+     
       this.setState({ids: []});
       this.setState({data: ''});
     } else {
@@ -128,7 +71,7 @@ class SecondaryUser extends React.Component {
       this.setState({data: item});
     }
 
-    // this.setState({data: [...this.state.data, item]});
+
   };
 
   isChecked1 = itemId => {
@@ -152,7 +95,9 @@ class SecondaryUser extends React.Component {
       return <View></View>;
     } else {
       return (
-        <View style={[styles.card, {marginTop: 10}]}>
+        <TouchableOpacity
+        onPress={() => this.toggleChecked(item.user_id, item)}
+         style={[styles.card, {marginTop: 10}]}>
           <View style={styles.container1}>
             <View style={{}}>
               <Text style={[styles.text, {fontWeight: 'bold'}]}>
@@ -181,7 +126,7 @@ class SecondaryUser extends React.Component {
               />
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     }
   };
@@ -190,7 +135,9 @@ class SecondaryUser extends React.Component {
       return <View></View>;
     } else {
       return (
-        <View style={[styles.card, {marginTop: 10}]}>
+        <TouchableOpacity 
+        onPress={() => this.toggleChecked1(item.user_id, item)} 
+        style={[styles.card, {marginTop: 10}]}>
           <View style={styles.container1}>
             <View style={{}}>
               <Text style={[styles.text, {fontWeight: 'bold'}]}>
@@ -219,7 +166,7 @@ class SecondaryUser extends React.Component {
               />
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       );
     }
   };
@@ -274,8 +221,6 @@ class SecondaryUser extends React.Component {
           },
           url: 'https://indiadeposit.in/admin/public/apis/createfamily',
         });
-
-        console.log('this response value', response.data);
         if (response.data.status == 200) {
           this.setState({showModal1: false});
           Toast.show(response.data.messages);
@@ -316,7 +261,7 @@ class SecondaryUser extends React.Component {
         secondaryData: [this.state.data1],
       });
     } else {
-      console.log('narendra pal here');
+ 
     }
   };
 
@@ -324,19 +269,13 @@ class SecondaryUser extends React.Component {
     const value1 = this.state.date.toISOString().split('T')[0];
     const [yyyy, mm, dd] = value1.split('-');
     value = `${dd}-${mm}-${yyyy}`;
-    console.log(
-      'this user data from item',
-      // this.state.primaryData,
-      // this.state.my_fixed_deposit_id,
-      this.state.data,
-      this.state.data1,
-    );
+  
 
     return (
       <View style={{flex: 1, backgroundColor: colors.card}}>
         <Header
           source={require('../../../../assets/Image/arrow2.png')}
-          title={'SECONDARY USER'}
+          title={'JOINT HOLDER'}
           onPress={() => this.props.navigation.goBack()}
         />
         <ScrollView style={styles.Scroll}>

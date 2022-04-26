@@ -56,7 +56,6 @@ const BankDetail=({route})=>{
        
 const addUser=async(values)=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
-    console.log('narendra here pal kumar',values);
    
         dispatch({
             type: 'Update_Bank_Request',

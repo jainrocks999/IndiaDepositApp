@@ -57,7 +57,7 @@ if (f==0) {
 }
   // let effective=(interestAmount*period/time/10).toFixed(2)
   let effective=(100*interestAmount/time/totalInvestment*period).toFixed(2)
-  console.log('this is interest amount guven by',interestAmount);
+ 
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
 
   const principalOnchange=(val)=>{

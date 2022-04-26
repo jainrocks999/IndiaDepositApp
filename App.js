@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, LogBox, Button ,Platform,SafeAreaView, Alert} from 'react-native';
+import { View, Text, StyleSheet, LogBox, Button ,Platform,SafeAreaView, Alert,Image} from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { Provider } from 'react-redux';
@@ -10,7 +10,9 @@ import Storage from './src/component/AsyncStorage';
 import * as RootNavigation from './src/navigator/rootNavigation';
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import colors from "./src/component/colors";
-
+import FlashMessage from 'react-native-flash-message';
+import { NetworkProvider,useIsConnected } from 'react-native-offline';
+import Toast from 'react-native-simple-toast';
 
 LogBox.ignoreLogs(['Warning: ...']);
 LogBox.ignoreAllLogs();
@@ -22,8 +24,9 @@ PushNotification.createChannel(
   },
   (created) => console.log(`createChannel returned '${created}'`)
 );
-
 const App = () => {
+  // const isConnected = useIsConnected();
+  // isConnected?Toast.show('Please check Network connection'):''
   useEffect(async() => {
     crashlytics().log('Analytics page just mounted')
     getCrashlyticsDetail()
@@ -31,6 +34,9 @@ const App = () => {
       crashlytics().log('Analytics page just unmounted')
     }
   }, [])
+
+  
+
   const manageLogin=async()=>{
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     const KeepmeLogin = await AsyncStorage.getItem('KeepmeLogin');
@@ -45,7 +51,6 @@ const App = () => {
   }
   PushNotification.configure({
     onRegister: function (token) {
-      console.log('TOKENs:', token.token);
       AsyncStorage.setItem(Storage.token,token.token);
     },
   
@@ -56,7 +61,7 @@ const App = () => {
         message: notification.title,
       });
       if(notification.userInteraction===true && notification.foreground==false) {
-        console.log('this is a function calling1');
+      
 
         RootNavigation.navigate('Splash')
         AsyncStorage.setItem('value','1')
@@ -69,8 +74,7 @@ const App = () => {
       notification.finish(PushNotificationIOS.FetchResult.NoData);
     },
     onAction: function (notification) {
-      console.log('ACTION:', notification.action);
-      console.log('NOTIFICATION:', notification);
+     
     },
     onRegistrationError: function (err) {
       console.error(err.message, err);
@@ -91,22 +95,40 @@ const App = () => {
     try {
       crashlytics().setUserId(user_id)
       crashlytics().setAttribute('username', name)
-      // crashlytics().setAttributes({
-      //   role: 'admin',
-      //   followers: '13',
-      //   email: 'narendrap.forebearpro@gmail.com',
-      //   username: 'narendra pal'
-      // })
     } catch (err) {
       crashlytics().recordError(err)
     }
   }
   return (
     <SafeAreaView style={{flex: 1,  backgroundColor:Platform.OS=='ios'? colors.bc:'white'}}>
-      <Provider store={Store}>
-        <RootApp />
-      </Provider>
-    {/* </View> */}
+     
+       <FlashMessage  
+       icon={<Image resizeMode='contain' style={{height:20,width:20,tintColor:'#000'}} source={require('./src/assets/Image/info.png')}/>}
+       duration={3000} 
+       style={{
+         borderRadius:10,
+         marginHorizontal:30,
+         marginVertical:20,
+        //  paddingVertical:10,
+         height:50,
+         alignItems:'center',
+         justifyContent:'center',
+         
+         }}
+        position={'bottom'}
+        titleStyle={{fontSize:16,marginTop:8}}
+          />
+        <NetworkProvider
+        pingTimeout={1000}
+        pingServerUrl='https://www.google.com/'
+        shouldPing={true}
+        pingOnlyIfOffline={false}
+        pingInBackground={true}
+        >
+         <Provider store={Store}>
+           <RootApp />
+         </Provider>
+      </NetworkProvider>
     </SafeAreaView>
   )
 }

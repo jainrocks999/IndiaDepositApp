@@ -77,7 +77,7 @@ const Payment = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/addtransactiondetail',
         });
-        console.log('this is user respose', response.data);
+     
         if (response.data.status == 200) {
           setLoader(false);
           navigation.navigate('PaymentDetail1', {
@@ -89,7 +89,7 @@ const Payment = ({route}) => {
           setLoader(false);
         }
       } catch (error) {
-        console.log('hi rrordsk', error);
+      
         setLoader(false);
       }
     } else if (values.transaction_id) {
@@ -111,7 +111,7 @@ const Payment = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/addtransactiondetail',
         });
-        console.log('this is user respose', response.data);
+      
         if (response.data.status == 200) {
           setLoader(false);
           navigation.navigate('PaymentDetail1', {
@@ -123,7 +123,7 @@ const Payment = ({route}) => {
           setLoader(false);
         }
       } catch (error) {
-        console.log('hi rrordsk', error);
+       
         setLoader(false);
       }
     }

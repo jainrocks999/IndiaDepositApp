@@ -42,7 +42,6 @@ const FDList=({route})=>{
         const [asc,setAsc]=useState('')
         const period=((parseFloat(year)*365+parseFloat(month)*30+parseFloat(day))/365).toFixed(2)
         const re = /^[0-9\b]+$/;
-console.log('this is route .params',route.params);
 useEffect(()=>{
   const backAction = () => {
     navigation.goBack()
@@ -75,7 +74,6 @@ const manageList=async(item)=>{
   })
 }
 const manageSearch=async()=>{
-  console.log('manage search is calling',sort,asc);
 if(year==0 && month==0 && day==0){
     Toast.show('Tenure should be more than 7 days')
  }
@@ -129,7 +127,6 @@ if(year==0 && month==0 && day==0){
 
 const handleSorting=(val)=>{
   setSort(val)
-  console.log('this is changing here');
     manageSearch()
 }
 
@@ -362,45 +359,7 @@ const renderItem=(item)=>{
                            </View>
                            <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android'? -10:5}}/>
                       </View>
-                      {/* <View style={{marginTop:24}}>
-                          <View style={styles.view4}>
-                              <Text style={[styles.text5,{fontWeight:'700'}]}>Location</Text>
-                          </View>
-                          <View style={{flexDirection:'row',alignItems:'center',marginTop:28,justifyContent:'space-between'}}>
-                            <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <TouchableOpacity onPress={()=>getAddress()}>
-                                <Image style={{width:24,height:24}} source={require('../../../assets/Image/search.png')}/>
-                            </TouchableOpacity>
-                               {address?<Text style={[styles.text5,{marginLeft:10,fontSize:12,width:'70%'}]}>{address}</Text>:
-                               <Text onPress={()=>getAddress()} style={[styles.text5,{marginLeft:20}]}>Current Location</Text>} 
-                               </View>
-                               {address?
-                              <TouchableOpacity
-                              onPress={()=>setAddress('')}
-                              style={{backgroundColor:colors.bc,borderRadius:12,justifyContent:'center',height:24,width:24,alignItems:'center'}}>
-                              <Text style={{marginRight:0,color:'#fff',marginLeft:0,marginBottom:3}}>x</Text>
-                              </TouchableOpacity>:null}
-                          </View>
-                       </View>
-                       <View style={styles.view6}>
-                             <Text style={{fontWeight:'700',fontFamily:'Montserrat-Regular'}}>OR</Text>
-                       </View>
-                      <View style={styles.view7}>
-                           <TextInput
-                              style={{borderBottomWidth:1.5,borderColor:'#3D4785',paddingBottom:Platform.OS=='android'? 0:5}}
-                              placeholder='Enter Pincode'
-                              placeholderTextColor={colors.heading1}
-                              value={pincode}
-                              onChangeText={(val)=>{
-                                if (re.test(val)||val=='') {
-                                  setPincode(val)
-                                }
-                              }}
-                              keyboardType='number-pad'
-                              maxLength={6}
-                              returnKeyType='done'
-                           />
-                       </View> */}
+                    
                        <View style={{marginTop:16}}>
                            <Text style={{fontSize:14,fontFamily:'Montserrat-Regular',}}>Type of FD</Text>
                            <MultiSelect     
@@ -413,9 +372,7 @@ const renderItem=(item)=>{
                                 tagRemoveIconColor={'#fff'}
                                 tagTextColor={'#fff'}
                                 selectText={selected.length>0?'':"Select FD"}
-                                // selectedItems
-                                // styleSelectorContainer={{marginTop:100}}
-                                // searchInputPlaceholderText="Select FD"
+                                
                                 onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
@@ -536,9 +493,7 @@ const renderItem=(item)=>{
                                           style={[styles.image4,{marginLeft:10}]} 
                                           source={require('../../../assets/Image/down.png')}/>}
                       />   
-                   {/* <Image style={{width:20,height:16,marginLeft:5}} 
-                   resizeMethod='resize' 
-                   source={require('../../../assets/Image/down.png')}/> */}
+                  
                  </TouchableOpacity>
                  <TouchableOpacity  
                  delayPressIn={0}

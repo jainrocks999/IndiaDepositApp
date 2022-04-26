@@ -110,7 +110,7 @@ const MyFDDetail = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/adduserbank',
         });
-        console.log('this user resposens', response);
+       
         if (response.data.status == 200) {
           setShowModal1(false);
           dispatch({
@@ -148,7 +148,9 @@ const MyFDDetail = ({route}) => {
   const renderItem = item => {
     return (
       <View style={styles.cont}>
-        <View style={styles.card}>
+        <TouchableOpacity 
+        onPress={() => toggleChecked(item.user_bank_id, item)}
+         style={styles.card}>
           <View>
             <View style={styles.cardView}>
               <Image
@@ -190,7 +192,7 @@ const MyFDDetail = ({route}) => {
             checked={isChecked(item.user_bank_id)}
             onPress={() => toggleChecked(item.user_bank_id, item)}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };
@@ -198,7 +200,9 @@ const MyFDDetail = ({route}) => {
   const renderItem1 = item => {
     return (
       <View style={styles.cont}>
-        <View style={styles.card}>
+        <TouchableOpacity 
+        onPress={() => toggleChecked1(item.user_bank_id, item)}
+         style={styles.card}>
           <View>
             <View style={styles.cardView}>
               <Image
@@ -240,7 +244,7 @@ const MyFDDetail = ({route}) => {
             checked={isChecked1(item.user_bank_id)}
             onPress={() => toggleChecked1(item.user_bank_id, item)}
           />
-        </View>
+        </TouchableOpacity>
       </View>
     );
   };

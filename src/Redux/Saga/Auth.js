@@ -3,10 +3,10 @@ import Api from '../Api';
 import AsyncStorage from '@react-native-community/async-storage';
 import Toast from 'react-native-simple-toast';
 import Storage from '../../component/AsyncStorage';
-
+import { showMessage } from "react-native-flash-message";
 //Login
 function* doLogin(action) {
-  console.log('this is action', action.pin,action.mobile);
+
   try {
     const data = new FormData();
     if (action.email) {
@@ -18,7 +18,7 @@ function* doLogin(action) {
     data.append('device_token', action.device_token);
     data.append('device_type', action.device_type);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is run time response', response);
+    
     if (response.status == 200) {
       yield put({
         type: 'User_Login_Success',
@@ -67,7 +67,12 @@ function* doLogin(action) {
       });
     }
   } catch (error) {
-    Toast.show(error.messages);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'User_Login_Error',
     });
@@ -127,6 +132,12 @@ function* mLogin(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'User_MLogin_Error',
     });
@@ -162,7 +173,12 @@ function* forgotpasword(action) {
       });
     }
   } catch (error) {
-    Toast.show(error.messages);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Send_Otp_Error',
     });
@@ -171,7 +187,7 @@ function* forgotpasword(action) {
 
 //Register
 function* doRegister(action) {
-  console.log('this is action values', action);
+  
   try {
     const data = new FormData();
     data.append('name', action.name);
@@ -200,7 +216,7 @@ function* doRegister(action) {
     data.append('device_type', action.device_type);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is  your response', response);
+   
     if (response.status == 200) {
       Toast.show(response.messages);
       yield put({
@@ -222,33 +238,7 @@ function* doRegister(action) {
 
       action.navigation.replace('Main');
 
-      // if(action && action.navigation){
-      //   action.navigation.replace('Otp',
-      //   {
-      //     otp:response.otp,
-      //     mobile:action.mobile,
-      //     user_id:response.data[0].user_id,
-      //     name:response.data[0].name,
-      //     email:response.data[0].email,
-      //     father_spouse_name:response.data[0].father_spouse_name,
-      //     mother_maiden_name:response.data[0].mother_maiden_name,
-      //     dob:response.data[0].dob,
-      //     gender:response.data[0].gender,
-      //         pan:response.data[0].pan,
-      //         address1:response.data[0].address1,
-      //         address2:response.data[0].address2,
-      //         occupation:response.data[0].occupation,
-      //         pincode:response.data[0].pincode,
-      //         country:response.data[0].country,
-      //         state:response.data[0].state,
-      //         city:response.data[0].city,
-      //         income_group:response.data[0].income_group,
-      //         marital_status:response.data[0].marital_status,
-      //         residential_status:response.data[0].residential_status,
-      //         education:response.data[0].education,
-      //   }
-      //     )
-      //   }
+      
     } else {
       if (response.messages.email) {
         Toast.show(response.messages.email);
@@ -260,8 +250,12 @@ function* doRegister(action) {
       });
     }
   } catch (error) {
-    Toast.show(error.message);
-    console.log(error.message);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }  
     yield put({
       type: 'User_Register_Error',
     });
@@ -309,7 +303,12 @@ function* logout(action) {
       });
     }
   } catch (error) {
-    Toast.show(error.message);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'User_Logout_Error',
     });
@@ -333,6 +332,12 @@ function* aboutus(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'About_Us_Error',
     });
@@ -356,6 +361,12 @@ function* contacts(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Contact_Detail_Error',
     });
@@ -378,6 +389,12 @@ function* faq(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Faq_Error',
     });
@@ -400,7 +417,12 @@ function* privacy(action) {
       });
     }
   } catch (error) {
-    console.log('th narendra ',error);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Privacy_Error',
     });
@@ -424,6 +446,12 @@ function* security(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Security_Error',
     });
@@ -446,6 +474,12 @@ function* TermAndCondition(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'TermAndCondition_Error',
     });
@@ -468,6 +502,12 @@ function* trending(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Trending_Error',
     });
@@ -475,7 +515,7 @@ function* trending(action) {
 }
 
 function* notification(action) {
-  console.log('thisi si your action', action);
+ 
   try {
     const data = new FormData();
     data.append('user_id', action.user_id);
@@ -496,6 +536,12 @@ function* notification(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Notification_Error',
     });
@@ -526,6 +572,12 @@ function* support(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Support_Error',
     });
@@ -555,6 +607,12 @@ function* contact(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Contact_Us_Error',
     });
@@ -582,6 +640,12 @@ function* changepassword(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Change_Password_Request',
     });
@@ -618,13 +682,19 @@ function* feedback(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Feedback_Error',
     });
   }
 }
 function* createPin(action) {
-  console.log('this is action', action);
+
   try {
     const data = new FormData();
     if (action.mobile) {
@@ -634,7 +704,7 @@ function* createPin(action) {
     }
     data.append('pin', action.pin);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('thisis espo', response);
+   
     if (response.status == 200) {
       yield put({
         type: 'Create_Pin_Success',
@@ -651,7 +721,12 @@ function* createPin(action) {
       });
     }
   } catch (error) {
-    Toast.show(error.messages);
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Create_Pin_Error',
     });
@@ -659,7 +734,7 @@ function* createPin(action) {
 }
 
 function* editProfile(action) {
-  console.log('this is action  value', action);
+
   try {
     const data = new FormData();
     data.append('user_id', action.user_id);
@@ -684,7 +759,7 @@ function* editProfile(action) {
     data.append('residential_status', action.residential_status);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is ser response', response);
+
     if (response.status == 200) {
       yield put({
         type: 'Edit_Profile_Success',
@@ -701,6 +776,12 @@ function* editProfile(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Edit_Profile_Error',
     });
@@ -733,7 +814,7 @@ function* AddFamily(action) {
     data.append('residential_status', action.residential_status);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is user response', response);
+    
     if (response.status == 200) {
       yield put({
         type: 'Add_Family_Success',
@@ -747,6 +828,12 @@ function* AddFamily(action) {
       Toast.show(response.Message);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Add_Family_Error',
     });
@@ -754,7 +841,7 @@ function* AddFamily(action) {
 }
 
 function* EditFamily(action) {
-  console.log('thisis is action value-----------------------', action);
+
   try {
     const data = new FormData();
     data.append('family_id', action.family_id);
@@ -780,7 +867,7 @@ function* EditFamily(action) {
     data.append('residential_status', action.residential_status);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this isi response value', response);
+  
     if (response.status == 200) {
       yield put({
         type: 'Edit_Family_Success',
@@ -794,6 +881,12 @@ function* EditFamily(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Edit_Family_Error',
     });
@@ -816,6 +909,12 @@ function* getFaq(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Get_Faq_Error',
     });
@@ -838,6 +937,12 @@ function* getBlog(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Get_Blog_Error',
     });
@@ -860,6 +965,12 @@ function* userDetails(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'User_Detail_Error',
     });
@@ -883,6 +994,12 @@ function* getStory(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Get_Story_Error',
     });
@@ -905,6 +1022,12 @@ function* bankList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Bank_List_Error',
     });
@@ -927,6 +1050,12 @@ function* nomineeList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Nominee_List_Error',
     });
@@ -959,6 +1088,12 @@ function* addBank(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Add_Bank_Error',
     });
@@ -992,6 +1127,12 @@ function* updateBank(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Update_Bank_Error',
     });
@@ -1018,6 +1159,12 @@ function* deleteBank(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Delete_Bank_Error',
     });
@@ -1040,6 +1187,12 @@ function* getBankName(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Bank_Name_Error',
     });
@@ -1071,14 +1224,19 @@ function* addNominee(action) {
       Toast.show(response.messages);
       action.navigation.navigate('Profile');
     } else {
-      console.log('thsi is working');
+     
       Toast.show(response.messages);
       yield put({
         type: 'Add_Nominee_Error',
       });
     }
   } catch (error) {
-    console.log('hi tisi  s narendra');
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Add_Nominee_Error',
     });
@@ -1112,14 +1270,19 @@ function* editNominee(action) {
       Toast.show(response.messages);
       action.navigation.navigate('Profile');
     } else {
-      console.log('thsi is working');
+ 
       Toast.show('Nominee add Error');
       yield put({
         type: 'Edit_Nominee_Error',
       });
     }
   } catch (error) {
-    console.log('hi tisi  s narendra');
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Edit_Nominee_Error',
     });
@@ -1142,6 +1305,12 @@ function* countryList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Country_List_Error',
     });
@@ -1154,8 +1323,6 @@ function* stateList(action) {
     data.append('country_id', action.country_id);
     data.append('user_id', action.user_id);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is user response', response);
-    // Alert.alert('hi',response)
     if (response.status == 200) {
       yield put({
         type: 'State_List_Success',
@@ -1167,6 +1334,12 @@ function* stateList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'State_List_Error',
     });
@@ -1176,7 +1349,7 @@ function* stateList(action) {
 function* cityList(action) {
   try {
     const data = new FormData();
-    //data.append('state_id', action.state_id);
+    data.append('state_id', action.state_id);
     data.append('user_id', action.user_id);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
     if (response.status == 200) {
@@ -1191,6 +1364,12 @@ function* cityList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'City_List_Error',
     });
@@ -1309,6 +1488,12 @@ function* Search(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'FD_Search_Error',
     });
@@ -1345,6 +1530,12 @@ function* FDDetail(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'FD_Detail_Error',
     });
@@ -1372,6 +1563,12 @@ function* SBDetail(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'SB_Detail_Error',
     });
@@ -1402,7 +1599,7 @@ function* SBSearch(action) {
     data.append('b_lat', action.b_lat);
     data.append('b_long', action.b_long);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is response value', response);
+   
     if (response.status == 200) {
       yield put({
         type: 'SB_Search_Success',
@@ -1461,7 +1658,12 @@ function* SBSearch(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
-    //  Toast.show('hi')
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'SB_Search_Error',
     });
@@ -1480,7 +1682,7 @@ function* FDCompare(action) {
     data.append('month', action.month);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is response value', response);
+    
     if (response.status == 200) {
       yield put({
         type: 'FD_Compare_Success',
@@ -1501,6 +1703,12 @@ function* FDCompare(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'FD_Compare_Error',
     });
@@ -1515,7 +1723,7 @@ function* SBCompare(action) {
     data.append('value_id2', action.value_id2);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is response value', response);
+   
     if (response.status == 200) {
       yield put({
         type: 'SB_Compare_Success',
@@ -1534,6 +1742,12 @@ function* SBCompare(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'SB_Compare_Error',
     });
@@ -1570,6 +1784,12 @@ function* SendOtp(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Send_RegOtp_Error',
     });
@@ -1606,6 +1826,12 @@ function* ResendOtp(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Resend_Otp_Error',
     });
@@ -1621,7 +1847,7 @@ function* verifydOtp(action) {
     }
     data.append('otpwithoutconfrim', action.boolean);
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this is response', response);
+  
     if (response.status == 200) {
       yield put({
         type: 'Verify_Otp_Success',
@@ -1642,6 +1868,12 @@ function* verifydOtp(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Verify_Otp_Error',
     });
@@ -1674,6 +1906,12 @@ function* verifydOtpForgot(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Verifyf_Otp_Error',
     });
@@ -1690,7 +1928,7 @@ function* ResenOtp(action) {
       data.append('otpwithoutconfrim', action.boolean);
     }
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this.respasdfjkldasjfdkljdsaklfjlkdf', response);
+  
     if (response.status == 200) {
       yield put({
         type: 'Resen_Otp_Success',
@@ -1714,6 +1952,12 @@ function* ResenOtp(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Resen_Otp_Error',
     });
@@ -1738,6 +1982,12 @@ function* FamilyList(action) {
       // Toast.show(response.messages)
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Family_List_Error',
     });
@@ -1763,7 +2013,7 @@ function* createFD(action) {
     data.append('mother_name', action.mother_name);
     data.append('father_name', action.father_name);
     data.append('marital_status', action.marital_status);
-    data.append('my_fixed_deposit_id', action.my_fixed_deposit_id);
+    data.append('my_fixed_deposit_id', action.my_fixed_deposit_id); 
     data.append('spouse_name', action.spouse_name);
     data.append('occupation', action.occupation);
     data.append('annual_income', action.annual_income);
@@ -1781,7 +2031,7 @@ function* createFD(action) {
     data.append('pan', action.pan);
     data.append('dob', action.dob);
     data.append('nominee_address', action.nominee_address);
-
+    data.append('lockin_period',action.lockin_period)
     data.append('maturity_amount', action.maturity_amount);
     data.append('maturity_interest', action.maturity_interest);
     data.append('bank_name', action.bank_name);
@@ -1791,10 +2041,7 @@ function* createFD(action) {
     data.append('fd_joint_applicants_id', action.fd_joint_applicants_id);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log(
-      'this is user response value dsfjdklfjdkfj jkljkl jdklfjklfj',
-      response,
-    );
+ 
     if (response.status == 200) {
       yield put({
         type: 'Create_FD_Success',
@@ -1896,6 +2143,12 @@ function* createFD(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'Create_FD_Error',
     });
@@ -1923,6 +2176,13 @@ function* myFDList(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
+    console.log('this isierror message ',error.message);
     yield put({
       type: 'MYFD_List_Error',
     });
@@ -1948,6 +2208,13 @@ function* myFdDetail(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
+
     yield put({
       type: 'MYFD_Detail_Error',
     });
@@ -1973,7 +2240,7 @@ function* NBFCSearch(action) {
     data.append('btype', action.btype);
 
     const response = yield call(Api.fetchDataByPOST, action.url, data);
-    console.log('this uskgflgk', response.data);
+  
     if (response.status == 200) {
       yield put({
         type: 'NBFC_Search_Success',
@@ -1996,7 +2263,7 @@ function* NBFCSearch(action) {
       });
     }
     else{
-      Toast.show(`We don't have any FD listed on this amount Please search with another amount`)
+      Toast.show(`No FD found. Minimum Amount should be Rs.25,000`)
     }
     } else {
       if (action.data == 'FdList') {
@@ -2022,6 +2289,12 @@ function* NBFCSearch(action) {
       Toast.show(response.messages);
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'NBFC_Search_Error',
     });
@@ -2060,6 +2333,12 @@ function* NBFCDetail(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'NBFC_Detail_Error',
     });
@@ -2097,6 +2376,12 @@ function* NBFCCompare(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'NBFC_Compare_Error',
     });
@@ -2120,6 +2405,12 @@ function* getNBFCName(action) {
       });
     }
   } catch (error) {
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
     yield put({
       type: 'NBFC_Name_Error',
     });

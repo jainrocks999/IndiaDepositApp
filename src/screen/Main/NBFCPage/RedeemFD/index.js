@@ -88,7 +88,7 @@ const MyFDDetail = ({route}) => {
           },
           url: 'https://indiadeposit.in/admin/public/apis/adduserbank',
         });
-        console.log('this user resposens', response);
+
         if (response.data.status == 200) {
           setShowModal1(false);
           dispatch({
@@ -166,18 +166,7 @@ const MyFDDetail = ({route}) => {
       {isFetching ? <Loader /> : null}
       <View>
         <View style={styles.view4}>
-          {/* <View style={styles.container1}>
-            <View style={[styles.view2]}>
-              <Text style={styles.item}>{'FD Holder Name'}</Text>
-              <Text style={styles.item1}>{route.params.name}</Text>
-            </View>
-            <View style={[styles.view2]}>
-              <Text style={styles.item}>{'Maturity Date'}</Text>
-              <Text style={[styles.item1, {textAlign: 'center'}]}>
-                {route.params.maturity_date}
-              </Text>
-            </View>
-          </View> */}
+        
         </View>
         <View style={[styles.view4, {marginTop: 5}]}>
          

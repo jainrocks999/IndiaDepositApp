@@ -47,7 +47,7 @@ const Supports=({route})=>{
     const dispatch=useDispatch()
     const isFetching=useSelector(state=>state.isFetching)
     const selector=useSelector((state)=>state.UserData)
-     console.log('this is user data',selector);
+ 
     const validateUser=async(values)=>{
       const user_id=await AsyncStorage.getItem(Storage.user_id)
       dispatch({

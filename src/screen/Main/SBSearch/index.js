@@ -38,7 +38,7 @@ const SBAccount = ({route}) => {
   const [loader, setLoader] = useState(false);
   const isFetching = useSelector(state => state.isFetching);
   const re = /^[0-9\b]+$/;
-  console.log('this is route.params sdaa',route.params.type1.length);
+
   const manageSearch = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
 
@@ -113,7 +113,7 @@ const SBAccount = ({route}) => {
         setLong(position.coords.longitude);
       },
       error => {
-        console.log('bghhjhj', error.code, error.message);
+       
         setLoader(false);
       },
       {enableHighAccuracy: true, forceLocationManager: false},
@@ -152,7 +152,7 @@ const SBAccount = ({route}) => {
                 });
             },
             error => {
-              console.log('bghhjhj', error.code, error.message);
+      
               setLoader(false);
             },
             {
@@ -163,7 +163,7 @@ const SBAccount = ({route}) => {
             },
           );
         } else {
-          console.log('Location permission denied');
+         
           setLoader(false);
         }
       } catch (err) {
@@ -224,63 +224,11 @@ const SBAccount = ({route}) => {
             <View style={{marginTop:24}}>
               <View style={styles.view1}>
                 <Text style={[styles.text2, {fontWeight: '700'}]}>
-                  Location
+                  Pincode
                 </Text>
               </View>
-              {/* <View
-                style={{
-                  marginTop: 10,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <TouchableOpacity
-                    delayPressIn={0}
-                    onPress={() => getAddress()}>
-                    <Image
-                      style={{width: 24, height: 24}}
-                      source={require('../../../assets/Image/search.png')}
-                    />
-                  </TouchableOpacity>
-                  {address ? (
-                    <Text style={[styles.text3, {fontSize: 12, width: '70%'}]}>
-                      {address}
-                    </Text>
-                  ) : (
-                    <Text onPress={() => getAddress()} style={styles.text3}>
-                      Current Location
-                    </Text>
-                  )}
-                </View>
-                {address ? (
-                  <TouchableOpacity
-                    delayPressIn={0}
-                    onPress={() => setAddress('')}
-                    style={{
-                      backgroundColor: colors.bc,
-                      borderRadius: 12,
-                      justifyContent: 'center',
-                      height: 24,
-                      width: 24,
-                      alignItems: 'center',
-                    }}>
-                    <Text
-                      style={{
-                        marginRight: 0,
-                        color: '#fff',
-                        marginLeft: 0,
-                        marginBottom: 3,
-                      }}>
-                      x
-                    </Text>
-                  </TouchableOpacity>
-                ) : null}
-              </View> */}
             </View>
-            {/* <View style={[styles.view, {alignItems: 'center'}]}>
-              <Text style={{fontWeight: '700'}}>OR </Text>
-            </View> */}
+           
             <View style={{marginTop: 0}}>
               <TextInput
                 style={styles.textinput1}
@@ -294,7 +242,7 @@ const SBAccount = ({route}) => {
                   }
                 }}
                 maxLength={6}
-                returnKeyType="go"
+                returnKeyType="search"
                 onSubmitEditing={()=>manageSearch()}
               />
             </View>

@@ -31,7 +31,7 @@ const Notification = () => {
   const selector = useSelector(state => state.Notification);
   const isFetching = useSelector(state => state.isFetching);
   const [loader, setLoader] = useState(false);
-  console.log('this is selector', selector);
+
   const [search, setSearch] = useState('');
   const [filteredDataSource, setFilteredDataSource] = useState(selector);
   const [masterDataSource, setMasterDataSource] = useState(selector);
@@ -75,7 +75,7 @@ const Notification = () => {
       },
       url: 'https://indiadeposit.in/admin/public/apis/updatenotification',
     });
-    console.log('this is narendra', response.data);
+
    
   } catch (error) {
     throw error;
@@ -96,9 +96,9 @@ const Notification = () => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/getnotification',
       });
-      console.log('this is narendra', response.data);
+     
       if (response.data.status == 200) {
-        console.log('this is narendra', response.data.data);
+       
         setFilteredDataSource(response.data.data);
         setMasterDataSource(response.data.data);
       }
@@ -165,6 +165,18 @@ const Notification = () => {
     }
   };
 
+  const renderModal = item => {
+    Alert.alert('CONFIRM', 'Are you sure you want to delete this notification?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => deletePost(item.notification_id)},
+    ]);
+  };
+
+
 const manageNotification=async(item)=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   if(item.my_fd_id){
@@ -223,7 +235,8 @@ const manageNotification=async(item)=>{
                         buttonStyle={{width: 16, height: 18}}
                         destructiveIndex={1}
                         options={['Delete', 'Cancel']}
-                        actions={[() => deletePost(item.notification_id)]}
+                        // actions={[() => deletePost(item.notification_id)]}
+                        actions={[() => renderModal(item)]}
                       />
                     </View>
                     <Text style={[styles.text3, {marginTop: 5}]}>
@@ -232,42 +245,7 @@ const manageNotification=async(item)=>{
                   </View>
               </View>
               </TouchableOpacity>
-              // <TouchableOpacity 
-              // onPress={()=>manageNotification(item)}>
-              //   {filteredDataSource[0].notification_id ==
-              //   item.notification_id ? (
-              //     <View />
-              //   ) : (
-              //     <View style={styles.line}></View>
-              //   )}
-              //   <View style={{backgroundColor:item.my_fd_id?'#e4e7ed':'#fff'}}>
-              //   <View style={{paddingHorizontal:15,marginTop:15}}>
-              //     <View>
-              //       <View style={styles.view2}>
-              //         <Text style={styles.text1}>{item.title}</Text>
-              //         <Text
-              //           style={{
-              //             fontFamily: 'Montserrat-Regular',
-              //             fontSize: 11,
-              //             color: colors.textColor,
-              //           }}>
-              //           {item.created_date}
-              //         </Text>
-              //         <OptionsMenu
-              //           button={require('../../../assets/Image/menu3.png')}
-              //           buttonStyle={{width: 16, height: 18}}
-              //           destructiveIndex={1}
-              //           options={['Delete', 'Cancel']}
-              //           actions={[() => deletePost(item.notification_id)]}
-              //         />
-              //       </View>
-              //       <Text style={[styles.text3, {marginTop: 5}]}>
-              //         {item.notification}
-              //       </Text>
-              //     </View>
-              //   </View>
-              //   </View>
-              // </TouchableOpacity>
+             
             )}
           />
         </View>

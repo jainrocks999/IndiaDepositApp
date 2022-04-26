@@ -59,7 +59,6 @@ const BankDetail = () => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/delete',
       });
-      console.log('this is response value', response);
       if (response.data.status == 200) {
         dispatch({
           type: 'Nominee_List_Request',

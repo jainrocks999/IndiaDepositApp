@@ -19,9 +19,6 @@ let interestAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)
 (1+(interest/12/100))/(interest/12/100))-totalInvestment*time*12).toFixed(0)
 let maturityAmount=((totalInvestment*[Math.pow((1 + (interest/12/100)), 12*time)-1]* (1+(interest/12/100))/(interest/12/100)).toFixed(0))
 const [len,setLen]=useState(5)
-console.log(investmentAmount,interestAmount,maturityAmount);
-
-
 useEffect(async()=>{
 const user_id=await AsyncStorage.getItem(Storage.user_id)
 try {

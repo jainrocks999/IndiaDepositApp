@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:371052927363:android:fabdde9b6154fa64033eb6",
+        "mobilesdk_app_id": "1:371052927363:android:f295c6d88b744aa0033eb6",
         "android_client_info": {
-          "package_name": "com.indiadeposit"
+          "package_name": "com.finobal.indiadeposit"
         }
       },
       "oauth_client": [
@@ -29,6 +29,49 @@
             {
               "client_id": "371052927363-rpbtghri3042ploidqa3e9fn893drhse.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "371052927363-5mapckprh0rp2pqg6gekrvj08kcm5tuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.finobal.indiadeposit"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371052927363:android:fabdde9b6154fa64033eb6",
+        "android_client_info": {
+          "package_name": "com.finobal.indiadeposit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371052927363-rpbtghri3042ploidqa3e9fn893drhse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrK7uJFf8k9r2PblZMxVjlTKfRSHZ540g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371052927363-rpbtghri3042ploidqa3e9fn893drhse.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "371052927363-5mapckprh0rp2pqg6gekrvj08kcm5tuc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.indiadeposit"
+              }
             }
           ]
         }

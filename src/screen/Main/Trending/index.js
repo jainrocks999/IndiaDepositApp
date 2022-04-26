@@ -57,15 +57,10 @@ const showContent=()=>{
             title={'TRENDING'}
             source ={require('../../../assets/Image/arrow2.png')}
             onPress={()=>navigation.goBack()}
-            // source1={require('../../../assets/Image/notification.png')}
-            // onPress1={()=>navigation.navigate('Notification')}
+           
             /> 
               {isFetching?<Loader/>:null}
-             {/* <ScrollView
-              contentContainerStyle={{flex:1}}
-              style={{backgroundColor:'#E5E5E5'}}>
-                 {isFetching?<Loader/>:null}
-             <View style={styles.card}> */}
+           
               <ScrollView style={{flex:1,paddingHorizontal:15,paddingVertical:20}}>
             <View style={styles.card}>
                 {showContent()}

@@ -25,6 +25,9 @@ import * as RootNavigation from '../../../navigator/rootNavigation';
 import Modal from 'react-native-modal';
 import axios from 'axios';
 import Loader from '../../../component/loader';
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
+import { NetworkProvider,useIsConnected } from 'react-native-offline';
 let backPress = 0;
 let arrayOfOneFD = [];
 const dashboard = () => {
@@ -38,7 +41,21 @@ const dashboard = () => {
   const [title,setTitle]=useState('')
   const [title1,setTitle1]=useState('')
   const dispatch = useDispatch();
-console.log('this is notification',notification);
+  const connected=useIsConnected()
+  
+  useEffect(() => {
+    
+   
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
 
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
@@ -54,14 +71,19 @@ console.log('this is notification',notification);
         },
         url: 'https://indiadeposit.in/admin/public/apis/getnotification',
       });
-      console.log('this is narendra', response.data);
+   
       if (response.data.status == 200) {
-        console.log('this is narendra', response.data);
+      
         setNotification(response.data.view_status);
         // setMasterDataSource(response.data.data);
       }
     } catch (error) {
-      throw error;
+      if (error.message == 'Network Error') {
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
     }
   }, []);
 
@@ -85,7 +107,12 @@ console.log('this is notification',notification);
         AsyncStorage.setItem(Storage.image, response.data.profile_pic);
       }
     } catch (error) {
-      throw error;
+      if (error.message == 'Network Error') {
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
     }
     dispatch({
       type: 'Bank_Name_Request',
@@ -195,6 +222,7 @@ console.log('this is notification',notification);
         justifyContent: 'center',
         height: 100,
       }}>
+       
       <View style={[styles.touch1]}>
         <TouchableOpacity delayPressIn={0}
           onPress={() => manageInformation(item)}
@@ -305,12 +333,18 @@ const manageNotification=async()=>{
       navigation.push('Notification')
     }   
   } catch (error) {
-    throw error;
+    if (error.message == 'Network Error') {
+      showMessage({
+        message:'Please check your network',
+        type:'danger',
+      })
+    }
   }
 }
   return (
     <View style={{flex: 1, backgroundColor: colors.card}}>
       <View>
+     
       <View style={{width: '100%',
                   backgroundColor: colors.bc,
                   alignItems: 'center',
@@ -339,22 +373,10 @@ const manageNotification=async()=>{
          </TouchableOpacity>
       </View>
     </View>
-      {/* <Header
-        title={'IndiaDeposit'}
-        source={require('../../../assets/Images/drawer.png')}
-        onPress={() => navigation.toggleDrawer()}
-        source1={require('../../../assets/Image/notification.png')}
-        onPress1={() => navigation.navigate('Notification')}
-      /> */}
+     
       {isFetching ? <Loader /> : null}
 
-      {/* <View style={styles.main}>
-        <Image
-          resizeMethod="resize"
-          source={require('../../../assets/Image/fixed-deposit.png')}
-        />
-      </View> */}
-
+    
       <ScrollView>
         {/* NBFC FLOW */}
 

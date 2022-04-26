@@ -21,6 +21,8 @@ import colors from '../../../component/colors';
 import BottomTab from '../../../component/StoreButtomTab';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
+import { showMessage } from "react-native-flash-message";
+import NetInfo from "@react-native-community/netinfo";
 
 const loginValidationSchema = yup.object().shape({
   oldPassword: yup
@@ -31,10 +33,6 @@ const loginValidationSchema = yup.object().shape({
     .string()
     .min(4, ({min}) => `Pin must be 4 digits`)
     .required('Please enter new pin'),
-  // .matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
   confirmPassword: yup
     .string()
     .when('newPassword', {
@@ -44,10 +42,6 @@ const loginValidationSchema = yup.object().shape({
         .oneOf([yup.ref('newPassword')], 'Both pin need to be the same'),
     })
     .required('Please confirm new Pin'),
-  // .matches(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-  // ),
 });
 
 const ChangePassword = () => {
@@ -62,6 +56,19 @@ const ChangePassword = () => {
   const [focus2, setFocus2] = useState(false);
   const ref1 = useRef(null);
   const ref2 = useRef(null);
+
+  
+  useEffect(() => {
+    NetInfo.addEventListener(state => {
+      console.log('this is testing message',state.isConnected);
+      if(!state.isConnected){
+        showMessage({
+          message:'Please check your network',
+          type:'danger',
+        })
+      }
+    });
+  },[])
 
   const showVisible = () => {
     return (

@@ -26,7 +26,7 @@ const fd_form = ({route}) => {
   const [ApiResponse, setApiResponse] = useState(undefined);
   const [multiSelect, setMultiSelect] = useState(false);
   const [listDataSource1, setListDataSource1] = useState([]);
-  console.log('thisi is user ersponse',listDataSource1);
+ 
   useEffect(async () => {
     renderSearch();
   }, []);
@@ -45,7 +45,7 @@ const fd_form = ({route}) => {
         },
         url: 'https://indiadeposit.in/admin/public/apis/getbranchbypincode',
       });
-      console.log('FD Form response ::;', response.data.data[0]);
+    
       setApiResponse(response.data.data[0]);
       if (response) {
         setLoader(false);
@@ -69,14 +69,14 @@ const fd_form = ({route}) => {
       });
       if (response) {
         setListDataSource1(response.data.data);
-        console.log('this is user response data',response.data);
+     
       }
     } catch (error) {}
   };
 
   const actualDownload = url => {
     const {dirs} = RNFetchBlob.fs;
-    console.log('this isi working');
+  
     RNFetchBlob.config({
       fileCache: true,
       addAndroidDownloads: {
@@ -89,13 +89,12 @@ const fd_form = ({route}) => {
     })
       .fetch('GET', url, {})
       .then(res => {
-        console.log('The file saved to ', res.path());
+      
       })
       .catch(e => {
-        console.log(e);
+     
       });
   };
-  console.log('THIS USER DETL', route.params.pincode);
   const downloadFile = async item => {
     try {
       const granted = await PermissionsAndroid.request(
