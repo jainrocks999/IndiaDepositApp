@@ -2182,7 +2182,6 @@ function* myFDList(action) {
         type:'danger',
       })
     }
-    console.log('this isierror message ',error.message);
     yield put({
       type: 'MYFD_List_Error',
     });

@@ -109,7 +109,6 @@ const App = () => {
          borderRadius:10,
          marginHorizontal:30,
          marginVertical:20,
-        //  paddingVertical:10,
          height:50,
          alignItems:'center',
          justifyContent:'center',

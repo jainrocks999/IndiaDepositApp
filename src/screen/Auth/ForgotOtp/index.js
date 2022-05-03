@@ -35,7 +35,6 @@ class OtpVarification extends React.Component {
   async componentDidMount() {
     
     NetInfo.addEventListener(state => {
-      console.log('this is testing message',state.isConnected);
       if(!state.isConnected){
         showMessage({
           message:'Please check your network',

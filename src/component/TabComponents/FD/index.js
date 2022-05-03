@@ -55,9 +55,9 @@ if (f==0) {
   interestAmount=parseFloat((maturityAmount1-totalInvestment)*(1*time*(f==12?1:f==6?2:f==3?4:12)/period)).toFixed(2)
   maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))
 }
-  // let effective=(interestAmount*period/time/10).toFixed(2)
+
   let effective=(100*interestAmount/time/totalInvestment*period).toFixed(2)
- 
+
   let effectiveRate=effective==Infinity?0:effective=='NaN'?0:effective
 
   const principalOnchange=(val)=>{
@@ -179,7 +179,7 @@ if (f==0) {
                           justifyContent:'space-between',
                           // width:'40%'
                           }}>
-                          <Text style={{marginRight:Platform.OS == 'android'?10:10,color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>{
+                          <Text style={{marginRight:Platform.OS == 'android'?-13:10,color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>{
                             period==365?'Days':
                             period==12?'Months':
                             period==1?'Years':''
@@ -192,7 +192,7 @@ if (f==0) {
                         inputAndroid: { 
                           color: colors.textColor,
                           fontFamily:'Montserrat-Regular',
-                          width:0,
+                          width:'100%',
                           fontSize:0,
                           marginRight:10,
                           height:40
@@ -245,7 +245,7 @@ if (f==0) {
                       flexDirection:'row',
                       justifyContent:'space-between'
                     }}>
-                      <Text style={{marginRight:10,
+                      <Text style={{marginRight:-13,
                         color:colors.textColor,fontFamily:'Montserrat-Regular',fontSize:13}}>
                         {f==12?'Yearly':
                         f==6?'Half-Yearly':
@@ -257,16 +257,16 @@ if (f==0) {
                         <RNPickerSelect
                         onValueChange={(val)=>setf(val)}
                         items={Data1}
-                        onOpen={()=>console.log('hidfdsfj j')}
                         style={{ 
                         inputAndroid: { 
                           color: colors.textColor,
                           fontFamily:'Montserrat-Regular',
-                          width:0,
+                          width:'100%',
                           fontSize:0,
                           height:40
                         },
-                        inputIOS:{ 
+                        inputIOS:{
+ 
                           color: colors.textColor,
                           fontFamily:'Montserrat-Regular',
                           width:0,

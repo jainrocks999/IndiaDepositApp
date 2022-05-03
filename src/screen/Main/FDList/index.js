@@ -24,12 +24,8 @@ import Loader from '../../../component/loader';
 import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
-import Geolocation from 'react-native-geolocation-service';
-import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
 import BottomTab from '../../../component/StoreButtomTab';
-
-Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 
 const FDList = ({route}) => {
@@ -192,87 +188,7 @@ const FDList = ({route}) => {
     setVisible(true);
     // setSelected([])
   };
-  const getCurrentLocation = () => {
-    setLoader(true);
-    Geolocation.requestAuthorization();
-    Geolocation.getCurrentPosition(
-      position => {
-        Geocoder.from(position.coords.latitude, position.coords.longitude)
-          .then(json => {
-            var addressComponent = json.results[0].formatted_address;
-            setAddress(addressComponent);
-            setLoader(false);
-          })
-          .catch(error => {
-            setLoader(false);
-            Toast.show('Something went wrong');
-            console.warn(error);
-          });
 
-        setLang(position.coords.latitude);
-        setLong(position.coords.longitude);
-      },
-      error => {
-        setLoader(false);
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 100000,
-        forceLocationManager: false,
-      },
-    );
-  };
-  const getAddress = async () => {
-    if (Platform.OS === 'ios') {
-      getCurrentLocation();
-    } else {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Device current location permission',
-            message: 'Allow app to get your current location',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setLoader(true);
-          Geolocation.getCurrentPosition(
-            position => {
-              Geocoder.from(position.coords.latitude, position.coords.longitude)
-                .then(json => {
-                  var addressComponent = json.results[0].formatted_address;
-                  setAddress(addressComponent);
-                  setLoader(false);
-                })
-                .catch(error => {
-                  Toast.show(error.origin.error_message);
-                  setLoader(false);
-                  console.warn(error);
-                });
-              setLang(position.coords.latitude);
-              setLong(position.coords.longitude);
-            },
-            error => {
-              setLoader(false);
-            },
-            {
-              enableHighAccuracy: true,
-              timeout: 10000,
-              maximumAge: 100000,
-              forceLocationManager: false,
-            },
-          );
-        } else {
-        }
-      } catch (err) {
-        console.warn(err);
-      }
-    }
-  };
   const renderItem = item => {
     return (
       <View style={styles.cont}>
@@ -589,7 +505,6 @@ const FDList = ({route}) => {
                 // selectedItems
                 // styleSelectorContainer={{marginTop:100}}
                 // searchInputPlaceholderText="Select FD"
-                onChangeInput={text => console.log(text)}
                 selectedItemTextColor={colors.bc}
                 selectedItemIconColor={colors.bc}
                 itemTextColor={colors.textColor}

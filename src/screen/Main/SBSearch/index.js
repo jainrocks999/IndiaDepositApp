@@ -20,12 +20,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Loader from '../../../component/loader';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Geolocation from 'react-native-geolocation-service';
-import Geocoder from 'react-native-geocoding';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../component/AsyncStorage';
-
-Geocoder.init('AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM');
 
 const SBAccount = ({route}) => {
   const navigation = useNavigation();
@@ -91,87 +87,7 @@ const SBAccount = ({route}) => {
 
     return () => backHandler.remove();
   }, []);
-
-  const getCurrentLocation = () => {
-    setLoader(true);
-    Geolocation.requestAuthorization();
-    Geolocation.getCurrentPosition(
-      position => {
-        Geocoder.from(position.coords.latitude, position.coords.longitude)
-          .then(json => {
-            var addressComponent = json.results[0].formatted_address;
-            // let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-            setAddress(addressComponent);
-            setLoader(false);
-          })
-          .catch(error => {
-            Toast.show('Something went wrong');
-            setLoader(false);
-            console.warn(error);
-          });
-        setLang(position.coords.latitude);
-        setLong(position.coords.longitude);
-      },
-      error => {
-       
-        setLoader(false);
-      },
-      {enableHighAccuracy: true, forceLocationManager: false},
-    );
-  };
-  const getAddress = async () => {
-    if (Platform.OS === 'ios') {
-      getCurrentLocation();
-    } else {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Device current location permission',
-            message: 'Allow app to get your current location',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setLoader(true);
-          Geolocation.getCurrentPosition(
-            position => {
-              Geocoder.from(position.coords.latitude, position.coords.longitude)
-                .then(json => {
-                  var addressComponent = json.results[0].formatted_address;
-                  //  let address=`${addressComponent[0].long_name},${addressComponent[1].long_name},${addressComponent[2].long_name},${addressComponent[3].long_name}`
-                  setAddress(addressComponent);
-                  setLoader(false);
-                })
-                .catch(error => {
-                  console.warn(error);
-                  Toast.show(error.origin.error_message);
-                  setLoader(false);
-                });
-            },
-            error => {
-      
-              setLoader(false);
-            },
-            {
-              enableHighAccuracy: true,
-              timeout: 20000,
-              maximumAge: 10000,
-              forceLocationManager: false,
-            },
-          );
-        } else {
-         
-          setLoader(false);
-        }
-      } catch (err) {
-        setLoader(false);
-        console.warn(err);
-      }
-    }
-  };
+  
   return (
     <View style={styles.container}>
       <Header

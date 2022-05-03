@@ -69,7 +69,6 @@ const Nominee = () => {
     Alert.alert('CONFIRM', 'Are you sure you want to delete Nominee Details?', [
       {
         text: 'Cancel',
-        onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
       {text: 'YES', onPress: () => deletePost(item)},

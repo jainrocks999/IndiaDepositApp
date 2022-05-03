@@ -163,7 +163,6 @@ useEffect(async()=>{
                                 // selectedItems
                                 single={false}
                                 searchInputPlaceholderText="Select Bank"
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}
@@ -202,7 +201,6 @@ useEffect(async()=>{
                                 // selectedItems
                                 single={false}
                                 searchInputPlaceholderText="Select Credit Rating"
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}

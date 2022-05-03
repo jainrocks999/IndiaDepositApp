@@ -154,7 +154,7 @@ class UserSelection extends React.Component {
                   {item.name}
                 </Text>
               </View>
-              <Text style={styles.text}>{`Date of Birth : ${item.dob}`}</Text>
+              <Text style={styles.text}>{`Date of Birth : ${item.dob==0||item.dob==''||item.dob==null?'':item.dob}`}</Text>
               {item.relation == null ||
               item.relation == 0 ||
               item.relation == '' ? null : (

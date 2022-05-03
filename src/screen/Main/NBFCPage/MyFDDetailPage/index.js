@@ -12,7 +12,6 @@ import BottomTab from '../../../../component/StoreButtomTab';
 const MyFDDetail = () => {
   const navigation = useNavigation();
   const selector = useSelector(state => state.MYFDetail);
-   console.log('this is lokin period from my f detail page',selector);
   const date = selector[0].create_date;
 
   const [dd1, mm1, yyyy1] = selector[0].create_date.split('/');
@@ -186,7 +185,7 @@ const MyFDDetail = () => {
           <View style={styles.container1}>
             <View style={[styles.view2]}>
               <Text style={[styles.item1, {textAlign: 'center'}]}>
-                {selector[0].my_fixed_deposit_id}
+                {selector[0].my_fixed_deposit_id_copy}
               </Text>
               <Text style={styles.item}>{'FD Name/ID'}</Text>
             </View>
@@ -291,7 +290,7 @@ const MyFDDetail = () => {
                 style={[
                   styles.item1,
                   {textAlign: 'center'},
-                ]}>{`${selector[0].lockin_period==null?'':selector[0].lockin_period} days`}</Text>
+                ]}>{`${selector[0].lockin_period==null||selector[0].lockin_period==''?'':selector[0].lockin_period} days`}</Text>
               <Text style={styles.item}>{'Lockin Period'}</Text>
             </View>
           </View>

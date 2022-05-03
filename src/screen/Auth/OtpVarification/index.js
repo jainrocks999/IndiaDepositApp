@@ -48,7 +48,6 @@ class OtpVarification extends React.Component {
   async componentDidMount() {
    
     NetInfo.addEventListener(state => {
-      console.log('this is testing message',state.isConnected);
       if(!state.isConnected){
         showMessage({
           message:'Please check your network',
@@ -166,9 +165,9 @@ class OtpVarification extends React.Component {
 
     if (
       this.props.attempt.messages ==
-      'You have reached the maximum number of attempts. Try after 1 minute!'
-    ) {
-    } else {
+      'You have reached the maximum number of attempts. Try after 1 minute!') {
+    } 
+    else {
       if (this.state.type == 'Register') {
         if (this.state.otp == this.state.otpData) {
           this.props.dispatch({
@@ -238,6 +237,7 @@ class OtpVarification extends React.Component {
               boolean: false,
             });
             Toast.show('Please enter correct otp code');
+
             this.props.dispatch({
               type: 'Verify_Otp_Request',
               url: 'verifyotp',
@@ -269,7 +269,11 @@ class OtpVarification extends React.Component {
             </View>
           );
         } else if (this.props.attempt.attempt == 0) {
-          return <View style={[styles.textBottom, {marginTop: 15}]}> </View>;
+          return (
+          <View style={{marginTop: 15,paddingHorizontal:7,alignItems:'center'}}>
+            <Text></Text> 
+            </View>
+          )
         } else {
           return (
             <View style={[styles.textBottom, {marginTop: 15}]}>

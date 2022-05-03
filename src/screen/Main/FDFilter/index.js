@@ -161,7 +161,6 @@ useEffect(()=>{
                                 selectText={selected.length>0?'':"Select Bank Name"}
                                 single={false}
                                 searchInputPlaceholderText="Select Bank"
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}
@@ -199,7 +198,6 @@ useEffect(()=>{
                                 // selectedItems
                                 single={false}
                                 searchInputPlaceholderText="Select Credit Rating"
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}
@@ -235,7 +233,6 @@ useEffect(()=>{
                                 selectText={bankType.length>0?'':"Select Bank Type"}
                                 single={false}
                                 searchInputPlaceholderText="Select Bank"
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}

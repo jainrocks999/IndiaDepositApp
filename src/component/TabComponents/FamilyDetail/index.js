@@ -71,7 +71,6 @@ const FamilyDetails = () => {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {text: 'YES', onPress: () => deletePost(item)},

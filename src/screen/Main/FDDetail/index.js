@@ -19,7 +19,6 @@ const FDDetail = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const selector = useSelector(state => state.FDDetail);
-console.log('this isi user data',selector);
   const details = selector[0];
   const period = (
     (parseFloat(route.params.year) * 365 +

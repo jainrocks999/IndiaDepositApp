@@ -14,12 +14,10 @@ import Loader from '../../../component/loader';
 import Storage from "../../../component/AsyncStorage";
 import AsyncStorage from '@react-native-community/async-storage';
 import MultiSelect from 'react-native-multiple-select';
-import Geocoder from 'react-native-geocoding';
 import Constants from '../../../component/Constants';
 import BottomTab from '../../../component/StoreButtomTab';
 
 
-Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 const FDList=({route})=>{
         const navigation=useNavigation()
         const dispatch=useDispatch()
@@ -373,7 +371,6 @@ const renderItem=(item)=>{
                                 tagTextColor={'#fff'}
                                 selectText={selected.length>0?'':"Select FD"}
                                 
-                                onChangeInput={ (text)=> console.log(text)}
                                 selectedItemTextColor={colors.bc}
                                 selectedItemIconColor={colors.bc}
                                 itemTextColor={colors.textColor}

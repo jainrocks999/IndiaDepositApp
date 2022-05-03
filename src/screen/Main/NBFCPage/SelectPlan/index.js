@@ -28,12 +28,17 @@ const BankCalu = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
- 
+
+  const period=((parseFloat(route.params.years)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
+  
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
   const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
 
-  console.log('this is narendr here',route.params.lockin_period);
+  const data=(selectedItems[0]*365%365).toFixed(0)
+  const data1=Math.floor(data/30)
+  const data2=Math.floor((selectedItems[0]*365)/365)
+  const data3=(data%30)
   const validateUser = async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
  
@@ -431,8 +436,10 @@ const BankCalu = ({route}) => {
                 paddingHorizontal: 10,
                 borderColor: colors.bc,
               }}>
+                
               <TextInput
-                value={selectedItems[0] ? `${selectedItems[0]} Year` : ''}
+                value={selectedItems[0]==undefined?'': period==selectedItems[0]?`${`${route.params.years>0?`${route.params.years}y`:''} ${route.params.month>0?`${route.params.month}m`:''} ${route.params.days>0?`${route.params.days}d`:''}`}`:`${selectedItems[0]}y`}
+                // value={}
                 placeholderTextColor={colors.heading1}
                 onChangeText={selectedItems[0]}
                 style={{color: colors.textColor, width: '90%'}}

@@ -153,7 +153,6 @@ const FDFilter = ({route}) => {
               tagTextColor={'#fff'}
               selectText={selected.length > 0 ? '' : 'Select Bank'}
               searchInputPlaceholderText="Select Bank"
-              onChangeInput={text => console.log(text)}
               selectedItemTextColor={colors.bc}
               selectedItemIconColor={colors.bc}
               itemTextColor={colors.textColor}
@@ -190,7 +189,6 @@ const FDFilter = ({route}) => {
               tagTextColor={'#fff'}
               selectText={creditRating.length > 0 ? '' : 'Select Credit Rating'}
               searchInputPlaceholderText="Select Credit Rating"
-              onChangeInput={text => console.log(text)}
               selectedItemTextColor={colors.bc}
               selectedItemIconColor={colors.bc}
               itemTextColor={colors.textColor}
@@ -226,7 +224,6 @@ const FDFilter = ({route}) => {
               tagTextColor={'#fff'}
               selectText={bankType.length > 0 ? '' : 'Select Bank Type'}
               searchInputPlaceholderText="Select Bank Type"
-              onChangeInput={text => console.log(text)}
               selectedItemTextColor={colors.bc}
               selectedItemIconColor={colors.bc}
               itemTextColor={colors.textColor}

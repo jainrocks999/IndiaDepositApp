@@ -243,7 +243,6 @@ const RegisterPage = ({route}) => {
   const handlePan=async(val)=>{
     if(val.length==10){
       setPan(val)
-      console.log('this is pancard',val);
       try {
         const data = new FormData();
         data.append('name',name);
@@ -258,7 +257,6 @@ const RegisterPage = ({route}) => {
           url: 'https://indiadeposit.in/admin/public/apis/panverification',
         });
        if(response.data){
-         console.log('this is code',response.data);
          Toast.show(`${response.data.message} ${response.data.code==undefined?'':response.data.code}`)
        }
       } catch (error) {

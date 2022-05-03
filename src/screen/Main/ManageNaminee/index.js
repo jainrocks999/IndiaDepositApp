@@ -26,7 +26,6 @@ const RegisterPage=()=>{
     return(
         <Formik
              initialValues={{ name: '',mobile:'',dob:'',address:'',relation:''}}
-             onSubmit={values => console.log(values)}
              validateOnMount={true}
              validationSchema={loginValidationSchema}>
             {({ handleChange, handleBlur, handleSubmit, values,touched,isValid,errors }) => (

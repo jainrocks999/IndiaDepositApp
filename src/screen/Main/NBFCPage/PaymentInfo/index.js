@@ -21,7 +21,6 @@ const MyFDDetail = ({route}) => {
   const [data, setData] = useState('');
   const [data4,setData4]=useState('')
   const [loader, setLoader] = useState(false);
-console.log('this is data',data);
   useEffect(async () => {
     try {
       setLoader(true);

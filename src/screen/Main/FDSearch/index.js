@@ -10,17 +10,14 @@ import Header from '../../../component/header';
 import Button from '../../../component/button1'
 import RNPickerSelect from "react-native-picker-select";
 import fontSize from '../../../component/fontSize';
-import Geocoder from 'react-native-geocoding';
 import { useDispatch, useSelector, } from 'react-redux';
 import Toast from 'react-native-simple-toast';
 import Loader from '../../../component/loader';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Geolocation from 'react-native-geolocation-service';
 import AsyncStorage from '@react-native-community/async-storage';
 import Storage from "../../../component/AsyncStorage";
 import BottomTab from '../../../component/StoreButtomTab';
 
-Geocoder.init("AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM");
 
 // AIzaSyDtVqHcJj94jft8rWb2Ap-aQesEicslmxM
 const Contact=({route})=>{
@@ -103,84 +100,7 @@ useEffect(()=>{
        })
     }
    }
-   const getCurrentLocation=()=>{
-      setLoader(true)
-      Geolocation.requestAuthorization();
-      Geolocation.getCurrentPosition(
-         (position) => {
-             Geocoder.from(position.coords.latitude, position.coords.longitude)
-                 .then(json => {
-                      var addressComponent = json.results[0].formatted_address;
-                        setAddress(addressComponent)
-                        setLoader(false)
-                 })
-                 .catch(error => {
-                  setLoader(false)
-                  Toast.show(error)
-                    console.warn(error)});
-                 setLang(position.coords.latitude)
-                 setLong(position.coords.longitude)
-                
-         },
-         (error) => {
-          
-              setLoader(false)
-          },
-         { enableHighAccuracy: true, timeout: 10000, maximumAge: 100000 ,forceLocationManager:false}
-     );
-    }
-  const getAddress=async()=>{
-   if(Platform.OS === 'ios'){
-   getCurrentLocation();
-    }else{
-      try {
-       const granted = await PermissionsAndroid.request(
-         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-         {
-           title: 'Device current location permission',
-           message:
-             'Allow app to get your current location',
-           buttonNeutral: 'Ask Me Later',
-           buttonNegative: 'Cancel',
-           buttonPositive: 'OK',
-         },
-       );
-       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-         setLoader(true)
-         Geolocation.getCurrentPosition(
-            (position) => {
-                Geocoder.from(position.coords.latitude, position.coords.longitude)
-                    .then(json => {
-                        var addressComponent = json.results[0].formatted_address;
-                        setAddress(addressComponent)
-                        setLoader(false)
-                    })
-                    .catch(error => {
-                     setLoader(false)
-                     Toast.show(error.origin.error_message)
-                       console.warn(error)});
-                     
-                    setLang(position.coords.latitude)
-                    setLong(position.coords.longitude)
-                 },
-            (error) => {
-                
-                 setLoader(false)
-             },
-            {  enableHighAccuracy: true, timeout: 20000 ,forceLocationManager:false}
-        );
-      
-       } else {
-       
-         setLoader(false)
-       }
-     } catch (err) {
-       console.warn(err);
-       setLoader(false)
-     }
-    }
-
-  }
+   
     return(
         <View style={styles.container}>
               <Header
@@ -289,6 +209,7 @@ useEffect(()=>{
                               />
                            </View>
                            <View style={{borderBottomWidth:1.5,borderColor:colors.bc,marginTop:Platform.OS=='android' ?-10:5}}/>
+                           <Text style={{color:colors.bc,fontSize:12}}>Minimum : ₹1000</Text>
                       </View>
                       <View style={{marginTop:24}}>
                           <View style={styles.view4}>

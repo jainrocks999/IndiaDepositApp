@@ -307,7 +307,7 @@ const showContent=()=>{
                          <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:7,paddingHorizontal:15}}>
 
                             <View style={{alignItems:'center'}}>
-                            <Text style={styles.same1}>{`${item.my_fixed_deposit_id}`}</Text>
+                            <Text style={styles.same1}>{`${item.my_fixed_deposit_id_copy}`}</Text>
                            
                                 <Text  style={styles.same}>{'Reference\nNo'}</Text>
                             </View>
