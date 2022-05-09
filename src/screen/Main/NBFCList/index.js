@@ -23,6 +23,7 @@ const FDList=({route})=>{
         const dispatch=useDispatch()
        
         const selector=useSelector(state=>state.NBFCList)
+        console.log('thisi s nsjfd l  narendra opa pfdfk ',selector);
         const isFetching=useSelector((state)=>state.isFetching)
         const [selectedData,setSelectedData]=useState([])
         const [visible,setVisible]=useState(false)
@@ -36,7 +37,7 @@ const FDList=({route})=>{
         const [premature_penalty,setPremature_penalty]=useState(route.params.premature_penalty)
         const [loan,setLoan]=useState(route.params.loan)
         const [selected,setSelected]=useState(route.params.type1)
-        const [sort,setSort]=useState('Alphabetical')
+        const [sort,setSort]=useState('')
         const [asc,setAsc]=useState('')
         const period=((parseFloat(year)*365+parseFloat(month)*30+parseFloat(day))/365).toFixed(2)
         const re = /^[0-9\b]+$/;
@@ -224,11 +225,11 @@ const renderItem=(item)=>{
                      </View>
 
                      <View style={{alignItems:'center'}}>
-                       <Text style={styles.same1}>{item.loan==0?'No':'Yes'}</Text>
+                       <Text style={styles.same1}>{item.rating}</Text>
                        <Image 
                         style={styles.image} 
                        resizeMode='contain' source={require('../../../assets/Image/loan.png')}/>
-                     <Text  style={styles.same}>{'Loan'}</Text>
+                     <Text  style={styles.same}>{'Credit Rating'}</Text>
                          </View>  
                      <View style={{alignItems:'center'}}>
                      <Text style={styles.same1}>{item.premature_withdrawals==0?'No':'Yes'}</Text>
@@ -545,10 +546,8 @@ const SBType=[
   { label: 'Senior Citizen', value: 'Senior Citizen' },
 ]
 const Sorting = [
-  // {label:'Online', value:'online'},
-  {label: 'Name', value: 'alphabet'},
   {label: 'Rate of Return', value: 'interest_rate'},
-  // {label: 'Minimum investment', value: 'mab'},
+  {label: 'Name', value: 'alphabet'},
   {label: 'Credit Rating', value: 'credit_rating'},
  
 
@@ -610,8 +609,6 @@ const Years=[
   { label: '03', value: '3' },
   { label: '04', value: '4'},
   { label: '05', value: '5' },
-  
-  
 ]
 const item = [ {
   name: 'Regular',
@@ -621,13 +618,7 @@ const item = [ {
   name: 'Senior Citizen',
   id: 15,
 },
-// {
-//   name: 'Tax Saving',
-//   id: 17,
-// },
-// {
-//   name: 'NRI',
-//   id: 13,
-// },
 
 ];
+
+

@@ -323,6 +323,7 @@ const MyFDDetail = ({route}) => {
             </View>
             <View style={{marginBottom: 400}}></View>
           </ScrollView>
+          {/* <BottomTab/> */}
         </View>
       </View>
       <View
@@ -332,10 +333,10 @@ const MyFDDetail = ({route}) => {
           right: 0,
           position: 'absolute',
           backgroundColor: '#fff',
-          paddingHorizontal: 20,
+          // paddingHorizontal: 20,
           paddingVertical: 10,
         }}>
-        <View style={{paddingVertical: 10}}>
+        <View style={{paddingVertical: 10,paddingHorizontal:20}}>
           <TouchableOpacity
             delayPressIn={0}
             disabled={data ? false : true}
@@ -351,6 +352,7 @@ const MyFDDetail = ({route}) => {
             <Text style={{color: colors.white}}>{'CONTINUE'}</Text>
           </TouchableOpacity>
         </View>
+        <BottomTab/>
       </View>
       <Dialog
         dialogStyle={{
@@ -460,9 +462,9 @@ const MyFDDetail = ({route}) => {
           </ScrollView>
         </DialogContent>
       </Dialog>
-      <View>
+      {/* <View>
         <BottomTab/>
-      </View>
+      </View> */}
     </View>
   );
 };

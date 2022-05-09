@@ -23,6 +23,7 @@ import Storage from '../../../component/AsyncStorage';
 import AsyncStorage from '@react-native-community/async-storage';
 import { showMessage } from "react-native-flash-message";
 import NetInfo from "@react-native-community/netinfo";
+// import BottomTab from '../../../component/StoreButtomTab';
 
 const loginValidationSchema = yup.object().shape({
   oldPassword: yup
@@ -266,7 +267,7 @@ const ChangePassword = () => {
             </View>
           </ScrollView>
           <StatusBar />
-          {/* <BottomTab/> */}
+          <BottomTab/>
         </View>
       )}
     </Formik>

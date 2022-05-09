@@ -13,7 +13,7 @@ const MyFDDetail = () => {
   const navigation = useNavigation();
   const selector = useSelector(state => state.MYFDetail);
   const date = selector[0].create_date;
-
+  console.log('this isa user detail',selector);
   const [dd1, mm1, yyyy1] = selector[0].create_date.split('/');
   var msDiff =
     new Date().getTime() - new Date(`${yyyy1}-${mm1}-${dd1}`).getTime();
@@ -257,34 +257,17 @@ const MyFDDetail = () => {
             </View>
           )}
         </View>
-       
-        <View style={[styles.view4, {marginTop: 10, marginBottom: 10}]}>
+        <View style={styles.line}></View>
+        <View style={[styles.view4, {marginTop: 0, marginBottom: 10}]}>
           <View style={[styles.container1]}>
             <View style={styles.view2}>
               <Text
                 style={[
                   styles.item1,
                   {textAlign: 'center'},
-                ]}>{`${selector[0].username}`}</Text>
-              <Text style={styles.item}>{'Name'}</Text>
+                ]}>{`${selector[0].interest_calculation_frequency}`}</Text>
+              <Text style={styles.item}>{'Interest Payout'}</Text>
             </View>
-            <View style={styles.view2}>
-              <Text style={[styles.item1, {textAlign: 'center'}]}>
-                {selector[0].user_dob}ß
-              </Text>
-              <Text style={styles.item}>{'Date of Birth'}</Text>
-            </View>
-          </View>
-        </View>
-
-      <View style={[styles.view4, {marginTop: 0, marginBottom: 10}]}>
-          <View style={{
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        paddingVertical:13,
-        paddingHorizontal:12
-    }}>
             <View style={styles.view2}>
               <Text
                 style={[
@@ -296,11 +279,13 @@ const MyFDDetail = () => {
           </View>
         </View>
 
+     
+    <View style={{height:120}}></View>
       </ScrollView>
       {selector[0].fd_status == 1 ? (
         <View
           style={{
-            bottom: 0,
+            bottom: 60,
             left: 0,
             right: 0,
             position: 'absolute',
@@ -326,16 +311,16 @@ const MyFDDetail = () => {
         <View />
       )}
       {selector[0].fd_status == 2 || selector[0].fd_status == 3 ? (
-        <View style={[styles.view4, {marginTop: 0, marginBottom: 10}]}>
+        <View style={[styles.view4, {marginTop: 0, marginBottom: 0}]}>
           <View style={[styles.container1]}>{fd_status(selector[0])}</View>
         </View>
       ) : (
         <View />
       )}
 
-       {/* <View>
+       <View>
         <BottomTab/>
-      </View> */}
+      </View>
     </View>
   );
 };

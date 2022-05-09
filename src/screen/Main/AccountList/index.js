@@ -372,69 +372,8 @@ const SBAccountList = ({route}) => {
                   Location
                 </Text>
               </View>
-              {/* <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginTop: 28,
-                  justifyContent: 'space-between',
-                }}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <TouchableOpacity
-                    delayPressIn={0}
-                    onPress={() => getAddress()}>
-                    <Image
-                      style={{width: 24, height: 24}}
-                      source={require('../../../assets/Image/search.png')}
-                    />
-                  </TouchableOpacity>
-                  {address ? (
-                    <Text
-                      style={[
-                        styles.text5,
-                        {marginLeft: 10, fontSize: 12, width: '70%'},
-                      ]}>
-                      {address}
-                    </Text>
-                  ) : (
-                    <Text
-                      onPress={() => getAddress()}
-                      style={[styles.text5, {marginLeft: 10}]}>
-                      Current Location
-                    </Text>
-                  )}
-                </View>
-                {address ? (
-                  <TouchableOpacity
-                    delayPressIn={0}
-                    onPress={() => setAddress('')}
-                    style={{
-                      backgroundColor: colors.bc,
-                      borderRadius: 12,
-                      justifyContent: 'center',
-                      height: 24,
-                      width: 24,
-                      alignItems: 'center',
-                    }}>
-                    <Text
-                      style={{
-                        marginRight: 0,
-                        color: '#fff',
-                        marginLeft: 0,
-                        marginBottom: 3,
-                      }}>
-                      x
-                    </Text>
-                  </TouchableOpacity>
-                ) : null}
-                    </View>*/}
             </View> 
-            {/* <View style={styles.view6}>
-              <Text
-                style={{fontWeight: '700', fontFamily: 'Montserrat-Regular'}}>
-                OR
-              </Text>
-            </View> */}
+           
             <View style={[styles.view7,{marginTop:0}]}>
               <TextInput
                 style={{
@@ -648,11 +587,7 @@ const SBAccountList = ({route}) => {
                 />
               )}
             />
-            {/* <Image
-              style={{width: 20, height: 16, marginLeft: 5}}
-              resizeMethod="resize"
-              source={require('../../../assets/Image/down.png')}
-            /> */}
+           
           </TouchableOpacity>
           <TouchableOpacity
             delayPressIn={0}
@@ -695,8 +630,7 @@ const SBAccountList = ({route}) => {
                 fontFamily: 'Montserrat-Regular',
               }}>
                 No banks found. Kindly change pincode
-              {/* We don't have any bank listed on this pincode try another nearest
-              pincode */}
+             
             </Text>
           </View>
         )}
@@ -711,10 +645,8 @@ const SBAccountList = ({route}) => {
 };
 export default SBAccountList;
 const Sorting = [
-  {label: 'Name', value: 'alphabet'},
   {label: 'Rate of Return', value: 'interest_rate'},
-  {label: 'Credit Rating', value: 'credit_rating'},
-
+  {label: 'Name', value: 'alphabet'},
 ];
 const item = [
   {

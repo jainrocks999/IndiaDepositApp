@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image,TouchableOpacity} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import colors from '../../../../component/colors';
 import Header from '../../../../component/header';
@@ -14,6 +14,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Storage from '../../../../component/AsyncStorage';
 import Constants from '../../../../component/Constants';
 import BottomTab from '../../../../component/StoreButtomTab';
+import Dialog, {DialogContent} from 'react-native-popup-dialog';
+import {useDispatch, useSelector} from 'react-redux';
+import HTMLView from 'react-native-htmlview';
 
 const MyFDDetail = ({route}) => {
   const navigation = useNavigation();
@@ -21,6 +24,16 @@ const MyFDDetail = ({route}) => {
   const [data, setData] = useState('');
   const [data4,setData4]=useState('')
   const [loader, setLoader] = useState(false);
+  const selector1 = useSelector(state => state.TermCondition);
+  const [visible, setVisible] = useState(true);
+  const [visible1, setVisible1] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [showModal1, setShowModal1] = useState(false);
+  const [isVisible1, setIsVisible1] = useState(false);
+  const [isVisible2, setIsVisible2] = useState(false);
+
+
+  console.log('this is route .apra',route.params);
   useEffect(async () => {
     try {
       setLoader(true);
@@ -44,6 +57,22 @@ const MyFDDetail = ({route}) => {
       setLoader(false);
     }
   }, []);
+
+  const handleClick = () => {
+    setIsVisible1(true);
+    setTimeout(() => {
+      setIsVisible1(false);
+      setShowModal(true);
+    }, 2000);
+  };
+  const handleClick1 = () => {
+    setIsVisible2(true);
+    setTimeout(() => {
+      setIsVisible2(false);
+      setShowModal1(true);
+    }, 2000);
+  };
+
   const manageUser =async() => {
     const user_id=await AsyncStorage.getItem(Storage.user_id)
     if (toggleCheckBox == true) {
@@ -80,6 +109,7 @@ const MyFDDetail = ({route}) => {
             onlinepaymenturl:response.data.onlinepaymenturl,
             accountnumber:response.data.accountnumber,
             bankifsc:response.data.bankifsc,
+            bank_name:route.params.data.bankname,
             beneficiaryname:response.data.beneficiaryname
           });
         }
@@ -98,7 +128,7 @@ const MyFDDetail = ({route}) => {
     return (
       <View style={styles.container}>
         <Header
-          title={'FD PURCHASE DETAIL'}
+          title={'FD INVESTMENT DETAIL'}
           source={require('../../../../assets/Image/arrow2.png')}
           onPress={() => navigation.goBack()}
         />
@@ -157,7 +187,7 @@ const MyFDDetail = ({route}) => {
              {/* Bank details */}
              <View style={{borderWidth:.5,borderColor:colors.bc,marginTop:15}}/>
              <View style={{marginTop: 15}}>
-                <Text style={styles.font}>BANK DETAILS</Text>
+                <Text style={styles.font}>BANK DETAIL FOR REDEMPTION</Text>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
                 <View style={{width: '45%'}}>
                     <Text style={styles.font}>Bank Name</Text>
@@ -259,7 +289,8 @@ const MyFDDetail = ({route}) => {
               {/* Payments details */}
               <View style={{borderWidth:.5,borderColor:colors.bc,marginTop:15}}/>
              <View style={{marginTop: 15}}>
-                <Text style={[styles.font]}>PAYMENTS BY</Text>
+                {/* <Text style={[styles.font]}>PAYMENTS BY</Text> */}
+                <Text style={[styles.font]}>BANK DETAIL FOR PAYMENT</Text>
                 <View style={{flexDirection: 'row', marginTop: 10}}>
                 <View style={{width: '45%'}}>
                     <Text style={styles.font}>Bank Name</Text>
@@ -322,9 +353,22 @@ const MyFDDetail = ({route}) => {
                       }>{`${data.nomineedetail[0].dob}`}</Text>
                   </View>
                 </View>
+                <View style={{borderWidth:.5,borderColor:colors.bc,marginTop:15}}/>
               </View>:<View/>}
+              <View style={{width:'100%'}}>
+                <Text 
+                style={{
+                  fontFamily: 'Montserrat-Regular',
+                    fontSize: 14,
+                    color: colors.textColor,
+                    marginLeft: 0,
+                    width: '100%',
+                    marginTop: 10,
+                }}
+                >Redemption Process : For Redemption, investor needs to follow the company specific procedure with the company directly.IndiaDeposit shall provide support services for redemption.</Text>
+              </View>
               <View
-                style={{marginTop: 30, flexDirection: 'row', marginBottom: 20}}>
+                style={{marginTop: 10, flexDirection: 'row', marginBottom: 20}}>
                 <CheckBox
                   disabled={false}
                   value={toggleCheckBox}
@@ -342,13 +386,46 @@ const MyFDDetail = ({route}) => {
                     width: '90%',
                     marginTop: 5,
                   }}>
-                  I verify that the above information is correct.
+                  {/* I verify that the above information is correct. */}
+                  I confirm that above information is correct and  by clicking SUBMIT below I agree to
+                  <Text onPress={()=>setShowModal1(true)} style={{color:colors.bc,textDecorationLine:'underline',}}> Terms and Conditions</Text>
                 </Text>
               </View>
+              
             </View>
           </View>
           <View style={{height: 100}}></View>
         </ScrollView>
+          <Dialog
+            dialogStyle={{
+              width: '95%',
+              paddingHorizontal: 0,
+              height: '90%',
+              paddingTop: 10,
+            }}
+            visible={showModal1}
+            onHardwareBackPress={() => setShowModal1(false)}>
+            <DialogContent>
+              <View style={{alignSelf: 'flex-end'}}>
+                <TouchableOpacity
+                  delayPressIn={0}
+                  onPress={() => setShowModal1(false)}
+                  style={styles.cross}>
+                  <Text style={styles.x}>x</Text>
+                </TouchableOpacity>
+              </View>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{marginBottom: 30}}>
+                  <HTMLView
+                    value={selector1[0].value
+                      .trim()
+                      .replace(new RegExp('<p>', 'g'), '<span>')}
+                    addLineBreaks={false}
+                  />
+                </View>
+              </ScrollView>
+            </DialogContent>
+          </Dialog>
         <View
           style={{
             bottom: 0,

@@ -65,11 +65,11 @@ const Refferal = () => {
       return true;
     }
   };
-
+  // ${code} ${link} 
   const share = async () => {
     await Share.share({
-      message: `${code} ${link} `,
-    });
+      message: `Join me on IndiaDeposit! Sign up using my code: ${code}. Download IndiaDeposit now: ${'https://play.google.com/store/apps/details?id=com.indiadeposit'} for play store and ${'https://apps.apple.com/us/app/indiadeposit/id1619773583'} app store`,
+    }); 
   };
 
   const copyToClipboard = () => {

@@ -338,11 +338,11 @@ const Upload = ({route}) => {
                 </View>
               )
             ) : (
-              <View style={styles.row}>
-                <Text style={styles.place}>Aadhar Card</Text>
-                <Text style={styles.place}>Passport</Text>
+              <View style={[styles.row,{paddingHorizontal:20}]}>
+                <Text style={[styles.place,{textAlign:'center'}]}>{`Masked Aadhar Card > Mentioned( Latest downloaded from UIDAI website(www.uidai.gov.in) showing Name and Address both)`}</Text>
+                {/* <Text style={styles.place}>Passport</Text>
                 <Text style={styles.place}>{'Voter’s ID'}</Text>
-                <Text style={styles.place}>{'Driving’s License'}</Text>
+                <Text style={styles.place}>{'Driving’s License'}</Text> */}
               </View>
             )}
           </View>
@@ -397,7 +397,7 @@ const Upload = ({route}) => {
               )
             ) : (
               <View>
-                <Text style={styles.place}>{'Pan Card'}</Text>
+                <Text style={styles.place}>{'Front side of Clear PAN Card'}</Text>
               </View>
             )}
           </View>
@@ -456,9 +456,9 @@ const Upload = ({route}) => {
               )
             ) : (
               <View style={styles.row}>
-                <Text style={styles.place}>{'Cancelled cheque'}</Text>
-                <Text style={styles.place}>{'Bank Pass Book'}</Text>
-                <Text style={styles.place}>{'Bank statement copy'}</Text>
+                <Text style={[styles.place,{textAlign:'center'}]}>{'Cancel Chq copy or Bank Statement with (Name,Account No.IFSC Code,branch name)'}</Text>
+                {/* <Text style={styles.place}>{'Bank Pass Book'}</Text>
+                <Text style={styles.place}>{'Bank statement copy'}</Text> */}
               </View>
             )}
           </View>
@@ -519,7 +519,7 @@ const Upload = ({route}) => {
               )
             ) : (
               <View style={styles.row}>
-                <Text style={styles.place}>{'Photo'}</Text>
+                <Text style={styles.place}>{'Latest Passport Size Photo'}</Text>
               </View>
             )}
           </View>
@@ -580,7 +580,7 @@ const Upload = ({route}) => {
               )
             ) : (
               <View style={styles.row}>
-                <Text style={styles.place}>{'Signature Copy'}</Text>
+                <Text style={[styles.place,{textAlign:'center'}]}>{'Sign in a blank page and upload the scan copy showing clear signature'}</Text>
               </View>
             )}
           </View>

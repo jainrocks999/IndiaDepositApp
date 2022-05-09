@@ -22,7 +22,7 @@ const Calculator = () => {
   const [routes] = React.useState([
     {key: 'first', title: 'Privacy'},
     {key: 'second', title: 'Security'},
-    {key: 'third', title: 'Term & Condition'},
+    {key: 'third', title: 'Terms & Conditions'},
   ]);
 
   useEffect(() => {

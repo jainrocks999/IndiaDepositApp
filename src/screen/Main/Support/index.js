@@ -202,18 +202,19 @@ const Supports=({route})=>{
     const [index, setIndex] = useState(0);
     const [routes] = React.useState
     ([
-      { key: 'first', title: 'FAQ’S' },
-      { key: 'second', title: 'SUPPORT' },
+      { key: 'first', title: 'FAQ’s' },
+      // { key: 'second', title: 'SUPPORT' },
     ]);
     return(
             <View style={styles.container}>
                  <Header
                      source={require('../../../assets/Image/arrow2.png')}
-                     title={'SUPPORT'}
+                     title={'FAQs'}
                      onPress={()=>navigation.goBack()}
                   />
                   <View style={styles.card}>
-                       <TabView
+                    <FAQs/>
+                       {/* <TabView
                           navigationState={{ index, routes }}
                           renderScene={renderScene}
                           onIndexChange={setIndex}
@@ -230,7 +231,7 @@ const Supports=({route})=>{
                             </Text>
                           )}
                           {...props} style={{backgroundColor: 'white',borderTopRightRadius:10,borderTopLeftRadius:10}}/>}
-                       />
+                       /> */}
                   </View>
                   <StatusBar/>
                   <View style={{position:'absolute',bottom:0,left:0,right:0}}>

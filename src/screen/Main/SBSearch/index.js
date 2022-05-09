@@ -42,7 +42,11 @@ const SBAccount = ({route}) => {
       Toast.show('Please enter minimum balance');
     } else if (location == '' && address == '') {
       Toast.show('Please confirm location');
-    } else if (location != '' && address != '') {
+    } 
+    else if(location.length<6){
+     Toast.show('Please enter correct pincode')
+    }
+    else if (location != '' && address != '') {
       Toast.show('Please confirm pincode or current location');
     } else {
       dispatch({

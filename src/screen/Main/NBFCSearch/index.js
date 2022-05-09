@@ -81,8 +81,8 @@ const Contact = ({route}) => {
         premature_penalty: '',
         loan: '',
         credit_rating:'',
-        order_on: '',
-        order_to: '',
+        order_on: 'interest_rate',
+        order_to: 'DESC',
         btype:2,
         navigation: navigation,
       });

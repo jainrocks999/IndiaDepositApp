@@ -39,6 +39,8 @@ const Payment = ({route}) => {
   const [yyyy, mm, dd] = value1.split('-');
   const value = `${dd}-${mm}-${yyyy}`;
 
+  console.log('this is routw.params. data ',route.params);
+
   useEffect(async () => {
     const backAction = () => {
       navigation.goBack();
@@ -180,16 +182,16 @@ const Payment = ({route}) => {
                     justifyContent: 'center',
                   }}></View>
                 <View style={{marginTop: 15, alignItems: 'center'}}>
-                  <View style={[styles.border, {borderWidth: image ? 0 : 1}]}>
+                  <TouchableOpacity onPress={() => uploadImage()} style={[styles.border, {borderWidth: image ? 0 : 1}]}>
                     {image ? (
                       <Image style={styles.image} source={{uri: image}} />
                     ) : (
                       <View>
-                        <Text style={styles.option}>Check copy</Text>
-                        <Text style={styles.option}>Screenshot</Text>
+                        <Text style={[styles.option,{textAlign:'center'}]}>Upload Transaction Copy Screenshot</Text>
+                        {/* <Text style={styles.option}>Screenshot</Text> */}
                       </View>
                     )}
-                  </View>
+                  </TouchableOpacity>
                   <View style={{marginTop: 10}}>
                     {image ? (
                       <TouchableOpacity
@@ -199,12 +201,13 @@ const Payment = ({route}) => {
                         <Text style={styles.upload}>Remove</Text>
                       </TouchableOpacity>
                     ) : (
-                      <TouchableOpacity
-                        delayPressIn={0}
-                        onPress={() => uploadImage()}
-                        style={styles.button}>
-                        <Text style={styles.upload}>Upload</Text>
-                      </TouchableOpacity>
+                      <View/>
+                      // <TouchableOpacity
+                      //   delayPressIn={0}
+                      //   onPress={() => uploadImage()}
+                      //   style={styles.button}>
+                      //   <Text style={styles.upload}>Upload</Text>
+                      // </TouchableOpacity>
                     )}
                   </View>
                   <Text style={styles.or}>OR</Text>
@@ -308,7 +311,7 @@ const Payment = ({route}) => {
           </ScrollView>
           <View
             style={{
-              bottom: 0,
+              bottom: 60,
               position: 'absolute',
               left: 0,
               right: 0,
@@ -320,9 +323,9 @@ const Payment = ({route}) => {
             </View>
           </View>
           <StatusBar />
-          {/* <View>
+          <View>
         <BottomTab/>
-      </View> */}
+      </View>
         </View>
       )}
     </Formik>

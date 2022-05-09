@@ -37,7 +37,7 @@ const ExpandableComponent = ({item, onClickFunction}) => {
             width:'100%',
             // height:40,
             backgroundColor:colors.bc,
-            marginTop:5,
+            marginBottom:5,
             justifyContent:'space-between',
             paddingHorizontal:15,
             flexDirection:'row',

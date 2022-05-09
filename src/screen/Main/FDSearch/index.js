@@ -67,6 +67,9 @@ useEffect(()=>{
       else if(pincode=='' && address==''){
          Toast.show('Please confirm location')
       }
+      else if(pincode.length<6){
+         Toast.show('Please enter correct pincode')
+      }
       else if(pincode!=''&&address!=''){
          Toast.show('Please confirm pincode or current location')
       }
@@ -89,8 +92,8 @@ useEffect(()=>{
          interest_payout:'',
          premature_penalty:'',
          loan:'',
-         order_on:'',
-         order_to:'',
+         order_on: 'interest_rate',
+         order_to: 'DESC',
          bank_type:'',
          credit_rating:'',
          b_lat:lat,

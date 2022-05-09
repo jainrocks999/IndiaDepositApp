@@ -42,7 +42,7 @@ const MyFDDetail = ({route}) => {
   const [ifsc_code, set_ifsc_code] = useState('');
   const [showModal1, setShowModal1] = useState(false);
 
-
+   console.log('this is route data',route.params);
   useEffect(async () => {
     const user_id = await AsyncStorage.getItem(Storage.user_id);
    
@@ -75,6 +75,10 @@ const MyFDDetail = ({route}) => {
     Clipboard.setString(route.params.bankifsc);
     Toast.show('copied to clipboard');
   };
+  const copyToClipboard3=()=>{
+    Clipboard.setString(route.params.bank_name)
+    Toast.show('copied to clipboard');
+  }
   const renderItem = item => {
     return (
       <View style={styles.cont}>
@@ -133,7 +137,8 @@ const MyFDDetail = ({route}) => {
       />
       {isFetching ? <Loader /> : null}
       <View style={{paddingHorizontal: 15, flex: 1}}>
-        <View style={[styles.card, {paddingBottom: 30,paddingTop:20, marginVertical: 20}]}>
+        <ScrollView>
+        <View style={[styles.card, {marginBottom:60,paddingTop:20, marginVertical: 20}]}>
           <Text style={{fontSize:13,fontFamily:'Montserrat-Regular'}}>{`Kindly make the payment directly to ${route.params.beneficiaryname}. Company's bank details are mentioned below`} </Text>
           <Text style={{marginTop:5,fontFamily:'Montserrat-Regular',fontSize:13}}>{`Note: NEFT/RTGS are the only acceptable mode of payment.Amy other payment,including IMPS,will not be accepted.The same has been emailed you`} </Text>
 
@@ -183,7 +188,7 @@ const MyFDDetail = ({route}) => {
             }}>
             IFSC Code
           </Text>
-          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:0}}>
             <Text
               style={{
                 fontFamily: 'Montserrat-SemiBold',
@@ -194,6 +199,27 @@ const MyFDDetail = ({route}) => {
             <Text onPress={() => copyToClipboard2()} style={{color:colors.bc}}>Copy</Text>
 
           </View>
+
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Regular',
+              fontSize: 13,
+              marginTop: 8,
+            }}>
+            Bank Name
+          </Text>
+          <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',marginBottom:20}}>
+            <Text
+              style={{
+                fontFamily: 'Montserrat-SemiBold',
+                color: colors.textColor,
+              }}>
+              {route.params.bank_name}
+            </Text>
+            <Text onPress={() => copyToClipboard3()} style={{color:colors.bc}}>Copy</Text>
+
+          </View>
+
           {route.params.onlinepaymenturl ? (
             <CustomButton
               onPress={() => Linking.openURL(route.params.onlinepaymenturl)}
@@ -217,6 +243,7 @@ const MyFDDetail = ({route}) => {
         <View>
         
         </View>
+        </ScrollView>
       </View>
       <View
         style={{
@@ -336,9 +363,9 @@ const MyFDDetail = ({route}) => {
           </ScrollView>
         </DialogContent>
       </Dialog>
-      {/* <View>
+      <View>
         <BottomTab/>
-      </View> */}
+      </View>
     </View>
   );
 };

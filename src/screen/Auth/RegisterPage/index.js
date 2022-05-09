@@ -581,7 +581,7 @@ const RegisterPage = () => {
               <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginBottom: 30}}>
                   <HTMLView
-                    value={selector[0].value
+                    value={selector1[0].value
                       .trim()
                       .replace(new RegExp('<p>', 'g'), '<span>')}
                     addLineBreaks={false}
@@ -611,7 +611,7 @@ const RegisterPage = () => {
               <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{marginBottom: 30}}>
                   <HTMLView
-                    value={selector1[0].value
+                    value={selector[0].value
                       .trim()
                       .replace(new RegExp('<p>', 'g'), '<span>')}
                     addLineBreaks={false}

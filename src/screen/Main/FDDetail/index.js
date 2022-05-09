@@ -420,6 +420,7 @@ const FDDetail = ({route}) => {
         </View>
         <StatusBar />
       </View>
+      <BottomTab/>
     </View>
   );
 };

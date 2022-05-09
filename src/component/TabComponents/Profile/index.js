@@ -119,7 +119,7 @@ const Profile=()=>{
                        </View> */}
                         <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
                         <Text style={styles.better1}>{`${value.email==0||null?'':value.email}`}</Text>
-                      {value.email_status==1? <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>:null}
+                      {value.email_status==1? <Text style={{color:colors.bc,fontSize:12}}>{'Verified'}</Text>:null}
                       </View>
                       </View>
                     {/* } */}
@@ -127,7 +127,8 @@ const Profile=()=>{
                       <Text style={styles.better}>Mobile</Text>
                       <View style={[styles.drop,{flexDirection:'row',alignItems:'center',justifyContent:'space-between'}]}>
                        <Text style={styles.better1}>{value.mobile==0||null?'':value.mobile}</Text>
-                       <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/>
+                       <Text style={{color:colors.bc,fontSize:12}}>{'Verified'}</Text>
+                       {/* <Image style={{width:20,height:20}} source={require('../../../assets/Image/verified.png')}/> */}
                       </View>
                     </View>
                     {/* {value.pan==0||null?<View/>: */}

@@ -18,6 +18,7 @@ const FDDetail=({route})=>{
 const navigation=useNavigation()
 const selector=useSelector(state=>state.NBFCDetail)
 const details=selector[0]
+console.log('this is user detail for test',details);
 const period=((parseFloat(route.params.year)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
 useEffect(()=>{
      const backAction = () => {
@@ -101,7 +102,8 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                     month:route.params.month,
                     years:route.params.year,
                     days:route.params.days,
-                    lockin_period:details.lockin_period
+                    lockin_period:details.lockin_period,
+                    rating:details.rating
                })
              } 
         } catch (error) {
@@ -314,6 +316,7 @@ const user_id=await AsyncStorage.getItem(Storage.user_id)
                          }
                      </View>
            </View>
+           <BottomTab/>
            
      </View>
        

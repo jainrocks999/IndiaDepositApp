@@ -265,64 +265,6 @@ const DrawerContent = ({props}) => {
             </View>
           </View>
         </TouchableOpacity>
-
-        <TouchableOpacity delayPressIn={0} onPress={() => validateUser3()}>
-          <View style={[styles.drawer]}>
-            <View style={styles.row}>
-              <View style={styles.view1}>
-                <View style={styles.iconView}>
-                  <Image
-                    style={styles.imageicon}
-                    source={require('../../assets/Image/cal.png')}
-                  />
-                </View>
-                <Text style={styles.text}>{'Calculator'}</Text>
-              </View>
-              <Image
-                style={styles.arrow}
-                source={require('../../assets/Image/arrowF.png')}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity delayPressIn={0} onPress={() => validateUser4()}>
-          <View style={[styles.drawer]}>
-            <View style={styles.row}>
-              <View style={styles.view1}>
-                <View style={styles.iconView}>
-                  <Image
-                    style={styles.imageicon}
-                    source={require('../../assets/Image/about.png')}
-                  />
-                </View>
-                <Text style={styles.text}>{'About Us'}</Text>
-              </View>
-              <Image
-                style={styles.arrow}
-                source={require('../../assets/Image/arrowF.png')}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity delayPressIn={0} onPress={() => validateUser5()}>
-          <View style={[styles.drawer]}>
-            <View style={styles.row}>
-              <View style={styles.view1}>
-                <View style={styles.iconView}>
-                  <Image
-                    style={styles.imageicon}
-                    source={require('../../assets/Image/contact_us.png')}
-                  />
-                </View>
-                <Text style={styles.text}>{'Contact Us'}</Text>
-              </View>
-              <Image
-                style={styles.arrow}
-                source={require('../../assets/Image/arrowF.png')}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
         <TouchableOpacity
           delayPressIn={0}
           onPress={() => {
@@ -346,24 +288,24 @@ const DrawerContent = ({props}) => {
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity
-          delayPressIn={0}
-          onPress={() => validateUser6()}
-          style={[styles.drawer]}>
-          <View style={styles.row}>
-            <View style={styles.view1}>
-              <View style={styles.iconView}>
-                <Image
-                  style={styles.imageicon}
-                  source={require('../../assets/Image/noti.png')}
-                />
+
+        <TouchableOpacity delayPressIn={0} onPress={() => validateUser3()}>
+          <View style={[styles.drawer]}>
+            <View style={styles.row}>
+              <View style={styles.view1}>
+                <View style={styles.iconView}>
+                  <Image
+                    style={styles.imageicon}
+                    source={require('../../assets/Image/cal.png')}
+                  />
+                </View>
+                <Text style={styles.text}>{'Calculator'}</Text>
               </View>
-              <Text style={styles.text}>{'Notifications'}</Text>
+              <Image
+                style={styles.arrow}
+                source={require('../../assets/Image/arrowF.png')}
+              />
             </View>
-            <Image
-              style={styles.arrow}
-              source={require('../../assets/Image/arrowF.png')}
-            />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
@@ -408,27 +350,6 @@ const DrawerContent = ({props}) => {
           </View>
         </TouchableOpacity>
 
-        {/* <TouchableOpacity
-          delayPressIn={0}
-          onPress={() => validateUser9()}
-          style={[styles.drawer]}>
-          <View style={styles.row}>
-            <View style={styles.view1}>
-              <View style={styles.iconView}>
-                <Image
-                  style={styles.imageicon}
-                  source={require('../../assets/Image/icon-chart-line1.png')}
-                />
-              </View>
-              <Text style={styles.text}>{'Trending'}</Text>
-            </View>
-            <Image
-              style={styles.arrow}
-              source={require('../../assets/Image/arrowF.png')}
-            />
-          </View>
-        </TouchableOpacity> */}
-
         <TouchableOpacity
           delayPressIn={0}
           onPress={() => validateUser1()}
@@ -441,12 +362,32 @@ const DrawerContent = ({props}) => {
                   source={require('../../assets/Image/support1.png')}
                 />
               </View>
-              <Text style={styles.text}>{'Support'}</Text>
+              <Text style={styles.text}>{'FAQs'}</Text>
             </View>
             <Image
               style={styles.arrow}
               source={require('../../assets/Image/arrowF.png')}
             />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity delayPressIn={0} onPress={() => validateUser5()}>
+          <View style={[styles.drawer]}>
+            <View style={styles.row}>
+              <View style={styles.view1}>
+                <View style={styles.iconView}>
+                  <Image
+                    style={styles.imageicon}
+                    source={require('../../assets/Image/contact_us.png')}
+                  />
+                </View>
+                <Text style={styles.text}>{'Contact Us'}</Text>
+              </View>
+              <Image
+                style={styles.arrow}
+                source={require('../../assets/Image/arrowF.png')}
+              />
+            </View>
           </View>
         </TouchableOpacity>
 
@@ -491,6 +432,76 @@ const DrawerContent = ({props}) => {
             />
           </View>
         </TouchableOpacity>
+
+        <TouchableOpacity delayPressIn={0} onPress={() => validateUser4()}>
+          <View style={[styles.drawer]}>
+            <View style={styles.row}>
+              <View style={styles.view1}>
+                <View style={styles.iconView}>
+                  <Image
+                    style={styles.imageicon}
+                    source={require('../../assets/Image/about.png')}
+                  />
+                </View>
+                <Text style={styles.text}>{'About Us'}</Text>
+              </View>
+              <Image
+                style={styles.arrow}
+                source={require('../../assets/Image/arrowF.png')}
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+        
+       
+        {/* <TouchableOpacity
+          delayPressIn={0}
+          onPress={() => validateUser6()}
+          style={[styles.drawer]}>
+          <View style={styles.row}>
+            <View style={styles.view1}>
+              <View style={styles.iconView}>
+                <Image
+                  style={styles.imageicon}
+                  source={require('../../assets/Image/noti.png')}
+                />
+              </View>
+              <Text style={styles.text}>{'Notifications'}</Text>
+            </View>
+            <Image
+              style={styles.arrow}
+              source={require('../../assets/Image/arrowF.png')}
+            />
+          </View>
+        </TouchableOpacity>
+        */}
+
+       
+
+        {/* <TouchableOpacity
+          delayPressIn={0}
+          onPress={() => validateUser9()}
+          style={[styles.drawer]}>
+          <View style={styles.row}>
+            <View style={styles.view1}>
+              <View style={styles.iconView}>
+                <Image
+                  style={styles.imageicon}
+                  source={require('../../assets/Image/icon-chart-line1.png')}
+                />
+              </View>
+              <Text style={styles.text}>{'Trending'}</Text>
+            </View>
+            <Image
+              style={styles.arrow}
+              source={require('../../assets/Image/arrowF.png')}
+            />
+          </View>
+        </TouchableOpacity> */}
+
+       
+
+       
         <TouchableOpacity delayPressIn={0} onPress={() => validateUser11()}>
           <View style={[styles.drawer]}>
             <View style={styles.row}>

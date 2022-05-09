@@ -245,13 +245,13 @@ const FDList = ({route}) => {
             </View>
 
             <View style={{alignItems: 'center'}}>
-              <Text style={styles.same1}>{item.loan == 0 ? 'No' : 'Yes'}</Text>
+              <Text style={styles.same1}>{item.rating}</Text>
               <Image
                 style={styles.image}
                 resizeMode="contain"
                 source={require('../../../assets/Image/loan.png')}
               />
-              <Text style={styles.same}>{'Loan'}</Text>
+              <Text style={styles.same}>{'Credit Rating'}</Text>
             </View>
             <View style={{alignItems: 'center'}}>
               <Text style={styles.same1}>

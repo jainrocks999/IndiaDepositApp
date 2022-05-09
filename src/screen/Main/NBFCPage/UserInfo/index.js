@@ -262,7 +262,7 @@ const RegisterPage = ({route}) => {
     <View style={styles.container}>
       <Header
         source={require('../../../../assets/Image/arrow2.png')}
-        title="PRIMARY USER INFO"
+        title="PRIMARY HOLDER INFO"
         onPress={() => navigation.goBack()}
       />
       {isFetching ? <Loader /> : null}

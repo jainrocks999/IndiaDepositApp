@@ -328,7 +328,7 @@ const FDList = ({route}) => {
           </View>
         )}
         {details.eligibility == null || details.eligibility == '' ? (
-          <View />
+          <View/>
         ) : (
           <View style={[styles.top]}>
             <View>
@@ -375,6 +375,7 @@ const FDList = ({route}) => {
       </View>
      
       <StatusBar />
+      <BottomTab/>
     </View>
   );
 };

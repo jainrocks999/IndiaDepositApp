@@ -102,8 +102,10 @@ const RegisterPage = ({route}) => {
       <ScrollView style={styles.scroll}>
       
         <View style={{marginTop:15}}>
-        <CustomButton title="CONTINUE"
-        onPress={()=> validateUser()
+        <CustomButton title="OK"
+        onPress={()=>
+          navigation.navigate('MyFD')
+          //  validateUser()
           // navigation.replace('SubmitRedeemRequest')
         }
         
@@ -111,7 +113,7 @@ const RegisterPage = ({route}) => {
         </View>
       </ScrollView>
       <StatusBar />
-      
+      <BottomTab/>
     </View>
   );
 };

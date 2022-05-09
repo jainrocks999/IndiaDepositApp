@@ -41,7 +41,7 @@ const Introduction = ({route}) => {
       </View>
       <View style={styles.main}>
         <View style={styles.lorem}>
-          <Text style={styles.heading}>{data.intro_speech}</Text>
+          <Text style={styles.heading}>{'Revolutionizing Fixed Return Investment in India'}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity

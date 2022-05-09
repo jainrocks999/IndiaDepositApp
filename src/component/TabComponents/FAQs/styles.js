@@ -3,7 +3,7 @@ import colors from '../../../component/colors';
 export default StyleSheet.create({
     container: {
       flex: 1,
-      marginTop:10,
+      // marginTop:10,
     },
     titleText: {
       flex: 1,

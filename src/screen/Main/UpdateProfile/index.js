@@ -495,10 +495,11 @@ const handlePan=async(val,name)=>{
                     returnKeyType="done"
                   />
                   {user.email_status == 1 ? (
-                    <Image
-                      style={{width: 20, height: 20}}
-                      source={require('../../../assets/Image/verified.png')}
-                    />
+                    <Text style={{color:colors.bc,fontSize:12}}>{'Verified'}</Text>
+                    // <Image
+                    //   style={{width: 20, height: 20}}
+                    //   source={require('../../../assets/Image/verified.png')}
+                    // />
                   ) : user.email_status == 0 ? (
                     <TouchableOpacity
                       delayPressIn={0}
@@ -543,10 +544,11 @@ const handlePan=async(val,name)=>{
                     editable={false}
                     returnKeyType="done"
                   />
-                  <Image
+                  <Text style={{color:colors.bc,fontSize:12}}>{'Verified'}</Text>
+                  {/* <Image
                     style={{width: 20, height: 20}}
                     source={require('../../../assets/Image/verified.png')}
-                  />
+                  /> */}
                 </View>
                 <View style={styles.error}>
                   {errors.mobile && touched.mobile && (

@@ -29,11 +29,12 @@ const BankCalu = ({route}) => {
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
 
+  console.log('this is user details ',route.params.rating);
   const period=((parseFloat(route.params.years)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
   
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
-  const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(2)
+  const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(0)
 
   const data=(selectedItems[0]*365%365).toFixed(0)
   const data1=Math.floor(data/30)
@@ -93,6 +94,7 @@ const BankCalu = ({route}) => {
         type1: route.params.type,
         interest_rate: selectedItems[1],
         lockin_period:route.params.lockin_period,
+        rating:route.params.rating,
         navigation: navigation,
       });
     }
@@ -142,6 +144,7 @@ const BankCalu = ({route}) => {
         interest_rate: (
           ((parseFloat((parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/selectedItems[0]/amount)*100
         ).toFixed(2),
+        rating:route.params.rating,
         navigation: navigation,
       });
     }
@@ -499,7 +502,7 @@ const BankCalu = ({route}) => {
                   <Text style={styles.maturity}>{'Total Interest'}</Text>
                   {frequency==''?
                     <Text style={styles.amount}>
-                    {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(2)}
+                    {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(0)}
                     </Text>                  
                     :<Text style={styles.amount}>
                     {value1 == 'NaN' || value1 == 'undefined' ? 0 : value1}
