@@ -90,6 +90,23 @@ const Holiday = () => {
           setLoader(false);
           setBoolean(true);
           setListDataSource(response.data.data);
+
+          try {
+            const data1 = new FormData();
+            data1.append('location', pincode);
+            const response = await axios({
+              method: 'POST',
+              data:data1,
+              headers: {
+                'content-type': 'multipart/form-data',
+                Accept: 'multipart/form-data',
+              },
+              url: 'https://indiadeposit.in/admin/public/apis/bankholiday',
+            });
+            if (response) {
+              setListDataSource1(response.data.data);
+            }
+          } catch (error) {}
         
         }
       } catch (error) {

@@ -19,7 +19,7 @@ const Calculator = () => {
   const [index, setIndex] = useState(0);
   const [routes] = React.useState([
     {key: 'first', title: 'SIP'},
-    {key: 'second', title: 'FD'},
+    {key: 'second', title: 'Lumpsum'},
   ]);
 
   useEffect(() => {

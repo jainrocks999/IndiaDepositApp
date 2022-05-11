@@ -2262,7 +2262,7 @@ function* NBFCSearch(action) {
       });
     }
     else{
-      Toast.show(`No FD found. Minimum Amount should be Rs.25,000`)
+      Toast.show(`No result found for selected filter`)
     }
     } else {
       if (action.data == 'FdList') {

@@ -23,6 +23,10 @@ const FD=()=>{
     const [selectedLanguage, setSelectedLanguage] = useState();
 
 
+    
+
+
+
 useEffect(async()=>{
   const user_id=await AsyncStorage.getItem(Storage.user_id)
   try {
@@ -51,6 +55,9 @@ if (f==0) {
   let data1=totalInvestment
   maturityAmount=(parseInt(data)+parseInt(data1)).toFixed(0)
 } else {
+
+  
+
  let maturityAmount1= parseFloat(totalInvestment*Math.pow(1+(interest/(100*12)),(f))).toFixed(2)
   interestAmount=parseFloat((maturityAmount1-totalInvestment)*(1*time*(f==12?1:f==6?2:f==3?4:12)/period)).toFixed(2)
   maturityAmount=parseInt(totalInvestment)+(parseInt(interestAmount))

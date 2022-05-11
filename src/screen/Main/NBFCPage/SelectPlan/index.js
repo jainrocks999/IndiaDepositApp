@@ -28,14 +28,20 @@ const BankCalu = ({route}) => {
   const isFetching = useSelector(state => state.isFetching);
   const dispatch = useDispatch();
   const re = /^[0-9\b]+$/;
+  const X1 = parseFloat(Math.pow((1+(selectedItems[1]/1200)),(12))).toFixed(6)-1
+  const Y1 = parseFloat(Math.pow((1+((X1)*100)/1/100),(1*selectedItems[0])))
+  const Z1 = parseFloat(amount*Y1 - amount).toFixed(6)
+  const zAmount=parseFloat(Z1)+parseFloat(amount)
+  const mInterest=parseFloat((100*Z1/selectedItems[0])/(amount)).toFixed(2)
 
-  console.log('this is user details ',route.params.rating);
   const period=((parseFloat(route.params.years)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
   
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
   const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
-  const value= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100)),(selectedItems[0]))).toFixed(0)
+  const value= parseFloat(amount*Math.pow(1+((frequency==''?mInterest:selectedItems[1])/(100)),(selectedItems[0]))).toFixed(0)
 
+  
+ 
   const data=(selectedItems[0]*365%365).toFixed(0)
   const data1=Math.floor(data/30)
   const data2=Math.floor((selectedItems[0]*365)/365)
@@ -475,9 +481,13 @@ const BankCalu = ({route}) => {
                 {frequency == '' ? (
                   <View style={{alignItems: 'center'}}>
                     <Text style={styles.maturity}>{'Maturity Amount'}</Text>
+                   {frequency==''? <Text style={styles.amount}>
+                      {parseFloat(zAmount).toFixed(2)}
+                    </Text>:
                     <Text style={styles.amount}>
-                      {value == 'NaN' ? 0 : value}
-                    </Text>
+                    {value == 'NaN' ? 0 : value}
+                  </Text>
+                    } 
                   </View>
                 ) : (
                   <View style={{alignItems: 'center'}}>{renderMethod()}</View>
@@ -485,16 +495,27 @@ const BankCalu = ({route}) => {
 
                 <View style={{alignItems: 'center'}}>
                   <Text style={styles.maturity}>{'Interest Rate'}</Text>
-                 {frequency? <Text style={styles.amount}>
-                 {`${(
+                 {frequency==''? <Text style={styles.amount}>
+                 {`${parseFloat((100*Z1/selectedItems[0])/(amount)).toFixed(2)}% p.a`}
+                 </Text>
+                  :
+                  <Text style={styles.amount}>
+                  
+                   {`${(
                       (
                         ((parseFloat((parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/selectedItems[0]/amount)*100
                       )
                     ).toFixed(2)}% p.a`}
+                 {/* {`${(
+                      (
+                        ((parseFloat((parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2))/selectedItems[0]/amount)*100
+                      )
+                    ).toFixed(2)}% p.a`} */}
                  </Text>
-                  :<Text style={styles.amount}>{`${parseFloat(
-                    selectedItems[1],
-                  ).toFixed(2)} % p.a`}</Text>}
+                  // <Text style={styles.amount}>{`${parseFloat(
+                  //   selectedItems[1],
+                  // ).toFixed(2)} % p.a`}</Text>
+                  }
                 </View>
               </View>
               <View style={styles.mContainer}>
@@ -502,7 +523,8 @@ const BankCalu = ({route}) => {
                   <Text style={styles.maturity}>{'Total Interest'}</Text>
                   {frequency==''?
                     <Text style={styles.amount}>
-                    {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(0)}
+                      {parseFloat(Z1).toFixed(2)}
+                    {/* {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(0)} */}
                     </Text>                  
                     :<Text style={styles.amount}>
                     {value1 == 'NaN' || value1 == 'undefined' ? 0 : value1}
