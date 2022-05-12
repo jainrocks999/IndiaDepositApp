@@ -33,11 +33,11 @@ const BankCalu = ({route}) => {
   const Z1 = parseFloat(amount*Y1 - amount).toFixed(6)
   const zAmount=parseFloat(Z1)+parseFloat(amount)
   const mInterest=parseFloat((100*Z1/selectedItems[0])/(amount)).toFixed(2)
-
+console.log('thisi is uder desfvcvc',mInterest);
   const period=((parseFloat(route.params.years)*365+parseFloat(route.params.month)*30+parseFloat(route.params.days))/365).toFixed(2)
   
   let maturityAmount1= parseFloat(amount*Math.pow(1+(selectedItems[1]/(100*12)),(frequency))).toFixed(2)
-  const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(2)
+  const value1 =parseFloat((maturityAmount1-amount)*(1*selectedItems[0]*(frequency==12?1:frequency==6?2:frequency==3?4:12))).toFixed(0)
   const value= parseFloat(amount*Math.pow(1+((frequency==''?mInterest:selectedItems[1])/(100)),(selectedItems[0]))).toFixed(0)
 
   
@@ -93,8 +93,8 @@ const BankCalu = ({route}) => {
         relationship: '',
         dob: '',
         nominee_address: '',
-        maturity_amount: value,
-        maturity_interest: value1,
+        maturity_amount: parseFloat(zAmount).toFixed(0),
+        maturity_interest: mInterest,
         bank_name: route.params.name,
         bank_logo: route.params.image,
         type1: route.params.type,
@@ -298,7 +298,7 @@ const BankCalu = ({route}) => {
         <View style={{alignItems: 'center'}}>
           <Text style={styles.maturity}>{'Payment per year'}</Text>
           <Text style={styles.amount}>
-            {((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(1)}
+            {((value1 == 'NaN' ? 0 : value1) / selectedItems[0]).toFixed(0)}
           </Text>
         </View>
       );
@@ -306,21 +306,21 @@ const BankCalu = ({route}) => {
       return (
         <View style={{alignItems: 'center'}}>
           <Text style={styles.maturity}>{'Payment per Half year'}</Text>
-          <Text style={styles.amount}>{(data / 2).toFixed(1)}</Text>
+          <Text style={styles.amount}>{(data / 2).toFixed(0)}</Text>
         </View>
       );
     } else if (frequency == 3) {
       return (
         <View style={{alignItems: 'center'}}>
           <Text style={styles.maturity}>{'Payment per Quarter'}</Text>
-          <Text style={styles.amount}>{(data / 4).toFixed(1)}</Text>
+          <Text style={styles.amount}>{(data / 4).toFixed(0)}</Text>
         </View>
       );
     } else if (frequency == 1) {
       return (
         <View style={{alignItems: 'center'}}>
           <Text style={styles.maturity}>{'Payment per Month'}</Text>
-          <Text style={styles.amount}>{(data / 12).toFixed(1)}</Text>
+          <Text style={styles.amount}>{(data / 12).toFixed(0)}</Text>
         </View>
       );
     }
@@ -482,7 +482,7 @@ const BankCalu = ({route}) => {
                   <View style={{alignItems: 'center'}}>
                     <Text style={styles.maturity}>{'Maturity Amount'}</Text>
                    {frequency==''? <Text style={styles.amount}>
-                      {parseFloat(zAmount).toFixed(2)}
+                      {parseFloat(zAmount).toFixed(0)}
                     </Text>:
                     <Text style={styles.amount}>
                     {value == 'NaN' ? 0 : value}
@@ -523,7 +523,7 @@ const BankCalu = ({route}) => {
                   <Text style={styles.maturity}>{'Total Interest'}</Text>
                   {frequency==''?
                     <Text style={styles.amount}>
-                      {parseFloat(Z1).toFixed(2)}
+                      {parseFloat(Z1).toFixed(0)}
                     {/* {value == 'NaN' ? 0 : parseFloat(value-amount).toFixed(0)} */}
                     </Text>                  
                     :<Text style={styles.amount}>
